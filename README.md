@@ -1,24 +1,18 @@
-# KusionStack 文档站点
+# kusionstack.io
 
-该仓库用于构建 https://kusionstack.io 文档网站，站点基于 [Docusaurus 2](https://docusaurus.io/) 构建。
+Source for kusionstack.io site <https://kusionstack.io>.
 
-## 文档目录
+Powered by [Docusaurus 2](https://docusaurus.io/).
 
-- `/docs` - 文档根目录
-- `/docs/user_docs` - 使用文档
-- `/docs/develop` - 开发文档
-- `/docs/referece` - 参考手册
-- `/docs/governance` - 治理
-- `/blog` - 博客
-
-
-## 本地预览
-
-可以通过以下命令在本地启动文档服务：
+## Build local
 
 ```
 $ npm install
 $ npm run start
 ```
 
-默认会打开 http://localhost:3000 文档页面。
+Open http://localhost:3000 in browser.
+
+## Notice
+
+This website is built under Docusaurus version 2.0.0-beta.17. There may be unknown errors when compiling on other versions.
