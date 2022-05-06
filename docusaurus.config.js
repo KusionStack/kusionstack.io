@@ -12,13 +12,15 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'KusionStack',
   tagline: '一站式可编程配置技术栈',
+
   url: 'https://kusionstack.io',
+  organizationName: 'KusionStack', // Usually your GitHub org/user name.
+  projectName: 'kusionstack.github.io', // Usually your repo name.
+
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/kcl-logo.png',
-  organizationName: 'kusion', // Usually your GitHub org/user name.
-  projectName: 'kusion', // Usually your repo name.
 
   i18n: {
     defaultLocale: 'zh-CN',
