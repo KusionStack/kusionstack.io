@@ -26,7 +26,7 @@ Windows 是最流行的桌面系统，有着庞大的用户群体，但是默认
 
 KCLVM 是 Kusion 中 KCL 配置语言的实现，通过以下命令克隆 KCLVM 代码到一个新的目录，地址：`git@github.com:KusionStack/KCLVM.git`。
 
-然后在 VS2019-x64 命令行环境切换到 `KCLVM/kclvmx` 目录执行 `cargo build` 测试 Rust 等环境。
+然后在 VS2019-x64 命令行环境切换到 `KCLVM` 目录执行 `cargo build` 测试 Rust 等环境。
 
 然后在 VS2019-x64 命令行环境切换到 `.\Scripts\build-windows` 目录，执行 `build.bat` 批处理脚本进行构建。输出的文件在 `.\Scripts\build-windows\_output\kclvm-windows` 目录。
 

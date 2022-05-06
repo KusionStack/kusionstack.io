@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Docker 和 Ubuntu 环境
 
-KusionStack 主要工具由 Golang、Rust、Python、C/C++ 等语言混合开发，同时还需要依赖 Git、Makefile 等工具。为了方便配置开发环境，我们提供了基于 ubuntu:20.04 的 Dockerfile 配置文件：https://github.com/KusionStack/KCLVM/blob/main/Dockerfile 。用户可以基于该自行构建镜像，也可以通过 `docker pull reg.docker.alibaba-inc.com/kusion/kclvmx-builder-ubuntu` 命令拉取镜像。
+KusionStack 主要工具以 Rust、Golang 等语言为主开发，KCL 语言通过 Python 提供一些扩展插件，同时还需要依赖 Git、Makefile 等工具。为了方便配置开发环境，我们提供了基于 ubuntu:20.04 的 Dockerfile 配置文件：https://github.com/KusionStack/KCLVM/blob/main/Dockerfile 。用户可以基于该自行构建镜像，也可以通过 `docker pull kusionstack/kclvm-builder-ubuntu` 命令拉取镜像。
 
 如果是本地的 Ubuntu 环境，可以参考 Dockerfile 文件的命令安装依赖环境。
 
