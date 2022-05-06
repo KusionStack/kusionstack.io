@@ -11,7 +11,7 @@ Kusion 的顶级仓库包含 Kusion 主仓库、Konfig 模型仓库、文档仓�
 ![](./images/repo-dag-01.png)
 
 - Kusion 主库：https://github.com/KusionStack/kusion
-- Kusion 网站仓库：https://github.com/KusionStack/kusionstack.github.io
+- Kusion 网站仓库：https://github.com/KusionStack/kusionstack.io
 - Kusion 模型库：https://github.com/KusionStack/konfig
 - KCLVM 主库：https://github.com/KusionStack/KCLVM
 - IDE 扩展仓库：https://github.com/KusionStack/vscode-kcl
@@ -25,7 +25,7 @@ Kusion 的顶级仓库包含 Kusion 主仓库、Konfig 模型仓库、文档仓�
 
 文档主要包含网址的文档、相关的案例代码文档、语言规范文档和 Kusion 模型库自带的文档等。
 
-- 文档主仓库：https://github.com/KusionStack/kusionstack.github.io
+- 文档主仓库：https://github.com/KusionStack/kusionstack.io
 - 电子书：https://github.com/KusionStack/kusion-in-action-book
 
 ## 3. KCLVM 仓库

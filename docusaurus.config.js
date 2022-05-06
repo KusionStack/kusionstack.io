@@ -15,7 +15,7 @@ const config = {
 
   url: 'https://kusionstack.io',
   organizationName: 'KusionStack', // Usually your GitHub org/user name.
-  projectName: 'kusionstack.github.io', // Usually your repo name.
+  projectName: 'kusionstack.io', // Usually your repo name.
 
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -39,7 +39,7 @@ const config = {
 
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          editUrl: 'https://github.com/KusionStack/kusionstack.github.io/blob/source',
+          editUrl: 'https://github.com/KusionStack/kusionstack.io/blob/source',
           remarkPlugins: [math, mermaid],
           rehypePlugins: [katex],
           showLastUpdateAuthor: true,
@@ -49,7 +49,7 @@ const config = {
           postsPerPage: 2,
           showReadingTime: true,
           // Please change this to your repo.
-          editUrl: 'https://github.com/KusionStack/kusionstack.github.io/blob/source',
+          editUrl: 'https://github.com/KusionStack/kusionstack.io/blob/source',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

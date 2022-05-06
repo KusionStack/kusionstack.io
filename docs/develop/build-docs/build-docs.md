@@ -2,14 +2,14 @@
 
 Kusion 的文档采用 [Docusaurus](https://docusaurus.io/) 框架构建，Docusaurus 是基于 React 构建的站点生成器。在构建之前先安装 [Node.js 16+](https://nodejs.org)。
 
-文档仓库：https://github.com/KusionStack/kusionstack.github.io
+文档仓库：https://github.com/KusionStack/kusionstack.io
 
 ## 1. 克隆仓库
 
 然后克隆文档仓库到本地：
 
 ```
-$ git clone git@github.com:KusionStack/kusionstack.github.io.git
+$ git clone git@github.com:KusionStack/kusionstack.io.git
 ```
 
 Markdown 格式的文档主要在 docs 和 blog 两个目录，目录对应的内容说明如下：
@@ -68,20 +68,20 @@ $ npm run build
 
 配置文件有文档配置、侧边栏和内部文档几个：
 
-- [docusaurus.config.js](https://github.com/KusionStack/kusionstack.github.io/blob/source/docusaurus.config.js) 是 [Docusaurus](https://docusaurus.io/) 的主配置文件。
-- [sidebars.js](https://github.com/KusionStack/kusionstack.github.io/blob/source/sidebars.js) 对应文档的侧边栏配置，被 [docusaurus.config.js](https://github.com/KusionStack/kusionstack.github.io/blob/source/docusaurus.config.js) 文件引用。
+- [docusaurus.config.js](https://github.com/KusionStack/kusionstack.io/blob/source/docusaurus.config.js) 是 [Docusaurus](https://docusaurus.io/) 的主配置文件。
+- [sidebars.js](https://github.com/KusionStack/kusionstack.io/blob/source/sidebars.js) 对应文档的侧边栏配置，被 [docusaurus.config.js](https://github.com/KusionStack/kusionstack.io/blob/source/docusaurus.config.js) 文件引用。
 
 ## 5. 主页面内容
 
 主页面内容由以下文件构建产生：
 
-- [docusaurus.config.js](https://github.com/KusionStack/kusionstack.github.io/blob/source/docusaurus.config.js) 是 [Docusaurus](https://docusaurus.io/) 的主配置文件，包含顶部的导航栏和底部的链接。
-- [src/pages/index.js](https://github.com/KusionStack/kusionstack.github.io/blob/source/src/pages/index.js) 对应页面主体区域，包含快速开始的链接按钮。
-- [src/components/HomepageFeatures.js](https://github.com/KusionStack/kusionstack.github.io/blob/source/src/components/HomepageFeatures.js) 对应 Kusion 的特性介绍。
+- [docusaurus.config.js](https://github.com/KusionStack/kusionstack.io/blob/source/docusaurus.config.js) 是 [Docusaurus](https://docusaurus.io/) 的主配置文件，包含顶部的导航栏和底部的链接。
+- [src/pages/index.js](https://github.com/KusionStack/kusionstack.io/blob/source/src/pages/index.js) 对应页面主体区域，包含快速开始的链接按钮。
+- [src/components/HomepageFeatures.js](https://github.com/KusionStack/kusionstack.io/blob/source/src/components/HomepageFeatures.js) 对应 Kusion 的特性介绍。
 
 ## 6. 内部链接
 
-网址内部的相对链接可以通过 Markdown 文件的相对路径映射，比如 [`/docs/develop/build-docs`](https://github.com/KusionStack/kusionstack.github.io/docs/develop/build-docs) 文件中可以通过 [`/docs/user_docs/intro/vs-x`](/docs/user_docs/intro/vs-x) 绝对路径或 [`../repos`](../repos) 相对路径引用。
+网址内部的相对链接可以通过 Markdown 文件的相对路径映射，比如 [`/docs/develop/build-docs`](https://github.com/KusionStack/kusionstack.io/docs/develop/build-docs) 文件中可以通过 [`/docs/user_docs/intro/vs-x`](/docs/user_docs/intro/vs-x) 绝对路径或 [`../repos`](../repos) 相对路径引用。
 
 注意：目录内部的 `index.md` 或与目录同名的 Markdonwn 文件对应目录链接的页面。
 
