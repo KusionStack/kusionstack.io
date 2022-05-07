@@ -4,7 +4,7 @@ import styles from './HomepageFeatures.module.css';
 
 const FeatureList = [
   {
-    title: 'KCL配置语言',
+    title: 'KCL 配置语言',
     Svg: require('../../static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
@@ -13,16 +13,16 @@ const FeatureList = [
     ),
   },
   {
-    title: 'Kusion模型库',
+    title: 'Kusion 模型库',
     Svg: require('../../static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-      Kusion Model 是 KusionStack 中预置的、使用 KCL 描述的配置模型，它提供给用户开箱即用、高度抽象的配置界面
+      Kusion Model 是 KusionStack 中预置的、使用 KCL 描述的配置模型，它提供给用户开箱即用、高度抽象的配置界面。
       </>
     ),
   },
   {
-    title: 'KusionStack引擎',
+    title: 'Kusion 引擎',
     Svg: require('../../static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
