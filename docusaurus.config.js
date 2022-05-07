@@ -92,14 +92,14 @@ const config = {
           {
             type: 'docSidebar',
             position: 'left',
-            sidebarId: 'develop',
-            label: '开发文档',
+            sidebarId: 'reference',
+            label: '参考手册',
           },
           {
             type: 'docSidebar',
             position: 'left',
-            sidebarId: 'reference',
-            label: '参考手册',
+            sidebarId: 'develop',
+            label: '开发文档',
           },
           {
             type: 'docSidebar',
