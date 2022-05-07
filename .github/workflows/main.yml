@@ -18,3 +18,5 @@ jobs:
       #    external_repository: KusionStack/kusionstack.github.io
       #    publish_dir: ./build
       #    publish_branch: main
+      #    user_name: 'github-actions[bot]'
+      #    user_email: 'github-actions[bot]@users.noreply.github.com'
