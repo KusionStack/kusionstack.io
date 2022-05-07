@@ -69,20 +69,6 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      metadata: [
-        // kusion
-        {name: 'go-import', content: 'kusionstack.io/kusion git https://github.com/KusionStack/kusion'},
-        {name: 'go-source', content: 'kusionstack.io/kusion git https://github.com/KusionStack/kusion https://github.com/KusionStack/kusion/tree/main{/dir} https://github.com/KusionStack/kusion/blob/main{/dir}/{file}#L{line}'},
-
-        // kcl-openapi
-        {name: 'go-import', content: 'kusionstack.io/kcl-openapi git https://github.com/KusionStack/kcl-openapi'},
-        {name: 'go-source', content: 'kusionstack.io/kcl-openapi git https://github.com/KusionStack/kcl-openapi https://github.com/KusionStack/kcl-openapi/tree/main{/dir} https://github.com/KusionStack/kcl-openapi/blob/main{/dir}/{file}#L{line}'},
-
-        // kclvm-go
-        {name: 'go-import', content: 'kusionstack.io/kclvm-go git https://github.com/KusionStack/kclvm-go'},
-        {name: 'go-source', content: 'kusionstack.io/kclvm-go git https://github.com/KusionStack/kclvm-go https://github.com/KusionStack/kclvm-go/tree/main{/dir} https://github.com/KusionStack/kclvm-go/blob/main{/dir}/{file}#L{line}'},
-      ],
-
       hideableSidebar: true,
       autoCollapseSidebarCategories: true,
       announcementBar: {
