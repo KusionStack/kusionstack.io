@@ -6,18 +6,16 @@ sidebar_position: 1
 
 推荐通过 kusionup 工具安装 Kusion，这是一个优雅的 kusion 多版本管理工具，你可以通过它：
 
-- 一键安装任何版本的 kusion ，内置内部版本（alipay）和开源版本（open）的安装源
+- 一键安装任何版本的 kusion
 - 灵活切换不同版本的 kusion
 - 自定义本地 kusion 版本
-- 在所有操作系统上运行良好（至少在 *uix 上运行良好）
 
 ## 1. 安装 Kusionup
 
 通过以下命令一键安装 `kusionup`：
 
 ```bash
-# fix oss link
-curl -s "https://kusionstack.io/oss/cli/kusionup/scripts/install_kusionup.sh" | bash && source $HOME/.kusionup/env
+curl -s "http://kusion-public.oss-cn-hzfinance.aliyuncs.com/cli/kusionup/scripts/install_kusionup.sh" | bash && source $HOME/.kusionup/env
 ```
 
 该脚本执行后会创建 `$HOME/.kusionup` 目录，该目录下会包含：
@@ -25,14 +23,13 @@ curl -s "https://kusionstack.io/oss/cli/kusionup/scripts/install_kusionup.sh" | 
 - `$HOME/.kusionup/bin` 目录用于放置 `kusionup` 二进制工具
 - `$HOME/.kusionup/env` 文件用于声明 `kusionup` 和 `kusion` 技术栈所需要的环境变量
 - `$HOME/.kusionup/current` 软链接用于标识当前激活的 `kusion` 版本
-- `$HOME/.kusionup/$VERSION` 目录代表不同的 `kusion` 版本目录，比如默认安装的内部最新版本 `$HOME/.kusionup/alipay@latest`
+- `$HOME/.kusionup/$VERSION` 目录代表不同的 `kusion` 版本目录，比如默认安装的最新版本 `$HOME/.kusionup/latest`
 
 **💡 自定义默认安装版本**：
-上述脚本会默认安装最新的内部 kusion 版本（`alipay@latest`），如果想**自定义默认安装版本**，可以运行下述命令（将最后的 `open@latest` 替换为你想要默认安装的版本号就就行）：
+上述脚本会默认安装最新的 kusion 版本（`latest`），如果想**自定义默认安装版本**，可以运行下述命令（将最后的 `latest` 替换为你想要默认安装的版本号就就行）：
 
 ```bash
-# todo: fix oss link
-curl -s "https://kusionstack.io/oss/cli/kusionup/scripts/install_kusionup.sh" | bash -s -- --skip-install && source $HOME/.kusionup/env && kusionup reinstall open@latest
+curl -s "http://kusion-public.oss-cn-hzfinance.aliyuncs.com/cli/kusionup/scripts/install_kusionup.sh" | bash -s -- --skip-install && source $HOME/.kusionup/env && kusionup reinstall latest
 ```
 
 **💡 安装失败问题排查**：
@@ -54,7 +51,7 @@ brew install openssl@1.1
 ```
 
 **❓ 问题 2**：mac KCLVM gettext dylib 找不到的问题
-![image.png](./images/err-gettest-01.png)
+![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2022/png/317257/1646538731635-b1e290a5-465d-4838-b8d1-7f22cb48e267.png#clientId=uc50abf48-5ee8-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=200&id=ub5ce78d1&margin=%5Bobject%20Object%5D&name=image.png&originHeight=400&originWidth=1158&originalType=binary&ratio=1&rotation=0&showTitle=false&size=238920&status=done&style=none&taskId=ue75303e6-140d-450f-84de-464da45a473&title=&width=579)
 
 - 使用 which 命令找到自己 gettext 的位置 (假设为/Users/yueyi/tools/homebrew/bin/gettext)
 
@@ -83,25 +80,24 @@ C02Y90Q4JHD2:bin yueyi$ otool -L /Users/yueyi/tools/homebrew/bin/gettext
 $ kusionup
 Use the arrow keys to navigate: ↓ ↑ → ←
 ? Select a version:
-  ▸ alipay@latest
+  ▸ latest
 ```
 
 执行 `kusionup ls-ver` 列出来自内置安装源中的**所有可安装的 **`**kusion**`** 版本**：
 
 ```bash
 $ kusionup ls-ver
-alipay@latest
-alipay@v0.3.16
-alipay@v0.3.15
-alipay@v0.3.14
-open@latest
+latest
+v0.3.16
+v0.3.15
+v0.3.14
 ```
 
 执行 `kusionup install $VERSION` 安装指定版本：
 
 ```shell
 # 这里假设安装开源 kusion 的最新版本 ↓
-$ kusionup install open@latest
+$ kusionup install latest
 Downloaded   0.0% (     2426 / 139988826 bytes) ...
 Downloaded  11.4% ( 16003466 / 139988826 bytes) ...
 Downloaded  21.0% ( 29433014 / 139988826 bytes) ...
@@ -113,12 +109,12 @@ Downloaded  71.2% ( 99667706 / 139988826 bytes) ...
 Downloaded  81.5% (114078806 / 139988826 bytes) ...
 Downloaded  91.5% (128134166 / 139988826 bytes) ...
 Downloaded 100.0% (139988826 / 139988826 bytes)
-INFO[0055] Unpacking /root/.kusionup/kusion-open@latest/kusion-linux.tgz ...
-INFO[0061] Success: latest downloaded in /root/.kusionup/kusion-open@latest
-INFO[0061] Default Kusion is set to 'open@latest'
+INFO[0055] Unpacking /root/.kusionup/kusion@latest/kusion-linux.tgz ...
+INFO[0061] Success: latest downloaded in /root/.kusionup/kusion@latest
+INFO[0061] Default Kusion is set to 'latest'
 
 $ kusion version
-releaseVersion: v0.3.16-9f700718 (open)  # ReleaseVersion 带 (open) 后缀的即为开源版本
+releaseVersion: v0.3.21
 ......
 ```
 
@@ -128,21 +124,21 @@ releaseVersion: v0.3.16-9f700718 (open)  # ReleaseVersion 带 (open) 后缀的�
 $ kusionup show
 |    VERSION    | ACTIVE |
 |---------------|--------|
-| alipay@latest |        |
-|  open@latest  |   *    |
+|    latest     |   *    |
+|    v0.3.20    |        |
 ```
 
 执行 `kusionup remove $VERSION` 删除指定版本：
 
 ```bash
-# 这里假设删除内部 kusion 的最新版本 ↓
-$ kusionup remove alipay@latest
-INFO[0000] Removing alipay@latest
+# 这里假设删除 kusion 的最新版本 ↓
+$ kusionup remove latest
+INFO[0000] Removing latest
 
 $ kusionup
 Use the arrow keys to navigate: ↓ ↑ → ←
 ? Select a version:
-  ▸ open@latest  # 已经没有 alipay@latest 的选项了
+  ▸ v0.3.20  # 已经没有 latest 的选项了
 ```
 
 ## 3. Kusionup 帮助文档
@@ -187,7 +183,7 @@ $ mv $HOME/.kusion $HOME/.kusionup/kusion-debug
 $ kusionup
 Use the arrow keys to navigate: ↓ ↑ → ←
 ? Select a version:
-    open@latest
+    latest
   ▸ debug
 ```
 
