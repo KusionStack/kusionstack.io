@@ -16,7 +16,8 @@ sidebar_position: 1
 通过以下命令一键安装 `kusionup`：
 
 ```bash
-curl -s "http://kusion-public.oss-cn-hzfinance.aliyuncs.com/cli/kusionup/scripts/install_kusionup.sh" | bash && source $HOME/.kusionup/env
+# fix oss link
+curl -s "https://kusionstack.io/oss/cli/kusionup/scripts/install_kusionup.sh" | bash && source $HOME/.kusionup/env
 ```
 
 该脚本执行后会创建 `$HOME/.kusionup` 目录，该目录下会包含：
@@ -30,7 +31,8 @@ curl -s "http://kusion-public.oss-cn-hzfinance.aliyuncs.com/cli/kusionup/scripts
 上述脚本会默认安装最新的内部 kusion 版本（`alipay@latest`），如果想**自定义默认安装版本**，可以运行下述命令（将最后的 `open@latest` 替换为你想要默认安装的版本号就就行）：
 
 ```bash
-curl -s "http://kusion-public.oss-cn-hzfinance.aliyuncs.com/cli/kusionup/scripts/install_kusionup.sh" | bash -s -- --skip-install && source $HOME/.kusionup/env && kusionup reinstall open@latest
+# todo: fix oss link
+curl -s "https://kusionstack.io/oss/cli/kusionup/scripts/install_kusionup.sh" | bash -s -- --skip-install && source $HOME/.kusionup/env && kusionup reinstall open@latest
 ```
 
 **💡 安装失败问题排查**：
@@ -52,7 +54,7 @@ brew install openssl@1.1
 ```
 
 **❓ 问题 2**：mac KCLVM gettext dylib 找不到的问题
-![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2022/png/317257/1646538731635-b1e290a5-465d-4838-b8d1-7f22cb48e267.png#clientId=uc50abf48-5ee8-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=200&id=ub5ce78d1&margin=%5Bobject%20Object%5D&name=image.png&originHeight=400&originWidth=1158&originalType=binary&ratio=1&rotation=0&showTitle=false&size=238920&status=done&style=none&taskId=ue75303e6-140d-450f-84de-464da45a473&title=&width=579)
+![image.png](./images/err-gettest-01.png)
 
 - 使用 which 命令找到自己 gettext 的位置 (假设为/Users/yueyi/tools/homebrew/bin/gettext)
 
