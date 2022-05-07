@@ -11,26 +11,19 @@ sidebar_position: 2
 通过以下命令拉取最新的版本：
 
 ```shell
-$ docker pull reg.docker.alibaba-inc.com/kusion/kusion
+$ docker pull kusionstack/kusion
 Using default tag: latest
 latest: Pulling from kusion/kusion
-524b0c1e57f8: Pull complete 
-d99fc7c79d4b: Pull complete 
-9406162ca122: Pull complete 
-bb2ee4fcf3ac: Pull complete 
-82970db0f263: Pull complete 
-e6eb88a9aaf8: Pull complete 
-Digest: sha256:9be5662e2bdd709db6c5249d719c1599f6a064dfc1b8fbc2e51248d800937163
-Status: Downloaded newer image for reg.docker.alibaba-inc.com/kusion/kusion:latest
-reg.docker.alibaba-inc.com/kusion/kusion:latest
+...
+kusionstack/kusion:latest
 $
 ```
 
 然后通过以下命令查看 KCL 版本号：
 
 ```shell
-$ docker run --rm -it reg.docker.alibaba-inc.com/kusion/kusion kcl --version
-kclvm version is 0.3.5; checksum: dcd883b0c414e9f250612051f1a34d48
+$ docker run --rm -it kusionstack/kusion kcl --version
+kclvm version is 0.4.1; checksum: ***
 $
 ```
 
@@ -39,15 +32,15 @@ $
 查看发布日志，查看相应的版本号。通过以下命令拉取kusion镜像（Kusion镜像中包含KCL命令行工具）：
 
 ```shell
-$ docker pull reg.docker.alibaba-inc.com/kusion/kusion
+$ docker pull kusionstack/kusion
 ...
 ```
 
 然后通过以下命令查看 KCL 版本号：
 
 ```shell
-$ docker run --rm -it reg.docker.alibaba-inc.com/kusion/kusion:v0.3.4-b72d3fc8 kcl --version
-kclvm version is 0.3.4
+$ docker run --rm -it kusionstack/kusion:v0.4.1 kcl --version
+kclvm version is 0.4.1
 $
 ```
 
@@ -62,7 +55,7 @@ hello = "world"
 然后通过以下命令执行 `hello.k` 文件：
 
 ```shell
-$ docker run --rm -it -v `pwd`:/root/hello.k reg.docker.alibaba-inc.com/kusion/kusion kcl /root/hello.k
+$ docker run --rm -it -v `pwd`:/root/hello.k kusionstack/kusion kcl /root/hello.k
 hello: world
 $
 ```
