@@ -39,7 +39,7 @@ const config = {
 
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          editUrl: 'https://github.com/KusionStack/kusionstack.io/blob/source',
+          editUrl: 'https://github.com/KusionStack/kusionstack.io/blob/main',
           remarkPlugins: [math, mermaid],
           rehypePlugins: [katex],
           showLastUpdateAuthor: true,
@@ -49,7 +49,7 @@ const config = {
           postsPerPage: 2,
           showReadingTime: true,
           // Please change this to your repo.
-          editUrl: 'https://github.com/KusionStack/kusionstack.io/blob/source',
+          editUrl: 'https://github.com/KusionStack/kusionstack.io/blob/main',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

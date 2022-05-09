@@ -68,16 +68,16 @@ $ npm run build
 
 配置文件有文档配置、侧边栏和内部文档几个：
 
-- [docusaurus.config.js](https://github.com/KusionStack/kusionstack.io/blob/source/docusaurus.config.js) 是 [Docusaurus](https://docusaurus.io/) 的主配置文件。
-- [sidebars.js](https://github.com/KusionStack/kusionstack.io/blob/source/sidebars.js) 对应文档的侧边栏配置，被 [docusaurus.config.js](https://github.com/KusionStack/kusionstack.io/blob/source/docusaurus.config.js) 文件引用。
+- [docusaurus.config.js](https://github.com/KusionStack/kusionstack.io/blob/main/docusaurus.config.js) 是 [Docusaurus](https://docusaurus.io/) 的主配置文件。
+- [sidebars.js](https://github.com/KusionStack/kusionstack.io/blob/main/sidebars.js) 对应文档的侧边栏配置，被 [docusaurus.config.js](https://github.com/KusionStack/kusionstack.io/blob/main/docusaurus.config.js) 文件引用。
 
 ## 5. 主页面内容
 
 主页面内容由以下文件构建产生：
 
-- [docusaurus.config.js](https://github.com/KusionStack/kusionstack.io/blob/source/docusaurus.config.js) 是 [Docusaurus](https://docusaurus.io/) 的主配置文件，包含顶部的导航栏和底部的链接。
-- [src/pages/index.js](https://github.com/KusionStack/kusionstack.io/blob/source/src/pages/index.js) 对应页面主体区域，包含快速开始的链接按钮。
-- [src/components/HomepageFeatures.js](https://github.com/KusionStack/kusionstack.io/blob/source/src/components/HomepageFeatures.js) 对应 Kusion 的特性介绍。
+- [docusaurus.config.js](https://github.com/KusionStack/kusionstack.io/blob/main/docusaurus.config.js) 是 [Docusaurus](https://docusaurus.io/) 的主配置文件，包含顶部的导航栏和底部的链接。
+- [src/pages/index.js](https://github.com/KusionStack/kusionstack.io/blob/main/src/pages/index.js) 对应页面主体区域，包含快速开始的链接按钮。
+- [src/components/HomepageFeatures.js](https://github.com/KusionStack/kusionstack.io/blob/main/src/components/HomepageFeatures.js) 对应 Kusion 的特性介绍。
 
 ## 6. 内部链接
 
