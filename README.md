@@ -1,3 +1,8 @@
+[![Contributors](https://img.shields.io/github/contributors/kusionstack/kusionstack.io.svg?style=for-the-badge)](https://github.com/kusionstack/kusionstack.io/graphs/contributors)
+[![Forks](https://img.shields.io/github/forks/kusionstack/kusionstack.io.svg?style=for-the-badge)](https://github.com/kusionstack/kusionstack.io/network/members)
+[![GitHub stars](https://img.shields.io/github/stars/kusionstack/kusionstack.io.svg?style=for-the-badge&label=Stars)](https://github.com/kusionstack/kusionstack.io/)
+[![license](https://img.shields.io/github/license/kusionstack/kusionstack.io.svg?style=for-the-badge)](https://github.com/kusionstack/kusionstack.io)
+
 # kusionstack.io
 
 Source for kusionstack.io site <https://kusionstack.io>.
