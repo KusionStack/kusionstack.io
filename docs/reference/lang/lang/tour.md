@@ -3013,7 +3013,7 @@ spec:
   selector: {}
 ```
 
-### KCL CLI 变量查询
+### KCL 变量查询
 
 我们可以在 KCL CLI 使用 `-S|--path-selector` 参数从 KCL 模型中查询一个或多个值。
 
@@ -3090,7 +3090,7 @@ var:
   age: 18
 ```
 
-### KCL CLI 变量修改
+### KCL 变量修改
 
 除了变量查询，KCL 还允许我们通过 KCL CLI 的 `-O|--overrides` 参数直接修改配置模型中的值。
 
@@ -3117,6 +3117,8 @@ override_spec: [[pkgpath] ":"] identifier ("=" value | "-")
   - 当 identifier 不存在时，对配置不作任何修改
 
 请注意，当 `identifier` 出现多次时，修改/删除全部 `identifier` 的值
+
+此外，在 KCL 中还提供了 API 用于变量查询和修改，详见 [API 文档](../xlang-api/go-api.md)
 
 #### 示例
 
