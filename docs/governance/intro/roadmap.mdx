@@ -367,7 +367,7 @@ Kusion Model 2022 路线规划以季度周期建立里程碑：
 - 代码质量：帮助提升模型的易用性和稳定性；
 
 ## Kusion Engine 路线规划
-Kusion Engine负责对KCL编译结果的解析和资源下发，主要包含三个部分：资源依赖解析与执行，资源State管理，多类型Runtime对接
+Kusion Engine负责对KCL编译结果的解析和资源下发，主要包含三个部分：资源依赖解析与执行，资源State管理，异构Runtime管理
 
 ### Kusion Engine 2022 规划
 Kusion Engine 2022 将围绕核心能力建设、用户使用体验优化和配套文档这几个方面展开
@@ -375,8 +375,8 @@ Kusion Engine 2022 将围绕核心能力建设、用户使用体验优化和配�
 #### 核心能力增强
 - 持续建设Kubernetes资源运维能力，从apply、patch、event等多个方面构建云原生时代的IaC引擎，打造更加Kubernetes Native的运维体验
 - 构建统一的State并发控制能力，任何对接过的存储介质都可以具备并发访问控制的能力
-- 建设Resource Lifecycle Hook，可以通过Hook机制在Resource生命周期里自定义外部扩展
-- 兼容Terraform的provider生态，可以同时纳管Terraform的provider资源
+- 精细化Resource Lifecycle管理，可以通过Hook机制在Resource生命周期里自定义外部扩展
+- 兼容Terraform的provider生态，可以纳管Terraform的provider资源
 
 #### 用户使用体验优化
 - 错误信息展示优化，让用户更容易定位到错误原因
@@ -390,17 +390,17 @@ Kusion Engine 2022 将围绕核心能力建设、用户使用体验优化和配�
 ### 里程碑
 - 2022.5
   - Apply支持三路merge
-  - 支持Watch能力 
-  - 支持Patch能力
+  - LiveDiff支持三路merge
 
 - 2022.7
-  - 兼容Terraform Provider 
-  - Resource Lifecycle Hook
+  - 支持Patch能力
+  - 支持Watch能力
+  - 兼容Terraform Provider
   - State统一并发控制
 
 - 2022.9
   - LiveDiff敏感信息隐藏
-  - LiveDiff支持全类型资源的三路merge diff
+  - 精细化Resource Lifecycle管理
   - 支持资源配置漂移检查
   
 - 2022.12
@@ -408,4 +408,7 @@ Kusion Engine 2022 将围绕核心能力建设、用户使用体验优化和配�
   - 全类型资源Watch能力
   
 ### 期望社区工作
-核心能力还在持续构建阶段，欢迎大家提供新的想法，把Kusion打造成云原生时代的IaC引擎。新手可以从用户体验和配套文档两个方面入手，方便快速了解整个项目
+核心能力还在持续构建阶段，欢迎大家提供新的想法，把Kusion打造成云原生时代的IaC引擎。2022年希望社区参与的工作如下：
+- 编写引擎相关文档，方便用户理解和快速上手
+- Terraform Provider生态对接，如Provider接口适配、生命周期管理等
+- 精细化Resource Lifecycle管理
