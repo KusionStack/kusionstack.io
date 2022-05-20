@@ -1,8 +1,11 @@
 name: build-and-deploy
 on:
+  pull_request:
+    branches:
+    - deploy
   push:
     branches:
-      - deploy
+    - deploy
 jobs:
   deploy:
     runs-on: ubuntu-18.04
