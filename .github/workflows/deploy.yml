@@ -3,11 +3,11 @@ on:
   pull_request:
     branches:
     - deploy
-  push:
-    branches:
-    - deploy
+    types:
+    - closed
 jobs:
   deploy:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-18.04
     steps:
       - name: Git checkout
