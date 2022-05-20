@@ -23,7 +23,7 @@ KCL 语言在 2022 年将完成如下工作，使语言特性到达生产可用�
 
 - 语言功能特性简化：根据更多的场景提炼精简语言特性，如删除非必须的语言特性，增强常用的语言特性。
 - 语言稳定性提升：包含编译时和运行时稳定性两部分：编译时稳定性：支持完备的类型系统，支持反向类型推导等核心能力，进一步提升语言类型完备性与编译时稳定性；运行时稳定性：语言内存管理（垃圾回收，运行时内存泄漏检查），语言调试能力支持。
-- 完备的包管理体系：基于 Github 支持 KCL 包/模块的上传、下载、安装与链接等。
+- 完备的包管理体系：基于 Github 支持 KCL 包 / 模块的上传、下载、安装与链接等。
 - 约束与策略能力支持：约束能力：语言支持编译时约束检查，提升静态校验能力；策略能力：语言实现 KCL 策略规则校验，重点支持语言策略前端，实现语言规则编写语法，规则逻辑方程求解，规则冲突检查等功能。
 - 资源顺序能力支持：通过 KCL 子语言支持资源顺序顺序依赖声明，包括显式依赖和隐式依赖。
 
@@ -43,7 +43,7 @@ KCL 语言在 2022 年将完成如下工作，使语言特性到达生产可用�
 
 - KCL 定义 API 规范：作为配置语言，通过 KCL 定义自身的 API/CLI/Plugin 等接口定义，通过半自举的方式加速自身的发展和完善。
 - 多种领域语言的生态扩展：支持更多的领域语言和格式集成，比如 HCL、Jsonnet 和 Protobuf 等语言支持。
-- 完备的多语言 API 构建：支持 KCL 编译，语法检查，自动化查询修改等，序列化/反序列化，KCL 代码编写等核心 API 函数，结合社区力量支持 Rust/Python/Java/Go 等多种语言。
+- 完备的多语言 API 构建：支持 KCL 编译，语法检查，自动化查询修改等，序列化 / 反序列化，KCL 代码编写等核心 API 函数，结合社区力量支持 Rust/Python/Java/Go 等多种语言。
 
 #### 目标领域增强
 
@@ -60,7 +60,7 @@ KCL 2022 路线规划以季度周期建立里程碑：
 - 2022.5
   - KCLVM 开源
   - KCLVM API
-    - 基于 C Native API 的多语言和 Restful API 
+    - 基于 C Native API 的多语言和 Restful API
   - KCL 语言工具 Rust 代码重写
     - 增删改查工具
     - 格式化工具
@@ -83,7 +83,7 @@ KCL 2022 路线规划以季度周期建立里程碑：
   - KCL JIT 方式编译执行
 - 2022.12
   - 产出通用领域语言编译器研发框架
-  - 多种后端支持：包括多种本地平台支持(x86, ARM 和 risc5 等)，多种 VM 格式支持（WASM 和 BPF 等)
+  - 多种后端支持：包括多种本地平台支持 (x86, ARM 和 risc5 等)，多种 VM 格式支持（WASM 和 BPF 等)
 
 ### 期望社区工作
 
@@ -109,8 +109,8 @@ KCL CLI 工具包含 OpenAPI 工具、文档生成、测试、格式化、校验
 - 命令行界面易用性提升
   - 更统一和完备的命令行 & API 界面
   - 更友好的报错信息与修正建议
-- OpenAPI 工具：支持云原生/非云原生场景下，多语言模型向 KCL 的转换
-- KCL 文档生成工具：完成文档自动生成&同步脚本，集成到 Konfig CICD 最佳实践；其他功能提升例如：支持从源代码生成 DocString 脚手架的 DocString 快速编写；生成信息更全面和精确的模型文档；支持对 DocString 内容的检查和自动纠错等
+- OpenAPI 工具：支持云原生 / 非云原生场景下，多语言模型向 KCL 的转换
+- KCL 文档生成工具：完成文档自动生成 & 同步脚本，集成到 Konfig CICD 最佳实践；其他功能提升例如：支持从源代码生成 DocString 脚手架的 DocString 快速编写；生成信息更全面和精确的模型文档；支持对 DocString 内容的检查和自动纠错等
 - KCL 格式化工具：集成到 Konfig CICD 最佳实践；功能提升例如：支持代码块竖向对齐等
 - KCL 代码审查工具：集成到 Konfig CICD，提供代码质量保障；功能提升例如：支持除 import 语句外更多的审查项，并支持自动修复；
 - KCL 测试工具：集成到 Konfig CICD，提供代码质量保障；功能提升例如：支持基于变更行的精准单元测试、集成测试，支持测试覆盖率统计；
@@ -138,7 +138,7 @@ KCL CLI 2022 规划里程碑如下：
   - 文档生成、代码审查、格式化工具达到稳定可用状态，应用于 Konfig CICD
   - 测试工具达到可精准测试，应用于 Konfig CICD
 - 2022.6
-  - 提供稳定完善的自动化迁移工具（云原生/非云原生存量模型转换；KCL 项目语言版本升级的自动化迁移），完整串联用户迁移和使用的全流程，并产出典型场景的全流程操作文档。
+  - 提供稳定完善的自动化迁移工具（云原生 / 非云原生存量模型转换；KCL 项目语言版本升级的自动化迁移），完整串联用户迁移和使用的全流程，并产出典型场景的全流程操作文档。
   - 测试工具支持测试覆盖率统计
   - 提供完备的代码审查工具，产出完善的代码审查规范文档
   - 提供完备的代码分析（属性列表分析、依赖分析等）和图形化展示工具
@@ -224,7 +224,7 @@ Kusion CLI 2022 路线规划以季度周期建立里程碑：
 
 import Kusion_CLI_Roadmap from './images/Kusion-CLI-Roadmap.svg';
 
-[打开路线规划图(SVG)](./images/Kusion-CLI-Roadmap.svg)
+[打开路线规划图 (SVG)](./images/Kusion-CLI-Roadmap.svg)
 
 ### 期望社区工作
 
@@ -243,7 +243,7 @@ Kusion IDE 工具包含 KCL 语言编写辅助、Kusion 一站式运维、静态
 
 #### KCL 语言编写辅助
 
-KCL 语言编写辅助模块关注开发者在编写、编译、测试 KCL 代码过程中的体验问题。2022 年重点建设 LSP(Language Server Protocol) 核心能力，提升功能易用性、准确率及性能，并借助生态力量扩展到更多 IDE 平台。
+KCL 语言编写辅助模块关注开发者在编写、编译、测试 KCL 代码过程中的体验问题。2022 年重点建设 LSP (Language Server Protocol) 核心能力，提升功能易用性、准确率及性能，并借助生态力量扩展到更多 IDE 平台。
 
 - LSP 核心能力建设
   - 重点提升错误提示、智能补全、代码重构等功能的易用性，结合 KCL Cli 能力提供源码分析及可视化展示功能，其余能力包括：编译及测试、格式化、代码审查、文档生成等。
@@ -367,45 +367,48 @@ Kusion Model 2022 路线规划以季度周期建立里程碑：
 - 代码质量：帮助提升模型的易用性和稳定性；
 
 ## Kusion Engine 路线规划
-Kusion Engine负责对KCL编译结果的解析和资源下发，主要包含三个部分：资源依赖解析与执行，资源State管理，多类型Runtime对接
+Kusion Engine 负责对 KCL 编译结果的解析和资源下发，主要包含三个部分：资源依赖解析与执行，资源 State 管理，异构 Runtime 管理
 
 ### Kusion Engine 2022 规划
 Kusion Engine 2022 将围绕核心能力建设、用户使用体验优化和配套文档这几个方面展开
 
 #### 核心能力增强
-- 持续建设Kubernetes资源运维能力，从apply、patch、event等多个方面构建云原生时代的IaC引擎，打造更加Kubernetes Native的运维体验
-- 构建统一的State并发控制能力，任何对接过的存储介质都可以具备并发访问控制的能力
-- 建设Resource Lifecycle Hook，可以通过Hook机制在Resource生命周期里自定义外部扩展
-- 兼容Terraform的provider生态，可以同时纳管Terraform的provider资源
+- 持续建设 Kubernetes 资源运维能力，从 apply、patch、event 等多个方面构建云原生时代的 IaC 引擎，打造更加 Kubernetes Native 的运维体验
+- 构建统一的 State 并发控制能力，任何对接过的存储介质都可以具备并发访问控制的能力
+- 精细化 Resource Lifecycle 管理，可以通过 Hook 机制在 Resource 生命周期里自定义外部扩展
+- 兼容 Terraform 的 provider 生态，可以纳管 Terraform 的 provider 资源
 
 #### 用户使用体验优化
 - 错误信息展示优化，让用户更容易定位到错误原因
-- LiveDiff展示结果优化，敏感信息特殊处理
+- LiveDiff 展示结果优化，敏感信息特殊处理
 
 #### 配套文档
-- 持续补充完善用户手册，尽量做到新手可以半小时跑完demo
-- 补充Kusion Engine系统架构
-- 补充Kusion Engine Workflow
+- 持续补充完善用户手册，尽量做到新手可以半小时跑完 demo
+- 补充 Kusion Engine 系统架构
+- 补充 Kusion Engine Workflow
 
 ### 里程碑
 - 2022.5
-  - Apply支持三路merge
-  - 支持Watch能力 
-  - 支持Patch能力
+  - Apply 支持三路 merge
+  - LiveDiff 支持三路 merge
 
 - 2022.7
-  - 兼容Terraform Provider 
-  - Resource Lifecycle Hook
-  - State统一并发控制
+  - 支持 Patch 能力
+  - 支持 Watch 能力
+  - 兼容 Terraform Provider
+  - State 统一并发控制
 
 - 2022.9
-  - LiveDiff敏感信息隐藏
-  - LiveDiff支持全类型资源的三路merge diff
+  - LiveDiff 敏感信息隐藏
+  - 精细化 Resource Lifecycle 管理
   - 支持资源配置漂移检查
-  
+
 - 2022.12
-  - Kubernetes Runtime具备常用高级能力，例如logs、exec、describe
-  - 全类型资源Watch能力
-  
+  - Kubernetes Runtime 具备常用高级能力，例如 logs、exec、describe
+  - 全类型资源 Watch 能力
+
 ### 期望社区工作
-核心能力还在持续构建阶段，欢迎大家提供新的想法，把Kusion打造成云原生时代的IaC引擎。新手可以从用户体验和配套文档两个方面入手，方便快速了解整个项目
+核心能力还在持续构建阶段，欢迎大家提供新的想法，把 Kusion 打造成云原生时代的 IaC 引擎。2022 年希望社区参与的工作如下：
+- 编写引擎相关文档，方便用户理解和快速上手
+- Terraform Provider 生态对接，如 Provider 接口适配、生命周期管理等
+- 精细化 Resource Lifecycle 管理
