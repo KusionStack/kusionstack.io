@@ -69,11 +69,18 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      hideableSidebar: true,
+      // hideableSidebar: true,
       autoCollapseSidebarCategories: true,
       announcementBar: {
         id: 'announcementBar-1', // Increment on change
         content: `⭐️ If you like KusionStack, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/KusionStack/kusion">Github</a>`,
+      },
+      
+      algolia: {
+        appId: '5JTIY9OTXT',
+        apiKey: '83c022f4ad19bf018860b768f23f879d',
+        indexName: 'kusionstack',
+        contextualSearch: true,
       },
       navbar: {
         title: 'KusionStack',
@@ -141,15 +148,19 @@ const config = {
             ],
           },
           {
-            title: '社区',
+            title: '资源',
             items: [
               {
-                label: '代码仓库',
+                label: '博客',
+                to: '/blog',
+              },
+              {
+                label: 'Github',
                 href: 'https://github.com/KusionStack',
               },
               {
-                label: '常见问题',
-                to: '/docs/user_docs/support',
+                label: 'Slack',
+                href: 'https://KusionStack.slack.com',
               },
             ],
           },
@@ -157,8 +168,8 @@ const config = {
             title: '更多',
             items: [
               {
-                label: '博客',
-                to: '/blog',
+                label: '常见问题',
+                to: '/docs/user_docs/support',
               },
               {
                 label: '更新日志',
