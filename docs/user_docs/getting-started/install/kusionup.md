@@ -70,7 +70,7 @@ C02Y90Q4JHD2:bin yueyi$ otool -L /Users/yueyi/tools/homebrew/bin/gettext
   /usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1281.100.1)
 ```
 
-- 将  `/Users/yueyi/tools/homebrew/Cellar/gettext/0.21/lib/libintl.8.dylib` 拷贝到 `usr/local/opt/gettext/lib/libintl.8.dylib`
+- 将  `/Users/yueyi/tools/homebrew/Cellar/gettext/0.21/lib/libintl.8.dylib` 拷贝到 `/usr/local/opt/gettext/lib/libintl.8.dylib`
 
 ## 2. 管理 Kusion 版本
 
