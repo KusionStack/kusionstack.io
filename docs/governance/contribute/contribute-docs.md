@@ -38,7 +38,6 @@ Kusion 文档分为用户指南、开发文档、内部文档、参考手册和�
 - 文件名和目录名只能用数字、英文字母、下划线 `_` 和减号 `-` 组成
 - 当前文档的图片放在当前目录的 images 目录下
 - 矢量图片可以通过 [drawio 离线版](https://github.com/jgraph/drawio-desktop/releases) 绘制（并同时提交源文件），以 200% 分辨率导出 png 格式图片
-- 矢量图也可以通过 [Mermaid](https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid) 在 Markdown 中直接绘制
 
 ## 2. 使用文档内容的基本模式
 
