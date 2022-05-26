@@ -6,6 +6,8 @@ sidebar_position: 2
 
 如果环境无法安装本地执行版本，可以选择 KusionStack 的 Docker 版本。首先在本地安装好 [Docker](https://www.docker.com/) 环境，并启动 Docker 服务。然后通过 `docker info` 命令验证本地的 Docker 服务已经正常启动。
 
+Kusion 镜像的网址: https://hub.docker.com/r/kusionstack/kusion
+
 ## 1. 拉取最新版本
 
 通过以下命令拉取最新的版本：
@@ -29,7 +31,7 @@ $
 
 ## 2. 拉取指定版本
 
-查看发布日志，查看相应的版本号。通过以下命令拉取kusion镜像（Kusion镜像中包含KCL命令行工具）：
+查看[镜像版本号列表](https://hub.docker.com/r/kusionstack/kusion/tags)，或者通过以下命令拉取 kusion 最新镜像（Kusion镜像中包含KCL命令行工具）：
 
 ```shell
 $ docker pull kusionstack/kusion
