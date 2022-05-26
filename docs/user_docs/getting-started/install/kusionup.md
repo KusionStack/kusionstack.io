@@ -15,7 +15,13 @@ sidebar_position: 1
 通过以下命令一键安装 `kusionup`：
 
 ```bash
-curl -s "http://kusion-public.oss-cn-hzfinance.aliyuncs.com/cli/kusionup/scripts/install_kusionup.sh" | bash && source $HOME/.kusionup/env
+brew install KusionStack/tap/kusionup && kusionup init --skip-prompt && source $HOME/.kusionup/env
+```
+
+升级 `kusionup`：
+```bash
+brew update
+brew upgrade KusionStack/tap/kusionup
 ```
 
 该脚本执行后会创建 `$HOME/.kusionup` 目录，该目录下会包含：
@@ -29,7 +35,7 @@ curl -s "http://kusion-public.oss-cn-hzfinance.aliyuncs.com/cli/kusionup/scripts
 上述脚本会默认安装最新的 kusion 版本（`latest`），如果想**自定义默认安装版本**，可以运行下述命令（将最后的 `latest` 替换为你想要默认安装的版本号就就行）：
 
 ```bash
-curl -s "http://kusion-public.oss-cn-hzfinance.aliyuncs.com/cli/kusionup/scripts/install_kusionup.sh" | bash -s -- --skip-install && source $HOME/.kusionup/env && kusionup reinstall latest
+brew install KusionStack/tap/kusionup && kusionup init --skip-install && source $HOME/.kusionup/env && kusionup reinstall latest
 ```
 
 **💡 安装失败问题排查**：
@@ -87,17 +93,19 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 
 ```bash
 $ kusionup ls-ver
-latest
-v0.3.16
-v0.3.15
-v0.3.14
+cdn@latest
+cdn@v0.4.2
+cdn@v0.4.1
+github@latest
+github@v0.4.2
+github@v0.4.1
 ```
 
 执行 `kusionup install $VERSION` 安装指定版本：
 
 ```shell
-# 这里假设安装开源 kusion 的最新版本 ↓
-$ kusionup install latest
+# 这里假设从 cdn 加速源安装 kusion 的最新版本 ↓
+$ kusionup install cdn@latest
 Downloaded   0.0% (     2426 / 139988826 bytes) ...
 Downloaded  11.4% ( 16003466 / 139988826 bytes) ...
 Downloaded  21.0% ( 29433014 / 139988826 bytes) ...
@@ -114,7 +122,7 @@ INFO[0061] Success: latest downloaded in /root/.kusionup/kusion@latest
 INFO[0061] Default Kusion is set to 'latest'
 
 $ kusion version
-releaseVersion: v0.3.21
+releaseVersion: v0.4.1
 ......
 ```
 
@@ -124,8 +132,8 @@ releaseVersion: v0.3.21
 $ kusionup show
 |    VERSION    | ACTIVE |
 |---------------|--------|
-|    latest     |   *    |
-|    v0.3.20    |        |
+|  cdn@latest   |   *    |
+|  cdn@v0.4.1   |        |
 ```
 
 执行 `kusionup remove $VERSION` 删除指定版本：
@@ -138,7 +146,7 @@ INFO[0000] Removing latest
 $ kusionup
 Use the arrow keys to navigate: ↓ ↑ → ←
 ? Select a version:
-  ▸ v0.3.20  # 已经没有 latest 的选项了
+  ▸ cdn@v0.4.1  # 已经没有 latest 的选项了
 ```
 
 ## 3. Kusionup 帮助文档
@@ -183,7 +191,7 @@ $ mv $HOME/.kusion $HOME/.kusionup/kusion-debug
 $ kusionup
 Use the arrow keys to navigate: ↓ ↑ → ←
 ? Select a version:
-    latest
+    cdn@latest
   ▸ debug
 ```
 
