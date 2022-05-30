@@ -4,16 +4,10 @@
 
 目前，ArgoCD 内置了一些常见的配置插件，包括 helm、jsonnet、kustomize。而对于 KCL 来说，作为一门全新的配置语言，想要使用 ArgoCD 实现漂移检查的能力，需要遵循它的插件化的机制，配置 Kusion 插件。具体操作如下：
 
-1. 将以下配置保存到 `patch-argocd-cm.yaml` 文件中
+1. 下载 [patch](https://github.com/KusionStack/examples/blob/main/kusion/argo-cd/patch-argocd-cm.yaml) 文件
 
-```yaml
-data:
-  configManagementPlugins: |
-    - name: kusion
-      generate:
-        command: ["sh", "-c"]
-        args: ["kusion compile -Y kcl.yaml -Y ci-test/settings.yaml"]
-      lockRepo: true
+```shell
+wget -q https://raw.githubusercontent.com/KusionStack/examples/main/kusion/argo-cd/patch-argocd-cm.yaml
 ```
 
 2. 更新配置
@@ -27,38 +21,10 @@ kubectl -n argocd patch cm/argocd-cm -p "$(cat patch-argocd-cm.yaml)"
 
 完成第一步，ArgoCD 就可以识别 Kusion 插件，但 Kusion 插件还没有载入到 ArgoCD 的镜像中。要实现配置漂移检查，需要修改 argocd-repo-server 的 Deployment。
 
-1. 将以下配置保存到 `patch-argocd-repo-server.yaml` 文件中
+1. 下载 [patch](https://github.com/KusionStack/examples/blob/main/kusion/argo-cd/patch-argocd-repo-server.yaml) 文件
 
-```yaml
-spec:
-  template:
-    spec:
-      # 1. Define an emptyDir volume which will hold the custom binaries
-      volumes:
-      - name: custom-tools
-        emptyDir: {}
-      # 2. Use an init container to download/copy custom binaries
-      initContainers:
-      - name: download-kusion
-        image: yuanhao1223/kusion:open 
-        command: [sh, -c]
-        args:
-        - cp -rf /kusion /custom-tools/kusion
-        volumeMounts:
-        - mountPath: /custom-tools
-          name: custom-tools
-      # 3. Volume mount the custom binary to the bin directory
-      containers:
-      - name: argocd-repo-server
-        env:
-        - name: PATH
-          value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/kusion/bin:/kusion/kclvm/bin 
-        volumeMounts:
-        - mountPath: /kusion
-          name: custom-tools
-          subPath: kusion
-        securityContext:
-          readOnlyRootFilesystem: false
+```shell
+wget -q https://raw.githubusercontent.com/KusionStack/examples/main/kusion/argo-cd/patch-argocd-repo-server.yaml
 ```
 
 2. 更新配置
@@ -67,16 +33,34 @@ spec:
 kubectl -n argocd patch deploy/argocd-repo-server -p "$(cat patch-argocd-repo-server.yaml)"
 ```
 
+3. 升级完成
+
+```shell
+kubectl get pod -n argocd -l app.kubernetes.io/name=argocd-repo-server
+```
+
 ## 3. 创建 KCL 项目
 
-到此，准备工具已经完成，现在开始验证。我们使用开源 Konfig 大库中的示例项目，执行以下命令，创建 ArgoCD Application：
+到此，准备工具已经完成，现在开始验证。这里我们使用开源 Konfig 大库中的示例项目。
 
-1. 创建 guestbook-test
+1. 开启本地端口转发
+
+```shell
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+```
+
+2. 登录 ArgoCD
+
+```shell
+argocd login localhost:8080
+```
+
+3. 创建 ArgoCD Application
 
 ```shell
 argocd app create guestbook-test \
---repo git@github.com:KusionStack/konfig.git \
---path appops/guestbook-frontend/test \
+--repo https://github.com/KusionStack/konfig.git \
+--path appops/guestbook-frontend/prod \
 --dest-namespace default \
 --dest-server https://kubernetes.default.svc \
 --config-management-plugin kusion
@@ -94,7 +78,7 @@ application 'guestbook-test' created
 
 ![](./images/5-out-of-sync.jpg)
 
-2. 设置同步策略（仅同步 `unsynced` 的资源）：
+4. 设置同步策略（仅同步 `unsynced` 的资源）：
 
 ```shell
 argocd app set guestbook-test --sync-option ApplyOutOfSyncOnly=true
@@ -123,14 +107,14 @@ argocd app set guestbook-test --sync-option ApplyOutOfSyncOnly=true
 2. 更新编译结果
 
 ```shell
-kusion compile -w appops/guestbook-frontend/test
+kusion compile -w appops/guestbook-frontend/prod
 ```
 
 3. Git 提交并推送
 
 ```shell
 git add .
-git commit -m "mannual drifted config for appops/guestbook-frontend/test"
+git commit -m "mannual drifted config for appops/guestbook-frontend/prod"
 git push origin main
 ```
 
