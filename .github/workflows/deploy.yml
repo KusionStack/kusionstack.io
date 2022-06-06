@@ -1,5 +1,8 @@
 name: build-and-deploy
 on:
+  push:
+    branches:
+    - deploy
   pull_request:
     branches:
     - deploy
