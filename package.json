@@ -30,8 +30,8 @@
     "react-dom": "^17.0.1",
     "rehype-katex": "^5.0.0",
     "remark-math": "^3.0.1",
-    "url-loader": "^4.1.1",
-    "trim": "0.0.3"
+    "trim": "0.0.3",
+    "url-loader": "^4.1.1"
   },
   "browserslist": {
     "production": [
@@ -44,5 +44,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "cz-conventional-changelog": "^3.3.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
