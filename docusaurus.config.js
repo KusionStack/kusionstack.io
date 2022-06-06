@@ -76,8 +76,8 @@ const config = {
       },
       
       algolia: {
-        appId: '5JTIY9OTXT',
-        apiKey: '83c022f4ad19bf018860b768f23f879d',
+        appId: 'RE5E6BQUZV',
+        apiKey: 'e9703ec3fe7856ddb5a1321fd17a5425',
         indexName: 'kusionstack',
         contextualSearch: true,
       },
