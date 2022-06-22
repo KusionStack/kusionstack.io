@@ -27,7 +27,7 @@ hello: KCL
 
 命令行执行的效果如图所示：
 
-![](images/hello.gif)
+![](/img/docs/user_docs/getting-started/hello.gif)
 
 输出的是 YAML 格式的配置数据。这个程序虽然简单，但是我们可以通过执行 KCL 配置程序到输出结果验证了开发环境和 `kcl` 命令行的基本用法。
 

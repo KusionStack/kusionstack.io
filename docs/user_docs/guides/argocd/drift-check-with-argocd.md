@@ -76,7 +76,7 @@ application 'guestbook-test' created
 
 通过ArgoCD UI，可以看到，已经创建的应用暂未同步，此处可以手动同步，也可以设置自动同步。
 
-![](./images/5-out-of-sync.jpg)
+![](/img/docs/user_docs/guides/argocd/out-of-sync.jpg)
 
 4. 设置同步策略（仅同步 `unsynced` 的资源）：
 
@@ -88,7 +88,7 @@ argocd app set guestbook-test --sync-option ApplyOutOfSyncOnly=true
 
 同步成功：
 
-![](./images/5-synced.jpg)
+![](/img/docs/user_docs/guides/argocd/synced.jpg)
 
 ## 4. 配置漂移检查
 
@@ -120,5 +120,5 @@ git push origin main
 
 4. 漂移配置自动收敛
 
-![](./images/5-reconcile-drifted-config.jpg)
+![](/img/docs/user_docs/guides/argocd/reconcile-drifted-config.jpg)
 

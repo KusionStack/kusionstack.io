@@ -200,4 +200,4 @@ kubectl port-forward svc/frontend-service -n deployment-single-stack-xx 30000:80
 ```
 
 打开浏览器访问 [http://127.0.0.1:30000](http://127.0.0.1:30000)：
-![](./images/app-preview.jpg)
+![](/img/docs/user_docs/guides/working-with-k8s/app-preview.jpg)

@@ -8,7 +8,7 @@ sidebar_position: 9
 
 Konfig 仓库地址：https://github.com/KusionStack/konfig
 
-![](./images/konfig-arch-01.png)
+![](/img/docs/user_docs/getting-started/konfig-arch-01.png)
 
 ## 1. 目录结构
 
@@ -55,7 +55,7 @@ Konfig 配置大库整体结构如下：
 
 下面是 Konfig 的架构图：
 
-![](./images/konfig-arch-01.png)
+![](/img/docs/user_docs/getting-started/konfig-arch-01.png)
 
 核心模型内部通过前端模型和后端模型两层抽象简化前端用户的配置代码，底层模型则是通过 [KCL OpenAPI](/docs/reference/cli/openapi) 工具自动生成。
 

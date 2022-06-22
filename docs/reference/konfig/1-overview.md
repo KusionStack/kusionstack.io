@@ -17,7 +17,7 @@ KusionStack 推荐通过 **配置大库** 的方式统一管理所有的配置�
 
 下面是配置大库（Konfig）的架构图：
 
-![](./images/konfig-arch-01.png)
+![](/img/docs/reference/konfig/konfig-arch-01.png)
 
 核心模型内部通过前端模型和后端模型两层抽象简化前端用户的配置代码，底层模型则是通过 [KCL OpenAPI](/docs/reference/cli/openapi) 工具自动生成。
 

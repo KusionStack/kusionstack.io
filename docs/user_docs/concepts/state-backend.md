@@ -6,7 +6,7 @@ sidebar_position: 3
 
 Kusion 工具的核心之一是一个结构化配置数据的状态按需执行框架引擎，其前端通过 KCL 开发的配置产出 YAML 等价的配置数据，然后通过可热插拔的后端执行引擎将 YAML 配置数据按需应用到不同的云原生平台。
 
-![](images/kusion-arch-01.png)
+![](/img/docs/user_docs/concepts/kusion-arch-01.png)
 
 ## 1. State
 
