@@ -9,7 +9,7 @@ tags: [KusionStack, Kusion, KCL, KCLVM]
 
 2022 年 5 月 28 日，KusionStack Open Day 线上线下视频直播正式宣布 KusionStack 一站式可编程配置技术栈（包含 KCL 配置语言、Kusion 引擎、Konfig 配置大库）开源。
 
-![](images/01.jpg) 
+![](/img/blog/2022-05-28-open-day/01.jpg) 
 
 以上是 KusionStack 杭州团队合影。至此，🎉KusionStack Open Day 圆满结束🎉
 
@@ -17,15 +17,15 @@ tags: [KusionStack, Kusion, KCL, KCLVM]
 
 感谢大家抽空参加，我们一起来回顾下👀，本次活动的精彩瞬间吧～👏
 
-![](images/02.jpg)
+![](/img/blog/2022-05-28-open-day/02.jpg)
 
 蚂蚁集团高级技术专家、Kusion 项目发起人及负责人——朵晓东作为整场活动的主持人，带领大家一起回顾了 Kusion 项目演进历程，并宣布了 KusionStack 正式开源的好消息！
 
-![](images/03.jpg)
+![](/img/blog/2022-05-28-open-day/03.jpg)
 
 活动开场，Kusion 项目的两位 Sponsor——蚂蚁集团可信原生技术部负责人何征宇和技术风险部负责人陈亮，对 Kusion 从研发至今的发展回顾和未来展望。两位 Sponsor 在视频中给予了 Kusion 项目极大的认可，并为 KusionStack 的开源献上了祝福。
 
-![](images/04.jpg)
+![](/img/blog/2022-05-28-open-day/04.jpg)
 
 
 Kata 创始人、木兰社区 TOC —— 王旭
@@ -38,7 +38,7 @@ Kata 创始人、木兰社区 TOC —— 王旭
 
 ## 2. 《数字化出海业务的 DevOps 探索和实践》
 
-![](images/05.png)
+![](/img/blog/2022-05-28-open-day/05.png)
 
 开场演讲的众安国际科技 Engineering 负责人李晓蕾（Sherry Lee），介绍了众安国际 DevOps 在支持数字化出海业务过程遇到难点和对应的解决之道。
 
@@ -51,7 +51,7 @@ Kata 创始人、木兰社区 TOC —— 王旭
 
 ## 3. 《蚂蚁集团规模化 DevOps 的代际演进探索》
 
-![](images/06.jpg)
+![](/img/blog/2022-05-28-open-day/06.jpg)
 
 
 蚂蚁集团高级技术专家、Kusion 项目发起人及负责人——朵晓东分享了 Kusion 的项目背景和发展进程，同时他宣布 Kusion 正式开源，并分享了开源计划。
@@ -66,7 +66,7 @@ Kata 创始人、木兰社区 TOC —— 王旭
 
 ## 4. 《KCL 配置策略语言》
 
-![](images/07.jpg)
+![](/img/blog/2022-05-28-open-day/07.jpg)
 
 蚂蚁集团高级研发工程师徐鹏飞介绍了 KCL 的相关核心特性，分享了 KCL 技术栈的思路、架构、关键技术，并展开讲述了 KCL 的在蚂蚁内部多场景的实践经历。
 
@@ -78,13 +78,13 @@ KCL 帮助不同角色的用户以简单、可扩展、稳定、高效、分而�
 
 ## 5. 中场休息
 
-![](images/08.jpg) 
+![](/img/blog/2022-05-28-open-day/08.jpg) 
 
 中场休息期间，“开源老兵”、Go 语言大佬——柴树杉老师浅谈了他参与 KusionStack 的心路历程和个人收获，并表达了能有更多伙伴参与到 KusionStack 的开源共建的希望。
 
 ## 6. 《Kusion 模型库和工具链的实践探索和总结》
 
-![](images/09.jpg) 
+![](/img/blog/2022-05-28-open-day/09.jpg) 
 
 蚂蚁集团高级研发工程师杨英明以实际的案例介绍了如何通过 KCL 抽象 Kusion 模型库，以及如何结合 Kusion 工具链一站式的完成配置代码的编写和生效，同时总结分享了通过这套模式进行实际交付的经验和建议。
 
@@ -95,7 +95,7 @@ KCL 帮助不同角色的用户以简单、可扩展、稳定、高效、分而�
 
 ## 7. 《Kusion 在蚂蚁的规模化实践》
 
-![](images/10.jpg) 
+![](/img/blog/2022-05-28-open-day/10.jpg) 
 
 最后，蚂蚁集团技术专家史贵明和蚂蚁集团高级运维工程师李治玮共同带来了 Kusion 在蚂蚁的规模化实践的分享。史贵明主要从 PaaS 配置管理的系统架构角度讲述了蚂蚁目前的多云配置管理能力，李治玮则从 SRE 视角下，分享了使用 KCL 解决多种复杂基础设施的交付效率问题和价值。
 
