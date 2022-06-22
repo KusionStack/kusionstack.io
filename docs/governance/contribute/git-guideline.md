@@ -15,17 +15,18 @@
 在选择合适的模版后，只需要填写模版上的要求填写的内容即可。如果在创建 issue 的时候发现没有模版，或者模版内容为空，可以通过微信群，钉钉群或者邮件向我们反馈这个问题。
 
 ## 2. 关于 Git 分支
-我们参考[ Angular 规范](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines)为分支命名。
+
+要向 KusionStack 贡献代码，您必须拥有一个 GitHub 帐户，以便您可以将代码推送到您自己的 KusionStack 分支并创建拉取请求。我们推荐参考 [Angular 规范](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines) 为您自己的分支命名。
 推荐的格式如下：
+
 ```
-{type}/{your_account_ID}/{a_short_description}
+{type}-{a_short_description}
 ```
-分支名称主要包括三个字段，并通过 “/” 分割。其中：
+分支名称主要包括两个字段，并通过 “-” 分割。其中：
  - {type} : 当前分支内容的类型。
- - {your_account_ID}: 进行这次修改的账户 ID。
  - {a_short_description}: 一个简短的描述，介绍这个分支的主要内容。
 
- e.g. 张三创建了一个修复了输出格式化 bug 的分支，并打算使用账户 zhangS 提交 mr，对应的分支名称`fix/zhangS/fix_output_fmt_bug`。
+e.g. 张三首先 Fork 仓库到自己账户下，然后创建对应名称 `zhangsan:fix-output-fmt-bug` 的分支（冒号之前是张三的账号），用于修复输出格式化 bug。
 
 ## 3. 关于 Git Commit
 我们参考 [Commitizen](https://github.com/commitizen/cz-cli) 书写 Commit Message。
@@ -60,7 +61,7 @@ node_modules/*
 
   其中 {breaking_change_description} 和 {linked issue} 如果 commit 中不包含破坏兼容性的改动和关联的 issue，可以省略。
 
-  e.g. 张三在分支 `fix/zhangsan/fix_output_fmt_bug` 中创建的 commit。
+  e.g. 张三在分支 `zhangsan:fix-output-fmt-bug` 中创建的 commit。
   ```
 
     fix(kclvm-printer): fix an output format bug in kclvm-printer
@@ -114,4 +115,5 @@ fix(kclvm-printer): fix an output format bug in kclvm-printer.
 ```
 
 ## <a name="cla"></a> 6. Contributor License Agreement(CLA)
-在第一次向我们提交 PR 之后，在PR中将会出现签署 CLA 的入口，请签署 CLA，如果拒绝签署，我们将无法接受 PR。
+
+在第一次向我们提交 PR 之后，在 PR 中的 CLA 检查将会失败并提示签署 CLA。您可以通过自己的账户之间在 PR 回复 "I have read the CLA Document and I hereby sign the CLA" 表示同意签署 CLA，然后手动重启失败的 CLA 检查 Action 即可。当 PR 被成功合并之后将会被锁定不能再修改。
