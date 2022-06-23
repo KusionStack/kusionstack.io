@@ -13,4 +13,4 @@ sidebar_label: 概览
   - **后端模型**：后端模型是「模型实现」，是让前端模型属性生效的模型，主要包含前端模型实例的渲染逻辑，后端模型中可借助 KCL 编写校验、逻辑判断、代码片段复用等代码，提高配置代码复用性和健壮性，对用户不感知，比如 `server_backend.k`
 - **底层模型**：是不包含任何实现逻辑和抽象的模型，往往由工具转换生成，无需修改，和真正生效的 YAML 属性一一对应，底层模型需要经过进一步抽象，一般不直接被用户使用。比如，`kusion_kubernetes` 是 Kubernetes 场景的底层模型库；
 
-![](./images/kusion-model-01.png)
+![](/img/docs/reference/model/kusion-model-01.png)

@@ -13,4 +13,4 @@ tags: [kcl]
 - 内容：https://segmentfault.com/a/1190000040455559
 - [PDF下载](https://gw.alipayobjects.com/os/bmw-prod/2cb0c283-5f24-485e-b635-b6efac887eba.pdf)
 
-[![KCL云原生配置策略语言](talk-cover.png)](https://gw.alipayobjects.com/os/bmw-prod/2cb0c283-5f24-485e-b635-b6efac887eba.pdf)
+[![KCL云原生配置策略语言](/img/blog/2021-08-03-kcl-intro/talk-cover.png)](https://gw.alipayobjects.com/os/bmw-prod/2cb0c283-5f24-485e-b635-b6efac887eba.pdf)

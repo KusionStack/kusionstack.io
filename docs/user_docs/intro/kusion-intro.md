@@ -18,7 +18,7 @@ Kusion 可编程云原生协议栈的终极目标是为了解决自动化运维�
 
 Kusion 技术栈在不同层次提供了相应的工具集、服务框架和规范，如图所示：
 
-![](./images/kusion-stack.png)
+![](/img/docs/user_docs/intro/kusion-stack.png)
 
 在最下层通过面向云原生领域提供定制的 KCL 配置策略语言、语言插件、多语言 SDK 和 OCMP 指导规范等手段为 云原生应用 IaC 化提供最基础的工具和实践指南。中间层通过 Konfig 大库、IaC 引擎、Kusion 服务为上层云原生应用提供随时可用的模型框架、配套的服务和工具。上层的 SRE 用户则通过 Kusion 提供的 Kusion 模型库描述终态，通过 Kusion 命令行工具进行查看仓库和线上系统差异，然后通过脚本进行半自动化运维工作。通过结合最佳的实践和 CICD 系统提供的辅助能力到 Kusion 工具链，可以极大简化多集群集成、权限系统集成、风险系统集成等系统化运维等工作。
 
@@ -26,7 +26,7 @@ Kusion 技术栈在不同层次提供了相应的工具集、服务框架和规�
 
 下面是 Kusion 的项目愿景大图：
 
-![](./images/kusion-goals.png)
+![](/img/docs/user_docs/intro/kusion-goals.png)
 
 愿景目标解释：
 
