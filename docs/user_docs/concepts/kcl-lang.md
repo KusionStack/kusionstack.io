@@ -10,7 +10,7 @@ KCL 是 Kusion 项目针对规模化运维的云原生场景新设计的配置�
 
 KCL 关键特性如下图所示：
 
-![](./images/kcl-capability-01.png)
+![](/img/docs/user_docs/concepts/kcl-capability-01.png)
 
 - 简单
   - 源于 Python、Golang，融入函数语言特性
@@ -40,7 +40,7 @@ KCL 关键特性如下图所示：
 
 Kusion 可编程协议栈的最底层是语言 & 协议，让用户可以通过编程的方式描述资源和状态、通过 OpenAPI 的规范和其他数据互通、通过插件和多语言扩展规范和其他高级语言交互。下面是语言 & 协议 内部的结构关系图：
 
-![](./images/iac-arch-lang.png)
+![](/img/docs/user_docs/concepts/iac-arch-lang.png)
 
 左边淡红色一列分别是 OpenAPI、KCL 和多语言支持的规范，中间青色一行是根据 KCL 语言规范的 KCLVM 实现和插件扩展。通过规范加 KCLVM 实现的 T 型结构，围绕 KCL 配置策略语言实现 KCL 配置和其他配置数据以及系统进行交互。
 

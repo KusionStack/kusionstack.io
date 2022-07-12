@@ -396,6 +396,6 @@ frontend-service   NodePort   10.0.0.1         <none>        80:10080/TCP   10m
 
 服务已经绑定到了宿主机器的 10080 端口，可以在浏览器打开 http://localhost:10080 查看：
 
-![](./images/guestbook.png)
+![](/img/docs/user_docs/getting-started/guestbook.png)
 
 说明服务已经正常启动。
