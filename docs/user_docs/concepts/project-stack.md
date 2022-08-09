@@ -56,5 +56,5 @@ appops/nginx-example
 └── project.yaml    # Project 配置文件
 ```
 
-根目录中有 `project.yaml` 文件表示对应一个 Project，然后 `dev/stack.yaml` 表示对应 Stack，base 目录对应基线配置（不是一个 Stack）。`dev/ci-test` 是测试相关配置和数据，`kcl.yaml` 和 `main.h` 是应用的 KCL 配置程序代码。
+根目录中有 `project.yaml` 文件表示对应一个 Project，然后 `dev/stack.yaml` 表示对应 Stack，base 目录对应基线配置（不是一个 Stack）。`dev/ci-test` 是测试相关配置和数据，`kcl.yaml` 和 `main.k` 是应用的 KCL 配置程序代码。
 
