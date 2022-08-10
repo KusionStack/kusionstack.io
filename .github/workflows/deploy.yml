@@ -2,10 +2,10 @@ name: build-and-deploy
 on:
   push:
     branches:
-    - deploy
+    - main
   pull_request:
     branches:
-    - deploy
+    - main
     types:
     - closed
 jobs:
