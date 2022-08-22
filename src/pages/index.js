@@ -16,7 +16,7 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="/docs/user_docs/getting-started/kubernetes">
+            to="/docs/user_docs/getting-started/usecase">
             快速开始 - 15min ⏱️
           </Link>
         </div>
