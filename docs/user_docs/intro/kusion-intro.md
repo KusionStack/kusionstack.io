@@ -33,7 +33,7 @@ KusionStack 源于蚂蚁集团内部的规模化实践，以广泛应用在蚂�
 + 融合多种角色：促进企业内的各平台团队、应用研发团队打破边界，各自向前一步，分工协同，通过“平台方生产配置组件，应用方定义应用配置”的工作方式，形成围绕应用价值交付的 Devops 体系
 + 融合工作流程：面向多样化的运维场景，通过可扩展的工程结构和一致的研发流程提供持续的业务研发扩展性，结合 GitOps、可配置 CI、CD、CDRA 技术形成端到端的工作流程
 + 融合运维方案：以工具链、自定义流水线、服务层、GUI 产品形成梯度运维方案，按需供给，灵活取用，兼顾内部专有云及外部混合云、多云场景需求，以弹性运维方案逐渐汰换割裂的 "烟囱" 式产品
-+ 融合技术理念：通过更开放的运维理念、模式及开源技术
++ 融合技术理念：通过开放的运维理念、文化及开源技术创造更多可能性
 
 ## 3. Kusion 技术栈的组成
 
@@ -52,15 +52,22 @@ KusionStack 的核心组成部分包括：
 
 **灵活组织，按需建模**
 
-KusionStack 采用纯客户端的工作方式，通过目录、文件的简单工程手段，提供按需组织工程结构和代码管理方式。KusionStack 通过自研的记录及函数语言 KCL 编写配置、模型、抽象及其约束、策略，支持用户按需定义围绕应用的配置模型，灵活应对复杂场景和快速变化。此外，KusionStack 提供了开箱即用的云原生应用配置模型，支持用户快速开始云原生交付运维之旅。最后，KusionStack 通过 KCL 模块化的语言功能沉淀可复用、可组合的模型和结构，协助平台方快速透出平台能力，应用方灵活定义应用配置。
+KusionStack 采用纯客户端的工作方式，通过目录、文件的简单工程方式，通过可扩展的基于 project、stack 设计的项目结构，提供按需组织的灵活管理方式。研发者可以通过记录及函数语言 KCL 编写配置、类型及其约束、函数和策略，通过分块配置编写及丰富的合并策略满足企业内多租户、多环境的配置编写需求，灵活应对复杂场景和快速变化。此外，KusionStack 提供了开箱即用的云原生应用配置模型，支持用户快速开始云原生交付运维之旅。最后，用户可以通过 KCL 的模块化语言特性沉淀可复用、可组合的类型和配置模型，协助平台方快速透出平台能力，应用方灵活定义所需应用配置。
 
 **一处编写，任意交付**
 
-KusionStack 协助应用研发者集中配置定义，通过 "容器镜像 + KCL 代码" 的方式交付到混合云、多云环境。KusionStack 通过可扩展的 project 项目结构，KCL 语言分块配置编写及合并策略特性满足企业内多租户、多环境的配置定义管理需求。此外，通过 Kusion 运维引擎管理含 Kubernetes 在内的多种运行时的混合资源，支持 Kubernetes 多集群资源管理，并通过集成 terraform 管理云资源。最后，KusionStack 原生提供了 CI pipelines 套件（如 Github Actions 套件），CD 技术（如 ArgoCD）集成，未来将陆续提供服务层和 GUI 产品，以灵活的自动化方案满足任意交付的要求。
+KusionStack 协助应用研发者集中配置定义，通过 "容器镜像 + KCL 代码" 的方式将应用交付到混合云、多云环境。研发者面向应用业务的配置，并通过面向不同运行时不同平台的 renders 解释并生成对应的低维度资源配置。此外，通过 Kusion 运维引擎管理含 Kubernetes 在内的多种运行时的 hybrid-resource，原生支持多集群的 Kubernetes 资源管理，并通过集成 terraform 管理 non-Kubernetes 资源。最后，KusionStack 原生支持命令行执行、GitOps 工作流、服务调用、GUI 产品（待开源）等自动化机制，通过灵活的自动化方案满足任意交付需求。
 
 **企业实践，生态集成**
 
-KusionStack 提供了一致的研发及交付工作流程，支持从平台 API 到应用配置的快速研发，工作流覆盖身份验证、权限配置、编写、预览、生效、观察、销毁的全工作流程，并将陆续提供服务层和 GUI 产品等接入方式。此外，KCL 提供了 CRUD API，多语言 SDK 及 plugin 动态扩展机制，以满足企业内多样化的自动化需求。最后，KusionStack 将持续提升运维工具及引擎扩展性，并与更多的社区技术集成。
+依托蚂蚁内部的实践积累，KusionStack 提供了面向 Platform API 从研发态到交付运维态的端到端工作流程：
+
+1. 平台集成：通过 KCL-OpenAPI 工具自助生成 KCL schema 代码
+2. 研发辅助：通过 KCL IDE 插件，lint，vet，compile，test 工具快速研发、测试
+3. CI 流程：通过 KCL dep，test 工具实现精确依赖分析及自动化测试验证
+4. CD 执行：通过 KusionCtl 工具实现身份验证、RBAC 权限配置，变更预览、生效、观察、销毁的执行流程
+
+此外，KCL 提供了 CRUD API，多语言 SDK 及 plugin 动态扩展机制，以满足企业内多样化的个性化自动化需求。KusionStack 将持续提升运维工具及引擎扩展性，并与更多的社区技术集成。
 
 
 ## 5. Kusion vs. X
@@ -75,7 +82,7 @@ KusionStack 是一个纯客户端的可编程技术栈，相比其他技术，�
 
 **vs. Terrform**
 
-KusionStack 是一种云原生亲和的可编程技术栈，旨在定义以应用为中心的配置建模抽象界面及管理机制。通过记录及函数语言 KCL 提供配置（config）、类型（schema）、函数（lambda）、规则（rule）为核心元素的编写能力。KCL 是一种没有原生线程、IO 等系统能力支持的现代编译型静态语言，并支持云原生亲和的语言功能。
+KusionStack 是一种云原生亲和的可编程运维技术栈，旨在定义以应用为中心的配置建模抽象界面及管理机制。通过记录及函数语言 KCL 提供配置（config）、类型（schema）、函数（lambda）、规则（rule）为核心元素的编写能力。KCL 是一种没有原生线程、IO 等系统能力支持的现代编译型静态语言，并支持云原生亲和的语言功能。
 
 ![](/img/docs/user_docs/intro/kcl.png)
 
@@ -83,39 +90,39 @@ KusionStack 提供与 KCL 完全解耦的运维引擎，其面向混合资源工
 
 ![](/img/docs/user_docs/intro/kusion-engine.png)
 
-Terrform 是一种广泛应用在云资源交付方面的可编程运维产品，以动态解释型语言 HCL 为入口，解释并驱动运维引擎及 Provider 框架工作，以其特有的 API 接入机制简化了云厂商参差的命令式 API 的使用难度，结合统一的工作流程，提供良好的声明式运维体验。
+Terrform 是一种广泛应用在云资源交付场景的可编程运维产品，以动态解释型语言 HCL 编写的描述块为入口，解释并驱动运维引擎及 Provider 框架工作，以其特有的 API 接入机制降低了云厂商参差的命令式 API 的使用难度，结合简洁的工作流程，提供良好的声明式运维体验。
 
 
 **vs. CD 系统（如 KubeVela， ArgoCD）**
 
-KusionStack 是一种客户端的可编程技术栈，通过 Kusion 引擎及 KusionCtl 工具链提供对云原生及非原生资源的管理工作流，提供 Push 方式的交付运维支持。
+KusionStack 是一种客户端的可编程运维技术栈，通过 Kusion 引擎及 KusionCtl 工具提供对云原生及非原生资源的管理工作流，提供 Push 方式的交付运维支持，因此也可以把 Kusion 引擎视为一种 Push 方式的 CD 技术实现。
 
-CD 系统通常以某种定义方式为源头，通过 Pull，Push 或两者结合的方式完成自动化的集群部署交付和配置漂移调和。如果您已采纳了 CD 系统，KusionStack 可以与其配合使用，如通过 ArgoCD 生效、调和 KCL 定义，如将 KusionCtl 与 KubeVela 配合使用等。
+CD 系统通常以某种定义方式为源头，通过 Pull，Push 或两者结合的方式完成自动化的集群部署交付和配置漂移调和。如果您已采纳了 CD 系统，KusionStack 可以与其配合使用，如通过 ArgoCD 调和生效 KCL 定义，如将 KusionCtl 与 KubeVela 配合使用等。
 
 **vs. Helm**
 
-KusionStack 是一种客户端的可编程技术栈，旨在通过丰富的语言级编程抽象能力和自动化集成机制定义面向应用的配置界面，并通过运维引擎及工具链生效、管理。
+KusionStack 是一种客户端的可编程运维技术栈，旨在通过丰富的语言级编程抽象能力和自动化集成机制定义面向应用的配置界面，并通过运维引擎及工具链生效、管理。
 
 Helm 理念源于 yum 包，是一种基于模板化 YAML 的包管理机制，并支持对包内资源的生效和管理。KusionStack 提供了 Helm 能力的超集，对于已采纳 Helm 的用户，可以将 KusionStack 中 Stack 编译结果以 Helm 格式打包后使用。
 
 **vs. OAM**
 
-KusionStack 是一种客户端的可编程技术栈，其中包括基于 OCI 等规范提供了开箱即用的代码化的云原生应用模型，用户也可以根据自身需求设计实现差异化的云原生应用模型。
+KusionStack 是一种客户端的可编程运维技术栈，其中包括基于 OCI 等规范提供了开箱即用的代码化的云原生应用模型，用户也可以根据自身需求设计实现差异化的云原生应用模型。
 
-OAM 是一种开源开放的应用模型，主要应用在云原生 CD 控制面 KubeVela。OAM 一般以云原生技术 CRD，operator 为载体，并支持以 payload 方式承载任意 CRD。KusionStack 亦可以成为一种技术载体在客户端完成 OAM 模型和配置定义，并与 KubeVela 结合使用。
+OAM 是一种开源开放的应用模型，主要应用在云原生 CD 控制面 KubeVela，以云原生技术 CRD，operator 为载体，并支持以 payload 方式承载任意 CR。KusionStack 亦可以成为一种技术载体在客户端完成 OAM 模型和配置定义，并与 KubeVela 结合使用。
 
 **vs. CrossPlane**
 
-KusionStack 是一种客户端的可编程技术栈，通过 Kusion Engine 提供面向混合资源的管理功能。Kusion Engine 原生提供了面向 Kubernetes API Server 的抽象及管理功能，并通过集成 Terrform 工具链支持非 Kubernetes 服务，并向上提供统一的资源抽象及面向资源的编排管理能力。
+KusionStack 是一种客户端的可编程运维技术栈，通过 Kusion Engine 提供面向混合资源的管理功能。Kusion Engine 原生提供了面向 Kubernetes API Server 的抽象及管理功能，并通过集成 Terrform 工具链支持非 Kubernetes 服务，并向上提供统一的资源抽象及面向资源的编排管理能力。
 
-CrossPlane 是一种开源云原生控制面框架，基于 Kubernetes API 扩展机制，以标准云原生方式接入命令式 API，以统一的范式接入并管理非云原生服务。相比而言，在 API 接入方式上 KusionStack 采用了客户端的方式，复用 Terrform 能力完成对非原生资源的管理，CrossPlane 则基于原生 Kubernetes API Server 方式做重定义。由于 KusionStack 原生支持 Kubernetes API Server，KusionStack 可以与 CrossPlane 无缝集成配合工作。
+CrossPlane 是一种开源云原生控制面框架，基于 Kubernetes API 扩展机制，以统一的范式和技术方式将命令式 API 接入并纳管到 Kubernetes API 扩展体系。相比而言，在 API 接入方式上 KusionStack 采用了客户端的方式，集成并复用 Terrform 能力完成对非原生资源的管理，CrossPlane 则基于原生 Kubernetes API Server 方式做重定义和调和。由于 KusionStack 原生支持 Kubernetes API Server，KusionStack 可以与 CrossPlane 无缝集成配合工作。
 
 **vs. Kubernetes**
 
-KusionStack 是一种客户端的可编程技术栈，旨在为多种运行提供**抽象**，**管理**方式和更好的**使用体验**，以可编程方式灵活定义并管理应用交付运维过程。
+KusionStack 是一种客户端的可编程运维技术栈，旨在为多种运行提供**抽象**，**管理**方式和更好的**使用体验**，以可编程方式灵活定义并管理应用交付运维过程。
 
-Kubernetes 是一种在世界范围内广泛采用的容器调度与管理运行时，一种面向集群的“操作系统”。面向 Kubernetes API 层，KusionStack 提供了诸多能力帮助用户更简单的完成应用交付运维：
+Kubernetes 是一种在世界范围内广泛采用的容器调度与管理运行时，一种面向容器集群的“操作系统”。面向 Kubernetes API 层，KusionStack 提供了诸多能力帮助用户更简单的完成应用交付运维：
 
 + KCL-OpenAPI 工具：原生 OpenAPI，CRD 支持，支持自动生成 KCL schema 代码
-+ Konfig 仓库：提供 Kubernetes，prometheus 模型，并提供面向应用的抽象模型库
++ Konfig 仓库：提供 Kubernetes，prometheus 等常用模型，并提供面向应用的抽象模型库
 + Kusion：提供面向 Kubernetes 的登录、RABC、敏感信息管理、3-way 预览、执行、观察、销毁等常用工作流支持
