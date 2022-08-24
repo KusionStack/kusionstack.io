@@ -22,26 +22,11 @@ Let's init this tutorial project with `kusion init --online`
 
 Select `code-city` and press `Enter`. After that we will see hints below and use the default value to config this project and stack.
 
-
-```shell
-? Please choose a template: code-city                  Code City metaphor for visualizing Go source code in 3D.
-This command will walk you through creating a new kusion project.
-
-Enter a value or leave blank to accept the (default), and press <ENTER>.
-Press ^C at any time to quit.
-
-Project Config:
-? Project Name: code-city
-? AppName: gocity
-? ContainerPort: 4000
-? ServicePort: 4000
-Stack Config: dev
-? Image: yuanhao1223/gocity:latest
-Created project 'code-city'
-```
+![](/img/docs/user_docs/getting-started/choose-template.gif)
 
 
-Let's go into this directory and check this project.
+The whole file hierarchy is shown below. More details about the directory structure can be found in 
+[Project & Stack](/docs/user_docs/concepts/project-stack).
 
 ```shell
 ➜  examples git:(main) ✗ cd code-city
@@ -76,27 +61,7 @@ More details about Konfig Models can be found in [Konfig](https://github.com/Kus
 ## Delivery
 Deliver this App into a Kubernetes cluster with one command `kusion apply`
 
-```shell
-➜  code-city-demo git:(main) ✗ cd dev && kusion apply main.k
- ✔︎  Compiling in stack dev...
-
-Stack: dev  ID                                 Action
- * ├─       apps/v1:Deployment:default:gocity  Create
- * └─       v1:Service:default:gocity          Create
-
-? Do you want to apply these diffs?  [Use arrows to move, type to filter]
-> yes
-  details
-  no
-
-? Do you want to apply these diffs? yes
-Start applying diffs ...
- SUCCESS  Create v1:Service:default:gocity success
- SUCCESS  Create apps/v1:Deployment:default:gocity success
-Create apps/v1:Deployment:default:gocity success [2/2] ███████████████ 100% | 0s
-
-Apply complete! Resources: 2 created, 0 updated, 0 deleted.
-```
+![](/img/docs/user_docs/getting-started/compile.gif)
 
 Check `Deploy` status.
 ```shell
