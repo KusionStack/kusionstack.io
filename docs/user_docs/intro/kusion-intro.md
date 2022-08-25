@@ -37,7 +37,7 @@ KusionStack 通过 engineering（工程化）的理念和技术栈融合平台�
 
 ## Kusion 技术栈的组成
 
-KusionStack 通过 engineering（工程化）的理念和技术手段融合平台方和应用方，以达到平台能力开放和自助运维效率的平衡。KusionStack 以专用语言和工具链为原点，构建了可编程、可扩展、可移植的运维技术栈，其核心组件包括：
+KusionStack 通过 engineering（工程化）的理念，技术和工作流程融合平台方和应用方，以达到平台能力开放和自助运维效率的平衡。KusionStack 以专用语言和工具链为原点，构建了可编程、可扩展、可移植的运维技术栈，其核心组件包括：
 
 + [KCL](https://github.com/KusionStack/KCLVM)：配置策略专用编程语言，协议组，工具链及 IDE 插件
 + [Kusion](https://github.com/KusionStack/kusion)：运维引擎、工具链、服务层，IDE 工作空间及社区技术集成套件
