@@ -6,7 +6,7 @@ sidebar_label: 使用指南
 
 ## 1. 添加应用
 
-在 [快速开始/Kubernetes](/docs/user_docs/getting-started/kubernetes) 我们已经展示如何快速添加一个应用（参考 [Project & Stack
+在 [快速开始/Usecase](/docs/user_docs/getting-started/usecase) 我们已经展示如何快速添加一个应用（参考 [Project & Stack
 ](/docs/user_docs/concepts/project-stack)）。
 
 ## 2. 验证 Konfig 代码
