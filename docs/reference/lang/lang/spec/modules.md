@@ -208,7 +208,7 @@ KCL supports a few standard system modules. The following is the full list of th
   - date() -> str
     return the `%Y-%m-%d %H:%M:%S` format date.
   - now() -> str
-    return the local time. e.g. e.g. `'Sat Jun 06 16:26:11 1998'`
+    return the local time. e.g. `'Sat Jun 06 16:26:11 1998'`
   - today() -> str
     return the `%Y-%m-%d %H:%M:%S.%{ticks}` format date.
 - math

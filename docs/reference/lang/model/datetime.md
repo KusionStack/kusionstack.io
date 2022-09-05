@@ -1,8 +1,8 @@
 ---
-title: "time"
-linkTitle: "time"
+title: "datetime"
+linkTitle: "datetime"
 type: "docs"
-description: time 包 - 时间处理
+description: datetime 包 - 时间处理
 weight: 100
 ---
 - datetime
@@ -11,7 +11,7 @@ weight: 100
   - date() -> str
     Return the `%Y-%m-%d %H:%M:%S` format date.
   - now() -> str
-    Return the local time. e.g. e.g. `'Sat Jun 06 16:26:11 1998'`
+    Return the local time. e.g. `'Sat Jun 06 16:26:11 1998'`
   - today() -> str
     Return the `%Y-%m-%d %H:%M:%S.%{ticks}` format date.
 
@@ -31,7 +31,7 @@ Return the `%Y-%m-%d %H:%M:%S` format date.
 
 `now() -> str`
 
-Return the local time. e.g. e.g. `'Sat Jun 06 16:26:11 1998'`
+Return the local time. e.g. `'Sat Jun 06 16:26:11 1998'`
 
 ## today
 
