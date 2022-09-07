@@ -27,7 +27,7 @@ KusionStack 源于蚂蚁集团内部的规模化工程化运维实践，已广�
 ![](/img/docs/user_docs/intro/kusion-stack-1.png)
 
 
-KusionStack 通过 engineering（工程化）的理念融合平台方，研发者和 [SRE](https://en.wikipedia.org/wiki/Site_reliability_engineering)，通过以 “modeling on platforms, compile to cloud” 为目标的一站式技术栈，让平台方简单灵活的开放平台能力，让应用研发者以应用为中心设计交付运维抽象，降低研发者在参与运维过程中对基础设施的认知负担，同时又赋予研发者充分的灵活性。总的来说，KusionStack 致力于构建**以应用为中心的抽象界面**，**一致的管理工具及自动化支持**和**更简单的端到端使用体验和工作流程**，并希望趋近这样的理性状态：
+KusionStack 通过 engineering（工程化）的理念融合平台方，研发者和 [SRE](https://en.wikipedia.org/wiki/Site_reliability_engineering)，通过以 “modeling on platforms, compile to cloud” 为目标的一站式技术栈，让平台方简单灵活的开放平台能力，让应用研发者以应用为中心设计交付运维抽象，降低研发者在参与运维过程中对基础设施的认知负担，同时又赋予研发者充分的灵活性。总的来说，KusionStack 与其他代码化技术一样提供了**版本化**、**可重用**、**可重复**的便利，同时 KusionStack 致力于构建**以应用为中心的抽象界面**，**一致的管理工具及自动化支持**和**更简单的端到端使用体验和工作流程**，并希望趋近这样的理性状态：
 
 + 融合**平台技术**：面向大量云原生及非云原生平台技术及服务，在差异化的 Platform API、IaaS API 层之上形成应用运维生命周期配置定义，并结合镜像机制，使得应用可以一处编写，随处交付
 + 融合**多种角色**：助力企业内的各平台团队、应用研发团队打破边界，各自向前，通过“平台方生产基础模型，应用方定义应用模型及配置”的工程化方式分工协同，共同形成围绕应用价值交付的 Devops 体系
@@ -85,7 +85,7 @@ KusionStack 是一个纯客户端的可编程技术栈，相比其他技术，�
 
 KusionStack 是一种云原生亲和的一站式可编程运维技术栈，旨在定义以应用为中心的抽象界面及端到端的管理机制。
 
-KusionStack 通过记录及函数语言 KCL 提供配置（config）、类型（schema）、函数（lambda）、规则（rule）为核心元素的编写能力。KCL 是一种没有原生线程、IO 等系统功能的现代编译型静态语言，并支持云原生亲和的语言功能。
+KusionStack 通过记录及函数语言 KCL 提供配置（config）、类型（schema）、函数（lambda）、规则（rule）为核心元素的编写能力。KCL 是一种现代编译型静态语言，采纳 Python、Golang 等现代编程语言设计元素，但没有原生线程、IO 等系统功能，可以低噪音、低副作用的应用在配置、建模、策略编写等场景，并提供云原生亲和的语言功能。
 
 ![](/img/docs/user_docs/intro/kcl.png)
 
