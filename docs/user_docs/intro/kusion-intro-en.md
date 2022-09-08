@@ -4,7 +4,7 @@
 
 **KusionStack is an open-source cloud-native programmable technology stack!**
 
-KusionStack is a highly flexible programmable technology stack to enable unified application delivery and operation, inspired by the word Fusion, which aims to help enterprises build an application-centric configuration management plane and DevOps ecology.
+KusionStack is a highly flexible programmable technology stack to enable unified application delivery and operation, inspired by the word Fusion, which aims to help enterprises build an application-centric configuration management plane and DevOps ecosystem.
 
 1. Fusion of hybrid scenarios of **private cloud**, **hybrid cloud**, and **multi-cloud** 
 2. Fusion of hybrid platform technologies of **cloud-native** and a variety of other platform technologies
@@ -24,7 +24,7 @@ At Ant Group, we have experienced all the above problems. We have built large-sc
 
 ![](/img/docs/user_docs/intro/kusion-stack-1.png)
 
-KusionStack fusions platform developers, application developers and [SRE](https://en.wikipedia.org/wiki/Site_reliability_engineering) with the platform engineering concept, through a one-stop technology stack targeting "modeling on platforms, compile to cloud". KusionStack enables the platform developers to open platform capabilities simply and flexibly, allowing application developers to design app-centric abstraction, reduce the cognitive burden on infrastructure, and at the same time give them sufficient flexibility. Overall, KusionStack, like other as-Code technologies, provides the convenience of **versioned**, **reusable**, and **repeatable**, and at the same time KusionStack is committed to building **application-centric abstraction**, **consistent management tools and automation mechanisms** and **simpler end-to-end user experience and workflow**, and hopes to approach the state:
+KusionStack fusions platform developers, application developers and [SRE](https://en.wikipedia.org/wiki/Site_reliability_engineering) with the platform engineering concept, through a one-stop technology stack targeting "modeling on platforms, compile to cloud". KusionStack enables the platform developers to open platform capabilities simply and flexibly, allowing application developers to design app-centric abstraction, reduce the cognitive burden on infrastructure, and at the same time give them sufficient flexibility. Overall, KusionStack, like other as-Code technologies, provides the convenience of **versioned**, **auditable**, **reusable**, **replayable** and **sharable**, and at the same time KusionStack is committed to building **application-centric abstraction**, **consistent management tools and automation mechanisms** and **simpler end-to-end user experience and workflow**, and hopes to approach the state:
 
 + Fusion of **platform technologies**: Running on a variety of cloud-native and non-cloud-native technologies and services, the application operation life cycle is modeled and configured based on differentiated PaaS and IaaS APIs. And shipping with the container image, applications can be configured in one place and delivered anywhere.
 + Fusion of  **multiple roles**: Help the platform and application developers break the boundaries and move closer, through the engineering way of "platform developers produce the base models, and the application developers define their application model and configs", the division of labor and collaboration jointly form a DevOps system around application delivery.
