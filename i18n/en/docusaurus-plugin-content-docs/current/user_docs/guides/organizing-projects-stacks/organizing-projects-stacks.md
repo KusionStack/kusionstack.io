@@ -1,1 +1,0 @@
-# Project Organization Best Practices

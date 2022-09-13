@@ -7,9 +7,12 @@ build:
 	npx http-server ./build
 
 check:
-	yarn run write-translations
 	yarn run build
 	npx http-server ./build
+
+.PHONY: i18n
+i18n:
+	yarn run write-translations
 
 clean:
 	-rm -rf ./build

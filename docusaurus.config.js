@@ -1,9 +1,6 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const math = require('remark-math');
-const katex = require('rehype-katex');
-
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
@@ -39,8 +36,6 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           editUrl: 'https://github.com/KusionStack/kusionstack.io/blob/main',
-          remarkPlugins: [math],
-          rehypePlugins: [katex],
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
         },
@@ -55,15 +50,6 @@ const config = {
         },
       }),
     ],
-  ],
-  stylesheets: [
-    {
-      href: 'https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css',
-      type: 'text/css',
-      integrity:
-        'sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ',
-      crossorigin: 'anonymous',
-    },
   ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
@@ -198,12 +184,6 @@ const config = {
     }),
 
     plugins: [
-      //[
-      //  require.resolve('docusaurus-lunr-search'), {
-      //    // indexBaseUrl: true,
-      //    // languages: ['zh-CN'],
-      //  },
-      //],
       [
         require.resolve('./src/plugins/changelog/index.js'),
         {
