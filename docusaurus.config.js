@@ -10,7 +10,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'KusionStack',
-  tagline: '一站式可编程配置技术栈',
+  tagline: 'A Unified Programmable Configuration Tech Stack',
 
   url: 'https://kusionstack.io',
   organizationName: 'KusionStack', // Usually your GitHub org/user name.
@@ -22,8 +22,8 @@ const config = {
   favicon: 'img/kcl-logo.png',
 
   i18n: {
-    defaultLocale: 'zh-CN',
-    locales: ['zh-CN'],
+    defaultLocale: 'en',
+    locales: ['en', 'zh-CN'],
   },
   scripts: [],
 
@@ -121,7 +121,16 @@ const config = {
           //  position: 'right',
           //  dropdownActiveClassDisabled: true
           //},
-          {type: 'localeDropdown', position: 'right'},
+          {
+            type: 'localeDropdown',
+            position: 'right',
+            dropdownItemsAfter: [
+              {
+                href: 'https://github.com/KusionStack/kusionstack.io/issues/25',
+                label: 'Help Us Translate',
+              },
+            ],
+          },
           {
             href: 'https://github.com/KusionStack',
             className: 'header-github-link',

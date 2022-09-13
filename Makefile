@@ -1,7 +1,13 @@
 dev:
 	yarn run start
 
+.PHONY: i18n
+i18n:	
+	yarn run build
+	npx http-server ./build
+
 check:
+	yarn run write-translations
 	yarn run build
 	npx http-server ./build
 

@@ -1,0 +1,26 @@
+{
+  "title": {
+    "message": "KusionStack",
+    "description": "The title in the navbar"
+  },
+  "item.label.使用文档": {
+    "message": "使用文档",
+    "description": "Navbar item with label 使用文档"
+  },
+  "item.label.参考手册": {
+    "message": "参考手册",
+    "description": "Navbar item with label 参考手册"
+  },
+  "item.label.开发文档": {
+    "message": "开发文档",
+    "description": "Navbar item with label 开发文档"
+  },
+  "item.label.治理": {
+    "message": "治理",
+    "description": "Navbar item with label 治理"
+  },
+  "item.label.博客": {
+    "message": "博客",
+    "description": "Navbar item with label 博客"
+  }
+}

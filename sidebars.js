@@ -42,7 +42,7 @@ const sidebars = {
     {
       type: 'link',
       href: '/changelog',
-      label: '更新日志',
+      label: 'changelog',
     },
   ],
 };
