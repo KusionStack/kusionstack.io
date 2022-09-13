@@ -23,7 +23,7 @@ const config = {
 
   i18n: {
     defaultLocale: 'zh-CN',
-    locales: ['zh-CN'],
+    locales: ['en', 'zh-CN'],
   },
   scripts: [],
 
@@ -121,7 +121,16 @@ const config = {
           //  position: 'right',
           //  dropdownActiveClassDisabled: true
           //},
-          {type: 'localeDropdown', position: 'right'},
+          {
+            type: 'localeDropdown',
+            position: 'right',
+            dropdownItemsAfter: [
+              {
+                href: 'https://github.com/KusionStack/kusionstack.io/issues/25',
+                label: 'Help Us Translate',
+              },
+            ],
+          },
           {
             href: 'https://github.com/KusionStack',
             className: 'header-github-link',
