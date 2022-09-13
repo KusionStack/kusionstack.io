@@ -1,0 +1,42 @@
+# container
+
+Source: [base/pkg/kusion_models/kube/frontend/container/container.k](https://github.com/KusionStack/konfig/blob/main/base/pkg/kusion_models/kube/frontend/container/container.k)
+
+## Schema Main
+
+Main describes the main container configuration that is expected to be run on the host.
+
+### Attributes
+
+| Name and Description                                                                                                                                                                                                                                  | Type                                                                 | Default Value | Required     |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- | ------------- | ------------ |
+| **name**<br />A Container-level attribute.<br />The container name. Each container in a pod must have a unique name.                                                                                                                      | str                                                                  | "main"        | **required** |
+| **command**<br />A Container-level attribute.<br />The startup command of main process. The image's entrypoint is used if this is not provided.                                                                                           | [str]                                                                | Undefined     | optional     |
+| **args**<br />A Container-level attribute.<br />The startup arguments of main process. The image's cmd is used if this is not provided.                                                                                                   | [str]                                                                | Undefined     | optional     |
+| **useBuiltInEnv**<br />useBuiltInEnv indicates use built-in envs or not.                                                                                                                                                                        | bool                                                                 | False         | optional     |
+| **env**<br />A Container-level attribute.<br />List of environment variables in the container.                                                                                                                                            | [[env.Env](env/doc_env#schema-env)]                                  | Undefined     | optional     |
+| **envFrom**<br />A Container-level attribute.<br />List of sources to populate environment variables in the container.                                                                                                                    | [[env.EnvFromSource](env/doc_env#schema-envfromsource)]              | Undefined     | optional     |
+| **ports**<br />A Container-level attribute.<br />List of network ports in the container.                                                                                                                                                  | [[port.ContainerPort](port/doc_container_port#schema-containerport)] | Undefined     | optional     |
+| **livenessProbe**<br />A Container-level attribute.<br />The probe to check whether container is live or not.                                                                                                                             | [p.Probe](probe/doc_probe#schema-probe)                              | Undefined     | optional     |
+| **readinessProbe**<br />A Container-level attribute.<br />The probe to check whether container is ready or not.<br />The default value can be referred to presupposed template: base/pkg/kusion\_models/templates/sofa\_probe.k | [p.Probe](probe/doc_probe#schema-probe)                              | Undefined     | optional     |
+| **startupProbe**<br />A Container-level attribute.<br />The probe to indicates that the Pod has successfully initialized.                                                                                                                 | [p.Probe](probe/doc_probe#schema-probe)                              | Undefined     | optional     |
+| **lifecycle**                                                                                                                                                                                                                                         | [lc.Lifecycle](lifecycle/doc_lifecycle#schema-lifecycle)             | Undefined     | optional     |
+| **workingDir**                                                                                                                                                                                                                                        | str                                                                  | Undefined     | optional     |
+| **securityContext**                                                                                                                                                                                                                                   | {str: any}                                                           | Undefined     | optional     |
+### Examples
+```python
+import base.pkg.kusion_models.kube.frontend.container
+import base.pkg.kusion_models.kube.frontend.container.probe as p
+
+main = container.Main {
+    name = "test"
+    livenessProbe = p.Probe {
+        handler = p.Http {
+            path = "/healthz"
+        }
+        initialDelaySeconds = 10
+    }
+}
+```
+
+<!-- Auto generated by kcl-doc tool, please do not edit. -->
