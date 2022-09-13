@@ -5,11 +5,11 @@ import Translate, {translate} from '@docusaurus/Translate';
 
 const FeatureList = [
   {
-    title: translate({'id': 'homepage.feature.kcl', 'message': 'KCL 配置语言'}),
+    title: translate({'id': 'homepage.feature.kcl', 'message': 'KCL 语言'}),
     Svg: require('../../static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <Translate id="homepage.feature.kcl.description">
-      面向配置、校验场景，基于声明式、OOP 编程范式等理念设计，静态类型语言。
+      面向配置和策略场景的基于约束的记录及函数语言
       </Translate>
     ),
   },

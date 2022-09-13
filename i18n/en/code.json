@@ -274,7 +274,7 @@
     "message": "Programmable configuration technology stack"
   },
   "homepage.feature.kcl": {
-    "message": "KCL Configure Language"
+    "message": "KCL"
   },
   "homepage.feature.konfig": {
     "message": "Kusion Model"
@@ -283,7 +283,7 @@
     "message": "Kusion Engine"
   },
   "homepage.feature.kcl.description": {
-    "message": "Configuration-oriented, verification scenario, based on declarative, OOP programming paradigm and other concepts design, static type language."
+    "message": "A constraint-based record & functional language mainly used in configuration and policy scenarios."
   },
   "homepage.feature.konfig.description": {
     "message": "Kusion Model is a pre-built, KCL-described configuration model in KusionStack that provides users with an out-of-the-box, highly abstracted configuration interface."
