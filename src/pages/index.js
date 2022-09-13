@@ -10,7 +10,7 @@ import Translate, {translate} from '@docusaurus/Translate';
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
   const siteConfig_title = translate({id: 'homepage.title', "message": "KusionStack"});
-  const siteConfig_tagline = translate({id: 'homepage.tagline', "message": "一站式可编程配置技术栈"});
+  const siteConfig_tagline = translate({id: 'homepage.tagline', "message": "Programmable Configuration technology Stack"});
 
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>

@@ -93,28 +93,28 @@ const config = {
             docId: 'intro/kusion-intro',
             position: 'left',
             sidebarId: 'user_docs',
-            label: '使用文档',
+            label: 'UserDoc',
           },
           {
             type: 'docSidebar',
             position: 'left',
             sidebarId: 'reference',
-            label: '参考手册',
+            label: 'Reference',
           },
           {
             type: 'docSidebar',
             position: 'left',
             sidebarId: 'develop',
-            label: '开发文档',
+            label: 'DevDoc',
           },
           {
             type: 'docSidebar',
             position: 'left',
             sidebarId: 'governance',
-            label: '治理',
+            label: 'Governance',
           },
 
-          {to: '/blog', label: '博客', position: 'left'},
+          {to: '/blog', label: 'Blog', position: 'left'},
 
           //{
           //  type: 'docsVersionDropdown',
@@ -143,23 +143,19 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: '文档',
+            title: 'Document',
             items: [
               {
-                label: 'KusionStack 简介',
+                label: 'Introduction',
                 to: '/docs/user_docs/intro/kusion-intro',
-              },
-              {
-                label: 'KusionStack 与社区工具异同',
-                to: '/docs/user_docs/intro/vs-x',
               },
             ],
           },
           {
-            title: '资源',
+            title: 'Resource',
             items: [
               {
-                label: '博客',
+                label: 'Blog',
                 to: '/blog',
               },
               {
@@ -173,14 +169,14 @@ const config = {
             ],
           },
           {
-            title: '更多',
+            title: 'More',
             items: [
               {
-                label: '常见问题',
+                label: 'faq',
                 to: '/docs/user_docs/support',
               },
               {
-                label: '更新日志',
+                label: 'Changelog',
                 to: '/changelog',
               },
             ],
@@ -193,7 +189,7 @@ const config = {
           height: 51,
           href: 'https://opensource.antgroup.com/',
         },
-        copyright: `版权 © ${new Date().getFullYear()} KusionStack Authors`,
+        copyright: `Copyright © ${new Date().getFullYear()} KusionStack Authors`,
       },
       prism: {
         theme: lightCodeTheme,
@@ -211,11 +207,11 @@ const config = {
       [
         require.resolve('./src/plugins/changelog/index.js'),
         {
-          blogTitle: 'KusionStack 更新日志',
+          blogTitle: 'KusionStack Changelog',
           blogDescription:
             'Keep yourself up-to-date about new features in every release',
           blogSidebarCount: 'ALL',
-          blogSidebarTitle: '更新日志',
+          blogSidebarTitle: 'Changelog',
           routeBasePath: '/changelog',
           showReadingTime: false,
           postsPerPage: 20,
@@ -227,7 +223,7 @@ const config = {
             description:
               'Keep yourself up-to-date about new features in every release',
             copyright: `Copyright © ${new Date().getFullYear()} KusionStack Authors.`,
-            language: 'zh',
+            language: 'en',
           },
         },
       ],

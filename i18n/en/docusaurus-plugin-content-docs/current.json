@@ -199,10 +199,6 @@
     "message": "develop",
     "description": "The label for category develop in sidebar docs"
   },
-  "sidebar.docs.category.构建文档": {
-    "message": "构建文档",
-    "description": "The label for category 构建文档 in sidebar docs"
-  },
   "sidebar.docs.category.构建 Kusion": {
     "message": "构建 Kusion",
     "description": "The label for category 构建 Kusion in sidebar docs"
@@ -507,10 +503,6 @@
     "message": "Konfig Lib",
     "description": "The label for category Konfig 配置大库 in sidebar reference"
   },
-  "sidebar.develop.category.构建文档": {
-    "message": "Build Docs",
-    "description": "The label for category 构建文档 in sidebar develop"
-  },
   "sidebar.develop.category.构建 Kusion": {
     "message": "Build Kusion",
     "description": "The label for category 构建 Kusion in sidebar develop"
@@ -530,10 +522,6 @@
   "sidebar.governance.category.贡献指南": {
     "message": "Contribution Guide",
     "description": "The label for category 贡献指南 in sidebar governance"
-  },
-  "sidebar.governance.link.更新日志": {
-    "message": "Changelog",
-    "description": "The label for link 更新日志 in sidebar governance, linking to /changelog"
   },
   "sidebar.governance.link.changelog": {
     "message": "changelog",

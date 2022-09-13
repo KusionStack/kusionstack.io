@@ -22,7 +22,7 @@ Kusion 文档分为用户指南、开发文档、内部文档、参考手册和�
 - 工具自动输出的文档需要由到源代码的链接，小标题可以不带编号
 - 尽量不要贴大段的代码（30行以内），代码最好给出文字解释和对应的参考链接
 - 有图有真相，但是不推荐过度复杂的架构图
-- 内部链接：采用 [`/docs/user_docs/intro/vs-x`](/docs/user_docs/intro/vs-x) 绝对路径形式
+- 内部链接：采用 [`/docs/user_docs/intro/kusion-intro`](/docs/user_docs/intro/vkusion-intro) 绝对路径形式
 
 **标点和空格**
 

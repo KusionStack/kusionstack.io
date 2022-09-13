@@ -3,24 +3,24 @@
     "message": "KusionStack",
     "description": "The title in the navbar"
   },
-  "item.label.使用文档": {
-    "message": "User",
-    "description": "Navbar item with label 使用文档"
-  },
-  "item.label.参考手册": {
+  "item.label.Reference": {
     "message": "Reference",
-    "description": "Navbar item with label 参考手册"
+    "description": "Navbar item with label Reference"
   },
-  "item.label.开发文档": {
-    "message": "Develop",
-    "description": "Navbar item with label 开发文档"
-  },
-  "item.label.治理": {
+  "item.label.Governance": {
     "message": "Governance",
-    "description": "Navbar item with label 治理"
+    "description": "Navbar item with label Governance"
   },
-  "item.label.博客": {
+  "item.label.Blog": {
     "message": "Blog",
-    "description": "Navbar item with label 博客"
+    "description": "Navbar item with label Blog"
+  },
+  "item.label.UserDoc": {
+    "message": "UserDoc",
+    "description": "Navbar item with label UserDoc"
+  },
+  "item.label.DevDoc": {
+    "message": "DevDoc",
+    "description": "Navbar item with label DevDoc"
   }
 }
