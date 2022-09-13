@@ -534,5 +534,9 @@
   "sidebar.governance.link.更新日志": {
     "message": "Changelog",
     "description": "The label for link 更新日志 in sidebar governance, linking to /changelog"
+  },
+  "sidebar.governance.link.changelog": {
+    "message": "changelog",
+    "description": "The label for link changelog in sidebar governance, linking to /changelog"
   }
 }
