@@ -1,9 +1,9 @@
 ---
-title: "数据类型"
-linkTitle: "数据类型"
+title: "Data Types"
+linkTitle: "Data Types"
 type: "docs"
 weight: 2
-description: 数据类型
+description: Data Types
 ---
 ## Syntax
 

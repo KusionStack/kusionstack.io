@@ -1,9 +1,9 @@
 ---
-title: "表达式"
-linkTitle: "表达式"
+title: "Expressions"
+linkTitle: "Expressions"
 type: "docs"
 weight: 2
-description: 表达式
+description: Expressions
 ---
 ## Syntax
 

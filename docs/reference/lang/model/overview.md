@@ -2,7 +2,7 @@
 sidebar_position: 0
 ---
 
-# 模块概览
+# Overview
 
 KCL 是面向配置的编程语言，通过内置模块、KCL 模块和插件模块提供工程化的扩展能力。
 

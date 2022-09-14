@@ -1,11 +1,11 @@
 ---
-title: "KCL 错误与警告"
-linkTitle: "KCL 错误与警告"
+title: "KCL Errors and Warnings"
+linkTitle: "KCL Errors and Warnings"
 type: "docs"
 weight: 2
-description: KCL 错误与警告
+description: KCL Errors and Warnings
 ---
-# KCL 错误与警告
+# KCL Errors and Warnings
 
 文档的此部分中的文章介绍了由 KCLVM 生成的诊断错误和警告消息。
 

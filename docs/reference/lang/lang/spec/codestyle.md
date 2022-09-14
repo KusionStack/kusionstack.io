@@ -1,9 +1,9 @@
 ---
-title: "编码风格"
-linkTitle: "编码风格"
+title: "Code Style"
+linkTitle: "Code Style"
 type: "docs"
 weight: 2
-description: 编码风格
+description: Code Style
 ---
 ## Introduction
 

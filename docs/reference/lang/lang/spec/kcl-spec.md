@@ -1,9 +1,9 @@
 ---
-title: "语言规范"
-linkTitle: "语言规范"
+title: "KCL Spec"
+linkTitle: "KCL Spec"
 type: "docs"
 weight: 2
-description: KCL 语言规范
+description: KCL Spec
 ---
 ## 词法规则
 

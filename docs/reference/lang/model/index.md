@@ -1,3 +1,3 @@
-# 模块系统
+# Module System
 
-KCL 通过内置模块、KCL 模块和插件模块提供工程化的扩展能力。本节描述内置模块和KCL模块的基本概念，插件模块参考 [插件系统](/docs/reference/lang/plugin)。
+KCL provides engineering extensibility through system modules, user modules and plug-in modules. This section describes the basic concepts of system modules. Plugin modules refer to [plugin system](/docs/reference/lang/plugin).

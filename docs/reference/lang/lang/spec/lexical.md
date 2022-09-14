@@ -1,9 +1,9 @@
 ---
-title: "词法"
-linkTitle: "词法"
+title: "Lexical"
+linkTitle: "Lexical"
 type: "docs"
 weight: 2
-description: 词法
+description: Lexical
 ---
 ## Lexical Conventions
 

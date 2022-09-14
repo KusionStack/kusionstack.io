@@ -1,9 +1,9 @@
 ---
-title: "使用 Schema 编写复杂的 KCL 配置"
-linkTitle: "使用 Schema 编写复杂的 KCL 配置"
+title: "Write complex config using KCL Schema"
+linkTitle: "Write complex config using KCL Schema"
 type: "docs"
 weight: 2
-description: 使用 Schema 编写复杂的 KCL 配置
+description: Write complex config using KCL Schema
 sidebar_position: 2
 ---
 ## 1. Introduction

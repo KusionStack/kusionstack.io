@@ -1,5 +1,5 @@
 ---
-title: "KCL之旅"
+title: "KCL Tour"
 sidebar_position: 1
 ---
 

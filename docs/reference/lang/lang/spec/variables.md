@@ -1,9 +1,9 @@
 ---
-title: "变量"
-linkTitle: "变量"
+title: "Variables"
+linkTitle: "Variable"
 type: "docs"
 weight: 2
-description: 变量
+description: Variable
 ---
 In KCL, variables can be defined using assign statements. For example, the following statement defines a variable `spam` to a string `"ham"`.
 
