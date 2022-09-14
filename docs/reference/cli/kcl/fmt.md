@@ -8,7 +8,7 @@ KCL 支持通过内置的命令行工具一键格式化多个 KCL 文件文档�
 
 ## KCL 编码风格
 
-KCL 格式化对文件的修改样式具体见 KCL 编码风格：[Style Guide for KCL Code](../../lang/lang/spec/codestyle.md)
+KCL 格式化对文件的修改样式具体见 KCL 编码风格：Style Guide for KCL Code
 
 ## 使用方式
 
