@@ -526,5 +526,69 @@
   "sidebar.governance.link.changelog": {
     "message": "changelog",
     "description": "The label for link changelog in sidebar governance, linking to /changelog"
+  },
+  "sidebar.docs.category.KCL": {
+    "message": "KCL",
+    "description": "The label for category KCL in sidebar docs"
+  },
+  "sidebar.docs.category.Code Lab": {
+    "message": "Code Lab",
+    "description": "The label for category Code Lab in sidebar docs"
+  },
+  "sidebar.docs.category.Spec": {
+    "message": "Spec",
+    "description": "The label for category Spec in sidebar docs"
+  },
+  "sidebar.docs.category.Errors and Warnings": {
+    "message": "Errors and Warnings",
+    "description": "The label for category Errors and Warnings in sidebar docs"
+  },
+  "sidebar.docs.category.Module System": {
+    "message": "Module System",
+    "description": "The label for category Module System in sidebar docs"
+  },
+  "sidebar.docs.category.Multi-Language": {
+    "message": "Multi-Language",
+    "description": "The label for category Multi-Language in sidebar docs"
+  },
+  "sidebar.docs.category.Advanced": {
+    "message": "Advanced",
+    "description": "The label for category Advanced in sidebar docs"
+  },
+  "sidebar.docs.category.Plugin System": {
+    "message": "Plugin System",
+    "description": "The label for category Plugin System in sidebar docs"
+  },
+  "sidebar.reference.category.KCL": {
+    "message": "KCL",
+    "description": "The label for category KCL in sidebar reference"
+  },
+  "sidebar.reference.category.Code Lab": {
+    "message": "Code Lab",
+    "description": "The label for category Code Lab in sidebar reference"
+  },
+  "sidebar.reference.category.Spec": {
+    "message": "Spec",
+    "description": "The label for category Spec in sidebar reference"
+  },
+  "sidebar.reference.category.Errors and Warnings": {
+    "message": "Errors and Warnings",
+    "description": "The label for category Errors and Warnings in sidebar reference"
+  },
+  "sidebar.reference.category.Module System": {
+    "message": "Module System",
+    "description": "The label for category Module System in sidebar reference"
+  },
+  "sidebar.reference.category.Multi-Language": {
+    "message": "Multi-Language",
+    "description": "The label for category Multi-Language in sidebar reference"
+  },
+  "sidebar.reference.category.Advanced": {
+    "message": "Advanced",
+    "description": "The label for category Advanced in sidebar reference"
+  },
+  "sidebar.reference.category.Plugin System": {
+    "message": "Plugin System",
+    "description": "The label for category Plugin System in sidebar reference"
   }
 }

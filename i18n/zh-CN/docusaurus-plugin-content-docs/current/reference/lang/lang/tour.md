@@ -1865,7 +1865,7 @@ schema Sample:
         regex.match(foo, "^The.*Foo$") and bar in [2, 4, 6, 8] if doCheck
 ```
 
-为了确保所有检查规则都能很好地发挥其相应的作用，我们可以通过编写 KCL 测试用例来测试不同数据组合的合理性和正确性，并通过 [kcl test tool](../../cli/kcl/test.md) 运行所有测试用例。
+为了确保所有检查规则都能很好地发挥其相应的作用，我们可以通过编写 KCL 测试用例来测试不同数据组合的合理性和正确性，并通过 kcl test tool 运行所有测试用例。
 
 ##### 文档
 
@@ -1902,7 +1902,7 @@ schema Server:
     labels?: {str:str}
 ```
 
-更多详细内容可见 [Doc tools](../../cli/kcl/docgen.md)。
+更多详细内容可见 Doc tools。
 
 ##### 配置
 
