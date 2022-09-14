@@ -1,9 +1,9 @@
 ---
-title: "使用 KCL 配置操作进行协同配置"
-linkTitle: "使用 KCL 配置操作进行协同配置"
+title: "Co-configuration with config operations"
+linkTitle: "Co-configuration with config operations"
 type: "docs"
 weight: 2
-description: 使用 KCL 配置操作进行协同配置
+description: Co-configuration with config operations
 sidebar_position: 3
 ---
 ## 1. Introduction

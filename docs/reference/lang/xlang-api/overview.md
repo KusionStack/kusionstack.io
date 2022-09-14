@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# 多语言接口简介
+# Introduction
 
 KCL 语言提供 C/Rust/Go/Python/Java 等通用编程语言接口，相关语言正在开发完整中。
 

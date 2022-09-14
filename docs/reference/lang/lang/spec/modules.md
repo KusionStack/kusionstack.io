@@ -1,9 +1,9 @@
 ---
-title: "模块"
-linkTitle: "模块"
+title: "Modules"
+linkTitle: "Modules"
 type: "docs"
 weight: 2
-description: 模块
+description: Modules
 ---
 ## Modules and the Import System
 

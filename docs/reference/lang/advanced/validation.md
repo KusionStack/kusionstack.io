@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 ---
-# KCL 校验
+# KCL Validation
 
 除了使用 KCL 代码生成 JSON/YAML 等配置格式，KCL 还支持对 JSON/YAML 数据进行格式校验。作为一种配置语言，KCL 在验证方面几乎涵盖了 OpenAPI 的所有功能。在 KCL 中可以通过一个结构定义来约束配置数据，同时支持通过 check 块自定义约束规则，在 schema 中书写校验表达式对 schema 定义的属性进行校验和约束。通过 check 表达式可以非常清晰简单地校验输入的 JSON/YAML 是否满足相应的 schema 结构定义与 check 约束。
 

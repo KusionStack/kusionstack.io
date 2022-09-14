@@ -1,9 +1,9 @@
 ---
-title: "语句"
-linkTitle: "语句"
+title: "Statements"
+linkTitle: "Statements"
 type: "docs"
 weight: 2
-description: 语句
+description: Statements
 ---
 ## Syntax
 

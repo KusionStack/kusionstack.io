@@ -1,9 +1,9 @@
 ---
-title: "编写简单的 KCL 配置"
-linkTitle: "编写简单的 KCL 配置"
+title: "Write simple config with KCL"
+linkTitle: "Write simple config with KCL"
 type: "docs"
 weight: 2
-description: 编写简单的 KCL 配置
+description: Write simple config with KCL
 sidebar_position: 1
 ---
 ## 1. Introduction
