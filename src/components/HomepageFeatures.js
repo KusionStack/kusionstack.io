@@ -27,7 +27,7 @@ const FeatureList = [
     Svg: require('../../static/img/undraw_docusaurus_react.svg').default,
     description: (
       <Translate id="homepage.feature.kusion.description">
-        Kusion 引擎介于 Konfig 与底层基础设施之间，用于解释 Konfig 中描述的运维意图，并根据运维意图对异构运行时进行操作。它屏蔽了基础设施复杂性，为不同环境提供一致的运维体验。
+        Kusion 引擎编译、实施 Konfig 中描述的运维意图，屏蔽基础设施复杂性，为多运行时、多云提供一致的运维体验。
       </Translate>
     ),
   },
