@@ -3,26 +3,26 @@ title: "KCL Tour"
 sidebar_position: 1
 ---
 
-本文展示了如何使用 KCL 的核心特性，包含变量、运算符、schema 和库，前提是您有使用其他语言编程的经验。KCL 主要受 Python 启发，了解 Python 对学习 KCL 非常有帮助。
+This page shows how to use major KCL features, from variables and operators to schemas and libraries, with the assumption that you have already known how to program in another language. KCL is mainly inspired by Python, and knowing Python is very helpful for learning KCL.
 
-### 重要概念
+### Important Concepts
 
-在学习 KCL 语言时，请牢记以下事实和概念：
+As we learn about the KCL language, keep these facts and concepts in mind:
 
-- KCL 是一种配置策略语言。它为编写配置和策略提供了简单且自洽的语言设计和库支持。它不能用于应用程序开发或其他通用编程语言（GPL）支持的场景。
-- KCL 吸收了经典 **OOP** 的元素，并且提供了**类型**、**复用**和**合并**等简单、开发人员友好、可靠且利于传播的配置编写实践。
-- KCL 更倾向于**不可变性**，建议使用**合并**来添加增量的变更。不可变性降低了副作用，例如不可预测的问题。
-- KCL 的 **schema** 结构体定义了严格的属性和静态类型，并且支持表达式验证。**schema** 结构体主要由带类型的属性、schema 上下文和检查块构成。
-- KCL 的 **config** 是一个类 **JSON** 表达式，通过它我们可以复用 schema 的完整定义。KCL 通过分离 schema 和 config 来提供定义和配置的能力。
-- KCL 的 **rule** 是一个书写规则约束表达式的结构，可用于数据校验和策略编写。
-- KCL 的代码文件以包（目录）和模块（文件）的形式进行管理。同一包中的 schema 彼此可见；跨包的数据需要通过 **import 语句**导入。包级变量虽然可以导出，但是它们不能被其他包修改。
-- KCL 语法定义主要使用声明式表达式，并且只提供少量必要的声明式语句，例如 import、 if...else、assert、assignment 以及 schema。
-- 没有主函数，每个 `.k` 文件可以作为单独的配置文件执行。
-- 支持**内置函数**和**插件**以简化编写。
+- KCL is a configuration and policy language. It provides simplified and self-contained language design and library support for writing configurations and policies. It cannot be used for application development or other purposes supported by General Purpose Language (GPL).
+- KCL absorbs classic **OOP** elements and provides simple, developer-friendly and reliable configuration writing practice with **type**, **reusing**, and **union**.
+- KCL prefers **immutability** and recommend to add up incremental updates through the **union**. Immutability reduces side effects like unpredictable issues.
+- KCL **schema** struct defines strict attributes, static types, and it also supports validation expressions. The **schema** struct is mainly composed of typed attributes, the schema context and the check block.
+- KCL **config** is a **json**-like expression, by which we can reuse a full definition of the schema. KCL provides support for definition and configuration by separating schema and config.
+- KCL **rule** is a structure for writing rule constraint expressions, which can be used for data verification and policy writing.
+- KCL code files are managed as packages(directories) and modules(files). The schema types in the same package are visible to each other; the data cross packages need to be imported through the **import statement**. The package-level variables can be exported, but they are immutable for other packages.
+- The KCL syntax definition mainly uses declarative expressions, and only provides a small number of necessary and imperative statements, such as import, if .. else, assert, assignment and schema.
+- No main function, each `.k` file could be executed as a separate configuration.
+- **Built-in functions** and **plugins** are supported to simplify coding.
 
-### 关键字
+### Keywords
 
-下表列出了 KCL 语言的关键字。
+The following table lists the words that the KCL language treats specially.
 
 ```
     True       False      None        Undefined   import
@@ -33,18 +33,18 @@ sidebar_position: 1
     rule
 ```
 
-### 标识符
+### Identifiers
 
-在 KCL 中, 标识符是标识一个值的名称，可以带有选择器。
+In KCL, an identifier is a name, may with selectors, that identifies a value.
 
-- 标识符由字母、数字、下划线或前缀 `$` 组成。
-- 标识符不能与关键字重复，除非它们有 `$` 前缀。
-- 标识符不得包含任何嵌入的空格或符号。
-- 可以在标识符中的任何位置使用字母和下划线。
-- 数字不能放在标识符的第一位。
-- `$` 字符只能放在标识符的第一个位置。
+- Identifiers consist of letters, numbers, underscores or the prefix `$`.
+- Identifiers cannot be repeated with keywords unless they have a `$` prefix.
+- Identifiers must not contain any embedded spaces or symbols.
+- Letters and underscores can be used anywhere in the identifier.
+- Numbers cannot be placed in the first place of the identifier.
+- The `$` character can only be placed in the first position of the identifier.
 
-示例：
+Examples:
 
 ```python
 x
@@ -55,47 +55,47 @@ _c
 $if
 ```
 
-为了简化限定标识符（例如 `pkg.type`）的定义，我们还定义了 `qualified identifier`：
+To simplify the definition of the qualified identifier, such as `pkg.type`, we additionally define `qualified identifier`:
 
-示例：
+Examples:
 
 ```python
 pkg.a
 ```
 
-在 `qualified identifier` 中的包名必须通过 `import` 关键字导入。
+The package name in `qualified identifier` must be imported.
 
-#### 标识符前缀
+#### Identifier Prefix
 
-使用 `$` 前缀符号定义关键字标识符。
+Use the `$` character prefix to define keyword identifiers.
 
 ```python
 $if = 1
 $else = "s"
 ```
 
-请注意，非关键字标识符是否有 `$` 符号都是同样的效果。
+Please note: whether the non-keyword identifier is prefixed with `$` has the same effect.
 
 ```python
 _a = 1
 $_a = 2  # equal to `_a = 2`
 ```
 
-### 变量
+### Variables
 
-以下是如何创建并实例化变量的例子：
+Here’s an example of how to create a variable and initialize it:
 
 ```python
 name = "Foo"  # Declare a variable named `name` and its value is a string literal "Foo"
 ```
 
-它对应了如下 YAML 输出：
+It corresponds to the following YAML output:
 
 ```yaml
 name: Foo
 ```
 
-在 KCL 中，我们可以通过定义包级变量将变量导出为配置数据。使其直接、清晰、可维护。导出的变量是不可变的。因此一旦声明它，就无法对其进行修改，例如，假设我们有一个名为 `example.k` 的配置文件，变量 `name` 在声明后就禁止修改，就像标准的命令式语言一样。
+In KCL, we can export variables as config data by defining package-level variables. To make it direct, clear, and maintainable. Exported variables are immutable so that once we declare it, we can't modify it. For example, assume we have a config file named `example.k`, the variable `name` can't be modified after the declaration, just like the standard imperative language.
 
 ```python
 name = "Foo"  # exported
@@ -105,14 +105,14 @@ name = "Foo"  # exported
 name = "Bar"  # error: a exported declaration variable can only be set once.
 ```
 
-作为补充，我们可以在模块级别定义一个非导出变量，这个变量是可变的，不会显示在 YAML 输出当中。
+As a complement, we can define a non-exported variable in module level which is mutable, which won't show up in YAML output:
 
 ```python
 _name = "Foo"  # _ variables are not output to YAML and are mutable
 _name = "Bar"
 ```
 
-请注意，变量的名称不能为 `True`、`False`、`None` 或者 `Undefined`，因为它们与 KCL 内置的名称常量之间存在二义性。
+Please note that the variable name cannot be one of `True`, `False`, `None`, `Undefined` because of ambiguity.
 
 ```python
 False = 1  # Error
@@ -121,26 +121,26 @@ None = Undefined  # Error
 Undefined = None  # Error
 ```
 
-### 内置类型
+### Built-in Types
 
-KCL 支持以下类型：
+The KCL language has special support for the following types:
 
-- 数字
-- 字符串
-- 布尔
-- 列表
-- 字典
+- number
+- string
+- boolean
+- list
+- dict
 
-#### 数字
+#### Number
 
-KCL 的数字类型有两种形式：
+KCL number comes into two flavors:
 
-- 64 位有符号整数。值的范围为 -9223372036854775808~9223372036854775807.
-- 64 位浮点数，遵循 IEEE 754 标准。我们不建议在配置中使用 float 类型，我们可以使用字符串代替并在运行时进行解析。
+- **Int**: 64 bits signed integer values. Values can be from -9223372036854775808~9223372036854775807.
+- **Float**: 64-bit floating-point numbers, as specified by the IEEE 754 standard. We do not recommend using the float type in the configuration, we can use a string instead and parse it during runtime processing.
 
-整数和浮点数都支持基本运算符，例如 `+`，`-`，`/` 和 `*`，而复杂的运算，例如 `abs()`, `ceil()` 和 `floor()`，都是通过内置的数学库来支持。
+Both int and float support basic operators such as `+`, `-`, `/`, and `*`, while complex operations, such as `abs()`, `ceil()`, and `floor()`, are supported through the built-in math library.
 
-整数是不带小数点的数字。以下是一些定义整数的例子：
+Integers are numbers without a decimal point. Here are some examples of defining integer literals:
 
 ```python
 a = 1
@@ -152,7 +152,7 @@ f = 0b10 # binary literal
 g = int("10") # int constructor
 ```
 
-如果一个数字包含小数点，则它是浮点数。以下是一些浮点数的示例：
+If a number includes a decimal point, it is a float number. Here are some examples of defining float literals:
 
 ```python
 a = 1.10
@@ -164,7 +164,7 @@ h = 70.2E-12
 i = float("112") # float constructor
 ```
 
-内置数学库可用于数字类型：
+Built-in math libraries can be used with numbers:
 
 ```python
 import math
@@ -179,20 +179,20 @@ assert math.floor(100.12) == 100.0
 assert math.pow(100, 2) == 10000.0
 ```
 
-KCL 默认使用 64 位数字类型。我们可以在 KCL 命令行使用 `-r` 参数执行严格的 32 位范围检查。
+In addition, please note that the KCL number is 64-bit by default. We can perform a stricter 32-bit range check by adding the `-r` parameter to the KCL command-line tool.
 
 ```
 kcl main.k -r -d
 ```
 
-请注意，为了性能考虑该功能只能在 `debug` 模式中使用。
+Please note that the value range check is only enabled in `debug` mode
 
-##### 单位字面值
+##### Units
 
-在 KCL 中，我们可以给一个整数添加如下的单位后缀，这不影响它的真实值。
+In KCL, we can add a unit suffix to an integer denomination to indicate that it does not affect its true value as follows.
 
-- 通用整形和定点数: `P`, `T`, `G`, `M`, `K`, `k`, `m`, `u`, `n`
-- 2 的幂: `Pi`, `Ti`, `Gi`, `Mi`, `Ki`
+- General integer or fixed-point number form: `P`, `T`, `G`, `M`, `K`, `k`, `m`, `u`, `n`
+- Corresponding power of 2: `Pi`, `Ti`, `Gi`, `Mi`, `Ki`
 
 ```python
 # SI
@@ -213,7 +213,7 @@ Ti = 1Ti  # 1024 ** 4
 Pi = 1Pi  # 1024 ** 5
 ```
 
-此外，我们还可以使用定义在 `units` 模块中的单位常量：
+Besides, And we can also use the unit constants defined in the `units` module as follows:
 
 ```python
 import units
@@ -235,7 +235,7 @@ Ti = 1 * units.Ti  # 1024 ** 4
 Pi = 1 * units.Pi  # 1024 ** 5
 ```
 
-我们还可以使用定义在 `units` 模块内的整数和单位字符串之间的转换函数
+We can also use the methods in the `units` module to convert between integers and unit strings.
 
 ```python
 import units
@@ -269,7 +269,7 @@ Ti = units.to_Ti(int("1Pi"))   # "1024Ti"
 Pi = units.to_Pi(int("10Pi"))  # "10Pi"
 ```
 
-单位类型定义在 `units` 模块中，单位类型的值不能进行任何四则运算。
+The unit value type is defined in the units module, and the unit value type does not allow any four calculations.
 
 ```python
 import units
@@ -281,7 +281,7 @@ x1: NumberMultiplier = x0  # Ok
 x2 = x0 + x1  # Error: unsupported operand type(s) for +: 'number_multiplier(1M)' and 'number_multiplier(1M)'
 ```
 
-我们可以使用 `int()`、`float()` 和 `str()` 函数将数值单位类型转换为数字类型或字符串类型。
+We can use the `int()`, `float()` function and `str()` function to convert the numeric unit type to the normal integer type and string type.
 
 ```python
 a: int = int(1Ki)  # 1024
@@ -289,9 +289,9 @@ b: float = float(1Ki)  # 1024.0
 c: str = str(1Mi)  # "1Mi"
 ```
 
-#### 字符串
+#### String
 
-字符串是一个不可变的 Unicode 字符序列。我们可以使用单引号或双引号创建字符串：
+The string is an immutable sequence of Unicode characters. We can use either single or double quotes to create a string:
 
 ```python
 'allows embedded "double" quotes'  # Single quotes
@@ -299,7 +299,7 @@ c: str = str(1Mi)  # "1Mi"
 '''Three single quotes''', """Three double quotes"""  # Triple quoted
 ```
 
-三引号用于定义多行字符串。
+Triple quoted strings may span multiple lines.
 
 ```python
 """This is a long triple quoted string
@@ -307,26 +307,26 @@ may span multiple lines.
 """
 ```
 
-请注意，KCL 的单引号和双引号字符串的使用几乎没有区别。唯一可以简化的是，我们不需要在单引号字符串中转义双引号，也不需要在双引号中转义单引号。
+Please note that there is almost no difference in the use of KCL single-quoted and double-quoted strings. The only thing that can be simplified is that we don’t need to escape double quotes in single quoted strings, and we don’t need to escape single quotes in double quoted strings.
 
 ```python
 'This is my book named "foo"'  # Don’t need to escape double quotes in single quoted strings.
 "This is my book named 'foo'"  # Don’t need to escape single quotes in double quoted strings.
 ```
 
-我们可以使用 `+` 操作符连接字符串：
+We can concatenate strings using the `+` operator:
 
 ```python
 x = 'The + operator ' + 'works, as well.'
 ```
 
-我们可以使用 `str` 内置函数将 int 或 float 转为字符串：
+We can cast an int or float to a string using the built-in function `str`:
 
 ```python
 x = str(3.5) # "3.5"
 ```
 
-可以使用很多内置的字符串函数：
+A lot of handy built-in functions and members of a string could be used:
 
 ```python
 x = "length"
@@ -360,11 +360,11 @@ assert "length length".title() == "Length Length"
 assert x.upper() == "LENGTH"
 ```
 
-格式化字符串有两种使用方法： 使用 `"{}".format()` 内置函数, 或者使用花括号指定变量并使用 `$` 标记取变量值。在 KCL 中叫做**插值字符串**。在下面的例子中，`a` 和 `b` 的值都是 `"hello world"`。
+There are 2 different ways to format a string: to use the `"{}".format()` built-in function, or to specify the variable between the curly braces and use a `$` mark to tell KCL to extract its value. This is called **string interpolation** in KCL. In following example, both `a` and `b` will be assigned to string `"hello world"`.
 
-此外，要序列化的变量可以以特殊的数据格式提取，例如 YAML 或 JSON。在这种情况中，`#yaml` 或 `#json` 可以包含在花括号中。
+Besides, the variable to serialized can be extracted in special data format, such as YAML or JSON.  In this case, a `#yaml` or `#json` can be included within the curly braces.
 
-具体来说，当 `$` 符号本身需要出现在**插值字符串**中，需要使用 `$$` 转义。或者使用 `+` 符号连接 `$` 符号和插值字符串来避免转义。在以下示例中，`c` 和 `c2` 的值都是 `$hello world$`。
+Specifically, when the dollar sign `$` itself is needed in a **string interpolation**, it needs to be escaped and use `$$` instead. Or in another way, `+` can be used to concat the dollar sign with the **string interpolation** to avoid that escape. In following example, both `c` and `c2` will be assigned to string `$hello world$`
 
 ```python
 world = "world"
@@ -388,13 +388,13 @@ e = "here is myDict in yaml:\n${myDict: #yaml}"
 #  key2: value2
 ```
 
-此外，我们可以在上面的示例代码输出 **YAML 字符串** 中看到一些符号，例如 `|`、`>`、`+`、`-`。
+Besides, we can see some symbols in the example code output **YAML string** above such as `|`, `>`, `+`, `-`.
 
-- `|` 表示 **块文字样式**，指示块内换行符的行为方式。
-- `>` 表示块标量中的**块折叠样式**，换行符将被空格替换。
-- `+` 和 `-` 是 **block chomping 指示符**，用于控制字符串末尾的换行符。 默认值 **clip** 在字符串的末尾放置一个换行符。 要删除所有换行符，请通过在样式指示符 `|` 或 `>` 后面添加 `-` 来**删除**它们。 clip 和 strip 都忽略块末尾实际有多少换行符； 在样式指示符后面添加一个 `+` 来**保留**它们。
+- `|` denotes the **block literal style** that indicates how newlines inside the block should behave.
+- `>` denotes the **block folded style** in the block scalar that the newlines will be replaced by spaces.
+- `+` and `-` are the **block chomping indicators** that control what should happen with newlines at the end of the string. The default value **clip** puts a single newline at the end of the string. To remove all newlines, **strip** them by putting a `-` after the style indicators `|` or `>`. Both clip and strip ignore how many newlines are actually at the end of the block; to **keep** them all put a `+` after the style indicator.
 
-例如，**strip 块文字样式** yaml 字符串是
+For example, a **strip block literal style** yaml string is
 
 ```yaml
 example: |-
@@ -407,7 +407,7 @@ example: |-
 
 ```
 
-结果为：
+The result is
 
 ```plain
 Several lines of text,
@@ -417,13 +417,13 @@ and also a blank line:
 plus another line at the end.
 ```
 
-更多信息可见 [Yaml Multiline String](https://yaml-multiline.info/) 和 [YAML Specification v1.2](https://yaml.org/spec/1.2.1/) 。
+See [Yaml Multiline String](https://yaml-multiline.info/) and [YAML Specification v1.2](https://yaml.org/spec/1.2.1/) for more information.
 
-##### 原始字符串
+##### Raw String
 
-KCL 原始字符串是通过在字符串字面值前加上 `'r'` 或 `'R'` 来创建的。 KCL 原始字符串将反斜杠 (`\`) 和字符串插值 (`${}`) 视为普通的非字符。当我们想要一个包含反斜杠、字符串插值的字符串并且不希望它们被视为转义字符时，原始字符串是很有用的。
+KCL raw string is created by prefixing a string literal with `'r'` or `'R'`. KCL raw string treats backslash (`\`) and string interpolation (`${}`) as a literal character. This is useful when we want to have a string that contains backslash, string interpolation and don’t want them to be treated as an escape character.
 
-- 对于包含反斜杠（`\`）的原始字符串，KCL 代码和输出 YAML 如下：
+- For backslash (`\`), the KCL code and output YAML are as follows:
 
 ```python
 s = "Hi\nHello"
@@ -437,7 +437,7 @@ s: |-
 raw_s: Hi\nHello
 ```
 
-- 对于包含字符串插值（`${}`）的原始字符串，KCL 代码和输出 YAML 如下：
+- For string interpolation (`${}`), the KCL code and output YAML are as follows:
 
 ```python
 worldString = "world"
@@ -451,7 +451,7 @@ s: Hello world
 raw_s: Hello ${worldString}
 ```
 
-此外，原始字符串最常用的场景是在正则表达式中使用:
+In addition, the most common scenario for raw strings is to be used with regular expressions:
 
 ```python
 import regex
@@ -460,9 +460,9 @@ key = "key"
 result = regex.match(key, r"[A-Za-z0-9_.-]*")  # True
 ```
 
-#### 布尔值
+#### Boolean
 
-布尔值有两个常量对象：`False` 和 `True`.
+Boolean values are the two constant objects `False` and `True`.
 
 ```python
 a = True
@@ -471,7 +471,7 @@ b = False
 
 #### List
 
-List 是一个序列，通常用于存储同质项的集合。下面是一个简单的 KCL 列表的例子：
+The list is a sequence, typically used to store collections of homogeneous items. Here’s a simple KCL list:
 
 ```python
 list = [1, 2, 3]
@@ -479,14 +479,14 @@ assert len(list) == 3  # True
 assert list[0] == 1  # True
 ```
 
-我们可以使用列表推导式构建列表：
+We can declare a list with list comprehension:
 
 ```python
 list = [ _x for _x in range(20) if _x % 2 == 0]
 assert list == [0, 2, 4, 6, 8, 10, 12, 14, 16, 18] # True
 ```
 
-并且还可以使用嵌套的列表推导式：
+We can perform nested list comprehension:
 
 ```python
 matrix = [[1, 2], [3,4], [5,6], [7,8]]
@@ -494,7 +494,7 @@ transpose = [[row[_i] for row in matrix] for _i in range(2)]
 assert transpose == [[1, 3, 5, 7], [2, 4, 6, 8]] # True
 ```
 
-此外，我们可以在列表推导式中使用两个变量。第一个变量表示列表中的索引，第二个变量表示列表中的项。
+Besides, we can use two variables in the list comprehension, the first variable denotes the list index and the second variable denotes the list item.
 
 ```python
 data = [1000, 2000, 3000]
@@ -511,7 +511,7 @@ dataLoop7 = [i for i, _ in data]  # [0, 1, 2]
 dataLoop8 = [v for _, v in data if v == 2000]  # [2000]
 ```
 
-我们可以通过 `+` 连接列表：
+We can merge list like this:
 
 ```python
 _list0 = [1, 2, 3]
@@ -519,7 +519,7 @@ _list1 = [4, 5, 6]
 joined_list = _list0 + _list1  # [1, 2, 3, 4, 5, 6]
 ```
 
-我们可以使用解包操作符 `*` 合并多个列表：
+We can also use the list unpacking operator `*` to merge multiple lists:
 
 ```python
 _list0 = [1, 2, 3]
@@ -527,7 +527,7 @@ _list1 = [4, 5, 6]
 union_list = [*_list0, *_list1]  # [1, 2, 3, 4, 5, 6]
 ```
 
-我们可以使用 `if` 表达式动态的将元素添加到列表，符合条件的元素会被添加到列表，不符合条件的元素会被忽略。
+We can use `if expressions` to dynamically add elements to the list element, elements that meet the conditions are added to the list, and elements that do not meet the conditions are ignored.
 
 ```python
 a = 1  # 1
@@ -558,7 +558,9 @@ data2 = [
 ]  # [1, 2]
 ```
 
-我们可以合并(union)列表:
+Please note that in the above `if expressions`, nested use is not supported.
+
+We can union two lists like this:
 
 ```python
 _list0 = [1, 2, 3]
@@ -566,7 +568,7 @@ _list1 = [4, 5, 6]
 union_list = _list0 | _list1  # [4, 5, 6]
 ```
 
-我们可以使用 `for k in list_var` 表达式遍历列表：
+We can use the expression `for k in list_var` to traverse a list.
 
 ```python
 data = [1, 2, 3]
@@ -575,9 +577,9 @@ dataAnother = [val * 2 for val in data]  # [2, 4, 6]
 
 #### Dict
 
-Dict 是将可哈希的值映射到任意对象的映射对象。字典是有序的。键的顺序遵循其声明的顺序：
+Dict is a mapping object that maps hashable values to arbitrary objects. Dict is ordered. The order of the keys follows the order of their declaration.
 
-这里有几个简单的 KCL 字典：
+Here are a couple of simple KCL dict, created using dict literals:
 
 ```python
 a = {"one" = 1, "two" = 2, "three" = 3}
@@ -586,7 +588,7 @@ assert a == b # True
 assert len(a) == 3 # True
 ```
 
-在写多行的键-值时，可以省略每个键-值对行尾的逗号 `,`:
+We can ignore the comma `,` at the end of the line for writing dict key-value pairs in multiple lines:
 
 ```python
 data = {
@@ -595,7 +597,7 @@ data = {
 }  # {"key1": "value1", "key2": "value2"}
 ```
 
-在 Dict 键上使用简单的字面值时可以省略引号：
+We can ignore the key quotation marks when we writing simple literals on the key.
 
 ```python
 data = {
@@ -604,7 +606,7 @@ data = {
 }  # {"key1": "value1", "key2": "value2"}
 ```
 
-此外，**选择表达式**可以用于定义包含嵌套键 dict 实例。
+In addition, the **config selector expressions** can be used to init a dict instance with nested keys.
 
 ```python
 person = {
@@ -614,7 +616,7 @@ person = {
 }  # {"base": {"count": 2, "value": "value"}, "labels": {"key": "value"}}
 ```
 
-输出的 YAML 为：
+The output YAML is
 
 ```yaml
 person:
@@ -625,14 +627,14 @@ person:
     key: value
 ```
 
-我们可以使用字典推导式构建字典：
+We can declare a dict with dict comprehension:
 
 ```python
 x = {str(i): 2 * i for i in range(3)}
 assert x == {"0" = 0, "1" = 2, "2" = 4}
 ```
 
-此外，我们可以在字典推导式中使用两个变量。第一个变量表示字典的键，第二个变量表示字典中键对应的值。
+Besides, we can use two variables in the dict comprehension, the first variable denotes the dict key and the second variable denotes the dict value of the key.
 
 ```python
 data = {key1 = "value1", key2 = "value2"}
@@ -648,7 +650,7 @@ dataKeys3 = {k: k for k, _ in data}  # {"key1": "key1", "key2": "key2"}
 dataValues3 = {v: v for _, v in data}  # {"value1": "value1", "value2": "value2"}
 ```
 
-我们可以使用解包操作符 `**` 来合并字典：
+We can **merge** dict using the dict unpacking operator `**` like this:
 
 ```python
 _part1 = {
@@ -662,7 +664,7 @@ _part2 = {
 a_dict = {**_part1, **_part2}  # {"a: "b", "c": "d"}
 ```
 
-此外，union 操作符 `|` 也能达到同样的效果:
+In addition, the same effect can be achieved by using the union operator `|`:
 
 ```python
 _part1 = {
@@ -676,7 +678,7 @@ _part2 = {
 a_dict = _part1 | _part2  # {"a: "b", "c": "d"}
 ```
 
-我们可以使用 `if` 表达式动态的将元素添加到字典，符合条件的元素会被添加到字典，不符合条件的元素会被忽略。
+We can use `if expressions` to dynamically add elements to the dict element, elements that meet the conditions are added to the dict, and elements that do not meet the conditions are ignored.
 
 ```python
 a = 1  # 1
@@ -707,7 +709,7 @@ data2 = {
 }  # {"key1": "value1", "key2": "value2"}
 ```
 
-我们可以使用 `for k in dict_var` 表达式来遍历字典, 并且可以使用 `in` 操作符来判断 dict 是否包含某个键。
+We can use the expression `for k in dict_var` to traverse a dict, and we can use the `in` operator to determine whether a dict contains a certain key
 
 ```python
 data = {key1 = "value1", key2 = "value2"}
@@ -718,15 +720,15 @@ containsKey2 = "key" in data  # False
 
 #### None
 
-在 KCL 中, `None` 表示对象的值为空， 这与 Go 中的 `nil` 和 Java 中的 `null` 一样，并且对应于 YAML 中的 `null`。
+In KCL, `None` can indicate that the value of the object is empty, which is similar to `nil` in Go or `null` in Java, and corresponds to `null` in YAML.
 
 ```python
 a = None
 b = [1, 2, None]
-c = {key1 = "value1", key2 = None}
+c = {key1 = value1, key2 = None}
 ```
 
-输出如下：
+The output is as follows:
 
 ```yaml
 a: null
@@ -739,7 +741,7 @@ c:
   key2: null
 ```
 
-请注意，`None` 不能参与四则运算，但它可以参与逻辑运算和比较运算。
+Please note that `None` cannot participate in the four arithmetic operations, but it can participate logical operators and comparison operators to perform calculations.
 
 ```python
 a = 1 + None  # error
@@ -752,7 +754,7 @@ f = str(None)  # None
 
 #### Undefined
 
-`Undefined` 与 `None` 类似，但其语义是变量没有分配任何值，也不会输出到 YAML。
+`Undefined` is similar to `None`, but its semantics is that a variable is not assigned any value and will not be output to YAML
 
 ```python
 a = Undefined
@@ -760,7 +762,7 @@ b = [1, 2, Undefined]
 c = {key1 = "value1", key2 = Undefined}
 ```
 
-输出如下：
+The output is as follows:
 
 ```yaml
 b:
@@ -770,7 +772,7 @@ c:
   key1: value1
 ```
 
-请注意，`Undefined` 不能参与四则运算，但它可以参与逻辑运算和比较运算。
+Please note that `Undefined` cannot participate in the four arithmetic operations, but it can participate logical operators and comparison operators to perform calculations.
 
 ```python
 a = 1 + Undefined  # error
@@ -781,9 +783,9 @@ e = Undefined or 1  # 1
 f = str(Undefined)  # Undefined
 ```
 
-### 运算符
+### Operators
 
-以下字符表示运算符：
+The following character sequences represent operators:
 
 ```
     +       -       *       **      /       //      %
@@ -791,9 +793,9 @@ f = str(Undefined)  # Undefined
     ~       <=      >=      ==      !=      @       \
 ```
 
-#### 算数运算符
+#### Arithmetic Operators
 
-KCL 支持常见的算数运算符：
+KCL supports the common arithmetic operators:
 
 ```python
 assert 2 + 3 == 5
@@ -804,9 +806,9 @@ assert 5 // 2 == 2
 assert 5 % 2 == 1
 ```
 
-#### 相等和关系运算符
+#### Equality and Relational Operators
 
-KCL 支持相等和关系运算符：
+KCL supports the meanings of equality and relational operators:
 
 ```python
 assert 2 == 2
@@ -817,9 +819,9 @@ assert 3 >= 3
 assert 2 <= 3
 ```
 
-#### 逻辑运算符
+#### Logical Operators
 
-我们可以使用逻辑运算符反转或组合布尔表达式，例如：`and` 和 `or`:
+We can invert or combine boolean expressions using the logical operators e.g., `and` and `or`:
 
 ```python
 if not done and (col == 0 or col == 3):
@@ -827,9 +829,9 @@ if not done and (col == 0 or col == 3):
 
 ```
 
-#### 位运算符和移位运算符
+#### Bitwise and Shift Operators
 
-以下是位运算符和移位运算符的例子：
+Here are examples of using bitwise and shift operators:
 
 ```python
 value = 0x22
@@ -843,24 +845,24 @@ assert (value << 4) == 0x220
 assert (value >> 4) == 0x02
 ```
 
-`|` 运算符可用于位运算，合并基本类型和集合及结构化数据，例如**列表**、**字典**和 **schema**。
+The `|` operator likewise computes bitwise, unions basic types and unions collection and schema data, such as **list**, **dict** and **schema**.
 
-位运算示例：
+Computing bitwise examples:
 
 ```python
 0x12345678 | 0xFF  # 0x123456FF
 ```
 
-联合基本类型示例：
+Unioning basic types examples:
 
 ```python
 schema x:
     a: int | str  # attribute a could be a int or string
 ```
 
-#### 赋值运算符
+#### Assignment Operators
 
-以下 token 作为语法中的分隔符：
+The following tokens serve as delimiters in the grammar:
 
 ```
     (       )       [       ]       {       }
@@ -869,7 +871,7 @@ schema x:
     &=      ^=      >>=     <<=     **=
 ```
 
-以下是使用赋值和参数赋值赋值运算符的例子：
+The following examples use assignment and argument assignment operators:
 
 ```python
 _a = 2
@@ -878,33 +880,33 @@ _a += 1
 assert _a == 7
 ```
 
-#### Identity 运算符
+#### Identity Operators
 
-以下关键字作为语法中的 identity 运算符：
+The following keywords serve as identity operators in the grammar:
 
 ```python
 is, is not
 ```
 
-Identity 运算符检查右侧和左侧是否时同一对象。它们通常用于检查某个变量是否是 `None/Undefined/True/False`。以下是一些例子：
+The identity operators check whether the right hand side and the left hand side are the very same object. They are usually used to check if some variable is `None/Undefined/True/False`. Here are some examples:
 
 ```python
 empty_String = ""
 empty_String is not None # True
 ```
 
-#### 成员运算符
+#### Membership Operators
 
-以下关键字作为语法中的成员运算符：
+The following keywords serve as membership operators in the grammar:
 
 ```python
 in, not in
 ```
 
-- `in` 运算符计算了第一个操作数是否是第二个操作数的成员，第二个运算符必须是 list、dict、schema 或 string。
-- `not in` 运算符与 `in` 相反。它们都返回一个布尔值。
+- The `in` operator reports whether its first operand is a member of its second operand, which must be a list, dict, schema, or string.
+- The `not in` operator is its negation. Both return a Boolean.
 
-成员的含义因第二个操作数的类型而异：列表的成员是其元素；字典的成员是其键；字符串的成员是其所有子字符串。
+The meaning of membership varies by the type of the second operand: the members of a list are its elements; the members of a dict are its keys; the members of a string are all its substrings.
 
 ```python
 1 in [1, 2, 3]                  # True
@@ -924,24 +926,26 @@ d = Data {one = 1, two = 2}     # Data is a schema with attributes one and two
 "three" in d                    # False
 ```
 
-#### 推导式
+#### Comprehension
 
-一个推导表达式通过遍历一个或多个迭代项并计算表达式生成的结果来生成连续的元素，并以此构造新的列表或字典。
+A comprehension constructs a new list or dictionary value by looping over one or more iterables and evaluating a body expression that produces successive elements of the result.
 
-我们可以如下使用列表和字典的推导表达式：
+We can declare list and dict by comprehension as:
 
 ```python
 listVar = [_x for _x in range(20) if _x % 2 == 0] # list comprehension
-dictVar = {str(_i): 2*_i for _i in range(3)} # dict comprehension
+dictVar = {str(_i): 2 * _i for _i in range(3)} # dict comprehension
 ```
 
-#### 其他运算符
+#### Other Operators
 
-- 使用 **()** 表示函数调用, 例如 `"{} {}".format("hello", world)`。
-- 使用 **[]** 引用列表中指定索引处的值。
-- 使用 **:** 定义类型注解。
-- 使用 **.** 引用成员字段。
-- 使用 **\\** 续行符编写长表达式。
+We can:
+
+- Represents a function call with **()**, like `"{} {}".format("hello", world)`
+- Refers to the value at the specified index in the list with **[]**
+- Define a type hint with **:**
+- Refers to a member field with **.**
+- Use the line continuation symbol `\` to write long expressions
 
 ```python
 longString = "Too long expression " + \
@@ -949,23 +953,23 @@ longString = "Too long expression " + \
              "Too long expression "
 ```
 
-### 表达式
+### Expressions
 
-#### 条件表达式
+#### Conditional Expressions
 
-条件表达式的形式为 `a if cond else b`。它首先计算条件 `cond`。如果为真，则会计算 `a` 并生成它的值；否则，它会生成 `b` 的值。
+A conditional expression has the form `a if cond else b`. It first evaluates the condition `cond`. If it's true, it evaluates `a` and yields its value; otherwise, it yields the value of `b`.
 
-示例:
+Examples:
 
 ```python
 x = True if enabled else False  # If enabled is True, x is True, otherwise x is False
 ```
 
-#### 索引表达式
+#### Index Expressions
 
-索引表达式 `a[i]` 生成可索引类型的第 `i` 个元素，例如字符串或数组。索引 `i` 必须是 `-n` ≤ `i` < `n` 范围内的 `int` 值，其中 `n` 等于 `len(a)`。其他任何索引都会导致错误。
+An index expression `a[i]` yields the `i` th element of an indexable type such as a string or list. The index `i` must be an `int` value in the range `-n` ≤ `i` < `n`, where `n` is `len(a)`; any other index results in an error.
 
-有效的负索引的行为类似于 `n+i`，允许方便的对序列末尾进行索引。
+A valid negative index `i` behaves like the non-negative index `n+i`, allowing for convenient indexing relative to the end of the sequence.
 
 ```python
 val = "abc"
@@ -979,9 +983,9 @@ list_1 = list[1]       # "one"
 list_n1 = list[-1]     # "two"
 ```
 
-索引表达式 `d[key]` 也可以用于字典 `d`，以获取指定键对应的值。如果字典中不包含这个键则会返回 `Undefined`
+An index expression `d[key]` may also be applied to a dictionary `d`, to obtain the value associated with the specified key. It returns `Undefined` if the dictionary contains no such key.
 
-出现在赋值符左侧的索引表达式会更新指定的列表或字典元素。
+An index expression appearing on the left side of an assignment causes the specified list or dictionary element to be updated:
 
 ```python
 d = {key1 = "value1", key2 = "value2"}
@@ -989,17 +993,17 @@ key1value = d["key1"]  # value1
 key2value = d["key2"]  # value2
 ```
 
-尝试更新不可变类型的元素值（如列表或字符串）或可变类型的不可变变量会产生错误。
+It is a dynamic error to attempt to update an element of an immutable type, such as a list or string, or a frozen value of a mutable type.
 
-#### 切片表达式
+#### Slice Expressions
 
-切片表达式 `a[start:stop:step]` 会生成 `a` 包含的一个子序列，其中 `a` 必须是字符串或者数组。
+A slice expression `a[start:stop:step]` yields a new value containing a sub-sequence of `a`, which must be a string, or list.
 
-`start`、`stop` 和 `step` 三个操作数都是可选的。如果有的话，每个值都必须为整数。`step` 的默认值为 1。如果 `step` 未指定，它前面的冒号也可以省略。指定 `step` 为 0 会产生错误。
+Each of the `start`, `stop`, and `step` operands is optional; if present, each must be an integer. The `step` value defaults to 1. If the step is not specified, the colon preceding it may be omitted too. It is an error to specify a step of zero.
 
-从概念上来说，这些操作数指定了一系列值，索引 `i` 从 `start` 开始，每次增加 `step` 直到 `i` 到达或超过 `stop`。结果由有效的 `i` 的 `a[i]` 组成。
+Conceptually, these operands specify a sequence of values `i` starting at start and successively adding 'step' until `i` reaches or passes `stop`. The result consists of the concatenation of values of `a[i]` for which `i` is valid.
 
-如下所示，从三个操作数计算有效的开始和结束的索引。`n` 是序列的长度。
+The effective start and stop indices are computed from the three operands as follows. Let `n` be the length of the sequence.
 
 ```python
 val = "abc"
@@ -1017,13 +1021,13 @@ c = val[1:-1]          # "b"   (remove first and last element)
 "banana"[4::-2]         # "nnb" (select alternate elements in reverse, starting at index 4)
 ```
 
-KCL 禁止将切片表达式定义为左值。原因是列表和字符串是不可变的，重新切片可以直接操作操作数，以确保更好的性能。
+It's not allowed to define a slice expression as a left value in KCL. Cause list and string are immutable, re-slicing can directly operate to operand to ensure better performance.
 
-#### 函数调用
+#### Function Invocations
 
-KCL 允许调用内置函数，或者调用内置和系统模块中的函数。
+KCL allows calling built-in functions and functions from built-in and system modules.
 
-调用函数的基本方法如下所示：
+To call a function, the basic way is shown as the following code excerpt:
 
 ```python
 import math
@@ -1032,30 +1036,30 @@ a = math.pow(2, 3)  # 2 powers 3 is 8.
 b = len([1, 2, 3])  # the length of [1, 2, 3] is 3
 ```
 
-参数以 `,` 分隔，并且 KCL 还支持位置参数和键-值对形式的参数。
+As you can see, arguments are separated with `,`, and KCL also supports positional arguments and key-value arguments.
 
 ```python
 print("hello world", end="")
 ```
 
-请注意：
+Note that:
 
-- 有些函数参数具有默认值。
-- 一些函数接受可变参数。
+- Some functions have parameters with default values.
+- Some functions accept variadic arguments.
 
-如果没有为没有默认值的参数提供参数，则会抛出错误。
+When an argument is not supplied for a parameter without a default value, an error will be reported.
 
-#### 选择表达式
+#### Selector Expressions
 
-选择表达式选择值的属性或方法。KCL 提供了许多识别或过滤属性的方法：
+A selector expression selects the attribute or method of the value. KCL provides a wealth of ways to identify or filter attributes.
 
 `x.y`
 
-- dict: 表示字典 `x` 中键 `y` 对应的值。
-- schema: 表示 schema `x` 中 `y` 属性的值。
-- package: 表示 package `x` 中 `y` 标示的标识符。
+- dict: it denotes the value of the key `y` in the dict `x`
+- schema: it denotes the attribute value of a schema `x` identified by `y`
+- package: it denotes the identifier of a package `x` identified by `y`
 
-示例：
+Examples:
 
 ```python
 schema Person:
@@ -1077,11 +1081,11 @@ result = myDict.key # "value"
 
 `x?.y`
 
-`x` 可以是 schema 实例或 dict。当 `x` 可能为 `None` 或者键 `y` 不在 `x` 中时这非常有用。
+`x` can be a schema instance or a dict. This is extremely helpful when the value of `x` might be `None` or when the key `y` might not exist in `x`.
 
 ```python
 # Example of dict:
-data = {"key" = "value"}
+data = {key = "value"}
 a = data?.key     # "value"
 b = data?.name    # Undefined
 
@@ -1102,29 +1106,29 @@ if alice?.job?.name == "Group":
     print("work in Group")
 ```
 
-#### Quantifier 表达式
+#### Quantifier Expressions
 
-Quantifier 表达式用于集合：列表或字典。通常用于在处理集合后获得某个结果，主要有以下四种形式：
+Quantifier expressions act on collection: list or dict, generally used to obtain a certain result after processing the collection, mainly in the following four forms:
 
 - **all**
-  - 用于检测集合中所有元素都满足给定的逻辑表达式，并且返回一个布尔值作为结果。
-  - 只有集合中所有元素都满足表达式为 true 时，`all` 表达式为 true，否则为 false。
-  - 如果集合为空，返回 true。
-  - 支持表达式执行期间逻辑表达式的短路。
+  - Used to detect that all elements in the collection satisfy the given logical expression, and return a boolean value as the result.
+  - Only when all elements in the collection satisfy the expression true, the `all` expression is true, otherwise it is false.
+  - If the original collection is empty, return true.
+  - Supports short-circuiting of logical expressions during expression execution.
 - **any**
-  - 用于检测集合中至少一个元素都满足给定的逻辑表达式，并且返回一个布尔值作为结果。
-  - 当集合中至少一个元素都满足表达式为 true 时，`any` 表达式为 true，否则 false。
-  - 如果集合为空，返回 false。
-  - 支持表达式执行期间逻辑表达式的短路。
+  - Used to detect that at least one element in the collection satisfies the given logical expression, and returns a boolean value as the result.
+  - When at least one element in the collection satisfies the expression true, the `any` expression is true, otherwise it is false.
+  - If the original collection is empty, return false.
+  - Supports short-circuiting of logical expressions during expression execution.
 - **map**
-  - 映射集合中的元素生成新的列表。
-  - 新列表的长度严格等于原列表的长度。
+  - Generate a new **list** by mapping the elements in the original collection.
+  - The length of the new list is exactly the same as the original collection.
 - **filter**
-  - 通过逻辑判断筛选原集合中的元素，返回一个经过筛选的子集合。
-  - 当表达式为 true 时才将元素添加到子集合。
-  - 产生的新集合的类型(list, dict 和 schema)与原集合的类型完全一致，并且长度为 `[0, len(original-collection)]`。
+  - By logically judging and filtering the elements in the original collection, and returning the filtered sub-collection.
+  - Only when the element judges the expression to be true, it is added to the sub-collection.
+  - The type (list, dict and schema) of the new collection is exactly the same as the original collection, and the length range is `[0, len(original-collection)]`.
 
-**all** 和 **any** 表达式的示例代码：
+**all** and **any** expression sample codes:
 
 ```python
 schema Config:
@@ -1141,7 +1145,7 @@ schema Config:
         }
 ```
 
-**map** 和 **filter** 表达式的示例代码：
+**map** and **filter** expression sample codes:
 
 ```python
 a = map e in [{name = "1", value = 1}, {name = "2", value = 2}] {
@@ -1159,13 +1163,13 @@ d = filter _, v in {a = "foo", b = "bar"} {
 }  # {"a": "foo"}
 ```
 
-请注意，区分 any 表达式和 any 类型的区别。当 `any` 在类型注解中使用，意味着变量的值是任意的，而 any 表达式意味着集合中的至少一个元素满足条件。
+Please pay attention to distinguish the difference between any expression and any type. When `any` is used in type annotations, it means that the value of the variable is arbitrary, while the any expression means that one of the elements in a set satisfies the condition.
 
-### 流程控制表达式
+### Control Flow Statements
 
-#### If 和 Else
+#### If and Else
 
-KCL 支持 `if` 表达式和可选的 `elif` 和 `else` 表达式, 示例如下：
+KCL supports `if` statements with optional `elif` and `else` statements, as the next sample shows.
 
 ```python
 a = 10
@@ -1178,7 +1182,7 @@ else:
     print("a >= 100")
 ```
 
-`elif` 的例子：
+The `elif` example:
 
 ```python
 _result = 0
@@ -1192,7 +1196,7 @@ else:
     _result = 4
 ```
 
-`if-elif-else` 表达式可以嵌套，示例如下：
+`if-elif-else` statements can be nested. For example:
 
 ```python
 a = 10
@@ -1207,7 +1211,7 @@ else:
     print("a >= 100")
 ```
 
-此外，对于简单的 `if` 表达式如下：
+In addition, for simple `if` statements as follows:
 
 ```python
 if success:
@@ -1216,15 +1220,15 @@ else:
     _result = "failed"
 ```
 
-我们可以使用 `<expr> if <condition> else <expr>` 的形式将它们写在一行：
+We can have it in one line using the `<expr> if <condition> else <expr>` pattern:
 
 ```python
 _result = "success" if success else "failed"
 ```
 
-`if` 或 `elif` 语句计算一个给定的表达式。当表达式的计算结果为 `True`,  `:` 之后的语句将被计算，而当表达式为 `False` ，后面的语句不会被计算。
+An `if` or `elif` statement evaluates a given expression. When the expression is evaluated to `True`, a list of statements following `:` are executed and when the expression is evaluated to `False` and statements will not be executed.
 
-请注意，常量 `False`, `None`, 数字 `0`, 空列表 `[]`, 空字典 `{}` 和空字符串 `""` 都被视为 `False` 。
+Please note that the false name constant `False`, `None`, the zero number `0`, the empty list `[]`, the empty dict `{}` and the empty string `""` are all seen as `False` expressions.
 
 ```python
 _emptyStr = ""
@@ -1235,7 +1239,7 @@ isEmptyList = False if _emptyList else True
 isEmptyDict = False if _emptyDict else True
 ```
 
-结果为：
+The output is
 
 ```yaml
 isEmptyStr: true
@@ -1243,9 +1247,9 @@ isEmptyList: true
 isEmptyDict: true
 ```
 
-### 断言语句
+### Assert
 
-当发生错误时，开发人员应该能够检测到错误并终止执行。因此，KCL 引入了 `assert` 语法，示例如下：
+When errors happen, developers should be able to detect the error and abort execution. Thus, KCL introduce the `assert` syntax. The following is an example:
 
 ```python
 a = 1
@@ -1256,9 +1260,7 @@ assert a != b
 assert a == b, "SOS"
 ```
 
-此外，我们可以为 assert 语声明一个条件，当条件满足时，才进行 assert 断言
-
-- 使用 if 语句书写条件断言
+In addition, we can declare a condition for the assert statement and make an assertion when the condition is met. The usual way of writing is
 
 ```python
 a = None
@@ -1266,16 +1268,16 @@ if a:
     assert a > 2:
 ```
 
-- 使用 if 表达式书写条件断言
+In KCL, it can also be simplified to the following form using the **if** expression to compose more complex conditional assert logic:
 
 ```python
 a = None
 assert a > 2 if a
 ```
 
-### 函数
+### Function
 
-KCL 支持使用 lambda 关键字定义一个函数
+KCL supports using the lambda keyword to define a function.
 
 ```python
 func = lambda x: int, y: int -> int {
@@ -1284,11 +1286,9 @@ func = lambda x: int, y: int -> int {
 a = func(1, 1)  # 2
 ```
 
-lambda 函数具有如下特性：
-
-- lambda 函数将最后一个表达式的值作为函数的返回值，空函数体返回 None
-- 返回值类型注解可以省略，返回值类型为最后一个表达式值的类型
-- 函数体中没有与顺序无关的特性，所有的表达式都是按顺序执行的
+- The value of the last expression is used as the return value of the function, and the empty function body returns `None`.
+- The return value type annotation can be omitted, and the return value type is the type of the last expression value.
+- There is no order-independent feature in the function body, all expressions are executed in order.
 
 ```python
 _func = lambda x: int, y: int -> int {
@@ -1302,7 +1302,7 @@ _func = lambda x: int, y: int -> str {
 }  # Error (int, int) -> str can't be assigned to (int, int) -> int
 ```
 
-lambda 函数对象不能参与任何计算，只能在赋值语句和调用语句中使用。
+The function type variables cannot participate in any calculations and can only be used in assignment statements and call statements.
 
 ```python
 func = lambda x: int, y: int -> int {
@@ -1311,7 +1311,7 @@ func = lambda x: int, y: int -> int {
 x = func + 1  # Error: unsupported operand type(s) for +: 'function' and 'int(1)'
 ```
 
-lambda 函数支持捕获其外部作用域的变量，并且可以作为其他函数的参数进行传递
+The lambda function supports the capture of external variables, which can be passed as parameters of other functions.
 
 ```python
 a = 1
@@ -1327,14 +1327,14 @@ r1 = funcOther(lambda x: int {
 }, 1)  # 2
 ```
 
-输出为:
+The output is
 
 ```yaml
 a: 1
 r: 2
 ```
 
-此外，可以定义一个匿名函数并直接调用。
+Further, we can define an anonymous function through lambda expression and call it.
 
 ```python
 result = (lambda x, y {
@@ -1343,7 +1343,7 @@ result = (lambda x, y {
 })(1, 1)  # 3
 ```
 
-并且还可以在 for 循环使用使用匿名函数
+We can also use anonymous functions in the for loop.
 
 ```python
 result = [(lambda x, y {
@@ -1351,12 +1351,12 @@ result = [(lambda x, y {
 })(x, y) for x in [1, 2] for y in [1, 2]]  # [2, 3, 3, 4]
 ```
 
-请注意，KCL 中定义的函数的均为纯函数：
+Note that the functions defined in the KCL are pure functions:
 
-- 函数的返回结果只依赖于它的参数。
-- 函数执行过程里面没有副作用。
+- The return result of a function depends only on its arguments.
+- There are no side effects in the function execution process.
 
-因此，KCL 函数不能修改外部的变量，只能引用外部的变量，比如如下代码会发生错误：
+Therefore, KCL functions cannot modify external variables, but can only reference external variables. For example, the following code will cause an error:
 
 ```python
 globalVar = 1
@@ -1366,27 +1366,27 @@ func = lambda {
 }
 ```
 
-### 类型系统
+### Type System
 
-#### 类型注解
+#### Type Annotation
 
-类型注解可用于包级变量，schema 属性和参数。
+Type annotations can be used on top level variables, schema attributes and arguments.
 
-- 属性可以是基本类型，例如字符串(`string`)，浮点数(`float`)，定点数(`int`) 或布尔值(`bool`)。
-- 属性可以是字面值类型，例如字符串文本(`"TCP"` 和 `"UDP"`)，数字文本 (`"1"` 和 `"1.2"`)，布尔值文本(`True` 和 `False`)。
-- 属性也可以是列表或字典：
-  - 未指定元素类型的列表为 `[]`。
-  - 元素类型为 `t` 的列表为 `[t]`。这里 `t` 是另一种类型。
-  - 键的类型为 `kt` 且值的类型为 `vt` 的字典为 `{kt:vt}`。
-  - `kt`， `vt` 或两者都可以为空, 就像列表未指定元素类型一样。
-- 属性可以是由 `|` 定义的 **联合类型** ，例如 `a | b`, 意为类型可以是 a 或 b。
-  - 联合类型可以包含 `int`, `str`, `float`, `bool`, `list`, `dict`, 字面值类型和 schema 类型，并且支持类型的嵌套，例如： `{str:str|int}`、`[[int|str]|str|float]` 和 `2 | 4 | 6` 等。
-- 属性可以是 schema 类型。在这种情况下，使用包名 + schema 名称作为类型名。
-- 属性可以声明为任意类型，例如 `any`。
+- An attribute can be of a basic type, such as a string (`str`), a floating-point number (`float`), a fixed-point number (`int`) or a boolean (`bool`).
+- An attribute can be a literal type, such as a string literal (`"TCP"` and `"UDP"`), a number literal (`"1"` and `"1.2"`), a boolean literal (`True` and `False`)
+- An attribute can also be a list or an ordinary dict:
+  - A list with unspecified type of elements is `[]`.
+  - A list with elements of type `t` is `[t]`. Here `t` is another type.
+  - A dict with keys of type `kt` and values of type `vt` is `{kt:vt}`.
+  - `kt`, `vt` or both of them can be missing, like a list with unspecified type of elements.
+- An attribute can be a **union type** defined by `|`, such as `a | b`, which means the type of the member could be a or b.
+  - A union type can include any types of `int`, `str`, `float`, `bool`, `list`, `dict`, literal and schema type, and supports type nesting e.g. `{str:str|int}`, `[[int|str]|str|float]` and `2 | 4 | 6`, etc.
+- An attribute can also be of a type generated from other schema. In such a case, the name of the other schema (including the package path prefix) is used as the type name.
+- An attribute can annotated an any type e.g., `any`.
 
-示例
+Examples:
 
-- 基本类型
+- Basic type
 
 ```python
 """Top level variable type annotation"""
@@ -1396,7 +1396,7 @@ c: float = 1.0  # Declare a variable `c` that has the type `float` and the value
 d: bool = True  # Declare a variable `d` that has the type `bool` and the value `True`
 ```
 
-- List/Dict/Schema 类型
+- List/Dict/Schema Type
 
 ```python
 schema Person:
@@ -1408,7 +1408,7 @@ b: {str:str} = {k1 = "v1", k2 = "v2"}  # Declare a variable `b` that has the dic
 c: Person = Person {}  # Declare a variable `c` that has the schema type `Person` and the value `Person {}`
 ```
 
-- 联合类型
+- Union Type
 
 ```python
 # Basic union types
@@ -1433,7 +1433,7 @@ x = LiteralType {
 }
 ```
 
-当属性的值不符合联合类型定义时，编译器会抛出错误：
+The compiler throws an error when the value of a property does not conform to the union type definition:
 
 ```python
 # Literal union types
@@ -1446,7 +1446,7 @@ x = LiteralType {
 }
 ```
 
-- Any 类型
+- Any Type
 
 ```python
 # Any type
@@ -1458,20 +1458,18 @@ schema Config:
 config = Config {}
 ```
 
-请注意，一般在配置编写中不提倡使用 `float` 和 `any` 类型，因为它们都存在一定的不稳定因素，比如精度丢失，无法进行静态类型检查等。
-
-此外在 KCL 中，不允许修改一个变量的类型。如果在重新分配值时不满足类型，将引发类型错误。
+In KCL, changing the type of a variable is not allowed. If the type is not satisfied when reassigning the value, the type error will be raised.
 
 ```python
 _a = 1  # The type of `_a` is `int`
 _a = "s"  # Error: expect int, got str(s)
 ```
 
-变量可以赋值给其上界类型，但不能赋值给它的特化类型。
+The type of a variable can be assigned to its upper bound type, but cannot be assigned to its specialized type.
 
-`None` 和 `Undefined` 可以赋值给任何类型:
+`None` and `Undefined` can be assigned to any type:
 
-- 任何类型都可以赋值给 `any` 类型, `None` 和 `Undefined` 可以赋值给 `any` 类型。
+- All types can be assigned to `any` type, `None` and `Undefined` can be assigned to `any` type.
 
 ```python
 a: int = None
@@ -1481,59 +1479,59 @@ d: any = "s"
 e: any = None
 ```
 
-- `int` 类型可以赋值给 `float` 类型, `float` 类型不能赋值给 `int` 类型.
+- The `int` type can be assigned to the `float` type, and the `float` type cannot be assigned to the `int` type.
 
 ```python
 a: float = 1
 b: int = 1.0  # Error: expect int, got float(1.0)
 ```
 
-- `int` 类型可以赋值给 `int|str` 类型, `int|str` 不能赋值给 `int` 类型.
+- The `int` type can be assigned to the `int|str` type, and the `int|str` type cannot be assigned to the `int` type.
 
 ```python
 a: int | str = 1
 b: int = 1 if a else "s"  # Error: expect int, got int(1)|str(s)
 ```
 
-请注意，在 KCL 中虽然提供了 any 类型，但是它仍然是静态类型，所有变量的类型在编译期间不可变。
+Note that although the any type is provided in the KCl, it is still a static type, and the types of all variables are immutable during compilation.
 
-#### 类型推导
+#### Type Inference
 
-如果顶层或 schema 中的变量或常量声明没有使用显式的类型注解，则会从初始值推断类型。
+If a variable or constant declaration in the top level or in the schema is not annotated explicitly with a type, the declaration's type is inferred from the initial value.
 
-- 整形数值被推断为 `int`。
+- Integer literals are inferred to type `int`.
 
 ```python
 a = 1  # The variable `a` has the type `int`
 ```
 
-- 浮点数被推断为 `float`。
+- Float literals are inferred to type `float`.
 
 ```python
 a = 1.0  # The variable `a` has the type `float`
 ```
 
-- 字符串被推断为 `str`。
+- String literals are inferred to type `str`.
 
 ```python
 a = "s"  # The variable `a` has the type `str`
 ```
 
-- 布尔值被推断为 `bool`。
+- Boolean literals are inferred to type `bool`
 
 ```python
 a = True  # The variable `a` has the type `bool`
 b = False  # The variable `b` has the type `bool`
 ```
 
-- `None` 和 `Undefined` 被推断为 `any`。
+- `None` and `Undefined` are inferred to type `any`
 
 ```python
 a = None  # The variable `a` has the type `any`
 b = Undefined  # The variable `b` has the type `any`
 ```
 
-- 列表的类型根据元素类型推断，并且是可变大小的。
+- List literals are inferred based on the elements of the literal, and to be variable-size.
 
 ```python
 a = [1, 2, 3]  # The variable `a` has the type `[int]`
@@ -1541,13 +1539,13 @@ b = [1, 2, True]  # The variable `b` has the list union type `[int|bool]`
 c = ["s", 1]  # The variable `c` has the list union type `[int|str]`
 ```
 
-请注意，空列表将被推导为 `[any]` 类型。
+Please note that a empty list will be inferred to `[any]`
 
 ```python
 a = []  # The variable `a` has the type `[any]`
 ```
 
-- 字典的类型是根据元素的键和值推断的，并且是可变大小的。
+- Dict literals are inferred based on the keys and values of the literal, and to be variable-size.
 
 ```python
 a = {key = "value"}  # The variable `a` has the type `{str:str}`
@@ -1555,29 +1553,29 @@ b = {key = 1}  # The variable `b` has the type `{str:int}`
 c = {key1 = 1, key2 = "s"}  # The variable `c` has the type `{str:int|str}`
 ```
 
-请注意，空字典将被推导为 `{any:any}` 类型。
+Please note that a empty dict will be inferred to `{any:any}`
 
 ```python
 a = {}  # The variable `a` has the type `{any:any}`
 ```
 
-- 携带运行时值的 if 条件表达式的类型将被静态推断为所有可能结果的联合类型。
+- The type of the if conditional expression carrying the runtime value will be statically inferred as a union type of all possible results.
 
 ```python
 a: bool = True  # The variable `a` has the type `bool`
 b = 1 if a else "s"  # The variable `b` has the type `int|str`
 ```
 
-当变量被推导为某个类型时，它的类型不能再改变。
+When a variable is deduced to a certain type, its type cannot be changed
 
 ```python
 _a = 1
 _a = "s"  # Error: expect int, got str(1)
 ```
 
-#### 类型别名
+#### Type Alias
 
-在 KCL 中，我们可以使用 `type` 关键字为所有类型声明一个类型别名简化复杂类型的书写。
+We can use the `type` keyword to declare a type alias for all types in KCL to simplify the writing and use of complex types.
 
 ```python
 type Int = int
@@ -1587,7 +1585,7 @@ type IntList = [int]
 type StringAnyDict = {str:}
 ```
 
-我们可以从一个包中导入一个类型并为它定义一个别名。
+We can import a type through import and define an alias for it.
 
 ```py
 import pkg
@@ -1595,7 +1593,7 @@ import pkg
 type Data = pkg.Data
 ```
 
-此外，我们还可以使用类型别名和字面值联合类型充当近似枚举的效果。
+In addition, we can use type aliases and union types to achieve similar enumeration functions.
 
 ```python
 # A type alias of string literal union types
@@ -1609,14 +1607,14 @@ config = Config {
 }
 ```
 
-上述代码执行的输出结果为：
+The output YAML is
 
 ```yaml
 config:
   color: Blue
 ```
 
-请注意，类型别名不能与已有的内置类型 `any`、`int`、`float`、`bool` 和 `str` 等相同
+Please note that the type alias name cannot be one of `any`, `int`, `float`, `bool` and `str` because of ambiguity.
 
 ```python
 type any = int | str  # Error
@@ -1626,9 +1624,11 @@ type bool = True  # Error
 type str = "A" | "B" | "C"  # Error
 ```
 
-#### 类型守卫
+#### Type Guards
 
-KCL 支持在程序中使用 `typeof` 函数对任意值求得其运行时的类型。
+KCL supports the `typeof` function which can give very basic information about the type of values we have at runtime. In KCL, checking against the value returned by `typeof` is a type guard. KCL expects this to return a certain set of strings:
+
+Example:
 
 ```python
 import sub as pkg
@@ -1659,12 +1659,14 @@ t6 = typeof(_x1, full_name=True)
 # t6: __main__.Person
 ```
 
-除此之外，我们可以使用 `as` 关键字在运行时作类型转换。`as` 关键字的一般用法如下：
+In addition, we can use the `as` keyword in conjunction with type guards to complete defensive type conversion programming.
 
-- 具有偏序关系的基础类型，比如 `float -> int`
-- 具有偏序关系的联合类型，比如 `int | str -> str`
-- 对类型上界 `any` 的转换，比如 `any -> int`
-- 具有偏序关系的结构类型，比如 `base-schema -> sub-schema`
+Only types with partial order can be downcast converted, the use of the as keyword is as follows:
+
+- Basic types of partial order relations, e.g., `float -> int`
+- Partial order relation of union type, e.g., `int | str -> str` and `[int | str] -> [str]`
+- Contains the partial order relation of the upper bound of the type, e.g., `any -> int`
+- Partial order relationship of structure type, e.g., `base-schema -> sub-schema`
 
 ```python
 schema Data1:
@@ -1681,33 +1683,34 @@ elif typeof(a) == "Data2":
     data2 = data as Data2  # The type of `data2` is `Data2`
 ```
 
-当类型转换失败时，一个运行时错误将被抛出。
+When a runtime error occurs in the `as` type conversion, a runtime error is thrown.
 
 ```python
 a: any = "s"
 b: int = a as int  # Error: The `str` type cannot be converted to the `int` type
 ```
 
-如果不想要运行时类型转换失败，我们可以添加 `if` 防御式代码进行检查。
+If we don’t want to throw a runtime error, we can use the type guard for defensive coding with `if` expressions.
 
 ```python
 a: any = "s"
 b = a as int if typeof(a) == "int" else None  # The type of b is `int`
 ```
 
-请注意，`as` 转换的目标类型不能是字面值类型或者联合类型，因为它们在运行时不具有一个完全确定的类型。
+Note that the `as` conversion of literal type and union type is not supported, because they are not a certain runtime object, only int, float and other objects at runtime, there is no int literal, float literal object, and no union object.
 
 ### Schema
 
-#### 概述
+#### Overview
 
-Schema 是定义复杂配置的语言元素。我们可以定义带类型的属性，初始值和验证规则。此外，KCL 支持 schema 单继承、mixin 和 protocol 实现复杂配置的复用。
+A schema is a language element to define a complex configuration.
+We can define typed attributes, initialization assignment, and verification rules. In addition, KCL supports schema single inheritance, mixin and protocol to realize the reuse of complex configuration.
 
-#### 基础部分
+#### Basic
 
-##### 属性
+##### Attribute
 
-以下是 schema 基础定义的示例：
+The followings are some basic examples:
 
 ```python
 # A person has a first name, a last name and an age.
@@ -1718,30 +1721,24 @@ schema Person:
     age: int = 0
 ```
 
-在 KCL 中, 我们可以使用类型注解在 schema 中定义一些属性，每个属性都可以设置一个可选的默认值（比如上述代码中的 `age` 属性，它的默认值是 `0`），没有设置默认值的属性的初始值为 `Undefined`, 它们不会在 YAML 当中进行输出。
+In KCL, we can use type annotations to define some attributes in the schema, each attribute can be set with an optional default value (such as the `age` attribute in the above code, its default value is `0`), attributes that are not set default values have an initial value of `Undefined`, which are not output in YAML.
 
-###### 不可变性
-
-schema 中属性的不可变性遵循和全局变量不可变性一样的规则，只有 schema 中的可变属性可以在 schema 中修改。此外，schema 的属性默认值可被 schema 配置值修改：
+Note, the immutability of attributes in the schema follows the same rules as the immutability of global variables, only mutable attributes in the schema can be modified in the schema.
 
 ```python
 schema Person:
     age: int = 1  # Immutable attribute
     _name: str = "Alice"  # Mutable attribute
 
-    age = 10  # Error, can't change the default value of the attribute `age` in the schema context.
+    age = 10  # Error
     _name = "Bob"  # Ok
-
-person = Person {
-    age = 3  # Ok, can change the default value of the attribute `age` in the schema config.
-}
 ```
 
-###### 可选属性
+###### Optional Attribute
 
-schema 实例中每个属性 **必须** 赋值一个非 `None`/`Undefined` 的值，否则编译器会抛出错误，除非它被 `?` 符号标记为可选属性。
+Each attribute **must** be assigned with a not `None`/`Undefined` value as a schema instance unless it is modified by a question mark as an optional attribute.
 
-示例：
+Examples:
 
 ```python
 schema Employee:
@@ -1754,15 +1751,15 @@ employee = Employee {
 }
 ```
 
-##### 顺序无关计算
+##### Irrelevant Order Calculation
 
-schema 中顺序无关计算表示 schema 内部属性之间的引用关系。例如，当我们声明一个形式为 `a = b + 1` 的表达式时，`a` 值的计算依赖于 `b` 值的计算。当编译器计算 `a` 的值并且 `a` 的值取决于 `b` 的值时，编译器会选择先计算 `b` 的值，然后根据 `b` 的值计算 a 的值表达式 `a = b + 1`，这与传统过程语言的计算方法略有不同。
+The irrelevant order calculation in the schema indicates the reference relationship between the internal attributes of the schema. For example, when we declare an expression of the form `a = b + 1`, the calculation of the value of `a` depends on the calculation of the value of `b`. When the compiler calculate the value of `a` and the value of `a` depends on the value of `b`, the compiler will choose to first calculate the value of `b`, and then calculate the value of a according to the expression `a = b + 1`, which is slightly different from the calculation method of traditional procedural language the difference.
 
-由于 schema 中值的计算是基于依赖关系的，就像有向无环图按照拓扑排序的顺序遍历图中的每个节点一样， schema 中属性的声明顺序并不那么重要，因此特征称为顺序无关计算。
+Since the calculation of values in the schema is based on dependencies, just like a directed acyclic graph traverses each node in the graph according to the order of topological sorting, the order of declaration of attributes in the schema is not so important, so the feature is called the irrelevant order calculation.
 
-请注意，不同 schema 属性值之间不能有循环引用。
+Please note that there can be no circular references between different schema attribute values.
 
-我们可以通过下面的例子看到这个特性。
+We can see this feature through the following examples.
 
 ```python
 schema Fib:
@@ -1774,17 +1771,17 @@ schema Fib:
 fib8 = Fib {n = 8}.value
 ```
 
-结果为：
+The output is
 
 ```yaml
 fib8: 21
 ```
 
-在 schema 中，我们只需要简单的指定属性之间的依赖关系，编译器就会根据依赖关系自动计算出值，这样可以帮助我们节省大量的样板代码，减少配置编写难度。
+We can see that in the schema, we only need to simply specify the dependency between attributes, and the compiler will automatically calculate the value based on the dependency, which can help us save a lot of boilerplate code and reduce configuration difficulty of writing.
 
-##### Schema 上下文
+##### Schema Context
 
-我们可以定义 schema 的上下文来管理 schema 的属性，可以直接在 schema 中编写 schema 参数、临时变量和表达式等：
+We can define the context of the schema to manage the attributes of the schema, and we can write schema parameters, temporary variables and expressions directly in the schema:
 
 ```python
 schema Person[_name: str]:  # define a schema argument
@@ -1793,27 +1790,9 @@ schema Person[_name: str]:  # define a schema argument
     hands: [int] = [i for i in [1, 2, 3]] # define a for statement
 ```
 
-然后，我们可以通过如下代码实例化一个 `Person` 并将其赋值给 `alice` 变量：
+##### Validation
 
-```python
-alice = Person("alice")
-```
-
-可以得到如下 YAML 输出：
-
-```yaml
-alice:
-  name: alice
-  age: 10
-  hands:
-  - 1
-  - 2
-  - 3
-```
-
-##### 校验
-
-KCL 中为了确保代码稳定性，除了使用 **静态类型** (类型注解) 和 **不可变性**，还支持在 **check** 块中定义验证规则 (KCL 几乎原生支持所有 [OpenAPI](https://www.openapis.org/) 的验证能力)：
+In addition to using **static typing** (the type annotation) and **immutability** in KCL schema mentioned earlier to ensure code stability, a bunch of validation rules are supported in a simple **check** block (KCL supports almost all authentication capabilities of [OpenAPI](https://www.openapis.org/)):
 
 ```python
 import regex
@@ -1824,18 +1803,18 @@ schema Sample:
     fooList: [str]
 
     check:
-        bar > 0  # Minimum, also support the exclusive case
-        bar < 100  # Maximum, also support the exclusive case
-        len(fooList) > 0  # Min length, also support exclusive case
-        len(fooList) < 100  # Max length, also support exclusive case
-        regex.match(foo, "^The.*Foo$")  # Regex match
-        isunique(fooList)  # Unique
-        bar in range(100)  # Range
-        bar in [2, 4, 6, 8]  # Enum
-        multiplyof(bar, 2)  # MultipleOf
+        bar > 0  # minimum, also support the exclusive case
+        bar < 100  # maximum, also support the exclusive case
+        len(fooList) > 0  # min length, also support exclusive case
+        len(fooList) < 100  # max length, also support exclusive case
+        regex.match(foo, "^The.*Foo$")  # regex match
+        isunique(fooList)  # unique
+        bar in range(100)  # range
+        bar in [2, 4, 6, 8]  # enum
+        multiplyof(bar, 2)  # multipleOf
 ```
 
-使用 schema, 所有的实例将在编译时验证：
+With the schema, all instances will be validated at compile time
 
 ```python
 # Ok
@@ -1853,7 +1832,7 @@ badSample = Sample {
 }
 ```
 
-此外，我们可以使用 **and**, **or**, **if** 来构建更复杂的检查逻辑：
+In addition, we can use **and**, **or**, **if** to compose more complex conditional check logic:
 
 ```python
 schema Sample:
@@ -1865,11 +1844,11 @@ schema Sample:
         regex.match(foo, "^The.*Foo$") and bar in [2, 4, 6, 8] if doCheck
 ```
 
-为了确保所有检查规则都能很好地发挥其相应的作用，我们可以通过编写 KCL 测试用例来测试不同数据组合的合理性和正确性，并通过 [kcl test tool](../../cli/kcl/test.md) 运行所有测试用例。
+In order to ensure that all check rules can play their corresponding roles well, we can test the rationality and correctness of different data combinations by writing KCL test cases, and run all test cases through the kcl test tool.
 
-##### 文档
+##### Documents
 
-通常在我们写好 schema 模型之后，我们会为 schema 写文档注释，可以用一个三引号字符串来完成，如下所示：
+Usually after we write the schema model, we will write documentation comments for the schema, which can be completed by using a three-quoted string as follows:
 
 ```python
 schema Server:
@@ -1902,20 +1881,17 @@ schema Server:
     labels?: {str:str}
 ```
 
-更多详细内容可见 [Doc tools](../../cli/kcl/docgen.md)。
+##### Config
 
-##### 配置
-
-假设我们有如下 schema 定义：
+Suppose we have the following schema definition:
 
 ```python
 schema Person:
     firstName: str
     lastName: str
-    labels?: {str:str}
 ```
 
-可以用类 JSON 的表达式定义配置：
+A config could be defined with a JSON-like expression:
 
 ```python
 person = Person {
@@ -1924,7 +1900,8 @@ person = Person {
 }
 ```
 
-schema 遵循严格的属性定义，配置未定义的属性将触发编译错误：
+At the same time, the schema adheres to strict attribute definitions,
+and configuring undefined attributes will trigger a compilation error.
 
 ```python
 person = Person {
@@ -1934,51 +1911,127 @@ person = Person {
 }
 ```
 
-此外，我们可以使用 `if` 表达式将元素动态的添加到 schema 实例中，将满足条件的元素添加到 schema 实例并忽略不满足条件的元素。并且除了使用一个 schema 类型实例化一个 schema，我们也可以通过 schema 实例得到一个新的实例。
+We can use `if expressions` to dynamically add elements to the schema config, elements that meet the conditions are added to the schema config, and elements that do not meet the conditions are ignored. Besides, the **config selector expressions** can be used to init a schema instance.
 
 ```python
+schema Base:
+    count: int
+    value: str
+
+schema Person:
+    base: Base
+    labels: {str:str}
+    name?: str
+
 env = "prod"
-person = Person {
-    firstName = "firstName"
-    lastName = "lastName"
+
+person1 = Person {
+    base.count = 2  # Config selector expression
+    base.value = "value"  # A schema variable in schema can use selector expressions
+    labels.key = "value"  # A dict variable in schema can use selector expressions
+}
+
+person2 = Person {
+    base = {
+        count = 1
+        value = "value"
+    }
+    labels.key = "value"
     if env == "prod":
         labels.env = env
     else:
         labels.env = "other"
 }
-# We can use the person instance to get a new instance named `personx` directly.
-personx = person {
-    firstName = "NewFirstName"
+```
+
+The output YAML is
+
+```yaml
+person1:
+  base:
+    count: 2
+    value: value
+  labels:
+    key: value
+person2:
+  base:
+    count: 1
+    value: value
+  labels:
+    key: value
+    env: prod
+```
+
+When we instantiate a schema without config parameters, we can generate schema instances in the following three forms:
+
+```python
+schema Data:
+    id: int = 1
+
+data1 = Data {}
+data2 = Data() {}
+data3 = Data()
+```
+
+In addition to using a schema type to instantiate a schema, we can also use a schema instance to get a new instance using the config expression.
+
+```python
+schema Config:
+    id: int
+    values: [int]
+
+configOrigin = Config {
+    id = 1
+    values = [0, 1]
+}
+configNew = configOrigin {
+    id = 2
+    values += [2, 3]
 }
 ```
 
-输出为：
+The output is
 
 ```yaml
-env: prod
-person:
-  firstName: firstName
-  lastName: lastName
-  labels:
-    env: prod
-personx:
-  firstName: NewFirstName
-  lastName: lastName
-  labels:
-    env: prod
+configOrigin:
+  id: 1
+  values:
+  - 0
+  - 1
+configNew:
+  id: 2
+  values:
+  - 0
+  - 1
+  - 2
+  - 3
 ```
 
-#### 高级功能
+In addition, schema attribute default values can be modified by schema config.
+
+```python
+schema Person:
+    age: int = 1
+    name: str = "Alice"
+
+    age = 2  # Error, can't change the default value of the attribute `age` in the schema context
+
+person = Person {
+    age = 3  # Ok, can change the default value of the attribute `age` in the schema config
+}
+```
+
+#### Advanced
 
 ##### Protocol & Mixin
 
-除了 schema, 在 KCL 中还提供了一种额外的类型定义方式 `protocol`，它的性质如下：
+In addition to schema, an additional type definition method `protocol` is provided in KCL, and its properties are as follows:
 
-- 在 protocol 中，只能定义属性及其类型，不能书写复杂的逻辑与 check 表达式，也不能使用 mixin。
-- protocol 只能对非 `_` 开头的属性进行约束。
-- protocol 只能继承自或者引用 protocol, 不能继承自或者引用 schema。
+- In a protocol, only attributes and their types can be defined, complex logic and check expressions cannot be written, and mixins cannot be used.
+- A protocol can only constrain properties that do not start with `_`.
+- A protocol can only inherit or refer to other protocols, but cannot inherit or refer to other schemas.
 
-此外，我们可以使用可选的 **mixin** 组装复杂的 schema，并使用 **protocol** 为 **mixin** 添加可选的宿主类型, 使用 `for` 关键字为 **mixin** 定义宿主类型，并且在 mixin 内部它将从宿主类型中查询到属性的类型。
+Besides, we can declare a complex assembly schema with optional **mixin** support and use **protocol** to add an optional host type to the dynamically inserted **mixin**.:
 
 ```python
 schema Person:
@@ -1989,19 +2042,19 @@ schema Person:
     fullName?: str  # Optional
 ```
 
-FullNameMixin 是一个产生 fullName 字段的简单例子：
+A fullName mixin which generates a fullName as a simple sample:
 
 ```python
 protocol PersonProtocol:
     firstName: str
     lastName: str
     fullName?: str
-    
+
 mixin FullNameMixin for PersonProtocol:
     fullName = "{} {}".format(firstName, lastName)
 ```
 
-然后我们可以通过一下方式获取 schema 实例：
+Then we can get the schema instance by:
 
 ```python
 person = Person {
@@ -2010,7 +2063,7 @@ person = Person {
 }
 ```
 
-输出结果为：
+The output is
 
 ```yaml
 person:
@@ -2019,7 +2072,7 @@ person:
   fullName: John Doe
 ```
 
-请注意，宿主类型 **protocol** 只能用于 **mixin** 的定义 (后缀名为 `Mixin`), 否则将会报错。
+Please note that the host type **protocol** can only be used for **mixin** definitions (the suffix name is `Mixin`), otherwise an error will be reported.
 
 ```python
 protocol DataProtocol:
@@ -2029,13 +2082,11 @@ schema Data for DataProtocol:  # Error: only schema mixin can inherit from proto
     x: str = data
 ```
 
-##### 索引签名
+##### Index Signature
 
-在 KCL schema 中可以定义索引签名，这意味着索引签名的键-值约束可用于构造具有 schema 类型的字典。或者可以将其他检查添加到额外的 schema 属性中，以增强 KCL 类型和语义检查。
+Index signatures can be defined in the KCL schema, and it means that the key-value constraints of the index signature can be used to construct a dict with the schema type, or additional checks can be added to the schema attributes to enhance the KCL type and semantic checks.
 
-###### 基本用法
-
-使用 `[{attr_alias}: {key_type}]: {value_type}` 的形式去定义 schema 的类型注解， 其中 `{attr_alias}` 可以省略。
+- Use the form `[{attr_alias}: {key_type}]: {value_type}` to define an index signature in the schema, and `{attr_alias}` can be omitted.
 
 ```python
 schema Map:
@@ -2050,9 +2101,16 @@ data = Map {
 }
 ```
 
-###### 同时定义属性和索引签名
+- Mandatory all attributes of the schema key and value types
 
-可以在 schema 中同时定义 schema 属性和索引签名，通常用于表示 schema 中额外属性的类型约束，比如如下代码
+```python
+schema Person:
+    name: str
+    age: int  # error, conflicts with the index signature definition `[str]: str`
+    [str]: str  # The values of all attributes of the schema can only be strings
+```
+
+- Mandatory all attribute key and value types are defined in the schema, which is equivalent to restricting all attribute types except the additional attributes.
 
 ```python
 schema Person:
@@ -2061,15 +2119,13 @@ schema Person:
     [...str]: str  # Except for the `name` and `age` attributes, the key type of all other attributes of the schema must be `str`, and the value type must also be `str`.
 ```
 
-###### 定义索引签名别名
-
-可以为索引签名定义类型注解的属性别名，并将其与检查块一起使用。
+- Define the index signature attribute alias and use it with the check block.
 
 ```python
 schema Data:
     [dataName: str]: str
     check:
-        dataName in ["Alice", "Bob", "John"]  # We can use the index signature key name in the check block.
+        dataName in ["Alice", "Bob", "John"]
 
 data = Data {
     Alice = "10"
@@ -2078,11 +2134,25 @@ data = Data {
 }
 ```
 
-##### 继承
+```python
+import regex
 
-类似于其他面向对象语言，KCL 提供了基础且有限的面向对象支持，例如 **属性复用**，**私有和公有变量**和**单继承**。KCL 不支持多继承。
+schema DataMap:
+    [attr: str]: str
+    check:
+        regex.match(attr, r'[-._a-zA-Z0-9]+')
 
-以下是单继承的例子：
+data = DataMap {
+    key1 = "value1"
+    "foo.bar" = "value2"  # check error
+}
+```
+
+##### Inheritance
+
+Like some other object-oriented languages, KCL provides fundamental but limited object-oriented support, such as **attribute reuse**, **private and public variables**, and **single inheritance**. Besides, KCL does NOT support multiple inheritances for the schema.
+
+The following is an example of schema inheritance:
 
 ```python
 # A person has a first name, a last name and an age.
@@ -2105,7 +2175,7 @@ employee = Employee {
 }
 ```
 
-结果为：
+The output is
 
 ```yaml
 employee:
@@ -2116,12 +2186,12 @@ employee:
   nationality: null
 ```
 
-请注意，KCL 只支持 schema 的 **单继承**。
+Please note that KCL only allows **single inheritance** on schemas.
 
-此外，当 schema 存在继承关系时，可选属性的性质如下：
+In addition, when the schema has an inheritance relationship, the properties of optional attributes are as follows:
 
-- 如果该属性在基类 schema 中是可选的，则它在子类 schema 中是可选的，也可以是子类 schema 中必选的。
-- 如果该属性在基类 schema 中是必选的，则它在子类 schema 中也是必选的。
+- If the attribute is optional in the base schema, it could be optional or required in the sub-schema.
+- If the attribute is required in the base schema, it must be required in the sub-schema.
 
 ```python
 schema Person:
@@ -2133,9 +2203,9 @@ schema Employee(Person):
     nationality?: str  # Error, only `nationality: str` is allowed
 ```
 
-##### Schema 函数
+##### Schema Function
 
-schema 映射到函数上非常好用；它可以有任意数量的输入和输出参数。 例如，Fibonacci 函数可以使用递归 schema 如下编写：
+Schema map very nicely onto functions; it can have any number of input and output parameters. For example, the Fibonacci function can be written as follows using the recursive schema config:
 
 ```python
 schema Fib[n: int]:
@@ -2151,19 +2221,19 @@ schema Fib[n: int]:
 fib8 = Fib(8).value  # 21
 ```
 
-##### 装饰器
+##### Decorators
 
-像 Python 一样, KCL 支持在 schema 上使用装饰器。KCL 装饰器动态地改变 schema 的功能，而不必直接使用子 schema 或更改被装饰的 schema 的源代码。 和函数调用一样，装饰器支持传入额外的参数。
+Just like Python, KCL supports the use of decorators on the schema. KCL Decorators dynamically alter the functionality of a schema without having to directly use sub schema or change the source code of the schema being decorated. And like a function call, the decorator supports passing in additional parameters.
 
-内置的 schema 装饰器：
+Built-in decorators of schema
 
 - `@deprecated`
-  标识 schema 或 schema 属性被废弃. `@deprecated` 装饰器支持三种参数：
-  - **version** - 字符串类型，表示版本信息。 默认值为空。
-  - **reason** - 字符串类型，表示不推荐使用的原因。 默认值为空。
-  - **strict** - bool 类型，表示是报错还是警告。 默认值是 true。 如果 `strict` 为 `True` 并且抛出错误，程序将被中断。 如果 `strict` 为 `False`，则会输出警告并且不会中断程序。
+  Mark whether a schema or schema attribute is deprecated. The `@deprecated` decorator supports three parameters:
+  - **version** - string type, indicating the version information. The default value is empty.
+  - **reason** - string type, indicating the deprecated reason. The default value is empty.
+  - **strict** - bool type, indicating whether to report an error or warning. The default value is true. If `strict` is `True` and the error is thrown, the program will be interrupted. If `strict` is `False`, a warning will be output and the program will not be interrupted.
 
-示例：
+Examples:
 
 ```python
 @deprecated
@@ -2171,40 +2241,34 @@ schema ObsoleteSchema:
     attr: str
 
 schema Person:
+    name: str = "John"
+    attrs: ObsoleteSchema = {
+        attr = "value"
+    }
+
+person = Person {}  # Error: ObsoleteSchema was deprecated
+```
+
+```python
+schema Person:
     firstName: str = "John"
     lastName: str
     @deprecated(version="1.16", reason="use firstName and lastName instead", strict=True)
     name: str
-    attrs: ObsoleteSchema = {  # Error: ObsoleteSchema was deprecated
-        attr = "value"
-    }
 
 JohnDoe = Person {  # Error: name was deprecated since version 1.16, use firstName and lastName instead
     name = "deprecated"
 }
 ```
 
-- `@info`
-  给 schema 或 schema 属性标识额外的信息，支持任意参数，用于语言静态分析 schema 或 schema 属性的扩展标记信息
+Note that the current version of KCL does not yet support user-defined decorators.
 
-示例：
+##### Members
 
-```python
-@info(version="v1")
-schema Person:
-    @info(message="name")
-    name: str
-    age: int
-```
+Built-in functions and members of schema
 
-请注意，当前版本的 KCL 尚不支持用户自己定义装饰器。
-
-##### 成员函数
-
-内置函数和 schema 成员
-
-- instances（）
-  返回 schema 的现有实例列表。
+- instances()
+  Return the list of existing instances of a schema.
 
 ```python
 schema Person:
@@ -2224,7 +2288,7 @@ bob = Person {
 aliceAndBob = Person.instances()  # Person is a schema type, instances() is its member method
 ```
 
-输出为：
+The output is
 
 ```yaml
 alice:
@@ -2240,13 +2304,13 @@ aliceAndBob:
   age: 10
 ```
 
-### 配置操作
+### Config Operations
 
-#### 配置合并
+#### Config Unification
 
-##### | 运算符
+##### | Operators
 
-在 KCL 中，我们可以使用合并运算符 `|` 来合并配置。union 运算符支持的类型包括如下：
+In KCL, we can use the union operator `|` to achieve the merging of configurations, the types supported by the union operator are as follows:
 
 ```
 SchemaInstance | SchemaInstance
@@ -2255,9 +2319,9 @@ Dict | Dict
 List | List
 ```
 
-合并集合和结构化数据：
+Unioning collection and schema data:
 
-- 合并 List。使用 `|` 运算符右边的列表表达式按照**索引**逐一覆盖左边列表表达式中的元素。
+- Unioning List. Overwrite the list expression on the right side of the operator `|` to the list variable on the left side of the operator one by one according to the **index**.
 
 ```python
 _a = [1, 2, 3]
@@ -2265,9 +2329,9 @@ _b = [4, 5, 6, 7]
 x = _a | _b  # [4, 5, 6, 7]  1 -> 4; 2 -> 5; 3 -> 6; Undefined -> 7
 ```
 
-合并特定索引或所有元素仍在讨论中。
+Unioning to the specific index or all elements is still under discussion.
 
-- 合并 Dict. 使用 `|` 运算符右边的列表表达式按照**键**逐一覆盖左边列表表达式中的元素。
+- Unioning Dict. Union the dict expression on the right side of the operator `|` one by one to the dict variable on the left side of the operator according to the **key**
 
 ```python
 _a = {key1 = "value1"}
@@ -2275,11 +2339,11 @@ _b = {key1 = "overwrite", key2 = "value2"}
 x = _a | _b  # {"key1": "overwrite", "key2": "value2"}
 ```
 
-集合和 schema 的合并是一个新的集合，其属性是将 b 合并到 a，保留从左到右的操作数顺序。
+The union of collection and schema is a new one whose attributes are unioning b to a, preserving the order of the attributes of the operands, left before right.
 
-- 合并 schema。Schema 的合并与 dict 相似。
+- Unioning Schema. The union operation for schema is similar to dict.
 
-Schema 的合并操作如下:
+Schema union could be done as:
 
 ```python
 schema Person:
@@ -2297,7 +2361,7 @@ _f = None | _a  #  {"firstName": "John"}
 _g = Undefined | _a  #  {"firstName": "John"}
 ```
 
-请注意，当 union 运算符的左右操作数之一为 None 时，将立即返回另一个操作数。
+Please note that when one of the left and right operands of the union operator is None, the other operand is returned immediately.
 
 ```python
 data1 = {key = "value"} | None  # {"key": "value"}
@@ -2305,7 +2369,7 @@ data2 = None | [1, 2, 3]  # [1, 2, 3]
 data3 = None | None  # None
 ```
 
-输出如下：
+The output is
 
 ```yaml
 data1:
@@ -2317,25 +2381,23 @@ data2:
 data3: null
 ```
 
-##### : 运算符
+##### : Operators
 
-模式: `identifier : E`
+Pattern: `identifier : E` or `identifier : T E`
 
-表达式 `E` 的值将被合并到元素值。
+The value of the expression `E` with optional type annotation `T` will be unioned into the element value.
 
-示例：
+Examples:
 
 ```python
-schema Data:
-    labels: {str:} = {key1 = "value1"}
-
-data = Data {
-    # union {key2: "value2"} into the attribute labels of the schema Data.
-    labels: {key2 = "value2"}
+data = {
+    labels: {key1: "value1"}
+    # union {key2: "value2"} into the attribute labels.
+    labels: {key2: "value2"}
 }
 ```
 
-输出：
+Output:
 
 ```yaml
 data:
@@ -2344,9 +2406,9 @@ data:
     key2: value2
 ```
 
-除了在 schema 属性上使用属性运算符之外，还可以使用属性运算符对配置块执行不同的操作。
+In addition to using attribute operators on the schema config attributes, variables inside and outside the schema can use attribute operators to perform different operations on the configuration.
 
-- schema 外部使用合并运算符 `:`
+- Using `:` outside the schema
 
 ```python
 schema Data:
@@ -2366,7 +2428,7 @@ config: Config {
 }
 ```
 
-与它等效的配置代码可以表示为:
+Its equivalent configuration code can be expressed as
 
 ```python
 schema Data:
@@ -2382,7 +2444,7 @@ config: Config {
 }
 ```
 
-输出结果为:
+The output is
 
 ```yaml
 config:
@@ -2391,7 +2453,7 @@ config:
     d2: 1
 ```
 
-- schema 内部使用合并运算符 `:`
+- Using `:` inside the schema
 
 ```python
 schema Data:
@@ -2411,15 +2473,15 @@ schema Config:
 config: Config {}
 ```
 
-#### 配置覆盖
+#### Config Override
 
-##### = 运算符
+##### = Operators
 
-模式: `identifier = E`
+Pattern: `identifier = E` or `identifier : T = E`
 
-表达式 `E` 的值将覆盖元素值。
+The value of the expression `E` with optional type annotation `T` will override the attribute value.
 
-示例：
+Examples:
 
 ```python
 schema Data:
@@ -2431,7 +2493,7 @@ data = Data {
 }
 ```
 
-输出：
+Output:
 
 ```yaml
 data:
@@ -2439,19 +2501,21 @@ data:
     key2: value2
 ```
 
-请注意，可以使用 `Undefined` 来覆盖，来“删除”内容。例如 `{ a = Undefined }`。
+Note:
 
-#### 配置添加
+- Especially, we can "delete" its content by overriding the attribute to `Undefined`, such as `{ a = Undefined }`.
 
-##### += 运算符
+#### Insert
 
-模式: `identifier += E`
+##### += Operators
 
-插入只能用于列表类型的 `identifier`.
+Pattern: `identifier += E` or `identifier : T += E`
 
-`E` 将插入到列表 `identifier` 指定索引后，并且索引以后的属性将自动后移。
+Insert only works for list type `identifier`.
 
-示例:
+`E` will be inserted just after the specified index of the list `identifier`, and the following attributes after the index will be automatically shifted.
+
+Examples:
 
 ```python
 schema Data:
@@ -2463,7 +2527,7 @@ data = Data {
 }
 ```
 
-输出：
+Output:
 
 ```yaml
 data:
@@ -2473,43 +2537,57 @@ data:
     - 1
 ```
 
-如果没有定义索引，将使用最后一个索引。
+If no index is specified, the last index will be used.
 
-#### 注意事项
+#### Notice
 
-合并运算符 `:` 是一个可交换的幂等运算符，当合并的值发生值的冲突时会发生值冲突错误，因此我们需要 `=` 和 `+=` 运算符表示配置的覆盖，添加和删除操作。
+Please note that the calculations of the `=` and `+=` attribute operators of the same attribute are sequential, and the latter ones have a higher priority.
+
+```python
+x = {
+    a = 1  # 1
+} | {
+    a = 2  # 1 -> 2
+} | {
+    a = 3  # 2 -> 3
+}  # The final value of attribute `a` is 3
+```
+
+Please note that the `:` attribute operator represents an idempotent merge operation, and an error will be thrown when the values that need to be merged conflict.
+
+Therefore, when we need a configuration to override or add and delete operations, it is best to use the `=` and `+=` operators
 
 ```python
 data0 = {id: 1} | {id: 2}  # Error：conflicting values between {'id': 2} and {'id': 1}
 data1 = {id: 1} | {id = 2}  # Ok, the value of `data` is {"id": 2}
 ```
 
-`:` 运算符冲突检查的规则如下:
+The check rules for `:` operator for KCL value conflicts are as follows:
 
-- `None` 和 `Undefined` 不与任何值冲突
+- For `None` and `Undefined` variables, they do not conflict with any value.
 
 ```python
 data0 = None | {id: 1}  # Ok
 ```
 
-- 对于 `int`、`float`、`str` 和 `bool` 类型的变量，当它们的值不相同时发生冲突错误。
+- For `int`, `float`, `str` and `bool` types, when their values are different, they are considered as conflicts.
 
 ```python
 data0 = 1 | 1  # Ok
 data1 = 1 | "s"  # Error
 ```
 
-- 对于列表类型
-  - 当它们的长度不相同时，它们被认为是冲突的
-  - 当它们的长度相同时，当且仅当它们的任意一个子元素值冲突时，它们自身是冲突的
+- For list type
+  - When their lengths are not equal, they are regarded as conflicts.
+  - When their lengths are equal, as long as there is a conflict in the value of a child element, it is regarded as a conflict.
 
 ```python
 data0 = [1] | [1]  # Ok
 data1 = [1, 2] | [1]  # Error
 ```
 
-- 对于 dict/schema 类型
-  - 对于相同的 key，key 的值冲突时，它们自身是冲突的，否则是不冲突的
+- For dict/schema type
+  - When the values of the same key conflict, they are regarded as conflicts
 
 ```python
 data0 = {id: 1} | {id: 1}  # Ok
@@ -2519,27 +2597,30 @@ data1 = {id: 1} | {idAnother: 1}  # Ok
 
 ### Rule
 
-KCL 支持使用 rule 关键字定义校验块，可用于数据校验，用法类似于 schema 中的 check 表达式。
+In addition to using the check keyword for verification and writing in the schema, KCL also supports the use of the `rule` keyword to define a set of rules for policy verification
+
+The KCL rule is the same as the schema/mixin/protocol and it is defined by indentation. We need write a rule per line and we can write if filter conditions and verification failure information for each rule. Different conditions are connected with logic `and` (similar to the way of writing in check block).
 
 ```python
 rule SomeRule:
     age > 0, "rule check failure message"
 ```
 
-可以像 schema 实例化那样调用一个 rule 进行校验
+We can call a KCL rule like instantiating a schema:
 
 ```python
-age = 0
-name = "Bob"
+age = 1
+name = "Alice"
+
 rule SomeRule:
     age > 0, "rule check failure message"
     name == "Alice"
 
 rule1 = SomeRule()  # Rule call 
-rule2 = SomeRule {}
+rule2 = SomeRule {}  # Rule call
 ```
 
-可以使用 protocol 和 for 绑定语句为 rule 增加类型约束:
+We can use protocol to implement type checking of rule structure:
 
 ```python
 # Schema definition
@@ -2592,11 +2673,11 @@ SomeChecker {
 }
 ```
 
-请注意，`protocol` 和 `rule` 的组合方式可以使属性和其约束定义进行分离，我们可以在不同的包中定义不同的 `rule` 和 `protocol` 按需进行组合，这与 schema 中的 check 表达式只能与 schema 属性定义在一起是不同的。
+Please note that the combination of `protocol` and `rule` can separate attributes from their constraint definitions. We can define different rules and protocols in different packages and combine them as needed. This is different from check expressions in schema, which can only be combined with schema attributes.
 
-此外，有两种复用不同 rule 的方式
+Besides, the following two ways can be used to achieve the multiplexing of different Rules:
 
-- 直接调用
+- Inline Call
 
 ```python
 weather = "sunny"
@@ -2615,7 +2696,7 @@ rule Main:
 Main()  # Rule call
 ```
 
-使用 rule 的继承 (rule 不同于 schema, 可以多继承混用)
+- Inherit
 
 ```python
 weather = "sunny"
@@ -2633,9 +2714,9 @@ rule Main(IsSunny, IsWednesday):
 Main()
 ```
 
-可以使用 option 函数与命令行 `-D` 参数获得外部数据进行校验
+We can obtain external data or input from the `option` function and the CLI parameter `-D` for verification:
 
-- 一个简单例子
+- A simple example
 
 ```python
 schema Day:
@@ -2652,7 +2733,7 @@ rule Main:
 Main()
 ```
 
-- 一个复杂例子
+- A complex example
 
 ```python
 data = option("data")
@@ -2679,11 +2760,15 @@ rule UserIsGranted:
 allow = Allow() or False
 ```
 
-### 模块
+Further, the above KCL rule code can be compiled into a target such as WASM and used at runtime.
 
-KCL 配置文件以 **模块** 形式组织。 单个 KCL 文件被认为是一个 module，一个目录被认为是一个包。
+### Module
 
-同一个包内的模块是可见的，跨包引用需要通过导入可见。
+KCL config files are organized as **modules**. A single KCL file is considered as a module, and a directory is considered as a package, which is a special module.
+
+The modules in the same package are visible and cross-package references need to be visible through import.
+
+Code structure:
 
 ```
 . 
@@ -2719,9 +2804,9 @@ schema ImageService:
     name: str
 ```
 
-#### 相对路径引用
+#### Relative Path Import
 
-我们可以使用 `.` 运算符来实现 KCL 入口文件的相对路径导入。
+We can use the operator `.` to realize the relative path import of KCL entry files.
 
 main.k:
 
@@ -2734,16 +2819,19 @@ s = service.ImageService {}
 m = root.Schema {}
 ```
 
-#### 绝对路径引用
+#### Absolute Path Import
 
-`import a.b.c.d` 的语义为：
+The semantics of `import a.b.c.d` is
 
-1. 从当前目录寻找路径 `./a/b/c/d`。
-2. 如果当前目录寻找失败，从根目录寻找 `ROOT_PATH/a/b/c/d`
+1. Search the path `./a/b/c/d` from the current directory.
+2. If the current directory search fails, search from the root path `ROOT_PATH/a/b/c/d`
 
-根路径 `ROOT_PATH` 的定义为：
+The definition of the root path `ROOT_PATH` is
 
-从当前目录或者父级目录中查找 `kcl.mod` 文件对应的目录。
+1. Look up the directory corresponding to the `kcl.mod` file from the current directory.
+2. If `kcl.mod` is not found, read from the environment variable `KCL_MODULE_ROOT` e.g., `kclvm/lib/*`.
+
+Code structure:
 
 ```
 . 
@@ -2768,37 +2856,37 @@ import mixin  # `root package` and `kcl.mod` are in the same directory
 myModel = model.CatalogItem {}
 ```
 
-请注意，对于 KCL 入口文件 `main.k`，不能导入所在文件夹，否则会出现递归导入错误：
+Note that for the KCL entry file `main.k`, it cannot be imported into the folder where it is located, otherwise a recursive import error will occur:
 
 ```python
 import model  # Error: recursively loading
 ```
 
-### 动态参数
+### Top-Level Argument
 
-假设某些字段需要像用户输入一样动态传入，我们可以在模块中定义一个动态参数：
+Assume some field need to be passed in dynamically like user input, we can define a top-level argument in a module:
 
 ```python
 bankCard = option("bankCard")  # Get bankCard through the option function.
 ```
 
-我们可以如下使用 module：
+Then we can use the module as below:
 
 ```
 kcl -DbankCard=123 employee.k
 ```
 
-目前，支持顶级参数的类型有数字、字符串、布尔、列表和字典。
+Currently, supported types of top-level argument are number, string, bool, list and dict.
 
 ```
 kcl main.k -D list_key='[1,2,3]' -D dict_key='{"key":"value"}' 
 ```
 
-请注意，命令行中引号 `"` 等符号需要使用 `\` 进行转义
+We need to pay attention to the escape of quotation marks `"` and other symbols in the command line
 
-#### Setting 文件形式的参数
+#### Arguments with Setting Files
 
-此外，它还支持输入一个 YAML 文件作为顶级参数。
+In addition, it also supports inputting a YAML file as top-level arguments.
 
 ```yaml
 kcl_options:
@@ -2820,7 +2908,7 @@ kcl_options:
 kcl -Y setting.yaml employee.k
 ```
 
-此外，setting 文件还支持配置命令行编译参数如下：
+In addition, the setting file also supports configuring command-line compilation parameters as follows:
 
 ```yaml
 kcl_cli_configs:
@@ -2837,7 +2925,7 @@ kcl_options:
     value: docker.io/kusion:latest
 ```
 
-KCL CLI -Y 参数还支持多文件配置，并支持编译参数和顶级参数的单独写入与合并。
+KCL CLI -Y parameters also support multi-file configuration, and support separate writing and merging of compilation parameters and option top level arguments parameter configuration.
 
 ```
 kcl -Y compile_setting.yaml option_setting.yaml
@@ -2865,7 +2953,7 @@ kcl_options:
     value: docker.io/kusion:latest
 ```
 
-我们可以使用以下指令获取每个参数的含义
+We can use the following command line to get the meaning of each configuration parameter or see KCL Quick Start
 
 ```
 kcl --help
@@ -2873,23 +2961,23 @@ kcl --help
 
 #### Option Functions
 
-我们可以在 KCL 代码中使用 `option` 获取顶级参数。
+We can use the `option` function in the KCL code to get the top-level arguments.
 
 ```python
 value = option(key="key", type='str', default="default_value", required=True, help="Set key value")
 ```
 
-参数
+Parameters
 
-- **key**: 参数的键。
-- **type**: 要转换的参数类型。
-- **default**: 参数默认值。
-- **required**: 当未提供参数且参数的 required 为 True 是报告错误。
-- **help**: 帮助信息。
+- **key**: The argument key.
+- **type**: The argument type to be converted.
+- **default**: The argument default value when the key-value argument is not provided
+- **required**: Report an error when the key-value argument is not provided and required is True.
+- **help**: The help message.
 
-### 多文件编译
+### Multi-file Compilation
 
-除了上面的 KCL 单文件执行之外，我们还可以使用以下命令同时编译多个 KCL 入口文件：
+In addition to the above KCL single file execution, we can compile multiple KCL entry files at the same time using the following command:
 
 ```
 kcl main_1.k main_2.k ... main_n.k
@@ -2909,7 +2997,7 @@ c = 3
 d = 4
 ```
 
-输出结果为：
+The output is:
 
 ```yaml
 a: 1
@@ -2918,7 +3006,7 @@ c: 3
 d: 4
 ```
 
-利用**多文件编译**，我们可以组合多个 KCL 文件，而无需使用 import 管理文件。 我们来看一个结合**多文件编译**和 **schema 实例**的例子。
+Taking advantage of the **multi-file combination**, we can assemble multiple KCL files without the need to use import management files. Let us see an example of combining **multi-file compilation** and **schema instance**.
 
 model.k
 
@@ -2971,13 +3059,13 @@ _backends = [Backend {
 print("---\n".join([yaml.encode(_b, ignore_private=True) for _b in _backends]))
 ```
 
-命令为：
+The command is
 
 ```
 kcl model.k backend.k
 ```
 
-输出为：
+The output is
 
 ```yaml
 apiVersion: v1
@@ -3013,31 +3101,31 @@ spec:
   selector: {}
 ```
 
-### KCL 变量查询
+### KCL CLI Path Selector
 
-我们可以在 KCL CLI 使用 `-S|--path-selector` 参数从 KCL 模型中查询一个或多个值。
+We can use KCL CLI `-S|--path-selector` parameter to select one or more values out of a KCL model.
 
-变量查询形式如下：
+The path selector looks like this:
 
 `pkg:var.name`
 
-- 在包中按名称选择节点 `pkg`
+- Select node by name in the package `pkg`
 
 `pkg:var.{name1,name2}`
 
-- 在包中选择多个节点 `pkg`
+- Select multiple nodes in the package `pkg`
 
 `pkg:var.*`
 
-- 选择包中给定级别的所有节点 `pkg`
+- Select all nodes at a given level in the package `pkg`
 
 `pkg:var.[index]`
 
-- 选择包 `pkg` 中列表 `var` 由 `index` 索引的元素
+- Select the element of the list `var` indexed by `index` in the package `pkg`
 
-请注意，KCL 变量通过包名和变量标识符 `pkg:identifier` 的组合来确保全局唯一性。 因此，我们需要同时指定 `pkg` 和 `identifier`。 省略参数 `pkg` 时，表示从当前路径的入口文件中查找变量。
+It should be noted that KCL variables ensure global uniqueness through the combination of the package name and variable identifier `pkg:identifier`. Therefore, we need to specify both `pkg` and `identifier`. When the parameter `pkg` is omitted, it means to find the variable from the entry file in the current path.
 
-#### 示例
+#### Examples
 
 Code structure:
 
@@ -3073,13 +3161,13 @@ var = pkg.Person {
 }
 ```
 
-命令为：
+The command is
 
 ```
 kcl main.k -S pkg:var -S :var.name
 ```
 
-输出结果为：
+The output is
 
 ```yaml
 var:
@@ -3090,11 +3178,11 @@ var:
   age: 18
 ```
 
-### KCL 变量修改
+### KCL CLI Variable Override
 
-除了变量查询，KCL 还允许我们通过 KCL CLI 的 `-O|--overrides` 参数直接修改配置模型中的值。
+In addition to **Variable Selector**, KCL also allows us to directly modify the values in the configuration model through the KCL CLI `-O|--overrides` parameter.
 
-变量修改参数的使用与变量查询类似，参数包含三部分，如 `pkg`、`identifier`、`attribute` 和 `override_value` .
+The use of **Variable Override** is similar to [**Variable Selector**](#variable-selector), and the parameter contains three parts e.g., `pkg`, `identifier`, `attribute` and `override_value`.
 
 ```
 kcl main.k -O override_spec
@@ -3106,25 +3194,23 @@ kcl main.k -O override_spec
 override_spec: [[pkgpath] ":"] identifier ("=" value | "-")
 ```
 
-- `pkgpath`: 表示需要修改标识符的包路径，通常为 `a.b.c` 的形式，对于 main 包，`pkgpath` 表示为 `__main__`, 可省略，省略不写时表示 main 包
-- `identifier`: 表示需要修改配置的标识符，通常为 `a.b.c` 的形式
-- `value`: 表示需要修改配置的值，可以是任意合法的 KCL 表达式，比如数字/字符串字面值，list/dict/schema 表达式等
-- `=`: 表示修改identifier的值
-  - 当 identifier 存在时，修改已有 identifier的值为 value
-  - 当 identifier 不存在时，添加 identifier属性，并将其值设置为 value
-- `-`: 表示删除 identifier属性
-  - 当 identifier 存在时，直接进行删除
-  - 当 identifier 不存在时，对配置不作任何修改
+- `pkgpath`: Indicates the path of the package whose identifier needs to be modified, usually in the form of `a.b.c`. For the main package, `pkgpath` is expressed as `__main__`, which can be omitted. If omitted, it means the main package.
+- `identifier`: Indicates the identifier that needs to modify the configuration, usually in the form of `a.b.c`.
+- `value`: Indicates the value of the configuration that needs to be modified, which can be any legal KCL expression, such as number/string literal value, list/dict/schema expression, etc.
+- `=`: means to modify the value of identifier.
+  - When the identifier exists, modify the value of the existing identifier to value.
+  - When identifier does not exist, add the identifier attribute and set its value to value.
+- `-`: means to delete the identifier attribute.
+  - When the identifier exists, delete it directly.
+  - When the identifier does not exist, no modification is made to the configuration.
 
-请注意，当 `identifier` 出现多次时，修改/删除全部 `identifier` 的值
+Note: When `identifier` appears multiple times, modify/delete all `identifier` values
 
-此外，在 KCL 中还提供了 API 用于变量查询和修改，详见 [API 文档](../xlang-api/go-api.md)
+#### Examples
 
-#### 示例
+##### Override Update Sample
 
-##### 修改示例
-
-KCL 代码：
+KCL code:
 
 ```python
 schema Person:
@@ -3137,13 +3223,13 @@ person = Person {
 }
 ```
 
-命令为：
+The command is
 
 ```
-kcl main.k -O :person.name=Bob -O :person.age=10
+kcl main.k -O :person.name=\"Bob\" -O :person.age=10
 ```
 
-输出结果为：
+The output is
 
 ```yaml
 person:
@@ -3151,10 +3237,10 @@ person:
   age: 10
 ```
 
-此外，当我们使用 KCL CLI `-d` 参数时，KCL 文件将同时修改为以下内容
+Besides, when we use KCL CLI `-d` argument, the KCL file will be modified to the following content at the same time
 
 ```
-kcl main.k -O :person.name=Bob -O :person.age=10 -d
+kcl main.k -O :person.name=\"Bob\" -O :person.age=10 -d
 ```
 
 ```python
@@ -3168,9 +3254,40 @@ person = Person {
 }
 ```
 
-##### 删除示例
+Another more complicated example:
 
-KCL 代码：
+```python
+schema Person:
+    name: str
+    age: int
+    ids?: [int]
+
+person = Person {
+    name = "Alice"
+    age = 10
+}
+```
+
+The command is
+
+```
+kcl main.k -O :person.ids=\[1,2\]
+```
+
+The output is
+
+```yaml
+person:
+  name: Alice
+  age: 10
+  ids:
+  - 1
+  - 2
+```
+
+##### Override Delete Sample
+
+KCL code:
 
 ```python
 schema Config:
@@ -3182,13 +3299,13 @@ config = Config {
 }
 ```
 
-命令为：
+The command is
 
 ```
 kcl main.k -O config.x-
 ```
 
-输出结果为：
+The output is
 
 ```yaml
 config:
@@ -3196,16 +3313,12 @@ config:
   y: s
 ```
 
-### KCL 工具
+### Summary
 
-KCL 内部还内置了一些语言外设工具来辅助 KCL 的编写和测试，比如格式化工具、文档生成工具、测试工具、lint 工具、插件工具等，以下是各个工具的文档链接。
+This page summarized the commonly used features in the KCL language. As a new language, KCL will gradually increase the functional features according to the requirements of the configuration scenario.
 
-- [Format](/reference/cli/kcl/fmt.md)
-- [Docgen](/reference/cli/kcl/docgen.md)
-- [Test](/reference/cli/kcl/test.md)
-- [Lint](/reference/cli/kcl/lint.md)
-- [Plugin](../plugin/index.md)
+For more information, please try further resources:
 
-### 总结
-
-本页总结了 KCL 语言中的常用功能。 KCL 作为一种新的语言，会根据配置场景的需求，逐步增加功能特性。
+- KCL codelabs
+- KCL language specification
+- KCL OpenAPI specification
