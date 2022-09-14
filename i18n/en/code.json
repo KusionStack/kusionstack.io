@@ -289,6 +289,6 @@
     "message": "Kusion Model is a pre-built, KCL-described configuration model in KusionStack that provides users with an out-of-the-box, highly abstracted configuration interface."
   },
   "homepage.feature.kusion.description": {
-    "message": "The Kusion engine sits between KCL and the underlying infrastructure, interpreting the compiled results of KCL and operating on the various heterogeneous underlying infrastructure settings, shielding the infrastructure from complexity. It provides a consistent experience for the same configuration across different environments that is programmable, observable, and maintainable."
+    "message": "Kusion engine is between Konfig and underlying infrastructures to interpret operations described in Konfig and deliver them to hybrid-runtimes. Kusion engine masks the complexity of infrastructures and provides a consistent experience in different clouds."
   }
 }
