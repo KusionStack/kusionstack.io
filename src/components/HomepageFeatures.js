@@ -27,7 +27,7 @@ const FeatureList = [
     Svg: require('../../static/img/undraw_docusaurus_react.svg').default,
     description: (
       <Translate id="homepage.feature.kusion.description">
-        引擎介于 KCL 与底层基础设施之间，用于解释 KCL 的编译结果，并对底层各种异构基础设置进行操作，屏蔽基础设施复杂性。为同一份配置在不同环境提供可编排、可观察、可运维的一致体验。
+        Kusion 引擎编译、实施 Konfig 中描述的运维意图，屏蔽基础设施复杂性，为多运行时、多云提供一致的运维体验。
       </Translate>
     ),
   },
