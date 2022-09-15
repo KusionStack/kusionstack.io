@@ -9,15 +9,15 @@ description: KCL Spec
 
 ### 关键字和保留字
 
-一些是 KCL 语言的关键字：
+下面是 KCL 语言的关键字：
 
 ```python
     True       False      None        Undefined   import
     and        or         in          is          not
     as         if         else        elif        for
     schema     mixin      protocol    check       assert
-    all        any        map         filter      final
-    lambda     rule
+    all        any        map         filter      lambda
+    rule
 ```
 
 下面是 KCL 语言的保留字：
@@ -26,7 +26,7 @@ description: KCL Spec
     pass       return     validate   rule        flow
     def        del        raise      except      try
     finally    while      from       with        yield
-    global     nonlocal   struct     class 
+    global     nonlocal   struct     class       final
 ```
 
 ### 行注释
@@ -40,16 +40,16 @@ description: KCL Spec
 ```python
     +       -       *       **      /       //      %
     <<      >>      &       |       ^       <       >
-    ~       <=      >=      ==      !=      @
+    ~       <=      >=      ==      !=      =
+    +=      -=      *=      **=     /=      //=     %=
+    <<=     >>=     &=      ^=
 ```
 
 ### 分隔符
 
 ```python
     (       )       [       ]       {       }
-    ,       :       .       ;       =       +=
-    -=      *=      **=     /=      //=     %=      
-    <<=     >>=     &=      ^=
+    ,       :       .       ;       @
 ```
 
 ### 运算符的优先级

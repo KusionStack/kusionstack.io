@@ -5,56 +5,56 @@ type: "docs"
 weight: 2
 description: KCL Spec
 ---
-## 词法规则
+## Lexical rules
 
-### 关键字和保留字
+### Keywords and reserved words
 
-一些是 KCL 语言的关键字：
+The following are the keywords of the KCL:
 
 ```python
     True       False      None        Undefined   import
     and        or         in          is          not
     as         if         else        elif        for
     schema     mixin      protocol    check       assert
-    all        any        map         filter      final
-    lambda     rule
+    all        any        map         filter      lambda
+    rule
 ```
 
-下面是 KCL 语言的保留字：
+The following are reserved words for the KCL:
 
 ```python
     pass       return     validate   rule        flow
     def        del        raise      except      try
     finally    while      from       with        yield
-    global     nonlocal   struct     class 
+    global     nonlocal   struct     class       final
 ```
 
-### 行注释
+### Line comment
 
 ```python
 # a comment
 ```
 
-### 运算符
+### Operators
 
 ```python
     +       -       *       **      /       //      %
     <<      >>      &       |       ^       <       >
-    ~       <=      >=      ==      !=      @
-```
-
-### 分隔符
-
-```python
-    (       )       [       ]       {       }
-    ,       :       .       ;       =       +=
-    -=      *=      **=     /=      //=     %=      
+    ~       <=      >=      ==      !=      =
+    +=      -=      *=      **=     /=      //=     %=
     <<=     >>=     &=      ^=
 ```
 
-### 运算符的优先级
+### Delimiters
 
-以下的运算符列表根据优先级从 **高到底** 排列：
+```python
+    (       )       [       ]       {       }
+    ,       :       .       ;       @
+```
+
+### Operator precedence
+
+The following list of operators is ordered from **highest to lowest**:
 
 | Operator                                                         | Description                                              |
 | ---------------------------------------------------------------- | -------------------------------------------------------- |
@@ -73,9 +73,9 @@ description: KCL Spec
 | `if – else`                                                     | Conditional expression =                                  |
 | `=`, `+=`, `-=`, `*=`, `/=`, `%=`, `&=`, `|=`, `^=`, `**=`, `//=`, `<<=`, `>>=`                     | Assign |
 
-## EBNF 语法
+## Grammar
 
-KCL 采用 Python 的 [LarkParser](https://lark-parser.readthedocs.io/en/latest/) 工具描述语法，规范规则如下：
+KCL uses Python's [LarkParser](https://lark-parser.readthedocs.io/en/latest/) tool to describe the grammar, and the specification rules are as follows:
 
 ```bnf
 // Copyright 2021 The KCL Authors. All rights reserved.
