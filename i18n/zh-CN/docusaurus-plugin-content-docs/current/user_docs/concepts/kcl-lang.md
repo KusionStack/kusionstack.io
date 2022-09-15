@@ -2,45 +2,34 @@
 sidebar_position: 4
 ---
 
-# KCL 配置策略语言
+# KCL
 
-KCL 是 Kusion 项目针对规模化运维的云原生场景新设计的配置策略语言。它的最初设计思路是通过成熟的编程语言理论和实践来改进对大量繁杂的 YAML 配置数据的管理，通过声明式的语法结合静态类型等特性来简化和校验配置的开发和运维工作。
+[KCL](https://github.com/KusionStack/KCLVM) 是一个开源的基于约束的记录及函数语言。KCL 通过成熟的编程语言技术和实践来改进对大量繁杂配置的编写，致力于构建围绕配置的更好的模块化、扩展性和稳定性，更简单的逻辑编写，以及更快的自动化集成和良好的生态延展性。
 
-## 1. 语言特色
+## 特性
 
-KCL 关键特性如下图所示：
+![](/img/docs/user_docs/intro/kcl.png)
 
-![](/img/docs/user_docs/concepts/kcl-capability-01.png)
++ **简单易用**：源于 Python、Golang 等高级语言，采纳函数式编程语言特性，低副作用
++ **设计良好**：独立的 Spec 驱动的语法、语义、运行时和系统库设计
++ **快速建模**：以 [Schema](https://kusionstack.io/docs/reference/lang/lang/tour#schema) 为中心的配置类型及模块化抽象
++ **功能完备**：基于 [Config](https://kusionstack.io/docs/reference/lang/lang/codelab/simple)、[Schema](https://kusionstack.io/docs/reference/lang/lang/tour/#schema)、[Lambda](https://kusionstack.io/docs/reference/lang/lang/tour/#function)、[Rule](https://kusionstack.io/docs/reference/lang/lang/tour/#rule) 的配置及其模型、逻辑和策略编写
++ **可靠稳定**：依赖[静态类型系统](https://kusionstack.io/docs/reference/lang/lang/tour/#type-system)、[约束](https://kusionstack.io/docs/reference/lang/lang/tour/#validation)和[自定义规则](https://kusionstack.io/docs/reference/lang/lang/tour#rule)的配置稳定性
++ **强可扩展**：通过独立配置块[自动合并机制](https://kusionstack.io/docs/reference/lang/lang/tour/#-operators-1)保证配置编写的高可扩展性
++ **易自动化**：[CRUD APIs](https://kusionstack.io/docs/reference/lang/lang/tour/#kcl-cli-variable-override)，[多语言 SDK](https://kusionstack.io/docs/reference/lang/xlang-api/overview)，[语言插件](https://github.com/KusionStack/kcl-plugin) 构成的梯度自动化方案
++ **极致性能**：使用 Rust & C，[LLVM](https://llvm.org/) 实现，支持编译到本地代码和 [WASM](https://webassembly.org/) 的高性能编译时和运行时
++ **API 亲和**：原生支持 [OpenAPI](https://github.com/KusionStack/kcl-openapi)、 Kubernetes CRD， Kubernetes YAML 等 API 生态规范
++ **开发友好**：[语言工具](https://kusionstack.io/docs/reference/cli/kcl/) (Format，Lint，Test，Vet，Doc 等)、 [IDE 插件](https://github.com/KusionStack/vscode-kcl) 构建良好的研发体验
++ **安全可控**：面向领域，不原生提供线程、IO 等系统级功能，低噪音，低安全风险，易维护，易治理
++ **生产可用**：广泛应用在蚂蚁集团平台工程及自动化的生产环境实践中
 
-- 简单
-  - 源于 Python、Golang，融入函数语言特性
-  - 吸收语句、表达式、条件、循环等集成语言元素
-  - 类型、数据分离，Schema 声明配置定义，字典声明配置实例
-- 稳定
-  - 强不可变约束
-  - 编译时类型推导、类型检查
-  - Rule 策略定义：以属性为中心的约束表达式、根据约束查询结果
-  - 可测试：assert、print、test tools
-- 协同编写
-  - 配置合并：编译时配置依赖图代换
-  - 配置属性运算符：满足配置覆盖、合并、添加和删除等需求
-- 工程化
-  - Schema 单继承+可插拔式、声明式模型组装：Mixin+Protocol
-  - 工具+API 粒度的配置自动化“增删改查”
-  - 丰富的内置函数+系统库
-  - 顶层数据动态数据导入
-  - 插件系统：复用通用编程语言生态
-  - 代码组织：Module + Package
-  - OpenAPI Model 支持：Swagger 与 Schema 双向转换，CRD 转换为 Schema
-  - IaD 亲和：对齐 K8S YAML 标准
-- 高性能
-  - 配合 LLVM 优化器、支持编译到本地代码和 WASM 等格式并高效执行
+## 场景
 
-## 2. 语言 & 协议
+您可以将 KCL 用于
 
-Kusion 可编程协议栈的最底层是语言 & 协议，让用户可以通过编程的方式描述资源和状态、通过 OpenAPI 的规范和其他数据互通、通过插件和多语言扩展规范和其他高级语言交互。下面是语言 & 协议 内部的结构关系图：
-
-![](/img/docs/user_docs/concepts/iac-arch-lang.png)
-
-左边淡红色一列分别是 OpenAPI、KCL 和多语言支持的规范，中间青色一行是根据 KCL 语言规范的 KCLVM 实现和插件扩展。通过规范加 KCLVM 实现的 T 型结构，围绕 KCL 配置策略语言实现 KCL 配置和其他配置数据以及系统进行交互。
-
++ 生成静态配置数据如 JSON, YAML 等
++ 使用 schema 对配置数据进行建模并减少配置数据中的样板文件
++ 为配置数据定义带有规则约束的 schema 并对数据进行自动验证
++ 无副作用地组织、简化、统一和管理庞大的配置
++ 通过分块编写配置数据可扩展地管理庞大的配置
++ 与 [Kusion Stack](https://kusionstack.io) 一起，用作平台工程语言来交付现代应用程序
