@@ -1,4 +1,4 @@
-# 安装问题
+# Installation
 
 ## 1. 找不到 `libintl.dylib`
 

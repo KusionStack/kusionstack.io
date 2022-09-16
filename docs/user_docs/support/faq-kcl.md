@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# KCL 语法
+# KCL
 
 ### 1. 如何用 KCL 写一个简单的 key-value 对配置
 
