@@ -39,7 +39,7 @@ KusionStack 通过 engineering（工程化）的理念和技术栈融合平台�
 
 KusionStack 通过 engineering（工程化）的理念，技术和工作流程融合平台方和应用方，以达到平台能力开放和自助运维效率的平衡。KusionStack 以专用语言和工具链为原点，构建了可编程、可扩展、可移植的运维技术栈，其核心组件包括：
 
-+ [KCL](https://github.com/KusionStack/KCLVM)：配置策略专用编程语言，协议组，工具链及 IDE 插件
++ [KCL](https://github.com/KusionStack/KCLVM)：面向应用研发者的配置策略专用高级编程语言，及其协议组，工具链及 IDE 插件
 + [Kusion](https://github.com/KusionStack/kusion)：运维引擎、工具链、服务层，IDE 工作空间及社区技术集成套件
 + [Konfig](https://github.com/KusionStack/konfig)：应用配置及基础模型共享仓库，及面向 GitOps 工作流程（如 GitHub Actions）的自定义 CI 套件
 
@@ -83,16 +83,29 @@ KusionStack 是一个纯客户端的可编程技术栈，相比其他技术，�
 
 **vs. Terraform**
 
-KusionStack 是一种云原生亲和的可编程运维技术栈，旨在定义以应用为中心的抽象界面及管理机制。通过记录及函数语言 KCL 提供配置（config）、类型（schema）、函数（lambda）、规则（rule）为核心元素的编写能力。KCL 是一种没有原生线程、IO 等系统功能的现代编译型静态语言，并支持云原生亲和的语言功能。
+KusionStack 是一种云原生亲和的可编程运维技术栈，旨在定义以应用为中心的抽象界面及管理机制。
+
+其中 KCL 是一种现代高级编程语言，相比于面向运维人员的声明式语言，KCL 面向有编程能力的研发人员。KCL 是编译型静态强类型语言，通过记录及函数语言设计为研发者提供配置（config）、建模抽象（schema）、函数逻辑（lambda）、环境规则（rule）为核心元素的编写能力。KCL 不原生提供线程、IO 等系统功能，支持面向云原生运维场景的语言功能，为解决领域问题提供稳定、安全、低噪音、低副作用、易于自动化、易于治理的编程支持。
 
 ![](/img/docs/user_docs/intro/kcl.png)
 
-KusionStack 提供与 KCL 完全解耦的运维引擎及 API 层，其面向混合资源工作。KusionStack 自研了基于面向 Kubernetes API server 的资源管理能力，支持基于 3-way diff 的 preview，运行时 dry-run 等必要的云原生管理能力；对于非 Kubernetes 控制面的服务（如 IaaS 资源）KusionStack 通过集成 Terraform 工具链完成自动化管理，将 Terraform 视为一种运行时资源管理引擎。
+KusionStack 提供与 KCL 完全解耦的运维引擎及 API 层，其面向混合资源工作。KusionStack 自研了基于面向 Kubernetes API server 的资源管理能力，支持基于 3-way diff 的 preview，运行时 dry-run 等必要的云原生管理能力；对于非 Kubernetes 控制面的服务（如 IaaS 资源）KusionStack 通过集成 Terraform 工具链完成自动化管理，将 Terraform 视为一种运行时资源 provision 引擎。
 
 ![](/img/docs/user_docs/intro/kusion-engine.png)
 
 Terraform 是一种广泛应用在云资源交付场景的可编程运维产品，以动态解释型语言 HCL 编写的配置块为入口，解释并驱动运维引擎及 Provider 框架工作，以其特有的 API 接入机制降低了云厂商参差的命令式 API 的使用难度，结合简洁的工作流程，提供良好的声明式运维体验。
 
+**vs. Pulumi**
+
+KusionStack 是一种客户端的可编程运维技术栈，旨在定义以应用为中心的抽象界面及管理机制。
+
+其中 KCL 是一种面向领域设计的专用现代高级语言，提供独立并前置于运行时的可编程能力。KCL 基于有限语言能力设计，不原生提供线程、IO 等系统功能，为解决领域问题提供稳定、安全、低噪音、低副作用、易于自动化、易于治理的编程支持。
+
+KusionStack 提供与 KCL 完全解耦的运维引擎及 API 层，其面向混合资源工作。KusionStack 自研了基于面向 Kubernetes API server 的资源管理能力，支持基于 3-way diff 的 preview，运行时 dry-run 等必要的云原生管理能力；对于非 Kubernetes 控制面的服务（如 IaaS 资源）KusionStack 通过集成 Terraform 工具链完成自动化管理，将 Terraform 视为一种运行时资源 provision 引擎。
+
+Pulumi 是一种组合了通用编程语言 SDK 和 Terraform 技术框架的可编程技术栈。在编程能力上 Pulumi 提供了设计良好的通用语言编写的多语言客户端 SDK，同时完全实现了类 Terraform 的引擎和 Provider 框架。
+
+基于经典的 C/S 模式，Pulumi 提供了一种对客户端运行时的研发机制，由客户端运行时直接访问服务端，并通过自研引擎转换并复用 Terraform Providers 生态。相比而言，KusionStack 提供了一种独立于运行时的编写机制，通过轻量的、面向领域场景的 KCL 语言提供简单、收敛的应用配置、策略编写能力，KCL 程序通常运行、产生 low-level 数据并集成到运行时访问工具（如 KusionCtl），这样的方式可以提供针对代码的左移的稳定性保障，也可以编译产生 wasm 模块，经过充分测试后被集成到服务端运行时。此外，Kusion Engine 原生提供了面向 Kubernetes API Server 的功能设计，更好的与 Kubernetes 服务端配合工作，对于非 Kubernetes 生态通过集成 Terraform 完成自动化。总的来说，Pulumi 免去了语言学习成本，但通用语言功能过强，噪音、副作用、稳定性问题、安全性问题和治理成本是难以避免的问题；而 KusionStack 面向领域的语言、技术栈和实践方式，有一定的学习成本，更适用于在规模化问题场景中使用。
 
 **vs. CD 系统（如 KubeVela， ArgoCD）**
 
