@@ -23,42 +23,6 @@
     "message": "OpenAPI 工具",
     "description": "The label for category OpenAPI 工具 in sidebar docs"
   },
-  "sidebar.docs.category.KCL 配置语言": {
-    "message": "KCL 配置语言",
-    "description": "The label for category KCL 配置语言 in sidebar docs"
-  },
-  "sidebar.docs.category.KCL 语言": {
-    "message": "KCL 语言",
-    "description": "The label for category KCL 语言 in sidebar docs"
-  },
-  "sidebar.docs.category.代码实验室": {
-    "message": "代码实验室",
-    "description": "The label for category 代码实验室 in sidebar docs"
-  },
-  "sidebar.docs.category.语言规范": {
-    "message": "语言规范",
-    "description": "The label for category 语言规范 in sidebar docs"
-  },
-  "sidebar.docs.category.错误和异常": {
-    "message": "错误和异常",
-    "description": "The label for category 错误和异常 in sidebar docs"
-  },
-  "sidebar.docs.category.模块系统": {
-    "message": "模块系统",
-    "description": "The label for category 模块系统 in sidebar docs"
-  },
-  "sidebar.docs.category.多语言支持": {
-    "message": "多语言支持",
-    "description": "The label for category 多语言支持 in sidebar docs"
-  },
-  "sidebar.docs.category.高级用法": {
-    "message": "高级用法",
-    "description": "The label for category 高级用法 in sidebar docs"
-  },
-  "sidebar.docs.category.插件系统": {
-    "message": "插件系统",
-    "description": "The label for category 插件系统 in sidebar docs"
-  },
   "sidebar.docs.category.Kusion 模型库": {
     "message": "Kusion 模型库",
     "description": "The label for category Kusion 模型库 in sidebar docs"
@@ -267,10 +231,6 @@
     "message": "敏感信息管理",
     "description": "The label for category 敏感信息管理 in sidebar docs"
   },
-  "sidebar.docs.category.常见问题": {
-    "message": "常见问题",
-    "description": "The label for category 常见问题 in sidebar docs"
-  },
   "sidebar.user_docs.category.简介": {
     "message": "简介",
     "description": "The label for category 简介 in sidebar user_docs"
@@ -311,10 +271,6 @@
     "message": "敏感信息管理",
     "description": "The label for category 敏感信息管理 in sidebar user_docs"
   },
-  "sidebar.user_docs.category.常见问题": {
-    "message": "常见问题",
-    "description": "The label for category 常见问题 in sidebar user_docs"
-  },
   "sidebar.reference.category.命令行工具": {
     "message": "命令行工具",
     "description": "The label for category 命令行工具 in sidebar reference"
@@ -330,42 +286,6 @@
   "sidebar.reference.category.OpenAPI 工具": {
     "message": "OpenAPI 工具",
     "description": "The label for category OpenAPI 工具 in sidebar reference"
-  },
-  "sidebar.reference.category.KCL 配置语言": {
-    "message": "KCL 配置语言",
-    "description": "The label for category KCL 配置语言 in sidebar reference"
-  },
-  "sidebar.reference.category.KCL 语言": {
-    "message": "KCL 语言",
-    "description": "The label for category KCL 语言 in sidebar reference"
-  },
-  "sidebar.reference.category.代码实验室": {
-    "message": "代码实验室",
-    "description": "The label for category 代码实验室 in sidebar reference"
-  },
-  "sidebar.reference.category.语言规范": {
-    "message": "语言规范",
-    "description": "The label for category 语言规范 in sidebar reference"
-  },
-  "sidebar.reference.category.错误和异常": {
-    "message": "错误和异常",
-    "description": "The label for category 错误和异常 in sidebar reference"
-  },
-  "sidebar.reference.category.模块系统": {
-    "message": "模块系统",
-    "description": "The label for category 模块系统 in sidebar reference"
-  },
-  "sidebar.reference.category.多语言支持": {
-    "message": "多语言支持",
-    "description": "The label for category 多语言支持 in sidebar reference"
-  },
-  "sidebar.reference.category.高级用法": {
-    "message": "高级用法",
-    "description": "The label for category 高级用法 in sidebar reference"
-  },
-  "sidebar.reference.category.插件系统": {
-    "message": "插件系统",
-    "description": "The label for category 插件系统 in sidebar reference"
   },
   "sidebar.reference.category.Kusion 模型库": {
     "message": "Kusion 模型库",
