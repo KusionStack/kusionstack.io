@@ -2,7 +2,7 @@
 title: "math"
 linkTitle: "math"
 type: "docs"
-description: math 包 - 数学函数
+description: math system module
 weight: 100
 ---
 ## ceil

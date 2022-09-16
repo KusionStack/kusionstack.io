@@ -2,7 +2,7 @@
 title: "json"
 linkTitle: "json"
 type: "docs"
-description: JSON 编码解码
+description: json system module
 weight: 100
 ---
 ## encode
