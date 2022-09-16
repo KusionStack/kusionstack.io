@@ -45,14 +45,14 @@ What better way to define an open, self-service, domain-oriented business proble
 
 In the platform engineering practice of Ant Group, we have strengthened the client-side working mode. We write and maintain the models, orchestration, constraints and policies around the application ops life cycle in the shared codebase [Konfig](https://github.com/KusionStack/konfig) through the record and functional language [KCL](https://github.com/KusionStack/KCLVM). KCL is a static and strongly typed language for application developers with programming ability, providing the writing experience of a modern high-level language with limited functionality around domain purposes. Under such practices, KCL is not a language just for writing K-V pairs, but a language for platform engineering development. Application developers, SREs, and platform developers conduct collaborative dev based on Konfig. They write configurations, and [schema](https://kusionstack.io/docs/reference/lang/lang/tour/#schema) abstractions, [functions](https://kusionstack.io/docs/reference/lang/lang/tour/#function), [constraints](https://kusionstack.io/docs/reference/lang/lang/tour/#validation) and [rules](https://kusionstack.io/docs/reference/lang/lang/tour/#rule) which are frequent and complex in the PaaS field through KCL native functions, that is, write stable and scalable business models, business logic, error-proofing constraints, and environmental rules. The Konfig repository becomes a unified programming interface, workspace and business layer, while the KCL-oriented secure, low-noise, low-side effect and unified writing paradigm are more conducive to long-term management and governance.
 
-![](/img/blog/2022-09-16-lean-from-scale-practice/classic-plats.png)
+![](/img/blog/2022-09-16-lean-from-scale-practice/kcl-dev.png)
 
 
 ## 3.Divide and Conquer: Deconstructing the Scaling Problem
 
 The idea of ​​divide and conquer is the key to solving the problem of scale. From MapReduce to Kubernetes, it all reflects its efficacy. In the field of large-scale delivery and operation, the classic operation platform tries to use the built-in unified model, orchestration, and provision technology in a black-box product to deal with full-scale business scenarios. Such a practice can be started easily and quickly and is effective on a small scale, but as the adoption rate of different business groups increases, differentiated requirements are introduced, and at the same time, with the constantly growing platform technology, it gradually enters a state of fatigue.
 
-![](/img/blog/2022-09-16-lean-from-scale-practice/d-c-overview.png)
+![](/img/blog/2022-09-16-lean-from-scale-practice/classic-plats.png)
 
 In Ant Group's practice, Konfig monorepo is the programming workspace opened by the internal engineering platform to developers, helping application developers to write configurations and policies around the application operation life cycle with a unified programming interface and tech stack, to orchestrate existing and new platform and infrastructure, create and manage cloud-native environments and RBAC-based permissions on demand, and manage the delivery workflow through GitOps. Konfig monorepo provides an independent white-box programming space for different scenarios, projects and applications, and its intrinsic scalability comes from:
 
