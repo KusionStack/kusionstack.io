@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# 概念 & 定义
+# Concepts
 
 ## 1. Kusion
 

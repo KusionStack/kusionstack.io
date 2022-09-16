@@ -2,7 +2,7 @@
 sidebar_position: 5
 ---
 
-# 命令行工具
+# Command Line Tool
 
 ### 1. Konfig 大库应用目录下的 settings.yaml 文件的作用是什么？
 

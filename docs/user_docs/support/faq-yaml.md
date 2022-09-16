@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-# YAML 语法
+# YAML
 
 ### 1. YAML 字符串使用单引号和双引号的区别是什么？
 
