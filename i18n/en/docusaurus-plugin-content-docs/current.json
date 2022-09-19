@@ -463,10 +463,6 @@
     "message": "Errors and Warnings",
     "description": "The label for category Errors and Warnings in sidebar docs"
   },
-  "sidebar.docs.category.Module System": {
-    "message": "Module System",
-    "description": "The label for category Module System in sidebar docs"
-  },
   "sidebar.docs.category.Multi-Language": {
     "message": "Multi-Language",
     "description": "The label for category Multi-Language in sidebar docs"
@@ -495,10 +491,6 @@
     "message": "Errors and Warnings",
     "description": "The label for category Errors and Warnings in sidebar reference"
   },
-  "sidebar.reference.category.Module System": {
-    "message": "Module System",
-    "description": "The label for category Module System in sidebar reference"
-  },
   "sidebar.reference.category.Multi-Language": {
     "message": "Multi-Language",
     "description": "The label for category Multi-Language in sidebar reference"
@@ -518,5 +510,13 @@
   "sidebar.user_docs.category.FAQ": {
     "message": "FAQ",
     "description": "The label for category FAQ in sidebar user_docs"
+  },
+  "sidebar.docs.category. System Module": {
+    "message": " System Module",
+    "description": "The label for category  System Module in sidebar docs"
+  },
+  "sidebar.reference.category. System Module": {
+    "message": " System Module",
+    "description": "The label for category  System Module in sidebar reference"
   }
 }
