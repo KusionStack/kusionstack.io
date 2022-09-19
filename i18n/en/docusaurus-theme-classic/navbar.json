@@ -16,11 +16,11 @@
     "description": "Navbar item with label Blog"
   },
   "item.label.UserDoc": {
-    "message": "UserDoc",
+    "message": "User",
     "description": "Navbar item with label UserDoc"
   },
   "item.label.DevDoc": {
-    "message": "DevDoc",
+    "message": "Developer",
     "description": "Navbar item with label DevDoc"
   }
 }
