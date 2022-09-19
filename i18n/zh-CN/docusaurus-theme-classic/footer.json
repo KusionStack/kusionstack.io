@@ -1,15 +1,15 @@
 {
-  "link.title.文档": {
+  "link.title.Document": {
     "message": "文档",
-    "description": "The title of the footer links column with title=文档 in the footer"
+    "description": "The title of the footer links column with title=Document in the footer"
   },
-  "link.title.资源": {
+  "link.title.Resource": {
     "message": "资源",
-    "description": "The title of the footer links column with title=资源 in the footer"
+    "description": "The title of the footer links column with title=Resource in the footer"
   },
-  "link.title.更多": {
+  "link.title.More": {
     "message": "更多",
-    "description": "The title of the footer links column with title=更多 in the footer"
+    "description": "The title of the footer links column with title=More in the footer"
   },
   "link.item.label.Github": {
     "message": "Github",
