@@ -32,7 +32,9 @@ hello: hello doc - 0.0.1
 
 ```python
 import kcl_plugin.hello
-x = hello.add(1,2)
+
+name = "kcl"
+three = hello.add(1,2)
 ```
 
 输出结果如下：
