@@ -158,7 +158,7 @@ const config = {
             title: 'More',
             items: [
               {
-                label: 'faq',
+                label: 'FAQ',
                 to: '/docs/user_docs/support',
               },
               {
