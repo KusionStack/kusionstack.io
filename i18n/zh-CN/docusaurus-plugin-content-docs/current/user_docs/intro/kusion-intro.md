@@ -18,7 +18,7 @@ KusionStack 是一个可编程、高灵活性的应用交付及运维技术栈�
 KusionStack 源于蚂蚁集团内部的规模化工程化运维实践，已广泛应用在蚂蚁多云应用交付运维，计算及数据基础设施交付，建站运维，数据库运维等多个业务领域，助力蚂蚁完成从传统运维管理模式到可编程 DevOps 运维模式的转型。
 
 
-## 为什么使用 Kusion？
+## 为什么开发 KusionStack？
 
 以 Kubernetes 为代表的云原生技术正成为现代企业及云厂商的一方技术，并快速形成面向全球的社区生态。Kubernetes API 支持面向终态、数据化（as Data）的定义方式，声明式、版本化、面向资源的可扩展 API，可终止、可预测的服务端模拟验证机制，这些优秀的设计使其天然具有一致的接入方式，完善的资源定义和扩展方式，以及客户端友好的验证、执行机制，原生具备了传统三方 API 接入层技术产品的典型能力。但从另一个角度看，现代应用也将同时长期依赖未云原生化的 PaaS、IaaS 层服务，这使得企业内应用交付运维依赖分散割裂的技术和平台，复杂混乱的工作界面和流程。此外，面向大量的非专家型应用研发者，Kubernetes 自身的技术复杂性和大量面向资源的使用界面制约了在企业内部以开放、民主方式建设更为广泛的 DevOps 生态。最后，平台侧缺少有效手段让大量平台能力简单、可控地开放给应用研发者，通过灵活的高抽象度降低研发者参与运维工作的认知负担，使其自助完成业务交付运维的研发及操作。
 
@@ -28,6 +28,8 @@ KusionStack 源于蚂蚁集团内部的规模化工程化运维实践，已广�
 ![](/img/docs/user_docs/intro/kusion-stack-1.png)
 
 
+## 为什么使用 KusionStack？
+
 KusionStack 通过 engineering（工程化）的理念和技术栈融合平台方，研发者和 [SRE](https://en.wikipedia.org/wiki/Site_reliability_engineering)，让平台方更简单灵活的开放平台能力，让应用研发者以应用为中心工作，同时降低研发者在参与运维过程中对基础设施的认知负担，同时又赋予研发者充分的灵活性。总的来说，KusionStack 致力于构建**以应用为中心的抽象界面**，**一致的管理工具及自动化支持**和**更简单的使用体验和工作流程**，并希望趋近这样的理性状态：
 
 + 融合**平台技术**：面向大量云原生及经典平台技术及服务，在差异化的 Platform API、IaaS API 层之上形成应用运维生命周期配置定义，并结合镜像机制，使得应用可以一处编写，随处交付
@@ -36,7 +38,8 @@ KusionStack 通过 engineering（工程化）的理念和技术栈融合平台�
 + 融合**运维方案**：以工具链、自定义流水线、服务层、GUI 产品形成梯度运维方案，按需供给，灵活取用，兼顾内部专有云及外部混合云、多云场景需求，以弹性运维方案逐渐汰换割裂的 "烟囱" 式产品
 + 融合**技术理念**：通过开放的运维理念、文化及开源技术在面对多样化的技术和角色创造更多可能性
 
-## Kusion 技术栈的组成
+
+## KusionStack 技术栈的组成
 
 KusionStack 通过 engineering（工程化）的理念，技术和工作流程融合平台方和应用方，以达到平台能力开放和自助运维效率的平衡。KusionStack 以专用语言和工具链为原点，构建了可编程、可扩展、可移植的运维技术栈，其核心组件包括：
 
@@ -49,7 +52,7 @@ KusionStack 通过 engineering（工程化）的理念，技术和工作流程�
 ![](/img/docs/user_docs/intro/kusion-arch.png)
 
 
-## Kusion 核心特征
+## KusionStack 核心特征
 
 **灵活组织，按需建模**
 
@@ -71,7 +74,7 @@ KusionStack 帮助应用研发者集中收敛围绕应用的全量配置定义�
 此外，KCL 提供了 CRUD API，多语言 SDK 及 plugin 动态扩展机制，以满足企业内个性化自动化需求。KusionStack 将持续提升运维工具及引擎扩展性，并与更多的社区技术集成。
 
 
-## Kusion vs. X
+## KusionStack vs. X
 
 KusionStack 是一个纯客户端的云原生亲和的可编程运维技术栈，旨在定义以应用为中心的抽象界面及管理机制。相比其他技术，其特点可以总结为:
 
@@ -82,11 +85,15 @@ KusionStack 是一个纯客户端的云原生亲和的可编程运维技术栈�
 
 ![](/img/docs/user_docs/intro/kusion-vs-x.png)
 
-其中 KCL 是一种现代高级编程语言，相比于面向运维人员的声明式语言，KCL 面向有编程能力的研发人员。KCL 是编译型静态强类型语言，通过记录及函数语言设计为研发者提供配置（config）、建模抽象（schema）、函数逻辑（lambda）、环境规则（rule）为核心元素的编写能力。KCL 不原生提供线程、IO 等系统功能，支持面向云原生运维场景的语言功能，为解决领域问题提供稳定、安全、低噪音、低副作用、易于自动化、易于治理的编程支持。
+其中 KCL 是一种现代高级编程语言，相比于面向运维人员的声明式语言，KCL 面向有编程能力的研发人员。KCL 是编译型静态强类型语言，通过记录及函数语言设计为研发者提供配置（config）、建模抽象（schema）、函数逻辑（lambda）、环境规则（rule）为核心元素的编写能力。
+
+KCL 提供运行时无关的研发能力，不原生提供线程、IO 等系统功能，支持面向云原生运维场景的语言功能，为解决领域问题提供稳定、安全、低噪音、低副作用、易于自动化、易于治理的编程支持。
+
+不同于通用语言编写的客户端运行时，KCL 通常编译运行并产生 low-level 数据并集成到运行时访问工具（如 KusionCtl），在推进到运行时前通过独立的 KCL 代码测试验证保证左移的稳定性。此外，KCL 还可以被编译为 wasm 模块，在通过重复测试后被服务端运行时集成。
 
 ![](/img/docs/user_docs/intro/kcl.png)
 
-KusionStack 提供与 KCL 完全解耦的运维引擎及 API 层，其面向混合资源工作。KusionStack 自研了基于面向 Kubernetes API machinery 的资源管理能力，支持基于 3-way diff 的 preview，运行时 dry-run 等必要的云原生管理能力；对于非 Kubernetes 控制面的服务（如 IaaS 资源）KusionStack 通过集成 Terraform 工具链完成自动化管理，将 Terraform 视为一种运行时资源 provision 引擎。
+KusionStack 提供与 KCL 完全解耦的运维引擎及 API 层，其面向混合资源工作。Kusion 引擎原生支持对 Kubernetes API machinery 能力的充分利用，如支持基于 3-way diff 的 preview，运行时 dry-run 等必要的云原生管理能力等。对于非 Kubernetes 控制面的服务（如 IaaS 资源），KusionStack 通过集成 Terraform 工具链完成自动化管理，将 Terraform 视为一种运行时资源 provision 工具。
 
 ![](/img/docs/user_docs/intro/kusion-engine.png)
 

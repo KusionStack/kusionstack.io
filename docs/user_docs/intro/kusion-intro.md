@@ -18,13 +18,16 @@ Based on the concept of Platform as Code, developers can quickly unify the full 
 KusionStack originated from the large-scale platform engineering practice within Ant Group and has been widely used in Ant Group's SaaS application delivery, computing and data infrastructure delivery, site construction, database operation and other operation scenarios, helping Ant Group to complete upgrades from the traditional operation model to the programmable and collaborative DevOps model.
 
 
-## Why use KusionStack?
+## Why develop KusionStack？
 
 Cloud-native technology represented by Kubernetes is becoming the first-party technology for modern enterprises and cloud vendors and has formed a global community ecology. Kubernetes supports a final-state, data-oriented API definition mechanism, declarative, versioned, and resource-schema-oriented definition and extension mechanism, and a terminable and predictable server-side verification and simulation mechanism. These excellent designs naturally have consistent API access mechanisms, perfect resource definition and extension capabilities, and client-friendly verification and execution mechanisms, natively possessing the typical capabilities of traditional third-party API access technology. But from another point of view, modern applications will also rely on non-cloud-native PaaS and IaaS services for a long time, which makes the application delivery and operation in the enterprise rely on scattered and changing technologies and platforms, and complex and fragmented working interfaces and processes. In addition, Kubernetes is a platform for building platforms. For non-expert application developers, the technical complexity of Kubernetes itself and a growing number of resource-oriented user interfaces restrict the growth of a broader DevOps ecosystem openly and democratically within the enterprise. Finally, there is a lack of effective means on the platform side to open growing platform capabilities to application developers in a simple, unified and manageable manner, and reduce the cognitive burden of application developers through high app-oriented abstraction, enabling them to complete app delivery and operation in a self-service way.
 
 At Ant Group, we have experienced all the above problems. We have built large-scale [Bare Metal](https://en.wikipedia.org/wiki/Bare-metal_server) Kubernetes clusters, a large-scale service mesh system based on [MOSN](https://github.com/mosn/mosn) sidecar, but also rely heavily on PaaS services such as middleware and some IaaS cloud services. In the field of operation, we have made many attempts to adapt to scale, complexity and rapid changes, such as using cloud-native tools to improve the classic ops platforms, such as adopting the Kubernetes community's native YAML-based DevOps solution, but none of them can meet the needs of internal application-centric, high-efficiency, low-awareness, and taking into account the open, flexible, scalable, and portable large-scale delivery and operation requirements.
 
 ![](/img/docs/user_docs/intro/kusion-stack-1.png)
+
+
+## Why use KusionStack?
 
 KusionStack fusions platform developers, application developers and [SRE](https://en.wikipedia.org/wiki/Site_reliability_engineering) with the platform engineering concept, through a one-stop technology stack targeting "modeling on platforms, compile to cloud". KusionStack enables the platform developers to open platform capabilities simply and flexibly, allowing application developers to design app-centric abstraction, reduce the cognitive burden on infrastructure, and at the same time give them sufficient flexibility. Overall, KusionStack, like other as-Code technologies, provides the convenience of **versioned**, **auditable**, **reusable**, **replayable** and **sharable**, and at the same time KusionStack is committed to building **application-centric abstraction**, **consistent management tools and automation mechanisms** and **simpler end-to-end user experience and workflow**, and hopes to approach the state:
 
@@ -70,7 +73,7 @@ Relying on the accumulation of practice within Ant Group, KusionStack provides a
 In addition, KCL provides CRUD APIs, multi-language SDK and a dynamic plugin expansion mechanism to meet the personalized automation needs in the enterprise. KusionStack will continue to improve the extensibility and integrate with more community technologies.
 
 
-## Kusion vs. X
+## KusionStack vs. X
 
 KusionStack is a pure client-side cloud-native programmable technology stack, which aims to define an application-centric abstract interface and an end-to-end management mechanism. Compared with other technologies, its characteristics can be summarized as:
 
@@ -81,11 +84,15 @@ KusionStack is a pure client-side cloud-native programmable technology stack, wh
 
 ![](/img/docs/user_docs/intro/kusion-vs-x.png)
 
-KCL is a modern high-level domain language. KCL is a compiled, static and strongly typed language. It provides developers with the ability to write configuration (config), modeling abstraction (schema), business logic (lambda), and environmental rules (rule) as the core elements through recording and functional language design. KCL does not natively provide system functions such as threads and IO, but supports functions for cloud-native operation scenarios, and tries to provide stable, secure, low-noise, low-side effect, easy-to-automate and easy-to-govern programming support for solving domain problems.
+KCL is a modern high-level domain language, which is a compiled, static and strongly typed language. It provides developers with the ability to write configuration (config), modeling abstraction (schema), business logic (lambda), and environmental policies (rule) as the core elements through recording and functional language design. 
+
+KCL tries to provide runtime-independent programmability and does not natively provide system functions such as threads and IO, but supports functions for cloud-native operation scenarios, and tries to provide stable, secure, low-noise, low-side effect, easy-to-automate and easy-to-govern programming support for solving domain problems.
+
+Unlike client runtime written in GPL, KCL programs usually run and generate low-level data and are integrated into the client-side runtime access tools (such as KusionCtl), which can provide a left-shifted stability guarantee by testing and validation of KCL code separately before pushing to runtime. KCL code can also be compiled into a wasm module, which could be integrated into the server runtime after full testing. 
 
 ![](/img/docs/user_docs/intro/kcl.png)
 
-KusionStack provides an operation engine and API layer that is completely decoupled from KCL, which is designed to work with hybrid resources. KusionStack has developed its resource management capabilities based on the Kubernetes API server, and supports 3-way diff-based preview, runtime dry-run and other necessary cloud-native management capabilities; for non-Kubernetes control planes (such as IaaS APIs) KusionStack integrates the Terraform toolchain to complete automated management, and treat Terraform as a resource runtime provision engine.
+KusionStack provides an operation engine and API layer that is completely decoupled from KCL, which is designed to work with hybrid resources. Kusion Engine natively supports full usage of the Kubernetes API machinery, which supports 3-way runtime diff-based preview, runtime dry-run and other necessary Kubernetes management capabilities. For non-Kubernetes control planes (such as IaaS APIs) KusionStack integrates the Terraform toolchain to complete automated management and treats Terraform as a resource runtime provision tool.
 
 ![](/img/docs/user_docs/intro/kusion-engine.png)
 
@@ -115,7 +122,7 @@ OAM is an open-source open application model specification. It is mainly used in
 
 **vs. CrossPlane**
 
-CrossPlane is an open-source cloud-native control plane framework that redefines, reconciles, and manages imperative APIs with the extension and technical means of the Kubernetes API machinery specification. In contrast, in terms of API access, KusionStack adopts a client-side approach to provide unified resource abstraction, natively provides a working mechanism for Kubernetes API machinery, and manages non-Kubernetes resources by integrating and reusing Terraform capabilities. KusionStack does not force the redefinition in the Kubernetes API server, and reduces the pressure on the Kubernetes API extension mechanism in large-scale scenarios. Since KusionStack natively supports full usage of the Kubernetes API machinery capabilities, it can be used seamlessly with CrossPlane.
+CrossPlane is an open-source cloud-native control plane framework that redefines, reconciles, and manages imperative APIs with the extension and technical means of the Kubernetes API machinery specification. In contrast, in terms of API access, KusionStack adopts a client-side approach to provide unified resource abstraction, natively provides a working mechanism for Kubernetes API machinery, and manages non-Kubernetes resources by integrating and reusing Terraform capabilities. KusionStack does not force the redefinition in the Kubernetes API server and reduces the pressure on the Kubernetes API extension mechanism in large-scale scenarios. Since KusionStack natively supports full usage of the Kubernetes API machinery capabilities, it can be used seamlessly with CrossPlane.
 
 **vs. Kubernetes**
 
