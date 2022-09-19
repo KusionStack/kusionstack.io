@@ -2,35 +2,35 @@
 sidebar_position: 2
 ---
 
-# Format
+# 格式化代码
 
-KCL supports formatting multiple KCL files via built-in command line tools. This article demonstrates the KCL coding style and how to use the KCL formatting tool.
+KCL 支持通过内置的命令行工具一键格式化多个 KCL 文件文档。本文展示 KCL 编码风格和 KCL 格式化工具的使用方式。
 
-## Code Style
+## KCL 编码风格
 
-The KCL formatting tool modifies the files according to the KCL coding style: [Style Guide for KCL Code](../../lang/lang/spec/codestyle.md)
+KCL 格式化对文件的修改样式具体见 KCL 编码风格：Style Guide for KCL Code
 
-## How to use
+## 使用方式
 
-* Formatting Single File
+* 单文件格式化
 
 ```text
 kcl-fmt your_config.k
 ```
 
-* Formatting multiple files
+* 文件夹内多文件格式化
 
 ```text
 kcl-fmt your_config_path -R
 ```
 
-* Args
-  * `-R|--recursive` Whether to recursively traverse subfolders
-  * `-w|--fmt-output` Whether to output to STDOUT, without `-w` means in-place modification.
+* 命令行参数
+  * `-R|--recursive` 设置是否递归遍历子文件夹
+  * `-w|--fmt-output` 设置是否输出到标准输出流，不加 `-w` 表示原地格式化 KCL 文件
 
-## Display of formatting files
+## 格式化文件效果展示
 
-* Before formatting
+* 格式化前
 
 ```py
 import     math
@@ -47,7 +47,7 @@ schema Deployment[replicas] ( DeploymentBase )   :
 deploy = Deployment(replicas = 3){}
 ```
 
-* After formatting
+* 格式化后
 
 ```py
 import math
