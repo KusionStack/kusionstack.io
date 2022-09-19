@@ -2,7 +2,7 @@
 title: "crypto"
 linkTitle: "crypto"
 type: "docs"
-description: crypto 包 - 提供 SHA 相关的哈希函数
+description: crypto system module
 weight: 100
 ---
 ## md5

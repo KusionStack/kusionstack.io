@@ -4,19 +4,19 @@ sidebar_position: 1
 
 # Introduction
 
-KCL 语言提供 C/Rust/Go/Python/Java 等通用编程语言接口，相关语言正在开发完整中。
+The KCL language provides general programming language interfaces such as C/Rust/Go/Python/Java, and the related languages are under development.
 
-## 1. C/Rust 语言
+## 1. C/Rust API
 
-KCL 核心采用 Rust 语言开发，对外导出 C 语言 API 供 Go/Python/Java 等高级语言包装和集成。
+The core of KCL is developed in Rust, and the C language API is exported externally for packaging and integration in high-level languages such as Go/Python/Java.
 
-## 2. Go 语言
+## 2. Go API
 
-Go 语言是通过 CGO 包装 KCL 提供的 C-API，同时提供更深度的定制特性以满足 KusionCtl 等上层工具的需求。
+Go API is a C-API provided by CGO wrapping KCL, while providing deeper customization features to meet the needs of upper-level tools such as Kusion Engine.
 
-### 2.1. API 抽象模型
+### 2.1. Abstract Model
 
-Go 语言 API 的抽象模型如下图：
+The abstract model of the KCL Go API is as follows:
 
 ```
 ┌─────────────────┐         ┌─────────────────┐           ┌─────────────────┐
@@ -44,9 +44,9 @@ Go 语言 API 的抽象模型如下图：
 └─────────────────┘         └─────────────────┘           └─────────────────┘
 ```
 
-其中输入的文件包含 KCL 文件和 `setting.yml` 配置文件，`Options` 可以用于指定额外的参数和工作目录等信息。“KCLVM-Go-API”部分是提供的 KCLVM 执行函数，执行函数根据输入文件和额外的参数执行 KCL 程序，最终输出 `KCLResultList` 结果。`KCLResultList` 是一个 `KCLResult` 构成的列表，每个 `KCLResult` 对应一个生成的配置文件或 `map[string]interface{}`。
+The input file contains the KCL file and the `setting.yml` configuration file, and `Options` can be used to specify additional parameters and information such as working directory. The "KCLVM-Go-API" part is the provided KCLVM execution function. The execution function executes the KCL program according to the input file and additional parameters, and finally outputs the result of `KCLResultList`. `KCLResultList` is a list of `KCLResult`, each `KCLResult` corresponding to a generated configuration file or `map[string]interface{}`.
 
-### 2.2. 例子
+### 2.2. Example
 
 ```go
 package main
@@ -92,7 +92,7 @@ x1 = Person{age:101}
 }
 ```
 
-输入结果:
+Output result:
 
 ```yaml
 age: 1
@@ -114,16 +114,17 @@ person: &{Name:kcl Age:101}
 
 ## 3. REST-API
 
-KCL 提供的 C-API 并没有 REST-API，REST-API 是通过 Protobuf 定义，最终由上层的 Go-SDK 提供实现。
+The C-API provided by KCL does not have a REST-API. The REST-API is defined by Protobuf and is finally implemented by the upper-layer Go-SDK.
 
-### 3.1. 启动 REST 服务
+### 3.1. Start REST Service
 
-通过以下方式可以启动 RestAPI 服务：
+The RestAPI service can be started in the following ways:
 
-- 底层多个 KCLVM 进程: `kcl-go rest-server -http=:2021`
-- 底层一个 KCLVM 进程: `kclvm -m kclvm.program.rpc-server -http=:2021`
+```
+kcl-go rest-server -http=:2021
+```
 
-然后可以通过 POST 协议请求服务：
+The service can then be requested via the POST protocol:
 
 ```shell
 $ curl -X POST http://127.0.0.1:2021/api:protorpc/BuiltinService.Ping --data '{}'
@@ -133,13 +134,13 @@ $ curl -X POST http://127.0.0.1:2021/api:protorpc/BuiltinService.Ping --data '{}
 }
 ```
 
-其中 POST 请求和返回的 JSON 数据和 Protobuf 定义的结构保持一致。
+The POST request and the returned JSON data are consistent with the structure defined by Protobuf.
 
-### 3.2. `BuiltinService` 服务
+### 3.2. `BuiltinService`
 
-其中 `/api:protorpc/BuiltinService.Ping` 路径表示 `BuiltinService` 服务的 `Ping` 方法。
+Where the `/api:protorpc/BuiltinService.Ping` path represents the `Ping` method of the `BuiltinService` service.
 
-完整的 `BuiltinService` 由 Protobuf 定义：
+The complete `BuiltinService` is defined by Protobuf:
 
 ```protobuf
 service BuiltinService {
@@ -162,13 +163,13 @@ message ListMethod_Result {
 }
 ```
 
-其中 `Ping` 方法可以验证服务是否正常，`ListMethod` 方法可以查询提供的全部服务和函数列表。
+The `Ping` method can verify whether the service is normal, and the `ListMethod` method can query the list of all services and functions provided.
 
-### 3.3. `KclvmService` 服务
+### 3.3. `KclvmService`
 
-`KclvmService` 服务是和 KCLVM 功能相关的服务。用法和 `BuiltinService` 服务一样。
+The `KclvmService` service is a service related to KCLVM functionality. The usage is the same as the `BuiltinService` service.
 
-比如有以下的 `Person` 结构定义：
+For example, there is the following `Person` structure definition:
 
 ```python
 schema Person:
@@ -178,13 +179,13 @@ schema Person:
         "value" in key  # 'key' is required and 'key' must contain "value"
 ```
 
-然后希望通过 `Person` 来校验以下的 JSON 数据：
+Then we want to use `Person` to verify the following JSON data:
 
 ```json
 {"key": "value"}
 ```
 
-可以通过 `KclvmService` 服务的 `ValidateCode` 方法完成。参考 `ValidateCode` 方法的 `ValidateCode_Args` 参数结构：
+This can be done through the `ValidateCode` method of the `KclvmService` service. Refer to the `ValidateCode_Args` structure of the `ValidateCode` method:
 
 ```protobuf
 message ValidateCode_Args {
@@ -196,7 +197,7 @@ message ValidateCode_Args {
 }
 ```
 
-根据 `ValidateCode_Args` 参数结构构造 POST 请求需要的 JSON 数据，其中包含 `Person` 定义和要校验的 JSON 数据：
+Construct the JSON data required by the POST request according to the `ValidateCode_Args` structure, which contains the `Person` definition and the JSON data to be verified:
 
 ```json
 {
@@ -205,7 +206,7 @@ message ValidateCode_Args {
 }
 ```
 
-将该 JSON 数据保存到 `vet-hello.json` 文件，然后通过以下命令进行校验：
+Save this JSON data to the `vet-hello.json` file and verify it with the following command:
 
 ```shell
 $ curl -X POST \
@@ -220,16 +221,6 @@ $ curl -X POST \
 }
 ```
 
-说明校验成功。
+## 4. APIs in other languages
 
-## 4. Python 语言
-
-Python 通过 SWIG 包装 Rust 提供的 C-API。同时提供访问 RestAPI 的客户端。具体细节待完善。
-
-## 5. Java 语言
-
-Java 通过 Jni 包装 Rust 提供的 C-API。同时提供访问 RestAPI 的客户端。具体细节待完善。
-
-## 6. 其它语言
-
-用户也可以基于 C-API 和 RestAPI 包装其它语言的 SDK。
+Coming soon

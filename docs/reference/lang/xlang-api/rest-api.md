@@ -3,14 +3,15 @@ sidebar_position: 2
 ---
 # Rest API
 
-## 1. 启动 REST 服务
+## 1. Start REST Service
 
-通过以下方式可以启动 RestAPI 服务：
+The RestAPI service can be started in the following ways:
 
-- 底层多个 KCLVM 进程: `kcl-go rest-server -http=:2021`
-- 底层一个 KCLVM 进程: `kclvm -m kclvm.program.rpc-server -http=:2021`
+```
+kcl-go rest-server -http=:2021
+```
 
-然后可以通过 POST 协议请求服务：
+The service can then be requested via the POST protocol:
 
 ```shell
 $ curl -X POST http://127.0.0.1:2021/api:protorpc/BuiltinService.Ping --data '{}'
@@ -20,13 +21,13 @@ $ curl -X POST http://127.0.0.1:2021/api:protorpc/BuiltinService.Ping --data '{}
 }
 ```
 
-其中 POST 请求和返回的 JSON 数据和 Protobuf 定义的结构保持一致。
+The POST request and the returned JSON data are consistent with the structure defined by Protobuf.
 
-## 2. `BuiltinService` 服务
+## 2. `BuiltinService`
 
-其中 `/api:protorpc/BuiltinService.Ping` 路径表示 `BuiltinService` 服务的 `Ping` 方法。
+Where the `/api:protorpc/BuiltinService.Ping` path represents the `Ping` method of the `BuiltinService` service.
 
-完整的 `BuiltinService` 由 Protobuf 定义：
+The complete `BuiltinService` is defined by Protobuf:
 
 ```protobuf
 service BuiltinService {
@@ -49,13 +50,13 @@ message ListMethod_Result {
 }
 ```
 
-其中 `Ping` 方法可以验证服务是否正常，`ListMethod` 方法可以查询提供的全部服务和函数列表。
+The `Ping` method can verify whether the service is normal, and the `ListMethod` method can query the list of all services and functions provided.
 
-## 3. `KclvmService` 服务
+## 3. `KclvmService`
 
-`KclvmService` 服务是和 KCLVM 功能相关的服务。用法和 `BuiltinService` 服务一样。
+The `KclvmService` service is a service related to KCLVM functionality. The usage is the same as the `BuiltinService` service.
 
-比如有以下的 `Person` 结构定义：
+For example, there is the following `Person` structure definition:
 
 ```python
 schema Person:
@@ -65,13 +66,13 @@ schema Person:
         "value" in key  # 'key' is required and 'key' must contain "value"
 ```
 
-然后希望通过 `Person` 来校验以下的 JSON 数据：
+Then we want to use `Person` to verify the following JSON data:
 
 ```json
 {"key": "value"}
 ```
 
-可以通过 `KclvmService` 服务的 `ValidateCode` 方法完成。参考 `ValidateCode` 方法的 `ValidateCode_Args` 参数结构：
+This can be done through the `ValidateCode` method of the `KclvmService` service. Refer to the `ValidateCode_Args` structure of the `ValidateCode` method:
 
 ```protobuf
 message ValidateCode_Args {
@@ -83,7 +84,7 @@ message ValidateCode_Args {
 }
 ```
 
-根据 `ValidateCode_Args` 参数结构构造 POST 请求需要的 JSON 数据，其中包含 `Person` 定义和要校验的 JSON 数据：
+Construct the JSON data required by the POST request according to the `ValidateCode_Args` structure, which contains the `Person` definition and the JSON data to be verified:
 
 ```json
 {
@@ -92,7 +93,7 @@ message ValidateCode_Args {
 }
 ```
 
-将该 JSON 数据保存到 `vet-hello.json` 文件，然后通过以下命令进行校验：
+Save this JSON data to the `vet-hello.json` file and verify it with the following command:
 
 ```shell
 $ curl -X POST \
@@ -107,11 +108,9 @@ $ curl -X POST \
 }
 ```
 
-说明校验成功。
+## 4. Complete Protobuf Service Definition
 
-## 4. 完整的 Protobuf 服务定义
-
-跨语言的 API 通过 Protobuf 定义([https://github.com/KusionStack/kclvm-go/blob/main/pkg/spec/gpyrpc/gpyrpc.proto](https://github.com/KusionStack/kclvm-go/blob/main/pkg/spec/gpyrpc/gpyrpc.proto))：
+Cross-language APIs defined via Protobuf([https://github.com/KusionStack/kclvm-go/blob/main/pkg/spec/gpyrpc/gpyrpc.proto](https://github.com/KusionStack/kclvm-go/blob/main/pkg/spec/gpyrpc/gpyrpc.proto)):
 
 ```protobuf
 // Copyright 2021 The KCL Authors. All rights reserved.

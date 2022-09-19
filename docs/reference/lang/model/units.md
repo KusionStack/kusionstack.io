@@ -2,15 +2,15 @@
 title: "units"
 linkTitle: "units"
 type: "docs"
-description: units 包 - 单位处理
+description: units system module - Unit handlers
 weight: 100
 ---
-## 单位的常量
+## Constants
 
-- 定点数: `n`, `u`, `m`, `k`, `K`, `G`, `T` and `P`.
-- 2 的幂: `Ki`, `Mi`, `Gi`, `Ti` and `Pi`.
+- Fixed point unit constants: `n`, `u`, `m`, `k`, `K`, `G`, `T` and `P`.
+- Power of 2 unit constants: `Ki`, `Mi`, `Gi`, `Ti` and `Pi`.
 
-## 函数列表
+## Functions
 
 - `to_n(num: int) -> str`
   Int literal to string with `n` suffix

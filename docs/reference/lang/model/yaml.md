@@ -2,7 +2,7 @@
 title: "yaml"
 linkTitle: "yaml"
 type: "docs"
-description: yaml 编码解码
+description: yaml encode and decode function
 weight: 300
 ---
 ## encode

@@ -2,7 +2,7 @@
 title: "datetime"
 linkTitle: "datetime"
 type: "docs"
-description: datetime 包 - 时间处理
+description: datetime system module
 weight: 100
 ---
 - datetime

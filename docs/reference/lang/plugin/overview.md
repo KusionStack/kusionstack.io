@@ -4,38 +4,40 @@ sidebar_position: 1
 
 # Introduction
 
-KCL 是声明式配置策略语言，对于不方便通过配置直接描述的复杂的业务逻辑可以通过通用的编程语言开发 KCL 插件对语言进行扩展。KCL 支持通过通用语言开发插件，KCL 程序导入插件中的函数。KCL 通过插件运行时和辅助的命令行工具提供插件支持。KCL 插件框架支持多种不同的通用语言开发插件，这里我们以 Python 为例简单说明插件的使用。
+For complex logic that is inconvenient to directly describe through configuration, the language can be extended by developing KCL plug-ins in a general programming language.
 
-插件的 Git 仓库: [https://github.com/KusionStack/kcl-plugin](https://github.com/KusionStack/kcl-plugin)
+KCL supports the development of plug-ins through a general-purpose language, KCL provides plugin support through a plugin runtime and auxiliary command line tools. The KCL plug-in framework supports different general-purpose languages to develop plug-ins. Here we take Python as an example to briefly explain the use of plug-ins.
 
-## 1. 你好插件
+KCL plugin Git repository: [https://github.com/KusionStack/kcl-plugin](https://github.com/KusionStack/kcl-plugin)
 
-KCL 插件在 KCLVM 的 `plugins` 子目录（通常安装在 `$HOME/.kusion/kclvm/plugins` 目录），或者通过 `$KCL_PLUGINS_ROOT` 环境变量设置（环境变量优先级更高）。对于插件开发人员，插件都在 Git 仓库管理： [https://github.com/KusionStack/kcl-plugin](https://github.com/KusionStack/kcl-plugin) ，可以将插件仓库克隆到该目录进行开发。
+## 1. Hello Plugin
 
-输入 `kcl-plugin info` 命令查看查看插件目录（将其中的 `/Users/kcl_user` 替换成本地的 `$HOME` 路径）：
+KCL plugins are installed in the `plugins` subdirectory of KCLVM (usually installed in the `$HOME/.kusion/kclvm/plugins` directory), or set through the `$KCL_PLUGINS_ROOT` environment variable (environment variables take precedence). For plugin developers, plugins are managed in the Git repository: [https://github.com/KusionStack/kcl-plugin](https://github.com/KusionStack/kcl-plugin), you can clone the plugin repository to this repository directory for development.
+
+Enter the `kcl-plugin info` command to view the plugin directory (replace `/Users/kcl_user` with the local `$HOME` path):
 
 ```shell
 $ kcl-plugin info
 # plugin_root: /Users/kcl_user/.kusion/kclvm/plugins
 ```
 
-通过 `kcl-plugin list` 子命令查看插件列表：
+View the list of plugins with the `kcl-plugin list` subcommand:
 
 ```shell
 $ kcl-plugin list
 hello: hello doc - 0.0.1
 ```
 
-其中 `hello` 是 KCL 内置的示例插件（不要修改改插件）。
+Where `hello` is an example plugin built into KCL (do not modify the plugin).
 
-在 KCL 代码中，可以通过 `kcl_plugin.hello` 导入 `hello` 插件。`main.k` 代码如下：
+In KCL code, the `hello` plugin can be imported via `kcl_plugin.hello`. `main.k` code is as follows:
 
 ```python
 import kcl_plugin.hello
 x = hello.add(1,2)
 ```
 
-输出结果如下：
+The output result is
 
 ```shell
 $ kcl main.k
@@ -43,9 +45,9 @@ name: kcl
 three: 3
 ```
 
-## 2. `kcl-plugin` 辅助命令
+## 2. `kcl-plugin` Command
 
-`kcl-plugin` 是提供的插件辅助工具，命令行帮助如下：
+`kcl-plugin` is a plugin helper provided, the command line help is as follows:
 
 ```shell
 $ kcl-plugin
@@ -62,11 +64,11 @@ optional arguments:
   -h, --help            show this help message and exit
 ```
 
-其中 `list` 子命令用于查看插件列表；`info` 用户查看插件目录和每个插件的信息；`init` 可以用户初始化新插件；`gendoc` 更新全部插件的 API 文档；`test` 测试指定的插件。
+The `list` subcommand is used to view the list of plugins; `info` allows users to view the plugin directory and information about each plugin; `init` allows users to initialize new plugins; `gendoc` updates the API documentation of all plugins; `test` tests specified plugin.
 
-## 3. 插件信息和文档
+## 3. Plugin Information and Documentation
 
-输入 `kcl-plugin info hello` 查看 `hello` 插件信息：
+Type `kcl-plugin info hello` to view the `hello` plugin information:
 
 ```shell
 $ kcl-plugin info hello
@@ -86,11 +88,11 @@ $ kcl-plugin info hello
 }
 ```
 
-插件的信息主要包含插件的名字和版本信息，插件提供的函数信息。该信息和插件目录中自动生成的 `api.md` 文件是一致的（插件 API 变化时通过 `kcl-plugin gendoc` 为全部的插件重新生成 `api.md` 文件）。
+The information of the plug-in mainly includes the name and version information of the plug-in, and the function information provided by the plug-in. This information is consistent with the automatically generated `api.md` file in the plugin directory (regenerate the `api.md` file for all plugins via `kcl-plugin gendoc` when the plugin API changes).
 
-## 4. 插件的目录结构
+## 4. Plugin Directory Structure
 
-插件的目录结构如下（将其中的 `/Users/kcl_user` 替换成本地的 `$HOME` 路径）：
+The directory structure of the plugin is as follows (replace `/Users/kcl_user` with the local `$HOME` path):
 
 ```shell
 $ tree /Users/kcl_user/.kusion/kclvm/plugins/
@@ -104,9 +106,9 @@ $ tree /Users/kcl_user/.kusion/kclvm/plugins/
 $
 ```
 
-其中 `_examples` 目录下是插件的示例代码，`_test` 目录下是插件的 KCL 测试代码，其他以字母开头的目录是普通的插件（目录中同时包含 `plugin.py` 和 `plugin_test.py` 文件）。
+The `_examples` directory is the sample code of the plugin, the `_test` directory is the KCL test code of the plugin, and the other directories starting with letters are ordinary plugins (the directory contains both `plugin.py` and `plugin_test.py` document).
 
-KCL 的插件是有一个独立的纯 Python 代码文件实现，并且插件相互之间不能直接调用。插件的内容如下：
+KCL plugins are implemented in an independent pure Python code file, and plugins cannot directly call each other. The content of the plugin is as follows:
 
 ```shell
 $ cat ./hello/plugin.py 
@@ -123,11 +125,11 @@ def add(a: int, b: int) -> int:
 ...
 ```
 
-其中 `INFO` 指明了插件的名字、概要说明、详细说明和版本信息。而所有名字以字母开头的函数是插件给 KCL 提供的函数，因此 KCL 中可以直接调用 `add` 函数。
+Where `INFO` specifies the name of the plugin, a brief description, a detailed description and version information. And all the functions whose names start with letters are the functions provided by the plugin to KCL, so the `add` function can be called directly in KCL.
 
-## 5. 创建一个插件
+## 5. Create Plugin
 
-通过 `kcl-plugin init` 命令可以创建一个插件示例：
+An example plugin can be created with the `kcl-plugin init` command:
 
 ```
 $ kcl-plugin init hi
@@ -136,12 +138,12 @@ hello: hello doc - 0.0.1
 hi: hi doc - 0.0.1
 ```
 
-`kcl-plugin init` 命令会以内置的模板构造一个新的插件，然后通过 `kcl-plugin list` 命令可以查看到新创建的插件。
+The `kcl-plugin init` command will construct a new plugin from the built-in template, and then we can view the newly created plugin with the `kcl-plugin list` command.
 
-## 6. 插件的删除
+## 6. Remove plugin
 
-KCL 插件在 KCLVM 的 `plugins` 子目录（通常安装在 `$HOME/.kusion/kclvm/plugins` 目录）。
-可以通过命令 `kcl-plugin info` 查询插件安装目录。
+KCL plugins are located in the `plugins` subdirectory of KCLVM (usually installed in the `$HOME/.kusion/kclvm/plugins` directory).
+We can query the plugin installation directory with the command `kcl-plugin info`.
 
 ```shell
 $ kcl-plugin info
@@ -150,7 +152,7 @@ $ tree /Users/kcl_user/.kusion/kclvm/plugins/
 /Users/kcl_user/.kusion/kclvm/plugins/
 ├── _examples
 ├── _test
-└── hello      -- 删除这个目录就可以删除 hello plugin
+└── hello      -- Delete this directory to delete the hello plugin
     ├── api.md
     ├── plugin.py
     └── plugin_test.py
@@ -159,9 +161,9 @@ $
 
 ## 7. 插件的测试
 
-插件是独立的纯 Python 文件实现，插件目录下有个 `plugin_test.py` 文件是插件的单元测试文件（基于 pytest 测试框架）。此外在 `_test` 目录下放置的是 KCL 文件的插件集成测试。`plugin_test.py` 单元测试是必须的，`_test` 目录下的 KCL 集成测试可以根据情况添加。
+The plugin is implemented as an independent pure Python file. There is a `plugin_test.py` file in the plugin directory, which is the unit test file of the plugin (based on the pytest testing framework). Also placed in the `_test` directory are plugin integration tests for KCL files. The `plugin_test.py` unit test is required, and the KCL integration tests in the `_test` directory can be added as needed.
 
-可以通过 `kcl-plugin test` 执行插件的单元测试：
+Unit tests for plugins can be executed via `kcl-plugin test`:
 
 ```shell
 $ kcl-plugin test hello
@@ -174,4 +176,4 @@ collected 5 items
 $
 ```
 
-集成测试可以通过在 `_test` 目录下执行 `python3 -m pytest` 命令进行测试。
+Integration tests can be tested by executing the `python3 -m pytest` command in the `_test` directory.
