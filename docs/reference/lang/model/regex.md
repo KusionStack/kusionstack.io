@@ -2,7 +2,7 @@
 title: "regex"
 linkTitle: "regex"
 type: "docs"
-description: regex 包 - 正则表达式
+description: regex system module
 weight: 100
 ---
 ## replace

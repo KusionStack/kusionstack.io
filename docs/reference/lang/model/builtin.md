@@ -2,13 +2,13 @@
 title: "builtin"
 sidebar_position: 1
 ---
-KCL 提供了一个内置系统模块的列表，这些模块是自动加载的，无需提供任何模块名称即可直接使用。例如，`print` 就是一个广泛使用的内置模块提供的函数。
+KCL provides a list of built-in functions that are automatically loaded and can be used directly without providing any module name. For example, `print` is a function provided by a widely used built-in module.
 
-## 类型转换
+## Type Conversion Functions
 
-KCL的 `bool`、`int`、`float`、`str`、`list`、`dict`等类型有内置同名的转换函数。其中 `int` 不仅仅可以用于截断浮点数，也可以用来将字符串转化为整数（解析时为10进制，也可以制定其他值）。
+KCL's `bool`, `int`, `float`, `str`, `list`, `dict` and other types have built-in conversion functions of the same name. Among them, `int` can not only be used to truncate floating-point numbers, but also can be used to convert strings to integers (decimal when parsing, other values can also be specified).
 
-下面是类型相关函数常见的用法：
+The following are common uses of type-related functions:
 
 ```py
 b1 = bool(1)  # true
@@ -34,7 +34,7 @@ l1 = list([1, 2, 3])
 
 `print(*args:any, end:str='\n')`
 
-内置的打印函数，提供不同类型的可变参数打印，默认在结尾添加一个换行符号。以下上常见的用法：
+The built-in print function, which provides different types of variable parameter printing, adds a newline at the end by default. The following are common usages:
 
 ```python
 print("hello KCL")
@@ -53,7 +53,7 @@ print({})
 print({a: 123})
 ```
 
-输出格式如下：
+The output is:
 
 ```shell
 hello KCL
@@ -71,13 +71,17 @@ abc 456
 {'a': 123}
 ```
 
-如果不希望在默认换行时，可以通过 `end=''` 命名参数重新指定结尾的字符串。
+If you do not want the default newline, you can re-specify the ending string with the `end=''` named parameter.
+
+```python
+print("Hello KCL", end='')
+```
 
 ## multiplyof
 
 `multiplyof(a:int, b:int) -> bool`
 
-判断整数 `a` 是否为 `b` 的整数倍，返回布尔值：
+Check whether the integer `a` is an integer multiple of `b`, and return a boolean value:
 
 ```python
 print(multiplyof(2, 1))  # True
@@ -87,13 +91,13 @@ print(multiplyof(0, 2))  # True
 print(multiplyof(1, 0))  # Error
 ```
 
-`0` 是任何数的倍数。但是 `b` 不能为 `0`，否则将抛出异常。
+`0` is a multiple of any number. But `b` cannot be `0`, otherwise an exception will be thrown.
 
 ## isunique
 
 `isunique(list: [any]) -> bool`
 
-判断数组中是否存在重复的元素，返回布尔值：
+Check if there are duplicate elements in an array, and return a boolean value:
 
 ```python
 print(isunique([]))     # True
@@ -108,13 +112,13 @@ print(isunique(['abc', "abc"]))      # False
 print(isunique(['abc', "a${'bc'}"])) # False
 ```
 
-需要注意的是整数和浮点数会忽略类型差异，根据值是否相等判断。
+It should be noted that integers and floating-point numbers ignore the type difference and judge whether the values are equal.
 
 ## len
 
 `len(x: str | [any] | {:}) -> int`
 
-返回字符串、列表和数组的长度：
+Return the length of strings, lists, and arrays:
 
 ```python
 print(len([])) # 0
@@ -126,19 +130,19 @@ print(len({abc:123})) # 1
 print("abc") # 3
 ```
 
-注：不支持对 `schema` 对象计算长度。
+Note: Calculating lengths on `schema` objects is not supported.
 
 ## abs
 
 `abs(x: number) -> number`
 
-计算 `x` 的绝对值。
+Calculate the absolute value of `x`.
 
 ## all_true
 
 `all_true(x:str|[]|{:}) -> bool`
 
-判断列表或字典类全部元素为真，用法如下：
+Judging that all elements of a list or dictionary class are true, the usage is as follows:
 
 ```python
 print(all_true([])) # True
@@ -151,7 +155,7 @@ print(all_true([True, False])) # False
 print(all_true([True, None]))  # False
 ```
 
-当列表为空时返回真。
+Returns true when the list is empty.
 
 <!--
 反直觉特性:
@@ -164,7 +168,7 @@ print(all_true({abc: False})) # True
 
 `any_true(x:str|[]|{:}) -> bool`
 
-判断可迭代对象中至少有一个元素为真，用法如下：
+Judging that at least one element in the iterable object is true, the usage is as follows:
 
 ```python
 print(any_true([]))  # False
@@ -175,7 +179,7 @@ print(any_true([1])) # True
 
 `bin(x:number) -> str`
 
-返回整数的二进制表示的字符串，用法如下：
+A string that returns the binary representation of an integer, used as follows:
 
 ```python
 print(bin(8)) # 0b1000
@@ -185,7 +189,7 @@ print(bin(8)) # 0b1000
 
 `hex(number)`
 
-返回整数的十六进制表示的字符串，用法如下：
+A string that returns the hexadecimal representation of an integer, used as follows:
 
 ```python
 print(hex(18)) # 0x12
@@ -195,7 +199,7 @@ print(hex(18)) # 0x12
 
 `oct(number)`
 
-返回整数的八进制表示的字符串，用法如下：
+A string that returns the octal representation of an integer, used as follows:
 
 ```python
 print(oct(10)) # 0o12
@@ -205,13 +209,13 @@ print(oct(10)) # 0o12
 
 `option(key:str, type:str='', required=False, default=None, help="") -> any`
 
-获取命令行参数输入的值。
+Gets the value of the command line top level argument input.
 
 ## ord
 
 `ord(c) -> int`
 
-获取字符的 Unicode 码点值，用法如下：
+Get the Unicode code point value of the character, the usage is as follows:
 
 ```python
 print(ord('A')) # 65
@@ -223,7 +227,7 @@ print(ord('C')) # 67
 
 `sorted(x: []) -> []`
 
-返回排序后的列表，用法如下：
+Returns the sorted list, used as follows:
 
 ```python
 _a = []
@@ -242,7 +246,7 @@ print(_d) # [1, 2]
 
 `range(start:int, end:int, step=1) -> [int]`
 
-产生迭代列表，用法如下：
+Generates an iterable list, used as follows:
 
 ```python
 print(range(1,5))      # [1, 2, 3, 4]
@@ -254,7 +258,7 @@ print(range(5, 1, -1)) # [5, 4, 3, 2]
 
 `min(x:[number]) -> number`
 
-返回列表中最小的元素，用法如下：
+Returns the smallest element in the list, used as follows:
 
 ```python
 print(min([1,2])) # 1
@@ -269,7 +273,7 @@ print(min([2,1])) # 1
 
 `max(x:[number]) -> number`
 
-返回列表中最大的元素，用法如下：
+Returns the largest element in the list, used as follows:
 
 ```python
 print(max([1,2])) # 2
@@ -280,7 +284,7 @@ print(max([2,1])) # 2
 
 `sum(x:[number], init_value=0) -> number`
 
-返回列表中全部元素的和，用法如下：
+Returns the sum of all elements in the list, used as follows:
 
 ```
 print(sum([1,2]))       # 3
@@ -291,9 +295,7 @@ print(sum([2,1], 1000)) # 1003
 
 `pow(x: number, y: number, z: number = None) -> number`
 
- 计算 `x**y`，如果 `z` 非空则计算 `(x**y)%z`，支持整数和浮点数。
-
-下面的常见的用法：
+Computes `x**y`, or `(x**y)%z` if `z` is not empty, supports integer and floating point numbers, used as follows:
 
 ```python
 print(pow(2,3))    # 8
@@ -306,9 +308,7 @@ print(pow(2, 0.5)) # 1.414
 
 `round(number: int|float, ndigits:int|None) -> float | int`
 
-返回 `number` 的四舍五入近似值。如果 `ndigits` 非 `None` 则返回浮点数并保留指定位数的小数（不能为负数），否则返回整数结构。
-
-下面是常用的用法：
+Returns the rounded approximation of `number`. If `ndigits` is not `None` returns a float with the specified number of decimal places (cannot be negative), otherwise returns an integer structure, used as follows:
 
 ```python
 print(round(1))   # 1
@@ -322,15 +322,13 @@ print(round(1.5555))    # 2
 print(round(1.5555, 0)) # 2.0
 ```
 
-需要注意的是，`ndigits` 为 `None` 和 `0` 的区别是前缀返回 `int` 类型、后者返回 `float` 类型。
+It should be noted that the difference between `ndigits` being `None` and `0` is that the prefix returns `int` type, the latter returns `float` type.
 
 ## typeof
 
 `typeof(x: any, full_name: bool = False) -> str`
 
-输出 `x` 在运算时的类型。当 `full_name` 参数设置为 `True` 时，将返回 `pkg.schema` 形式的包前缀。
-
-下面是常见的用法：
+Output the type of `x` at runtime. When the `full_name` parameter is set to `True`, the package prefix of the form `pkg.schema` will be returned, used as follows:
 
 ```python
 import sub as pkg
@@ -365,9 +363,7 @@ t6 = typeof(_x1, full_name=True)
 
 `zip(*args: str|list|dict)`
 
-用于将可迭代的对象作为参数，将对象中对应的元素打包成一个个元组，然后返回由这些元组组成的列表。
-
-下面是常见的用法：
+It is used to take an iterable object as a parameter, pack the corresponding elements in the object into tuples, and then return a list composed of these tuples, used as follows:
 
 ```py
 a = zip([0, 1, 2], [3, 4, 5])

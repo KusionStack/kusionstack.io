@@ -2,7 +2,7 @@
 title: "base64"
 linkTitle: "base64"
 type: "docs"
-description: base64 编码解码
+description: base64 system module - base64 encode and decode function
 weight: 100
 ---
 ## encode
