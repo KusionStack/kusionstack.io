@@ -118,7 +118,7 @@ const config = {
             ],
           },
           {
-            href: 'https://github.com/KusionStack',
+            href: 'https://github.com/KusionStack/kusion',
             className: 'header-github-link',
             'aria-label': 'GitHub repository',
             position: 'right',
@@ -150,7 +150,7 @@ const config = {
               },
               {
                 label: 'Slack',
-                href: 'https://KusionStack.slack.com',
+                href: 'https://join.slack.com/t/kusionstack/shared_invite/zt-19lqcc3a9-_kTNwagaT5qwBE~my5Lnxg',
               },
             ],
           },

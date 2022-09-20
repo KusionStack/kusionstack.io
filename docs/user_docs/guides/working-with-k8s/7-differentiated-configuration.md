@@ -1,4 +1,4 @@
-# 差异化配置
+# Differentiated configurations
 
 应用的 KCL 配置代码中可以通过添加 if-else 语句搭配魔术变量设置需要的差异化配置，比如根据实际部署的集群名称设置不同的 labels。
 

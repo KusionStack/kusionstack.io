@@ -1,4 +1,4 @@
-# 配置网络
+# Network
 
 Server 模型中的 services 属性用于声明应用的网络配置，有关网络的抽象定义，可以查看 KCL Model 中 [base.pkg.kusion_models.kube.frontend.service](/docs/reference/model/kusion_models/kube/frontend/service/doc_service) 模块的文档。
 

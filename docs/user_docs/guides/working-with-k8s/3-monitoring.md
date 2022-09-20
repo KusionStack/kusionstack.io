@@ -1,4 +1,4 @@
-# 配置监控
+# Monitoring
 
 本篇指南向你展示，如何使用 KCL 语言与其相对应的 CLI 工具 Kusion，完成一个 Kubernetes 应用 Prometheus 监控部署。本次演示的样例主要由以下组件构成：
 

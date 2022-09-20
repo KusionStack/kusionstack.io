@@ -1,4 +1,4 @@
-# Introduction to KusionStack
+# KusionStack
 
 
 ## What is KusionStack?
