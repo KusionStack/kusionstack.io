@@ -1,15 +1,17 @@
 # Vault CSI Provider
 
-本指南将向你展示，KCL/Kusion 通过集成 Vault CSI Provider，解决敏感信息的传输问题。
-本次演示是将数据库的用户名和密码传输到 Pod 中，涉及 3 个 Kubernetes 内置资源和 1 个 自定义资源：
+This guide will show you that KCL/Kusion solves the secret management problem by integrating Vault CSI Provider.
+We will pass the database username and password into the Pod, involving 3 kubernetes built-in resources and 1 custom resource:
 
-- 命名空间（Namespace）
-- 无状态应用（Deployment）
-- 服务账号（ServiceAccount）
-- 自定义资源（SecretProviderClass）
+- Namespace
+- Deployment
+- ServiceAccount
+- SecretProviderClass
 
 :::tip
-本指南要求你对 Kubernetes 有基本的了解。不清楚相关概念的，可以前往 Kubernetes 官方网站，查看相关说明：
+
+This guide requires you to have a basic understanding of Kubernetes.
+If you are not familiar with the relevant concepts, please refer to the links below:
 - [Learn Kubernetes Basics](https://kubernetes.io/docs/tutorials/kubernetes-basics/)
 - [Namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
 - [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
@@ -17,126 +19,128 @@
 - [SecretProviderClass](https://secrets-store-csi-driver.sigs.k8s.io/concepts.html#custom-resource-definitions-crds)
 :::
 
-## 1. 准备开始
+## Prerequisites
 
-在开始之前，我们需要做以下准备工作：
+Before we start, we need to complete the following steps first:
 
-1、安装 Kusion 工具链
+1、Install Kusion
 
-我们推荐使用 kusion 的官方安装工具 `kusionup`，可实现 kusion 多版本管理等关键能力。
-详情信息请参阅[下载和安装](/docs/user_docs/getting-started/install)。
+We recommend using the official installation tool _kusionup_ which supports multi-version management.
+See [Download and Install](/docs/user_docs/getting-started/install) for more details.
 
-2、下载开源 Konfig 大库
+2、Clone Konfig repo
 
-在本篇指南中，需要用到部分已经抽象实现的 KCL 模型。
-有关 KCL 语言的介绍，可以参考 [Tour of KCL](/reference/lang/lang/tour.md)。
+In this guide, we need some KCL models that [Konfig](https://github.com/KusionStack/konfig.git) offers.
+For more details on KCL language, please refer to [Tour of KCL](/docs/reference/lang/lang/tour).
 
-仓库地址： https://github.com/KusionStack/konfig.git
+3、Running Kubernetes cluster
 
-3、可用的 Kubernetes 集群
+There must be a running Kubernetes cluster and a [kubectl](https://Kubernetes.io/docs/tasks/tools/#kubectl) command line tool.
+If you don't have a cluster yet, you can use [Minikube](https://minikube.sigs.k8s.io/docs/tutorials/multi_node/) to start one of your own.
 
-必须要有一个 Kubernetes 集群，同时 Kubernetes 集群最好带有
-[kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) 命令行工具。
-如果你还没有集群，你可以通过 [Minikube](https://minikube.sigs.k8s.io/docs/tutorials/multi_node/)
-构建一个你自己的集群。
+4、Available Helm CLI
 
-4、可用的 Helm CLI
+The Helm tool is used to deploy the Vault server and CSI driver.
+If you haven't installed Helm, please refer to [Install Helm](https://helm.sh/docs/intro/install/).
 
-Helm 工具用来部署 Vault Server 和 CSI Driver。
-如果你还没有安装 Helm，请参阅 [Helm 官方地址](https://helm.sh/docs/intro/install/)。
+## Install Vault server and CSI driver
 
-## 2. 安装 Vault 和 CSI Driver
+We recommend deploying the Vault server and CSI driver on Kubernetes by _Helm Chart_.
+[Helm](https://helm.sh/docs/helm/) is a package manager,
+which can install and configure Vault and its related components in different modes.
+Helm chart implements conditionalization and parameterization of templates.
+These parameters can be set via command line arguments or defined in YAML files.
 
-推荐使用 Helm Chart 在 Kubernetes 上部署 Vault Server 和 CSI Driver
-[Helm](https://helm.sh/docs/helm/) 是一个包管理器，
-它可以安装和配置 Vault 及其相关组件，以不同模式运行。
-Helm Chart 实现了模板的条件化和参数化。这些参数可以通过命令行参数设置或在 YAML 中定义。
+### Install Vault server
 
-### 2.1 安装 Vault
-
-1、添加 HashiCorp Helm 存储库：
+1、Add HashiCorp helm repository:
 ```bash
 helm repo add hashicorp https://helm.releases.hashicorp.com
 ```
 
-2、更新所有存储库以确保 helm 缓存了最新版本：
+2、Update to cache HashiCorp's latest version:
 ```bash
 helm repo update
 ```
 
-3、安装最新版本的 Vault Server，以开发模式运行，禁用 Injector 服务并启用 CSI：
+3、Install Vault server, start in development mode, disable Injector and enable CSI:
 ```bash
 helm install vault hashicorp/vault \
     --set "server.dev.enabled=true" \
     --set "injector.enabled=false" \
     --set "csi.enabled=true"
 ```
-`server.dev.enabled=true` 表示 Vault 在单 Pod 上以开发者模式启动；
-`injector.enabled=false` 表示禁用 Injector 服务；
-`csi.enabled=true` 表示启用 Vault CSI Pod。
-如果你已经安装了 Vault，可以使用 `helm upgrade` 命令来更新 Vault 的部署模式。
+`server.dev.enabled=true` indicates that Vault is started in developer mode on a single pod.
+`injector.enabled=false` indicates that the Injector service is disabled;
+`csi.enabled=true` Indicates that the Vault CSI Pod is enabled.
+If you already have Vault installed, you can use the `helm upgrade` command to update Vault's deployment mode.
 
-4、检查 Default 命名空间中的所有 Pod：
+4、Check all pods in the default namespace:
 ```bash
 kubectl get pod
 NAME                       READY   STATUS    RESTARTS   AGE
 vault-0                    1/1     Running   0          17m
 vault-csi-provider-456hl   1/1     Running   0          17m
 ```
-等到 `vault-0` 的状态是 `Running` 并且准备就绪（`1/1`），再继续本指南。
 
-### 2.2 安装 CSI Driver
+Wait until the status of `vault-0` is `Running` and ready (`1/1`) before continuing with this guide.
 
-[Secrets Store CSI 驱动程序](https://secrets-store-csi-driver.sigs.k8s.io/introduction.html)
-`secrets-store.csi.k8s.io` 允许 Kubernetes 将存储在外部机密存储中的多个机密、密钥和证书作为卷挂载到其 Pod 中。
-附加卷后，其中的数据将被挂载到容器的文件系统中。
+### Install CSI driver
+
+[Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/introduction.html)
+`secrets-store.csi.k8s.io` allows Kubernetes to mount multiple secrets, keys,
+and certs stored in enterprise-grade external secrets stores into their pods as a volume.
+Once the volume is attached, the data in it is mounted into the container’s file system.
 
 :::tip
-[容器存储接口（CSI）](https://github.com/container-storage-interface/spec/blob/master/spec.md)
-是一种标准，用于将任意块和文件存储系统暴露给 Kubernetes 等容器编排系统 (CO) 上的容器化工作负载。
-使用 CSI 第三方存储提供商可以编写和部署插件，在 Kubernetes 中公开新的存储系统，而无需接触核心 Kubernetes 代码。
+
+The [Container Storage Interface (CSI)](https://github.com/container-storage-interface/spec/blob/master/spec.md)
+is a standard for exposing arbitrary block and file storage systems
+to containerized workloads on Container Orchestration Systems (COs) like Kubernetes.
+Using CSI third-party storage providers can write and deploy plugins exposing new storage systems in Kubernetes
+without ever having to touch the core Kubernetes code.
 :::
 
-1、添加 CSI 驱动的 Helm 存储库：
+1、Add CSI driver helm repository:
 ```bash
 helm repo add secrets-store-csi-driver https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts
 ```
 
-2、安装最新版本的 Kubernetes-Secrets-Store-CSI-Driver：
+2、Install Kubernetes-Secrets-Store-CSI-Driver：
 ```bash
 helm install csi secrets-store-csi-driver/secrets-store-csi-driver --namespace kube-system
 ```
-`csi-secrets-store-csi-driver` 是以 DemonSet 形式部署在 `kube-system` 命名空间。
 
-3、检查 CSI Driver 的 Pod 是否启动：
+3、Check CSI driver pods:
 ```bash
 kubectl --namespace=kube-system get pods -l "app=secrets-store-csi-driver"
 NAME                                 READY   STATUS    RESTARTS   AGE
 csi-secrets-store-csi-driver-2wl2f   3/3     Running   0          2m
 ```
-等待 `csi-secrets-store-csi-driver-2wl2f` 的状态是 `Running`，并且已经准备就绪（`3/3`），再继续本指南。
 
-## 3. 配置 Vault
+Wait until the status of pod `csi-secrets-store-csi-driver-2wl2f` is `Running` and is ready (`3/3`) before continuing with this guide.
 
-Vault 将机密数据保存在自己的数据库中，用户需要先配置相关机密数据，并启用 Vault 的 Kubernetes 认证。
+## Configure Vault
 
-### 3.1 配置机密数据 {#set-secret-data}
+Vault stores confidential data in its database, and users need to configure the relevant confidential data and enable Vault's Kubernetes authentication.
 
-在[创建挂载 Vault Secret 的 Pod](#create-pod-with-secret-mounted)小节，挂载到 Pod 中的卷，
-引用了保存在 `secret/data/db-pass` 路径下的 secret 。
-Vault 以开发模式运行时，kv 引擎会启用默认路径 `/secret`。
+### Create a secret
 
-1、在 `vault-0` 启动交互式 shell 终端：
+In [Create a pod with a secret mounted](#create-a-pod-with-a-secret-mounted) section,
+the volume mounted in Pod expects secret stored at path `secret/data/db-pass`.
+When Vault is run in development a K/V secret engine is enabled at the path `/secret`.
+
+1、start an interactive shell session on the `vault-0` pod:
 ```bash
 kubectl exec -it vault-0 -- /bin/sh
 ```
 
-2、在 `secret/db-pass` 路径创建带有密码的 secret：
+2、Create a secret at the path `secret/db-pass` with a password:
 ```bash
 vault kv put secret/db-pass password="db-secret-password"
 ```
 
-输出类似于：
+The output is similar to:
 ```
 Key                Value
 ---                -----
@@ -147,12 +151,12 @@ destroyed          false
 version            1
 ```
 
-3、验证 secret 在路径 `/secret/db-pass` 上是否可读：
+3、Verify that the secret is readable at the path `secret/db-pass`.
 ```bash
 vault kv get secret/db-pass
 ```
 
-输出类似于：
+The output is similar to:
 ```
 ======= Metadata =======
 Key                Value
@@ -168,24 +172,24 @@ Key         Value
 ---         -----
 password    db-secret-password
 ```
-到此，机密数据创建完毕，暂且不需要退出 Pod。
+For now, the confidential data is created, please don't exit the vault pod immediately.
 
-### 3.2 启用 kubernetes 身份认证
+### Enable Kubernetes authentication
 
-Vault 提供了 Kubernetes 身份验证方法，使客户端能够使用 Kubernetes ServiceAccount 令牌进行身份验证。
-此令牌在创建时提供给每个 Pod。
+Vault provides a Kubernetes authentication method that enables clients to authenticate with a Kubernetes ServiceAccount Token.
+The Kubernetes resources that access the secret and create the volume authenticate through this method through a `role`.
 
-1、继续上一小节的 Terminal，启用 Kubernetes 身份验证：
+1、Continue with the terminal in the previous step, and enable the Kubernetes authentication method:
 ```bash
 vault auth enable kubernetes
 ```
-输出类似于：
+
+The output is similar to:
 ```
 Success! Enabled kubernetes auth method at: kubernetes/
 ```
 
-2、配置 kubernetes 身份认证规则，依赖 Kubernetes API 地址、ServiceAccount 令牌、
-证书以及 Kubernetes ServiceAccount 的颁发者（Kubernetes 1.21+ 需要）：
+2、Configure authentication rules, depending on the Kubernetes API address, ServiceAccount token, certificate, and the issuer of the Kubernetes ServiceAccount(required for Kubernetes 1.21+):
 ```bash
 vault write auth/kubernetes/config \
     kubernetes_host="https://$KUBERNETES_PORT_443_TCP_ADDR:443" \
@@ -194,18 +198,15 @@ vault write auth/kubernetes/config \
     issuer="https://kubernetes.default.svc.cluster.local"
 ```
 
-输出类似于：
+The output is similar to:
 ```
 Success! Data written to: auth/kubernetes/config
 ```
-Kubernetes 创建容器时，将 `token_reviewer_jwt` 和 `kubernetes_ca_cert` 挂载到容器中。
-环境变量 `KUBERNETES_PORT_443_TCP_ADDR` 引用的是 Kubernetes 主机的内部网络地址。
 
-3、设置读权限的 _policy_
+When Kubernetes creates pods, mount `token_reviewer_jwt` and `Kubernetes_ca_cert` into them.
+The environment variable `KUBERNETES_PORT_443_TCP_ADDR` references the internal network address of the Kubernetes host.
 
-Kubernetes-Secrets-Store-CSI-Driver 需要读取密钥，保证它对挂载的卷和卷中密钥有读权限。
-
-创建名为 `kcl-vault-csi-policy` 的 _policy_：
+3、Create a policy named `kcl-vault-csi-policy`:
 ```bash
 vault policy write kcl-vault-csi-policy - <<EOF
 path "secret/data/db-pass" {
@@ -214,7 +215,9 @@ path "secret/data/db-pass" {
 EOF
 ```
 
-4、再创建名为 `kcl-vault-csi-role` 的 _role_ ，关联上一步创建的 _policy_，并绑定 Namespace 和 ServiceAccount：
+Kubernetes-Secrets-Store-CSI-Driver needs to read the secret key, which must have read access to the mounted volume.
+
+4、Create a role named `kcl-vault-csi-role`:
 ```bash
 vault write auth/kubernetes/role/kcl-vault-csi-role \
     bound_service_account_names=kcl-vault-csi-sa \
@@ -223,28 +226,31 @@ vault write auth/kubernetes/role/kcl-vault-csi-role \
     ttl=24h
 ```
 
-输出类似于：
+The output is similar to:
 ```
 Success! Data written to: auth/kubernetes/role/kcl-vault-csi-role
 ```
-该角色将 Kubernetes 服务帐户 _kcl-vault-csi-sa_ 和命名空间 _kcl-vault-csi_ 与 Vault 策略 _kcl-vault-csi-role_ 关联起来。
-此  Kubernetes 服务帐户将会在后面创建。认证成功后返回的令牌有效期为 24 小时。最后，执行 `exit` 退出 Pod。
 
-## 4. 结果验证 {#verify-result}
+This role associates the Kubernetes service account `kcl-vault-csi-sa` and namespace `kcl-vault-csi` with the Vault policy `kcl-vault-csi-role`.
+This Kubernetes service account will be created later. The token returned after successful authentication is valid for 24 hours.
+Finally, exit the `vault-0` pod.
 
-上一节我们已经在 Vault 中保存机密数据，并且配置 Vault 角色，完成了 Namespace + ServiceAccount + Policy 的绑定。
-这一节，我们直接使用开源大库中的 Vault 演示项目，部署应用并检验结果。
+## Verify Secret
 
-### 4.1 创建挂载 Vault Secret 的 Pod  {#create-pod-with-secret-mounted}
+In the previous section, we created a secret in the Vault server,
+configured the Vault `role` and `policy`, and completed the binding of `Namespace` and `ServiceAccount`.
+In this section, we directly use the Vault demo project `kcl-vault-csi` in Konfig to deploy the application and verify the results.
 
-1、进入开源大库的 Vault 演示项目的 Stack 目录 `base/examples/kcl-vault-csi/dev`，并下发配置：
+### Create a pod with a secret mounted
+
+1、Enter stack dir `base/examples/kcl-vault-csi/dev` and apply stack configs:
 ```bash
 cd base/examples/kcl-vault-csi/dev && kusion apply --yes=true
 ```
 
-输出类似于：
+The output is similar to:
 ```
- SUCCESS  Compiling in stack dev...                                                                                                   
+SUCCESS  Compiling in stack dev...                                                                                                   
 
 Stack: dev    Provider                                               Type                       Name    Plan
       * ├─  kubernetes                                       v1:Namespace           kcl-vault-csi[0]  Create
@@ -261,29 +267,35 @@ Creating Deployment/kcl-vault-csi-dev [4/4] ████████████
 
 Apply complete! Resources: 4 created, 0 updated, 0 deleted.
 ```
-四个资源创建成功，待 Deployment 创建出 Pod 后，会将 SecretProviderClass 中声明的卷挂载到容器的文件系统中。
 
-### 4.2 校验注入结果
+The four resources are created successfully.
+After the deployment controller finished syncing pods, it will mount the volume declared in SecretProviderClass to the pod's file system.
 
-1、检查实验 Pod 是否运行：
+### Verify mount results
+
+1、Check pod status:
 ```bash
 kubectl get pod -n kcl-vault-csi 
 ```
 
-输出类似于：
+The output is similar to:
 ```
 NAME                                 READY   STATUS    RESTARTS   AGE
 kcl-vault-csi-dev-64b66968d8-p27fv   1/1     Running   0          12s
 ```
 
-2、查看写入 Pod 的文件系统路径 `/mnt/secrets-store/db-password` 的内容，
-检查是否是[配置机密数据](#set-secret-data) 小节写入的 paasword：
+2、Read file content from `/mnt/secrets-store/db-password`, see if it is the password written in the section [Create a secret](#create-a-secret):
 ```bash
 kubectl exec -it kcl-vault-csi-dev-64b66968d8-p27fv -n kcl-vault-csi -- cat /mnt/secrets-store/db-password
 ```
 
-输出类似于：
+The output is similar to:
 ```
 db-secret-password
 ```
-可以看到，我们成功地将机密数据 `password` 通过 CSI 卷的方式，成功注入到 Pod 的文件系统中，完成了机密信息的传输。
+
+It can be seen that we successfully injected the secret data `password` into the file system of the pod by the CSI driver.
+
+## What's Next
+
+- Learn about secret management with [Vault Agent](/docs/user_docs/guides/sensitive-data-solution/vault-agent)
