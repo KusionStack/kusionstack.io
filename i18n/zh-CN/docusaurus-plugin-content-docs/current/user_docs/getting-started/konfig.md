@@ -39,15 +39,13 @@ Konfig 配置大库整体结构如下：
 
 ## 2. 测试 Konfig 代码
 
-在安装完成 Kusion 工具之后，在 Konfig 根目录执行 `make check-all` 测试大库全部应用（参考 [Project & Stack
-](/docs/user_docs/concepts/project-stack)），或者执行 `make check-http-echo` 测试 `appops/http-echo` 应用。
+在安装完成 Kusion 工具之后，在 Konfig 根目录执行 `make check-all` 测试大库全部应用（参考 [Konfig](/docs/user_docs/concepts/konfig)），或者执行 `make check-http-echo` 测试 `appops/http-echo` 应用。
 
 如果需要单独测试 `appops/http-echo` 应用的 dev 版本，可以进入 `appops/http-echo/dev` 目录执行 `kusion compile` 命令（或者通过更底层的 `kcl -Y kcl.yaml ./ci-test/settings.yaml` 命令），输出的文件在 `appops/http-echo/dev/ci-test/stdout.golden.yaml` 文件。
 
 ## 3. 添加应用
 
-在 [快速开始/Usecase](/docs/user_docs/getting-started/usecase) 我们已经展示如何快速添加一个应用（参考 [Project & Stack
-](/docs/user_docs/concepts/project-stack)）。
+在 [快速开始/Usecase](/docs/user_docs/getting-started/usecase) 我们已经展示如何快速添加一个应用（参考 [Konfig](/docs/user_docs/concepts/konfig)）。
 
 ## 4. Konfig 架构图
 

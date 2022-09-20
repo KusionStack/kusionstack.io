@@ -31,4 +31,4 @@ Let's get operation `Preview` as an example to demonstrate how the three parts c
  2. Walk this DAG:
     1. Get the latest `State` from the actual infra by the `Runtime`
     2. Get the last operation `State` from the `State` storage medium
-3. Merge/Diff three states: desired state described in Konfig, live state from `Runtime` and prior state from `State` storage medium, and return the diff result to the console
+ 3. Merge/Diff three states: desired state described in Konfig, live state from `Runtime` and prior state from `State` storage medium, and return the diff result to the console

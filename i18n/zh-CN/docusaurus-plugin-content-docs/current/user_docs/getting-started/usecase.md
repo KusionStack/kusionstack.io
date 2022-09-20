@@ -26,7 +26,7 @@ Select `code-city` and press `Enter`. After that we will see hints below and use
 
 
 The whole file hierarchy is shown below. More details about the directory structure can be found in 
-[Project & Stack](/docs/user_docs/concepts/project-stack).
+[Konfig](/docs/user_docs/concepts/konfig).
 
 ```shell
 ➜  examples git:(main) ✗ cd code-city
