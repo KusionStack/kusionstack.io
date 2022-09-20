@@ -2,13 +2,13 @@
 sidebar_position: 3
 ---
 
-# Lint Check
+# Lint 检查代码风格
 
-KCL supports checking KCL code style through built-in command line tool and supports multiple output formats. This document shows how to use the KCL Lint tool.
+KCL 支持通过内置的命令行工具对 KCL 代码进行检查，并支持多种输出格式。本文档展示 KCL Lint 工具的使用方式。
 
-## Example
+## 示例
 
-### Project Struct
+### 工程结构
 
 ```text
 .
@@ -22,27 +22,27 @@ KCL supports checking KCL code style through built-in command line tool and supp
     └── test.k
 ```
 
-`.kcllint` is the configuration file of lint. It is optional. `a.k`, `b.k`, `c.k` and `test.k` are the kcl file to be checked.
+其中，`.kcllint` 文件为配置参数文件，非必需项，`a.k`,`b.k`,`c.k`,`test.k` 为测试的 kcl 文件。
 
-Args：
+命令：
 
 ```shell
 kcl-lint your_config.k
 ```
 
-or
+或
 
 ```shell
 kcl-lint your_config_path
 ```
 
-lint configuration file
+lint 配置文件
 
 ```shell
 kcl-lint --config abspath/.kcllint your_config.k
 ```
 
-Output:
+输出结果示例：
 
 ```shell
 /Users/../test.k:12:1: E0501 line too long (122 > 120 characters)
@@ -60,9 +60,9 @@ Check total 1 files:
 KCL Lint: 2 problems
 ```
 
-## KCL Lint Tool
+## KCL Lint 工具使用方式
 
-### Args
+### CLI 参数
 
 ```shell
 usage: kcl-lint [-h] [--config file] [file]
@@ -75,30 +75,30 @@ optional arguments:
   --config file  KCL lint config path
 ```
 
-+ --config : path of `.kcllint`
-+ file: the path of a single `*.k` file or directory to be checked. Support the absolute path or relative path of the current directory.
++ --config : lint 配置文件 `.kcllint` 的路径
++ file : 需要检查的单个 `.k` 文件路径或路径目录下的所有 `.k` 文件，支持绝对路径或当前目录的相对路径
 
-### Lint Configuration
+### Lint 配置参数
 
-#### Priority
+#### 优先级
 
-The priority of Lint's configuration is as follows:
+Lint 的配置参数的优先级如下：
 
-1. the `.kcllint` set in CLI Args
-2. the `.kcllint` under directory of checked `.k` file or checked directory
-3. default configuration
+1. CLI 参数中的 `--config file` 路径的 `.kcllint` 文件
+2. 被检查 `.k` 文件所在目录或被检查目录下的 `.kcllint` 文件
+3. 默认配置
 
 #### .kcllint
 
-The file `.kcllint` is written in YAML. Its contents include:
+`.kcllint` 文件以 yaml 格式书写。其内容包括：
 
-+ check_list: kinds of checks, including `"import"` and `"misc"`
-+ ignore: ignored check items. See the `Error Code` for optional items.
-+ max_line_length: the parameter of check, that is, the maximum length of code
-+ output: output streams and formats, including `"stdout"`、`"file"` and `"sarif"`
-+ output_path: The path of output file. It is optional, but it is required when the `output` set as `"file"` or `"sarif"`
+- check_list 用于选择检查的 checker，可选项为 `"import"` 和 `"misc"`
+- ignore 用于选择忽略的检查项，可选项见错误代码
+- max_line_length 为检查的参数，即单行代码最大长度
+- output 用于选择输出流和输出格式，可选项为 `"stdout"`、`"file"`、`"sarif"`
+- output_path 为可选项，当 output 选择了“file”或"sarif"，则必须设置输出文件的路径
 
-Example:
+示例：
 
 ```yaml
 check_list: ["import","misc"]
@@ -108,7 +108,7 @@ output: ["stdout"]
 output_path:
 ```
 
-Default Configuration:
+#### 默认配置
 
 ```yaml
 check_list: ["import", "misc"]
@@ -117,7 +117,9 @@ max_line_length: 200
 output: ["stdout"]
 ```
 
-### Error Code
+### 错误代码
+
+目前提供 import_checker 和 misc_checker
 
 + import_checker
   + E0401: Unable to import.
