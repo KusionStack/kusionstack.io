@@ -1,25 +1,25 @@
 ---
 sidebar_position: 5
 ---
-# Docgen
+# 文档生成工具
 
-The Kusion command line tool supports extracting model documents from KCL source code and supports multiple output formats: JSON, YAML and Markdown, etc. This article introduces the document specification of the KCL language, gives an example of how to use the KCL document generation tool to extract documents, and shows the process of adding localized language documents.
+Kusion 命令行工具支持从 KCL 源码中一键提取模型文档，并支持丰富的输出格式：JSON，YAML 和 Markdown 等。本文介绍 KCL 语言的文档规范，举例说明如何使用 KCL 文档生成工具提取文档，并展示新增本地化语言文档的流程。
 
-## 1. Document Specification of KCL
+## 1. KCL 语言的文档规范
 
-The documentation of the KCL file mainly contains the following two parts:
+KCL文件的文档主要包含如下两个部分：
 
-* Current KCL Module document: description of the current KCL file
-* All schema documents contained in the KCL file: a description of the current schema, including schema description, schema attribute descriptions, and Examples. The specific format is as follows:
+* 当前 KCL Moudle 的文档：对当前 KCL 文件的说明
+* KCL 文件内包含的所有 Schema 的文档：对当前 Schema 的说明，其中包含 Schema 描述、Schema 各属性的描述、Examples 三部分，具体格式如下：
 
-1. Schema description
+1. Schema 描述
 
   ```python
-  """This is a brief description of the Schema
+  """这是Schema一个简短的描述信息
   """
   ```
 
-2. Description of each attribute of Schema: including attribute description, attribute type, default value, optional or not
+2. Schema 各属性的描述：包含属性描述、属性类型、默认值、是否可选
 
   ```python
   """
@@ -32,7 +32,8 @@ The documentation of the KCL file mainly contains the following two parts:
   """
   ```
 
-  `----------` indicates that `Attributes` is a title (the length of the symbol `-` is the same as the length of the title), the attribute name and attribute type are separated by a colon `:`, and the description of the attribute is another Write on a line and increase indentation. The default value of the attribute is separated by a comma `,` after the attribute type, and it is written in the form of `default is {default value}`. In addition, it is necessary to indicate whether the attribute is optional/required. For optional attributes, write `optional` after the default value, and write `required` after the default value for a required attribute.
+  其中，使用 `----------` 表示 `Attributes` 为一个标题(`-` 符号长度与标题长度保持一致)，属性名称与属性类型用冒号 `:` 分隔，属性的说明另起一行并增加缩进进行书写。属性的默认值说明跟在属性类型之后使用逗号 `,` 分隔，书写为 `default is {默认值}` 形式，此外需要说明属性是否为可选/必选，对于可选属性在默认值之后书写 `optional`，对于必选属性在默认值之后书写 `required`。
+
 
 3. Examples
 
@@ -47,14 +48,13 @@ The documentation of the KCL file mainly contains the following two parts:
   """
   ```
 
-In addition, the KCL docstring syntax should use a subset of the [re-structured text (reST[)](https://docutils.sourceforge.io/rst.html) and be rendered using the [Sphinx](https://www.sphinx-doc.org/en/master/).
+  此外，KCL 文档字符串语法应采用 [re-structured text (reST)](https://docutils.sourceforge.io/rst.html) 语法子集，并使用 [Sphinx](https://www.sphinx-doc.org/en/master/) 渲染呈现。
 
-## 2. Generating Documentation From KCL
+## 2. 从 KCL 源码生成文档
 
-Use the `kcl-doc generate` command to extract documentation from a user-specified file or directory and output it to the specified directory.
+使用 kcl-doc generate 命令，从用户指定的文件或目录中提取文档，并输出到指定目录。
 
-1. Args
-
+1. 参数说明
   ```
   usage: kcl-doc generate [-h] [--format YAML] [-o OUTPUT] [--r]
                           [--i18n-locale LOCALE] [--repo-url REPO_URL]
@@ -77,45 +77,45 @@ Use the `kcl-doc generate` command to extract documentation from a user-specifie
                           the generated doc to link to the source code.
   ```
 
-2. Extract documents from the file(s) and output to the specified directory
+2. 从指定的一个或多个文件中提取文档，并输出到指定目录
 
   ```text
   kcl-doc generate your_config.k your_another_config.k -o your_docs_output_dir
   ```
 
-3. From the specified directory, recursively find the KCL file(s) and extract the documentation
+3. 从指定目录内，递归地查找 KCL 源码文件，并提取文档
 
   ```text
   kcl-doc generate your_config_dir -r -o your_docs_output_dir
   ```
 
-4. When generating documentation, specify the source code repository address. The generated documentation will contain links to source files
+4. 在生成文档时，指定源码仓库地址。一经指定，生成的文档中将包含指向源码文件的链接
 
   ```text
   kcl-doc generate your_config.k -o your_docs_output_dir --repo-url https://url/to/source_code
   ```
 
-## 3. Add Documentation for Localized Languages
+## 3. 新增本地化语言的文档
 
-As shown before, by default, the documentation extracted by the documentation generation tool is based on the content of the source docstring, and thus the language of the documentation depends on the language in which the docstring was written. If you need to add localized language documentation to the source file, you can follow the steps below:
+如前所示，默认情况下，文档生成工具提取的文档以源码 docstring 的内容为准，因而文档的语言随 docstring 编写语言而定。如果需要为源文件新增本地化语言的文档，则可以遵循按如下步骤：
 
-1. Initialize the i18n configuration file. This step generates the corresponding i18n configuration file based on the specified KCL file. The file format can be JSON/YAML, and the default is YAML. The output profile name will end in the specified target localization language
+1. 初始化 i18n 配置文件。该步骤基于指定的 KCL 源码文件，生成相应的 i18n 配置文件，文件格式可选 JSON/YAML，默认为 YAML. 输出的配置文件名称将以指定的目标本地化方言结尾
 
   ```text
   kcl-doc init-i18n your_config.k --format JSON --i18n-locale your_target_locale
   ```
 
-2. Modify the i18n configuration file generated above and use the target language to modify the doc field in the configuration
+2. 手动修改上述生成的 i18n 配置文件，使用目标语言修改配置中的 doc 字段
 
-3. Generate documentation in localized languages based on the modified i18n configuration. The tool will find the i18n configuration file for the specified target language and convert it to the final document
+3. 基于修改后的 i18n 配置，生成本地化语言的文档。工具将查找指定目标语言的 i18n 配置文件，并转化为最终的文档
 
   ```text
   kcl-doc generate your_config_dir --i18n-locale your_target_locale --format Markdown
   ```
 
-  Next, a simple example is used to demonstrate the process of adding localized language documents.
+  接下来，通过一个小例子演示新增本地化语言文档的过程。
 
-  3.1 Prepare the KCL file, such as `server.k`:
+  3.1 准备 KCL 源码文件，例如 server.k：
 
     ```python
     schema Server:
@@ -149,13 +149,13 @@ As shown before, by default, the documentation extracted by the documentation ge
         labels?: {str: str}
     ```
 
-  3.2 Get the initialized i18n configuration file from the `server.k`. For example, if you want to add Chinese documents to it, specify the format of the generated configuration file as YAML
+  3.2 从 server.k 得到初始化的 i18n 配置文件，例如希望为其增加中文文档，指定生成的配置文件格式为 YAML
 
     ```text
     kcl init-i18n server.k --format YAML --i18n-locale zh_cn
     ```
 
-    This command will create the directory `kcl_doc` under the current directory and generate the i18n configuration file `kcl_doc/i18n_server_zh_cn.yaml`. Its contents are as follows:
+    该命令将在当前目录下创建 kcl_doc 目录，并生成 i18n 配置文件 kcl_doc/i18n_server_zh_cn.yaml，其内容如下：
 
     ```yaml
     name: server
@@ -215,7 +215,7 @@ As shown before, by default, the documentation extracted by the documentation ge
     source_code_url: ''
     ```
 
-  3.3 Modify the i18n configuration, and modify the doc field to the Chinese description. The modified configuration is as follows:
+  3.3 修改初始化得到的 i18n 配置，将其中的 doc 字段修改为中文的描述，修改后的配置如下：
 
     ```yaml
     name: server
@@ -271,41 +271,42 @@ As shown before, by default, the documentation extracted by the documentation ge
     source_code_url: ''
     ```
 
-  3.4 Based on the modified i18n configuration, generate documents in localized languages. Execute the following command to output the Chinese document `kcl_doc/doc_server_zh_cn.md`. The commands and the contents of the generated documents are as follows:
+  3.4 基于修改后的 i18n 配置，生成本地化语言的文档，执行如下命令，将输出中文的文档 kcl_doc/doc_server_zh_cn.md，命令及生成的文档内容如下：
 
-  ```text
-  kcl-doc generate server.k --i18n-locale zh_cn --format Markdown
-  ```
+    ```text
+    kcl-doc generate server.k --i18n-locale zh_cn --format Markdown
+    ```
 
-  ~~~markdown
-  # server
-  ## Schema Server
-  Server 模型定义了采用 Kubernetes 最佳实践的持续运行的服务的通用配置接口
+    ~~~markdown
+    # server
+    ## Schema Server
+    Server 模型定义了采用 Kubernetes 最佳实践的持续运行的服务的通用配置接口
 
-  ### Attributes
-  |Name and Description|Type|Default Value|Required|
-  |--------------------|----|-------------|--------|
-  |**workloadType**<br />workloadType 属性定义了服务的类型，是服务级别的属性。合法的取值有：Deployment, CafeDeployment.<br />另请查看：kusion_models/core/v1/workload_metadata.k.|str|"Deployment"|**required**|
-  |**name**<br />name 为服务的名称，是服务级别的属性。<br />另请查看：kusion_models/core/v1/metadata.k.|str|Undefined|**required**|
-  |**labels**<br />labels 为服务的标签，是服务级别的属性。<br />另请查看：kusion_models/core/v1/metadata.k.|{str: str}|Undefined|optional|
-  ### Examples
-  ```
-  myCustomApp = AppConfiguration {
-      name = "componentName"
-  }
-  ```
+    ### Attributes
+    |Name and Description|Type|Default Value|Required|
+    |--------------------|----|-------------|--------|
+    |**workloadType**<br />workloadType 属性定义了服务的类型，是服务级别的属性。合法的取值有：Deployment, CafeDeployment.<br />另请查看：kusion_models/core/v1/workload_metadata.k.|str|"Deployment"|**required**|
+    |**name**<br />name 为服务的名称，是服务级别的属性。<br />另请查看：kusion_models/core/v1/metadata.k.|str|Undefined|**required**|
+    |**labels**<br />labels 为服务的标签，是服务级别的属性。<br />另请查看：kusion_models/core/v1/metadata.k.|{str: str}|Undefined|optional|
+    ### Examples
+    ```
+    myCustomApp = AppConfiguration {
+        name = "componentName"
+    }
+    ```
 
-  <!-- Auto generated by kcl-doc tool, please do not edit. -->
-  ~~~
+    <!-- Auto generated by kcl-doc tool, please do not edit. -->
 
-## 4. Appendix
+    ~~~
 
-### 1. Concept of reST
+## 4. 附录
 
-For documents in reST format, paragraphs and indentation are important, new paragraphs are marked with blank lines, and indentation is the indentation indicated in the output. Font styles can be expressed as follows:
+### 1. 常见的 reST 概念
 
-* \*Italic\*
-* \*\*Bold\*\*
-* \`\`Monospaced\`\`
+对于 reST 格式的文档，段落和缩进很重要，新段落用空白行标记，缩进即为表示输出中的缩进。可以使用如下方式表示字体样式：
 
-Refer to [reST](https://docutils.sourceforge.io/rst.html) for more information.
+* \*斜体\*
+* \*\*粗体\*\*
+* \`\`等宽字体\`\`
+
+参考 [reST 文档](https://docutils.sourceforge.io/rst.html)获得更多帮助。
