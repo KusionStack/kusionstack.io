@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # KCL 语法
 
-### 1. 如何用 KCL 写一个简单的 key-value 对配置
+## 1. 如何用 KCL 写一个简单的 key-value 对配置
 
 创建一个名为 `config.k` 的文件
 
@@ -38,7 +38,7 @@ service: my-service
 kcl config.k -o config.yaml
 ```
 
-### 2. KCL 中有哪些基本的数据类型？
+## 2. KCL 中有哪些基本的数据类型？
 
 KCL 目前的基本数值类型和值包含:
 
@@ -75,7 +75,7 @@ bob = Person {
 
 注意: 所有 KCL 类型的变量均可赋值为空值 `None` 和未定义的值 `Undefined`
 
-### 3. 有些 KCL 变量名带 `_` 下划线前缀表示什么？和不带 `_` 下划线前缀的区别是什么？分别适合什么场景下使用？
+## 3. 有些 KCL 变量名带 `_` 下划线前缀表示什么？和不带 `_` 下划线前缀的区别是什么？分别适合什么场景下使用？
 
 KCL 中带下划线前缀的变量表示一个**隐藏**的，**可变**的变量，**隐藏**表示带下划线前缀的变量不会被输出到 YAML 当中，包括包级别的下划线前缀变量和 schema 当中的下划线前缀变量。**可变**表示带下划线前缀的变量可被多次重复赋值，不带下划线前缀的变量被赋值后不可变。
 
@@ -94,7 +94,7 @@ schema Person:
     _name: str # hidden and mutable
 ```
 
-### 4. 如何向 dict 中添加元素？
+## 4. 如何向 dict 中添加元素？
 
 可以使用 union 运算符 `|`, 或者 dict 解包运算符 `**` 来向 dict 中添加一个元素，并且可以使用 `in`,`not in` 等关键字判断 dict 变量当中是否包含某一个键值
 
@@ -138,9 +138,9 @@ data:
   key2: value2
 ```
 
-### 5. 如何修改 dict 中的元素？
+## 5. 如何修改 dict 中的元素？
 
-与问题[如何向 dict 中添加元素？](#3-%E5%A6%82%E4%BD%95%E5%90%91-dict-%E4%B8%AD%E6%B7%BB%E5%8A%A0%E5%85%83%E7%B4%A0)类似，可以使用 union 运算符 `|`, 或者解包运算符 `**` 修改 dict 当中的元素
+我们可以使用 union 运算符 `|`, 或者解包运算符 `**` 修改 dict 当中的元素
 
 ```python
 _data = {key = "value"}  # {"key": "value"}
@@ -150,7 +150,7 @@ _data = {**_data, **{key = "override_value2"}}  # {"key": "override_value2"}
 
 如果想要删除 dict 中某个键为 `key` 的值，可以使用解包运算符 `**{key = Undefined}` 或者合并运算符 `| {key = Undefined}` 进行覆盖，覆盖后 key 的值为 Undefined，不会进行 YAML 输出。
 
-### 6. 如何向 list 中添加元素？
+## 6. 如何向 list 中添加元素？
 
 在 list 中添加元素有两种方式：
 
@@ -181,7 +181,7 @@ data4 = data1 + data2 or [] # Right [1, 2, 3], 使用 or 取 data2 的默认值�
 data5 = data1 + data2  # Error: can only concatenate list (not "NoneType") to list
 ```
 
-### 7. 如何修改/删除 list 中的元素？
+## 7. 如何修改/删除 list 中的元素？
 
 修改 list 中的元素分为两种方式：
 
@@ -232,7 +232,7 @@ anotherWayDeleteListItem:
 - 2
 ```
 
-### 8. 怎样写 for 循环？怎样理解和使用 list comprehension 列表推导式 和 dict comprehension 字典推导式 ？
+## 8. 怎样写 for 循环？怎样理解和使用 list comprehension 列表推导式 和 dict comprehension 字典推导式 ？
 
 KCL 目前仅支持函数式/声明式的推导式 for 循环方式，可以按照如下方式遍历 dict 和 list 变量:
 
@@ -342,7 +342,7 @@ dataKeys3 = [k for k, _ in data]  # ["key1", "key2"]
 dataValues3 = [v for _, v in data]  # ["value1", "value2"]
 ```
 
-### 9. 怎样写 if 条件语句？
+## 9. 怎样写 if 条件语句？
 
 KCL 支持两种方式书写 if 条件语句:
 
@@ -412,7 +412,7 @@ config = {
 }  # {"MY_PROD_ENV": "prod_value"}
 ```
 
-### 10. 怎样表达 "与" "或" "非" 等逻辑运算？
+## 10. 怎样表达 "与" "或" "非" 等逻辑运算？
 
 在 KCL 中，使用 `and` 表示"逻辑与", 使用 `or` 表示"逻辑或", 使用 `not` 表示"非", 与 C 语言当中的 `&&`, `||` 和 `~` 语义一致；
 
@@ -444,7 +444,7 @@ x0 = value if value else default
 x1 = value or default  # 使用 value or default 代替 value if value else default
 ```
 
-### 11. 如何判断变量是否为 None/Undefined、字符串/dict/list 是否为空？
+## 11. 如何判断变量是否为 None/Undefined、字符串/dict/list 是否为空？
 
 请注意，在 if 表达式的条件判断中，`False`、`None`、`Undefined`、数字 `0`、空列表 `[]`、空字典 `{}` 和空字符串 `""`, `''`, `""""""`, `''''''` 都被视为值为 `假` 的表达式。
 
@@ -481,7 +481,7 @@ isEmptyList = bool(_emptyList)
 isEmptyDict = bool(_emptyDict)
 ```
 
-### 12. 字符串怎样拼接、怎样格式化字符串、怎样检查字符串前缀、后缀？怎样替换字符串内容？
+## 12. 字符串怎样拼接、怎样格式化字符串、怎样检查字符串前缀、后缀？怎样替换字符串内容？
 
 - KCL 中可以使用 `+` 运算符连接两个字符串
 
@@ -498,7 +498,6 @@ data2 = "string1" + " " + "string2"  # "string1 string2"
 hello = "hello"
 a = "{} world".format(hello)
 b = "${hello} world"
-# a,b 均被赋值为"hello world"
 ```
 
 注意，如果想在 `"{}".format()` 中单独使用 `{` 字符或者 `}`, 则需要使用 `{{` 和 `}}` 分别对 `{` 和 `}` 进行转义，比如转义一个 JSON 字符串如下代码：
@@ -553,10 +552,6 @@ data2 = regex.replace("abc123", r"\D", "0")  # 替换"abc123"中的所有非数�
 
 其中，`r"\D"` 表示不需要使用 `\\` 转义 `\D` 中的反斜杠 `\`，多用于正则表达式字符串中
 
-`regex.replace` 函数详细使用方式请参考:
-
-- [如何使用正则表达式？](#14-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F)
-
 此外，我们可以在字符串格式化表达式中插入索引占位符或者关键字占位符用于格式化多个字符串
 
 - 索引占位符
@@ -573,7 +568,7 @@ x: Read the directions
 y: string string string
 ```
 
-  关键字占位符
+- 关键字占位符
 
 ```python
 x = 'a: {a}, b: {b}, c: {c}'.format(a = 1, b = 'Two', c = 12.3)
@@ -585,7 +580,7 @@ x = 'a: {a}, b: {b}, c: {c}'.format(a = 1, b = 'Two', c = 12.3)
 x: 'a: 1, b: Two, c: 12.3'
 ```
 
-### 13. 字符串中使用单引号和双引号的区别是什么？
+## 13. 字符串中使用单引号和双引号的区别是什么？
 
 KCL 单引号和双引号字符串几乎没有区别。唯一的区别是，不需要在单引号字符串中使用 `\"` 转义双引号 `"`，不需要在双引号字符串中使用 `\'` 转义单引号引号 `'`。
 
@@ -612,7 +607,7 @@ longStrWithQuote2: Single quotes in long strings '(not at the beginning and end)
 longStrWithQuote3: Single quotes in long strings '(not at the beginning and end)
 ```
 
-### 14. 如何编写跨行的长字符串？
+## 14. 如何编写跨行的长字符串？
 
 KCL 中可以使用单引号字符串 + 换行符 `\n` 或者三引号字符串书写一个多行字符串，并且可以借助续行符 `\` 优化 KCL 字符串的形式，比如对于如下代码中的三个多行字符串变量，它们的制是相同的：
 
@@ -646,11 +641,11 @@ string3: |
   The third line
 ```
 
-### 15. 如何使用正则表达式？
+## 15. 如何使用正则表达式？
 
 通过在 KCL 中导入正则表达式库 `import regex` 即可使用正则表达式，其中包含了如下函数:
 
-- **match**: 正则表达式匹配函数，正根正则表达式对输入字符串进行匹配，返回 bool 类型表示是否匹配成功
+- **match**: 正则表达式匹配函数，根据正则表达式对输入字符串进行匹配，返回 bool 类型表示是否匹配成功
 - **split**: 正则表达式分割函数，根据正则表达式分割字符串，返回分割字串的列表
 - **replace**: 正则表达式替换函数，替换字符串中所有满足正则表达式的子串，返回被替换的字符串
 - **compile**: 正则表达式编译函数，返回 bool 类型表示是否是一个合法的正则表达式
@@ -722,11 +717,11 @@ schema Env:
         regex.match(name, r"[A-Za-z_][A-Za-z0-9_]*"), "a valid env name must start with alphabetic character or '_', followed by a string of alphanumeric characters or '_'"
 ```
 
-### 16. KCL 当中的 schema 是什么含义？
+## 16. KCL 当中的 schema 是什么含义？
 
-schema 是 KCL 中一种语言元素，用于定义配置数据的类型，像 C 语言中的 struct 或者 Java 中的 class 一样，在其中可以定义属性，每种属性具有相应的类型，比如问题 [17. 如何声明 schema](#17-%E5%A6%82%E4%BD%95%E5%A3%B0%E6%98%8E-schema-) 当中显示的 schema 例子
+schema 是 KCL 中一种语言元素，用于定义配置数据的类型，像 C 语言中的 struct 或者 Java 中的 class 一样，在其中可以定义属性，每种属性具有相应的类型。
 
-### 17. 如何声明 schema？
+## 17. 如何声明 schema？
 
 KCL 中使用 schema 关键字可以定义一个结构，在其中可以申明 schema 的各个属性
 
@@ -753,10 +748,9 @@ schema Deployment:
     labels: {str:str}
 ```
 
-在上面的代码中，`cpu` 和 `memory` 被定义为整数 int 类型；`name`，`image` 和 `service` 是字符串 str 类型;
-`command` 是字符串类型的列表; labels 是字典类型，其键类型和值类型均为字符串。
+在上面的代码中，`cpu` 和 `memory` 被定义为整数 int 类型；`name`，`image` 和 `service` 是字符串 str 类型; `command` 是字符串类型的列表; labels 是字典类型，其键类型和值类型均为字符串。
 
-### 18. 如何为 schema 属性添加 "不可变"、"必选" 约束？
+## 18. 如何为 schema 属性添加 "不可变"、"必选" 约束？
 
 KCL 中使用 `?` 运算符定义一个 schema 的"可选"约束，schema 属性默认都是"必选"的
 
@@ -770,7 +764,7 @@ schema Person:
     age = 10  # Error, age是一个不可变的属性
 ```
 
-### 19. 如何为 schema 中的属性编写校验规则？
+## 19. 如何为 schema 中的属性编写校验规则？
 
 在 schema 定义当中可以使用 check 关键字编写 schema 属性的校验规则, 如下所示，check 代码块中的每一行都对应一个条件表达式，当满足条件时校验成功，当不满足条件时校验失败, 条件表达式后可跟 `, "check error message"` 表示当校验失败时需要显示的信息
 
@@ -820,7 +814,7 @@ schema Sample:
 | 非空校验 | 使用 schema 的可选/必选属性                             |
 | 条件校验 | 使用 check if 条件表达式                                |
 
-### 20. 如何为 schema 及其属性添加文档注释？
+## 20. 如何为 schema 及其属性添加文档注释？
 
 一个完整的 schema 属性注释使用三引号字符串表示，其中的结构如下所示:
 
@@ -856,7 +850,7 @@ person = Person {
 }
 ```
 
-### 21. 如何基于 schema 编写配置？多个配置之间如何复用公共的配置？
+## 21. 如何基于 schema 编写配置？多个配置之间如何复用公共的配置？
 
 在 schema 实例化的过程中可以使用解包运算符 `**` 对公共的配置进行展开
 
@@ -902,7 +896,7 @@ girl:
   hc: 10
 ```
 
-### 22. 基于 schema 编写配置时如何覆盖 schema 属性的默认值？
+## 22. 基于 schema 编写配置时如何覆盖 schema 属性的默认值？
 
 在定义 schema 后，可以使用 schema 名称实例化相应的配置，使用 `:` 运算符对 schema 默认值进行 union, 使用 `=` 对 schema 默认值进行覆盖。对于 int/float/bool/str 类型的 schema 属性，union 和覆盖的效果相同; 对于 list/dict/schema 类型的 schema 属性，union 和覆盖的效果不同;
 
@@ -928,7 +922,7 @@ meta:
     key2: value2
 ```
 
-### 23. 如何通过继承来复用 schema 定义？
+## 23. 如何通过继承来复用 schema 定义？
 
 可以在 schema 定义处声明 schema 需要继承的 schema 名称:
 
@@ -967,7 +961,7 @@ employee:
 
 注意: KCL 只允许 schema 单继承
 
-### 24. 如何通过组合复用 schema 逻辑？
+## 24. 如何通过组合复用 schema 逻辑？
 
 可以使用 KCL schema mixin 复用 schema 逻辑，mixin 一般被用于 schema 内部属性的分离数据，和数据映射等功能，可以使 KCL 代码更具模块化和声明性。注意不同的 mixin 之间的混入属性不建议定义依赖关系，会使得 mixin 使用方式复杂，一般一个 mixin 中作不超过三个属性混入即可。
 
@@ -1002,7 +996,7 @@ person:
   upper: JOHN DOE
 ```
 
-### 25. 如何导入其他 KCL 文件？
+## 25. 如何导入其他 KCL 文件？
 
 通过 import 关键字可以导入其他 KCL 文件，KCL 配置文件被组织为模块。单个 KCL 文件被视为一个模块，目录被视为一个包，作为一个特殊的模块。import 关键字支持相对路径导入和绝对路径导入两种方式
 
@@ -1040,7 +1034,7 @@ import ...root  # 相对路径导入, 父目录的父目录
 import model  # Error: recursively loading
 ```
 
-### 26. 什么情况下可以省略 import ？
+## 26. 什么情况下可以省略 import ？
 
 除了 main 包当中的同一文件夹下的 KCL 可以相互引用而不需通过 import 相互引用，比如对于如下目录结构:
 
@@ -1076,7 +1070,7 @@ schema Service(BaseService):
     id: str
 ```
 
-### 27. 有一行代码太长了，如何在语法正确的情况下优雅地换行？
+## 27. 有一行代码太长了，如何在语法正确的情况下优雅地换行？
 
 在 KCL 中可以使用续行符 `\` 进行换行, 并且在字符串中也可以使用 `\` 表示续行
 
@@ -1155,7 +1149,7 @@ data3 = [ \
 ]  # Right, 使用续行符的列表定义, 无需保持缩进, 实际效果是单行列表
 ```
 
-### 28. **, * 这些符号是什么意思？
+## 28. **, * 这些符号是什么意思？
 
 - `**`, `*` 出现在 dict/list 外部时分别表示乘方运算符和乘法运算符
 
@@ -1180,7 +1174,7 @@ data = [1, 2, 3]
 dataUnpack = [*data, 4, 5, 6]  # 将data解包合并入dataUnpack中, [1, 2, 3, 4, 5, 6]
 ```
 
-### 29. 如何取 list/dict/schema 的子元素
+## 29. 如何取 list/dict/schema 的子元素
 
 在 KCL 中可以使用 select 表达式或者 subscript 表达式取 list/dict/schema 的子元素
 
@@ -1284,7 +1278,7 @@ data = None
 data1 = None[0] # error
 ```
 
-因此，在取集合类型的子元素时往往要进行非空或者长度判断：
+在取集合类型的子元素时往往要进行非空或者长度判断：
 
 ```python
 data = []
@@ -1306,7 +1300,7 @@ data = {key1.key2.key3 = []}
 item = data?.key1?.key2?.key3?[0]
 ```
 
-### 30. 如何在 KCL 代码中判断变量的类型
+## 30. 如何在 KCL 代码中判断变量的类型
 
 KCL typeof built-in 函数可以在该函数执行时立即返回一个变量的类型(字符串表示)用于类型断言
 
@@ -1341,7 +1335,7 @@ t6 = typeof(_x1, full_name=True)
 # t6: __main__.Person
 ```
 
-### 31. 关键字和 KCL 变量名冲突了可以怎么解决?
+## 31. 关键字和 KCL 变量名冲突了可以怎么解决?
 
 对于与关键字冲突的标识符，可以在标识符前添加 `$` 前缀用于定义一个关键字标识符，比如如下代码中使用了 `if`, `else` 等关键字作为标识符并且可以得到相应的 YAML 输出
 
@@ -1371,7 +1365,7 @@ _a = 1
 $_a = 2  # 等效于 `_a = 2`
 ```
 
-### 32. KCL 的内置类型是 KCL 的关键字吗？是否可用于变量的定义
+## 32. KCL 的内置类型是 KCL 的关键字吗？是否可用于变量的定义
 
 KCL 的内置类型包括 `int`, `float`, `bool` 和 `str` 四种类型，它们不是 KCL 的关键字，可用于变量的定义，比如如下代码：
 
@@ -1389,7 +1383,7 @@ str: 2
 
 注意：如无特殊需求，不建议变量的名称取这些内置类型，因为在有些语言当中，它们作为关键字存在
 
-### 33. 如何在 KCL 中实现类似 Enum 枚举的功能
+## 33. 如何在 KCL 中实现类似 Enum 枚举的功能
 
 有两种方式可以在 KCL 中实现 Enum 枚举的方式
 
@@ -1436,7 +1430,7 @@ person = Person {
 }
 ```
 
-### 34. 如何求字典 dict 的长度
+## 34. 如何求字典 dict 的长度
 
 在 KCL 中可以使用 `len` 内置函数直接求 dict 的长度
 
@@ -1454,7 +1448,7 @@ len1 = len("hello")  # 5
 len2 = len([1, 2, 3])  # 3
 ```
 
-### 35. 如何在 KCL 中编写带条件的配置
+## 35. 如何在 KCL 中编写带条件的配置
 
 在 KCL 中，除了支持在顶级的语句中书写 `if-elif-else` 条件表达式以外，还支持在 KCL 复杂结构（list/dict/schema）中书写条件表达式，支持带条件的配置书写。
 
@@ -1462,7 +1456,7 @@ len2 = len([1, 2, 3])  # 3
 x = 1
 # List 结构中的 if 条件语句
 dataList = [
-    if x == 1:
+    if x == 1: 1
 ]
 # Dict 结构中的 if 条件语句
 dataDict = {
@@ -1484,9 +1478,7 @@ dataSchema = Config {
 }
 ```
 
-注意：为降低书写配置复杂性提升可读性，在 KCL 复杂结构中暂不支持 `if-elif-else` 条件的嵌套
-
-### 36. KCL 中的 == 运算符会作深度比较嘛？
+## 36. KCL 中的 == 运算符会作深度比较嘛？
 
 KCL 中的 `==` 运算符
 
@@ -1504,7 +1496,7 @@ print([1, 2] == [1, 2, 3])  # False
 print({k1 = 1, k2 = 2, k3 = 3} == {k2 = 2, k1 = 1})  # False
 ```
 
-### 37. 如何对 KCL 中已有的配置块进行修改
+## 37. 如何对 KCL 中已有的配置块进行修改
 
 在 KCL 中，存在三种**属性运算符** `=`、`+=`、`:`，可以用来对已有配置块进行修改，并且可以使用**解包运算符** `**` 等"继承"一个配置块的所有属性字段和值。
 
@@ -1512,7 +1504,7 @@ print({k1 = 1, k2 = 2, k3 = 3} == {k2 = 2, k1 = 1})  # False
 - `+=` 属性运算符表示添加，一般用于对 list 类型的属性添加子元素，`+=` 属性运算符后跟的操作数类型也只能为 list 类型
 - `:` 属性运算符表示幂等合并，当值发生冲突时进行报错，不冲突时进行合并
 
-#### 覆盖属性运算符=
+### 覆盖属性运算符=
 
 最常使用的属性运算符是 `=`，表示一个属性的赋值，多次对同一个属性进行使用时表示覆盖，对于 `{}` 外的全局变量或者 `{}` 内的属性均表示使用值覆盖这个全局变量或者属性
 
@@ -1536,7 +1528,7 @@ bob = Person {
 }  # 最终 bob 的值为 {"name": "Bob", age: 10}
 ```
 
-#### 插入属性运算符 +=
+### 插入属性运算符 +=
 
 插入属性运算符表示对一个属性的值进行原地添加，比如向一个 list 类型的属性添加新的元素
 
@@ -1547,7 +1539,7 @@ data = {
 }  # 最终 data 的值为 {"args": ["kcl", "-Y", "settings.yaml"]}
 ```
 
-#### 合并属性运算符:
+### 合并属性运算符:
 
 合并属性运算符表示对一个属性的不同配置块值进行幂等的合并，当需要合并的值发生冲突时进行报错，多用于复杂配置合并场景
 
@@ -1732,7 +1724,7 @@ configNew:
     key2: value2
 ```
 
-#### KCL 发生 conflicting values on the attribute 'attr' between {value1} and {value2} 错误的解决方式
+### KCL 发生 conflicting values on the attribute 'attr' between {value1} and {value2} 错误的解决方式
 
 当 KCL 发生类似 conflicting values on the attribute 'attr' between {value1} and {value2} 错误时，一般是合并属性运算符 `:` 的使用问题，表明 `value1` 和 `value2` 配置进行合并时在属性 `attr` 处发生了冲突错误。一般情况将 value2 的 attr 属性修改为其他属性运算符即可，使用 `=` 表示覆盖，使用 `+=` 表示添加
 
@@ -1748,7 +1740,7 @@ data = {k: 1} | {k: 2}  # Error: conflicting values on the attribute 'k' between
 data = {k: 1} | {k = 2}  # Ok: the value 2 will override the value 1 through the `=` operator
 ```
 
-### 38. KCL 中如何同时遍历多个元素
+## 38. KCL 中如何同时遍历多个元素
 
 KCL 中可以使用 for 推导表达式遍历多个元素
 
@@ -1808,7 +1800,7 @@ dimension3:
 - 6
 ```
 
-### 39. KCL 中如何为 option 函数设定默认值
+## 39. KCL 中如何为 option 函数设定默认值
 
 在 KCL 中，当 option 属性的值为 None/Undefined 空时，可以使用逻辑或 `or` 直接指定一个默认值
 
@@ -1822,7 +1814,7 @@ value = option("key") or "default_value"  # 当 key 的值存在时，取 option
 value = option("key", default="default_value")  # 当 key 的值存在时，取 option("key") 的值，否则取 "default_value"
 ```
 
-### 40. KCL 中 schema 怎么检查多个属性不能同时为空
+## 40. KCL 中 schema 怎么检查多个属性不能同时为空
 
 在 KCL 中，对于 schema 的单个属性不能为空可以使用属性非空标记
 
@@ -1854,10 +1846,10 @@ schema Config:
     b?: str
 
     check:
-        a or b, "a属性和b属性不能同时填写"
+        not a or not b, "a属性和b属性不能同时填写"
 ```
 
-### 41. KCL 中 import 了某个文件但是找不到其同目录下其他 KCL 文件定义的 schema 可能是什么原因
+## 41. KCL 中 import 了某个文件但是找不到其同目录下其他 KCL 文件定义的 schema 可能是什么原因
 
 可能是与使用 import 仅导入了这个文件夹的这一个文件导致，在 KCL 中，import 支持导入整个文件夹，也支持导入某一个文件夹下的的某一个 KCL 文件，比如对于如下目录结构
 
@@ -1883,7 +1875,7 @@ import pkg
 import pkg.pkg1
 ```
 
-### 42. KCL 中的缩进是如何处理的?
+## 42. KCL 中的缩进是如何处理的?
 
 在 KCL 中，在出现冒号 `:`、中括号对 `[]` 以及大括号对 `{}` 时，一般需要使用换行 + 缩进，同一缩进级的缩进空格数需要保持一致，一个缩进级一般采用 4 个空格表示
 
@@ -1936,7 +1928,7 @@ data = {  # 左大括号 { 后跟换行+缩进
 }  # 右大括号 } 前取消缩进
 ```
 
-### 43. 如何为 KCL 代码编写简单的测试？
+## 43. 如何为 KCL 代码编写简单的测试？
 
 KCL 目前的版本还不支持内部程序调试，可以使用 assert 语句以及 print 函数实现数据的断言和打印查看
 
@@ -1978,7 +1970,7 @@ schema TestPerson_ok:
     assert a.age == 1
 ```
 
-然后再目录下执行 kcl-test 命令:
+然后在目录下执行 kcl-test 命令:
 
 ```
 $ kcl-test
@@ -1986,7 +1978,7 @@ ok   /pkg/to/app [365.154142ms]
 $
 ```
 
-### 44. KCL 中如何定义函数或定义方法？
+## 44. KCL 中如何定义函数或定义方法？
 
 schema 结构在一定程度上充当了函数的功能，并且这个函数具有多个输入参数和多个输出参数的能力，比如如下代码可以实现一个斐波那契数列的功能:
 
@@ -2117,7 +2109,7 @@ data:
   id2: 2
 ```
 
-### 45. 为什么变量赋值为枚举类型(字面值联合类型)时会报错
+## 45. 为什么变量赋值为枚举类型(字面值联合类型)时会报错
 
 在 KCL 中，被定义为字面值联合类型的属性，在赋值时仅允许接收一个字面值或者同为字面值联合类型的变量，比如如下代码是正确的：
 
@@ -2171,7 +2163,7 @@ data = Data {
 }
 ```
 
-### 46. 过程式的 for 循环
+## 46. 过程式的 for 循环
 
 KCL 中为何不支持过程式的 for 循环！
 
@@ -2187,7 +2179,7 @@ result = [(lambda x: int, y: int -> int {
 })(x, y) for x in [1, 2] for y in [1, 2]]  # [2, 2, 4, 4]
 ```
 
-### 47. 默认变量不可变
+## 47. 默认变量不可变
 
 KCL 变量不可变性是指 KCL 顶层结构中的非下划线 `_` 开头的导出变量初始化后不能被改变。
 
@@ -2214,9 +2206,9 @@ a = 1  # 不可变导出变量
 _b = 2  # 可变非导出变量
 ```
 
-### 48. 如何通过编写 KCL 插件进行扩展?
+## 48. 如何通过编写 KCL 插件进行扩展?
 
-KCL 插件在 KCLVM 的 plugins 子目录（通常安装在 `$HOME/.kusion/kclvm/plugins` 目录），或者通过 `$KCL_PLUGINS_ROOT` 环境变量设置（环境变量优先级更高）。对于插件开发人员，插件都在 Git 仓库管理，可以将插件仓库克隆到该目录进行开发。
+KCL 插件在 KCLVM 的 plugins 子目录（通常安装在 `$HOME/.kusion/kclvm/plugins` 目录），或者通过 `$KCL_PLUGINS_ROOT` 环境变量设置（环境变量优先级更高）。对于插件开发人员，插件都在 [Git 仓库](https://github.com/KusionStack/kcl-plugin)管理，可以将插件仓库克隆到该目录进行开发。
 
 KCL 内置了 kcl-plugin 脚手架命令用于辅助用户使用 Python 语言编写 KCL 插件，以便在 KCL 文件当中调用相应的插件对 KCL 语言本身进行增强，比如访问网络，读写 IO，CMDB 查询和加密解密等功能。
 
