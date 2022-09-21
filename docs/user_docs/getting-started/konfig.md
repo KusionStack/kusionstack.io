@@ -2,61 +2,59 @@
 sidebar_position: 9
 ---
 
-# Kusion 模型库
+# Kusion Model Library
 
-**Kusion 模型库**也叫做 `Kusion Model`，是 KusionStack 中预置的、用 KCL 描述的配置模型，它提供给用户开箱即用、高度抽象的配置接口，模型库最初朴素的出发点就是改善 YAML 用户的效率和体验，我们希望通过将代码更繁杂的模型抽象封装到统一的模型中，从而简化用户侧配置代码的编写。
+Kusion model library, is a preset configuration model described by KCL. It provides users with out-of-the-box, highly abstract configuration interfaces. The original starting point of the model library is to improve the efficiency and experience of YAML users. We hope to simplify the writing of user-side configuration code by abstracting and encapsulating the model with more complex code into a unified model.
 
-Konfig 仓库地址：https://github.com/KusionStack/konfig
+Konfig repository address: https://github.com/KusionStack/konfig
 
-![](/img/docs/user_docs/getting-started/konfig-arch-01.png)
+![](/img/docs/user_docs/getting-started/konfig-arch-01-en.png)
 
-## 1. 目录结构
+## 1. Directory
 
-先克隆 Kusion 模型库：`git clone git@github.com:KusionStack/Konfig.git`。
+First clone the Kusion model library: `git clone git@github.com:KusionStack/Konfig.git`。
 
-Konfig 配置大库整体结构如下：
+The overall structure of the Config configuration library is as follows:
 
 ```bash
 .
-├── Makefile            # 通过 Makefile 封装常用命令
-├── README.md           # 配置大库说明
-├── appops              # 应用运维目录，用来放置所有应用的 KCL 运维配置
+├── Makefile
+├── README.md
+├── appops # App Ops
 │   ├── guestbook-frontend
 │   ├── http-echo
 │   └── nginx-example
-├── base                # Kusion Model 模型库
-│   ├── examples        # Kusion Model 样例代码
-│   │   ├── monitoring  # 监控配置样例
-│   │   ├── native      # Kubernetes 资源配置样例
-│   │   └── server      # 云原生应用运维配置模型样例
+├── base                # Kusion Models
+│   ├── examples        # Kusion Model Examples
+│   │   ├── monitoring  # monitoring example
+│   │   ├── native      # Kubernetes example
+│   │   └── server
 │   └── pkg
-│       ├── kusion_kubernetes   # Kubernetes 底层模型库
-│       ├── kusion_models       # 核心模型库
-│       └── kusion_prometheus   # Prometheus 底层模型库
-├── hack                # 放置一些脚本
-└── kcl.mod             # 大库配置文件，通常用来标识大库根目录位置以及大库所需依赖
+│       ├── kusion_kubernetes   # Kubernetes low level models
+│       ├── kusion_models       # core models
+│       └── kusion_prometheus   # Prometheus low level models
+├── hack                # utils script
+└── kcl.mod             # kcl module file
 ```
 
-## 2. 测试 Konfig 代码
+## 2. Test the Konfig
 
-在安装完成 Kusion 工具之后，在 Konfig 根目录执行 `make check-all` 测试大库全部应用（参考 [Project & Stack
-](/docs/user_docs/concepts/project-stack)），或者执行 `make check-http-echo` 测试 `appops/http-echo` 应用。
+After the Kusion tool is installed, execute the `make check-all` test (refer to Project & Stack ), or execute the `make check-http-echo` test `appops/http-echo` application.
 
-如果需要单独测试 `appops/http-echo` 应用的 dev 版本，可以进入 `appops/http-echo/dev` 目录执行 `kusion compile` 命令（或者通过更底层的 `kcl -Y kcl.yaml ./ci-test/settings.yaml` 命令），输出的文件在 `appops/http-echo/dev/ci-test/stdout.golden.yaml` 文件。
+If you need to test the dev version of the `appops/http-echo` application , you can enter the `appops/http-echo/dev` directory to execute the `kusion compile` command (or through a lower-level `kcl -Y kcl.yaml ./ci-test/settings.yaml` command), and the output file is in the `appops/http-echo/dev/ci-test/stdout.golden.yaml` file .
 
-## 3. 添加应用
+## 3. Add app
 
-在 [快速开始/Usecase](/docs/user_docs/getting-started/usecase) 我们已经展示如何快速添加一个应用（参考 [Project & Stack
-](/docs/user_docs/concepts/project-stack)）。
+In [Quick Start/Usecase](/docs/user_docs/getting-started/usecase) we have shown how to quickly add an application (see [Project & Stack](/docs/user_docs/concepts/project-stack)).
 
-## 4. Konfig 架构图
+## 4. Konfig Architecture
 
-之所以用一个大的仓库管理全部的 IaC 配置代码，是由于不同代码包的研发主体不同，会引发出包管理和版本管理的问题，从而导致平台侧需要支持类似编译平台的能力。采用大库模式下，业务配置代码、基础配置代码在一个大库中，因此代码间的版本依赖管理比较简单，平台侧处理也比较简单，定位唯一代码库的目录及文件即可，代码互通，统一管理，便于查找、修改、维护（大库模式也是 Google 等头部互联网公司内部实践的模式）。
+The reason why a large warehouse is used to manage all the IaC configuration codes is that the development subjects of different code packages are different, which will lead to the problems of package management and version management, which leads to the need for the platform side to support the ability of similar compilation platforms. In the big library mode, the business configuration code and basic configuration code are in one big library, so the version dependency management between codes is relatively simple, and the processing on the platform side is relatively simple. It is enough to locate the directory and file of the unique code library, and the code can communicate with each other. Unified management, easy to find, modify and maintain (the big library mode is also the internal practice mode of Google and other leading Internet companies).
 
-下面是 Konfig 的架构图：
+The following is the architecture diagram of Konfig:
 
-![](/img/docs/user_docs/getting-started/konfig-arch-01.png)
+![](/img/docs/user_docs/getting-started/konfig-arch-01-en.png)
 
-核心模型内部通过前端模型和后端模型两层抽象简化前端用户的配置代码，底层模型则是通过 [KCL OpenAPI](/docs/reference/cli/openapi) 工具自动生成。
+The core model simplifies the configuration code of front-end users through two-layer abstraction of front-end model and back-end model, and the underlying model is automatically generated by [KCL OpenAPI](/docs/reference/cli/openapi) tool.
 
-模型的更详细文档可参考 [参考手册/Kusion 模型库](/docs/reference/model)。
+More detailed documentation of the model can be found in the Reference [Kusion Model Library](/docs/reference/model).

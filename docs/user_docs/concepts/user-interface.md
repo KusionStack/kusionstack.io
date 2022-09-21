@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# 用户界面
+# User Interface
 
 ## 1. 单 App 应用界面
 

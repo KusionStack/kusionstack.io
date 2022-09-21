@@ -3,33 +3,65 @@
     "message": "Next",
     "description": "The label for version current"
   },
-  "sidebar.docs.category.参考手册": {
+  "sidebar.docs.category.Reference": {
     "message": "Reference",
-    "description": "The label for category 参考手册 in sidebar docs"
+    "description": "The label for category Reference in sidebar docs"
   },
-  "sidebar.docs.category.命令行工具": {
+  "sidebar.docs.category.Command Line Tools": {
     "message": "Command Line Tools",
-    "description": "The label for category 命令行工具 in sidebar docs"
+    "description": "The label for category Command Line Tools in sidebar docs"
   },
-  "sidebar.docs.category.Kusion 工具": {
+  "sidebar.docs.category.Kusion Tools": {
     "message": "Kusion Tools",
-    "description": "The label for category Kusion 工具 in sidebar docs"
+    "description": "The label for category Kusion Tools in sidebar docs"
   },
-  "sidebar.docs.category.KCL 语言工具": {
+  "sidebar.docs.category.KCL Tools": {
     "message": "KCL Tools",
-    "description": "The label for category KCL 语言工具 in sidebar docs"
+    "description": "The label for category KCL Tools in sidebar docs"
   },
-  "sidebar.docs.category.OpenAPI 工具": {
+  "sidebar.docs.category.OpenAPI Tools": {
     "message": "OpenAPI Tools",
-    "description": "The label for category OpenAPI 工具 in sidebar docs"
+    "description": "The label for category OpenAPI Tools in sidebar docs"
   },
-  "sidebar.docs.category.Kusion 模型库": {
-    "message": "Kusion Model",
-    "description": "The label for category Kusion 模型库 in sidebar docs"
+  "sidebar.docs.category.KCL": {
+    "message": "KCL",
+    "description": "The label for category KCL in sidebar docs"
   },
-  "sidebar.docs.category.核心模型库": {
-    "message": "Core Model",
-    "description": "The label for category 核心模型库 in sidebar docs"
+  "sidebar.docs.category.Code Lab": {
+    "message": "Code Lab",
+    "description": "The label for category Code Lab in sidebar docs"
+  },
+  "sidebar.docs.category.Spec": {
+    "message": "Spec",
+    "description": "The label for category Spec in sidebar docs"
+  },
+  "sidebar.docs.category.Errors and Warnings": {
+    "message": "Errors and Warnings",
+    "description": "The label for category Errors and Warnings in sidebar docs"
+  },
+  "sidebar.docs.category. System Module": {
+    "message": " System Module",
+    "description": "The label for category  System Module in sidebar docs"
+  },
+  "sidebar.docs.category.Plugin System": {
+    "message": "Plugin System",
+    "description": "The label for category Plugin System in sidebar docs"
+  },
+  "sidebar.docs.category.Multi-Language": {
+    "message": "Multi-Language",
+    "description": "The label for category Multi-Language in sidebar docs"
+  },
+  "sidebar.docs.category.Use Case": {
+    "message": "Use Case",
+    "description": "The label for category Use Case in sidebar docs"
+  },
+  "sidebar.docs.category.Kusion Model Library": {
+    "message": "Kusion Model Library",
+    "description": "The label for category Kusion Model Library in sidebar docs"
+  },
+  "sidebar.docs.category.Core Model Library": {
+    "message": "Core Model Library",
+    "description": "The label for category Core Model Library in sidebar docs"
   },
   "sidebar.docs.category.kusion_kubernetes": {
     "message": "kusion_kubernetes",
@@ -155,145 +187,185 @@
     "message": "volume",
     "description": "The label for category volume in sidebar docs"
   },
-  "sidebar.docs.category.Konfig 配置大库": {
-    "message": "Konfig 配置大库",
-    "description": "The label for category Konfig 配置大库 in sidebar docs"
+  "sidebar.docs.category.Konfig": {
+    "message": "Konfig",
+    "description": "The label for category Konfig in sidebar docs"
   },
   "sidebar.docs.category.develop": {
     "message": "develop",
     "description": "The label for category develop in sidebar docs"
   },
-  "sidebar.docs.category.构建 Kusion": {
-    "message": "构建 Kusion",
-    "description": "The label for category 构建 Kusion in sidebar docs"
+  "sidebar.docs.category.Build Kusion": {
+    "message": "Build Kusion",
+    "description": "The label for category Build Kusion in sidebar docs"
   },
-  "sidebar.docs.category.设计与实现": {
-    "message": "设计与实现",
-    "description": "The label for category 设计与实现 in sidebar docs"
+  "sidebar.docs.category.Design and Implementation": {
+    "message": "Design and Implementation",
+    "description": "The label for category Design and Implementation in sidebar docs"
   },
   "sidebar.docs.category.governance": {
     "message": "governance",
     "description": "The label for category governance in sidebar docs"
   },
-  "sidebar.docs.category.开源社区": {
-    "message": "Open Source Community",
-    "description": "The label for category 开源社区 in sidebar docs"
+  "sidebar.docs.category.Community": {
+    "message": "Community",
+    "description": "The label for category Community in sidebar docs"
   },
-  "sidebar.docs.category.发版策略": {
+  "sidebar.docs.category.Release Policy": {
     "message": "Release Policy",
-    "description": "The label for category 发版策略 in sidebar docs"
+    "description": "The label for category Release Policy in sidebar docs"
   },
-  "sidebar.docs.category.贡献指南": {
+  "sidebar.docs.category.Contribution Guide": {
     "message": "Contribution Guide",
-    "description": "The label for category 贡献指南 in sidebar docs"
+    "description": "The label for category Contribution Guide in sidebar docs"
   },
   "sidebar.docs.category.user_docs": {
     "message": "user_docs",
     "description": "The label for category user_docs in sidebar docs"
   },
-  "sidebar.docs.category.简介": {
-    "message": "Intro",
-    "description": "The label for category 简介 in sidebar docs"
+  "sidebar.docs.category.Introduction": {
+    "message": "Introduction",
+    "description": "The label for category Introduction in sidebar docs"
   },
-  "sidebar.docs.category.快速开始": {
+  "sidebar.docs.category.Quick Start": {
     "message": "Quick Start",
-    "description": "The label for category 快速开始 in sidebar docs"
+    "description": "The label for category Quick Start in sidebar docs"
   },
-  "sidebar.docs.category.下载和安装": {
-    "message": "Download and Install",
-    "description": "The label for category 下载和安装 in sidebar docs"
+  "sidebar.docs.category.Download & Install": {
+    "message": "Download & Install",
+    "description": "The label for category Download & Install in sidebar docs"
   },
-  "sidebar.docs.category.架构 & 概念": {
+  "sidebar.docs.category.Architecture & Concept": {
     "message": "Architecture & Concept",
-    "description": "The label for category 架构 & 概念 in sidebar docs"
+    "description": "The label for category Architecture & Concept in sidebar docs"
   },
-  "sidebar.docs.category.用户指南": {
+  "sidebar.docs.category.User Guide": {
     "message": "User Guide",
-    "description": "The label for category 用户指南 in sidebar docs"
+    "description": "The label for category User Guide in sidebar docs"
   },
-  "sidebar.docs.category.开始 Kusion": {
-    "message": "Begin Kusion",
-    "description": "The label for category 开始 Kusion in sidebar docs"
+  "sidebar.docs.category.Start Kusion": {
+    "message": "Start Kusion",
+    "description": "The label for category Start Kusion in sidebar docs"
   },
   "sidebar.docs.category.Kubernetes": {
     "message": "Kubernetes",
     "description": "The label for category Kubernetes in sidebar docs"
   },
-  "sidebar.docs.category.项目组织最佳实践": {
-    "message": "Project Organization Best Practices",
-    "description": "The label for category 项目组织最佳实践 in sidebar docs"
+  "sidebar.docs.category.Project Best Practices": {
+    "message": "Project Best Practices",
+    "description": "The label for category Project Best Practices in sidebar docs"
   },
   "sidebar.docs.category.ArgoCD": {
     "message": "ArgoCD",
     "description": "The label for category ArgoCD in sidebar docs"
   },
-  "sidebar.docs.category.敏感信息管理": {
-    "message": "Information security",
-    "description": "The label for category 敏感信息管理 in sidebar docs"
+  "sidebar.docs.category.Manage Sensitive Information": {
+    "message": "Manage Sensitive Information",
+    "description": "The label for category Manage Sensitive Information in sidebar docs"
   },
-  "sidebar.user_docs.category.简介": {
-    "message": "Intro",
-    "description": "The label for category 简介 in sidebar user_docs"
+  "sidebar.docs.category.FAQ": {
+    "message": "FAQ",
+    "description": "The label for category FAQ in sidebar docs"
   },
-  "sidebar.user_docs.category.快速开始": {
+  "sidebar.user_docs.category.Introduction": {
+    "message": "Introduction",
+    "description": "The label for category Introduction in sidebar user_docs"
+  },
+  "sidebar.user_docs.category.Quick Start": {
     "message": "Quick Start",
-    "description": "The label for category 快速开始 in sidebar user_docs"
+    "description": "The label for category Quick Start in sidebar user_docs"
   },
-  "sidebar.user_docs.category.下载和安装": {
-    "message": "Download and Install",
-    "description": "The label for category 下载和安装 in sidebar user_docs"
+  "sidebar.user_docs.category.Download & Install": {
+    "message": "Download & Install",
+    "description": "The label for category Download & Install in sidebar user_docs"
   },
-  "sidebar.user_docs.category.架构 & 概念": {
+  "sidebar.user_docs.category.Architecture & Concept": {
     "message": "Architecture & Concept",
-    "description": "The label for category 架构 & 概念 in sidebar user_docs"
+    "description": "The label for category Architecture & Concept in sidebar user_docs"
   },
-  "sidebar.user_docs.category.用户指南": {
+  "sidebar.user_docs.category.User Guide": {
     "message": "User Guide",
-    "description": "The label for category 用户指南 in sidebar user_docs"
+    "description": "The label for category User Guide in sidebar user_docs"
   },
-  "sidebar.user_docs.category.开始 Kusion": {
-    "message": "Begin Kusion",
-    "description": "The label for category 开始 Kusion in sidebar user_docs"
+  "sidebar.user_docs.category.Start Kusion": {
+    "message": "Start Kusion",
+    "description": "The label for category Start Kusion in sidebar user_docs"
   },
   "sidebar.user_docs.category.Kubernetes": {
     "message": "Kubernetes",
     "description": "The label for category Kubernetes in sidebar user_docs"
   },
-  "sidebar.user_docs.category.项目组织最佳实践": {
-    "message": "Project Organization Best Practices",
-    "description": "The label for category 项目组织最佳实践 in sidebar user_docs"
+  "sidebar.user_docs.category.Project Best Practices": {
+    "message": "Project Best Practices",
+    "description": "The label for category Project Best Practices in sidebar user_docs"
   },
   "sidebar.user_docs.category.ArgoCD": {
     "message": "ArgoCD",
     "description": "The label for category ArgoCD in sidebar user_docs"
   },
-  "sidebar.user_docs.category.敏感信息管理": {
-    "message": "Information security",
-    "description": "The label for category 敏感信息管理 in sidebar user_docs"
+  "sidebar.user_docs.category.Manage Sensitive Information": {
+    "message": "Manage Sensitive Information",
+    "description": "The label for category Manage Sensitive Information in sidebar user_docs"
   },
-  "sidebar.reference.category.命令行工具": {
+  "sidebar.user_docs.category.FAQ": {
+    "message": "FAQ",
+    "description": "The label for category FAQ in sidebar user_docs"
+  },
+  "sidebar.reference.category.Command Line Tools": {
     "message": "Command Line Tools",
-    "description": "The label for category 命令行工具 in sidebar reference"
+    "description": "The label for category Command Line Tools in sidebar reference"
   },
-  "sidebar.reference.category.Kusion 工具": {
+  "sidebar.reference.category.Kusion Tools": {
     "message": "Kusion Tools",
-    "description": "The label for category Kusion 工具 in sidebar reference"
+    "description": "The label for category Kusion Tools in sidebar reference"
   },
-  "sidebar.reference.category.KCL 语言工具": {
+  "sidebar.reference.category.KCL Tools": {
     "message": "KCL Tools",
-    "description": "The label for category KCL 语言工具 in sidebar reference"
+    "description": "The label for category KCL Tools in sidebar reference"
   },
-  "sidebar.reference.category.OpenAPI 工具": {
+  "sidebar.reference.category.OpenAPI Tools": {
     "message": "OpenAPI Tools",
-    "description": "The label for category OpenAPI 工具 in sidebar reference"
+    "description": "The label for category OpenAPI Tools in sidebar reference"
   },
-  "sidebar.reference.category.Kusion 模型库": {
-    "message": "Kusion Model",
-    "description": "The label for category Kusion 模型库 in sidebar reference"
+  "sidebar.reference.category.KCL": {
+    "message": "KCL",
+    "description": "The label for category KCL in sidebar reference"
   },
-  "sidebar.reference.category.核心模型库": {
-    "message": "Code Model",
-    "description": "The label for category 核心模型库 in sidebar reference"
+  "sidebar.reference.category.Code Lab": {
+    "message": "Code Lab",
+    "description": "The label for category Code Lab in sidebar reference"
+  },
+  "sidebar.reference.category.Spec": {
+    "message": "Spec",
+    "description": "The label for category Spec in sidebar reference"
+  },
+  "sidebar.reference.category.Errors and Warnings": {
+    "message": "Errors and Warnings",
+    "description": "The label for category Errors and Warnings in sidebar reference"
+  },
+  "sidebar.reference.category. System Module": {
+    "message": " System Module",
+    "description": "The label for category  System Module in sidebar reference"
+  },
+  "sidebar.reference.category.Plugin System": {
+    "message": "Plugin System",
+    "description": "The label for category Plugin System in sidebar reference"
+  },
+  "sidebar.reference.category.Multi-Language": {
+    "message": "Multi-Language",
+    "description": "The label for category Multi-Language in sidebar reference"
+  },
+  "sidebar.reference.category.Use Case": {
+    "message": "Use Case",
+    "description": "The label for category Use Case in sidebar reference"
+  },
+  "sidebar.reference.category.Kusion Model Library": {
+    "message": "Kusion Model Library",
+    "description": "The label for category Kusion Model Library in sidebar reference"
+  },
+  "sidebar.reference.category.Core Model Library": {
+    "message": "Core Model Library",
+    "description": "The label for category Core Model Library in sidebar reference"
   },
   "sidebar.reference.category.kusion_kubernetes": {
     "message": "kusion_kubernetes",
@@ -419,104 +491,32 @@
     "message": "volume",
     "description": "The label for category volume in sidebar reference"
   },
-  "sidebar.reference.category.Konfig 配置大库": {
-    "message": "Konfig Lib",
-    "description": "The label for category Konfig 配置大库 in sidebar reference"
+  "sidebar.reference.category.Konfig": {
+    "message": "Konfig",
+    "description": "The label for category Konfig in sidebar reference"
   },
-  "sidebar.develop.category.构建 Kusion": {
+  "sidebar.develop.category.Build Kusion": {
     "message": "Build Kusion",
-    "description": "The label for category 构建 Kusion in sidebar develop"
+    "description": "The label for category Build Kusion in sidebar develop"
   },
-  "sidebar.develop.category.设计与实现": {
+  "sidebar.develop.category.Design and Implementation": {
     "message": "Design and Implementation",
-    "description": "The label for category 设计与实现 in sidebar develop"
+    "description": "The label for category Design and Implementation in sidebar develop"
   },
-  "sidebar.governance.category.开源社区": {
-    "message": "Open Source Community",
-    "description": "The label for category 开源社区 in sidebar governance"
+  "sidebar.governance.category.Community": {
+    "message": "Community",
+    "description": "The label for category Community in sidebar governance"
   },
-  "sidebar.governance.category.发版策略": {
+  "sidebar.governance.category.Release Policy": {
     "message": "Release Policy",
-    "description": "The label for category 发版策略 in sidebar governance"
+    "description": "The label for category Release Policy in sidebar governance"
   },
-  "sidebar.governance.category.贡献指南": {
+  "sidebar.governance.category.Contribution Guide": {
     "message": "Contribution Guide",
-    "description": "The label for category 贡献指南 in sidebar governance"
+    "description": "The label for category Contribution Guide in sidebar governance"
   },
   "sidebar.governance.link.changelog": {
     "message": "changelog",
     "description": "The label for link changelog in sidebar governance, linking to /changelog"
-  },
-  "sidebar.docs.category.KCL": {
-    "message": "KCL",
-    "description": "The label for category KCL in sidebar docs"
-  },
-  "sidebar.docs.category.Code Lab": {
-    "message": "Code Lab",
-    "description": "The label for category Code Lab in sidebar docs"
-  },
-  "sidebar.docs.category.Spec": {
-    "message": "Spec",
-    "description": "The label for category Spec in sidebar docs"
-  },
-  "sidebar.docs.category.Errors and Warnings": {
-    "message": "Errors and Warnings",
-    "description": "The label for category Errors and Warnings in sidebar docs"
-  },
-  "sidebar.docs.category.Multi-Language": {
-    "message": "Multi-Language",
-    "description": "The label for category Multi-Language in sidebar docs"
-  },
-  "sidebar.docs.category.Advanced": {
-    "message": "Advanced",
-    "description": "The label for category Advanced in sidebar docs"
-  },
-  "sidebar.docs.category.Plugin System": {
-    "message": "Plugin System",
-    "description": "The label for category Plugin System in sidebar docs"
-  },
-  "sidebar.reference.category.KCL": {
-    "message": "KCL",
-    "description": "The label for category KCL in sidebar reference"
-  },
-  "sidebar.reference.category.Code Lab": {
-    "message": "Code Lab",
-    "description": "The label for category Code Lab in sidebar reference"
-  },
-  "sidebar.reference.category.Spec": {
-    "message": "Spec",
-    "description": "The label for category Spec in sidebar reference"
-  },
-  "sidebar.reference.category.Errors and Warnings": {
-    "message": "Errors and Warnings",
-    "description": "The label for category Errors and Warnings in sidebar reference"
-  },
-  "sidebar.reference.category.Multi-Language": {
-    "message": "Multi-Language",
-    "description": "The label for category Multi-Language in sidebar reference"
-  },
-  "sidebar.reference.category.Advanced": {
-    "message": "Advanced",
-    "description": "The label for category Advanced in sidebar reference"
-  },
-  "sidebar.reference.category.Plugin System": {
-    "message": "Plugin System",
-    "description": "The label for category Plugin System in sidebar reference"
-  },
-  "sidebar.docs.category.FAQ": {
-    "message": "FAQ",
-    "description": "The label for category FAQ in sidebar docs"
-  },
-  "sidebar.user_docs.category.FAQ": {
-    "message": "FAQ",
-    "description": "The label for category FAQ in sidebar user_docs"
-  },
-  "sidebar.docs.category. System Module": {
-    "message": " System Module",
-    "description": "The label for category  System Module in sidebar docs"
-  },
-  "sidebar.reference.category. System Module": {
-    "message": " System Module",
-    "description": "The label for category  System Module in sidebar reference"
   }
 }

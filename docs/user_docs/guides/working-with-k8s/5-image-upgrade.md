@@ -1,4 +1,4 @@
-# 镜像升级
+# Upgrade
 
 Server 模型中的 image 属性用于声明应用的业务容器镜像，有关镜像的定义，可以查看 KCL Model 中 [base.pkg.kusion_models.kube.frontend.server](/docs/reference/model/kusion_models/kube/frontend/doc_server) 模块的文档。
 

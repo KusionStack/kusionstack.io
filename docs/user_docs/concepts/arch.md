@@ -2,7 +2,7 @@
 sidebar_position: 4
 ---
 
-# Kusion 整体架构
+# Kusion Architecture
 
 架构图本质上反应的是 Kusion 的工作流程和工作机制。熟悉了整体架构图之后，同样能够做到纲举目张为 Kusion 的日常使用和开发提供指导。
 
