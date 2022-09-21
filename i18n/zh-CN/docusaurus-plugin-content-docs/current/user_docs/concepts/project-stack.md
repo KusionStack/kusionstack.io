@@ -6,7 +6,7 @@ sidebar_position: 2
 
 为了应对规模化运维面临的配置、团队多维度爆炸的挑战，Kusion 采用业界通用的思路通过引入 Project & Stack 一层抽象来规范和简化化配置代码的管理。它们是 Kusion 抽象的项目组织结构，项目采用 Project 概念抽象，其中对应多个 Stack 为可以独立部署、单独配置的最小 KCL 程序单元。二者关系如下图：
 
-![](/img/docs/user_docs/concepts/project-stack.png)
+![](/img/docs/user_docs/concepts/konfig.png)
 
 其中的 Base 比较特殊，对应 Project 中通用的基线配置，用于不同的 Stack 共享（并非独立部署单元）。
 

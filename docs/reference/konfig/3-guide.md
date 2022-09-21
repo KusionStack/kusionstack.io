@@ -6,15 +6,13 @@ sidebar_label: 使用指南
 
 ## 1. 添加应用
 
-在 [快速开始/Usecase](/docs/user_docs/getting-started/usecase) 我们已经展示如何快速添加一个应用（参考 [Project & Stack
-](/docs/user_docs/concepts/project-stack)）。
+在 [快速开始/Usecase](/docs/user_docs/getting-started/usecase) 我们已经展示如何快速添加一个应用（参考 [Project & Stack](/docs/user_docs/concepts/konfig)）。
 
 ## 2. 验证 Konfig 代码
 
 ### 2.1 快速开始
 
-在安装完成 Kusion 工具之后，在 Konfig 根目录执行 `make check-all` 验证大库全部 Project（参考 [Project & Stack
-](/docs/user_docs/concepts/project-stack)），或者执行 `make check WHAT="http-echo"` 验证 `appops/http-echo` 应用。
+在安装完成 Kusion 工具之后，在 Konfig 根目录执行 `make check-all` 验证大库全部 Project（参考 [Konfig](/docs/user_docs/concepts/konfig)），或者执行 `make check WHAT="http-echo"` 验证 `appops/http-echo` 应用。
 
 如果需要单独验证 `appops/http-echo` 应用的 dev 版本，可以进入 `appops/http-echo/dev` 目录执行 `kusion compile` 命令（或者通过更底层的 `kcl -Y kcl.yaml ci-test/settings.yaml -o ci-test/stdout.golden.yaml` 命令），输出的文件在 `appops/http-echo/dev/ci-test/stdout.golden.yaml`。
 

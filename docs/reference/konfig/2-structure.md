@@ -61,7 +61,7 @@ sidebar_label: 目录结构
 
 ## 3. Project 和 Stack 结构
 
-Project 和 Stack 的基本概念可见 [《Project & Stack》](/user_docs/concepts/project-stack.md)。
+Project 和 Stack 的基本概念可见 [《Project & Stack》](/user_docs/concepts/konfig.md)。
 
 Project 在配置大库的应用运维（appops）场景中对应的概念是「应用」，Stack 对应的概念是「环境」，更多映射关系可见[《映射关系》](/user_docs/guides/organizing-projects-stacks/mapping.md)。
 

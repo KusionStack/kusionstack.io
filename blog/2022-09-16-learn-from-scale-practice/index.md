@@ -56,7 +56,7 @@ The idea of ​​divide and conquer is the key to solving the problem of scale,
 
 In Ant Group's practice, Konfig monorepo is the programming workspace opened by the internal engineering platform to developers, helping application developers to write configurations and policies around the application operation life cycle with a unified programming interface and tech stack, to integrate with existing and future platform and infrastructure, to create and manage cloud-native environments and RBAC-based permissions on demand, and to manage the delivery workflow through GitOps. Konfig monorepo provides an independent white-box programming space for different scenarios, projects and applications, whose intrinsic scalability comes from:
 
-- Flexible, scalable, independent client-side [engineering structure design](https://kusionstack.io/docs/user_docs/concepts/project-stack)
+- Flexible, scalable, independent client-side [engineering structure design](https://kusionstack.io/docs/user_docs/concepts/konfig)
 - The [automatic merging](https://kusionstack.io/docs/reference/lang/lang/tour/#-operators-1) technology of isolated config blocks supports the arbitrary and scalable organization of config blocks
 - [Static type system](https://kusionstack.io/docs/reference/lang/lang/tour/#type-system) technology provides reusable and scalable type-based modeling and constraints in a modern programming language manner
 - Project-grained Gitops CI workflow definition support (add a link?)
@@ -116,6 +116,6 @@ Finally, I would like to talk about the next step. There’re still possibilitie
 - [https://web.devopstopologies.com/#anti-types](https://web.devopstopologies.com/#anti-types)
 - [https://github.com/KusionStack/KCLVM](https://github.com/KusionStack/KCLVM)
 - [https://kusionstack.io/docs/reference/lang/lang/tour](https://kusionstack.io/docs/reference/lang/lang/tour/#%E9%85%8D%E7%BD%AE%E6%93%8D%E4%BD%9C)
-- [https://kusionstack.io/docs/user_docs/concepts/project-stack](https://kusionstack.io/docs/user_docs/concepts/project-stack)
+- [https://kusionstack.io/docs/user_docs/concepts/konfig](https://kusionstack.io/docs/user_docs/concepts/konfig)
 - [https://cacm.acm.org/magazines/2016/7/204032-why-google-stores-billions-of-lines-of-code-in-a-single-repository/fulltext](https://cacm.acm.org/magazines/2016/7/204032-why-google-stores-billions-of-lines-of-code-in-a-single-repository/fulltext)
 
