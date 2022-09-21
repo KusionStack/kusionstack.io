@@ -1,16 +1,4 @@
 {
-  "link.item.label.Github": {
-    "message": "Github",
-    "description": "The label of footer link with label=Github linking to https://github.com/KusionStack"
-  },
-  "link.item.label.Slack": {
-    "message": "Slack",
-    "description": "The label of footer link with label=Slack linking to https://KusionStack.slack.com"
-  },
-  "copyright": {
-    "message": "Copyright © 2022 KusionStack Authors",
-    "description": "The footer copyright"
-  },
   "link.title.Document": {
     "message": "Document",
     "description": "The title of the footer links column with title=Document in the footer"
@@ -23,14 +11,6 @@
     "message": "More",
     "description": "The title of the footer links column with title=More in the footer"
   },
-  "link.item.label.faq": {
-    "message": "faq",
-    "description": "The label of footer link with label=faq linking to /docs/user_docs/support"
-  },
-  "link.item.label.Changelog": {
-    "message": "Changelog",
-    "description": "The label of footer link with label=Changelog linking to /changelog"
-  },
   "link.item.label.Introduction": {
     "message": "Introduction",
     "description": "The label of footer link with label=Introduction linking to /docs/user_docs/intro/kusion-intro"
@@ -38,5 +18,25 @@
   "link.item.label.Blog": {
     "message": "Blog",
     "description": "The label of footer link with label=Blog linking to /blog"
+  },
+  "link.item.label.Github": {
+    "message": "Github",
+    "description": "The label of footer link with label=Github linking to https://github.com/KusionStack"
+  },
+  "link.item.label.Slack": {
+    "message": "Slack",
+    "description": "The label of footer link with label=Slack linking to https://join.slack.com/t/kusionstack/shared_invite/zt-19lqcc3a9-_kTNwagaT5qwBE~my5Lnxg"
+  },
+  "link.item.label.FAQ": {
+    "message": "FAQ",
+    "description": "The label of footer link with label=FAQ linking to /docs/user_docs/support"
+  },
+  "link.item.label.Changelog": {
+    "message": "Changelog",
+    "description": "The label of footer link with label=Changelog linking to /changelog"
+  },
+  "copyright": {
+    "message": "Copyright © 2022 KusionStack Authors",
+    "description": "The footer copyright"
   }
 }
