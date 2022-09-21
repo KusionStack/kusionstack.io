@@ -1,124 +1,128 @@
 # Vault Agent
 
-本指南将向你展示，KCL/Kusion 通过集成 Vault，解决敏感信息的传输问题。
-本次演示是将数据库的用户名和密码传输到 Pod 中，涉及 3 个 Kubernetes 资源：
+This guide will show you that KCL/Kusion solves the secret management problem by integrating Vault.
+We will pass the database username and password into the Pod, involving 3 Kubernetes resources:
 
-- 命名空间（Namespace）
-- 无状态应用（Deployment）
-- 服务账号（ServiceAccount）
+- Namespace
+- Deployment
+- ServiceAccount
 
 :::tip
-本指南要求你对 Kubernetes 有基本的了解。不清楚相关概念的，可以前往 Kubernetes 官方网站，查看相关说明：
-- [Learn Kubernetes Basics](https://kubernetes.io/docs/tutorials/kubernetes-basics/)
-- [Namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
-- [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
-- [ServiceAccount](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/)
+
+This guide requires you to have a basic understanding of Kubernetes.
+If you are not familiar with the relevant concepts, please refer to the links below:
+- [Learn Kubernetes Basics](https://Kubernetes.io/docs/tutorials/Kubernetes-basics/)
+- [Namespace](https://Kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
+- [Deployment](https://Kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+- [ServiceAccount](https://Kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/)
 :::
 
-## 1. 准备开始
+## Prerequisites
 
-在开始之前，我们需要做以下准备工作：
+Before we start, we need to complete the following steps:
 
-1、安装 Kusion 工具链
+1、Install Kusion
 
-我们推荐使用 kusion 的官方安装工具 `kusionup`，可实现 kusion 多版本管理等关键能力。
-详情信息请参阅[下载和安装](/docs/user_docs/getting-started/install)。
+We recommend using the official installation tool _kusionup_ which supports multi-version management.
+See [Download and Install](/docs/user_docs/getting-started/install) for more details.
 
-2、下载开源 Konfig 大库
+2、Clone Konfig repo
 
-在本篇指南中，需要用到部分已经抽象实现的 KCL 模型。
-有关 KCL 语言的介绍，可以参考 [Tour of KCL](/reference/lang/lang/tour.md)。
+In this guide, we need some KCL models that [Konfig](https://github.com/KusionStack/konfig.git) offers.
+For more details on KCL language, please refer to [Tour of KCL](/docs/reference/lang/lang/tour).
 
-仓库地址： https://github.com/KusionStack/konfig.git
+3、Running Kubernetes cluster
 
-3、可用的 Kubernetes 集群
+There must be a running Kubernetes cluster and a [kubectl](https://Kubernetes.io/docs/tasks/tools/#kubectl) command line tool.
+If you don't have a cluster yet, you can use [Minikube](https://minikube.sigs.k8s.io/docs/tutorials/multi_node/) to start one of your own.
 
-必须要有一个 Kubernetes 集群，同时 Kubernetes 集群最好带有
-[kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) 命令行工具。
-如果你还没有集群，你可以通过 [Minikube](https://minikube.sigs.k8s.io/docs/tutorials/multi_node/)
-构建一个你自己的集群。
+4、Available Helm CLI
 
-4、可用的 Helm CLI
+The Helm tool is used to deploy the Vault Server and Agent Injector.
+If you haven't installed Helm, please refer to [Install Helm](https://helm.sh/docs/intro/install/).
 
-Helm 工具用来部署 Vault Server 和 Agent Injector。
-如果你还没有安装 Helm，请参阅 [Helm 官方地址](https://helm.sh/docs/intro/install/)。
+## Install Vault
 
-## 2. 安装 Vault
+We recommend deploying the vault server and agent on Kubernetes by _Helm Chart_.
+[Helm](https://helm.sh/docs/helm/) is a package manager,
+it can install and configure Vault and its related components in different modes.
+Helm chart implements conditionalization and parameterization of templates.
+These parameters can be set via command line arguments or defined in YAML files.
 
-推荐使用 Helm Chart 在 Kubernetes 上部署 Vault Server 和 Agent。
-[Helm](https://helm.sh/docs/helm/) 是一个包管理器，
-它可以安装和配置 Vault 及其相关组件，以不同模式运行。
-Helm Chart 实现了模板的条件化和参数化。这些参数可以通过命令行参数设置或在 YAML 中定义。
-
-1、添加 HashiCorp Helm 存储库：
+1、Add HashiCorp helm repo：
 ```bash
 helm repo add hashicorp https://helm.releases.hashicorp.com
 ```
 
-2、更新所有存储库以确保 helm 缓存了最新版本：
+2、Update to cache HashiCorp's latest version:
 ```bash
 helm repo update
 ```
 
-3、安装最新版本的 Vault Server 和 Agent，并以开发模式运行：
+3、Install Vault server and agent, and start in development mode:
 ```bash
 helm install vault hashicorp/vault --set "server.dev.enabled=true"
 ```
-`server.dev.enabled=true` 表示 Vault 在单 Pod 上以开发者模式启动。
 
-4、检查 Default 命名空间中的所有 Pod：
+`server.dev.enabled=true` indicates that Vault is started in developer mode on a single pod.
+
+4、Check all pods in the default namespace:
 ```bash
 kubectl get pod
 ```
 
-输出类似于：
+The output is similar to:
 ```
 NAME                                  READY   STATUS    RESTARTS      AGE
 vault-0                               1/1     Running   0             2d1h
 vault-agent-injector-58b6d499-k9x9r   1/1     Running   0             2d1h
 ```
 
-`vault-0` 是以 **dev** 模式运行的 Vault 服务器，
-`vault-agent-injector-58b6d499-k9x9r` 是 Agent，会根据 Annotation 执行数据注入。
+Pod `vault-0` is the Vault server running in **dev** mode,
+pod `vault-agent-injector-58b6d499-k9x9r` is an agent that injects data according to `metadata.annotations`.
 
 :::caution
-本例为了简化演示，使用 **dev** 模式启动 Vault 服务器，
-此模式下，Vault 会自动初始化并解封（Unseal）。请勿在生产环境中使用。
+
+To simplify the demonstration, start the Vault server in **dev** mode.
+In this mode, the vault server will automatically initialize and unseal.
+**DO NOT** use it in a production environment.
 :::
 
-## 3. 配置 Vault
+## Configure Vault
 
-Vault 将机密数据保存在自己的数据库中，用户需要先配置相关机密数据，并启用 Vault 的 Kubernetes 认证。
+Vault stores secrets in its database, and users need to configure the relevant confidential data and enable Vault's Kubernetes authentication.
 
-### 3.1 配置机密数据 {#set-secret-data}
+### Create a Secret
 
-在[创建带注解的 Pod](#create-pod-with-annotation) 小节，将会把数据库的用户名和密码作为机密数据注入 Pod，
-而 Vault 将此机密数据保存。要创建此类数据，需要 Vault 启用 kv 引擎，并将用户名和密码保存在指定的路径中。
+We must enable the k/v engine of Vault, and save the secret data(username and password of database) in it.
+Then, in the [Create Annotated Pods](#create-annotated-pods) section, the database username and password will be injected into the pod.
 
-1、在 `vault-0` 启动交互式 shell 终端：
+1、Start an interactive shell session on the `vault-0` pod: 
 ```bash
 kubectl exec -it vault-0 -- /bin/sh
 ```
 
-2、指定路径 `path=internal` 启动 kv 引擎：
+2、Enable the k/v engine at the path `path=internal`
 ```bash
 vault secrets enable -path=internal kv-v2
 ```
-输出类似于：
+
+The output is similar to:
 ```bash
 Success! Enabled the kv-v2 secrets engine at: internal/
 ```
 
 :::tip
-有关 kv secrets 引擎的更多信息，请参阅
-[Static Secrets: Key/Value Secret](https://learn.hashicorp.com/tutorials/vault/static-secrets)。
+
+For more detail on the k/v secrets engine, see [Static Secrets: Key/Value Secret](https://learn.hashicorp.com/tutorials/vault/static-secrets).
 :::
 
-3、在 `internal/database/config` 路径创建 secret，包含 `username` 和 `password`：
+3、Create a secret at the path `internal/database/config` with username and password:
 ```bash
 vault kv put internal/database/config username="db-readonly-username" password="db-secret-password"
 ```
-输出类似于：
+
+The output is similar to:
 ```
 Key              Value
 ---              -----
@@ -128,11 +132,12 @@ destroyed        false
 version          1
 ```
 
-4、检查创建结果：
+4、Verify that the secret is readable at the path `internal/database/config`:
 ```bash
 vault kv get internal/database/config
 ```
-输出类似于：
+
+The output is similar to:
 ```
 ======= Metadata =======
 Key                Value
@@ -149,42 +154,42 @@ Key         Value
 password    db-secret-password
 username    db-readonly-username
 ```
-到此，机密数据创建完毕，暂且不需要退出 Pod。
 
-### 3.2 启用 kubernetes 身份认证
+Now the confidential data is created, please don't exit the Pod.
 
-Vault 提供了 Kubernetes 身份验证方法，使客户端能够使用 Kubernetes ServiceAccount 令牌进行身份验证。
-此令牌在创建时提供给每个 Pod。
+### Enable Kubernetes Authentication
 
-1、继续上一小节的 Terminal，启用 Kubernetes 身份验证：
+Vault provides a Kubernetes authentication method that enables clients to authenticate with a Kubernetes ServiceAccount Token.
+The Kubernetes resources that access the secret and create the volume authenticate through this method through a `role`.
+
+1、Continue with the terminal in the previous step, and enable the Kubernetes authentication method:
 ```bash
 vault auth enable kubernetes
 ```
-输出类似于：
+
+The output is similar to:
 ```
-Success! Enabled kubernetes auth method at: kubernetes/
+Success! Enabled Kubernetes auth method at: Kubernetes/
 ```
 
-2、配置 kubernetes 身份认证规则，
-依赖 Kubernetes API 地址、ServiceAccount 令牌、证书以及 Kubernetes ServiceAccount 的颁发者（Kubernetes 1.21+ 需要）：
+2、Configure authentication rules, depending on the Kubernetes API address, ServiceAccount token, certificate, and the issuer of the Kubernetes ServiceAccount(required for Kubernetes 1.21+):
 ```bash
-vault write auth/kubernetes/config \
-    kubernetes_host="https://$KUBERNETES_PORT_443_TCP_ADDR:443" \
-    token_reviewer_jwt="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" \
-    kubernetes_ca_cert=@/var/run/secrets/kubernetes.io/serviceaccount/ca.crt \
-    issuer="https://kubernetes.default.svc.cluster.local"
+vault write auth/Kubernetes/config \
+    Kubernetes_host="https://$Kubernetes_PORT_443_TCP_ADDR:443" \
+    token_reviewer_jwt="$(cat /var/run/secrets/Kubernetes.io/serviceaccount/token)" \
+    Kubernetes_ca_cert=@/var/run/secrets/Kubernetes.io/serviceaccount/ca.crt \
+    issuer="https://Kubernetes.default.svc.cluster.local"
 ```
 
-输出类似于：
+The output is similar to:
 ```
-Success! Data written to: auth/kubernetes/config
+Success! Data written to: auth/Kubernetes/config
 ```
-Kubernetes 创建容器时，将 `token_reviewer_jwt` 和 `kubernetes_ca_cert` 挂载到容器中。
-环境变量 `KUBERNETES_PORT_443_TCP_ADDR` 引用的是 Kubernetes 主机的内部网络地址。
 
-3、设置读权限的 _policy_
+When Kubernetes creates pods, mount `token_reviewer_jwt` and `Kubernetes_ca_cert` into them.
+The environment variable `KUBERNETES_PORT_443_TCP_ADDR` references the internal network address of the Kubernetes host.
 
-后面要部署的服务，需要读取路径 `internal/database/config` 中保存的机密数据，先给该路径添加读权限：
+3、Create a policy named `kcl-vault-agent-agent-policy`:
 ```bash
 vault policy write kcl-vault-agent-agent-policy - <<EOF
 path "internal/data/database/config" {
@@ -193,41 +198,47 @@ path "internal/data/database/config" {
 EOF
 ```
 
-4、再创建名为 `kcl-vault-agent-agent-role` 的 _role_ ，关联上一步创建的 _policy_，并绑定 Namespace 和 ServiceAccount：
+The service to be deployed later needs to read the secret saved in the path "internal/database/config",
+so grant read permission to the path first.
+
+4、Create a role named `kcl-vault-agent-agent-role`:
 ```bash
-vault write auth/kubernetes/role/kcl-vault-agent-agent-role \
+vault write auth/Kubernetes/role/kcl-vault-agent-agent-role \
     bound_service_account_names=kcl-vault-agent-agent-sa \
     bound_service_account_namespaces=kcl-vault-agent-agent \
     policies=kcl-vault-agent-agent-policy \
     ttl=24h
 ```
 
-输出类似于：
+The output is similar to:
 ```
-Success! Data written to: auth/kubernetes/role/kcl-vault-agent-role
+Success! Data written to: auth/Kubernetes/role/kcl-vault-agent-role
 ```
-该角色将 Kubernetes 服务帐户 _kcl-vault-agent-sa_ 和命名空间 _kcl-vault_ 与 Vault 策略 _kcl-vault-agent-role_ 关联起来。
-此  Kubernetes 服务帐户将会在后面创建。认证成功后返回的令牌有效期为 24 小时。最后，执行 `exit` 退出 Pod。
 
-## 4. 结果验证
+This role associates the Kubernetes service account `kcl-vault-agent-sa` and namespace `kcl-vault` with the Vault policy `kcl-vault-agent-role`.
+This Kubernetes service account will be created later. The token returned after successful authentication is valid for 24 hours.
+Finally, exit the `vault-0` pod.
 
-上一节我们已经在 Vault 中保存机密数据，并且配置 Vault 角色，完成了 Namespace + ServiceAccount + Policy 的绑定。
-这一节，我们直接使用开源大库中的 Vault 演示项目，部署应用并检验结果。
+## Verify Secret
 
-### 4.1 创建带注解的 Pod {#create-pod-with-annotation}
+In the previous section, we created a secret in the Vault server,
+configured the Vault `role` and `policy`, and completed the binding of `Namespace` and `ServiceAccount`.
+In this section, we directly use the Vault demo project `kcl-vault-agent` in Konfig to deploy the application and verify the results.
 
-1、进入开源大库的 Vault 演示项目的 Stack 目录 `base/examples/kcl-vault-agent/dev`，并下发配置：
+### Create Annotated Pods
+
+1、Enter stack dir `base/examples/kcl-vault-agent/dev` and apply stack configs:
 ```bash
 cd base/examples/kcl-vault/dev && kusion apply --yes=true
 ```
 
-输出类似于：
+The output is similar to:
 ```
 SUCCESS  Compiling in stack dev...
 Stack: dev    Provider                Type                    Name    Plan
-      * ├─  kubernetes        v1:Namespace      kcl-vault-agent[0]  Create
-      * ├─  kubernetes  apps/v1:Deployment  kcl-vault-agent-dev[0]  Create
-      * └─  kubernetes   v1:ServiceAccount   kcl-vault-agent-sa[0]  Create
+      * ├─  Kubernetes        v1:Namespace      kcl-vault-agent[0]  Create
+      * ├─  Kubernetes  apps/v1:Deployment  kcl-vault-agent-dev[0]  Create
+      * └─  Kubernetes   v1:ServiceAccount   kcl-vault-agent-sa[0]  Create
 
 Start applying diffs......
  SUCCESS  Creating Namespace/kcl-vault-agent
@@ -237,37 +248,38 @@ Creating ServiceAccount/kcl-vault-agent-sa [3/3] ██████████�
 ```
 
 :::info
-三个资源已全部下发，Deployment 还需要创建 ReplicaSet 和 Pod，并且 Pod 需要一定的时间启动。
 
-请使用 `kubectl get po -n kcl-vault-agent` 确定 Pod 进入到 _Running_ 状态，并且已经准备就绪（2/2）。
+All three resources have been distributed, and the controller needs some time to sync these resources.
+
+Please execute `kubectl get po -n kcl-vault-agent` to make sure the Pod is Running (`2/2`).
 :::
 
-### 4.2 验证结果
+### Validation mount results
 
-#### 4.2.1 非格式化输出
+#### Raw Output
 
-1、检查结果机密信息注入结果：
+1、Secret injection result:
 ```bash
 kubectl exec -n kcl-vault \
     $(kubectl get pod -n kcl-vault-agent -l app=kcl-vault-agent-test -o jsonpath="{.items[0].metadata.name}") \
     --container kcl-vault-agent-test -- cat /vault/secrets/database-config.txt
 ```
 
-输出类似于：
+The output is similar to:
 ```
 data: map[password:db-secret-password username:db-readonly-username]
 metadata: map[created_time:2022-03-13T08:40:02.1133715Z custom_metadata:<nil> deletion_time: destroyed:false version:1]
 ```
 
-可以看到未格式化的数据库用户名和密码，这也是[配置机密数据](#set-secret-data)小节配置的内容。
+You can see the unformatted database username and password, which are configured in the [Create a secret](#create-a-secret) section.
 
-#### 4.2.2 格式化输出
+#### Formatted Output
 
-没有格式化的数据显然是不合理的，给业务应用在读取配置方面也添加了不必要的障碍。
-数据格式化，Vault 也提供了一些[模板说明](https://www.vaultproject.io/docs/agent/template)。
-在本例子中，只需要打开 `main.k` 中被注释的部分，再次下发配置即可。
+Unformatted data is unreasonable and not read directly for applications.
+Regarding formatting, Vault also provides some [template instructions](https://www.vaultproject.io/docs/agent/template).
+In this example, you only need to uncomment the code of `main.k` and re-apply the configurations.
 
-以下展示的是 `main.k` 中的部分配置代码：
+The following shows commented code in `main.k`:
 ```py
 podMetadata = apis.ObjectMeta {
         annotations = {
@@ -281,22 +293,26 @@ postgresql://{{ .Data.data.username }}:{{ .Data.data.password }}@postgres:5432/w
 {{- end -}}"""
 ```
 
-重新下发配置：
+Apply again:
 ```bash
 kusion apply --yes=true
 ```
 
-待 Deployment 滚动更新完成后，检查机密数据注入结果：
+Check the secret data after the `Deployment` rolling update is finished:
 ```bash
 kubectl exec -n kcl-vault-agent \
     $(kubectl get pod -n kcl-vault-agent -l app=kcl-vault-agent-test -o jsonpath="{.items[0].metadata.name}") \
     --container kcl-vault-agent-test -- cat /vault/secrets/database-config.txt
 ```
 
-输出类似于：
+The output is similar to:
 ```
 postgresql://db-readonly-username:db-secret-password@postgres:5432/wizard
 ```
-可以看到，不仅成功注入了机密数据，而且按照 Pod 模板中的 Annotation 字段指定的格式渲染结果。
+As you can see, the confidential data is injected successfully and the result is rendered in the format specified by annotation.
 
-到此我们就完成了 KCL/Kusion 集成 Vault Agent Injector 实现了敏感信息的传输。
+At this point, we have completed the KCL/Kusion integration Vault agent to realize secret management.
+
+## What's Next
+
+- Learn about secret management with [Vault CSI Provider](/docs/user_docs/guides/sensitive-data-solution/vault-csi-provider)
