@@ -4,9 +4,9 @@ sidebar_position: 3
 
 # Konfig 
 
-Konfig is a monorepo that stores configurations about operation intentions mainly described by KCL. It provides users with out-of-the-box, highly abstract configuration models. The original starting point of the model library is to improve the efficiency and experience of YAML users.
-We hope to simplify the writing of user-side configuration code by abstracting
-and encapsulating the model with more complex code into a unified model.
+Konfig is a monorepo that stores configurations about operation intentions mainly described by KCL. Users can write configuration (config), type (schema), function (lambda) and policy (rule) through the record and functional language KCL. Konfig provides an out-of-the-box cloud-native application model, allowing users to quickly start the journey of cloud-native delivery. Developers can write base models and application models through KCL's modular language features, which helps the platform side quickly reveal capabilities through "building blocks", and application developers can define application models as needed.
+
+Konfig repository is a unified programming interface for all operation scenarios and is a cooperation workspace for application developers, platform developers and SREs.
 
 For more details, please refer to [Model Overview](https://KusionStack.io/docs/reference/model/overview)
 
