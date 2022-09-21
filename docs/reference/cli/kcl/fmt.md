@@ -4,11 +4,11 @@ sidebar_position: 2
 
 # Format
 
-KCL supports formatting multiple KCL files via the built-in formatting tool. This article demonstrates the KCL code style and how to use the KCL formatting tool.
+KCL supports formatting multiple KCL files via the built-in formatting tool. This article demonstrates the KCL code style and how to use the KCL Format tool.
 
 ## Code Style
 
-The KCL formatting tool modifies the files according to the KCL code style: [Style Guide for KCL Code](../../lang/lang/spec/codestyle.md)
+The KCL Format tool modifies the files according to the KCL code style: [Style Guide for KCL Code](../../lang/lang/spec/codestyle.md)
 
 ## How to use
 
