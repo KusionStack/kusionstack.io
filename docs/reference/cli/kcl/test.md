@@ -6,7 +6,7 @@ sidebar_position: 5
 
 ## Intro
 
-KCL provides a simple testing framework through the built-in KCL Test tool and 'testing' package. All KCL files in each directory are a set of tests, and each schema starts with 'Test' in each 'test.k' is a test case.
+The KCL Test tool and `testing` package provide a simple testing framework to test KCL code. All KCL files in each directory are a set of tests, and each schema starts with `Test` in each `test.k` is a test case.
 
 ## How to use
 

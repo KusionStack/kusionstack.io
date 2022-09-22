@@ -3,7 +3,7 @@ sidebar_position: 5
 ---
 # Docgen
 
-The KCL Docgen tool supports extracting model documents from KCL source code and supports multiple output formats: JSON, YAML and Markdown, etc. This article introduces the document specification of the KCL language, gives an example of how to use the KCL document generation tool to extract documents, and shows the process of adding localized language documents.
+The KCL Docgen tool supports extracting model documents from KCL source code and supports multiple output formats: JSON, YAML and Markdown. This article introduces the document specification of the KCL language, gives an example of how to use the KCL Docgen tool to extract documents, and shows the process of importing localization documents.
 
 ## 1. Document Specification of KCL
 
@@ -32,7 +32,7 @@ The documentation of the KCL file mainly contains the following two parts:
   """
   ```
 
-  `----------` indicates that `Attributes` is a title (the length of the symbol `-` is the same as the length of the title), the attribute name and attribute type are separated by a colon `:`, and the description of the attribute is written on another line and increase indentation. The default value of the attribute is separated by a comma `,` after the attribute type, and it is written in the form of `default is {default value}`. In addition, it is necessary to indicate whether the attribute is optional/required. Write `optional` after the default value for an optional attribute, and write `required` after the default value for a required attribute.
+  `----------` indicates that `Attributes` is a title (the length of the symbol `-` is the same as the length of the title), the attribute name and attribute type are separated by a colon `:`, the description of the attribute is written on another line with indentation. The default value of the attribute is separated by a comma `,` after the attribute type, and it is written in the form of `default is {default value}`. In addition, it is necessary to indicate whether the attribute is optional/required. Write `optional` after the default value for an optional attribute, and write `required` after the default value for a required attribute.
 
 3. Examples
 
@@ -105,9 +105,9 @@ As shown before, by default, the documentation extracted by the documentation ge
   kcl-doc init-i18n your_config.k --format JSON --i18n-locale your_target_locale
   ```
 
-2. Modify the i18n configuration file and use the target language to modify the doc field in the configuration
+2. Modify the i18n configuration file and update each doc field in your locale language
 
-3. Generate documentation in localized languages based on the modified i18n configuration. The tool will find the i18n configuration file for the specified target language and convert it to the final document
+3. Generate localized documents from the modified i18n configuration file
 
   ```text
   kcl-doc generate your_config_dir --i18n-locale your_target_locale --format Markdown
@@ -215,7 +215,7 @@ As shown before, by default, the documentation extracted by the documentation ge
     source_code_url: ''
     ```
 
-  3.3 Modify the doc field to the Chinese description. The modified configuration is as follows:
+  3.3 Modify all the `doc` fields to the Chinese description. The modified configuration is as follows:
 
     ```yaml
     name: server

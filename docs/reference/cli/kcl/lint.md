@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # Lint
 
-KCL supports checking KCL code style through built-in Lint tool and supports multiple output formats. This document shows how to use the KCL Lint tool.
+The KCL Lint tool supports checking some warning-level defects in KCL code and supports multiple output formats. This document shows how to use the KCL Lint tool.
 
 ## Example
 

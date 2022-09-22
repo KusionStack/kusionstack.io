@@ -6,7 +6,7 @@ sidebar_position: 4
 
 ## Intro
 
-KCL supports basic configuration data verification capabilities through the built-in Validation tool. You can write a KCL schema to verify the type and value of the input JSON/YAML files.
+The KCL Validation tool supports basic configuration data verification capabilities. You can write a KCL schema to verify the type and value of the input JSON/YAML files.
 
 ## How to use
 
