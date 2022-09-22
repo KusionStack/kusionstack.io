@@ -1,6 +1,6 @@
 ---
 slug: 2022-declarative-config-overview
-title: 声明式配置技术概述
+title: Declarative Configuration Overview
 authors:
   name: 徐鹏飞
   title: KusionStack 团队成员
