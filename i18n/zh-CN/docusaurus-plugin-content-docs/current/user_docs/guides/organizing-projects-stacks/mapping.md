@@ -1,6 +1,6 @@
 # 映射关系
 
-在[架构 & 概念](/user_docs/concepts/project-stack.md)中已经介绍过 Project 和 Stack 的基本概念，配置大库中可以使用 Project 进行配置单元的隔离，一个配置大库由 Project 组成，Project 下进一步进行逻辑隔离便是 Stack，每个 Project 下包含一个或多个 Stack。Project 和 Stack 可以根据需要选择映射关系，比如用户可以把一个应用映射成一个 Project，也可以把一种运维场景映射为一个 Project，比如建站运维等，在本节中将详细介绍几种映射关系的最佳实践。
+在[架构 & 概念](/user_docs/concepts/konfig.md)中已经介绍过 Project 和 Stack 的基本概念，配置大库中可以使用 Project 进行配置单元的隔离，一个配置大库由 Project 组成，Project 下进一步进行逻辑隔离便是 Stack，每个 Project 下包含一个或多个 Stack。Project 和 Stack 可以根据需要选择映射关系，比如用户可以把一个应用映射成一个 Project，也可以把一种运维场景映射为一个 Project，比如建站运维等，在本节中将详细介绍几种映射关系的最佳实践。
 
 ## 1. 云原生：应用和集群
 

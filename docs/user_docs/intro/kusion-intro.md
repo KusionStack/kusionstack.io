@@ -1,4 +1,4 @@
-# Introduction to KusionStack
+# KusionStack
 
 
 ## What is KusionStack?
@@ -145,4 +145,4 @@ KusionStack is in the early days of open source, you can see the releases of [Ku
 ## Next step
 
 + [Install using KusionCtl](/docs/user_docs/getting-started/install/kusionup)
-+ Learn about [core concepts](/docs/user_docs/concepts/project-stack) and [technical architecture](/docs/user_docs/concepts/arch)
++ Learn about [core concepts](/docs/user_docs/concepts/konfig) and [technical architecture](/docs/user_docs/concepts/arch)

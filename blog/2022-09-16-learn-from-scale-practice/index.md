@@ -46,7 +46,6 @@ Compared with a domain language there's no better way for open, self-service, do
 
 In the platform engineering practice of Ant Group, we have strengthened the client-side working mode. We write and maintain the models, orchestration, constraints and policies around the application ops life cycle in the shared codebase [Konfig](https://github.com/KusionStack/konfig) through the record and functional language [KCL](https://github.com/KusionStack/KCLVM). KCL is a static and strongly typed language for application developers with programming ability, and provides the writing experience of a modern high-level language with limited functionality around domain purposes. Under such practices, KCL is not a language just for writing K-V pairs, but a language for platform engineering development. Application developers, SREs, and platform developers conduct dev collaboratively based on Konfig. They write configurations, and [schema](https://kusionstack.io/docs/reference/lang/lang/tour/#schema) abstractions, [functions](https://kusionstack.io/docs/reference/lang/lang/tour/#function), [constraints](https://kusionstack.io/docs/reference/lang/lang/tour/#validation) and [rules](https://kusionstack.io/docs/reference/lang/lang/tour/#rule) which are frequent and complex in the PaaS field through KCL native functions, that is, writing stable and scalable business models, business logic, error-proofing constraints, and environmental rules. The Konfig repository becomes a unified programming interface, workspace and business layer, while the KCL-oriented writing paradigm, which is secure and consistent, with low noise, low side effect and easy to automate, are more beneficial for long-term management and governance.
 
-
 ![](/img/blog/2022-09-16-lean-from-scale-practice/kcl-dev.png)
 
 
@@ -58,7 +57,7 @@ The idea of ​​divide and conquer is the key to solving the scaling problem, 
 
 In Ant Group's practice, Konfig monorepo is the programming workspace opened by the internal engineering platform to developers, helping application developers to write configurations and policies around the application operation life cycle with a unified programming interface and tech stack, to integrate with existing and future platform and infrastructure, to create and manage cloud-native environments and RBAC-based permissions on demand, and to manage the delivery workflow through GitOps. Konfig monorepo provides an independent white-box programming space for different scenarios, projects and applications, whose intrinsic scalability comes from:
 
-- Flexible, scalable, independent client-side [engineering structure design](https://kusionstack.io/docs/user_docs/concepts/project-stack)
+- Flexible, scalable, independent client-side [engineering structure design](https://kusionstack.io/docs/user_docs/concepts/konfig)
 - The [automatic merging](https://kusionstack.io/docs/reference/lang/lang/tour/#-operators-1) technology of isolated config blocks supports the arbitrary and scalable organization of config blocks
 - [Static type system](https://kusionstack.io/docs/reference/lang/lang/tour/#type-system) technology provides reusable and scalable type-based modeling and constraints in a modern programming language manner
 - Project-grained Gitops CI workflow definition support
@@ -118,6 +117,6 @@ Finally, I would like to talk about the next step. There’re still possibilitie
 - [https://web.devopstopologies.com/#anti-types](https://web.devopstopologies.com/#anti-types)
 - [https://github.com/KusionStack/KCLVM](https://github.com/KusionStack/KCLVM)
 - [https://kusionstack.io/docs/reference/lang/lang/tour](https://kusionstack.io/docs/reference/lang/lang/tour/#%E9%85%8D%E7%BD%AE%E6%93%8D%E4%BD%9C)
-- [https://kusionstack.io/docs/user_docs/concepts/project-stack](https://kusionstack.io/docs/user_docs/concepts/project-stack)
+- [https://kusionstack.io/docs/user_docs/concepts/konfig](https://kusionstack.io/docs/user_docs/concepts/konfig)
 - [https://cacm.acm.org/magazines/2016/7/204032-why-google-stores-billions-of-lines-of-code-in-a-single-repository/fulltext](https://cacm.acm.org/magazines/2016/7/204032-why-google-stores-billions-of-lines-of-code-in-a-single-repository/fulltext)
 

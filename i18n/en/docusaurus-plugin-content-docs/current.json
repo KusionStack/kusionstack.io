@@ -204,7 +204,7 @@
     "description": "The label for category 下载和安装 in sidebar docs"
   },
   "sidebar.docs.category.架构 & 概念": {
-    "message": "Architecture & Concept",
+    "message": "Architecture & Concepts",
     "description": "The label for category 架构 & 概念 in sidebar docs"
   },
   "sidebar.docs.category.用户指南": {
@@ -244,7 +244,7 @@
     "description": "The label for category 下载和安装 in sidebar user_docs"
   },
   "sidebar.user_docs.category.架构 & 概念": {
-    "message": "Architecture & Concept",
+    "message": "Architecture & Concepts",
     "description": "The label for category 架构 & 概念 in sidebar user_docs"
   },
   "sidebar.user_docs.category.用户指南": {

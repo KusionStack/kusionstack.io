@@ -1,3 +1,5 @@
-# 快速开始
+# Get Started
 
-快速开始以最快流程对 [Kusion](/docs/user_docs/intro/kusion-intro) 有一个简单直观的体验，其中包含 Kusion 的快速安装、KCL 配置语言的速览、Kusion 模型库和如何通过 Kusion 工具快速部署 [Kubernetes](https://kubernetes.io) 官方的 [Guestbook](https://kubernetes.io/zh/docs/tutorials/stateless-application/guestbook) 例子。
+Get started include a quick overview of the KCL configuration language, the Kusion model library and how to deploy CodeCity examples with KusionStack.
+
+

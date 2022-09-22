@@ -57,7 +57,7 @@ DevOps 理念在 10 多年前被提出，从 KVM 到容器再到云原生时代�
 
 在蚂蚁的实践中，Konfig  monorepo 是内部工程平台向研发者开放的编程界面和工作空间，帮助应用研发者以统一的编程界面编写围绕应用运维生命周期的配置和策略，从而编排和使用存量和新增的平台基础设施，按需创建管理云原生环境以及基于 RBAC 的权限，并通过 GitOps 方式管理交付过程。Konfig monorepo 为不同场景、项目、应用提供了独立的白盒的编程空间，其内生的扩展性来源于：
 
-- 灵活、可扩展、独立的客户端的 [工程结构设计](https://kusionstack.io/docs/user_docs/concepts/project-stack)
+- 灵活、可扩展、独立的客户端的 [工程结构设计](https://kusionstack.io/docs/user_docs/concepts/konfig)
 - 独立配置块 [自动合并技术](https://kusionstack.io/docs/reference/lang/lang/tour/#-operators-1)支持任意分块、可扩展的配置块组织
 - [静态类型系统](https://kusionstack.io/docs/reference/lang/lang/tour/#type-system)技术提供现代编程语言可复用、可扩展的类型化建模和约束功能
 - 项目粒度的 GitOps CI 工作流程定义支持
@@ -112,8 +112,9 @@ Konfig monorepo 提供了分治的、可组合的工程结构设计、代码组�
 - [https://platformengineering.org/blog/what-is-platform-engineering](https://platformengineering.org/blog/what-is-platform-engineering)
 - [https://internaldeveloperplatform.org/what-is-an-internal-developer-platform/](https://internaldeveloperplatform.org/what-is-an-internal-developer-platform/)
 - [https://web.devopstopologies.com/#anti-types](https://web.devopstopologies.com/#anti-types)
+- [https://github.com/KusionStack/kusion](https://github.com/KusionStack/kusion)
 - [https://github.com/KusionStack/KCLVM](https://github.com/KusionStack/KCLVM)
 - [https://kusionstack.io/docs/reference/lang/lang/tour](https://kusionstack.io/docs/reference/lang/lang/tour/#%E9%85%8D%E7%BD%AE%E6%93%8D%E4%BD%9C)
-- [https://kusionstack.io/docs/user_docs/concepts/project-stack](https://kusionstack.io/docs/user_docs/concepts/project-stack)
+- [https://kusionstack.io/docs/user_docs/concepts/konfig](https://kusionstack.io/docs/user_docs/concepts/konfig)
 - [https://cacm.acm.org/magazines/2016/7/204032-why-google-stores-billions-of-lines-of-code-in-a-single-repository/fulltext](https://cacm.acm.org/magazines/2016/7/204032-why-google-stores-billions-of-lines-of-code-in-a-single-repository/fulltext)
 

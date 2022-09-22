@@ -2,15 +2,15 @@
 sidebar_position: 4
 ---
 
-# Validation 校验代码
+# Validation Code
 
-## 简介
+## Intro
 
-KCL 支持通过内置的 `kcl-vet` 命令行工具提供了基本的配置数据校验能力，可以编写 KCL schema 对输入的 JSON/YAML 格式文件进行类型以及数值的校验。
+KCL supports basic configuration data verification capabilities through the built-in `kcl-vet` command line tool. You can write a KCL schema to verify the type and value of the input JSON/YAML files.
 
-## 使用方式
+## How to use
 
-假设有 data.json 文件，代码如下:
+There is a JSON format file `data.json`:
 
 ```json
 {
@@ -28,7 +28,7 @@ KCL 支持通过内置的 `kcl-vet` 命令行工具提供了基本的配置数�
 }
 ```
 
-构造 schema.k 校验文件，内容如下：
+Build a validate KCL file `schema.k`:
 
 ```py
 schema User:
@@ -47,22 +47,22 @@ schema Data:
     value: str
 ```
 
-在目录下执行如下命令
+Execute the following command:
 
 ```
 $ kcl-vet data.json schema.k
 Validate succuss!
 ```
 
-## 指定校验的 schema
+## Specify the schema for validation
 
-当教研的 KCL 文件中存在多个 schema 定义时，kcl-vet 工具会默认取第一个 schema 定义进行校验，如果需要指定校验的 schema，可以使用 `-d|--schema` 参数
+When multiple schema definitions exist in the KCL file, by default, the `kcl-vet` tool will use the first schema to check. If you need to specify a schema for verification, you can use the '- d | -- schema' parameter
 
 ```
 $kcl-vet data.json schema.k -d User
 ```
 
-## 命令行参数
+## Args
 
 ```
 $ kcl-vet -h
