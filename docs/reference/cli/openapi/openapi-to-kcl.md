@@ -1,4 +1,4 @@
-# OpenAPI 转 KCL
+# OpenAPI to KCL
 
 命令
 

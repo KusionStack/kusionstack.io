@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# 如何贡献代码
+# How to Contribute Code?
 
 欢迎参与 Kusion 共建贡献完善代码、完善代码文档和测试，同时也欢迎通过 Issue 提供反馈。本文主要针对修改和完善已有的代码，如果是要增加 Konfig 新模型请先通过 Issue 或讨论中充分讨论，如果是希望增加 KCL 语言请通过 [KEP](/docs/develop/kep) 流程提交。
 

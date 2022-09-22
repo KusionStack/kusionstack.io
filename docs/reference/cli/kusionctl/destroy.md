@@ -1,7 +1,7 @@
 ---
 sidebar_position: 7
 ---
-# 销毁资源
+# Destroy
 
 通过工作目录销毁已应用到资源的配置栈
 

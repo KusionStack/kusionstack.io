@@ -1,4 +1,4 @@
-# KCL OpenAPI 规范
+# KCL OpenAPI Spec
 
 [OpenAPI](https://www.openapis.org/) 允许 API 提供方规范地描述 API 操作和模型，并基于它生成自动化工具和特定语言的客户端。
 

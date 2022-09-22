@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# 快速开始
+# Quick Start
 
 ## 1. 安装 KCLOpenAPI tool
 

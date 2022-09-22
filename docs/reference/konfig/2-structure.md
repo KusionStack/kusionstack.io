@@ -1,8 +1,8 @@
 ---
 id: structure
-sidebar_label: 目录结构
+sidebar_label: dir-struct
 ---
-# 配置大库（Konfig）目录结构
+# Konfig Dir Struct
 
 本文主要解释 Konfig 配置大库的目录和代码结构，其中涉及的基本概念解释可见[《Kusion 模型库概览》](/docs/reference/model/overview)。
 

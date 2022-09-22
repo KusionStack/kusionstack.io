@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 ---
-# 校验工程
+# Validate
 
 校验当前目录的 KCL 配置是否可以编译
 

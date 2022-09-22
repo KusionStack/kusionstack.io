@@ -1,7 +1,7 @@
 ---
 sidebar_position: 4
 ---
-# 编译工程
+# Compile
 
 将 KCL 编译成 YAML
 

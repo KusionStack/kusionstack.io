@@ -1,4 +1,4 @@
-# 新手任务计划
+# Tasks for newbie
 
 为了帮助新同学更好的参与 Kusion 开源项目，我们将提供一些新手任务参考思路，帮助大家成为 Kusion Contributor！并为有价值的贡献者颁发 Kusion 贡献者证书和小纪念品。
 
