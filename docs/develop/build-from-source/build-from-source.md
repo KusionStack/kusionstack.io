@@ -1,3 +1,4 @@
-# 构建 KusionStack
+# Build KusionStack
 
-当用户希望自己修改底层代码并查看效果时，希望从代码构建 KusionStack 工具。从代码构建不仅仅是开发 KusionStack 项目的必要条件，也是正常二进制打包和发布的必经流程。
+When users want to modify the underlying code and see the effect themselves, they want to build the KusionStack tool from the code. Building from code is not only a necessary condition for developing KusionStack projects, but also a necessary process for normal binary packaging and distribution.
+

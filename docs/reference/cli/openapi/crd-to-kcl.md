@@ -1,4 +1,4 @@
-# CRD 转 KCL
+# CRD to KCL
 
 命令
 

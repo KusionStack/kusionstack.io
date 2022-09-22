@@ -1,4 +1,4 @@
-# 构建文档
+# Build Doc
 
 Kusion 的文档采用 [Docusaurus](https://docusaurus.io/) 框架构建，Docusaurus 是基于 React 构建的站点生成器。在构建之前先安装 [Node.js 16+](https://nodejs.org)。
 

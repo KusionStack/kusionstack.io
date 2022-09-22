@@ -1,8 +1,8 @@
 ---
 id: vars
-sidebar_label: 魔术变量
+sidebar_label: Magic Vars
 ---
-# 配置大库（Konfig）魔术变量
+# Magic Vars
 
 ## 1. 概念
 

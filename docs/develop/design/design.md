@@ -1,3 +1,2 @@
-# 设计与实现
+# Design and Implementation
 
-Kusion 内部设计与实现。

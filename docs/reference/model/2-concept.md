@@ -1,8 +1,8 @@
 ---
 id: concept
-sidebar_label: 基本概念
+sidebar_label: Concept
 ---
-# Kusion 模型库基本概念
+# Kusion Model Concept
 
 ## 1. Kusion 模型库 (Kusion Model)
 

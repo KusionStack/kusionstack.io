@@ -1,8 +1,8 @@
 ---
 id: guide
-sidebar_label: 使用指南
+sidebar_label: Use Guide
 ---
-# 配置大库（Konfig）使用指南
+# Use Guide
 
 ## 1. 添加应用
 

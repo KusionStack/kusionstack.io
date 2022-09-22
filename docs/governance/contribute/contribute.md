@@ -1,3 +1,4 @@
-# 贡献指南
+# Contribute Guide
 
-如果是第一次参与开源社区，可以先查看 Issue 和 PR（PullRequest）中相似的修改。然后针对自己的问题和社区或开发团队同学充分讨论，也可以同创建 Issue 的方式反馈遇到的问题，然后就可以针对相关的 Issue 提供代码补丁。刚开始可以从文档完善和局部代码改进开始，比如：文档、Examples、多语言 Binding等。同时这对希望深入参与的同学能够针对语言功能、语言测试、编程框架、多种后端等核心特性做贡献。
+If it is the first time to participate in the open source community, you can first check the similar changes in Issue and PR (PullRequest). Then you can fully discuss your own problems with the community or development team classmates, and you can also feedback the problems encountered by creating issues, and then you can provide code patches for related issues. At the beginning, you can start with document improvement and partial code improvement, such as: documentation, Examples, multi-language Binding, etc. At the same time, students who want to participate deeply can contribute to core features such as language functions, language testing, programming frameworks, and various backends.
+

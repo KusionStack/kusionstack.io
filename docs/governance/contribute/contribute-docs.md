@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# 如何贡献文档
+# How to Contribute Document?
 
 本文主要针对已有的文档做局部修改。如果是投稿博客文章、添加新的文档或者调整文档目录结构请先联系团队成员。
 

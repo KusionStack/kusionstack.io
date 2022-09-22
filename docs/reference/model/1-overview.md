@@ -1,8 +1,8 @@
 ---
 id: overview
-sidebar_label: 概览
+sidebar_label: Overview
 ---
-# Kusion 模型库概览
+# Kusion Model Overview
 
 **Kusion 模型库**也叫做 `Kusion Model`，是 KusionStack 中预置的、使用 KCL 描述的配置模型，它提供给用户开箱即用、高度抽象的配置界面，模型库最初朴素的出发点就是改善 YAML 用户的效率和体验，我们希望通过将代码更繁杂的模型抽象封装到统一的模型中，从而简化用户侧配置代码的编写。
 

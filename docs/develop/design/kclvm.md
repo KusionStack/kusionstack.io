@@ -2,7 +2,7 @@
 sidebar_position: 99
 ---
 
-# KCLVM 整体架构
+# KCLVM Architecture
 
 ## 1. 演化历史
 

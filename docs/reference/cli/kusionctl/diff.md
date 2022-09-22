@@ -1,7 +1,7 @@
 ---
 sidebar_position: 5
 ---
-# Diff 比较文档差异
+# Diff
 
 比较输入文件 `<from>` 和 `<to>` 之间的差异
 

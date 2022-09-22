@@ -2,7 +2,7 @@
 sidebar_position: 4
 ---
 
-# Windows/X64 环境
+# Windows/X64
 
 Windows 是最流行的桌面系统，有着庞大的用户群体，但是默认缺少完整的开发环境。如果需要在 Windows 下构建 KusionStack 工具，首先需要安装开发环境。
 

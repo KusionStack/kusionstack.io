@@ -1,3 +1,3 @@
-# OpenAPI 工具
+# OpenAPI Tools
 
-Kusion 针对 OpenAPI 规范增加了对 KCL 配置策略语言的支持，不仅仅可以实现对普通模型的转换，也支持 CRD 等模型等转换。
+Kusion adds support for the KCL configuration policy language to the OpenAPI specification, which can not only convert common models, but also support CRD and other models.
