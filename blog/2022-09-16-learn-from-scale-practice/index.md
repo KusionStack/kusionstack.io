@@ -115,6 +115,7 @@ Finally, I would like to talk about the next step. There’re still possibilitie
 - [https://platformengineering.org/blog/what-is-platform-engineering](https://platformengineering.org/blog/what-is-platform-engineering)
 - [https://internaldeveloperplatform.org/what-is-an-internal-developer-platform/](https://internaldeveloperplatform.org/what-is-an-internal-developer-platform/)
 - [https://web.devopstopologies.com/#anti-types](https://web.devopstopologies.com/#anti-types)
+- [https://github.com/KusionStack/kusion](https://github.com/KusionStack/kusion)
 - [https://github.com/KusionStack/KCLVM](https://github.com/KusionStack/KCLVM)
 - [https://kusionstack.io/docs/reference/lang/lang/tour](https://kusionstack.io/docs/reference/lang/lang/tour/#%E9%85%8D%E7%BD%AE%E6%93%8D%E4%BD%9C)
 - [https://kusionstack.io/docs/user_docs/concepts/konfig](https://kusionstack.io/docs/user_docs/concepts/konfig)
