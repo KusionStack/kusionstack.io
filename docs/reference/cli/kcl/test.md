@@ -149,7 +149,7 @@ Automatically execute integration tests when the directory contains `*.k`. If th
 
 ## Batch Test
 
-+ `kcl-test path` Execute the test of the specified directory. It can be omitted if execute the current directory
++ `kcl-test path` Execute the test of the specified directory. It can be omitted if it's the same directory that the command is executed
 + `kcl-test -run=regexp` Execute the test which matches patterns
 + `kcl-test ./...` Execute unit tests recursively
 
