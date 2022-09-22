@@ -85,7 +85,7 @@ optional arguments:
 The priority of Lint's configuration is as follows:
 
 1. the `.kcllint` set in CLI Args
-2. the `.kcllint` under directory of checked `.k` file or checked directory
+2. the `.kcllint` under the directory of checked `.k` file or checked directory
 3. default configuration
 
 #### .kcllint
@@ -94,9 +94,9 @@ The file `.kcllint` is written in YAML. Its contents include:
 
 + check_list: kinds of checks, including `"import"` and `"misc"`
 + ignore: ignored check items. See the `Error Code` for optional items.
-+ max_line_length: the parameter of check, that is, the maximum length of code
++ max_line_length: check parameter, that is, the maximum length of code
 + output: output streams and formats, including `"stdout"`、`"file"` and `"sarif"`
-+ output_path: The path of output file. It is optional, but it is required when the `output` is set as `"file"` or `"sarif"`
++ output_path: The path of the output file. It is optional, but it is required when the `output` is set as `"file"` or `"sarif"`
 
 Example:
 
