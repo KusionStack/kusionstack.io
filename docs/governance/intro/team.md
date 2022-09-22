@@ -2,18 +2,19 @@
 sidebar_position: 2
 ---
 
-# KusionStack 团队
+# Team
 
-## 1. 活跃团队
+## 1. Core Team 
 
-Kusion 团队致力于 KCL 语言、KusionCtl、Kusion 模型库、IDE 插件等核心功能以及 Kusion 文档网站的开发和完善。按字母顺序列出了 Kusion 团队的现有成员。
+The Kusion Core team is committed to the development and improvement of core functions such as KCL language, KusionCtl, Kusion model library, IDE plug-ins, and the Kusion documentation website. Lists the current members of the Kusion team in alphabetical order.
 
-## 2. 荣誉开发者
+## 2. Honorary
 
-Kusion 的发展离不开为其做出巨大贡献的人们，感谢你们。
+The development of Kusion cannot be separated from the people who have contributed so much to it. Thank you.
 
-## 3. 学生开发者
+## 3. Student
 
-一部分学生于在校、实习期间帮助了 Kusion，并为其贡献了包括插件选项校验、迁移工具及 Bootstrap 主题在内的优秀功能。
+Some students helped Kusion during school and internships, and contributed excellent features including plugin option verification, migration tools, and Bootstrap themes.
 
-## 4. 特别鸣谢
+## 4. Special
+
