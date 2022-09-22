@@ -1,5 +1,5 @@
 ---
-slug: 2022-lean-from-scale-practice
+slug: 2022-learn-from-scale-practice
 title: What We Learned From Large-scale Platform Engineering Practices
 authors:
   name: Xiaodong, Duo
@@ -16,7 +16,7 @@ This blog is based on the platform engineering and automation practice of [Kusio
 
 The concept of DevOps was proposed more than 10 years ago. From KVM to container to the cloud-native era, a large number of enterprises have invested in the DevOps wave to solve the dilemma of internal large-scale operation efficiency and platform construction efficiency. Most of them have fallen into some kind of Anti-Pattern based on an inappropriate understanding of DevOps, while some companies have explored their golden paths. I have experienced Anti-Patterns as shown in the figure below, where the Dev and Ops teams go their separate ways, or simply force the Dev team to handle Ops work independently. More typical classifications can be found [here](https://web.devopstopologies.com/#anti-types).
 
-![](/img/blog/2022-09-16-lean-from-scale-practice/devops-anti-pattern.png)
+![](/img/blog/2022-09-16-learn-from-scale-practice/devops-anti-pattern.png)
 
 There are various reasons for difficulties achieving DevOps at scale within the enterprise, especially for companies that maintain their infrastructure within the enterprise while adopting technology platforms on the cloud. Among which, the following situations are quite common:
 
@@ -37,7 +37,7 @@ Unlike small teams working on cloud-hosted Infra services and DevOps-as-a-Servic
 
 In fact, not everyone should be or could be an expert in this specific field, which turns out to be particularly hard as well. Even the experts from the platform technology team themselves are usually good at their own professional fields, especially nowadays confronting the wide adoption of cloud-native concepts and technologies, hundreds of thousands of application configurations brought by a large number of highly open and configurable platform technologies and the business complexity of the PaaS field as well as the requirements for high stability and unified governance. The purpose of platform engineering just lies in allowing application developers to participate in such large-scale DevOps work as easily and painlessly as possible. In Ant Group's practice, we tend to the following cooperative state, which is closer to Google's best practices in team structure and work mode. Platform developers and SREs become "Enablers" to support application developers to complete dev, delivery and operation in self-service. At the same time, the work results of application developers making applications deliverable and operational also become the basis for the ops team to handle application ops work. The SRE, application dev, and ops team periodically feedback the problems and pain points in the work process to the platform dev team to form a positive cycle.
 
-![](/img/blog/2022-09-16-lean-from-scale-practice/devops-cycle.png)
+![](/img/blog/2022-09-16-learn-from-scale-practice/devops-cycle.png)
 
 
 ## 2. Domain Language: A Pole of the Engineering Thought
@@ -46,14 +46,14 @@ Compared with a domain language there's no better way for open, self-service, do
 
 In the platform engineering practice of Ant Group, we have strengthened the client-side working mode. We write and maintain the models, orchestration, constraints and policies around the application ops life cycle in the shared codebase [Konfig](https://github.com/KusionStack/konfig) through the record and functional language [KCL](https://github.com/KusionStack/KCLVM). KCL is a static and strongly typed language for application developers with programming ability, and provides the writing experience of a modern high-level language with limited functionality around domain purposes. Under such practices, KCL is not a language just for writing K-V pairs, but a language for platform engineering development. Application developers, SREs, and platform developers conduct dev collaboratively based on Konfig. They write configurations, and [schema](https://kusionstack.io/docs/reference/lang/lang/tour/#schema) abstractions, [functions](https://kusionstack.io/docs/reference/lang/lang/tour/#function), [constraints](https://kusionstack.io/docs/reference/lang/lang/tour/#validation) and [rules](https://kusionstack.io/docs/reference/lang/lang/tour/#rule) which are frequent and complex in the PaaS field through KCL native functions, that is, writing stable and scalable business models, business logic, error-proofing constraints, and environmental rules. The Konfig repository becomes a unified programming interface, workspace and business layer, while the KCL-oriented writing paradigm, which is secure and consistent, with low noise, low side effect and easy to automate, are more beneficial for long-term management and governance.
 
-![](/img/blog/2022-09-16-lean-from-scale-practice/kcl-dev.png)
+![](/img/blog/2022-09-16-learn-from-scale-practice/kcl-dev.png)
 
 
 ## 3. Divide and Conquer: Deconstructing the Scaling Problem
 
 The idea of ​​divide and conquer is the key to solving the scaling problem, whose efficiency is reflected from MapReduce to Kubernetes. In the field of large-scale delivery and operation, the classic operation platform tries to use the built-in unified model, orchestration, and provision technology in a black-box product to deal with full-scale business scenarios. Such a practice can be started easily and quickly and turns out to be effective on a small scale. However, as the adoption rate of different business groups increases and different requirements are put forward, it gradually enters into a state of fatigue with the constantly growing platform technology.
 
-![](/img/blog/2022-09-16-lean-from-scale-practice/classic-plats.png)
+![](/img/blog/2022-09-16-learn-from-scale-practice/classic-plats.png)
 
 In Ant Group's practice, Konfig monorepo is the programming workspace opened by the internal engineering platform to developers, helping application developers to write configurations and policies around the application operation life cycle with a unified programming interface and tech stack, to integrate with existing and future platform and infrastructure, to create and manage cloud-native environments and RBAC-based permissions on demand, and to manage the delivery workflow through GitOps. Konfig monorepo provides an independent white-box programming space for different scenarios, projects and applications, whose intrinsic scalability comes from:
 
@@ -67,7 +67,7 @@ Konfig monorepo provides divide-and-conquer, composable engineering structure de
 
 The following figure illustrates a typical automated workflow with a Gitops approach in the Konfig monorepo, starting from application-oriented code changes and reaching the runtime through configurable CI and CD processes. Compared to centralized black-box products, this mechanism is much more open, customizable and extensible, through which there’s no more necessity of designing clumsy configuration management portals for different business scenarios, projects, and applications.
 
-![image.png](/img/blog/2022-09-16-lean-from-scale-practice/d-c-overview.png)
+![image.png](/img/blog/2022-09-16-learn-from-scale-practice/d-c-overview.png)
 
 
 ## 4. Modeling: Marginal Revenue and the Long Tail
