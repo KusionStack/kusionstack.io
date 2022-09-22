@@ -1,7 +1,6 @@
-# Start Kusion
+# Adopting KusionStack
 
-对于全新的项目来说，您只需要从头开始采用 Kusion 技术栈编写和管理基础设施配置即可，我们提供了针对不同运行时的[用户指南](../../guides/guides.md)文档引导您这一过程。
-然而，对于已经建设了基础设施的项目，可能已有存量的配置模型和数据，对此，Kusion 也提供了一些自动化工具帮助您快速迁移：
+If you’ve fallen in love with KusionStack, it might not be obvious how to adopt it. For brand new projects, it’s easy: start writing your infrastructure using the KusionStack from the start. But what if you already have infrastructure stood up? For this, Kusion also provides some automated tools to help you quickly migrate.
 
-对于 kubernetes 用户，Kusion 提供了 OpenAPI 到 KCL 模型代码的转换工具，以直接复用 Kubernetes 已有的上百个核心模型。
-对于 istio 用户，以及 Kubernetes 内置模型无法支持的情况， Kusion 还支持将 CRD 自动生成为 KCL 模型代码。
+For kubernetes users, Kusion provides a conversion tool from OpenAPI to KCL model code to directly reuse hundreds of existing core models in Kubernetes. For istio users, and for situations that Kubernetes built-in models cannot support, Kusion also supports automatic CRD generation as KCL model code.
+
