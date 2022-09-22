@@ -1,5 +1,5 @@
 ---
-slug: 2022-lean-from-scale-practice
+slug: 2022-learn-from-scale-practice
 title: 从规模化平台工程实践，我们学到了什么
 authors:
   name: 朵晓东
@@ -16,7 +16,7 @@ tags: [KusionStack, Kusion]
 
 DevOps 理念在 10 多年前被提出，从 KVM 到容器再到云原生时代，大量企业投入 DevOps 运动以期望解决内部规模化运维效率和平台建设效率的困境。其中大部分陷入过某种基于对 DevOps 朴素认知的 Anti-Pattern，同时也有部分公司探索出自己的路径。我经历过如下图简示的 Anti-Patterns，Dev 与 Ops 团队各行其是，或者简单的强制 Dev 团队独立完成 Ops 工作。在[这里](https://web.devopstopologies.com/#anti-types)可以找到更多更典型分类。
 
-![](/img/blog/2022-09-16-lean-from-scale-practice/devops-anti-pattern.png)
+![](/img/blog/2022-09-16-learn-from-scale-practice/devops-anti-pattern.png)
 
 企业内规模化 DevOps 难以推行的原因多种多样，特别是在企业内自持基础设施、同时采用云上技术平台的公司阻力最大。其中以这几种情况尤为常见：
 
@@ -37,7 +37,7 @@ DevOps 理念在 10 多年前被提出，从 KVM 到容器再到云原生时代�
 
 事实上，不是所有人都应该或者能够成为这个领域的专家，这非常困难！实际上平台技术团队的专家通常也仅擅长自己的专业领域而已，特别是在云原生理念和技术广泛应用的今天，面向大量高度开放、可配置的平台技术带来的成百上千的应用配置，PaaS 领域的业务复杂性，以及高稳定性和统一治理的要求，而平台工程的目的正是为了让应用研发者尽可能简单无痛的参与到这样规模化的 DevOps 工作中。在蚂蚁的实践中，我们更趋向于以下这种合作状态，在团队架构和工作模式上更靠近 Google 的最佳实践。平台研发者及 SRE 成为 “Enabler” 支持应用研发者自服务的完成研发及交付运维，同时应用研发者使其应用可交付运维的工作结果也成为运维人员可以接手应用运维工作的基础。最终 SRE、应用研发及运维人员把工作过程中的问题和痛点反馈给平台研发者形成正向循环。
 
-![](/img/blog/2022-09-16-lean-from-scale-practice/devops-cycle.png)
+![](/img/blog/2022-09-16-learn-from-scale-practice/devops-cycle.png)
 
 
 ## 2. 专用语言：工程化方式的一极
@@ -46,14 +46,14 @@ DevOps 理念在 10 多年前被提出，从 KVM 到容器再到云原生时代�
 
 在蚂蚁的平台工程实践中，我们强化了客户端的工作方式，将围绕应用运维生命周期的模型、编排、约束和策略稳定、可扩展的通过专用语言  [KCL](https://github.com/KusionStack/KCLVM)  编写维护在共享仓库 [Konfig](https://github.com/KusionStack/konfig) 中。 KCL 是一种面向有编程能力的应用研发者的静态强类型语言，提供现代高级语言的编写体验和围绕领域目的有限功能。在平台工程实践中 KCL 不是一种仅用于编写 K-V 对的语言，而是一种面向平台工程领域的专用语言。应用研发者、SRE、平台研发者面向 Konfig 协同研发，通过 KCL 原生功能编写应用配置，以及在 PaaS 领域更为高频和复杂的[模型](https://kusionstack.io/docs/reference/lang/lang/tour/#schema)抽象、[功能函数](https://kusionstack.io/docs/reference/lang/lang/tour/#function)和[约束](https://kusionstack.io/docs/reference/lang/lang/tour/#validation)[规则](https://kusionstack.io/docs/reference/lang/lang/tour/#rule)，即编写稳定、可扩展的业务模型、业务逻辑、防错约束和环境规则。Konfig 仓库则成为统一的编程界面，工作空间和业务层载体，而基于 KCL 的安全、低噪音、低副作用、一致的编写范式更有利于长期管理和治理。
 
-![](/img/blog/2022-09-16-lean-from-scale-practice/kcl-dev.png)
+![](/img/blog/2022-09-16-learn-from-scale-practice/kcl-dev.png)
 
 
 ## 3. 分治：解构规模化问题
 
 分治思路是解决规模化问题的钥匙，从 MapReduce 到 Kubernetes 无不体现其功效。在规模化交付运维领域，经典运维平台试图在统一的黑盒平台产品中，以内置的统一模型、编排、provision 技术来应对全量业务场景。这样的实践可以快速启动，在小范围内奏效，但随着不同业务主体采用率提升引入差异化需求，同时随着持续变化的平台技术逐渐进入疲态。
 
-![](/img/blog/2022-09-16-lean-from-scale-practice/classic-plats.png)
+![](/img/blog/2022-09-16-learn-from-scale-practice/classic-plats.png)
 
 在蚂蚁的实践中，Konfig  monorepo 是内部工程平台向研发者开放的编程界面和工作空间，帮助应用研发者以统一的编程界面编写围绕应用运维生命周期的配置和策略，从而编排和使用存量和新增的平台基础设施，按需创建管理云原生环境以及基于 RBAC 的权限，并通过 GitOps 方式管理交付过程。Konfig monorepo 为不同场景、项目、应用提供了独立的白盒的编程空间，其内生的扩展性来源于：
 
@@ -67,7 +67,7 @@ Konfig monorepo 提供了分治的、可组合的工程结构设计、代码组�
 
 下图示意了一种 Konfig  monorepo 中 GitOps 方式的典型的自动化工作流程，从面向应用的代码变更开始，通过可配置的 CI、CD 过程触达运行时，这样的机制相比中心化的黑盒产品方式更加开放、可定制、可扩展，也免去了针对不同业务场景、不同项目、应用设计笨拙的配置文件管理 portal 的必要。
 
-![](/img/blog/2022-09-16-lean-from-scale-practice/d-c-overview.png)
+![](/img/blog/2022-09-16-learn-from-scale-practice/d-c-overview.png)
 
 
 ## 4. 建模：边际收益和长尾问题
