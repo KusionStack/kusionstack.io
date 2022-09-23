@@ -1,16 +1,20 @@
-# Differentiated configurations
+# Differentiated Configurations
 
-应用的 KCL 配置代码中可以通过添加 if-else 语句搭配魔术变量设置需要的差异化配置，比如根据实际部署的集群名称设置不同的 labels。
+In the KCL code of the application, you can set the required differential configuration by adding an `if-else` statement with magic variables, 
+such as setting different labels according to the actual deployed cluster name.
 
-> 有关 KCL 语义相关的详细说明，请参阅[表达式](/reference/lang/lang/spec/expressions.md)。
+:::tip
 
-## 1. 准备工作
+About KCL semantics, please read [Expressions](/docs/reference/lang/lang/spec/expressions) for more details.
+:::
 
-可参考：[部署应用服务/准备工作](./1-deploy-server.md#1-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C)
+## Prerequisites
 
-## 2. 差异化配置样例
+Please refer to the [prerequisites](/docs/user_docs/guides/working-with-k8s/deploy-server#prerequisites) in the guide for deploying an application.
 
-`base/bask.k` 中 Pod Label 的配置：
+## Example
+
+Pod Label in `base/bask.k`:
 
 ```py
 appConfiguration: frontend.Server {
@@ -23,4 +27,5 @@ appConfiguration: frontend.Server {
 }
 ```
 
-通过以上 KCL 代码，我们根据配置大库（Konfig）中的魔术变量判断实际部署时的集群名称来选择性的为应用容器中注入标签，来做到被第三方服务识别或者其他目的。
+Through the above KCL code, you can get the actual cluster name according to the magic variables in the Konfig library,
+and selectively inject labels into the application container to be recognized by 3rd services or for other purposes.
