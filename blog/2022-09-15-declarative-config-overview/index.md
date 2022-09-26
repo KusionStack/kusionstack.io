@@ -1,6 +1,6 @@
 ---
 slug: 2022-declarative-config-overview
-title: Declarative Configuration Overview
+title: The Landscape of Declarative Configuration
 authors:
   name: 徐鹏飞
   title: KusionStack 团队成员
@@ -55,7 +55,7 @@ tags: [KusionStack, Kusion, KCLVM, Configuration]
     - Kustomize 的 Patch 比较定制，基本是通过固定几种 Patch Merge 策略
 - 代表技术
   - JSON/YAML：非常方便阅读，以及自动化处理，不同的语言均具有丰富的 API 支持。
-  - Kustomize：提供了一种无需**模板**和 **DSL** 即可自定义 Kubernetes 资源基础配置和差异化配置的解决方案，本身不解决约束的问题，需要配合大量的额外工具进行约束检查如 [Kube-linter](https://github.com/stackrox/kube-linter)、[Checkov](https://github.com/bridgecrewio/checkov) 等检查工具，图 2 示出了 Kustomize 的典型工作方式。
+  - [Kustomize](https://kustomize.io/)：提供了一种无需**模板**和 **DSL** 即可自定义 Kubernetes 资源基础配置和差异化配置的解决方案，本身不解决约束的问题，需要配合大量的额外工具进行约束检查如 [Kube-linter](https://github.com/stackrox/kube-linter)、[Checkov](https://github.com/bridgecrewio/checkov) 等检查工具，图 2 示出了 Kustomize 的典型工作方式。
 
 ![](/img/blog/2022-09-15-declarative-config-overview/02-kustomize.png)
 图 2 Kustomize 典型工作方式
@@ -71,7 +71,7 @@ tags: [KusionStack, Kusion, KCLVM, Configuration]
   - 容易落入所有配置参数都是模版参数的陷阱
   - 当配置规模变大时，开发者和工具都难以维护和分析它们
 - 代表技术
-  - Helm：Kubernetes 资源的包管理工具，通过配置模版管理 Kubernetes 资源配置。图 3 示出了一个 Helm Jekins Package ConfigMap 配置模版，可以看出这些模版本身都十分短小，可以书写简单的逻辑，适合 Kubernetes 基础组件固定的一系列资源配置通过包管理+额外的配置参数进行安装。相比于单纯的模版化的 KV，Helm 一定程度上提供了模版存储/引用和语义化版本管理的能力相比于 Kustomize 更适合管理外部 Charts, 但是在多环境、多租户的配置管理上不太擅长。
+  - [Helm](https://helm.sh/)：Kubernetes 资源的包管理工具，通过配置模版管理 Kubernetes 资源配置。图 3 示出了一个 Helm Jekins Package ConfigMap 配置模版，可以看出这些模版本身都十分短小，可以书写简单的逻辑，适合 Kubernetes 基础组件固定的一系列资源配置通过包管理+额外的配置参数进行安装。相比于单纯的模版化的 KV，Helm 一定程度上提供了模版存储/引用和语义化版本管理的能力相比于 Kustomize 更适合管理外部 Charts, 但是在多环境、多租户的配置管理上不太擅长。
 
 ![](/img/blog/2022-09-15-declarative-config-overview/03-helm.png)
 图 3 Helm Jekins Package ConfigMap 配置模版
@@ -98,9 +98,9 @@ tags: [KusionStack, Kusion, KCLVM, Configuration]
   - 运行时错误
   - 约束能力不足
 - 代表技术：
-  - GCL：一种 Python 实现的声明式配置编程语言，提供了必要的语言能力支持模版抽象，但编译器本身是 Python 编写，且语言本身是解释执行，对于大的模版实例 (比如 K8s 模型) 性能较差。
-  - HCL：一种 Go 实现结构化配置语言，原生语法受到 libucl、nginx 配置等的启发，用于创建对人类和机器都友好的结构化配置语言，主要针对 devops 工具、服务器配置以及 Terraform 中定义资源配置等。
-  - Jsonnet：一种 C++ 实现的数据模板语言，适用于应用程序和工具开发人员，可以生成配置数据并且无副作用组织、简化、统一管理庞大的配置。
+  - [GCL](https://github.com/rix0rrr/gcl)：一种 Python 实现的声明式配置编程语言，提供了必要的语言能力支持模版抽象，但编译器本身是 Python 编写，且语言本身是解释执行，对于大的模版实例 (比如 K8s 模型) 性能较差。
+  - [HCL](https://github.com/hashicorp/hcl)：一种 Go 实现结构化配置语言，原生语法受到 libucl、nginx 配置等的启发，用于创建对人类和机器都友好的结构化配置语言，主要针对 devops 工具、服务器配置以及 Terraform 中定义资源配置等。
+  - [Jsonnet](https://github.com/google/jsonnet)：一种 C++ 实现的数据模板语言，适用于应用程序和工具开发人员，可以生成配置数据并且无副作用组织、简化、统一管理庞大的配置。
 
 #### 1.2.4 类型化 (Typed) 的 KV
 
@@ -115,7 +115,7 @@ tags: [KusionStack, Kusion, KCLVM, Configuration]
   - 对于想要配置覆盖、修改的多租户、多环境场景难以实现
   - 对于带条件的约束场景，定义和校验混合定义编写用户界面不友好
 - 代表技术：
-  - CUE：CUE 解决的核心问题是“类型检查”，主要应用于配置约束校验场景及简单的云原生配置场景
+  - [CUE](https://github.com/cue-lang/cue)：CUE 解决的核心问题是“类型检查”，主要应用于配置约束校验场景及简单的云原生配置场景
 
 #### 1.2.5 模型化 (Structural) 的 KV
 
@@ -130,7 +130,7 @@ tags: [KusionStack, Kusion, KCLVM, Configuration]
   - 面向人类可读可写，面向机器部分可读可写
 - 不足
   - 扩展新模型及生态构建需要一定的研发成本
-- 代表技术：KCL，把运维类研发统一为一种声明式的代码编写，可以针对差异化应用交付场景抽象出用户模型并添加相应的约束能力，期望借助可编程 devops 解决规模化运维场景中的配置策略编写的效率和可扩展性等问题。图 4 示出了一个 KCL 编写应用交付配置代码的典型场景
+- 代表技术：KCL：一种 Rust 实现的声明式配置策略编程语言，把运维类研发统一为一种声明式的代码编写，可以针对差异化应用交付场景抽象出用户模型并添加相应的约束能力，期望借助可编程 devops 解决规模化运维场景中的配置策略编写的效率和可扩展性等问题。图 4 示出了一个 KCL 编写应用交付配置代码的典型场景
 
 ![](/img/blog/2022-09-15-declarative-config-overview/04-kcl-app-code.png)
 图 4 使用 KCL 编写应用交付配置代码
@@ -143,7 +143,7 @@ tags: [KusionStack, Kusion, KCLVM, Configuration]
 此外，从不同声明式配置方式的使用场景出发
 
 - 如果需要编写结构化的静态的 K-V，或使用 Kubernetes 原生的技术工具，建议选择 YAML
-- 如果希望引入编程语言便利性以消除文本(如 YAML、JSON) 模板，有良好的可读性，或者已是 Terraform 的用户，建议选择 HCL
+- 如果希望引入编程语言便利性以消除文本(如 YAML、JSON) 模板，有良好的可读性，或者已是 [Terraform](https://www.terraform.io) 的用户，建议选择 HCL
 - 如果希望引入类型功能提升稳定性，维护可扩展的配置文件，建议选择 CUE 之类的数据约束语言
 - 如果希望以现代语言方式编写复杂类型和建模，维护可扩展的配置文件，原生的纯函数和策略，和生产级的性能和自动化，建议选择 KCL
 
@@ -151,7 +151,7 @@ tags: [KusionStack, Kusion, KCLVM, Configuration]
 
 > 注意，本文将不会讨论通用语言编写配置的情况，通用语言一般是 Overkill 的，即远远超过了需要解决的问题，通用语言存在各式各样的安全问题，比如能力边界问题 (启动本地线程、访问 IO, 网络，代码死循环等不安全隐患)，比如像音乐领域就有专门的音符去表示音乐，方便学习与交流，不是一般文字语言可以表述清楚的。
 >
-> 此外，通用语言因为本身就样式繁多，存在统一维护、管理和自动化的成本，且通用语言一般是编写一个过程，并最终被编译为二进制从进程启动，扩展性不好控制，而配置语言往往编写的是数据，再搭配以简单的逻辑，描述的是期望的最终结果，然后由编译器或者引擎来消费这个期望结果。
+> 此外，通用语言因为本身就样式繁多，存在统一维护、管理和自动化的成本，通用语言一般用来编写客户端运行时，是服务端运行时的一个延续，不适合编写与运行时无关的配置，最终被编译为二进制从进程启动，稳定性和扩展性不好控制，而配置语言往往编写的是数据，再搭配以简单的逻辑，描述的是期望的最终结果，然后由编译器或者引擎来消费这个期望结果。
 
 ## 二、KCL 的核心设计与应用场景
 
@@ -755,5 +755,6 @@ output "r10" {
 - KCL Documents: [https://kusionstack.io/docs/reference/lang/lang/tour](https://kusionstack.io/docs/reference/lang/lang/tour)
 - How Terraform Works: A Visual Intro: [https://betterprogramming.pub/how-terraform-works-a-visual-intro-6328cddbe067](https://betterprogramming.pub/how-terraform-works-a-visual-intro-6328cddbe067) 
 - How Terraform Works: Modules Illustrated: [https://awstip.com/terraform-modules-illustrate-26cbc48be83a](https://awstip.com/terraform-modules-illustrate-26cbc48be83a)
+- Helm: [https://helm.sh/](https://helm.sh/)
 - Helm v.s. Kustomize: [https://harness.io/blog/helm-vs-kustomize](https://harness.io/blog/helm-vs-kustomize)
 - KubeVela: [https://kubevela.io/docs/](https://kubevela.io/docs/)
