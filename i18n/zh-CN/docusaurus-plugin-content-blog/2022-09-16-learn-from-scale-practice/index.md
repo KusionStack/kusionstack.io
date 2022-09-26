@@ -92,7 +92,7 @@ Konfig monorepo 提供了分治的、可组合的工程结构设计、代码组�
 
 运维自动化是基础设施运维领域的经典技术范畴，随着云原生理念及技术的推波助澜，可以被自动化集成成为企业运维实践的基本要求，开源开放、高度可配置的 CI、CD 技术逐步被企业采纳，黑盒的、无法被集成的 “产品” 方式逐步被灵活的可编排方式弱化并替代。这种实践的主要优势在于其强大的自定义编排和链接能力，高度的可扩展性和良好的可移植性。特别是在 Kubernetes 生态，GitOps 方式有更高的采用率，与可配置的 CI、CD 技术有天然的亲和性。这样的变化也在推进以工单和运维产品为中心的工作流逐步转变为以工程效率平台为中心的自服务工作流，而生产环境的运维能力则成为了工作流中面向生产自动运维的一个重要环节。在开源社区，面向不同研发效率平台的抽象层技术创新也在活跃进行中，平台侧研发者希望通过最短的认知和实践路径打通应用到云环境的 CI、CD 过程。
 
-在蚂蚁的工程实践中，工程效率平台深度参与了 Konfig monorepo 的开放自动化实践，我们的实践方向也与工程效率平台技术演进方向高度一致。在从几人到几十人再到几百人的协同工作中，面向运维场景的工作流设计，高频的代码提交和 pipelines 执行，实时自动化测试和部署过程，这些对服务于单库的工程效率平台造成了很多的挑战。特别是 monorepo 中多样化的业务需要独立且强大的工作流自定义和操作支持，也需要高实时性、强 SLO 保障的并行的工作流执行能力，这些需求与单库模式的需求有巨大的差异，也给我们制造了很多麻烦。大部分配置语言是解释型语言，而 KCL 被设计为一种编译型语言，由 Rust、C、LLVM 优化器实现，以达到对规模化 KCL 文件提供高性能编译和运行时执行的目标，同时支持编译到本地码和 wasm 以满足不同运行时的执行要求。另外 Git 的存储及架构设计不同于 [Citc/Piper](https://cacm.acm.org/magazines/2016/7/204032-why-google-stores-billions-of-lines-of-code-in-a-single-repository/fulltext) 架构，不适用于规模化代码的 monorepo，所幸今天我们的代码量还没有遇到很大的问题。我们正在一起工作解决这些问题，希望随着实践的深入逐步解决他们。
+在蚂蚁的工程实践中，工程效率平台深度参与了 Konfig monorepo 的开放自动化实践，我们的实践方向也与工程效率平台技术演进方向高度一致。在从几人到几十人再到几百人的协同工作中，面向运维场景的工作流设计，高频的代码提交和 pipelines 执行，实时自动化测试和部署过程，这些对服务于单库的工程效率平台造成了很多的挑战。特别是 monorepo 中多样化的业务需要独立且强大的工作流自定义和操作支持，也需要高实时性、强 SLO 保障的并行的工作流执行能力，这些需求与单库模式的需求有巨大的差异，也给我们制造了很多麻烦。大部分配置语言是解释型语言，而 KCL 被设计为一种编译型语言，由 Rust、C、LLVM 优化器实现，以达到对规模化 KCL 文件提供[高性能](https://kusionstack.io/blog/2022-declarative-config-overview#35-performance)编译和运行时执行的目标，同时支持编译到本地码和 wasm 以满足不同运行时的执行要求。另外 Git 的存储及架构设计不同于 [Citc/Piper](https://cacm.acm.org/magazines/2016/7/204032-why-google-stores-billions-of-lines-of-code-in-a-single-repository/fulltext) 架构，不适用于规模化代码的 monorepo，所幸今天我们的代码量还没有遇到很大的问题。我们正在一起工作解决这些问题，希望随着实践的深入逐步解决他们。
 
 ## 6. 协同和文化：更重要的事
 
@@ -116,5 +116,6 @@ Konfig monorepo 提供了分治的、可组合的工程结构设计、代码组�
 - [https://github.com/KusionStack/KCLVM](https://github.com/KusionStack/KCLVM)
 - [https://kusionstack.io/docs/reference/lang/lang/tour](https://kusionstack.io/docs/reference/lang/lang/tour/#%E9%85%8D%E7%BD%AE%E6%93%8D%E4%BD%9C)
 - [https://kusionstack.io/docs/user_docs/concepts/konfig](https://kusionstack.io/docs/user_docs/concepts/konfig)
+- [https://kusionstack.io/blog/2022-declarative-config-overview#35-performance](https://kusionstack.io/blog/2022-declarative-config-overview#35-performance)
 - [https://cacm.acm.org/magazines/2016/7/204032-why-google-stores-billions-of-lines-of-code-in-a-single-repository/fulltext](https://cacm.acm.org/magazines/2016/7/204032-why-google-stores-billions-of-lines-of-code-in-a-single-repository/fulltext)
 
