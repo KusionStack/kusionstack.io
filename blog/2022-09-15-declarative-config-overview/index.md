@@ -615,19 +615,19 @@ app: App {
 
 在代码规模较大或者计算量较高的场景情况下 KCL 比 CUE/Jsonnet/HCL 等语言性能更好 (CUE 等语言受限于运行时约束检查开销，而 KCL 是一个静态编译型语言)
 
-- CUE
+- CUE (test.cue)
 
 ```cue
 import "list"
 
 temp: {
-       for i, _ in [1]*10000 {
-               "a\(i)": list.Max([1, 2])
-       }
+        for i, _ in list.Range(0, 10000, 1) {
+                "a\(i)": list.Max([1, 2])
+        }
 }
 ```
 
-- KCL
+- KCL (test.k)
 
 ```python
 a = lambda x: int, y: int -> int {
@@ -636,7 +636,7 @@ a = lambda x: int, y: int -> int {
 temp = {"a${i}": a(1, 2) for i in range(10000)}
 ```
 
-- Jsonnet
+- Jsonnet (test.jsonnet)
 
 ```jsonnet
 local a(x, y) = std.max(x, y);
@@ -645,7 +645,7 @@ local a(x, y) = std.max(x, y);
 }
 ```
 
-- Terraform HCL (由于 terraform range 函数只支持最多 1024 个迭代器，将 range(10000) 拆分为 10 个子 range)
+- Terraform HCL (test.tf, 由于 terraform range 函数只支持最多 1024 个迭代器，将 range(10000) 拆分为 10 个子 range)
 
 ```python
 output "r1" {
@@ -678,14 +678,13 @@ output "r9" {
 output "r10" {
   value = {for s in range(9000, 10000) : format("a%d", s) => max(1, 2)}
 }
-
 ```
 
-- 运行时间
+- 运行时间（考虑到生产环境的实际资源开销，本次测试以单核为准）
 
-| 设备型号 | KCL v0.4.3 运行时间 (包含编译+运行时间) | CUE v0.4.2 运行时间 (包含编译+运行时间) | Jsonnet v0.18.0 运行时间 (包含编译+运行时间) | HCL in Terraform v1.2.9 运行时间 (包含编译+运行时间) |
+| 环境 | KCL v0.4.3 运行时间 (包含编译+运行时间) | CUE v0.4.3 运行时间 (包含编译+运行时间) | Jsonnet v0.18.0 运行时间 (包含编译+运行时间) | HCL in Terraform v1.3.0 运行时间 (包含编译+运行时间) |
 | --- | --- | --- | --- | --- |
-| Mac 6-Core Intel Core i7，2.6 GHz | 375 ms | 6290 ms | 1890 ms | tf plan -parallelism=1 时：1774 ms; tf plan -parallelism=10 时：685 ms; parallelism 参数更大时运行速度没有更明显提升 |
+| OS: macOS 10.15.7; CPU: Intel(R) Core(TM) i7-8850H CPU @ 2.60GHz; Memory: 32 GB 2400 MHz DDR4; 不开启 NUMA | 440 ms (kclvm_cli run test.k) | 6290 ms (cue export test.cue) | 1890 ms (jsonnet test.jsonnet) | 1774 ms (terraform plan -parallelism=1)|
 
 综上可以看出：CUE 和 KCL 均可以覆盖到绝大多数配置校验场景，并且均支持属性类型定义、配置默认值、约束校验等编写，但是 CUE 对于不同的约束条件场景无统一的写法，且不能很好地透出校验错误，KCL 使用 check 关键字作统一处理，支持用户自定义错误输出。
 
