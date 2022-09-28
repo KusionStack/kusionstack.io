@@ -1,25 +1,26 @@
-# Application Scaling
+# Configure Resource Specification
 
-Server 模型中的 schedulingStrategy.resource 属性用于声明应用的业务容器的资源规格，有关资源规格的定义，可以查看 KCL Model 中 [base.pkg.kusion_models.kube.frontend.resource](/docs/reference/model/kusion_models/kube/frontend/resource/doc_resource) 模块的文档。
+The attribute `schedulingStrategy` of the `Server` model is used to declare the resource spec of an application's business container.
+About the definition of resource spec, please see [here](/docs/reference/model/kusion_models/kube/frontend/resource/doc_resource) for more details.
 
-## 1. 准备工作
+## Prerequisites
 
-可参考：[部署应用服务/准备工作](./1-deploy-server.md#1-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C)
+Please refer to the [prerequisites](/docs/user_docs/guides/working-with-k8s/deploy-server#prerequisites) in the guide for deploying an application.
 
-## 2. 扩缩容配置样例
+## Example
 
-通过编辑 schedulingStrategy.resource 的值来设置业务容器的资源规格。
+Re-assign the `schedulingStrategy.resource` value.
 
-有两个方法修改资源规格，一种是修改 resource 表达式中 cpu、memory 的值：
+There are two ways to modify the resource spec, one is to modify the values of `cpu` and `memory` in the resource expression:
 
 ```py
 import base.pkg.kusion_models.kube.frontend
 import base.pkg.kusion_models.kube.frontend.resource as res
 
 appConfiguration: frontend.Server {
-    # 修改 resource 表达式中 cpu、memory 的值
-    # 原值：schedulingStrategy.resource = "cpu=100m,memory=100Mi,disk=1Gi"
-    # 新的值（应用扩容）：
+    # modify the values of cpu and memory in the resource expression
+    # before: schedulingStrategy.resource = "cpu=100m,memory=100Mi,disk=1Gi"
+    # after(scale up): 
     schedulingStrategy.resource = res.Resource {
         cpu = 500m
         memory = 500Mi
@@ -28,21 +29,21 @@ appConfiguration: frontend.Server {
 }
 ```
 
-另一种是使用预置的 resource 值替代原值来进行应用扩容：
+The other is to use the preset resource value to replace the original value to expand the application:
 
 ```py
 import base.pkg.kusion_models.kube.frontend
 import base.pkg.kusion_models.kube.templates.resource as res_tpl
 
 appConfiguration: frontend.Server {
-    # 使用预置的 resource 值替代原值来进行应用扩容：
-    # 原值：schedulingStrategy.resource = "cpu=100m,memory=100Mi,disk=1Gi"
-    # 新的值（应用扩容）：
+    # use the preset resource value
+    # before: schedulingStrategy.resource = "cpu=100m,memory=100Mi,disk=1Gi"
+    # after(scale up): 
     schedulingStrategy.resource = res_tpl.large
 }
 ```
 
-上述代码是样例配置，可以根据 SchedulingStrategy 模型定义和实际情况添加自定义配置：
+The code above is a sample configuration, you can add custom configurations according to the actual situation:
 
 ```py
 import base.pkg.kusion_models.kube.frontend.resource as res
@@ -59,9 +60,9 @@ schema SchedulingStrategy:
     resource: str | res.Resource = "1<cpu<2,1Gi<memory<2Gi,disk=20Gi"
 ```
 
-## 3. 配置生效
+## Applying
 
-再次执行【[配置生效](./1-deploy-server.md#4-%E9%85%8D%E7%BD%AE%E7%94%9F%E6%95%88)】的步骤即可进行资源扩容：
+Re-run steps in [Applying](/docs/user_docs/guides/working-with-k8s/deploy-server#applying), resource scaling is completed.
 
 ```
 $ kusion apply
