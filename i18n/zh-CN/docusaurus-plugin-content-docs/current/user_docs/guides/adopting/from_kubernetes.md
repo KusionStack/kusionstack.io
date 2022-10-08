@@ -8,7 +8,7 @@
 
 ## 2. KCL OpenAPI 支持
 
-KCLOpenAPI 工具支持从 OpenAPI/CRD 定义提取并生成 KCL schema. 在[KCLOpenapi Spec](/docs/reference/cli/openapi/spec)中明确定义了 OpenAPI 规范与 KCL 语言之间的映射关系。
+KCLOpenAPI 工具支持从 OpenAPI/CRD 定义提取并生成 KCL schema. 在[KCLOpenapi Spec](/reference/cli/openapi/spec.md)中明确定义了 OpenAPI 规范与 KCL 语言之间的映射关系。
 
 [安装 Kusion 工具包](/docs/user_docs/getting-started/install)的同时会默认安装 KCLOpenapi 工具，KCLOpenapi 工具的使用和示例可参见[KCLOpenAPI 工具](/docs/reference/cli/openapi)
 
