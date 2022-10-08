@@ -80,7 +80,7 @@ From the [openapi-spec file of Kubernetes version 1.23](https://github.com/kuber
 }
 ```
 
-Save the above spec as deployment.json, execute `kclopenapi generate model -f deployment.json` command, and all relevant KCL schema files will be generated in the current workspace, as shown in the [KCL Deployment file (Kubernetes 1.22 version)](https://github.com/KusionStack/konfig/blob/main/base/pkg/kusion_kubernetes/api/apps/v1/deployment.k).
+Save the above spec as deployment.json, execute `kcl-openapi generate model -f deployment.json` command, and all relevant KCL schema files will be generated in the current workspace, as shown in the [KCL Deployment file (Kubernetes 1.22 version)](https://github.com/KusionStack/konfig/blob/main/base/pkg/kusion_kubernetes/api/apps/v1/deployment.k).
 
 
 
@@ -102,7 +102,7 @@ If CRD is used in your project, you can also use a similar schema, generate the 
 * Generate KCL Schema from CRD
 
     ```
-    kclopenapi generate model --crd --skip-validation -f your_crd.yaml
+    kcl-openapi generate model --crd --skip-validation -f your_crd.yaml
     ```
 
 * Declare CR using KCL
