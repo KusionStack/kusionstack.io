@@ -3,7 +3,7 @@
 命令
 
 ```shell
-kclopenapi generate model --crd -f ${your_CRD.yaml} -t ${the_kcl_files_output_dir} --skip-validation
+kcl-openapi generate model --crd -f ${your_CRD.yaml} -t ${the_kcl_files_output_dir} --skip-validation
 ```
 
 # 示例
@@ -58,7 +58,7 @@ spec:
 - 命令
 
 ```shell
-kclopenapi generate model -f test_crontab_CRD.yaml -t ~/ --skip-validation --crd
+kcl-openapi generate model -f test_crontab_CRD.yaml -t ~/ --skip-validation --crd
 ```
 
 - 输出文件： ~/models/stable_example_com_v1_cron_tab.k
