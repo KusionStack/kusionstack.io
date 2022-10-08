@@ -1,9 +1,9 @@
 ---
 sidebar_position: 99
 ---
-# 开源协议
+# License
 
-Kusion 采用 [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) 协议开源。
+Kusion Use [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) License:
 
 ```
                                  Apache License

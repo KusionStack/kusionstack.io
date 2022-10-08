@@ -1,27 +1,33 @@
-# Monitoring
+# Enable Monitoring
 
-本篇指南向你展示，如何使用 KCL 语言与其相对应的 CLI 工具 Kusion，完成一个 Kubernetes 应用 Prometheus 监控部署。本次演示的样例主要由以下组件构成：
+This guide shows you how to use the KCL language and its corresponding CLI tool Kusion to complete the monitoring and deployment of a Kubernetes application Prometheus.
+The demo sample is mainly composed of the following components:
 
-- 命名空间（Namespace）
-- 无状态应用（Deployment）
-- Pod 监控（PodMonitor）
+- Namespace
+- Deployment
+- PodMonitor
 
-> 本指南要求你对 Kubernetes 和 Prometheus 有基本的了解。不清楚相关概念的，可以前往 Kubernetes 和 Prometheus 官方网站，查看相关说明：
+:::tip
+
+This guide requires you to have a basic understanding of Kubernetes and Prometheus.
+If you are not familiar with the relevant concepts, please refer to the links below:
 
 - [Learn Kubernetes Basics](https://kubernetes.io/docs/tutorials/kubernetes-basics/)
 - [Prometheus Introduction](https://prometheus.io/docs/introduction/overview/)
+:::
 
-## 1. 准备开始
+## Prerequisites
 
-在开始之前，除了参考 [部署应用服务/准备工作](./1-deploy-server.md#1-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C) 的准备工作，还需要完成如下准备：
+Before starting, in addition to referring [here](/docs/user_docs/guides/working-with-k8s/deploy-server#prerequisites),
+the following preparations need to be completed:
 
-- 在 Kubernetes 集中部署 Prometheus Operator
+- Deploy Prometheus Operator in your cluster
 
-根据 [kube-prometheus](https://github.com/prometheus-operator/kube-prometheus) 中的提示步骤在您的集群当中部署 Prometheus Operator
+Follow the steps in [kube-prometheus](https://github.com/prometheus-operator/kube-prometheus) to deploy the Prometheus Operator in your cluster
 
-## 2. 监控配置样例
+## Example
 
-通过将 `enableMonitoring` 设置为 `True` 使能配置，并添加业务容器端口号配置 `8080`
+Enable monitoring by setting `enableMonitoring` to `True`, and add the business container port number configuration `8080`
 
 ```py
 import base.pkg.kusion_models.kube.frontend
@@ -47,15 +53,15 @@ appConfiguration: frontend.Server {
 }
 ```
 
-## 3. 配置生效
+## Applying
 
-执行命令：
+Run the following command:
 
 ```bash
 kusion apply
 ```
 
-输出类似于：
+The output is similar to:
 
 ```
  SUCCESS  Compiling in stack prod...                                                                                                  
@@ -66,12 +72,14 @@ Stack: prod    Provider                                 Type                    
        * └─  kubernetes                   apps/v1:Deployment  prometheus-example-appprod[0]  Create
 ```
 
-## 4. 查看监控面板
+## Validate Result
 
-可以看到，除了部署 kubernetes `Deployment` 和 `Namespace` 资源外，还额外部署了 `PodMonitor` 资源用于配置 Prometheus 监听应用 Pod，当资源都创建完成时，可以通过如下命令查看 Prometheus 监控面板。
+We can see that in addition to deploying k8s `Deployment` and `Namespace` resources,
+`PodMonitor` is also deployed to configure Prometheus to monitor target pods.
+After the resources are created, you can use the following commands to check the Prometheus monitoring panel.
 
 ```
 kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090
 ```
 
-最后通过 http://localhost:9090 访问监控面板并查看应用程序的监控指标。
+Finally, access the monitoring panel via [http://localhost:9090](http://localhost:9090) and see the monitoring metrics of the application.

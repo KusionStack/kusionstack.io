@@ -1,4 +1,4 @@
-# Start Kusion
+# Adopting KusionStack
 
 If you start using kusion in a brand new project, what you only need to do is to write and manage your infrastructure configuration from scratch, and we provide user guide documents for infra running on different runtimes to guide you through this process. 
 

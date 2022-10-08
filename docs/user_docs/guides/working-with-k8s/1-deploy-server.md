@@ -1,50 +1,60 @@
 # Deploy Server
 
-本篇指南向你展示，如何使用 KCL 语言与其相对应的 CLI 工具 Kusion，完成一个运行在 Kubernetes 中的 Long-Running 应用的部署，我们将组织配置的单位叫做应用（Application），描述应用部署和运维细节的配置集合叫做应用服务（Server），它本质上是通过 KCL 定义的运维模型，完整的 Server 模型定义可见：[server](/docs/reference/model/kusion_models/kube/frontend/doc_server)
+This guide shows you how to use the KCL language and Kusion CLIs to complete the deployment of an application running in Kubernetes.
+We call the abstraction of application operation and maintenance configuration as `Server`, and its instance as `Application`.
+It is essentially an operation and maintenance model defined by [KCL](/docs/reference/lang/lang/tour),
+and the complete definition can be seen [here](/docs/reference/model/kusion_models/kube/frontend/doc_server).
 
-要将一个运行在 Kubernetes 中的应用完全部署起来，一般需要下发多个 Kubernetes 资源，本次演示的样例涉及以下 Kubernetes 资源：
+In actual production, the application online generally needs to update several k8s resources:
 
-- 命名空间（Namespace）
-- 无状态工作负载（Deployment）
-- 服务（Service）
+- Namespace
+- Deployment
+- Service
 
-> 不清楚相关概念的，可以前往 Kubernetes 官方网站，查看相关说明：
+:::tip
+
+This guide requires you to have a basic understanding of Kubernetes.
+If you are not familiar with the relevant concepts, please refer to the links below:
 
 - [Learn Kubernetes Basics](https://kubernetes.io/docs/tutorials/kubernetes-basics/)
 - [Namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
 - [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
 - [Service](https://kubernetes.io/docs/concepts/services-networking/service/)
+:::
 
-## 1. 准备工作
+## Prerequisites
 
-在开始之前，我们需要做以下准备工作：
+Before we start, we need to complete the following steps:
 
-1、安装 Kusion 工具链
+1、Install Kusion
 
-我们推荐使用 kusion 的官方安装工具 `kusionup`，可实现 kusion 多版本管理等关键能力。详情信息请参阅[下载和安装](/docs/user_docs/getting-started/install)。
+We recommend using the official installation tool _kusionup_ which supports multi-version management.
+See [Download and Install](/docs/user_docs/getting-started/install) for more details.
 
-2、下载开源 Konfig 大库
+2、Clone Konfig repo
 
-在本篇指南中，需要用到部分已经抽象实现的 KCL 模型，有关 KCL 语言的介绍，可以参考 [Tour of KCL](/reference/lang/lang/tour.md)。
+In this guide, we need some KCL models that [Konfig](https://github.com/KusionStack/konfig.git) offers.
+For more details on KCL language, please refer to [Tour of KCL](/docs/reference/lang/lang/tour).
 
-仓库地址： [https://github.com/KusionStack/konfig.git](https://github.com/KusionStack/konfig.git)
+3、Running Kubernetes cluster
 
-3、可用的 Kubernetes 集群
+There must be a running Kubernetes cluster and a [kubectl](https://Kubernetes.io/docs/tasks/tools/#kubectl) command line tool.
+If you don't have a cluster yet, you can use [Minikube](https://minikube.sigs.k8s.io/docs/tutorials/multi_node/) to start one of your own.
 
-必须要有一个 Kubernetes 集群，同时 Kubernetes 集群最好带有 [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) 命令行工具。
-如果你还没有集群，你可以通过 [Minikube](https://minikube.sigs.k8s.io/docs/tutorials/multi_node/) 构建一个你自己的集群。
+## Initializing
 
-## 2. 初始化
+This guide is to deploy an app by KCL and Kusion, relying on Kusion tools, Konfig library and Kubernetes cluster.
 
-本指南是以 KCL 和 Kusion 的方式部署应用服务，依赖 kusion 工具、Konfig 大库和 Kubernetes 集群。
-
-打开 Konfig 大库项目，进入 `appops` 目录，初始化 KCL 项目：
+Open Konfig repo, enter the `appops` directory, and initialize the KCL project:
 
 ```bash
 cd appops && kusion init
 ```
 
-`kusion init` 命令会提示你输入可能需要的参数，例如项目名称、项目描述，镜像地址等；也可以一路点击 *回车* 使用默认值。输出类似于：
+The `kusion init` command will prompt you to enter required parameters, such as project name, project description, image address, etc.
+You can keep pressing _Enter_ all the way to use the default values.
+
+The output is similar to:
 
 ```
 ✔ deployment-single-stack    A minimal kusion project of single stack
@@ -61,14 +71,18 @@ Press ^C at any time to quit.
 Created project 'deployment-single-stack'
 ```
 
-到此，我们就成功初始化一个 KCL 项目：deployment-single-stack，该代码包含一个 Project 和一个 Stack。
-其中，`project name` 和 `project description` 是每个模板都需要设置的属性，目的是为了模板共享。
-剩余三个字段，是模板中需要用户填入的三个属性，`Stack` 表示配置栈的名称，可以理解为配置的隔离标识；
-`ClusterName` 是指集群名称，在本例中暂未使用；`Image` 表示应用的业务容器的镜像地址。
+Now, we have successfully initialized a KCL project `deployment-single-stack`, which contains a `dev` stack.
+`project name` and `project description` are provided by KCL template, and another three fields require users to fill in. 
+`Stack` represents the name of a configuration set, which is used to isolate with other stacks.
+`ClusterName` represents the cluster name, it will be recorded into `metadata.annotations`.
+`Image` represents the image address of the app's main container.
 
-> 有关 Project 和 Stack 的设计说明，请参阅 [Project&Stack](/user_docs/concepts/konfig.md)。
+:::info
 
-该项目的目录结构如下：
+See [Project&Stack](/user_docs/concepts/konfig.md) for more details about Project and Stack.
+:::
+
+The directory structure is as follows:
 
 ```
 deployment-single-stack
@@ -87,48 +101,70 @@ deployment-single-stack
 3 directories, 8 files
 ```
 
-可以看到，目录共分成三层，每层目录都有各自的设计意义。
-根目录下 `project.yaml` 表示项目级别的属性；`kusion.yaml` 是模板的配置文件，与本指南的操作内容无关。
-`base` 目录存放的是公共配置；`dev` 目录存放的是定制化配置，`kcl.yaml` 是静态编译配置，指定了编译文件，
-`main.k` 是定制化配置的具体代码，`stack.yaml` 存放的是是配置栈的描述信息；
-`dev/ci-test` 目录存放的是动态编译配置和最终输出，默认情况下，编译输出到该目录下的 `stdout.golden.yaml` 文件。
-整体来说，`.k` 文件是 KCL 源码，`.yaml` 是配置文件。
+It can be seen that the project has three levels of directories, and each level has its design significance.
 
-## 3. 配置编译
+First level:
+- `project.yaml` represents project-level properties.
+- `kusion.yaml` is the template configuration file, which is not relevant to the operation of this guide.
 
-到此，已经借助 kusion 提供的内置模板，完成了项目的开发。
-项目的编程语言是 KCL，不是 Kubernetes 认识的 JSON/YAML，因此还需要编译得到最终输出。
+Second level:
+- `base` directory stores common configurations for all stacks.
+- `dev` directory stores the customized configuration:
+  - `dev/kcl.yaml` stores static compilation configuration.
+  - `dev/main.k` stores specific configurations of `dev` stack.
+  - `dev/stack.yaml` stores stack information.
 
-首先进入到项目的 Stack 目录（`deployment-single-stack/dev`）并执行编译：
+Third level:
+- `dev/ci-test` directory stores the dynamic compilation configuration and final output.
+
+By default, the compilation output goes to the `stdout.golden.yaml` file in this directory.
+In general, the `.k` file is the KCL source code, and the `.yaml` is the configuration file.
+
+## Compiling
+
+At this point, the development of the project has been completed with the help of the built-in template provided by Kusion.
+The programming language of the project is KCL, not JSON/YAML which Kubernetes recognizes, so it needs to be compiled to get the final output.
+
+Enter stack dir `deployment-single-stack/dev` and compile:
 
 ```bash
 cd deployment-single-stack/dev && kusion compile
 ```
 
-输出默认保存在 `deployment-single-stack/dev/ci-test/stdout.golden.yaml` 文件中。
+The output is saved in the `deployment-single-stack/dev/ci-test/stdout.golden.yaml` file by default.
 
-> 有关 kusion 命令行工具的说明，执行 `kusion -h`，或者参考工具的在线文档 [Overview of Kusion CLI](/docs/reference/cli/kusionctl/overview)。
+:::tip
 
-## 4. 配置生效
+For instructions on the kusion command line tool, execute `kusion -h`, or refer to the tool's online [documentation](/docs/reference/cli/kusionctl/overview)。
+:::
+
+## Applying
 
 完成编译，现在开始下发配置。通过查看 `stdout.golden.yaml` 文件，可以看到 3 个资源：
+Compilation is completed, and now apply the configuration. At the `stdout.golden.yaml` file, you can see 3 resources:
 
-- 一个 name 为 deployment-single-stackdev 的 Deployment
-- 一个 name 为 deployment-single-stack 的 Namespace
-- 一个 name 为 frontend-service 的 Service
+- a Deployment named `deployment-single-stackdev`
+- a Namespace named `deployment-single-stack`
+- a Service named `frontend-service`
 
 该文件的内容已经是 Kubernetes 能够识别的配置，可以使用 `kubectl apply -f stdout.golden.yaml` 直接下发配置，
 也可以使用 `kusion apply` 完成配置编译并下发（该命令包含了配置编译）。
+The content of this file can be directly accepted by Kubernetes.
+You can run `kusion apply` or `kubectl apply -f stdout.golden.yaml` to directly apply the configuration.
 
-> 推荐使用 kusion 工具，本例中的编译输出是完整的 YAML 声明，但不是所有的 KCL 项目编译结果都是如此。
+:::tip
 
-执行命令：
+It is recommended to use the Kusion CLI, the compilation output in this example is the complete YAML declaration, 
+but not all KCL project compilation results are the same.
+:::
+
+Execute command:
 
 ```bash
 kusion apply
 ```
 
-输出类似于：
+The output is similar to:
 
 ```
 SUCCESS  Compiling in stack dev...
@@ -148,15 +184,15 @@ Creating Service/frontend-service [3/3] █████████████�
 Apply complete! Resources: 3 created, 0 updated, 0 deleted.
 ```
 
-以上就完成了配置生效，可以使用 `kubectl` 工具检查资源的实际状态。
+After the configuration applying successfully, you can use the `kubectl` to check the actual status of these resources.
 
-1、 检查 Namespace
+1、 Check Namespace
 
 ```bash
 kubectl get ns
 ```
 
-输出类似于：
+The output is similar to:
 
 ```
 NAME                      STATUS        AGE
@@ -165,39 +201,40 @@ default                   Active        72d
 deployment-single-stack   Active        10m
 ```
 
-2、检查 Deployment
+2、Check Deployment
 
 ```bash
 kubectl get deploy -n deployment-single-stack
 ```
 
-输出类似于：
+The output is similar to:
 
 ```
 NAME                         READY   UP-TO-DATE   AVAILABLE   AGE
 deployment-single-stackdev   1/1     1            1           11m
 ```
 
-3、检查 Service
+3、Check Service
 
 ```bash
 kubectl get svc -n deployment-single-stack
 ```
 
-输出类似于：
+The output is similar to:
 
 ```
 NAME               TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
 frontend-service   NodePort   10.0.0.0       <none>        80:10001/TCP   11m
 ```
 
-4、检查应用
+4、Validate app
 
-使用 `kubecl` 工具，将本机端口 `30000` 映射到 Service 端口 `80`
+Using the `kubecl` tool, forward native port `30000` to the service port `80`.
 
 ```bash
 kubectl port-forward svc/frontend-service -n deployment-single-stack-xx 30000:80
 ```
 
-打开浏览器访问 [http://127.0.0.1:30000](http://127.0.0.1:30000)：
+Open browser and visit [http://127.0.0.1:30000](http://127.0.0.1:30000)：
+
 ![](/img/docs/user_docs/guides/working-with-k8s/app-preview.jpg)

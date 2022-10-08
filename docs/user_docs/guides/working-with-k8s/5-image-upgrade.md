@@ -1,29 +1,30 @@
-# Upgrade
+# Upgrade Image
 
-Server 模型中的 image 属性用于声明应用的业务容器镜像，有关镜像的定义，可以查看 KCL Model 中 [base.pkg.kusion_models.kube.frontend.server](/docs/reference/model/kusion_models/kube/frontend/doc_server) 模块的文档。
+The attribute `image` of the `Server` model is used to declare your app's business container image.
+For the definition of `image`, please see [here](/docs/reference/model/kusion_models/kube/frontend/doc_server) for more details.
 
-## 1. 准备工作
+## Prerequisites
 
-可参考：[部署应用服务/准备工作](./1-deploy-server.md#1-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C)
+Please refer to the [prerequisites](/docs/user_docs/guides/working-with-k8s/deploy-server#prerequisites) in the guide for deploying an application.
 
-## 2. 镜像升级
+## Example
 
-编辑 dev/main.k 中的 image 的值:
+Re-assign the image value in `dev/main.k`:
 
 ```py
 import base.pkg.kusion_models.kube.frontend
 
 appConfiguration: frontend.Server {
-    # 修改 image 的值为要升级的版本
-    # 修改前：image = "gcr.io/google-samples/gb-frontend:v4"
-    # 修改后：
+    # set image to your want
+    # before: image = "gcr.io/google-samples/gb-frontend:v4"
+    # after: 
     image = "gcr.io/google-samples/gb-frontend:v5"
 }
 ```
 
-## 3. 配置生效
+## Applying
 
-再次执行【[配置生效](./1-deploy-server.md#4-%E9%85%8D%E7%BD%AE%E7%94%9F%E6%95%88)】的步骤即可升级应用的镜像：
+Re-run steps in [Applying](/docs/user_docs/guides/working-with-k8s/deploy-server#applying), update image is completed.
 
 ```
 $ kusion apply

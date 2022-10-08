@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 ---
-# 初始化工程代码
+# Init Project
 
 初始化一个新项目，包含 KCL 文件结构和基础代码
 

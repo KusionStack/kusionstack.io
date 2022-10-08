@@ -1,9 +1,9 @@
-# OpenAPI 转 KCL
+# OpenAPI to KCL
 
 命令
 
 ```shell
-kclopenapi generate model -f ${your_open_api_spec.yaml} -t ${the_kcl_files_output_dir}
+kcl-openapi generate model -f ${your_open_api_spec.yaml} -t ${the_kcl_files_output_dir}
 ```
 
 示例：
@@ -35,7 +35,7 @@ paths: {}
 - 命令：
 
 ```shell
-kclopenapi generate model -f test_open_api_spec.yaml -t ~/
+kcl-openapi generate model -f test_open_api_spec.yaml -t ~/
 ```
 
 - 输出：~/models/v1/test_int.k

@@ -1,6 +1,6 @@
 ---
 slug: 2022-sense-of-open-day
-title: KusionStack 开源有感
+title: Sense of KusionStack Open Day
 authors:
   name: 朵晓东
   title: Kusion 创始人

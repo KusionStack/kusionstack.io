@@ -159,11 +159,11 @@
     "message": "下载和安装",
     "description": "The label for category 下载和安装 in sidebar user_docs"
   },
-  "sidebar.user_docs.category.Architecture & Concept": {
+  "sidebar.user_docs.category.Architecture & Concepts": {
     "message": "架构 & 概念",
-    "description": "The label for category Architecture & Concept in sidebar user_docs"
+    "description": "The label for category Architecture & Concepts in sidebar user_docs"
   },
-  "sidebar.user_docs.category.Start Kusion": {
+  "sidebar.user_docs.category.Adopting KusionStack": {
     "message": "开始 Kusion",
     "description": "The label for category 开始 Kusion in sidebar user_docs"
   },

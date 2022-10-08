@@ -1,30 +1,44 @@
 # Mapping
 
-在[架构 & 概念](/user_docs/concepts/konfig.md)中已经介绍过 Project 和 Stack 的基本概念，配置大库中可以使用 Project 进行配置单元的隔离，一个配置大库由 Project 组成，Project 下进一步进行逻辑隔离便是 Stack，每个 Project 下包含一个或多个 Stack。Project 和 Stack 可以根据需要选择映射关系，比如用户可以把一个应用映射成一个 Project，也可以把一种运维场景映射为一个 Project，比如建站运维等，在本节中将详细介绍几种映射关系的最佳实践。
+In [Project & stack](/docs/user_docs/concepts/konfig#project--stack) section, we have already introduced the basics of `Project` and `Stack`.
+A configuration library consists of Project, and the further logical isolation under Project is Stack. Each Project contains one or more Stack.
+Project and Stack can choose the mapping relationship based on user needs.
+For example, users can map an application to a Project, or map an operation and maintenance scenario to a Project,
+such as site construction and operation and maintenance.
+In this section, several best practices for mapping relationships are detailed.
 
-## 1. 云原生：应用和集群
+## Cloud Native: Applications and Clusters
 
-在应用为中心的运维体系中，应用是核心概念，也是 DevOps 主要运维的对象。在云原生场景中，应用通常部署在 Kubernetes 集群中，所以在这种典型场景中，可以将 Project 映射为应用，将 Stack 映射为集群。一个应用的配置根据集群进行隔离，集群间的差异化配置存放到每个 Stack 目录中，集群间的通用配置存放在 base 目录中。
+In the application-centric operation and maintenance system, applications are the core object of DevOps operation and maintenance.
+In cloud-native scenarios, applications are usually deployed in Kubernetes clusters,
+So you can map `Project` to applications and `Stack` to clusters.
+An application's configuration is distinct within different clusters, the differentiated configuration is stored in each stack directory,
+and the common configuration of all clusters is stored in the base directory.
 
-| 概念    | 映射为 |
-| ------- | ------ |
-| Project | 应用   |
-| Stack   | 集群   |
+| Concept | Mapping TO  |
+| ------- | ----------- |
+| Project | Application |
+| Stack   | Cluster     |
 
-## 2. 单租户场景：应用和环境
+## Single-tenancy: Applications and Environments
 
-在某些通用场景，我们可以对集群的概念进一步进行抽象为环境，一个应用通常需要部署到多个环境，比如测试、预发、生产。在单租户场景中，一个推荐的做法是将 Project 映射为应用，Stack 映射为环境。
+An application usually needs to be deployed to multiple environments, such as dev, test, and prod.
+In a single-tenant scenario, a recommended practice is to map `Project` to applications and `Stack` to environments.
 
-| 概念    | 映射为 |
-| ------- | ------ |
-| Project | 应用   |
-| Stack   | 环境   |
+| Concept | Mapping To  |
+| ------- | ----------- |
+| Project | Application |
+| Stack   | Environment |
 
-## 3 多租户场景：应用和环境
+## Multi-tenancy: Applications and Environments
 
-在多租户场景中且以应用为核心的运维体系中，一种推荐做法是在应用名中添加租户信息，应用名在不同租户间是唯一的，即 Project 映射为多租户间唯一应用，Project 的 Name 是多租户间唯一应用名，Stack 映射为该应用下的环境配置。
+In an application-centric operation and maintenance system in a multi-tenant scenario,
+we recommend appending tenant information to the app's name.
+The application name is unique among different tenants, that is,
+`Project` is mapped to the unique application, `Project Name` is the unique name of all apps,
+and `Stack` is mapped to the environment configuration of the unique app.
 
-| 概念    | 映射为                 |
-| ------- | ---------------------- |
-| Project | 多租户间唯一的应用名称 |
-| Stack   | 环境                   |
+| Concept | Mapping To  |
+| ------- | ----------- |
+| Project | Application+Tenant |
+| Stack   | Environment |

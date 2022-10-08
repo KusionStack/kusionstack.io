@@ -4,11 +4,11 @@ sidebar_position: 2
 
 # Format
 
-KCL supports formatting multiple KCL files via built-in command line tools. This article demonstrates the KCL coding style and how to use the KCL formatting tool.
+The KCL Format tool supports reformatting KCL files to the standard code style. This article demonstrates the KCL code style and how to use the KCL Format tool.
 
 ## Code Style
 
-The KCL formatting tool modifies the files according to the KCL coding style: [Style Guide for KCL Code](../../lang/lang/spec/codestyle.md)
+The KCL Format tool modifies the files according to the KCL code style: [Style Guide for KCL Code](../../lang/lang/spec/codestyle.md)
 
 ## How to use
 
@@ -26,7 +26,7 @@ kcl-fmt your_config_path -R
 
 * Args
   * `-R|--recursive` Whether to recursively traverse subfolders
-  * `-w|--fmt-output` Whether to output to STDOUT, without `-w` means in-place modification.
+  * `-w|--fmt-output` Whether to output to STDOUT, without `-w` indicates in-place modification.
 
 ## Display of formatting files
 

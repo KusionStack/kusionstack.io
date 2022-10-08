@@ -1,8 +1,8 @@
 ---
 id: overview
-sidebar_label: 概览
+sidebar_label: Overview
 ---
-# 配置大库（Konfig）概览
+# Konfig Overview
 
 KusionStack 推荐通过 **配置大库** 的方式统一管理所有的配置清单和模型库，即不仅存放抽象模型本身的 KCL 定义，还存放各种类型的配置清单，比如应用的运维配置、策略配置等。配置大库推荐托管在各类 VCS 系统中，以方便做配置的回滚和漂移检查。官方的配置大库的最佳实践代号为 Konfig，仓库托管在 [Github](https://github.com/KusionStack/konfig)。
 

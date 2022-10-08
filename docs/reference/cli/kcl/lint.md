@@ -2,9 +2,9 @@
 sidebar_position: 3
 ---
 
-# Lint Check
+# Lint
 
-KCL supports checking KCL code style through built-in command line tool and supports multiple output formats. This document shows how to use the KCL Lint tool.
+The KCL Lint tool supports checking some warning-level defects in KCL code and supports multiple output formats. This document shows how to use the KCL Lint tool.
 
 ## Example
 
@@ -22,7 +22,7 @@ KCL supports checking KCL code style through built-in command line tool and supp
     └── test.k
 ```
 
-`.kcllint` is the configuration file of lint. It is optional. `a.k`, `b.k`, `c.k` and `test.k` are the kcl file to be checked.
+`.kcllint` is the configuration file of lint and it is optional. `a.k`, `b.k`, `c.k` and `test.k` are the kcl file to be checked.
 
 Args：
 
@@ -75,7 +75,7 @@ optional arguments:
   --config file  KCL lint config path
 ```
 
-+ --config : path of `.kcllint`
++ --config: path of `.kcllint`
 + file: the path of a single `*.k` file or directory to be checked. Support the absolute path or relative path of the current directory.
 
 ### Lint Configuration
@@ -85,7 +85,7 @@ optional arguments:
 The priority of Lint's configuration is as follows:
 
 1. the `.kcllint` set in CLI Args
-2. the `.kcllint` under directory of checked `.k` file or checked directory
+2. the `.kcllint` under the directory of checked `.k` file or checked directory
 3. default configuration
 
 #### .kcllint
@@ -94,9 +94,9 @@ The file `.kcllint` is written in YAML. Its contents include:
 
 + check_list: kinds of checks, including `"import"` and `"misc"`
 + ignore: ignored check items. See the `Error Code` for optional items.
-+ max_line_length: the parameter of check, that is, the maximum length of code
++ max_line_length: check parameter, that is, the maximum length of code
 + output: output streams and formats, including `"stdout"`、`"file"` and `"sarif"`
-+ output_path: The path of output file. It is optional, but it is required when the `output` set as `"file"` or `"sarif"`
++ output_path: The path of the output file. It is optional, but it is required when the `output` is set as `"file"` or `"sarif"`
 
 Example:
 
@@ -108,7 +108,7 @@ output: ["stdout"]
 output_path:
 ```
 
-Default Configuration:
+#### Default Configuration:
 
 ```yaml
 check_list: ["import", "misc"]

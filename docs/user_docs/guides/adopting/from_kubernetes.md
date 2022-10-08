@@ -32,7 +32,7 @@ The existing Kusion Models may not meet your specific business requirements, the
 
 We already have a copy of [generated Kubernetes 1.22 models](https://github.com/KusionStack/konfig/blob/main/base/pkg/kusion_kubernetes/api/apps/v1/deployment.k) under the `base/pkg/kusion_kubernetes` directory in the Konfig repository. You can skip this step and use the existing models, or you can generate other versions of that if needed.
 
-Now let's generate a v1.23 version of Kubernetes models. From [Kubernetes v1.23 OpenAPI Spec](https://github.com/kubernetes/kubernetes/blob/release-1.23/api/openapi-spec/swagger.json), we can find the definition of the `apps/v1.Deployment` model, and here is a partial excerpt：
+Now let's generate a v1.23 version of Kubernetes models. From [Kubernetes v1.23 OpenAPI Spec](https://github.com/kubernetes/kubernetes/blob/release-1.23/api/openapi-spec/swagger.json), we can find the definition of the `apps/v1.Deployment` model, and here is a partial excerpt:
 
 ```json
 {

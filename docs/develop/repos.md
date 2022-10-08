@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# 仓库结构
+# Repo Struct
 
 ## 1. 主要仓库
 

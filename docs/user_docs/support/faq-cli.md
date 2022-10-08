@@ -4,17 +4,17 @@ sidebar_position: 5
 
 # Command Line Tool
 
-### 1. Konfig 大库应用目录下的 settings.yaml 文件的作用是什么？
+### 1. What is the function of the `settings.yaml` in the application directory of the Konfig?
 
-KCL 中 settings.yaml 文件表示 KCL 命令行工具的配置参数文件，可以将编译的配置放入其中进行调用比如需要编译的文件，需要输入的 option 动态参数 `-d`，是否需要忽略掉空值 None `-n` 等配置。
+The `settings.yaml` in KCL indicates the configuration file of the KCL command line tool. You can put the compiled configuration into it, such as the file to be compiled, the option dynamic parameter that needs to be input(`-d`), whether to ignore the null value(`-n`) and other configurations.
 
-比如对于如下的命令行运行参数
+For example, for the following arguments:
 
 ```
 kcl main.k -D key=value -n -r
 ```
 
-就可以使用如下的命令行参数和 settings.yaml 配置文件代替
+It can be replaced by the following command line arguments and `settings.yaml`
 
 ```
 
@@ -34,22 +34,22 @@ kcl_options:
     value: value
 ```
 
-- `kcl_cli_configs` 表示可以配置的编译参数，`file` 用于配置编译的 KCL 文件，`disable_none` 表示是否使用 `-n` 参数，`strict_range_check` 表示是否使用 `-r` 参数。
-- `kcl_options` 表示可以配置的动态参数，`key` 表示动态参数的名称，`value` 表示动态参数的值
+- `kcl_cli_configs` indicates configurable compilation arguments, `file` indicates the KCL file used for compilation，`disable_none` indicates whether to use `-n`, `strict_range_check` indicates whether to use `-r`.
+- `kcl_options` indicates dynamic options that can be configured, `key` indicates option name, `value` indicates option value
 
-注意：settings.yaml 的文件名称可替换，只要其中的配置结构满足规定即可
+Note: The file name does not need to be `settings.yaml`, but the configuration in it must meet the requirements.
 
-### 2. 如何传入动态参数？如何在代码中获取命令行传入的动态参数？
+### 2. How to input dynamic options? How to get dynamic options in code?
 
-KCL 支持多种方式传入动态参数
+KCL supports multiple ways to input dynamic options
 
-- `-D`: 使用 KCL 命令行的-D 参数可以直接传入动态参数，支持基本数据类型 str/int/float/bool, 以及结构数据类型 list/dict
+- `-D`: Use the command line argument `-D` to input dynamic options. It supports basic data types str/int/float/bool and structured data types list/dict
 
 ```
 kcl main.k -D env-type=TEST -D deploy-topology='[{"cluster":"sigma-eu126-mybank-staging","idc":"cn-hangzhou-test-eu126","replicas":2,"workspace":"middlewarehzcloudsit","zone":"CellAEU126"}]'
 ```
 
-- `-Y`: 使用 KCL 命令行的-Y 参数可以间接通过配置文件传入动态参数:
+- `-Y`: Use the command line argument `-Y` to input dynamic options by configuration file:
 
 ```yaml
 kcl_options:
@@ -64,14 +64,14 @@ kcl_options:
     zone: CellAEU126
 ```
 
-在代码中使用内置的 option 函数获取即可
+Use the built-in function `option()` to get it:
 
 ```python
 env = option("env-type")
 deploy_topology = option("deploy-topology")
 ```
 
-输出 YAML
+Output:
 
 ```yaml
 env: TEST
@@ -83,15 +83,15 @@ deploy_topology:
   zone: CellAEU126
 ```
 
-### 3. 如何使用 kcl 的多文件编译特性？
+### 3. How to compile multiple files?
 
-- 使用 KCL 命令行工具直接书写多文件编译
+- Input multiple files in the command line:
 
 ```
 kcl file1.k file2.k file3.k
 ```
 
-- 在配置文件中配置并配合 KCL 命令行工具参数 `-Y` 使用
+- Set multiple files in configuration file and use command line argument `-Y`:
 
 settings.yaml
 
@@ -107,6 +107,7 @@ kcl_cli_configs:
 kcl -Y settings.yaml
 ```
 
-### 4. Konfig 大库应用目录下的 stack.yaml 文件的定位是什么？
+### 4. What is the function of the `settings.yaml` in the application directory of the Konfig?
 
-Stack 是项目中的一个隔离的逻辑工作区。Stack 唯一地属于一个开发组，例如 Web 项目中的前端开发组，并且唯一表示特定的开发阶段，例如开发、测试、生产。从开发的角度看，Stack 是 Kusion 项目的基本配置单元。从执行的角度来看，KCL 代码单元被部署到一个 Stack 中。
+A Stack is an isolated logical workspace within a project. Stacks uniquely
+ belong to a unique development group, such as the front-end development group in a web project, and uniquely represent a specific development phase, such as dev, test, or prod. From a development perspective, Stack is the basic unit of configuration for the Kusion project. From an execution perspective, KCL code units are deployed into a Stack.

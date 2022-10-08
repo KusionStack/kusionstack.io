@@ -1,6 +1,15 @@
 # Drift Detection by ArgoCD
 
-## 1. Config ArgoCD Plugin with Kusion
+## Prerequisite
+
+Install ArgoCD:
+
+```bash
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
+
+## Config ArgoCD Plugin with Kusion
 
 ArgoCD has already had some common built-in plugins, including helm, jsonnet, and kustomize. 
 For KCL, as a brand-new configuration language, if you want to use ArgoCD to complete drift detection, 
@@ -19,7 +28,7 @@ wget -q https://raw.githubusercontent.com/KusionStack/examples/main/kusion/argo-
 kubectl -n argocd patch cm/argocd-cm -p "$(cat patch-argocd-cm.yaml)"
 ```
 
-## 2. Update ArgoCD Deployment
+## Update ArgoCD Deployment
 
 After completing the first step, ArgoCD will recognize the Kusion plugin, 
 but the Kusion plugin has not been loaded into the ArgoCD image. 
@@ -43,7 +52,7 @@ kubectl -n argocd patch deploy/argocd-repo-server -p "$(cat patch-argocd-repo-se
 kubectl get pod -n argocd -l app.kubernetes.io/name=argocd-repo-server
 ```
 
-## 3. Create KCL Project
+## Create KCL Project
 
 At this point, the preparation work has been completed, and now the verification process is started. 
 Here we use example projects from the open-source [Konfig](https://github.com/KusionStack/konfig) library.
@@ -71,8 +80,12 @@ argocd app create guestbook-test \
 --config-management-plugin kusion
 ```
 
-> Note：If you are using a private repository, you need to configure the private repository access with private key credentials before executing the create command. 
-> Please refer [Private Repositories](https://argo-cd.readthedocs.io/en/stable/user-guide/private-repositories/#ssh-private-key-credential) for more details.
+:::info
+
+If you are using a private repository, you need to configure the private repository access with private key credentials before executing the create command. 
+
+Please refer [Private Repositories](https://argo-cd.readthedocs.io/en/stable/user-guide/private-repositories/#ssh-private-key-credential) for more details.
+:::
 
 After successfully creating, you can see the following output:
 
@@ -91,13 +104,16 @@ Here, you can manually synchronize or set automatic synchronization.
 argocd app set guestbook-test --sync-option ApplyOutOfSyncOnly=true
 ```
 
-> For more information on synchronization strategies, see [Sync Options](https://argo-cd.readthedocs.io/en/stable/user-guide/sync-options/)
+:::info
+
+For more information on synchronization strategies, see [Sync Options](https://argo-cd.readthedocs.io/en/stable/user-guide/sync-options/)
+:::
 
 Sync succeeded:
 
 ![](/img/docs/user_docs/guides/argocd/synced.jpg)
 
-## 4. Config Drift Detection
+## Configure Drift Detection
 
 At this point, the ArgoCD monitoring KCL project has been completed, implement configuration drift detection and achieve result consistency.
 Let's modify the mirror version of `guestbook-test` to implement configuration changes.

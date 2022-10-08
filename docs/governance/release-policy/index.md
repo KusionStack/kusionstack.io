@@ -1,3 +1,3 @@
-# 发版策略
+# Release Policy
 
-发版策略定义了版本的语义、发版的流程等。为了最大化并发开发流程，Kusion 和 KCLVM 等采用独立的发版策略。
+The release policy defines the semantics of the release, the release process, etc. In order to maximize the concurrent development process, Kusion and KCLVM, etc. adopt independent release strategies.
