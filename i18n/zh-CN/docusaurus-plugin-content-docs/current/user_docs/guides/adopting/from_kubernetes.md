@@ -8,7 +8,7 @@
 
 ## 2. KCL OpenAPI 支持
 
-KCLOpenAPI 工具支持从 OpenAPI/CRD 定义提取并生成 KCL schema. 在[KCLOpenapi Spec](/reference/cli/openapi/spec.md)中明确定义了 OpenAPI 规范与 KCL 语言之间的映射关系。
+KCLOpenAPI 工具支持从 OpenAPI/CRD 定义提取并生成 KCL schema. 在[KCLOpenapi Spec](/docs/reference/cli/openapi/spec)中明确定义了 OpenAPI 规范与 KCL 语言之间的映射关系。
 
 [安装 Kusion 工具包](/docs/user_docs/getting-started/install)的同时会默认安装 KCLOpenapi 工具，KCLOpenapi 工具的使用和示例可参见[KCLOpenAPI 工具](/docs/reference/cli/openapi)
 
@@ -76,7 +76,7 @@ Kubernetes 内置模型的完整 OpenAPI 定义存放在 [Kubernetes openapi-spe
 }
 ```
 
-将以上述 spec 保存为 deployment.json，执行 ```kclopenapi generate model -f deployment.json```，将在当前工作空间生成所有相关的 KCL schema 文件，如 [KCL Deployment 文件（Kubernetes 1.22 版本）](https://github.com/KusionStack/konfig/blob/main/base/pkg/kusion_kubernetes/api/apps/v1/deployment.k) 所示。
+将以上述 spec 保存为 deployment.json，执行 ```kcl-openapi generate model -f deployment.json```，将在当前工作空间生成所有相关的 KCL schema 文件，如 [KCL Deployment 文件（Kubernetes 1.22 版本）](https://github.com/KusionStack/konfig/blob/main/base/pkg/kusion_kubernetes/api/apps/v1/deployment.k) 所示。
 
 #### 2. 编写自定义前端模型
 
@@ -93,7 +93,7 @@ Kubernetes 内置模型的完整 OpenAPI 定义存放在 [Kubernetes openapi-spe
 * 从 CRD 生成 KCL Schema
 
     ```
-    kclopenapi generate model --crd --skip-validation -f your_crd.yaml
+    kcl-openapi generate model --crd --skip-validation -f your_crd.yaml
     ```
 
 * 使用 KCL 声明 CR
