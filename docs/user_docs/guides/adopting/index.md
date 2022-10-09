@@ -1,6 +1,8 @@
 # Adopting KusionStack
 
-If you’ve fallen in love with KusionStack, it might not be obvious how to adopt it. For brand new projects, it’s easy: start writing your infrastructure using the KusionStack from the start. But what if you already have infrastructure stood up? For this, Kusion also provides some automated tools to help you quickly migrate.
+If you start using kusion in a brand new project, what you only need to do is to write and manage your infrastructure configuration from scratch, and we provide user guide documents for infra running on different runtimes to guide you through this process. 
 
-For kubernetes users, Kusion provides a conversion tool from OpenAPI to KCL model code to directly reuse hundreds of existing core models in Kubernetes. For istio users, and for situations that Kubernetes built-in models cannot support, Kusion also supports automatic CRD generation as KCL model code.
+However, for infrastructure which has already been managed by Kubernetes, you may have some inventory of configuration models and data. In this case, kusion provides automated tools to help you migrate from Kubernetes quickly:
 
+- For Kubernetes users, Kusion provides a `kcl-openapi` tool to translate Kubernetes OpenAPI to KCL model code, so that the existing Kubernetes core models can be directly included in the KCL models scope.
+- For Kubernetes CRD users such as istio, the `kcl-openapi` tool can also convert CRDs into KCL model code.
