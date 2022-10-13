@@ -277,7 +277,7 @@
     "message": "KCL"
   },
   "homepage.feature.konfig": {
-    "message": "Kusion Model"
+    "message": "Konfig"
   },
   "homepage.feature.kusion": {
     "message": "Kusion Engine"
@@ -286,7 +286,7 @@
     "message": "A constraint-based record & functional language mainly used in configuration and policy scenarios."
   },
   "homepage.feature.konfig.description": {
-    "message": "Kusion Model is a pre-built, KCL-described configuration model in KusionStack that provides users with an out-of-the-box, highly abstracted configuration interface."
+    "message": "Konfig is a monorepo that stores operation intentions described by KCL and provides a set of out-of-the-box Cloud Native application models, allowing users to quickly start the journey of cloud-native delivery."
   },
   "homepage.feature.kusion.description": {
     "message": "Kusion engine is to compile and deliver intents in Konfig to hybrid runtime on multi-cloud with less complexity and a consistent experience."
