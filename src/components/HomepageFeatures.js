@@ -14,11 +14,11 @@ const FeatureList = [
     ),
   },
   {
-    title: translate({'id': 'homepage.feature.konfig', 'message': 'Kusion 模型库'}),
+    title: translate({'id': 'homepage.feature.konfig', 'message': 'Konfig'}),
     Svg: require('../../static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <Translate id="homepage.feature.konfig.description">
-      Kusion Model 是 KusionStack 中预置的、使用 KCL 描述的配置模型，它提供给用户开箱即用、高度抽象的配置界面。
+      Konfig 是一个配置大库，存放了用户用 KCL 描述的运维意图。它提供给用户开箱即用的云原生应用配置模型，方便用户快速开始云原生应用发布之旅。
       </Translate>
     ),
   },
