@@ -61,7 +61,7 @@ More details about Konfig Models can be found in [Konfig](https://github.com/Kus
 ## Delivery
 Deliver this App into a Kubernetes cluster with one command `kusion apply`
 
-![](/img/docs/user_docs/getting-started/compile.gif)
+![](/img/docs/user_docs/getting-started/apply.gif)
 
 Check `Deploy` status.
 ```shell

@@ -51,7 +51,7 @@ The whole file hierarchy is shown below. More details about the directory struct
 import .pkg
 
 app = pkg.App {
-    image = "yuanhao1223/gocity:latest"
+    image = "howieyuen/gocity:latest"
 }
 ```
 `main.k` only contains 5 lines (including an empty line). Line 1 imports a pkg that contains the model `App` which is an abstract model representing the App we will deliver later. This model hides the complexity of Kubernetes `Deployment` and `Service` and only one field `image` is needed to make this App ready to use. 
@@ -61,7 +61,7 @@ More details about Konfig Models can be found in [Konfig](https://github.com/Kus
 ## Delivery
 Deliver this App into a Kubernetes cluster with one command `kusion apply`
 
-![](/img/docs/user_docs/getting-started/compile.gif)
+![](/img/docs/user_docs/getting-started/apply.gif)
 
 Check `Deploy` status.
 ```shell
