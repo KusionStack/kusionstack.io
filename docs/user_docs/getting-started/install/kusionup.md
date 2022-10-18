@@ -2,60 +2,60 @@
 sidebar_position: 1
 ---
 
-# Kusionup
+# Install by Kusionup
 
-It is recommended to install Kusion through the kusionup tool, which is an elegant kusion multi-version management tool, you can use it:
+It is recommended to install `kusion` through the `kusionup` tool, which is an elegant tool for managing multiple versions of `kusion`, you can use it to:
 
-- Install any version of kusion with one click
-- Flexible switching between different versions of kusion
-- Customize local kusion version
+- Install any version of `kusion` with one click
+- Flexibly switch between different versions of `kusion`
+- Customize your local `kusion` version
 
-## 1. Install Kusionup
+## 1. Install Kusionup and Latest Kusion
 
-One-click installation with the following command `kusionup`:
+The following script will install the `kusionup` tool and the latest version of `kusion` tools with one-click:
 
 ```bash
 brew install KusionStack/tap/kusionup && kusionup init --skip-prompt && source $HOME/.kusionup/env
 ```
 
-Upgrade `kusionup`：
+And you can later upgrade `kusionup` with `brew`：
 
 ```bash
 brew update
 brew upgrade KusionStack/tap/kusionup
 ```
 
-The script will crate a `$HOME/.kusionup` directory, which will contain:
+The installation script creates a `$HOME/.kusionup` directory and contains these files:
 
-- `$HOME/.kusionup/bin` directory include the `kusionup` binary file
-- `$HOME/.kusionup/env` file is used to declare `kusionup` and kusion environment variables required by the technology stack
-- `$HOME/.kusionup/current` soft link is used to identify the currently active kusion version
-- `$HOME/.kusionup/$VERSION` directories represent different kusion version directories, such as the latest version installed by default `$HOME/.kusionup/latest`
+- `$HOME/.kusionup/bin` is a directory that contains the `kusionup` binary file
+- `$HOME/.kusionup/env` is a file that declares environment variables used by `kusionup` and `kusion` tools
+- `$HOME/.kusionup/current` is a soft link to the currently active `kusion` tools
+- `$HOME/.kusionup/$VERSION` are directories of different versions of `kusion` tools. For example, the latest version will be installed by default to the `$HOME/.kusionup/latest` directory
 
 **💡 Install the custom version**：
 
-The above script will install the latest kusion version ( latest) by default. If you want to customize the default installation version , use the following command:
+The above installation script by default installs the latest `kusion` tools. And if you want to customize it and install a specific version(github@v0.7.0 as an example) directly, please try the following command:
 
 ```bash
-brew install KusionStack/tap/kusionup && kusionup init --skip-install && source $HOME/.kusionup/env && kusionup reinstall latest
+brew install KusionStack/tap/kusionup && kusionup init --skip-install && source $HOME/.kusionup/env && kusionup reinstall github@v0.7.0
 ```
 
 **💡 Installation failure troubleshooting:
 
 
-**❓ Issue 1**：M1 Mac Openssl `dylib` library cannot be found or SSL module is not available
+**❓ Issue 1**：M1 Mac openssl `dylib` library cannot be found or SSL module is not available
 
-1. Make sure you have a homebrew arm64e-version installed in `/opt/homebrew`, otherwise to install the arm version of `brew` with the following command
+1. Make sure you have arm64e-version homebrew installed at `/opt/homebrew`. If not, you can first install it:
 
-```python
+```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 # add to path environment
 export PATH=/opt/homebrew/bin:$PATH
 ```
 
-2. Use brew to install `openssl@1.1`
+2. Install `openssl@1.1` with `brew`
 
-```python
+```bash
 brew install openssl@1.1
 ```
 
@@ -82,10 +82,9 @@ C02Y90Q4JHD2:bin yueyi$ otool -L /Users/yueyi/tools/homebrew/bin/gettext
 
 - Copy `/Users/yueyi/tools/homebrew/Cellar/gettext/0.21/lib/libintl.8.dylib` to `/usr/local/opt/gettext/lib/libintl.8.dylib`
 
-## 2. Manage Multi Kusion Versions
+## 2. Manage Multiple Versions of Kusion
 
-After executing the installation script, `kusionup` and a default kusion version is installed. Use kusionup to check the all installed version:
-
+During the `kusionup` installation the default version of `kusion` is installed. Then you can check and navigate through all the installed versions of `kusion`:
 
 ```bash
 $ kusionup
@@ -94,7 +93,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
   ▸ latest
 ```
 
-Execute to `kusionup ls-ver' to list all installable **kusion**versions from the built-in installation sources :
+Also, you can list all the available versions of `kusion`:
 
 ```bash
 $ kusionup ls-ver
@@ -106,7 +105,7 @@ github@v0.4.2
 github@v0.4.1
 ```
 
-Execute to `kusionup install $VERSION` to install specified version:
+To install a specific version of ``kusion`, you can use `kusionup install $VERSION`:
 
 ```shell
 # choose the cdn to speed up installation
@@ -131,7 +130,7 @@ releaseVersion: v0.4.1
 ......
 ```
 
-Execute to `kusionup show` to see the current kusion version:
+Use `kusionup show` command to take a view of all the installed versions and spot the active version:
 
 ```bash
 $ kusionup show
@@ -141,7 +140,7 @@ $ kusionup show
 |  cdn@v0.4.1   |        |
 ```
 
-Execute to `kusionup remove $VERSION` to delete specified version:
+You can also `kusionup remove $VERSION` to uninstall a specific version of `kusion`:
 
 ```bash
 # try remove the latest version
@@ -154,7 +153,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
   ▸ cdn@v0.4.1  # there is no latest version
 ```
 
-## 3. Kusionup Help
+## 3. Kusionup Command Usage Reference
 
 ```bash
 $ kusionup -h
@@ -182,13 +181,13 @@ Use "kusionup [command] --help" for more information about a command.
 
 ## 4. Kusionup Tips
 
-**How to add custom kusion version to the kusionup toggle list?**
+**How to add a custom version of `kusion` to the `kusionup` toggle list?**
 
-We can use the following method to add any local version which may be used for debugging.
+You might need to add a local version of `kusion` for debugging and this can be done by following commands:
 
 ```bash
-# install a debug version
-$ mv $HOME/.kusion $HOME/.kusionup/kusion-debug
+# place your debug version of kusion tools to the kusion-debug directory
+$ cp -r <directory_contianing_your_customized_kusion> $HOME/.kusionup/kusion-debug
 
 # switch to the debug version
 $ kusionup
@@ -198,14 +197,16 @@ Use the arrow keys to navigate: ↓ ↑ → ←
   ▸ debug
 ```
 
-**Note:** In `.kusionup` `.kusionup`, the subdirectory name must start with "kusion-" and the suffix is ​​the version number;
+**Note:** the subdirectories under the `.kusionup` must be named with a "kusion-" prefix and with a version number as a suffix
 
-## 5. VS Code Extension
+## 5. Install the VS Code Extension
 
-In order to improve the efficiency of IDE development of KCL, Kusion provides plug-n support for VS Code online and native environment.
-The online version can be opened from https://vscode.dev address, and then install "KCL for vscode.dev plugin", the effect is as follows:
+To improve the KCL development on VS Code, there are VS Code
+ extensions for both VS Code Web IDE and VS Code.
+
+The [VS Code Web IDE](https://vscode.dev) can be reached through the browser, and you can search and install the [KCL for vscode.dev](https://marketplace.visualstudio.com/items?itemName=kcl.kcl-vscode-web-extension) in the VS Code Extension tab. And here's the syntax highlighting view you'll get: 
 
 ![](/img/docs/user_docs/getting-started/install/ide-vscode.png)
 
-Native VS Code can install a complete KCL plugin , providing features such as highlighting, auto-completion (keyword completion, etc.), jump, hover, outline, etc. Although the plugin is not a necessary part of Kusion, it is recommended to install it to improve efficiency.
+The KCL extension for the local VS Code IDE provides more rich language support for the KCL language such as highlighting, auto-completion, quick info hover and code navigation, etc. Although the extension is not a must-required part of Kusion, it is recommended to install it to improve coding efficiency.
 
