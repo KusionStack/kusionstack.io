@@ -11,9 +11,16 @@ This tutorial will demonstrate how to deliver an App with a Loadbalancer in one 
 - [Kubernetes](https://kubernetes.io/) or [Kind](https://kind.sigs.k8s.io/)
 
 ## Init Project 
+
+Firstly, clone the Konfig repo and enter the root directory:
+
+```bash
+git clone git@github.com:KusionStack/konfig.git && cd konfig
+```
+
 Let's init this tutorial project with `kusion init --online`
-```shell
-➜  examples git:(main) ✗ kusion init --online
+```bash
+➜  konfig git:(main) ✗ kusion init --online
 ? Please choose a template:  [Use arrows to move, type to filter]
 > code-city                  Code City metaphor for visualizing Go source code in 3D.
   deployment-multi-stack     A minimal kusion project of multi stacks
@@ -29,7 +36,7 @@ The whole file hierarchy is shown below. More details about the directory struct
 [Konfig](/docs/user_docs/concepts/konfig).
 
 ```shell
-➜  examples git:(main) ✗ cd code-city
+➜  konfig git:(main) ✗ cd code-city
 ➜  code-city git:(main) ✗ tree
 .
 ├── base
