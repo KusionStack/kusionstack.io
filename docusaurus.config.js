@@ -102,6 +102,13 @@ const config = {
 
           {to: '/blog', label: 'Blog', position: 'left'},
 
+          {
+            type: 'docSidebar',
+            position: 'left',
+            sidebarId: 'events',
+            label: 'Events',
+          },
+
           //{
           //  type: 'docsVersionDropdown',
           //  position: 'right',
