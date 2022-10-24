@@ -11,16 +11,23 @@ This tutorial will demonstrate how to deliver an App with a Loadbalancer in one 
 - [Kubernetes](https://kubernetes.io/) or [Kind](https://kind.sigs.k8s.io/)
 
 ## Init Project 
+
+Firstly, clone the Konfig repo and enter the root directory:
+
+```bash
+git clone git@github.com:KusionStack/konfig.git && cd konfig
+```
+
 Let's init this tutorial project with `kusion init --online`
-```shell
-➜  examples git:(main) ✗ kusion init --online
+```bash
+➜  konfig git:(main) ✗ kusion init --online
 ? Please choose a template:  [Use arrows to move, type to filter]
 > code-city                  Code City metaphor for visualizing Go source code in 3D.
   deployment-multi-stack     A minimal kusion project of multi stacks
   deployment-single-stack    A minimal kusion project of single stack
 ```
 
-Select `code-city` and press `Enter`. After that we will see hints below and use the default value to config this project and stack.
+Select `code-city` and press `Enter`. After that, we will see hints below and use the default value to config this project and stack.
 
 ![](/img/docs/user_docs/getting-started/choose-template.gif)
 
@@ -29,7 +36,7 @@ The whole file hierarchy is shown below. More details about the directory struct
 [Konfig](/docs/user_docs/concepts/konfig).
 
 ```shell
-➜  examples git:(main) ✗ cd code-city
+➜  konfig git:(main) ✗ cd code-city
 ➜  code-city git:(main) ✗ tree
 .
 ├── base
@@ -54,7 +61,7 @@ app = pkg.App {
     image = "yuanhao1223/gocity:latest"
 }
 ```
-`main.k` only contains 5 lines (include an empty line). Line 1 imports a pkg that contains the model `App` which is an abstract model represents the App we will deliver later. This model hides the complexity of Kubernetes `Deployment` and `Service` and onely one field `image` is needed to make this App ready to use. 
+`main.k` only contains 5 lines (including an empty line). Line 1 imports a pkg that contains the model `App` which is an abstract model representing the App we will deliver later. This model hides the complexity of Kubernetes `Deployment` and `Service` and only one field `image` is needed to make this App ready to use. 
 
 More details about Konfig Models can be found in [Konfig](https://github.com/KusionStack/konfig)
 
