@@ -13,10 +13,10 @@ import styles from './index.module.css'
 function Feature({ imgUrl, title, description, reverse }) {
   return (
     <div className={clsx('row', styles.feature, reverse && styles.featureReverse)}>
-      <div className="col col--6 text--center">
+      <div className="text--center">
         <img className={styles.featureImage} src={useBaseUrl(imgUrl)} alt={title} />
       </div>
-      <div className={clsx('col col--6', styles.featureContent)}>
+      <div className={styles.featureContent}>
         <div>
           <h3>{title}</h3>
           <div>{description}</div>
@@ -34,7 +34,7 @@ function Home() {
       <main>
         <div className={clsx('hero shadow--lw', styles.heroBanner)}>
           <div className="container text--center">
-            <div className={clsx("col col--6", styles.center)}>
+            <div className={styles.center}>
                 <h1 className="hero__title">{siteConfig.title}</h1>
                 <p className="hero__subtitle">
                   <Translate id="siteConfig.tagline">{siteConfig.tagline}</Translate>
