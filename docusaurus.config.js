@@ -6,8 +6,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'KusionStack',
-  tagline: 'A Unified Programmable Configuration Tech Stack',
+  title: 'Collaborate, Automate',
+  tagline: 'Codify modern delivery across Kubernetes and Clouds',
 
   url: 'https://kusionstack.io',
   organizationName: 'KusionStack', // Usually your GitHub org/user name.
