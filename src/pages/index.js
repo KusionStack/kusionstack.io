@@ -12,11 +12,11 @@ import styles from './index.module.css'
 
 function Feature({ imgUrl, title, description, reverse }) {
   return (
-    <div className={clsx(styles.feature, reverse && styles.featureReverse)}>
-      <div className="text--center">
+    <div className={clsx('row', styles.feature, reverse && styles.featureReverse)}>
+      <div className="col col--6 text--center">
         <img className={styles.featureImage} src={useBaseUrl(imgUrl)} alt={title} />
       </div>
-      <div className={styles.featureContent}>
+      <div className={clsx('col col--6', styles.featureContent)}>
         <div>
           <h3>{title}</h3>
           <div>{description}</div>
