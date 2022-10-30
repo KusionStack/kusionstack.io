@@ -12,13 +12,19 @@ This tutorial will demonstrate how to deliver an App with a Loadbalancer in one 
 
 ## Init Project 
 
-Firstly, clone the Konfig repo and enter the root directory:
+Firstly, let's clone the Konfig repo and enter the root directory:
 
-```bash
+```shell
 git clone git@github.com:KusionStack/konfig.git && cd konfig
 ```
 
-Let's init this tutorial project with `kusion init --online`
+After this step, we can init this tutorial project with online templates
+```shell
+kusion init --online
+```
+
+All init templates are listed as follows:
+
 ```shell
 ➜  konfig git:(main) ✗ kusion init --online
 ? Please choose a template:  [Use arrows to move, type to filter]
@@ -32,8 +38,10 @@ Select `code-city` and press `Enter`. After that, we will see hints below and us
 ![](/img/docs/user_docs/getting-started/choose-template.gif)
 
 
-The whole file hierarchy is shown below. More details about the directory structure can be found in 
-[Konfig](/docs/user_docs/concepts/konfig).
+After this process, we can get the whole file hierarchy with this command
+```shell
+cd code-city && tree
+```
 
 ```shell
 ➜  konfig git:(main) ✗ cd code-city && tree
@@ -50,6 +58,9 @@ The whole file hierarchy is shown below. More details about the directory struct
 
 3 directories, 6 files
 ```
+ More details about the directory structure can be found in 
+[Konfig](/docs/user_docs/concepts/konfig).
+
 ### Review Config Files
 
 ```python
@@ -67,20 +78,31 @@ appConfiguration: frontend.Server {
 More details about Konfig Models can be found in [Konfig](https://github.com/KusionStack/konfig)
 
 ## Delivery
-Go to the `dev` folder by `cd dev` and we will deliver this App into a Kubernetes cluster with one command `kusion apply --watch`
+```shell
+cd dev && kusion apply --watch
+```
+Go to the `dev` folder and we will deliver this App into a Kubernetes cluster with one command `kusion apply --watch`
 
 ![](/img/docs/user_docs/getting-started/apply.gif)
 
-Check `Deploy` status.
+Check `Deploy` status
+```shell
+kubectl -ncode-city get deploy
+```
+The expected output is shown as follows:
+
 ```shell
 ➜  dev git:(main) ✗ kubectl -ncode-city get deploy
 NAME           READY   UP-TO-DATE   AVAILABLE   AGE
 code-citydev   1/1     1            1           1m
 ```
 
-Port-forward our App
+Port-forward our App with the `service`
 ```shell
 kubectl port-forward -ncode-city svc/gocity 4000:4000
+```
+```shell
+➜  dev git:(main) ✗ kubectl port-forward -ncode-city svc/gocity 4000:4000
 Forwarding from 127.0.0.1:4000 -> 4000
 Forwarding from [::1]:4000 -> 4000
 ```
