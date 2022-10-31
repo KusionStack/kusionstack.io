@@ -4,21 +4,19 @@ sidebar_position: 1
 
 # 记录与告警
 
-Prometheus Operator 为 Kubernetes 提供了对 Prometheus 及其相关监控组件的 Kubernetes 原生部署和管理。该项目的目的是为 Kubernetes 集群简化和自动化基于 Prometheus 的监控配置。
+本指南将向你展示如何基于 Prometheus Operator 一键部署 Alertmanager 集群并集成 Prometheus，并使用 PrometheusRules 记录指标数据和推送告警。
 
-Prometheus Operator 主要包括以下几个功能：
+## 介绍
 
-- Kubernetes 自定义资源：使用 Kubernetes CRD 来部署和管理 Prometheus、Alertmanager 和相关组件。
-- 简化的部署配置：通过 Kubernetes 原生资源的方式，配置 Prometheus，比如版本、持久化、保留策略和副本。
-- Prometheus 目标配置：基于熟知的 Kubernetes 标签查询自动生成监控目标配置，无需学习 Prometheus 特定的配置语言。
+Prometheus 是一个开源系统监控和警报工具包。它将其指标收集并存储为时间序列数据，即指标信息与记录它的时间戳一起存储，以及称为标签的可选键值对。
 
-下面是 Prometheus Operator 的架构图：
+下图说明了 Prometheus 的架构及其一些生态系统组件：
 
 ![](/img/docs/user_docs/guides/prometheus/structure.png)
 
-本指南将向你展示如何基于 Prometheus Operator 一键部署 Alertmanager 集群并集成 Prometheus，并使用 PrometheusRules 记录指标数据和推送告警。
+Prometheus 从检测作业中直接或通过中间推送网关从短期作业中抓取指标。它在本地存储所有抓取的样本，并对这些数据运行规则，以从现有数据聚合和记录新的时间序列或生成警报。Grafana 或其他 API 使用者可用于可视化收集的数据。
 
-## 前提条件
+## 准备开始
 
 在开始之前，我们需要做以下准备工作：
 
@@ -58,7 +56,9 @@ kubectl create -f bundle.yaml
 - Prometheus 依赖的 RBAC
 - Prometheus 服务
 
+:::info
 想要体验快速部署结果，可直接跳到[一键部署](#一键部署)小节。
+:::
 
 ### 配置 Alertmanager
 
@@ -79,10 +79,10 @@ Alertmanager 默认启动是按照最低配置，这并没什么用处，因为�
 ```py
 _alertmanager_config: monitoringv1alpha1.AlertmanagerConfig{
     metadata = {
-        name = "config-example"
+        name = "main"
         namespace = _common_namespace
         labels = {
-            "alertmanagerConfig" = "example"
+            "alertmanagerConfig" = "main"
         }
     }
     spec = {
@@ -112,7 +112,7 @@ _alertmanager_config: monitoringv1alpha1.AlertmanagerConfig{
 ```py
 _alertmanager: monitoringv1.Alertmanager{
     metadata = {
-        name = "example"
+        name = "main"
         namespace = "default"
     }
     spec = {
@@ -131,7 +131,7 @@ _alertmanager: monitoringv1.Alertmanager{
 ```py
 _alertmanager_svc: corev1.Service{
     metadata = {
-        name = "alertmanager-example"
+        name = "alertmanager"
         namespace = "default"
     }
     spec = {
@@ -206,7 +206,7 @@ RBAC 的完整配置，请查看源码文件：[`prometheus-install/base/base.k`
 ```py
 _prometheus: monitoringv1.Prometheus{
     metadata = {
-        name = "example"
+        name = "main"
         namespace = "default"
     }
     spec = {
@@ -217,12 +217,12 @@ _prometheus: monitoringv1.Prometheus{
         ruleSelector = {
             matchLabels = {
                 "role" = "alert-rules"
-                "prometheus" = "example"
+                "prometheus" = "main"
             }
         }
         serviceMonitorSelector = {
             matchLabels = {
-                "prometheus" = "example"
+                "prometheus" = "main"
             }
         }
         # 通过 Alertmanager 的公开的 Service，配置 Alertmanager
@@ -245,7 +245,7 @@ _prometheus: monitoringv1.Prometheus{
 ```py
 _prometheus_svc: corev1.Service{
     metadata = {
-        name = "prometheus-example"
+        name = "prometheus"
         namespace = "default"
     }
     spec = {
@@ -281,7 +281,7 @@ Prometheus admin API 允许访问删除某个时间范围内的系列、清理�
 目前已经完成所有监控报警相关配置，现在开始一键部署。首先进入 `prometheus-install` stack 目录：
 
 ```bash
-cd base/examples/monitoring/prometheus-install/prod
+cd konfig/base/examples/monitoring/prometheus-install/prod
 ```
 
 再执行 `kusion apply`:
@@ -297,13 +297,13 @@ kusion apply
 
 Stack: prod  ID                                                                        Action  
  * ├─        rbac.authorization.k8s.io/v1:ClusterRole:default:prometheus               Create
- * ├─        monitoring.coreos.com/v1:Alertmanager:default:example                     Create  
- * ├─        monitoring.coreos.com/v1alpha1:AlertmanagerConfig:default:config-example  Create
- * ├─        monitoring.coreos.com/v1:Prometheus:default:example                       Create
+ * ├─        monitoring.coreos.com/v1:Alertmanager:default:main                        Create
+ * ├─        monitoring.coreos.com/v1alpha1:AlertmanagerConfig:default:main            Create
+ * ├─        monitoring.coreos.com/v1:Prometheus:default:main                          Create
  * ├─        rbac.authorization.k8s.io/v1:ClusterRoleBinding:default:prometheus        Create
  * ├─        v1:ServiceAccount:default:prometheus                                      Create
- * ├─        v1:Service:default:alertmanager-example                                   Create
- * └─        v1:Service:default:prometheus-example                                     Create
+ * ├─        v1:Service:default:alertmanager                                           Create
+ * └─        v1:Service:default:prometheus                                             Create
 
 ? Do you want to apply these diffs?  [Use arrows to move, type to filter]
   yes
