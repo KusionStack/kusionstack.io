@@ -2,11 +2,21 @@
 sidebar_position: 1
 ---
 
-# Getting Started
+# Recording and Alerting
 
-The Prometheus Operator’s goal is to make running Prometheus on top of Kubernetes as easy as possible while preserving Kubernetes-native configuration options.
+The Prometheus Operator provides Kubernetes native deployment and management of Prometheus and related monitoring components. The purpose of this project is to simplify and automate the configuration of a Prometheus-based monitoring stack for Kubernetes clusters.
 
-This guide will show you how to set up an Alertmanager cluster integrating with a Prometheus instance.
+The Prometheus operator includes, but is not limited to, the following features:
+
+- Kubernetes Custom Resources: Use Kubernetes custom resources to deploy and manage Prometheus, Alertmanager, and related components.
+- Simplified Deployment Configuration: Configure the fundamentals of Prometheus like versions, persistence, retention policies, and replicas from a native Kubernetes resource.
+- Prometheus Target Configuration: Automatically generate monitoring target configurations based on familiar Kubernetes label queries; no need to learn a Prometheus-specific configuration language.
+
+The following is the architecture diagram of the Prometheus Operator:
+
+![](/img/docs/user_docs/guides/prometheus/structure.png)
+
+This guide will show you how to set up an Alertmanager cluster integrating with a Prometheus instance based on Prometheus Operator, and use PromethuesRules to record metrics and push alerts.
 
 ## Prerequisites
 
@@ -37,7 +47,7 @@ kubectl create -f bundle.yaml
 
 For more details, please check [Prometheus Operator Quickstart](https://github.com/prometheus-operator/prometheus-operator#quickstart).
 
-## Full Configuration
+## Setup
 
 There is a project named `prometheus-install` in Konfig mono repo, which contains the full configuration of setting up Prometheus and Alertmanager:
 
@@ -45,12 +55,12 @@ There is a project named `prometheus-install` in Konfig mono repo, which contain
 - an AlertmanagerConfig object
 - an Alertmanager Service
 - a Prometheus cluster 
-- Required RBAC
+- required RBAC
 - a Prometheus Service
 
 If you can't wait to experience one-click deployment, please jump to the [One-click Deployment](#one-click-deployment) section.
 
-### Configure Alertmanager
+### Setup Alertmanager
 
 By default, the Alertmanager instances will start with a minimal configuration which isn’t useful since it doesn’t send any notification when receiving alerts.
 
@@ -151,7 +161,7 @@ For complete configuration, please check source code file: [`prometheus-install/
 
 This Alertmanager cluster is now fully functional and highly available, but no alerts are fired against it. Because you have not set up Prometheus yet.
 
-### Configure Prometheus
+### Setup Prometheus
 
 Before you set up Prometheus, you must first create the RBAC rules for the Prometheus service account beforehand.
 
@@ -263,10 +273,10 @@ Prometheus Admin API allows access to delete series for a certain time range, cl
 More information about the admin API can be found in [Prometheus official documentation](https://prometheus.io/docs/prometheus/latest/querying/api/#tsdb-admin-apis).
 
 :::tip
-For complete congfiugration, please check source code file: [`prometheus-install/prod/main.k`](https://github.com/KusionStack/konfig/blob/main/base/examples/monitoring/prometheus-install/prod/main.k).
+For complete configuration, please check source code file: [`prometheus-install/prod/main.k`](https://github.com/KusionStack/konfig/blob/main/base/examples/monitoring/prometheus-install/prod/main.k).
 :::
 
-## One-click Deployment
+### One-click Deployment
 
 Now you can deploy them with one click. Firstly, enter the stack dir of project `prometheus-install` in the konfig repo:
 
@@ -310,3 +320,150 @@ kubectl port-forward svc/prometheus-example 30900:9090
 Now, you can open the Prometheus web interface, [http://127.0.0.1:30900](http://127.0.0.1:30900/), and go to the "Status > Runtime & Build Information" page and check that Prometheus has discovered 3 Alertmanager instances.
 
 ![](/img/docs/user_docs/guides/prometheus/alertmanager.jpg)
+
+## PrometheusRule
+
+The PrometheusRule custom resource definition (CRD) declaratively defines desired Prometheus rules to be consumed by Prometheus instances, including alerting and recording rules. These rules are reconciled by the Operator and dynamically loaded without requiring any restart of Prometheus Rules.
+
+### Recording Rules
+
+Recording rules allow you to precompute frequently needed or computationally expensive expressions and save their result as a new set of time series. Querying the precomputed result will then often be much faster than executing the original expression every time it is needed. This is especially useful for dashboards, which need to query the same expression repeatedly every time they refresh.
+
+The following code snippet takes the node information as an example to the recording rules:
+
+```py
+_sum_of_node_memory = """\
+sum(
+  node_memory_MemAvailable_bytes{job="node-exporter"} or
+  (
+    node_memory_Buffers_bytes{job="node-exporter"} +
+    node_memory_Cached_bytes{job="node-exporter"} +
+    node_memory_MemFree_bytes{job="node-exporter"} +
+    node_memory_Slab_bytes{job="node-exporter"}
+  )
+) by (cluster)
+"""
+
+_node_cpu = """\
+sum(rate(node_cpu_seconds_total{job="node-exporter",mode!="idle",mode!="iowait",mode!="steal"}[5m])) /
+count(sum(node_cpu_seconds_total{job="node-exporter"}) by (cluster, instance, cpu))
+"""
+```
+
+`_sum_of_node_memory` records the sum of node available memory in bytes. 
+
+`_node_cpu` calculates the average rate of increase of node CPU every 5 minutes.
+
+:::tip
+For complete configuration, please check source code file: [`prometheus-rules/record/main.k`](https://github.com/KusionStack/konfig/blob/main/base/examples/monitoring/prometheus-rules/record/main.k).
+:::
+
+Now, you can create the recording rule above.
+
+1、Enter the `record` directory of project `prometheus-rules`:
+
+```bash
+cd konfig/base/examples/monitoring/prometheus-rules/record
+```
+
+2、Apply these rules:
+
+```bash
+kusion apply --yes
+```
+
+3、Check the Prometheus instance has loaded these rules:
+
+```bash
+kubectl port-forward svc/prometheus-example 30900:9090
+```
+
+Now, you can open the Prometheus web interface, [http://127.0.0.1:30900](http://127.0.0.1:30900/), and go to the "Status > Rules" page and check that Prometheus has loaded `node.rules`:
+
+![](/img/docs/user_docs/guides/prometheus/node-rules.jpg)
+
+#### Further Reading
+
+If you want to see the generating line graph from the [Recording Rules](#recording-rules) section, you need to deploy a `node-exporter` server in the default namespace. 
+
+:::info
+How to install node-exporter? Please check here: [`node-exporter.yaml`](https://github.com/KusionStack/examples/blob/main/prometheus/node-exporter.yaml)
+:::
+
+Then, you will see, the sum of node memory in bytes：
+
+![](/img/docs/user_docs/guides/prometheus/node-memory.jpg)
+
+and the average rate of increase of node CPU every 5 minutes:
+
+![](/img/docs/user_docs/guides/prometheus/node-cpu.jpg)
+
+### Alerting Rules
+
+Alerting rules allow you to define alert conditions based on Prometheus expression language expressions and to send notifications about firing alerts to an external service. Whenever the alert expression results in one or more vector elements at a given point in time, the alert counts as active for these elements' label sets.
+
+The following code snippet is an example of alerting rules:
+
+```py
+_alerts: monitoringv1.PrometheusRule {
+    metadata = {
+        name = "example-alert"
+        namespace = "default"
+        labels: {
+            "prometheus": "example",
+            "role": "alert-rules",
+        }
+    }
+    spec = {
+        groups = [
+            {
+                name = "alert.rules"
+                rules = [
+                    {
+                        alert: "ExampleAlert"
+                        # vector(s scalar) returns the scalar s as a vector with no labels.
+                        expr: "vector(1)"
+                    }
+                ]
+            }
+        ]
+    }
+}
+```
+
+Using internal function `vector(1)` will always return a vector 1, which means always triggering an alert.
+
+:::tip
+For complete configuration, please check source code file: [`prometheus-rules/alert/main.k`](https://github.com/KusionStack/konfig/blob/main/base/examples/monitoring/prometheus-rules/alert/main.k).
+:::
+
+Now, you can apply the alerting rules:
+
+1、Enter the stack `alert` of project `prometheus-rules`:
+
+```bash
+cd konfig/base/examples/monitoring/prometheus-rules/alert
+```
+
+2、Apply these rules:
+
+```bash
+kusion apply --yes
+```
+
+3、Check the Prometheus instance has loaded these rules:
+
+Since you have already done the port forward step, you just need to refresh the "Status > Rules" page and check that Prometheus has loaded `alert.rules`:
+
+![](/img/docs/user_docs/guides/prometheus/alert-rules.jpg)
+
+4、Check the Alertmanager has received the alert successfully:
+
+```bash
+kubectl port-forward svc/alertmanager-example 30903:9093
+```
+
+Now, you can open the Alertmanager web interface, [http://127.0.0.1:30903](http://127.0.0.1:30903/) and see the example alert:
+
+![](/img/docs/user_docs/guides/prometheus/alert.jpg)
+

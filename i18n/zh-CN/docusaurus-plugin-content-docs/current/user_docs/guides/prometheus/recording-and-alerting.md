@@ -2,11 +2,21 @@
 sidebar_position: 1
 ---
 
-# 快速开始
+# 记录与告警
 
-Prometheus Operator 的目标是尽可能简单地在 Kubernetes 上运行 Prometheus，同时保留 Kubernetes 原生配置选项。
+Prometheus Operator 为 Kubernetes 提供了对 Prometheus 及其相关监控组件的 Kubernetes 原生部署和管理。该项目的目的是为 Kubernetes 集群简化和自动化基于 Prometheus 的监控配置。
 
-本指南将向你展示如何一键 Alertmanager 集群并集成 Prometheus 实例。
+Prometheus Operator 主要包括以下几个功能：
+
+- Kubernetes 自定义资源：使用 Kubernetes CRD 来部署和管理 Prometheus、Alertmanager 和相关组件。
+- 简化的部署配置：通过 Kubernetes 原生资源的方式，配置 Prometheus，比如版本、持久化、保留策略和副本。
+- Prometheus 目标配置：基于熟知的 Kubernetes 标签查询自动生成监控目标配置，无需学习 Prometheus 特定的配置语言。
+
+下面是 Prometheus Operator 的架构图：
+
+![](/img/docs/user_docs/guides/prometheus/structure.png)
+
+本指南将向你展示如何基于 Prometheus Operator 一键部署 Alertmanager 集群并集成 Prometheus，并使用 PrometheusRules 记录指标数据和推送告警。
 
 ## 前提条件
 
@@ -37,7 +47,7 @@ kubectl create -f bundle.yaml
 
 详见 Prometheus Operator [快速开始](https://github.com/prometheus-operator/prometheus-operator#quickstart)。
 
-## 配置详情
+## 组件部署
 
 在 konfig 大库的 `prometheus-install` 项目中，保存了设置 Prometheus 和 Alertmanager 的完整的配置：
 
@@ -149,7 +159,7 @@ _alertmanager_svc: corev1.Service{
 详细配置，请查看源码文件: [`prometheus-install/prod/main.k`](https://github.com/KusionStack/konfig/blob/main/base/examples/monitoring/prometheus-install/prod/main.k)。
 :::
 
-此 Alertmanager 集群现在功能齐全且高可用，但不会针对它触发任何警报。这是因为你还没有设置 Prometheus 应用。
+此 Alertmanager 集群现在功能齐全且高可用，但不会针对它触发任何报警。这是因为你还没有设置 Prometheus 应用。
 
 ### 配置 Prometheus
 
@@ -191,7 +201,7 @@ _prometheus_clusterrole: rbac.ClusterRole {
 RBAC 的完整配置，请查看源码文件：[`prometheus-install/base/base.k`](https://github.com/KusionStack/konfig/blob/main/base/examples/monitoring/prometheus-install/base/base.k)。
 :::
 
-2. 创建 Prometheus，它将向 Alertmanger 集群发送警报：
+2. 创建 Prometheus，它将向 Alertmanger 集群发送报警：
 
 ```py
 _prometheus: monitoringv1.Prometheus{
@@ -266,7 +276,7 @@ Prometheus admin API 允许访问删除某个时间范围内的系列、清理�
 详细配置，请查看源码文件: [`prometheus-install/prod/main.k`](https://github.com/KusionStack/konfig/blob/main/base/examples/monitoring/prometheus-install/prod/main.k)。
 :::
 
-## 一键部署
+### 一键部署
 
 目前已经完成所有监控报警相关配置，现在开始一键部署。首先进入 `prometheus-install` stack 目录：
 
@@ -307,6 +317,154 @@ Stack: prod  ID                                                                 
 kubectl port-forward svc/prometheus-example 30900:9090
 ```
 
-然后打开 [http://127.0.0.1:30900](http://127.0.0.1:30900/)，访问 Prometheus 界面，进入 “Status > Runtime & Build Information” 页面，检查 Prometheus 是否发现了 3 个 Alertmanager 示例：
+现在，你可以打开 [http://127.0.0.1:30900](http://127.0.0.1:30900/)，访问 Prometheus 界面，进入 “Status > Runtime & Build Information” 页面，检查 Prometheus 是否发现了 3 个 Alertmanager 示例：
 
 ![](/img/docs/user_docs/guides/prometheus/alertmanager.jpg)
+
+## PrometheusRule
+
+自定义资源定义 (CRD) `PrometheusRule` 声明式定义 Prometheus 实例使用的所需 Prometheus 规则，包括记录规则和报警规则。这些规则由 Operator 协调并动态加载，无需重新启动 Prometheus。
+
+### 记录规则
+
+记录规则可以预先计算经常需要或计算量大的表达式，并将其结果保存为一组新的时间序列。查询预先计算的结果通常比每次需要时执行原始表达式要快得多。这对于仪表板特别有用，仪表板每次刷新时都需要重复查询相同的表达式。
+
+下面的代码片段，是以节点信息为例的记录规则：
+
+```py
+_sum_of_node_memory = """\
+sum(
+  node_memory_MemAvailable_bytes{job="node-exporter"} or
+  (
+    node_memory_Buffers_bytes{job="node-exporter"} +
+    node_memory_Cached_bytes{job="node-exporter"} +
+    node_memory_MemFree_bytes{job="node-exporter"} +
+    node_memory_Slab_bytes{job="node-exporter"}
+  )
+) by (cluster)
+"""
+
+_node_cpu = """\
+sum(rate(node_cpu_seconds_total{job="node-exporter",mode!="idle",mode!="iowait",mode!="steal"}[5m])) /
+count(sum(node_cpu_seconds_total{job="node-exporter"}) by (cluster, instance, cpu))
+"""
+```
+
+`_sum_of_node_memory` 记录节点可用内存总量，以 byte 为单位。
+
+`_node_cpu` 计算每 5 分钟节点 CPU 的平均增长率。
+
+:::tip
+详细配置, 请查看源码文件: [`prometheus-rules/record/main.k`](https://github.com/KusionStack/konfig/blob/main/base/examples/monitoring/prometheus-rules/record/main.k).
+:::
+
+现在，你可以创建上面的记录规则。
+
+1、进入 `prometheus-rules` 项目的 `record` 目录：
+
+```bash
+cd konfig/base/examples/monitoring/prometheus-rules/record
+```
+
+2、创建规则：
+
+```bash
+kusion apply --yes
+```
+
+3、检查 Prometheus 已加载规则：
+
+```bash
+kubectl port-forward svc/prometheus-example 30900:9090
+```
+
+现在，你可以打开 [http://127.0.0.1:30900](http://127.0.0.1:30900/)，访问 Prometheus 界面，进入 “Status > Rules” 页面，检查 Prometheus 是否已加载 `node.rules`：
+
+![](/img/docs/user_docs/guides/prometheus/node-rules.jpg)
+
+#### 拓展阅读
+
+如果你想看到[记录规则](#记录规则)小节所生成的折线图，你需要在 `default` 命名空间部署 `node-exporter` 服务。
+
+:::info
+如何安装 node-exporter? 请查看这里: [`node-exporter.yaml`](https://github.com/KusionStack/examples/blob/main/prometheus/node-exporter.yaml)
+:::
+
+那么，你将会看到，节点可用内存的折线图：
+
+![](/img/docs/user_docs/guides/prometheus/node-memory.jpg)
+
+和节点 CPU 每 5 分钟平均增长率的折线图：
+
+![](/img/docs/user_docs/guides/prometheus/node-cpu.jpg)
+
+
+### 报警规则
+
+报警规则可以根据 Prometheus 表达式语言表达式定义报警条件，并将有关触发报警的通知发送到外部服务。每当报警表达式在给定时间点产生一个或多个矢量元素时，对于这些元素的标签集，报警就会被视为已激活。
+
+下面的代码片段是报警规则的示例：
+
+```py
+_alerts: monitoringv1.PrometheusRule {
+    metadata = {
+        name = "example-alert"
+        namespace = "default"
+        labels: {
+            "prometheus": "example",
+            "role": "alert-rules",
+        }
+    }
+    spec = {
+        groups = [
+            {
+                name = "alert.rules"
+                rules = [
+                    {
+                        alert: "ExampleAlert"
+                        # vector() 函数将标量作为没有标签的向量返回。
+                        expr: "vector(1)"
+                    }
+                ]
+            }
+        ]
+    }
+}
+```
+
+示例报警的表达式使用内部函数 `vertor()`，它将总是返回向量 1，即总是会触发报警。
+
+:::tip
+详细配置, 请查看源码文件: [`prometheus-rules/alert/main.k`](https://github.com/KusionStack/konfig/blob/main/base/examples/monitoring/prometheus-rules/alert/main.k).
+:::
+
+现在，你可以创建报警规则：
+
+1、进入 `prometheus-rules` 项目的 `alert` 目录：
+
+```bash
+cd konfig/base/examples/monitoring/prometheus-rules/alert
+```
+
+2、创建规则：
+
+```bash
+kusion apply --yes
+```
+
+3、检查 Prometheus 已加载规则：
+
+由于你已经完成了端口转发的步骤，因此只需要刷新 “Status > Rules” 页面，检查 Prometheus 是否已加载 `alert.rules`：
+
+![](/img/docs/user_docs/guides/prometheus/alert-rules.jpg)
+
+4、检查 Alertmanager 成功接收报警：
+
+```bash
+kubectl port-forward svc/alertmanager-example 30903:9093
+```
+
+现在，你可以打开 [http://127.0.0.1:30903](http://127.0.0.1:30903/)，访问 Alertmanager 界面，发现示例报警：
+
+![](/img/docs/user_docs/guides/prometheus/alert.jpg)
+
