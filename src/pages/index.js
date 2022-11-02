@@ -5,6 +5,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import Layout from '@theme/Layout'
 import clsx from 'clsx'
 import React from 'react'
+import { ExampleScroller } from "../components/ExampleScroller"
 
 import whoIsUsing from '../data/whoIsUsing'
 import styles from './index.module.css'
@@ -90,7 +91,7 @@ function Home() {
                   <ul>
                     <li>
                         <Translate id="home.easyshipping.2">
-                            Codify and unifies spec, resources and manifests about modern app
+                            Codify and unifies spec, resources and manifests around modern app
                         </Translate>
                     </li>
                     <li>
@@ -171,6 +172,12 @@ function Home() {
               }
             />
           </div>
+        </div>
+
+        <div className="hero-divider" />
+
+        <div className="hero">
+            <ExampleScroller />
         </div>
 
         <div className="hero-divider" />
