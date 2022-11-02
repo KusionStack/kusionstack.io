@@ -6,6 +6,39 @@
  */
 
  :root {
+   --palette-charade: #21222c;
+   --palette-gray: #32343e;
+   --palette-green: #66bb6a;
+   --palette-midnight: #141725;
+   --palette-pale-blue: #b1b5d3;
+   --palette-pink: #d14671;
+   --palette-pink-darker: #be2f5b;
+   --palette-rock: rgb(var(--palette-rock-raw));
+   --palette-rock-raw: 38, 40, 51;
+   --palette-sky: #81d3f9;
+   --palette-turquoise: #0cc0df;
+   --palette-black-10: rgba(0, 0, 0, 0.1);
+   --palette-white: #fff;
+   --palette-white-03: rgba(255, 255, 255, 0.03);
+   --palette-white-05: rgba(255, 255, 255, 0.05);
+   --palette-white-10: rgba(255, 255, 255, 0.1);
+   --palette-white-20: rgba(255, 255, 255, 0.2);
+   --palette-white-30: rgba(255, 255, 255, 0.3);
+   --palette-white-40: rgba(255, 255, 255, 0.4);
+   --palette-white-60: rgba(255, 255, 255, 0.6);
+   --palette-white-darker: #d9d9d9;
+   --palette-yellow: #ffd54f;
+   --image-shadow: 0 15px 61px 5px rgba(20, 23, 37, 0.94);
+
+   --font-size-small: 15px;
+   --font-size-normal: 16px;
+   --font-size-large: 17px;
+   --font-size-big-1: 22px;
+   --font-size-big-2: 24px;
+   --font-size-big-3: 32px;
+   --font-size-big-4: 46px;
+   --font-size-big-5: 64px;
+
   /*
   See css var + hsl color palette technique:
   https://blog.maximeheckel.com/posts/the-power-of-composition-with-css-variables/
