@@ -11,7 +11,6 @@ const M = [3, 5, 19, 31]
 const L = [4, 5, 19, 31]
 
 const getTopByIndex = (m: number[], index: 1 | 2 | 3 | 4): number => {
-  console.log(m)
   const scale = {
     1: 20 * (m[0] ?? 0),
     2: -25 * (m[1] ?? 0),
