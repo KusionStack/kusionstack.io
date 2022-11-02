@@ -4,19 +4,17 @@ sidebar_position: 1
 
 # Recording and Alerting
 
-The Prometheus Operator provides Kubernetes native deployment and management of Prometheus and related monitoring components. The purpose of this project is to simplify and automate the configuration of a Prometheus-based monitoring stack for Kubernetes clusters.
+This guide will show you how to set up an Alertmanager cluster integrating with a Prometheus instance based on Prometheus Operator, and use PromethuesRules to record metrics and push alerts.
 
-The Prometheus operator includes, but is not limited to, the following features:
+## Introduction
 
-- Kubernetes Custom Resources: Use Kubernetes custom resources to deploy and manage Prometheus, Alertmanager, and related components.
-- Simplified Deployment Configuration: Configure the fundamentals of Prometheus like versions, persistence, retention policies, and replicas from a native Kubernetes resource.
-- Prometheus Target Configuration: Automatically generate monitoring target configurations based on familiar Kubernetes label queries; no need to learn a Prometheus-specific configuration language.
+Prometheus is an open-source system monitoring and alerting toolkit. It collects and stores its metrics as time series data, i.e. metrics information is stored with the timestamp at which it was recorded, alongside optional key-value pairs called labels.
 
-The following is the architecture diagram of the Prometheus Operator:
+This diagram illustrates the architecture of Prometheus and some of its ecosystem components:
 
 ![](/img/docs/user_docs/guides/prometheus/structure.png)
 
-This guide will show you how to set up an Alertmanager cluster integrating with a Prometheus instance based on Prometheus Operator, and use PromethuesRules to record metrics and push alerts.
+Prometheus scrapes metrics from instrumented jobs, either directly or via an intermediary push gateway for short-lived jobs. It stores all scraped samples locally and runs rules over this data to either aggregate and record new time series from existing data or generate alerts. Grafana or other API consumers can be used to visualize the collected data.
 
 ## Prerequisites
 
@@ -58,7 +56,10 @@ There is a project named `prometheus-install` in Konfig mono repo, which contain
 - required RBAC
 - a Prometheus Service
 
-If you can't wait to experience one-click deployment, please jump to the [One-click Deployment](#one-click-deployment) section.
+
+:::info
+If you can't wait to experience one-click setup, please jump to the [One-click Setup](#one-click-setup) section.
+:::
 
 ### Setup Alertmanager
 
@@ -79,10 +80,10 @@ Option 2 is chosen in the [`prometheus-install`](https://github.com/KusionStack/
 ```py
 _alertmanager_config: monitoringv1alpha1.AlertmanagerConfig{
     metadata = {
-        name = "config-example"
+        name = "main"
         namespace = _common_namespace
         labels = {
-            "alertmanagerConfig" = "example"
+            "alertmanagerConfig" = "main"
         }
     }
     spec = {
@@ -112,7 +113,7 @@ _alertmanager_config: monitoringv1alpha1.AlertmanagerConfig{
 ```py
 _alertmanager: monitoringv1.Alertmanager{
     metadata = {
-        name = "example"
+        name = "main"
         namespace = "default"
     }
     spec = {
@@ -131,7 +132,7 @@ Creating a Kubernetes Service listening target port `9093`:
 ```py
 _alertmanager_svc: corev1.Service{
     metadata = {
-        name = "alertmanager-example"
+        name = "alertmanager"
         namespace = _common_namespace
     }
     spec = {
@@ -206,7 +207,7 @@ For full configuration of RBAC rules，please check source code file: [`promethe
 ```py
 _prometheus: monitoringv1.Prometheus{
     metadata = {
-        name = "example"
+        name = "main"
         namespace = "default"
     }
     spec = {
@@ -217,12 +218,12 @@ _prometheus: monitoringv1.Prometheus{
         ruleSelector = {
             matchLabels = {
                 "role" = "alert-rules"
-                "prometheus" = "example"
+                "prometheus" = "main"
             }
         }
         serviceMonitorSelector = {
             matchLabels = {
-                "prometheus" = "example"
+                "prometheus" = "main"
             }
         }
         # intergating with alert manager by its service
@@ -245,7 +246,7 @@ Creating a Kubernetes service listening target port `9090`:
 ```py
 _prometheus_svc: corev1.Service{
     metadata = {
-        name = "prometheus-example"
+        name = "prometheus"
         namespace = "default"
     }
     spec = {
@@ -276,12 +277,12 @@ More information about the admin API can be found in [Prometheus official docume
 For complete configuration, please check source code file: [`prometheus-install/prod/main.k`](https://github.com/KusionStack/konfig/blob/main/base/examples/monitoring/prometheus-install/prod/main.k).
 :::
 
-### One-click Deployment
+### One-click Setup
 
 Now you can deploy them with one click. Firstly, enter the stack dir of project `prometheus-install` in the konfig repo:
 
 ```bash
-cd base/examples/monitoring/prometheus-install/prod
+cd konfig/base/examples/monitoring/prometheus-install/prod
 ```
 
 Then, run `kusion apply`:
@@ -297,13 +298,13 @@ The output is similar to:
 
 Stack: prod  ID                                                                        Action  
  * ├─        rbac.authorization.k8s.io/v1:ClusterRole:default:prometheus               Create
- * ├─        monitoring.coreos.com/v1:Alertmanager:default:example                     Create  
- * ├─        monitoring.coreos.com/v1alpha1:AlertmanagerConfig:default:config-example  Create
- * ├─        monitoring.coreos.com/v1:Prometheus:default:example                       Create
+ * ├─        monitoring.coreos.com/v1:Alertmanager:default:main                        Create
+ * ├─        monitoring.coreos.com/v1alpha1:AlertmanagerConfig:default:main            Create
+ * ├─        monitoring.coreos.com/v1:Prometheus:default:main                          Create
  * ├─        rbac.authorization.k8s.io/v1:ClusterRoleBinding:default:prometheus        Create
  * ├─        v1:ServiceAccount:default:prometheus                                      Create
- * ├─        v1:Service:default:alertmanager-example                                   Create
- * └─        v1:Service:default:prometheus-example                                     Create
+ * ├─        v1:Service:default:alertmanager                                           Create
+ * └─        v1:Service:default:prometheus                                             Create
 
 ? Do you want to apply these diffs?  [Use arrows to move, type to filter]
   yes
@@ -407,10 +408,10 @@ The following code snippet is an example of alerting rules:
 ```py
 _alerts: monitoringv1.PrometheusRule {
     metadata = {
-        name = "example-alert"
+        name = "alert"
         namespace = "default"
         labels: {
-            "prometheus": "example",
+            "prometheus": "main",
             "role": "alert-rules",
         }
     }
@@ -420,7 +421,7 @@ _alerts: monitoringv1.PrometheusRule {
                 name = "alert.rules"
                 rules = [
                     {
-                        alert: "ExampleAlert"
+                        alert: "WebhookAlert"
                         # vector(s scalar) returns the scalar s as a vector with no labels.
                         expr: "vector(1)"
                     }
