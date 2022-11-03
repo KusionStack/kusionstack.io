@@ -68,7 +68,7 @@ function Home() {
               <Translate id="home.quickstart">All about your modern app by Platform as Code</Translate>
             </h2>
             <p className={styles.header}>
-                <Translate id="siteConfig.tagline">KusionStack codifies and unifies platform resources into stacked models and polices.</Translate>
+                <Translate id="siteConfig.tagline">KusionStack codifies and unifies platform resources into stacked models and policies.</Translate>
             </p>
           </div>
         </div>
@@ -96,7 +96,7 @@ function Home() {
                     </li>
                     <li>
                         <Translate id="home.easyshipping.3">
-                            Orchestrate and provision on Kubernetes and Clouds in a managed manner
+                            Orchestration and provision on Kubernetes and Clouds in a managed manner
                         </Translate>
                     </li>
                     <li>
