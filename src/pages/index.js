@@ -85,13 +85,13 @@ function Home() {
                   <p>
                     <Translate
                       id="home.easyshipping.1">
-                      Fast develop, easy deliver
+                      Fast development, easy delivery
                     </Translate>
                   </p>
                   <ul>
                     <li>
                         <Translate id="home.easyshipping.2">
-                            Codify and unifies spec, resources and manifests around modern app
+                            Codify and unify spec, resources and manifests around modern apps
                         </Translate>
                     </li>
                     <li>
@@ -127,12 +127,12 @@ function Home() {
                     </li>
                     <li>
                         <Translate id="home.enterpriseops.3">
-                            Production ready with scalability, performance and left-shifted stability
+                            Production-ready with scalability, performance and left-shifted stability
                         </Translate>
                     </li>
                     <li>
                       <Translate id="home.enterpriseops.4">
-                            Various usages to meet requirements of diverse enterprise scenarios
+                            Various usages to meet the requirements of diverse enterprise scenarios
                       </Translate>
                     </li>
                   </ul>
@@ -159,12 +159,12 @@ function Home() {
                     </li>
                     <li>
                       <Translate id="home.platformengineering.3">
-                            Easy to integrate in CI pipeline, service and product to build your paved road
+                            Easy to integrate into CI pipeline, service and product to build your paved road
                       </Translate>
                     </li>
                     <li>
                       <Translate id="home.platformengineering.4">
-                            Fast develop on raw platform capabilities with consistency to cope with change
+                            Fast development on raw platform capabilities with consistency to cope with change
                       </Translate>
                     </li>
                   </ul>
@@ -185,7 +185,7 @@ function Home() {
         <div className="hero">
           <div className="container text--center">
             <h2 className="hero__subtitle">
-              <Translate id="home.whoisusing">Who is Using KusionStack</Translate>
+              <Translate id="home.whoisusing">Adopted by</Translate>
             </h2>
             <div className={styles.whiteboard}>
               <div className="row">
