@@ -2206,7 +2206,42 @@ a = 1  # 不可变导出变量
 _b = 2  # 可变非导出变量
 ```
 
-## 48. 如何通过编写 KCL 插件进行扩展?
+## 48. 如何将数字单位字面值与数字进行运算
+
+在 KCL 中，数字单位作为一种特殊类型存在，它不允许算术运算，因为可以直接使用 `str(1024Mi）== "1024Mi"` 方式进行单位转换并直接输出，但是当它们进行计算后，KCL 无法为这个数字取一定的单位标准，比如 `1Ki + 1Mi` 无法确定计算后的结果使用单位 `Ki` 还是 `Mi`, 这里存在二义性，因此在 KCL 中直接禁止了数字单位进行运算。
+
+但是，我们可以通过 `int()` 函数将数字单位字面值转换为整数并进行计算，然后使用 `units` 系统模块中的函数将它们转换为相应的数字单位字符串。
+
+比如
+
+```kcl
+import units
+import math
+
+val: units.NumberMultiplier = 2048Mi
+ratio: float = 0.3
+cpu: int | str = 1
+
+res = {
+    cpu = str(int(int(cpu) * ratio * 1000)) + "m"  # Convert int value to value with the unit 'm' and calculate `cpu = cpu * radio`
+    memory = units.to_Mi(int(int(val) * ratio))   # `memory = val * radio` with the unit 'Mi'
+}
+```
+
+输出为:
+
+```yaml
+val: 2147483648.0
+ratio: 0.3
+cpu: 1
+res:
+  cpu: 300m
+  memory: 614Mi
+```
+
+
+
+## 49. 如何通过编写 KCL 插件进行扩展?
 
 KCL 插件在 KCLVM 的 plugins 子目录（通常安装在 `$HOME/.kusion/kclvm/plugins` 目录），或者通过 `$KCL_PLUGINS_ROOT` 环境变量设置（环境变量优先级更高）。对于插件开发人员，插件都在 [Git 仓库](https://github.com/KusionStack/kcl-plugin)管理，可以将插件仓库克隆到该目录进行开发。
 
