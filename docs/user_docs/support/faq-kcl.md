@@ -2192,7 +2192,40 @@ a = 1 # immutable exported variable
 _b = 2 # mutable non-export variable
 ```
 
-## 48. How to develop a KCL plugin?
+## 48. How to calculate the literal value of a numeric unit with a number
+
+In KCL, numeric units exist as a special type, which does not allow arithmetic operations, because `str(1024Mi) == "1024Mi"` can be written directly, but when they are calculated, KCL compiler doesn't know what unit to take. For example, `1Ki + 1Mi` cannot determine whether the calculated result uses the unit of `Ki` or `Mi`. There is ambiguity here, so numerical units are directly prohibited from performing operations in KCL.
+
+However, we can convert the numeric unit literal value into an integer through the `int()` function, and then call the functions in the units package or spliced them into the corresponding unit string.
+
+For Example:
+
+```python
+import units
+import math
+
+val: units.NumberMultiplier = 2048Mi
+ratio: float = 0.3
+cpu: int | str = 1
+
+res = {
+    cpu = str(int(int(cpu) * ratio * 1000)) + "m"  # Convert int value to value with the unit 'm'
+    memory = units.to_Mi(int(int(val) * ratio))   # `memory = val * 0.3` with the unit 'Mi'
+}
+```
+
+The output YAML is
+
+```yaml
+val: 2147483648.0
+ratio: 0.3
+cpu: 1
+res:
+  cpu: 300m
+  memory: 614Mi
+```
+
+## 49. How to develop a KCL plugin?
 
 KCL plugins are installed in the plugins subdirectory of KCLVM (usually installed in the `$HOME/.kusion/kclvm/plugins` directory), or set through the `$KCL_PLUGINS_ROOT` environment variable. For plugin developers, plugins are managed in the [Git repository](https://github.com/KusionStack/kcl-plugin), and the plugin repository can be cloned to this directory for development.
 
