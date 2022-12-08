@@ -1,14 +1,14 @@
 # OpenAPI to KCL
 
-To convert from models defined in the OpenAPI spec file to KCL schema, we could run the following script:
+命令
 
 ```shell
 kcl-openapi generate model -f ${your_open_api_spec.yaml} -t ${the_kcl_files_output_dir}
 ```
 
-For example:
+示例：
 
-- There is the OpenAPI spec file that we need to convert: `test_open_api_spec.yaml`
+- 输入文件：test_open_api_spec.yaml:
 
   ```yaml
   definitions:
@@ -32,13 +32,13 @@ For example:
   paths: {}
   ```
 
-- The script will be:
+- 命令：
 
   ```shell
   kcl-openapi generate model -f test_open_api_spec.yaml -t ~/
   ```
 
-- Then we can find the generated file here: `~/models/v1/test_int.k`
+- 输出：~/models/v1/test_int.k
 
   ```python
   """
