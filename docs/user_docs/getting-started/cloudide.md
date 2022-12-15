@@ -22,7 +22,7 @@ It takes about 30s to wait for the codespace to prepare the environment. Then in
 
 The two configuration files `appops/guestbook-frontend/base/base.k` and `appops/guestbook-frontend/dev/main.k` will be opened automatically by the codespace. Together the two files declare the infra configuration of the guestbook-frontend application in the dev environment. For example, the `dev/main.k` declares that dev version of the application image will be `gcr.io/google-samples/gb-frontend:v5`, and the `base/base.k` file contains the common and basic configurations among the environments -- for example, a service named `frontend` that expose the application through port 80.
 
-![view code](/img/docs/user_docs/getting-started/install/codespaces/gotodef.gif)
+![view code](/img/docs/user_docs/getting-started/install/codespaces/view-code.gif)
 
 ### Step2: Deploy with Kusion
 

@@ -22,7 +22,7 @@ KusionStack 支持免安装快速体验啦！无需任何任何下载-安装-配
 
 此外，我们创建的工作空间会默认展示 `appops/guestbook-frontend/base/base.k` 和 `appops/guestbook-frontend/dev/main.k` 两个文件，它们描述了 `guestbook-frontend` 应用的部署配置。可以看到应用的 `dev/main.k` 文件中声明了研发环境对应的镜像版本为 `gcr.io/google-samples/gb-frontend:v5`，而 `base/base.k` 中则描述了该应用在各环境下的通用配置——例如名为 `frontend`、通过 80 端口提供服务的服务资源。
 
-![view code](/img/docs/user_docs/getting-started/install/codespaces/gotodef.gif)
+![view code](/img/docs/user_docs/getting-started/install/codespaces/view-code.gif)
 
 ### Step2：使用 Kusion 发布应用
 
