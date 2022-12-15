@@ -6,7 +6,7 @@ sidebar_position: 2
 
 KusionStack 支持免安装快速体验啦！无需任何任何下载-安装-配置流程，即可快速体验通过 KusionStack 管理和发布应用的流程。
 
-## 使用 GitHub Codespaces
+## 使用 GitHub Codespaces 体验
 
 使用 [GitHub Codespaces](https://github.com/features/codespaces) 云端开发 IDE，您即可面向 Konfig 仓库创建云端工作空间，获得已预置 Kusion 整套工具和插件的研发环境。
 
@@ -28,7 +28,7 @@ KusionStack 支持免安装快速体验啦！无需任何任何下载-安装-配
 
 minikube 启动完成后，我们即可使用 kusion 将 `guestbook-frontend` 应用发布到 `dev`环境，预览待发布应用资源与集群资源的 live-diff，确认无误后继续完成发布：
 - 在 dev 目录下的配置文件 `main.k` 中，右键点击 `Kusion: Preview Live Diff and Apply`
-- 在随机展开的交互式控制台中，使用键盘↑↓箭头切换选择，对于 `Do you want to apply these diffs?` 选择 `details` 即可预览变更资源列表；进一步，对 `Which diff detail do you want to see? `选择指定或全部资源分别预览变更细节。由于是首次发布，可以看到，发生变更的3类资源 Service、Deployment、Namespace 均为待 `Create` 状态
+- 在随即展开的交互式控制台中，使用键盘↑↓箭头切换选择，对于 `Do you want to apply these diffs?` 选择 `details` 即可预览变更资源列表；进一步，对 `Which diff detail do you want to see? `选择指定或全部资源分别预览变更细节。由于是首次发布，可以看到，发生变更的3类资源 Service、Deployment、Namespace 均为待 `Create` 状态
 - 选择 `yes` 确认变更后，我们可以继续观察控制台滚动显示的资源变更状态跟踪，直至显示 `Watch Finish! All resources have been reconciled`，说明全部相关资源调和完成
 - 接着，Kusion 检测到集群内服务的变化，提示进行端口转发以便进一步验证本次变更中的应用运行正常，点击 `Forward Port` 按钮，并在后续提示中选择 `Open in Browser`，在浏览器中访问服务，验证 guestbook 前端页面已经正常提供服务
 
