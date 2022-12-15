@@ -14,15 +14,15 @@ With [GitHub Codespaces](https://github.com/features/codespaces), you can create
 
 You can click the [Open in GitHub Codespaces link](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=488867056&machine=standardLinux32gb&devcontainer_path=.devcontainer.json), or click on the `Open in GitHub Codespaces` badge at the home page of [the Konfig repo](https://github.com/KusionStack/konfig), and then confirm to `Create codespace` at the create page. And a 4-core • 8GB RAM • 32GB storage workspace of Konfig main branch will be created.
 
-![create codespace](/static/img/docs/user_docs/getting-started/install/codespaces/create-codespace.gif)
+![create codespace](/img/docs/user_docs/getting-started/install/codespaces/create-codespace.gif)
 
 It takes about 30s to wait for the codespace to prepare the environment. Then in the workspace and you'll see a progress notification indicating that the minikube is starting, which provides a local Kubernetes cluster for the quick start application to deploy to. The minikube starting costs about 1 minute, and during that please take your time and you could glance over the KCL configurations of the application we are going to deploy. 
 
-![minikube start](/static/img/docs/user_docs/getting-started/install/codespaces/minikube-start.gif)
+![minikube start](/img/docs/user_docs/getting-started/install/codespaces/minikube-start.gif)
 
 The two configuration files `appops/guestbook-frontend/base/base.k` and `appops/guestbook-frontend/dev/main.k` will be opened automatically by the codespace. Together the two files declare the infra configuration of the guestbook-frontend application in the dev environment. For example, the `dev/main.k` declares that dev version of the application image will be `gcr.io/google-samples/gb-frontend:v5`, and the `base/base.k` file contains the common and basic configurations among the environments -- for example, a service named `frontend` that expose the application through port 80.
 
-![view code](/static/img/docs/user_docs/getting-started/install/codespaces/gotodef.gif)
+![view code](/img/docs/user_docs/getting-started/install/codespaces/gotodef.gif)
 
 ### Step2: Deploy with Kusion
 
@@ -36,7 +36,7 @@ With the minikube started, we can now simulate the `guestbook-frontend` deployme
 
 - then the service changes in the cluster will be detected and a `Port forwarding` notification prompts to hint that we can forward a local port to the guestbook-frontend service port 80 within the minikube so that we can further access and verify the service locally. We can click the button and select `Open in Browser` in the following notification and verify the service through the browser.
 
-![apply to cloud](/static/img/docs/user_docs/getting-started/install/codespaces/apply.gif)
+![apply to cloud](/img/docs/user_docs/getting-started/install/codespaces/apply.gif)
 
 
 ## Review and Summary
@@ -45,4 +45,4 @@ Now we've completed the quick start trial of KusionStack: preview, deploy and ve
 
 After the trial, you can stop the codespace in the [GitHub Codespaces Management Page](https://github.com/codespaces) and it can be restored for later use. Or you can just delete it and everything will return to the beginning.
 
-![delete codespace](/static/img/docs/user_docs/getting-started/install/codespaces/delete-codespace.gif)
+![delete codespace](/img/docs/user_docs/getting-started/install/codespaces/delete-codespace.gif)
