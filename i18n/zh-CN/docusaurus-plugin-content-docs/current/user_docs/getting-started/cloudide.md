@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # 在云端 IDE 体验 KusionStack
 
-KusionStack 支持免安装快速体验啦！无需任何任何下载-安装-配置流程，即可快速体验通过 KusionStack 管理和发布应用的流程。
+KusionStack 支持免安装快速体验啦！无需任何下载-安装-配置流程，即可快速体验通过 KusionStack 管理和发布应用的流程。
 
 ## 使用 GitHub Codespaces 体验
 
