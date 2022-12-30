@@ -147,5 +147,5 @@ KusionStack 处于开源早期，你可以在这里看到 [Kusion](https://githu
 
 ## 下一步
 
-+ [安装使用 KusionCtl](/docs/user_docs/getting-started/install/kusionup)
++ [安装指南](/docs/user_docs/getting-started/install)
 + 了解[核心概念](/docs/user_docs/concepts/konfig)和[技术架构](/docs/user_docs/concepts/arch)

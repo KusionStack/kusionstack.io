@@ -145,5 +145,5 @@ KusionStack is at an early stage of open source. You can check the release versi
 
 ## Next step
 
-+ [Install using KusionCtl](/docs/user_docs/getting-started/install/kusionup)
++ [Installation](/docs/user_docs/getting-started/install)
 + Learn about [core concepts](/docs/user_docs/concepts/konfig) and [technical architecture](/docs/user_docs/concepts/arch)
