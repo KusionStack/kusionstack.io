@@ -50,7 +50,7 @@ function Home() {
                     </Link>
                 </div>
                 <div>
-                    <Link className={clsx("button button--primary button--lg", styles.button)} to="/docs/user_docs/getting-started/install/kusionup">
+                    <Link className={clsx("button button--primary button--lg", styles.button)} to="/docs/user_docs/getting-started/install">
                         <Translate description="homepage getting started button">
                             Install
                         </Translate>
