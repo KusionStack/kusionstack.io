@@ -155,7 +155,7 @@ Install `openssl@1.1` with `brew`
 brew install openssl@1.1
 ```
 
-**2. Mac KCLVM `gettext` dylib cannot be found**
+**3. Mac KCLVM `gettext` dylib cannot be found**
 
 ![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2022/png/317257/1646538731635-b1e290a5-465d-4838-b8d1-7f22cb48e267.png#clientId=uc50abf48-5ee8-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=200&id=ub5ce78d1&margin=%5Bobject%20Object%5D&name=image.png&originHeight=400&originWidth=1158&originalType=binary&ratio=1&rotation=0&showTitle=false&size=238920&status=done&style=none&taskId=ue75303e6-140d-450f-84de-464da45a473&title=&width=579)
 
