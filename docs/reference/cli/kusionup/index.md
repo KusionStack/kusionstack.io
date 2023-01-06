@@ -1,6 +1,9 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Kusionup Tools
 
-[Kusionup](https://github.com/KusionStack/kusionup) is a version management tool for kusion and KCL. It is heavily inspired by `goup`.
+[Kusionup](https://github.com/KusionStack/kusionup) is a multi-version management tool for Kusion and KCL. It is heavily inspired by [goup](https://github.com/owenthereal/goup).
 
 After `kusionup init` is finished, a `$HOME/.kusionup` directory will be created, and contains these files:
 
@@ -8,6 +11,48 @@ After `kusionup init` is finished, a `$HOME/.kusionup` directory will be created
 - `$HOME/.kusionup/env` is a file that declares environment variables used by `kusionup` and `kusion` tools
 - `$HOME/.kusionup/current` is a soft link to the currently active `kusion` tools
 - `$HOME/.kusionup/$VERSION` are directories of different versions of `kusion` tools. For example, the latest version will be installed by default to the `$HOME/.kusionup/latest` directory
+
+## Installation
+
+```mdx-code-block
+<Tabs>
+<TabItem value="MacOS" >
+```
+
+```bash
+brew install KusionStack/tap/kusionup
+```
+
+```mdx-code-block
+</TabItem>
+<TabItem value="Linux">
+```
+
+```bash
+curl -sSf https://raw.githubusercontent.com/KusionStack/kusionup/main/scripts/install.sh | bash
+```
+
+```mdx-code-block
+</TabItem>
+<TabItem value="Go Install">
+```
+
+```bash
+go install github.com/KusionStack/kusionup@latest
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+## Initialization
+
+After `kusionup` is installed, execute the one-click initialization command to complete the installation of the latest version of Kusion and the supporting KCL:
+
+```bash
+kusionup init --skip-prompt && source $HOME/.kusionup/env
+```
 
 ## Install the specified version
 
@@ -76,7 +121,7 @@ INFO[0061] Success: latest downloaded in /root/.kusionup/kusion@latest
 INFO[0061] Default Kusion is set to 'latest'
 ```
 
-Run `kusionup show` to check of all the installed versions and spot the active version:
+Run `kusionup show` to check all the installed versions and spot the active version:
 
 ```bash
 kusionup show

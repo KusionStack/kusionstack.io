@@ -12,66 +12,24 @@ KusionStack 包含“三大件”，分别是：
 - KCL：KCL（Kusion Configuration Language）是一种开源的基于约束的记录和功能语言。
 - Konfig：Konfig 是用 KCL 语言编写的基础设施配置的核心代码仓库。
 
-前两者，是二进制工具，需要下载安装，第三个是 Git 仓库。对于二进制工具，KusionStack 提供了两种安装方式：
-一键安装和手动安装。其中一键安装通过 `kusionup` 工具实现多版本管理。
+前两者，是二进制工具，需要下载安装，第三个是 Git 仓库。对于二进制工具，KusionStack 提供了一键安装。
 
 ## 一键安装
 
-首先安装 `kusionup`，可根据不同操作系统和工作环境，选择不同的安装方式。
-
-### 安装 kusionup
+对于 Mac 和 Linux 用户，推荐使用 brew 包管理器；对于 Go 环境用户，也可以使用 `go install`。
 
 ```mdx-code-block
 <Tabs>
-<TabItem value="MacOS" >
+<TabItem value="MacOS&Linux" >
 ```
 
 ```bash
-brew install KusionStack/tap/kusionup
-```
-
-```mdx-code-block
-</TabItem>
-<TabItem value="Linux">
-```
-
-```bash
-curl -sSf https://raw.githubusercontent.com/KusionStack/kusionup/main/scripts/install.sh | bash
+brew install KusionStack/tap/kusion
 ```
 
 ```mdx-code-block
 </TabItem>
 <TabItem value="Go Install">
-```
-
-```bash
-go install github.com/KusionStack/kusionup@latest
-```
-
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
-### 初始化
-
-`kusionup` 安装完成后，执行一键初始化命令，即可完成 kusion 的 latest 版本以及配套的 KCL 的安装：
-
-```bash
-kusionup init --skip-prompt && source $HOME/.kusionup/env
-```
-
-:::info
-有关 kusionup 的相关说明，请看 [Kusionup Tools](/docs/reference/cli/kusionup/)。
-:::
-
-## 手动安装
-
-### 安装 Kusion
-
-```mdx-code-block
-<Tabs>
-<TabItem value="Go Install" >
 ```
 
 ```bash
@@ -83,85 +41,11 @@ go install github.com/KusionStack/kusion@latest
 </Tabs>
 ```
 
-### 安装 KCL
+KCL 已经嵌入在 Kusion 中，因此你不需要额外再安装它。如果你对 KCL 的其他版本有兴趣，请阅读 [KCL 安装指南](https://kcl-lang.io/docs/user_docs/getting-started/install/)。
 
-```mdx-code-block
-<Tabs>
-<TabItem value="MacOS" >
-```
-
-```bash
-curl -fsSL https://kcl-lang.io/script/install.sh | /bin/bash
-```
-
-```mdx-code-block
-</TabItem>
-<TabItem value="Linux">
-```
-
-```bash
-wget -q https://kcl-lang.io/script/install.sh -O - | /bin/bash
-```
-
-```mdx-code-block
-</TabItem>
-<TabItem value="Windows">
-```
-
-```bash
-powershell -Command "iwr -useb https://kcl-lang.io/script/install.ps1 | iex"
-```
-
-```mdx-code-block
-</TabItem>
-<TabItem value="Go Install">
-```
-
-```bash
-go install kusionstack.io/kclvm-go/cmds/kcl-go@main && alias kcl='kcl-go kcl'
-```
-
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
-:::info
-有关 KCL 安装的细节, 请看[这里](https://kcl-lang.io/docs/user_docs/getting-started/install/)。
+:::tip
+如果你需要 Kusion 和 KCL 的多版本管理工具，请阅读 [Kusionup 工具](/docs/reference/cli/kusionup/)介绍。
 :::
-
-### 设置环境变量
-
-```mdx-code-block
-<Tabs>
-<TabItem value=".zshrc" >
-```
-
-```bash
-cat > ~/.zshrc <<EOF
-mkdir -p $HOME/.kusionup/current
-export KUSION_PATH=$HOME/.kusionup/current
-EOF
-source ~/.zshrc
-```
-
-```mdx-code-block
-</TabItem>
-<TabItem value=".bash_profile">
-```
-
-```bash
-cat > ~/.bash_profile <<EOF
-mkdir -p $HOME/.kusionup/current
-export KUSION_PATH=$HOME/.kusionup/current
-EOF
-source ~/.bash_profile
-```
-
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
 
 ## 免安装
 
@@ -174,7 +58,7 @@ docker pull kusionstack/kusion:latest
 ```
 
 :::info
-KusionStack image: https://hub.docker.com/r/kusionstack/kusion
+Kusion 镜像仓库: https://hub.docker.com/r/kusionstack/kusion
 :::
 
 接下来，以交互式方式启动 Kusion 镜像：
