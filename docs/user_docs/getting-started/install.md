@@ -13,66 +13,25 @@ KusionStack consists of "three major pieces", namely:
 - Konfig: Konfig is the mono repository of the infra configuration in KCL.
 
 The first two are binary tools that need to be downloaded and installed, and the third is a Git repository. 
-For binary tools, KusionStack provides two installation methods: one-click installation and manual installation. 
-The one-click installation implements multi-version management through the `kusionup` tool.
+For binary tools, KusionStack provides a one-click installation for everybody.
 
 ## One-click installation
 
-Firstly, install `kusionup`, you can choose different installation methods according to different operating systems and working environments.
-
-### Install Kusionup
+The preferred method for installing on Mac and Linux is to use the brew package manager.
+You can also run `go install` if your environment is available for golang.
 
 ```mdx-code-block
 <Tabs>
-<TabItem value="MacOS" >
+<TabItem value="MacOS&Linux" >
 ```
 
 ```bash
-brew install KusionStack/tap/kusionup
-```
-
-```mdx-code-block
-</TabItem>
-<TabItem value="Linux">
-```
-
-```bash
-curl -sSf https://raw.githubusercontent.com/KusionStack/kusionup/main/scripts/install.sh | bash
+brew install KusionStack/tap/kusion
 ```
 
 ```mdx-code-block
 </TabItem>
 <TabItem value="Go Install">
-```
-
-```bash
-go install github.com/KusionStack/kusionup@latest
-```
-
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
-### Initialization
-
-After `kusionup` is installed, execute the one-click initialization command to complete the installation of the latest version of kusion and the supporting KCL:
-
-```bash
-kusionup init --skip-prompt && source $HOME/.kusionup/env
-```
-
-:::info
-More details of kusionup, please refer to [Kusionup Tools](/docs/reference/cli/kusionup/).
-:::
-
-## Manual Installation
-
-### Install Kusion
-
-```mdx-code-block
-<Tabs>
-<TabItem value="Go Install" >
 ```
 
 ```bash
@@ -84,86 +43,11 @@ go install github.com/KusionStack/kusion@latest
 </Tabs>
 ```
 
-### Install KCL
+KCL is embedded in Kusion, so you don't need to install it again. If you are interested in other versions of KCL, please refer to [KCL Installation](https://kcl-lang.io/docs/user_docs/getting-started/install/).
 
-```mdx-code-block
-<Tabs>
-<TabItem value="MacOS" >
-```
-
-```bash
-curl -fsSL https://kcl-lang.io/script/install.sh | /bin/bash
-```
-
-```mdx-code-block
-</TabItem>
-<TabItem value="Linux">
-```
-
-```bash
-wget -q https://kcl-lang.io/script/install.sh -O - | /bin/bash
-```
-
-```mdx-code-block
-</TabItem>
-<TabItem value="Windows">
-```
-
-```bash
-powershell -Command "iwr -useb https://kcl-lang.io/script/install.ps1 | iex"
-```
-
-```mdx-code-block
-</TabItem>
-<TabItem value="Go Install">
-```
-
-```bash
-go install kusionstack.io/kclvm-go/cmds/kcl-go@main && alias kcl='kcl-go kcl'
-```
-
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
-:::info
-More details of KCL installation, please refer to [KCL Installation](https://kcl-lang.io/docs/user_docs/getting-started/install/).
+:::tip
+If you need a multi-version management tool for Kusion and KCL, please refer to [Kusionup Tools](/docs/reference/cli/kusionup/).
 :::
-
-### Set Environment Variables
-
-```mdx-code-block
-<Tabs>
-<TabItem value=".zshrc" >
-```
-
-```bash
-mkdir -p $HOME/.kusionup/current
-cat > ~/.zshrc <<EOF
-export KUSION_PATH=$HOME/.kusionup/current
-EOF
-source ~/.zshrc
-```
-
-```mdx-code-block
-</TabItem>
-<TabItem value=".bash_profile">
-```
-
-```bash
-mkdir -p $HOME/.kusionup/current
-cat > ~/.bash_profile <<EOF
-export KUSION_PATH=$HOME/.kusionup/current
-EOF
-source ~/.bash_profile
-```
-
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 ## No Installation
 
 If the upper installation doesn't support your environment, you can use the docker image of Kusion instead. First, prepare the [Docker](https://www.docker.com/) service and start it. Then use the `docker pull` command to get an available Kusion image.
@@ -172,8 +56,8 @@ If the upper installation doesn't support your environment, you can use the dock
 docker pull kusionstack/kusion:latest
 ```
 
-:::info
-KusionStack image: https://hub.docker.com/r/kusionstack/kusion
+:::tip
+Kusion image repository: https://hub.docker.com/r/kusionstack/kusion
 :::
 
 Next, run Kusion in an interactive mode:
