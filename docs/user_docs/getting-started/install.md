@@ -35,7 +35,7 @@ brew install KusionStack/tap/kusion
 ```
 
 ```bash
-go install github.com/KusionStack/kusion@latest
+go install kusionstack.io/kusion@latest
 ```
 
 ```mdx-code-block
