@@ -13,7 +13,9 @@ sidebar_label: dir-struct
 ├── Makefile            # 通过 Makefile 封装常用命令
 ├── README.md           # 配置大库说明
 ├── appops              # 应用运维目录，用来放置所有应用的 KCL 运维配置
-│   ├── guestbook-frontend
+│   ├── clickhouse-operator
+│   ├── code-city
+│   ├── guestbook
 │   ├── http-echo
 │   └── nginx-example
 ├── base                # Kusion Model 模型库
