@@ -50,7 +50,7 @@ KCL 已经嵌入在 Kusion 中，因此你不需要额外再安装它。如果�
 ## 免安装
 
 如果上面的安装方式不支持你的环境，你可以选择 Kusion 镜像作为替代。
-首选，准备好 [Docker](https://www.docker.com/) 服务并启动，
+首先，准备好 [Docker](https://www.docker.com/) 服务并启动，
 然后执行 `docker pull` 命令，拉取一个可用的 Kusion 镜像。
 
 ```bash
@@ -66,3 +66,12 @@ Kusion 镜像仓库: https://hub.docker.com/r/kusionstack/kusion
 ```bash
 docker run --rm -it kusionstack/kusion:latest bash
 ```
+
+## 免安装快速体验
+
+KusionStack 还支持在 GitHub Codepsaces 快速体验，免安装，内置 IDE 插件。
+您可前往[创建 Konfig 工作空间](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=488867056&machine=standardLinux32gb&devcontainer_path=.devcontainer.json) 即刻开启 KusionStack 体验之旅。
+
+:::info
+详细指南参见 [KusionStack 在云端 IDE 的快速体验](cloudide.md)
+:::

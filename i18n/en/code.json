@@ -290,5 +290,67 @@
   },
   "homepage.feature.kusion.description": {
     "message": "Kusion engine is to compile and deliver intents in Konfig to hybrid runtime on multi-cloud with less complexity and a consistent experience."
+  },
+  "Getting started": {
+    "message": "Getting started",
+    "description": "homepage getting started button"
+  },
+  "Install": {
+    "message": "Install",
+    "description": "homepage getting started button"
+  },
+  "home.quickstart": {
+    "message": "All about your modern app by Platform as Code"
+  },
+  "siteConfig.tagline": {
+    "message": "KusionStack codifies and unifies platform resources into stacked models and policies."
+  },
+  "home.easyshipping": {
+    "message": "Easy App Shipping"
+  },
+  "home.easyshipping.1": {
+    "message": "Fast development, easy delivery"
+  },
+  "home.easyshipping.2": {
+    "message": "Codify and unify spec, resources and manifests around modern apps"
+  },
+  "home.easyshipping.3": {
+    "message": "Orchestration and provision on Kubernetes and Clouds in a managed manner"
+  },
+  "home.easyshipping.4": {
+    "message": "Easy-to-access, Kubernetes-first, lightweight and dev-friendly"
+  },
+  "home.enterpriseops": {
+    "message": "Enterprise Declarative DevOps"
+  },
+  "home.enterpriseops.1": {
+    "message": "From the first code to production"
+  },
+  "home.enterpriseops.2": {
+    "message": "Multi teams, projects go across multi phases to multi runtimes, clouds"
+  },
+  "home.enterpriseops.3": {
+    "message": "Production-ready with scalability, performance and left-shifted stability"
+  },
+  "home.enterpriseops.4": {
+    "message": "Various usages to meet the requirements of diverse enterprise scenarios"
+  },
+  "home.platformengineering": {
+    "message": "Enable Platform Engineering"
+  },
+  "home.platformengineering.1": {
+    "message": "Build proper abstraction and golden path"
+  },
+  "home.platformengineering.2": {
+    "message": "Schema-centric abstraction and constraints to build your models and validations"
+  },
+  "home.platformengineering.3": {
+    "message": "Easy to integrate into CI pipeline, service and product to build your paved road"
+  },
+  "home.platformengineering.4": {
+    "message": "Fast development on raw platform capabilities with consistency to cope with change"
+  },
+  "home.whoisusing": {
+    "message": "Adopted by"
   }
 }
