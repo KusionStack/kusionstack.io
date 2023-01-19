@@ -12,7 +12,7 @@ With [GitHub Codespaces](https://github.com/features/codespaces), you can create
 
 ### Step1: Create a Workspace of Konfig
 
-You can click the [Open in GitHub Codespaces link](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=488867056&machine=standardLinux32gb&devcontainer_path=.devcontainer.json), or click on the `Open in GitHub Codespaces` badge at the home page of [the Konfig repo](https://github.com/KusionStack/konfig), and then confirm to `Create codespace` at the create page. And a 4-core • 8GB RAM • 32GB storage workspace of Konfig main branch will be created.
+You can directly [create a workspace on Kusion](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=488867056&machine=standardLinux32gb&devcontainer_path=.devcontainer.json), or click on the `Open in GitHub Codespaces` badge at the home page of [the Konfig repo](https://github.com/KusionStack/konfig), and then confirm to `Create codespace` at the create page. And a 4-core • 8GB RAM • 32GB storage workspace of Konfig main branch will be created.
 
 ![create codespace](/img/docs/user_docs/getting-started/install/codespaces/create-codespace.gif)
 

@@ -73,5 +73,5 @@ KusionStack 还支持在 GitHub Codepsaces 快速体验，免安装，内置 IDE
 您可前往[创建 Konfig 工作空间](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=488867056&machine=standardLinux32gb&devcontainer_path=.devcontainer.json) 即刻开启 KusionStack 体验之旅。
 
 :::info
-详细指南参见 [KusionStack 在云端 IDE 的快速体验](/docs/user_docs/getting-started/cloudide.md)
+详细指南参见 [KusionStack 在云端 IDE 的快速体验](cloudide.md)
 :::

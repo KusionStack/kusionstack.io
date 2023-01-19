@@ -68,9 +68,9 @@ docker run --rm -it kusionstack/kusion:latest bash
 
 ## No Installation: KusionStack QuickStart Trial with GitHub Codespaces
 
-You can also start a KusionStack quickstart trial with [GitHub Codespaces](https://github.com/features/codespaces). With no installation required, you can [create a workspace]((https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=488867056&machine=standardLinux32gb&devcontainer_path=.devcontainer.json)) with built-in Kusion and IDE extension support via merely a browser connected to the Internet in seconds.
+You can also start a KusionStack quickstart trial with [GitHub Codespaces](https://github.com/features/codespaces). With no installation required, you can [create a workspace on Konfig](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=488867056&machine=standardLinux32gb&devcontainer_path=.devcontainer.json)) with built-in Kusion and IDE extension support via merely a browser connected to the Internet in seconds.
 
 
 :::info
-For a detailed guide, please refer to the [Start a Quick Start Trial with KusionStack in GitHub Codespaces](/docs/user_docs/getting-started/cloudide.md)
+For a detailed guide, please refer to the [Start a Quick Start Trial with KusionStack in GitHub Codespaces](cloudide.md)
 :::
