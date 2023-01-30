@@ -150,3 +150,7 @@ servers = [
 其中 `ServerConfig` 的 `ip` 是字符串类型，并没有给出默认值。用户在生成 `ServerConfig` 类型的属性时必须手工添加 `ip` 属性的值，否则 KCL 将会报出缺少必填属性的错误。`role` 属性是 `"frontend" | "backend"` 枚举字符串类型。
 
 此外，`schema` 还可以结合 `check`、`mixin`、可选属性、继承和扩展模块实现更为复杂的配置和策略数据的抽象，细节可以参考手册部分的文档。
+
+## 更多文档
+
+访问 [KCL 网站](https://kcl-lang.io/) 获取更多 KCL 信息。
