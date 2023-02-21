@@ -271,7 +271,7 @@
     "message": "KusionStack"
   },
   "homepage.tagline": {
-    "message": "Codify modern delivery across Kubernetes and Clouds"
+    "message": "A self-service application deployment platform for  Kubernetes and clouds"
   },
   "homepage.feature.kcl": {
     "message": "KCL"
@@ -303,7 +303,7 @@
     "message": "All about your modern app by Platform as Code"
   },
   "siteConfig.tagline": {
-    "message": "KusionStack codifies and unifies platform resources into stacked models and policies."
+    "message": "A self-service application deployment platform for  Kubernetes and clouds"
   },
   "home.easyshipping": {
     "message": "Easy App Shipping"
@@ -312,10 +312,10 @@
     "message": "Fast development, easy delivery"
   },
   "home.easyshipping.2": {
-    "message": "Codify and unify spec, resources and manifests around modern apps"
+    "message": "Codify and unify resources and manifests about modern apps"
   },
   "home.easyshipping.3": {
-    "message": "Orchestration and provision on Kubernetes and Clouds in a managed manner"
+    "message": "Orchestrate hybrid resources from Kubernetes, clouds and your customized infrastructure in a unified way"
   },
   "home.easyshipping.4": {
     "message": "Easy-to-access, Kubernetes-first, lightweight and dev-friendly"
@@ -345,10 +345,10 @@
     "message": "Schema-centric abstraction and constraints to build your models and validations"
   },
   "home.platformengineering.3": {
-    "message": "Easy to integrate into CI pipeline, service and product to build your paved road"
+    "message": "Easy to integrate into CI pipelines, services and products to build your paved road"
   },
   "home.platformengineering.4": {
-    "message": "Fast development on raw platform capabilities with consistency to cope with change"
+    "message": "Enable self-service capabilities on raw platform capabilities with consistency to cope with fast changes"
   },
   "home.whoisusing": {
     "message": "Adopted by"

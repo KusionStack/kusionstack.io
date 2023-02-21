@@ -120,7 +120,7 @@ export const ExampleScroller = () => {
           "text--center",
         )}
       >
-        Codify Your Modern Delivery
+        Coding Your Modern Delivery
       </h2>
 
       <p

@@ -62,21 +62,41 @@ function Home() {
 
         <div className="hero-divider" />
 
-        <div className="hero">
-          <div className="container text--center">
-            <h2 className="hero__subtitle">
-              <Translate id="home.quickstart">All about your modern app by Platform as Code</Translate>
-            </h2>
-            <p className={styles.header}>
-                <Translate id="siteConfig.tagline">KusionStack codifies and unifies platform resources into stacked models and policies.</Translate>
-            </p>
-          </div>
-        </div>
-
         <div className="hero-divider" />
 
         <div className="hero">
           <div className="container">
+          <Feature
+              imgUrl="img/features/enable.jpeg"
+              title={<Translate id="home.platformengineering">Enable Platform Engineering</Translate>}
+              description={
+                <>
+                  <p>
+                    <Translate
+                      id="home.platformengineering.1">
+                      Build proper abstraction and golden path
+                    </Translate>
+                  </p>
+                  <ul>
+                    <li>
+                        <Translate id="home.platformengineering.2">
+                            Schema-centric abstraction and constraints to build your models and validations
+                        </Translate>
+                    </li>
+                    <li>
+                      <Translate id="home.platformengineering.3">
+                            Easy to integrate into CI pipelines, services and products to build your paved road
+                      </Translate>
+                    </li>
+                    <li>
+                      <Translate id="home.platformengineering.4">
+                            Enable self-service capabilities on raw platform capabilities with consistency to cope with fast changes
+                      </Translate>
+                    </li>
+                  </ul>
+                </>
+              }
+            />
             <Feature
               imgUrl="img/features/easy.jpeg"
               title={<Translate id="home.easyshipping">Easy App Shipping</Translate>}
@@ -91,12 +111,12 @@ function Home() {
                   <ul>
                     <li>
                         <Translate id="home.easyshipping.2">
-                            Codify and unify spec, resources and manifests around modern apps
+                          Codify and unify resources and manifests about modern apps
                         </Translate>
                     </li>
                     <li>
                         <Translate id="home.easyshipping.3">
-                            Orchestration and provision on Kubernetes and Clouds in a managed manner
+                          Orchestrate hybrid resources from Kubernetes, clouds and your customized infrastructure in a unified way
                         </Translate>
                     </li>
                     <li>
@@ -107,6 +127,7 @@ function Home() {
                   </ul>
                 </>
               }
+              reverse={true}
             />
             <Feature
               imgUrl="img/features/teams.png"
@@ -133,38 +154,6 @@ function Home() {
                     <li>
                       <Translate id="home.enterpriseops.4">
                             Various usages to meet the requirements of diverse enterprise scenarios
-                      </Translate>
-                    </li>
-                  </ul>
-                </>
-              }
-              reverse={true}
-            />
-            <Feature
-              imgUrl="img/features/enable.jpeg"
-              title={<Translate id="home.platformengineering">Enable Platform Engineering</Translate>}
-              description={
-                <>
-                  <p>
-                    <Translate
-                      id="home.platformengineering.1">
-                      Build proper abstraction and golden path
-                    </Translate>
-                  </p>
-                  <ul>
-                    <li>
-                        <Translate id="home.platformengineering.2">
-                            Schema-centric abstraction and constraints to build your models and validations
-                        </Translate>
-                    </li>
-                    <li>
-                      <Translate id="home.platformengineering.3">
-                            Easy to integrate into CI pipeline, service and product to build your paved road
-                      </Translate>
-                    </li>
-                    <li>
-                      <Translate id="home.platformengineering.4">
-                            Fast development on raw platform capabilities with consistency to cope with change
                       </Translate>
                     </li>
                   </ul>
