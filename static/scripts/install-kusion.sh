@@ -29,7 +29,10 @@ KUSION_CLI=kusion
 
 KUSION_CLI_FILE_PATH="${KUSION_HOME_DIR}/${KUSION_CLI}"
 
-DOWNLOAD_BASE="https://github.com/KusionStack/kusion/releases/download"
+GITHUB_ORG=KusionStack
+GITHUB_REPO=kusion
+
+DOWNLOAD_BASE="https://github.com/$GITHUB_ORG/$GITHUB_REPO/releases/download"
 
 # --- helper functions for logs ---
 info() {
@@ -113,7 +116,7 @@ checkExistingKusion() {
 }
 
 getLatestRelease() {
-    local KusionReleaseURL="https://api.github.com/repos/KusionStack/kusion/releases"
+    local KusionReleaseURL="https://api.github.com/repos/$GITHUB_ORG/$GITHUB_REPO/releases"
     local latest_release=""
 
     if [ "$KUSION_HTTP_REQUEST_CLI" == "curl" ]; then
@@ -136,7 +139,6 @@ download() {
 	# Create the temp directory
 	KUSION_TMP_ROOT=$(mktemp -dt kusion-install-XXXXXX)
 	ARTIFACT_TMP_FILE="$KUSION_TMP_ROOT/$KUSION_CLI_ARTIFACT"
-	echo $ARTIFACT_TMP_FILE
 
 	info "Downloading $DOWNLOAD_URL ..."
 	if [ "$KUSION_HTTP_REQUEST_CLI" == "curl" ]; then

@@ -2,34 +2,71 @@ name: installation check
 on: 
   push:
     branches:
-    - main
+      - main
+    paths:
+      - 'static/scripts/**'
   pull_request:
     branches: 
       - 'main'
+    paths:
+      - 'static/scripts/**'
 jobs:
-  check-macos:
+  check-scripts-on-macos:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Check Install Script
+      - name: check install script
         run: static/scripts/install.sh
-      - name: Check Kusion Run
-        run: kusion version
+      - name: check kusion run
+        run: sudo kusion compile -w static/stack -o stdout
         shell: bash -leo pipefail {0}
-  check-linux:
+  check-brew-on-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: brew install kusion
+        run: brew install KusionStack/tap/kusion
+      - name: check kusion run
+        run: kusion compile -w static/stack -o stdout
+        shell: bash -leo pipefail {0}
+  check-scripts-on-linux:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Check Install Script
+      - name: check install script
         run: static/scripts/install.sh
-      - name: Check Kusion Run
-        run: kusion version
+      - name: check kusion run
+        run: kusion compile -w static/stack -o stdout
         shell: bash -ieo pipefail {0}
-  check-windows:
+  check-brew-on-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: Homebrew/actions/setup-homebrew@master
+      - name: brew install kusion
+        run: brew install KusionStack/tap/kusion
+        shell: bash -ieo pipefail {0}
+      - name: check kusion run
+        run: kusion compile -w static/stack -o stdout
+        shell: bash -ieo pipefail {0}
+  check-powershell-on-windows:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Check Install Script
+      - name: check install script
         run: static/scripts/install.ps1
-      - name: Check Kusion Run
-        run: C:\kusion\kusion.exe version
+        shell: powershell
+      - name: check kusion run
+        run: C:\kusion\kusion.exe compile -w static/stack -o stdout
+        shell: powershell
+  check-scoop-on-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: scoop install kusion
+        run: |
+          iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
+          scoop bucket add KusionStack https://github.com/KusionStack/scoop-bucket.git
+          scoop install KusionStack/kusion
+          kusion compile -w static/stack -o stdout
+        shell: powershell
