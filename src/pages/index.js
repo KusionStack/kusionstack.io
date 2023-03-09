@@ -43,7 +43,7 @@ function Home() {
             </div>
             <div className={styles.indexCtas}>
                 <div>
-                    <Link className={clsx("button button--lg button--secondary", styles.button)} to="/docs/user_docs/getting-started/usecase">
+                    <Link className={clsx("button button--lg button--secondary", styles.button)} to="/docs/user_docs/getting-started/usecases/deliver-first-project">
                         <Translate description="homepage getting started button">
                             Getting started
                         </Translate>

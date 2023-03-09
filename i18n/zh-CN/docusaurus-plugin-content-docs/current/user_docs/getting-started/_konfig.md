@@ -47,7 +47,7 @@ Konfig 配置大库整体结构如下：
 
 ## 3. 添加应用
 
-在 [快速开始/Usecase](/docs/user_docs/getting-started/usecase) 我们已经展示如何快速添加一个应用（参考 [Konfig](/docs/user_docs/concepts/konfig)）。
+在 [快速开始/Usecase](/docs/user_docs/getting-started/usecases/deliver-first-project) 我们已经展示如何快速添加一个应用（参考 [Konfig](/docs/user_docs/concepts/konfig)）。
 
 ## 4. Konfig 架构图
 
