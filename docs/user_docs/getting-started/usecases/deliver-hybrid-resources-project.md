@@ -21,7 +21,7 @@ export ALICLOUD_SECRET_KEY="nxuowIxxx" # replace it with your SecretKey
 ```
 
 :::info
-Alternatively, Kusion provides sensitive data management tool for handling the AccessKey and SecretKey mentioned above. For detailed guidance, please refer to documentation. todo @fuyuan
+Alternatively, Kusion provides a sensitive data management tool for handling the AccessKey and SecretKey mentioned above.
 :::
 
 ![](/img/docs/user_docs/getting-started/set-oss-access.png)
