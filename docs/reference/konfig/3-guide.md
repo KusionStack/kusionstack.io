@@ -6,7 +6,7 @@ sidebar_label: Use Guide
 
 ## 1. 添加应用
 
-在 [快速开始/Usecase](/docs/user_docs/getting-started/usecase) 我们已经展示如何快速添加一个应用（参考 [Project & Stack](/docs/user_docs/concepts/konfig)）。
+在 [快速开始/Usecases](/docs/user_docs/getting-started/usecases/deliver-first-project) 我们已经展示如何快速添加一个应用（参考 [Project & Stack](/docs/user_docs/concepts/konfig)）。
 
 ## 2. 验证 Konfig 代码
 
