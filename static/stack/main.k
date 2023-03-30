@@ -1,10 +1,11 @@
-id = "apps/v1:Deployment:nginx"
+id = "apps/v1:Deployment:default:nginx"
 $type = "Kubernetes"
 attributes = {
     apiVersion = "apps/v1"
     kind = "Deployment"
     metadata = {
         name = "nginx"
+        namespace = "default"
         labels.app = "nginx"
     }
     spec = {
