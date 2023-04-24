@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Deliver Wordpress Application on Kubernetes and Clouds
+# Deliver the Wordpress application on Kubernetes and clouds
 
 This tutorial will demonstrate how to deploy a wordpress application using KusionStack which relies on both Kubernetes and Alicloud IaaS resources. Unlike the code-city application we previously deployed on Kubernetes, the wordpress application will also rely on Alicloud RDS (Relational Database Service) to provide a cloud-based database solution for wordpress website content such as articles, comments, users and other information. 
 
@@ -10,6 +10,7 @@ This tutorial will demonstrate how to deploy a wordpress application using Kusio
 
 - [Kusion](/docs/user_docs/getting-started/install)
 - [Kubernetes](https://kubernetes.io/) or [Kind](https://kind.sigs.k8s.io/)
+- [Terraform](https://www.terraform.io/)
 - Prepare an Alicloud account and create a user with `AliyunVPCFullAccess` and `AliyunRDSFullAccess` permissions to use the Relational Database Service (RDS). This user can be created and managed in the [Alicloud Resource Access Management (RAM) Console](https://ram.console.aliyun.com/users/)
 - Additionally, we also need to configure the obtained AccessKey and SecretKey as environment variables: 
 
@@ -40,17 +41,17 @@ Then we can locate the `wordpress` project under the `appops/` directory, which 
 cd appops/wordpress && tree
 .
 ├── README.md                       // Documentation
-├── base							// Common configuration for all stacks
-│   └── base.k					    // Common config code file for all stacks
-├── dev							    // Stack directory
-│   ├── ci-test					    // CI test directory, storing test scripts and data
-│   │   ├── settings.yaml			// Configuration for test data and compiling
-│   │   └── stdout.golden.yaml		// Expected Spec YAML, which can be updated using make
-│   ├── kcl.yaml					// Multi-file compilation configuration for current stack
-│   ├── main.k					    // Config codes for App Dev in current stack
-│   ├── platform.k					// Config codes for Platform Dev in current stack
-│   └── stack.yaml				    // Meta information of current stack
-└── project.yaml				    // Meta information of current project
+├── base                            // Common configuration for all stacks
+│   └── base.k                      // Common config code file for all stacks
+├── dev                             // Stack directory
+│   ├── ci-test                     // CI test directory, storing test scripts and data
+│   │   ├── settings.yaml           // Configuration for test data and compiling
+│   │   └── stdout.golden.yaml      // Expected Spec YAML, which can be updated using make
+│   ├── kcl.yaml                    // Multi-file compilation configuration for current stack
+│   ├── main.k                      // Config codes for App Dev in current stack
+│   ├── platform.k                  // Config codes for Platform Dev in current stack
+│   └── stack.yaml                  // Meta information of current stack
+└── project.yaml                    // Meta information of current project
 
 3 directories, 9 files
 ```

@@ -10,6 +10,7 @@ sidebar_position: 2
 
 - [安装 Kusion](/docs/user_docs/getting-started/install)
 - [Kubernetes 集群](https://kubernetes.io/) 或 [Kind](https://kind.sigs.k8s.io/)
+- [Terraform](https://www.terraform.io/)
 - 准备一个阿里云账号，并创建一个具有 `AliyunVPCFullAccess` 和 `AliyunRDSFullAccess` 权限的用户，以使用其关系型数据库服务 (RDS)，该用户可以在[阿里云资源访问控制 (RAM) 控制台](https://ram.console.aliyun.com/users/)中创建和管理
 - 我们还需要将该用户的 AccessKey 和 SecretKey 配置为环境变量：
 
@@ -39,17 +40,17 @@ git clone git@github.com:KusionStack/konfig.git && cd konfig
 cd appops/wordpress && tree
 .
 ├── README.md                       // 说明文档
-├── base							// 各环境通用配置
-│   └── base.k					    // 应用的环境通用配置
-├── dev							    // 环境目录
-│   ├── ci-test					    // CI 测试目录，放置测试脚本和数据
-│   │   ├── settings.yaml			// 测试数据和编译文件配置
-│   │   └── stdout.golden.yaml		// 期望的 YAML，可通过 make 更新
-│   ├── kcl.yaml					// 当前 Stack 的多文件编译配置
-│   ├── main.k					    // 应用在当前环境的应用开发者关注的配置清单
-│   ├── platform.k					// 应用在当前环境的平台开发者关注的配置清单
-│   └── stack.yaml				    // Stack 元信息
-└── project.yaml				    // Project 元信息
+├── base                            // 各环境通用配置
+│   └── base.k                      // 应用的环境通用配置
+├── dev                             // 环境目录
+│   ├── ci-test                     // CI 测试目录，放置测试脚本和数据
+│   │   ├── settings.yaml           // 测试数据和编译文件配置
+│   │   └── stdout.golden.yaml      // 期望的 YAML，可通过 make 更新
+│   ├── kcl.yaml                    // 当前 Stack 的多文件编译配置
+│   ├── main.k                      // 应用在当前环境的应用开发者关注的配置清单
+│   ├── platform.k                  // 应用在当前环境的平台开发者关注的配置清单
+│   └── stack.yaml                  // Stack 元信息
+└── project.yaml                    // Project 元信息
 
 3 directories, 9 files
 ```
