@@ -197,4 +197,23 @@ kubectl get deploy -n secret-as-code secret-as-codedev -o jsonpath='{.metadata.a
 }
 ```
 
+原始配置是：
+
+```json
+{
+  "bar": "ref+vault://secret/bar#/bar",
+  "foo": "ref+vault://secret/foo#/foo",
+  "secret-store": "vault"
+}
+```
+
+原配置按照以下内容修改：
+
+```diff
+- "bar": "ref+vault://secret/bar#/bar",
++ "bar": "bar",
+- "foo": "ref+vault://secret/foo#/foo",
++ "foo": "foo",
+```
+
 至此，通过 IaC 的方式，我们将托管在 Vault 的敏感信息取回并使用。
