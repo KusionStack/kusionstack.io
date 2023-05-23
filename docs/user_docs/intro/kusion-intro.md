@@ -46,7 +46,7 @@ Based on the self-developed programming language **KCL**, the powerful engine an
 In addition to the general advantages of as-code solutions, KusionStack hopes to help to define the application model with the platform team and application team collaboratively. With the **separation of concerns**, different roles could focus on their work based on their knowledge and responsibility. Through such a division of labor, the platform team can better manage the differences and complexities of the platform, and app developers could participate in ops work with less cognitive load.
 
 
-## Composition of KusionStack
+## KusionStack Composition
 
 KusionStack consists of a series of tools and products. Among them, KCL provides programmability similar to modern programming languages, Kusion turns blueprints into reality with powerful engines and orchestration capabilities, and Konfig holds app delivery models and components. You can choose to use one of them, such as KCL, or use them in combination.
 
