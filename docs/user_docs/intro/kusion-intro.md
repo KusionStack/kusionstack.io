@@ -99,7 +99,7 @@ Compared with application delivery products or platforms, KusionStack is a clien
 
 ## Development status
 
-KusionStack is at an early stage of open source. We will continue to focus on providing a better and more usable **application delivery** model**, supporting **multiple clusters** and more **clouds**, and natively providing **identity** and **resource** management mechanisms.
+KusionStack is at an early stage of open source. We will continue to focus on providing a better and more usable **application delivery model**, supporting **multiple clusters** and more **clouds**, and natively providing **identity** and **resource** management mechanisms.
 
 You can check out the release versions of [Kusion](https://github.com/KusionStack/kusion/releases) and [KCLVM](https://github.com/KusionStack/KCLVM/releases) and are also welcome to join us via [Community](https://github.com/KusionStack/community).
 
