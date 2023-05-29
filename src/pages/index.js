@@ -6,17 +6,23 @@ import Layout from '@theme/Layout'
 import clsx from 'clsx'
 import React from 'react'
 import { ExampleScroller } from "../components/ExampleScroller"
-import ThemedImage from '@theme/ThemedImage';
+import ThemedImage from '@theme/ThemedImage'
 
 import whoIsUsing from '../data/whoIsUsing'
 import styles from './index.module.css'
 
 
-function Feature({ imgUrl, title, description, reverse }) {
+function Feature({ imgUrl, imgDarkUrl, title, description, reverse }) {
   return (
     <div className={clsx('row', styles.feature, reverse && styles.featureReverse)}>
       <div className="col col--6 text--center">
-        <img className={styles.featureImage} src={useBaseUrl(imgUrl)} alt={title} />
+        <ThemedImage className={styles.featureImage}
+          alt={title}
+          sources={{
+            light: useBaseUrl(imgUrl),
+            dark: useBaseUrl(imgDarkUrl)
+          }}
+        />
       </div>
       <div className={clsx('col col--6', styles.featureContent)}>
         <div>
@@ -79,7 +85,8 @@ function Home() {
         <div className="hero">
           <div className="container">
             <Feature
-              imgUrl="img/features/easy.jpeg"
+              imgUrl="/img/features/easy.png"
+              imgDarkUrl="/img/features/easy-white.png"
               title={<Translate id="home.easyshipping">Easy App Shipping</Translate>}
               description={
                 <>
@@ -110,7 +117,8 @@ function Home() {
               }
             />
             <Feature
-              imgUrl="img/features/teams.png"
+              imgUrl="/img/features/teams.png"
+              imgDarkUrl="/img/features/teams-white.png"
               title={<Translate id="home.enterpriseops">Enterprise Declarative DevOps</Translate>}
               description={
                 <>
@@ -142,7 +150,8 @@ function Home() {
               reverse={true}
             />
             <Feature
-              imgUrl="img/features/enable.jpeg"
+              imgUrl="/img/features/enable.png"
+              imgDarkUrl="/img/features/enable-white.png"
               title={<Translate id="home.platformengineering">Enable Platform Engineering</Translate>}
               description={
                 <>
