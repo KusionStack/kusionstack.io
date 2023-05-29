@@ -1,7 +1,7 @@
 const whoisUsing = [
   {
     name: 'Ant Group',
-    img: 'img/logos/antgroup.jpeg',
+    img: 'img/logos/antgroup.png',
     href: 'https://www.antgroup.com/'
   },
   {
