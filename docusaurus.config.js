@@ -16,7 +16,7 @@ const config = {
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/kcl-logo.png',
+  favicon: 'img/kusionstack-icon-square.png',
 
   i18n: {
     defaultLocale: 'en',
@@ -70,8 +70,8 @@ const config = {
       navbar: {
         title: 'KusionStack',
         logo: {
-          alt: 'KusionStack Logo',
-          src: 'img/kcl-logo.png',
+          alt: 'KusionStack Icon',
+          src: 'img/kusionstack-icon.png'
         },
         items: [
           {
