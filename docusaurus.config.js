@@ -71,7 +71,8 @@ const config = {
         title: 'KusionStack',
         logo: {
           alt: 'KusionStack Icon',
-          src: 'img/kusionstack-icon.png'
+          src: 'img/kusionstack-icon.png',
+          srcDark: 'img/kusionstack-icon-white.png',
         },
         items: [
           {
