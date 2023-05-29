@@ -6,6 +6,7 @@ import Layout from '@theme/Layout'
 import clsx from 'clsx'
 import React from 'react'
 import { ExampleScroller } from "../components/ExampleScroller"
+import ThemedImage from '@theme/ThemedImage';
 
 import whoIsUsing from '../data/whoIsUsing'
 import styles from './index.module.css'
@@ -210,7 +211,14 @@ function Home() {
             </h2>
             <br/>
             <div>
-                <img src="img/cncf-logo.png" />
+              <ThemedImage
+                className={styles.cncfLogo}
+                alt="CNCF themed image"
+                sources={{
+                  light: useBaseUrl('/img/cncf-color.png'),
+                  dark: useBaseUrl('/img/cncf-white.png'),
+                }}
+              />
             </div>
           </div>
         </div>
