@@ -2,19 +2,34 @@
 sidebar_position: 1
 ---
 
-# Quick Start
+# KCL OpenAPI Tool Quick Start
 
-## 1. 安装 KCLOpenAPI tool
+## 1. Installation
 
-目前有两种安装方式可选：
+The kcl-openapi tool can be installed in both ways: 
 
-- [通过 kusionctl 工具集一键安装（推荐）](#joYJh)
-- [单独安装 KCLOpenAPI 工具](#BjyR3)
+- [recommend: install along with the kusion tools pack](#11-install-along-with-the-kusion-tools-pack)
+- [only install the kcl-openapi tool](#12-only-install-the-kcl-openapi-tool)
 
-## 1.1 通过 kusionctl 工具集一键安装
+## 1.1 Install along with the kusion tools pack
 
-- 安装：推荐直接安装 kusionctl 工具集，它内置了 kusionCtl，KCLVM，KCLOpenAPI 等多种工具。关于 kusionctl 安装，请查看 [kusion 快速上手文档](/docs/user_docs/getting-started/install)。
-- 验证安装结果，执行 `kcl-openapi generate model -h`，看到如下信息说明安装成功：
+It's recommended to directly install the kusion tools pack, which bundled the kusion cli, KCLVM, kcl-openapi tool and other useful tools. About installing the kusion tools pack, please refer to the [Kusion Quick Start Doc](/docs/user_docs/getting-started/install).
+
+## 1.2 Only install the kcl-openapi tool
+
+You can optionally install the kcl-openapi tool separately:
+
+```shell
+# 1. download the released binary from:
+# https://github.com/KusionStack/kcl-openapi/releases
+
+# 2. Add the binary location to PATH
+export PATH="<Your directory to store KCLOpenapi binary>:$PATH"
+```
+
+## 1.3 Verify your installation
+
+- To verify the installation, you can run the command: `kcl-openapi generate model -h` and the following information indicates your successful installation:
 
 ```shell
 kcl-openapi command helps you to generate KCL schema structure from K8s CRD YAML/JSON file.
@@ -35,41 +50,6 @@ Options:
 
 Usage:
   kcl-openapi generate model -f FILENAME [options]
-```
-
-## 1.2 单独安装 KCLOpenAPI 工具：
-
-- 安装：您也可以单独安装 KCLOpenapi：
-
-```shell
-# 1. 下载二进制程序
-# https://github.com/KusionStack/kcl-openapi/releases
-
-# 2. 将命令添加至PATH
-export PATH="<Your directory to store KCLOpenapi binary>:$PATH"
-```
-
-- 验证安装结果，执行 `kcl-openapi -h`，看到如下信息说明安装成功：
-
-```shell
-Usage:
-  kcl-openapi [OPTIONS] <generate | validate>
-
-Swagger tries to support you as best as possible when building APIs.
-
-It aims to represent the contract of your API with a language agnostic description of your application in json or yaml.
-
-
-Application Options:
-  -q, --quiet                  silence logs
-      --log-output=LOG-FILE    redirect logs to file
-
-Help Options:
-  -h, --help                   Show this help message
-
-Available commands:
-  generate  generate kcl code
-  validate  validate the swagger document
 ```
 
 # 2. 生成 KCL 文件

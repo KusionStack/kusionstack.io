@@ -1,11 +1,12 @@
 # KCL OpenAPI Spec
 
-[OpenAPI](https://www.openapis.org/) 允许 API 提供方规范地描述 API 操作和模型，并基于它生成自动化工具和特定语言的客户端。
+[OpenAPI](https://www.openapis.org/) defines the API Specification for API providers to describe their operations and models in a normative way and provides generating tools to automatically convert to client codes in specific languages.
 
-## KCL OpenAPI 文件结构
+The KCL OpenAPI Spec describes the rules about how the OpenAPI definitions are translated to the KCL schemas. 
 
-依据 OpenAPI 3.0 规范，OpenAPI 文件中应至少包含 openapi、components、 info、paths 四种根节点对象，KCL OpenAPI 聚焦于其中模型定义的部分，即 OpenAPI 文件中的 `definitions`，而描述操作的 Restful API 部分（即 OpenAPI 文件中的 `paths`）则不属于 KCL OpenAPI 定义的范畴。
-​
+## The File Structure of the KCL OpenAPI
+
+According to the OpenAPI 3.0 specification, an OpenAPI file should at least contains four root objects: `openapi`, `components`, `info`, `paths`. The KCL OpenAPI focuses on the part in which the models are defined -- the `definitions` object. Yet the `paths` part which describes the Restful API operations is not considered by the KCL OpenAPI Spec.
 
 注：除以上列出的节点外，OpenAPI 官方规范还支持 servers、security、tags、externalDocs 四种可选的根节点，但都不是 KCL OpenAPI 所关心的，因此用户无需填写这部分内容，即使填写了也不会产生任何影响。
 ​
