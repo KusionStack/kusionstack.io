@@ -119,6 +119,7 @@ export const ExampleScroller = () => {
           seCss["section__title--wide"],
           "text--center",
         )}
+        style={{ color: "var(--ifm-color-primary)" }}
       >
         Codify Your Modern Delivery
       </h2>

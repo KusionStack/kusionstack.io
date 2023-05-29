@@ -20,7 +20,7 @@ function Feature({ imgUrl, title, description, reverse }) {
       </div>
       <div className={clsx('col col--6', styles.featureContent)}>
         <div>
-          <h3>{title}</h3>
+          <h3 style={{ color: "var(--ifm-color-primary)" }}>{title}</h3>
           <div>{description}</div>
         </div>
       </div>
@@ -32,51 +32,50 @@ function Home() {
   const { siteConfig } = useDocusaurusContext()
 
   return (
-    <Layout title={ siteConfig.tagline} description={siteConfig.tagline}>
+    <Layout title={siteConfig.tagline} description={siteConfig.tagline}>
       <main>
-        <div className={clsx('hero shadow--lw', styles.heroBanner)}>
-          <div className="container text--center">
-            <div className={styles.center}>
-                <h1 className="hero__title">{siteConfig.title}</h1>
-                <p className="hero__subtitle">
-                  <Translate id="siteConfig.tagline">{siteConfig.tagline}</Translate>
-                </p>
-            </div>
+        <header className={clsx("container", styles.banner)}>
+          <div className="container">
+            <h2 className={styles.title} style={{ color: "var(--ifm-color-primary)" }}>{siteConfig.title}</h2>
+            <p className={styles.description}>
+              <Translate id="siteConfig.tagline">{siteConfig.tagline}</Translate>
+            </p>
             <div className={styles.indexCtas}>
-                <div>
-                    <Link className={clsx("button button--lg button--secondary", styles.button)} to="/docs/user_docs/getting-started/usecases/deliver-first-project">
-                        <Translate description="homepage getting started button">
-                            Getting started
-                        </Translate>
-                    </Link>
-                </div>
-                <div>
-                    <Link className={clsx("button button--primary button--lg", styles.button)} to="/docs/user_docs/getting-started/install">
-                        <Translate description="homepage getting started button">
-                            Install
-                        </Translate>
-                    </Link>
-                </div>
+              <div>
+                <Link className={clsx("button button--lg button--secondary", styles.button)} to="/docs/user_docs/getting-started/usecases/deliver-first-project">
+                  <Translate description="homepage getting started button">
+                    Getting started
+                  </Translate>
+                </Link>
+              </div>
+              <div>
+                <Link className={clsx("button button--primary button--lg", styles.button)} to="/docs/user_docs/getting-started/install">
+                  <Translate description="homepage getting started button">
+                    Install
+                  </Translate>
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
+        </header>
 
-        <div className="hero-divider" />
+        <br></br>
+        <br></br>
 
-        <div className="hero">
+        <div className="container">
           <div className="container text--center">
-            <h2 className="hero__subtitle">
+            <h2 className={styles.subtitle} style={{ color: "var(--ifm-color-primary)" }}>
               <Translate id="home.quickstart">All about your modern app by Platform as Code</Translate>
             </h2>
-            <p className={styles.header}>
-                <Translate id="siteConfig.tagline">KusionStack codifies and unifies platform resources into stacked models and policies.</Translate>
-            </p>
           </div>
         </div>
 
-        <div className="hero-divider" />
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
 
-        <div className="hero">
+        <div className="container">
           <div className="container">
             <Feature
               imgUrl="img/features/easy.jpeg"
@@ -91,18 +90,18 @@ function Home() {
                   </p>
                   <ul>
                     <li>
-                        <Translate id="home.easyshipping.2">
-                            Codify and unify spec, resources and manifests around modern apps
-                        </Translate>
+                      <Translate id="home.easyshipping.2">
+                        Codify and unify spec, resources and manifests around modern apps
+                      </Translate>
                     </li>
                     <li>
-                        <Translate id="home.easyshipping.3">
-                            Orchestration and provision on Kubernetes and Clouds in a managed manner
-                        </Translate>
+                      <Translate id="home.easyshipping.3">
+                        Orchestration and provision on Kubernetes and Clouds in a managed manner
+                      </Translate>
                     </li>
                     <li>
                       <Translate id="home.easyshipping.4">
-                            Easy-to-access, Kubernetes-first, lightweight and dev-friendly
+                        Easy-to-access, Kubernetes-first, lightweight and dev-friendly
                       </Translate>
                     </li>
                   </ul>
@@ -122,18 +121,18 @@ function Home() {
                   </p>
                   <ul>
                     <li>
-                        <Translate id="home.enterpriseops.2">
-                            Multi teams, projects go across multi phases to multi runtimes, clouds
-                        </Translate>
+                      <Translate id="home.enterpriseops.2">
+                        Multi teams, projects go across multi phases to multi runtimes, clouds
+                      </Translate>
                     </li>
                     <li>
-                        <Translate id="home.enterpriseops.3">
-                            Production-ready with scalability, performance and left-shifted stability
-                        </Translate>
+                      <Translate id="home.enterpriseops.3">
+                        Production-ready with scalability, performance and left-shifted stability
+                      </Translate>
                     </li>
                     <li>
                       <Translate id="home.enterpriseops.4">
-                            Various usages to meet the requirements of diverse enterprise scenarios
+                        Various usages to meet the requirements of diverse enterprise scenarios
                       </Translate>
                     </li>
                   </ul>
@@ -154,18 +153,18 @@ function Home() {
                   </p>
                   <ul>
                     <li>
-                        <Translate id="home.platformengineering.2">
-                            Schema-centric abstraction and constraints to build your models and validations
-                        </Translate>
+                      <Translate id="home.platformengineering.2">
+                        Schema-centric abstraction and constraints to build your models and validations
+                      </Translate>
                     </li>
                     <li>
                       <Translate id="home.platformengineering.3">
-                            Easy to integrate into CI pipeline, service and product to build your paved road
+                        Easy to integrate into CI pipeline, service and product to build your paved road
                       </Translate>
                     </li>
                     <li>
                       <Translate id="home.platformengineering.4">
-                            Fast development on raw platform capabilities with consistency to cope with change
+                        Fast development on raw platform capabilities with consistency to cope with change
                       </Translate>
                     </li>
                   </ul>
@@ -175,17 +174,23 @@ function Home() {
           </div>
         </div>
 
-        <div className="hero-divider" />
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
 
-        <div className="hero">
-            <ExampleScroller />
+        <div className="container">
+          <ExampleScroller />
         </div>
 
-        <div className="hero-divider" />
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
 
-        <div className="hero">
+        <div className="container">
           <div className="container text--center">
-            <h2 className="hero__subtitle">
+            <h2 className="hero__subtitle" style={{ color: "var(--ifm-color-primary)" }}>
               <Translate id="home.whoisusing">Adopted by</Translate>
             </h2>
             <div className={styles.whiteboard}>
@@ -202,14 +207,17 @@ function Home() {
           </div>
         </div>
 
-        <div className="hero-divider" />
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
 
-        <div className="hero">
+        <div className="container">
           <div className="container text--center">
             <h2 className="hero__subtitle">
               KusionStack is in <Link to="https://cncf.io/">Cloud Native Computing Foundation</Link> landscape
             </h2>
-            <br/>
+            <br />
             <div>
               <ThemedImage
                 className={styles.cncfLogo}
@@ -222,6 +230,8 @@ function Home() {
             </div>
           </div>
         </div>
+        <br></br>
+        <br></br>
       </main>
     </Layout>
   )
