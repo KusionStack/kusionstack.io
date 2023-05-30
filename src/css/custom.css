@@ -60,7 +60,7 @@ html[data-theme='dark'] {
 }
 
 [data-theme='light'] {
-  --ifm-color-primary: #0066ff;
+  --ifm-color-primary: #1974d2;
   --ifm-color-secondary: #ffffff;
   --ifm-color-primary-dark: #2D3F50;
   --ifm-color-primary-darker: rgb(31, 165, 136);
