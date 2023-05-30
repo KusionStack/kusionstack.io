@@ -60,14 +60,14 @@ html[data-theme='dark'] {
 }
 
 [data-theme='light'] {
-  --ifm-color-primary: #1974d2;
+  --ifm-color-primary: #1677ff;
   --ifm-color-secondary: #ffffff;
-  --ifm-color-primary-dark: #2D3F50;
-  --ifm-color-primary-darker: rgb(31, 165, 136);
-  --ifm-color-primary-darkest: rgb(26, 136, 112);
-  --ifm-color-primary-light: rgb(70, 174, 203);
-  --ifm-color-primary-lighter: rgb(102, 189, 212);
-  --ifm-color-primary-lightest: rgb(146, 208, 224);
+  --ifm-color-primary-dark: #1677ff;
+  --ifm-color-primary-darker: #1677ff;
+  --ifm-color-primary-darkest: #1677ff;
+  --ifm-color-primary-light: #1677ff;
+  --ifm-color-primary-lighter: #1677ff;
+  --ifm-color-primary-lightest: #1677ff;
   --ifm-code-font-size: 95%;
   --ifm-alert-color: #0d3c61;
 
