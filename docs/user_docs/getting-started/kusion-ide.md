@@ -24,7 +24,7 @@ To find the Kusion walkthrough: Open the Command Palatte > type and select `Welc
 
     We could quickly create a new kusion project from archetype. To do that, click the `Create Kusion Project` button on the walkthrough (or, type `Kusion: Create` in the Command Palatte), and select a project template(For example using the `code-city` template we could deploy an application to visualize software as 3D cities).
 
-    ![](https://github.com/KusionStack/vscode-kusion/blob/main/images/create-project.gif?raw=true)
+    ![](/img/docs/user_docs/getting-started/create-project.gif)
 
 3. **Explore Your Project and Configurations**
     Now let's open our kusion project that we previously created and browse the configuration code
@@ -36,4 +36,4 @@ To find the Kusion walkthrough: Open the Command Palatte > type and select `Welc
 5. **Apply the Application Changes**
     Then if the live diff is as expected, we apply the changes to the runtime by clicking the 'Apply' button to confirm to apply.
 
-    ![](https://github.com/KusionStack/vscode-kusion/blob/main/images/config-diff-apply.gif?raw=true)
+    ![](/img/docs/user_docs/getting-started/config-diff-apply.gif)
