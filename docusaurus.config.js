@@ -136,6 +136,14 @@ const config = {
                 label: 'Introduction',
                 to: '/docs/user_docs/intro/kusion-intro',
               },
+              {
+                label: 'Get Started',
+                to: '/docs/user_docs/getting-started',
+              },
+              {
+                label: 'FAQ',
+                to: '/docs/user_docs/support',
+              }
             ],
           },
           {
@@ -159,8 +167,8 @@ const config = {
             title: 'More',
             items: [
               {
-                label: 'FAQ',
-                to: '/docs/user_docs/support',
+                label: 'KCL',
+                to: 'https://kcl-lang.io',
               },
             ],
           },
