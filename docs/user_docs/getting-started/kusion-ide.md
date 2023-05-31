@@ -14,26 +14,30 @@ Here's an example for you to quickly get started to deliver [code city](https://
 To find the Kusion walkthrough: Open the Command Palatte > type and select `Welcome: Open Walkthrough...` > then type and select `kusion`.
 
 
-1. **Open a Konfig Workspace Folder**
-    A monorepo [konfig](https://github.com/KusionStack/konfig) is already there for quick start, we could clone the repo and open it with VS Code: 
+1. **Abstract: Define Your Models**
+    For quick start, A monorepo [konfig](https://github.com/KusionStack/konfig) is already there, which contains classical atractions of application configuration and jobs, etc. We could directly clone the repo and open it with VS Code: 
+    
     ```
     git clone https://github.com/KusionStack/konfig.git
     ```
 
-2. **Create a New Kusion Project**
+2. **Config: New Kusion Project**
 
     We could quickly create a new kusion project from archetype. To do that, click the `Create Kusion Project` button on the walkthrough (or, type `Kusion: Create` in the Command Palatte), and select a project template(For example using the `code-city` template we could deploy an application to visualize software as 3D cities).
 
     ![](/img/docs/user_docs/getting-started/create-project.gif)
 
-3. **Explore Your Project and Configurations**
-    Now let's open our kusion project that we previously created and browse the configuration code
+3. **Preview**
 
-4. **Verify the Resource Changes to be made**
+    Now let's preview the yaml representation of our Config previously created by clicking the data preview button or type and select `Kusion: Open Data Preview To the Side`.
+    
+    ![](/img/docs/user_docs/getting-started/preview-data.gif)
 
-    After changing the stack's configuration, we can right-click at the configuraion main file and select `Preview Live Diff and Apply` to verify the resource changes to be made. And 
+4. **Runtime Diff and Go online**
+    
+    After changing the stack's configuration, we can right-click at the configuraion main file and select `Preview Live Diff and Apply` to open the Runtime Diff page.
 
-5. **Apply the Application Changes**
-    Then if the live diff is as expected, we apply the changes to the runtime by clicking the 'Apply' button to confirm to apply.
+    Then we could confirm the diff and make the changes go online.
 
     ![](/img/docs/user_docs/getting-started/config-diff-apply.gif)
+    
