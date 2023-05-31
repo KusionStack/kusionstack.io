@@ -95,7 +95,7 @@ function Home() {
                       Fast development, easy delivery
                     </Translate>
                   </p>
-                  <ul>
+                  <ul className='left-align-ul'>
                     <li>
                       <Translate id="home.easyshipping.2">
                         Codify and unify spec, resources and manifests around modern apps
@@ -127,7 +127,7 @@ function Home() {
                       From the first code to production
                     </Translate>
                   </p>
-                  <ul>
+                  <ul className='left-align-ul'>
                     <li>
                       <Translate id="home.enterpriseops.2">
                         Multi teams, projects go across multi phases to multi runtimes, clouds
@@ -160,7 +160,7 @@ function Home() {
                       Build proper abstraction and golden path
                     </Translate>
                   </p>
-                  <ul>
+                  <ul className='left-align-ul'>
                     <li>
                       <Translate id="home.platformengineering.2">
                         Schema-centric abstraction and constraints to build your models and validations
