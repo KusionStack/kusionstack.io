@@ -113,25 +113,6 @@ export const ExampleScroller = () => {
         seCss["section--showcase"],
       )}
     >
-      <h2
-        className={clsx(
-          seCss.section__title,
-          seCss["section__title--wide"],
-          "text--center",
-        )}
-        style={{ color: "var(--ifm-color-primary)" }}
-      >
-        Codify Your Modern Delivery
-      </h2>
-
-      <p
-        className={clsx(
-          "text--center",
-        )}
-      >
-        With configs, models, functions and rules
-      </p>
-
       <div className={shCss.showcase}>
         <div className={shCss.showcase__inner}>
           <div

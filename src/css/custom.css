@@ -56,12 +56,14 @@
 }
 
 html[data-theme='dark'] {
+  --feature-icon-color: #ffffff;
   --site-color-feedback-background: #f0f8ff;
   --site-color-favorite-background: #1d1e1e;
   --site-color-checkbox-checked-bg: hsl(167deg 56% 73% / 10%);
 }
 
 [data-theme='light'] {
+  --feature-icon-color: #000000;
   --ifm-color-primary: var(--primary-color);
   --ifm-color-secondary: #ffffff;
   --ifm-color-primary-dark: var(--primary-color);
