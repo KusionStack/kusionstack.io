@@ -6,8 +6,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Collaborate, Automate',
-  tagline: 'Codify modern delivery across Kubernetes and Clouds',
+  title: 'Organize, Code, Run',
+  tagline: 'KusionStack codifies and unifies platform resources into stacked models and policies.',
 
   url: 'https://kusionstack.io',
   organizationName: 'KusionStack', // Usually your GitHub org/user name.
@@ -60,7 +60,7 @@ const config = {
         id: 'announcementBar-1', // Increment on change
         content: `⭐️ If you like KusionStack, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/KusionStack/kusion">Github</a>`,
       },
-      
+
       algolia: {
         appId: 'RE5E6BQUZV',
         apiKey: 'e9703ec3fe7856ddb5a1321fd17a5425',
@@ -102,13 +102,6 @@ const config = {
           },
 
           {to: '/blog', label: 'Blog', position: 'left'},
-
-          {
-            type: 'docSidebar',
-            position: 'left',
-            sidebarId: 'events',
-            label: 'Events',
-          },
 
           //{
           //  type: 'docsVersionDropdown',
@@ -169,10 +162,6 @@ const config = {
                 label: 'FAQ',
                 to: '/docs/user_docs/support',
               },
-              {
-                label: 'Changelog',
-                to: '/changelog',
-              },
             ],
           },
         ],
@@ -190,32 +179,6 @@ const config = {
         darkTheme: darkCodeTheme,
       },
     }),
-
-    plugins: [
-      [
-        require.resolve('./src/plugins/changelog/index.js'),
-        {
-          blogTitle: 'KusionStack Changelog',
-          blogDescription:
-            'Keep yourself up-to-date about new features in every release',
-          blogSidebarCount: 'ALL',
-          blogSidebarTitle: 'Changelog',
-          routeBasePath: '/changelog',
-          showReadingTime: false,
-          postsPerPage: 20,
-          archiveBasePath: null,
-          authorsMapPath: 'authors.json',
-          feedOptions: {
-            type: 'all',
-            title: 'KusionStack changelog',
-            description:
-              'Keep yourself up-to-date about new features in every release',
-            copyright: `Copyright © ${new Date().getFullYear()} KusionStack Authors.`,
-            language: 'en',
-          },
-        },
-      ],
-    ],
 };
 
 module.exports = config;
