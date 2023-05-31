@@ -7,11 +7,6 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
 
-.containerheroBanner {
-  padding-top: 6rem;
-  padding: 6rem 2rem;
-}
-
 .heroLogoWrapper {
   position: relative;
   left: 50%;
@@ -66,24 +61,17 @@
 }
 
 .button {
+  font-family: "Poppins";
   font-weight: 500;
   padding: 12px 25px;
   font-size: 18px;
 }
 
-.featureCard {
-  background-color: var(--feature-card-background);
-  padding: 10px;
-  margin-bottom: 30px;
-}
-
-.featureCardIcon {
-  margin-bottom: 20px;
-}
-
-.featureCardTitle,
-.featureCardBody {
+.poppinsFont,
+.featureTitle,
+.featureBody {
   font-family: "Poppins";
+  font-weight: 600;
 }
 
 @media screen and (max-width: 966px) {
@@ -102,15 +90,6 @@
     width: 100%;
     margin-bottom: 10px;
   }
-}
-
-.heroLogo {
-  width: 80%;
-  height: 80%;
-}
-
-.heroTitle {
-  padding-left: 1.5rem;
 }
 
 .feature {
@@ -140,11 +119,6 @@
     height: 192px;
     margin-bottom: 1.5rem;
   }
-}
-
-.featureContent {
-  display: flex !important;
-  align-items: center;
 }
 
 .whiteboard {

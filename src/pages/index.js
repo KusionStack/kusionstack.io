@@ -10,23 +10,17 @@ import ThemedImage from '@theme/ThemedImage'
 
 import whoIsUsing from '../data/whoIsUsing'
 import styles from './index.module.css'
+import { FcInTransit, FcCollaboration, FcDeployment } from "react-icons/fc";
 
-
-function Feature({ imgUrl, imgDarkUrl, title, description, reverse }) {
+function Feature({ icon, title, description, reverse }) {
   return (
     <div className={clsx('row', styles.feature, reverse && styles.featureReverse)}>
       <div className="col col--6 text--center">
-        <ThemedImage className={styles.featureImage}
-          alt={title}
-          sources={{
-            light: useBaseUrl(imgUrl),
-            dark: useBaseUrl(imgDarkUrl)
-          }}
-        />
+        {icon}
       </div>
-      <div className={clsx('col col--6', styles.featureContent)}>
+      <div className={clsx('col col--6')}>
         <div>
-          <h3 style={{ color: "var(--ifm-color-primary)" }}>{title}</h3>
+          <h3 className={styles.featureTitle} style={{ color: "var(--ifm-color-primary)" }}>{title}</h3>
           <div>{description}</div>
         </div>
       </div>
@@ -84,8 +78,7 @@ function Home() {
         <div className="container">
           <div className="container">
             <Feature
-              imgUrl="/img/features/easy.png"
-              imgDarkUrl="/img/features/easy-white.png"
+              icon={<FcInTransit size={224} />}
               title={<Translate id="home.easyshipping">Easy App Shipping</Translate>}
               description={
                 <>
@@ -116,8 +109,7 @@ function Home() {
               }
             />
             <Feature
-              imgUrl="/img/features/teams.png"
-              imgDarkUrl="/img/features/teams-white.png"
+              icon={<FcCollaboration size={224} />}
               title={<Translate id="home.enterpriseops">Enterprise Declarative DevOps</Translate>}
               description={
                 <>
@@ -149,8 +141,7 @@ function Home() {
               reverse={true}
             />
             <Feature
-              imgUrl="/img/features/enable.png"
-              imgDarkUrl="/img/features/enable-white.png"
+              icon={<FcDeployment size={224} />}
               title={<Translate id="home.platformengineering">Enable Platform Engineering</Translate>}
               description={
                 <>
@@ -189,6 +180,19 @@ function Home() {
         <br></br>
 
         <div className="container">
+          <h2
+            className={clsx(
+              "text--center", styles.poppinsFont,
+            )}
+            style={{ color: "var(--ifm-color-primary)" }}
+          >
+            Codify Your Modern Delivery
+          </h2>
+          <p className={clsx(
+            "text--center", styles.description
+          )}>
+            With configs, models, functions and rules
+          </p>
           <ExampleScroller />
         </div>
 
@@ -199,7 +203,9 @@ function Home() {
 
         <div className="container">
           <div className="container text--center">
-            <h2 className="hero__subtitle" style={{ color: "var(--ifm-color-primary)" }}>
+            <h2 className={clsx(
+              "hero__subtitle", styles.poppinsFont,
+            )} style={{ color: "var(--ifm-color-primary)" }}>
               <Translate id="home.whoisusing">Adopted by</Translate>
             </h2>
             <div className={styles.whiteboard}>
@@ -223,7 +229,9 @@ function Home() {
 
         <div className="container">
           <div className="container text--center">
-            <h2 className="hero__subtitle">
+            <h2 className={clsx(
+              "hero__subtitle", styles.poppinsFont,
+            )} >
               KusionStack is in <Link to="https://cncf.io/">Cloud Native Computing Foundation</Link> landscape
             </h2>
             <br />
