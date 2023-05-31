@@ -410,8 +410,8 @@ schema Pet:
 |                  | string format byte          | str             |                                                                                                       |
 |                  | string format int-or-string | int             | str                                                                                                   |
 |                  | string format binay         | str             |                                                                                                       |
-|                  | string format date          | unsupported     | As defined by full-date - [RFC3339](http://xml2rfc.ietf.org/public/rfc/html/rfc3339.html#anchor14) |
-|                  | string format date-time     | unsupported     | As defined by date-time - [RFC3339](http://xml2rfc.ietf.org/public/rfc/html/rfc3339.html#anchor14) |
+|                  | string format date          | unsupported     | As defined by full-date|
+|                  | string format date-time     | unsupported     | As defined by date-time|
 |                  | string format password     | unsupported     | for swagger: A hint to UIs to obscure input.                                                         |
 |                  | datetime                    | datetime        |                                                                                                       |
 

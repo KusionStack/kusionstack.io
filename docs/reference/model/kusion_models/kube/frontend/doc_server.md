@@ -18,7 +18,7 @@ Server is abstaction of Deployment and StatefulSet.
 |**sidecarContainers**<br />SidecarContainers describes the list of sidecar container configuration that is expected to be run on the host.|[[sidecar.Sidecar](sidecar/doc_sidecar#schema-sidecar)]|Undefined|optional|
 |**initContainers**<br />InitContainers describes the list of sidecar container configuration that is expected to be run on the host.|[[sidecar.Sidecar](sidecar/doc_sidecar#schema-sidecar)]|Undefined|optional|
 |**useBuiltInLabels**<br />UseBuiltInLabels indicates use built-in labels or not.|bool|False|optional|
-|**labels**<br />Labels is a map of string keys and values that can be used to organize and categorize (scope and select) objects.<br />More info: http://kubernetes.io/docs/user-guide/labels|{str: str}|Undefined|optional|
+|**labels**<br />Labels is a map of string keys and values that can be used to organize and categorize (scope and select) objects.<br />{str: str}|Undefined|optional|
 |**annotations**<br />Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.<br />More info: http://kubernetes.io/docs/user-guide/annotations|{str: str}|Undefined|optional|
 |**useBuiltInSelector**<br />UseBuiltInSelector indicates use built-in selector or not.|bool|False|optional|
 |**selector**<br />Label selector for pods. Existing ReplicaSets/ whose pods are selected by this will be the ones affected by this deployment.|{str: str}|Undefined|optional|
