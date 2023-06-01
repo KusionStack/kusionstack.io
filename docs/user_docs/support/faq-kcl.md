@@ -652,6 +652,8 @@ Regular expressions can be used by importing the regular expression system modul
 Examples:
 
 ```python
+import regex
+
 regex_source = "Apple,Google,Baidu,Xiaomi"
 regex_split = regex.split(regex_source, ",")
 regex_replace = regex.replace(regex_source, ",", "|")
@@ -688,6 +690,8 @@ For longer regular expressions, we can also use **r-string** to ignore the escap
 Examples:
 
 ```python
+import regex
+
 isIp = regex.match("192.168.0.1", r"^(1\d{2}|2[0-4]\d|25[0-5]|[1-9]\d|[1-9])."+r"(1\d{2}|2[0-4]\d|25[0-5]|[1-9]\d|\d)."+r"(1\d{2}|2[0-4]\d|25[0-5]|[1-9]\d|\d)."+r"(1\d{2}|2[0-4]\d|25[0-5]|[1-9]\d|\d)$")  # Determine if it is an IP string
 ```
 
@@ -2192,44 +2196,55 @@ a = 1 # immutable exported variable
 _b = 2 # mutable non-export variable
 ```
 
-## 48. How to calculate the literal value of a numeric unit with a number
+## 48. Is there a type like Go `interface{}`/`any` or Java `Object` in KCL?
 
-In KCL, numeric units exist as a special type, which does not allow arithmetic operations, because `str(1024Mi) == "1024Mi"` can be written directly, but when they are calculated, KCL compiler doesn't know what unit to take. For example, `1Ki + 1Mi` cannot determine whether the calculated result uses the unit of `Ki` or `Mi`. There is ambiguity here, so numerical units are directly prohibited from performing operations in KCL.
-
-However, we can convert the numeric unit literal value into an integer through the `int()` function, and then call the functions in the units package or spliced them into the corresponding unit string.
-
-For Example:
+In KCL, we can use the `any` type annotation to define a variable to store any values such as integers, strings and schemas. For example:
 
 ```python
-import units
-import math
+schema Data:
+    id: int = 1
 
-val: units.NumberMultiplier = 2048Mi
-ratio: float = 0.3
-cpu: int | str = 1
-
-res = {
-    cpu = str(int(int(cpu) * ratio * 1000)) + "m"  # Convert int value to value with the unit 'm'
-    memory = units.to_Mi(int(int(val) * ratio))   # `memory = val * 0.3` with the unit 'Mi'
-}
+var_list: [any] = [1, "12", Data {}]
 ```
 
 The output YAML is
 
 ```yaml
-val: 2147483648.0
-ratio: 0.3
-cpu: 1
-res:
-  cpu: 300m
-  memory: 614Mi
+var_list:
+- 1
+- '12'
+- id: 1
+```
+
+In addition, we can also use the `typeof` function to determine the type of variables during KCL code execution:
+
+```python
+schema Data1:
+    id: int = 1
+
+schema Data2:
+    name: str = "name"
+
+data_list: [any] = [Data1 {}, Data2 {}]
+data_type_list: [str] = [typeof(data) for data in data_list]
+```
+
+The output YAML is
+
+```yaml
+data_list:
+- id: 1
+- name: name
+data_type_list:
+- Data1
+- Data2
 ```
 
 ## 49. How to develop a KCL plugin?
 
-KCL plugins are installed in the plugins subdirectory of KCLVM (usually installed in the `$HOME/.kusion/kclvm/plugins` directory), or set through the `$KCL_PLUGINS_ROOT` environment variable. For plugin developers, plugins are managed in the [Git repository](https://github.com/KusionStack/kcl-plugin), and the plugin repository can be cloned to this directory for development.
+KCL plugins are installed in the plugins subdirectory of KCL (usually installed in the `$HOME/.kusion/kclvm/plugins` directory), or set through the `$KCL_PLUGINS_ROOT` environment variable. Besides, the `plugins` directory could also be placed at the `pwd` path. For plugin developers, plugins are managed in the [Git repository](https://github.com/KusionStack/kcl-plugin), and the plugin repository can be cloned to this directory for development.
 
-KCL has built-in kcl-plugin scaffolding command to assist users to write KCL plug-ins in Python language, so that the corresponding plug-ins can be called in the KCL file to enhance the KCL language itself, such as accessing the network, reading and writing IO, CMDB query and encryption and decryption functions. .
+KCL has built-in kcl-plugin scaffolding command to assist users to write KCL plug-ins in Python language, so that the corresponding plug-ins can be called in the KCL file to enhance the KCL language itself, such as accessing the network, reading and writing IO, CMDB query and encryption and decryption functions.
 
 ```
 usage: kcl-plugin [-h] {list,init,info,gendoc,test} ...
@@ -2307,3 +2322,18 @@ kcl-plugin info io
 ```
 
 Finally, the plugin that has written the test can be merged with MR in the `kcl_plugins` repository.
+
+
+## 50. How to do basic type conversion in KCL
+
+You can use the `int()`, `float()` function and `str()` function to convert the basic types between `int`, `float` and `str`.
+
+```
+_t = 1
+
+t_str: str = str(_t)           # you will get "t_str: '1'"
+t_int: int = int(t_str)        # you will get "t_int: 1"
+t_float: float = float(t_str)  # you will get "t_float: 1.0"
+```
+
+For more information about type conversion, see [KCL Builtin Types](https://kcl-lang.io/docs/reference/lang/tour#built-in-types) and [KCL Type System](https://kcl-lang.io/docs/reference/lang/tour#type-system).

@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # KCL Quick Start
 
-KCL (Kusion Configuration Language) is Kusion's built-in cloud-native domain configuration and policy language. At the beginning of its design, KCL was inspired by Python3, and at the same time absorbed the conceptual design of declarative and OOP programming paradigms. In this section we will quickly demonstrate the basic features of the KCL language.
+KCL is a cloud-native domain configuration and policy language. At the beginning of its design, KCL was inspired by Python3, and at the same time absorbed the conceptual design of declarative and OOP programming paradigms. In this section we will quickly demonstrate the basic features of the KCL language.
 
 ## 1. Hello KCL
 
@@ -18,7 +18,7 @@ hello = "KCL"
 
 Set the `hello` attribute to the `"KCL"` string. Then save the code to the `hello.k` file.
 
-How to execute this program depends on the specific development environment, we first assume that the local macOS or Linux system has installed the `kcl` command (or enter the **Docker** environment test by `docker run --rm -it kusionstack/kusion bash`) and then run the following command:
+How to execute this program depends on the specific development environment, we first assume that the local macOS or Linux system has installed the `kcl` command (or enter the **Docker** environment test by `docker run --rm -it kusionstack/kclvm`) and then run the following command:
 
 ```shell
 $ kcl hello.k
@@ -124,14 +124,18 @@ When executed, an error similar to the following will be generated (the displaye
 
 ```shell
 $ kcl server.k 
-KCL Compile Error[E2G22] : The type got is inconsistent with the type expected
-    ---> File /path/to/server.k:8:2
-    8 |    ports = [1.2, 1.3]
-      5    ^  -> got [float(1.2)|float(1.3)]
-    ---> File /path/to/server.k:3:2
-    3 |    ports: [int] = [8000, 8001, 8002]
-      5    ~  -> expect [int]
-expect [int], got [float(1.2)|float(1.3)]
+error[E2G22]: TypeError
+ --> /path/to/server.k:8:5
+  |
+8 |     ports = [1.2, 1.3]
+  |     ^ expected [int], got [float(1.2)|float(1.3)]
+  |
+
+ --> /path/to/server.k:3:5
+  |
+3 |     ports: [int] = [8000, 8001, 8002]
+  |     ^ variable is defined here, its type is [int], but got [float(1.2)|float(1.3)]
+  |
 ```
 
 Similarly we can encapsulate the attributes of the `servers` section with the following code:
@@ -149,7 +153,7 @@ servers = [
 
 The attribute `ip` of `ServerConfig` is a string type, and no default value is given. We must manually add the value of the `ip` attribute when generating the `ServerConfig` type attribute, otherwise the KCL will report a missing required attribute error. The `role` attribute is a `"frontend" | "backend"` enumerated string type.
 
-In addition, `schema` can also combine `check`, `mixin`, optional attributes, inheritance and extension modules to achieve more complex configuration and policy data abstraction, details can be found at [here](../../reference/lang/lang/tour.md).
+In addition, `schema` can also combine `check`, `mixin`, optional attributes, inheritance and extension modules to achieve more complex configuration and policy data abstraction, full language details can be found at [here](https://kcl-lang.io/docs/reference/lang/tour).
 
 ## More Documents
 
