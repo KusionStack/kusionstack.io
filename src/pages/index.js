@@ -65,7 +65,7 @@ function Home() {
         <div className="container">
           <div className="container text--center">
             <h2 className={styles.subtitle} style={{ color: "var(--ifm-color-primary)" }}>
-              <Translate id="home.quickstart">All about your modern app by Platform as Code</Translate>
+              <Translate id="home.quickstart">All about your modern app by Platform Engineering</Translate>
             </h2>
           </div>
         </div>
@@ -110,29 +110,29 @@ function Home() {
             />
             <Feature
               icon={<FcCollaboration size={224} />}
-              title={<Translate id="home.enterpriseops">Enterprise Declarative DevOps</Translate>}
+              title={<Translate id="home.enterpriseops">Secure in the First Place</Translate>}
               description={
                 <>
                   <p>
                     <Translate
                       id="home.enterpriseops.1">
-                      From the first code to production
+                      From the first line of code to the production stage
                     </Translate>
                   </p>
                   <ul className='left-align-ul'>
                     <li>
                       <Translate id="home.enterpriseops.2">
-                        Multi teams, projects go across multi phases to multi runtimes, clouds
+                        Shift left to guarantee security at the earliest stages to make operation more confidence
                       </Translate>
                     </li>
                     <li>
                       <Translate id="home.enterpriseops.3">
-                        Production-ready with scalability, performance and left-shifted stability
+                        Documenting expert experience through codified rules and strategies
                       </Translate>
                     </li>
                     <li>
                       <Translate id="home.enterpriseops.4">
-                        Various usages to meet the requirements of diverse enterprise scenarios
+                        Capable of providing diverse and fine-grained controls for Kubernetes operations, meeting enterprise-level demands
                       </Translate>
                     </li>
                   </ul>
@@ -142,7 +142,7 @@ function Home() {
             />
             <Feature
               icon={<FcDeployment size={224} />}
-              title={<Translate id="home.platformengineering">Enable Platform Engineering</Translate>}
+              title={<Translate id="home.platformengineering">Enable Developer Self-Service</Translate>}
               description={
                 <>
                   <p>

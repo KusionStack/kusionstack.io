@@ -300,10 +300,10 @@
     "description": "homepage getting started button"
   },
   "home.quickstart": {
-    "message": "All about your modern app by Platform as Code"
+    "message": "All about your modern app by Platform Engineering"
   },
   "siteConfig.tagline": {
-    "message": "KusionStack codifies and unifies platform resources into stacked models and policies."
+    "message": "Build a more efficient and secure enterprise-grade Internal Developer Platform in Kubernetes and Clouds"
   },
   "home.easyshipping": {
     "message": "Easy App Shipping"
@@ -321,22 +321,22 @@
     "message": "Easy-to-access, Kubernetes-first, lightweight and dev-friendly"
   },
   "home.enterpriseops": {
-    "message": "Enterprise Declarative DevOps"
+    "message": "Secure in the First Place"
   },
   "home.enterpriseops.1": {
-    "message": "From the first code to production"
+    "message": "From the first line of code to the production stage"
   },
   "home.enterpriseops.2": {
-    "message": "Multi teams, projects go across multi phases to multi runtimes, clouds"
+    "message": "Shift left to guarantee security at the earliest stages to make operation more confidence"
   },
   "home.enterpriseops.3": {
-    "message": "Production-ready with scalability, performance and left-shifted stability"
+    "message": "Documenting expert experience through codified rules and strategies"
   },
   "home.enterpriseops.4": {
-    "message": "Various usages to meet the requirements of diverse enterprise scenarios"
+    "message": "Capable of providing diverse and fine-grained controls for Kubernetes operations, meeting enterprise-level demands"
   },
   "home.platformengineering": {
-    "message": "Enable Platform Engineering"
+    "message": "Enable Developer Self-Service"
   },
   "home.platformengineering.1": {
     "message": "Build proper abstraction and golden path"
