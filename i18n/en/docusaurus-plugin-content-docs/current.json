@@ -231,6 +231,10 @@
     "message": "Information security",
     "description": "The label for category 敏感信息管理 in sidebar docs"
   },
+  "sidebar.docs.category.GitHub Actions": {
+    "message": "GitHub Actions",
+    "description": "The label for category GitHub Actions in sidebar docs"
+  },
   "sidebar.user_docs.category.简介": {
     "message": "Intro",
     "description": "The label for category 简介 in sidebar user_docs"
@@ -270,6 +274,10 @@
   "sidebar.user_docs.category.敏感信息管理": {
     "message": "Information security",
     "description": "The label for category 敏感信息管理 in sidebar user_docs"
+  },
+  "sidebar.user_docs.category.GitHub Actions": {
+    "message": "GitHub Actions",
+    "description": "The label for category GitHub Actions in sidebar user_docs"
   },
   "sidebar.reference.category.命令行工具": {
     "message": "Command Line Tools",
