@@ -309,46 +309,46 @@
     "message": "Easy App Shipping"
   },
   "home.easyshipping.1": {
-    "message": "Fast development, easy delivery"
+    "message": "Faster development, simplified delivery"
   },
   "home.easyshipping.2": {
-    "message": "Codify and unify spec, resources and manifests around modern apps"
+    "message": "Declarative, application-centric spec"
   },
   "home.easyshipping.3": {
-    "message": "Orchestration and provision on Kubernetes and Clouds in a managed manner"
+    "message": "Managed resource orchestration and provisioning in Kubernetes and Clouds"
   },
   "home.easyshipping.4": {
-    "message": "Easy-to-access, Kubernetes-first, lightweight and dev-friendly"
+    "message": "Kubernetes-first, lightweight and dev-friendly"
   },
   "home.enterpriseops": {
-    "message": "Secure in the First Place"
+    "message": "Secure By Design"
   },
   "home.enterpriseops.1": {
-    "message": "From the first line of code to the production stage"
+    "message": "From the first line of code to the production"
   },
   "home.enterpriseops.2": {
-    "message": "Shift left to guarantee security at the earliest stages to make operation more confidence"
+    "message": "Shift-left validation to detect risks early"
   },
   "home.enterpriseops.3": {
-    "message": "Documenting expert experience through codified rules and strategies"
+    "message": "Codified rules and policies from operating best practice"
   },
   "home.enterpriseops.4": {
-    "message": "Capable of providing diverse and fine-grained controls for Kubernetes operations, meeting enterprise-level demands"
+    "message": "Enterprise-grade fine-grained cluster control for Kubernetes"
   },
   "home.platformengineering": {
     "message": "Enable Developer Self-Service"
   },
   "home.platformengineering.1": {
-    "message": "Build proper abstraction and golden path"
+    "message": "Build universal abstraction and golden path"
   },
   "home.platformengineering.2": {
-    "message": "Schema-centric abstraction and constraints to build your models and validations"
+    "message": "Schema-based abstraction to build your models and validations"
   },
   "home.platformengineering.3": {
-    "message": "Easy to integrate into CI pipeline, service and product to build your paved road"
+    "message": "Building blocks to establish your paved path"
   },
   "home.platformengineering.4": {
-    "message": "Fast development on raw platform capabilities with consistency to cope with change"
+    "message": "Integration with iterative platform capabilities to meet evolving needs"
   },
   "home.whoisusing": {
     "message": "Adopted by"
