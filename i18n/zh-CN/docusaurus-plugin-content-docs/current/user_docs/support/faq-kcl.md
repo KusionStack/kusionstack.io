@@ -15,7 +15,7 @@ image = "nginx:1.14.2"
 service = "my-service"
 ```
 
-上述 KCL 代码中，定义了 4 个变量 `cpu` 和 `memory` 被声明为整数类型，并且它们的值为 `256` 和 `512`，而 `image` 和 `service` 是字符串类型，它们的值为 `image` 和 `service`
+上述 KCL 代码中，定义了 4 个变量 `cpu` 和 `memory` 被声明为整数类型，并且它们的值分别为 `256` 和 `512`，而 `image` 和 `service` 是字符串类型，它们的值分别为 `image` 和 `service`
 
 使用如下命令可以将上述 KCL 文件编译为 YAML 进行输出
 
@@ -654,6 +654,8 @@ string3: |
 使用举例:
 
 ```python
+import regex
+
 regex_source = "Apple,Google,Baidu,Xiaomi"
 regex_split = regex.split(regex_source, ",")
 regex_replace = regex.replace(regex_source, ",", "|")
@@ -688,6 +690,8 @@ regex_result_false: false
 对于比较长的正则表达式，还可以使用 r-string 忽略 `\` 符号的转义简化正则表达式字符串的书写:
 
 ```python
+import regex
+
 isIp = regex.match("192.168.0.1", r"^(1\d{2}|2[0-4]\d|25[0-5]|[1-9]\d|[1-9])."+r"(1\d{2}|2[0-4]\d|25[0-5]|[1-9]\d|\d)."+r"(1\d{2}|2[0-4]\d|25[0-5]|[1-9]\d|\d)."+r"(1\d{2}|2[0-4]\d|25[0-5]|[1-9]\d|\d)$")  # 判断是否是一个IP字符串
 ```
 
@@ -766,7 +770,7 @@ schema Person:
 
 ## 19. 如何为 schema 中的属性编写校验规则？
 
-在 schema 定义当中可以使用 check 关键字编写 schema 属性的校验规则, 如下所示，check 代码块中的每一行都对应一个条件表达式，当满足条件时校验成功，当不满足条件时校验失败, 条件表达式后可跟 `, "check error message"` 表示当校验失败时需要显示的信息
+在 schema 定义当中可以使用 check 关键字编写 schema 属性的校验规则, 如下所示，check 代码块中的每一行都对应一个条件表达式，当满足条件时校验成功，当不满足条件时校验失败。条件表达式后可跟 `, "check error message"` 表示当校验失败时需要显示的信息
 
 ```python
 import regex
@@ -2030,7 +2034,7 @@ lambda 函数具有如下特性：
 ```python
 _func = lambda x: int, y: int -> int {
     x + y
-}  # Define a function using the lambda expression
+}  # 使用 lambda 表达式定义一个函数
 _func = lambda x: int, y: int -> int {
     x - y
 }  # Ok
@@ -2206,40 +2210,49 @@ a = 1  # 不可变导出变量
 _b = 2  # 可变非导出变量
 ```
 
-## 48. 如何将数字单位字面值与数字进行运算
+## 48. 在 KCL 中存在类似 Go `interface{}`/`any` 或者 Java `Object` 的类型嘛?
 
-在 KCL 中，数字单位作为一种特殊类型存在，它不允许算术运算，因为可以直接使用 `str(1024Mi）== "1024Mi"` 方式进行单位转换并直接输出，但是当它们进行计算后，KCL 无法为这个数字取一定的单位标准，比如 `1Ki + 1Mi` 无法确定计算后的结果使用单位 `Ki` 还是 `Mi`, 这里存在二义性，因此在 KCL 中直接禁止了数字单位进行运算。
+在 KCL 中，我们可以使用 `any` 类型注解来定义一个变量存储任意类型比如整数、字符串、schema 结构等数据。比如如下例子:
 
-但是，我们可以通过 `int()` 函数将数字单位字面值转换为整数并进行计算，然后使用 `units` 系统模块中的函数将它们转换为相应的数字单位字符串。
+```python
+schema Data:
+    id: int = 1
 
-比如
-
-```kcl
-import units
-import math
-
-val: units.NumberMultiplier = 2048Mi
-ratio: float = 0.3
-cpu: int | str = 1
-
-res = {
-    cpu = str(int(int(cpu) * ratio * 1000)) + "m"  # Convert int value to value with the unit 'm' and calculate `cpu = cpu * radio`
-    memory = units.to_Mi(int(int(val) * ratio))   # `memory = val * radio` with the unit 'Mi'
-}
+var_list: [any] = [1, "12", Data {}]
 ```
 
-输出为:
+输出 YAML 为:
 
 ```yaml
-val: 2147483648.0
-ratio: 0.3
-cpu: 1
-res:
-  cpu: 300m
-  memory: 614Mi
+var_list:
+- 1
+- '12'
+- id: 1
 ```
 
+此外，我们可以使用 `typeof` 函数来判断 KCL 变量的类型:
 
+```python
+schema Data1:
+    id: int = 1
+
+schema Data2:
+    name: str = "name"
+
+data_list: [any] = [Data1 {}, Data2 {}]
+data_type_list: [str] = [typeof(data) for data in data_list]
+```
+
+输出 YAML 为:
+
+```yaml
+data_list:
+- id: 1
+- name: name
+data_type_list:
+- Data1
+- Data2
+```
 
 ## 49. 如何通过编写 KCL 插件进行扩展?
 
@@ -2324,3 +2337,16 @@ kcl-plugin info io
 
 最后将编写测试完成的插件在 `kcl_plugins` 仓库提 MR 合并即可
 
+## 50. 如何在 KCL 中进行基本类型转换
+
+可以使用`int()`, `float()`和`str()` 这些内置的方法来进行 `int`, `float` 和 `str` 之间的基本类型转换.
+
+```
+_t = 1
+
+t_str: str = str(_t)           # 输出的 t_str 为一个字符串 "t_str: '1'"
+t_int: int = int(t_str)        # 输出的 t_int 为一个整型 "t_int: 1"
+t_float: float = float(t_str)  # 输出的 t_float 为一个浮点型 "t_float: 1.0"
+```
+
+如果您想查看更多详细的关于KCL类型系统和类型转换的内容，您可以查阅 [KCL 内置类型](https://kcl-lang.io/docs/reference/lang/tour#built-in-types) 和 [KCL 类型系统](https://kcl-lang.io/docs/reference/lang/tour#type-system)。
