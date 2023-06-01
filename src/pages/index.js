@@ -85,23 +85,23 @@ function Home() {
                   <p>
                     <Translate
                       id="home.easyshipping.1">
-                      Fast development, easy delivery
+                      Faster development, simplified delivery
                     </Translate>
                   </p>
                   <ul className='left-align-ul'>
                     <li>
                       <Translate id="home.easyshipping.2">
-                        Codify and unify spec, resources and manifests around modern apps
+                        Declarative, application-centric spec
                       </Translate>
                     </li>
                     <li>
                       <Translate id="home.easyshipping.3">
-                        Orchestration and provision on Kubernetes and Clouds in a managed manner
+                        Managed resource orchestration and provisioning in Kubernetes and Clouds
                       </Translate>
                     </li>
                     <li>
                       <Translate id="home.easyshipping.4">
-                        Easy-to-access, Kubernetes-first, lightweight and dev-friendly
+                        Kubernetes-first, lightweight and dev-friendly
                       </Translate>
                     </li>
                   </ul>
@@ -110,29 +110,29 @@ function Home() {
             />
             <Feature
               icon={<FcApproval size={224} />}
-              title={<Translate id="home.enterpriseops">Secure in the First Place</Translate>}
+              title={<Translate id="home.enterpriseops">Secure By Design</Translate>}
               description={
                 <>
                   <p>
                     <Translate
                       id="home.enterpriseops.1">
-                      From the first line of code to the production stage
+                      From the first line of code to the production
                     </Translate>
                   </p>
                   <ul className='left-align-ul'>
                     <li>
                       <Translate id="home.enterpriseops.2">
-                        Shift left to guarantee security at the earliest stages to make operation more confidence
+                        Shift-left validation to detect risks early
                       </Translate>
                     </li>
                     <li>
                       <Translate id="home.enterpriseops.3">
-                        Documenting expert experience through codified rules and strategies
+                        Codified rules and policies from operating best practice
                       </Translate>
                     </li>
                     <li>
                       <Translate id="home.enterpriseops.4">
-                        Capable of providing diverse and fine-grained controls for Kubernetes operations, meeting enterprise-level demands
+                        Enterprise-grade fine-grained cluster control for Kubernetes
                       </Translate>
                     </li>
                   </ul>
@@ -148,23 +148,23 @@ function Home() {
                   <p>
                     <Translate
                       id="home.platformengineering.1">
-                      Build proper abstraction and golden path
+                      Build universal abstraction and golden path
                     </Translate>
                   </p>
                   <ul className='left-align-ul'>
                     <li>
                       <Translate id="home.platformengineering.2">
-                        Schema-centric abstraction and constraints to build your models and validations
+                        Schema-based abstraction to build your models and validations
                       </Translate>
                     </li>
                     <li>
                       <Translate id="home.platformengineering.3">
-                        Easy to integrate into CI pipeline, service and product to build your paved road
+                        Building blocks to establish your paved path
                       </Translate>
                     </li>
                     <li>
                       <Translate id="home.platformengineering.4">
-                        Fast development on raw platform capabilities with consistency to cope with change
+                        Integration with iterative platform capabilities to meet evolving needs
                       </Translate>
                     </li>
                   </ul>
