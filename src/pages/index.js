@@ -10,7 +10,7 @@ import ThemedImage from '@theme/ThemedImage'
 
 import whoIsUsing from '../data/whoIsUsing'
 import styles from './index.module.css'
-import { FcInTransit, FcCollaboration, FcDeployment } from "react-icons/fc";
+import { FcInTransit, FcDeployment, FcApproval } from "react-icons/fc";
 
 function Feature({ icon, title, description, reverse }) {
   return (
@@ -109,7 +109,7 @@ function Home() {
               }
             />
             <Feature
-              icon={<FcCollaboration size={224} />}
+              icon={<FcApproval size={224} />}
               title={<Translate id="home.enterpriseops">Secure in the First Place</Translate>}
               description={
                 <>
