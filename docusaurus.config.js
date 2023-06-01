@@ -91,12 +91,6 @@ const config = {
           {
             type: 'docSidebar',
             position: 'left',
-            sidebarId: 'develop',
-            label: 'DevDoc',
-          },
-          {
-            type: 'docSidebar',
-            position: 'left',
             sidebarId: 'governance',
             label: 'Governance',
           },
