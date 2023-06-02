@@ -230,4 +230,4 @@ This tutorial demonstrates how to use KusionStack to deploy a wordpress applicat
 
 The following video will show you a complete demonstration of how to deploy a wordpress application and related Alicloud RDS resources with Kusion command-line tool. 
 
-[![kusionstack-delivery-wordpress-application](https://res.cloudinary.com/marcomontalbano/image/upload/v1682254540/video_to_markdown/images/youtube--psUV_WmP2OU-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://www.youtube.com/watch?v=psUV_WmP2OU "kusionstack-delivery-wordpress-application")
+[![kusionstack-delivery-wordpress-application](/img/docs/user_docs/getting-started/wordpress-video-cover.png)](https://www.youtube.com/watch?v=QHzKKsoKLQ0 "kusionstack-delivery-wordpress-application")
