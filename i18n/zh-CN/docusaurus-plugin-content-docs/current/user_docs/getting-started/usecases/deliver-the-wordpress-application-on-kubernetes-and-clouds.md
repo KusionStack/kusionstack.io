@@ -229,4 +229,4 @@ kusion destroy --yes
 
 下面的视频将为您完整地演示如何通过 Kusion 命令行工具完成 Wordpress 应用以及相关阿里云 RDS 资源的一键部署：
 
-[![kusionstack-delivery-wordpress-application](https://res.cloudinary.com/marcomontalbano/image/upload/v1682254540/video_to_markdown/images/youtube--psUV_WmP2OU-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://www.youtube.com/watch?v=psUV_WmP2OU "kusionstack-delivery-wordpress-application")
+[![kusionstack-delivery-wordpress-application](/img/docs/user_docs/getting-started/wordpress-video-cover.png)](https://www.youtube.com/watch?v=QHzKKsoKLQ0 "kusionstack-delivery-wordpress-application")
