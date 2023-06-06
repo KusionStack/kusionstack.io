@@ -8,26 +8,35 @@ sidebar_position: 1
 
 The kcl-openapi tool can be installed in both ways: 
 
-- [recommend: install along with the kusion tools pack](#11-install-along-with-the-kusion-tools-pack)
-- [only install the kcl-openapi tool](#12-only-install-the-kcl-openapi-tool)
+- [go install](#11-go-install)
+- [curl|sh install (MacOS & Linux)](#12-curlsh-install-macos--linux)
+- [download from release](#13-dowload-from-release)
 
-## 1.1 Install along with the kusion tools pack
+## 1.1 go install
 
-It's recommended to directly install the kusion tools pack, which bundled the kusion cli, KCLVM, kcl-openapi tool and other useful tools. About installing the kusion tools pack, please refer to the [Kusion Quick Start Doc](/docs/user_docs/getting-started/install).
+```shell
+go install kusionstack.io/kcl-openapi@latest
+```
 
-## 1.2 Only install the kcl-openapi tool
+## 1.2 Curl|sh install (MacOS & Linux)
 
-You can optionally install the kcl-openapi tool separately:
+If you don't have go, you can install the CLI with this one-liner:
+
+```shell
+curl https://kusionstack.io/scripts/install-kcl-openapi.sh | sh
+```
+
+## 1.3 Dowload from release
 
 ```shell
 # 1. download the released binary from:
 # https://github.com/KusionStack/kcl-openapi/releases
 
-# 2. Add the binary location to PATH
+# 2. Unzip the package and add the binary location to PATH
 export PATH="<Your directory to store KCLOpenapi binary>:$PATH"
 ```
 
-## 1.3 Verify your installation
+## 1.4 Verify your installation
 
 - To verify the installation, you can run the command: `kcl-openapi generate model -h` and the following information indicates your successful installation:
 
