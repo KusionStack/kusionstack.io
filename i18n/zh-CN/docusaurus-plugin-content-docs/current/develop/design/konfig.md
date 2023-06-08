@@ -65,7 +65,7 @@ sidebar_position: 4
 
 Project 和 Stack 的基本概念可见 [《Project & Stack》](/user_docs/concepts/konfig.md)。
 
-Project 在配置大库的应用运维（appops）场景中对应的概念是「应用」，Stack 对应的概念是「环境」，更多映射关系可见[《映射关系》](/user_docs/guides/organizing-projects-stacks/mapping.md)。
+Project 在配置大库的应用运维（appops）场景中对应的概念是「应用」，Stack 对应的概念是「环境」。
 
 本节以应用「nginx-example」为例，介绍 Project 和 Stack 在配置大库中的基本目录结构：
 
