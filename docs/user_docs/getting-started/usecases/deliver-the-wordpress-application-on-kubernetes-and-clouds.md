@@ -2,28 +2,57 @@
 sidebar_position: 2
 ---
 
-# Deliver the Wordpress application on Kubernetes and clouds
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-This tutorial will demonstrate how to deploy a wordpress application using KusionStack which relies on both Kubernetes and Alicloud IaaS resources. Unlike the code-city application we previously deployed on Kubernetes, the wordpress application will also rely on Alicloud RDS (Relational Database Service) to provide a cloud-based database solution for wordpress website content such as articles, comments, users and other information. 
+# Deliver the WordPress application on Kubernetes and clouds
+
+This tutorial will demonstrate how to deploy a wordpress application using KusionStack which relies on both Kubernetes and IaaS resources provided by cloud vendors. Unlike the code-city application we previously deployed on Kubernetes, the wordpress application will also rely on RDS (Relational Database Service) to provide a cloud-based database solution for wordpress website content such as articles, comments, users and other information. 
+
+## Full Demonstration Video
+
+The following video will show you a complete demonstration of how to deploy a wordpress application and related Alicloud RDS resources with Kusion command-line tool. 
+
+[![kusionstack-delivery-wordpress-application](/img/docs/user_docs/getting-started/wordpress-video-cover.png)](https://www.youtube.com/watch?v=QHzKKsoKLQ0 "kusionstack-delivery-wordpress-application")
 
 ## Prerequesties
 
-- [Kusion](/docs/user_docs/getting-started/install)
-- [Kubernetes](https://kubernetes.io/) or [Kind](https://kind.sigs.k8s.io/)
-- [Terraform](https://www.terraform.io/)
-- Prepare an Alicloud account and create a user with `AliyunVPCFullAccess` and `AliyunRDSFullAccess` permissions to use the Relational Database Service (RDS). This user can be created and managed in the [Alicloud Resource Access Management (RAM) Console](https://ram.console.aliyun.com/users/)
-- Additionally, we also need to configure the obtained AccessKey and SecretKey as environment variables: 
+- [Install Kusion](/docs/user_docs/getting-started/install)
+- [Deploy Kubernetes](https://kubernetes.io/) or [Kind](https://kind.sigs.k8s.io/)
+- [Install Terraform](https://www.terraform.io/)
+- Prepare a cloud service account and create a user with `VPCFullAccess` and `RDSFullAccess` permissions to use the Relational Database Service (RDS). This kind of user can be created and managed in the Identity and Access Management (IAM) console
 
-```shell
+Additionally, we also need to configure the obtained AccessKey and SecretKey as environment variables: 
+
+<Tabs>
+<TabItem value="AWS" >
+
+```bash
+export AWS_ACCESS_KEY_ID="AKIAQZDxxxx" # replace it with your AccessKey
+export AWS_SECRET_ACCESS_KEY="oE/xxxx" # replace it with your SecretKey
+```
+
+![aws iam account](/img/docs/user_docs/getting-started/aws-iam-account.png)
+
+```mdx-code-block
+</TabItem>
+<TabItem value="Alicloud">
+```
+
+```bash
 export ALICLOUD_ACCESS_KEY="LTAI5txxx" # replace it with your AccessKey
 export ALICLOUD_SECRET_KEY="nxuowIxxx" # replace it with your SecretKey
 ```
 
+![alicloud iam account](/img/docs/user_docs/getting-started/set-rds-access.png)
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+
 :::info
 Alternatively, Kusion provides a sensitive data management tool for handling the AccessKey and SecretKey mentioned above.
 :::
-
-![](/img/docs/user_docs/getting-started/set-rds-access.png)
 
 ## Review Project Structure and Config Codes
 
@@ -48,8 +77,8 @@ cd appops/wordpress && tree
 │   │   ├── settings.yaml           // Configuration for test data and compiling
 │   │   └── stdout.golden.yaml      // Expected Spec YAML, which can be updated using make
 │   ├── kcl.yaml                    // Multi-file compilation configuration for current stack
-│   ├── main.k                      // Config codes for App Dev in current stack
-│   ├── platform.k                  // Config codes for Platform Dev in current stack
+│   ├── main.k                      // Config codes for Developer in current stack
+│   ├── platform.k                  // Config codes for Platform in current stack
 │   └── stack.yaml                  // Meta information of current stack
 └── project.yaml                    // Meta information of current project
 
@@ -78,14 +107,12 @@ wordpress: frontend.Server {
 
     # use cloud database for the storage of wordpress
     database = storage.DataBase {
-        # choose aliyun_rds as the cloud database
-        dataBaseType = "aliyun_rds"
+        # choose aws_rds as the cloud database
+        dataBaseType = "aws_rds"
         dataBaseAttr = storage.DBAttr {
             # choose the engine type and version of the database
             databaseEngine = "MySQL"
             databaseEngineVersion = "5.7"
-            # choose the charge type of the cloud database
-            cloudChargeType = "Serverless"
             # create database account
             databaseAccountName = "root"
             databaseAccountPassword = option("db_password")
@@ -93,20 +120,34 @@ wordpress: frontend.Server {
             internetAccess = True
         }
     }
+
+    # NOTE: this configuration is an example of adding an environment variable in the main container
+    # uncommenting and re-deploying will add the environment variable "ENV_ADD_EXAMPLE" in the 
+    # main container and the differnces will be shown by the command of "kusion apply"
+    mainContainer: {
+        env += [
+            {
+                name = "ENV_ADD_EXAMPLE"
+                value = "wordpress-example"
+            }
+        ]
+    }
 }
 ```
 
 ```python
 # dev/platform.k
 import base.pkg.kusion_models.kube.frontend
-import base.pkg.kusion_clouds.alicloud_backend.alicloud_config
+import base.pkg.kusion_models.kube.frontend.storage
+import base.pkg.kusion_models.kube.metadata
+import base.pkg.kusion_clouds.aws_backend.aws_config
 
 # The application configuration in stack will overwrite 
 # the configuration with the same attribute in base.
 # And platform.k is for the configurations in concern of platform developers. 
 
-_alicloudResourceName = "{}-{}".format(metadata.__META_APP_NAME, metadata.__META_ENV_TYPE_NAME).lower()
-_alicloudDependencyPrefix = "$kusion_path." + alicloud_config.alicloudProvider.namespace + ":" + alicloud_config.alicloudProvider.name + ":"
+_cloudResourceName = "{}-{}".format(metadata.__META_APP_NAME, metadata.__META_ENV_TYPE_NAME).lower()
+_awsDependencyPrefix = "$kusion_path." + aws_config.awsProvider.namespace + ":" + aws_config.awsProvider.name + ":"
 
 # defination of wordpress application frontend model
 wordpress: frontend.Server {
@@ -115,25 +156,42 @@ wordpress: frontend.Server {
         env += [
             {
                 name = "WORDPRESS_DB_HOST"
-                value = _alicloudDependencyPrefix + alicloud_config.alicloudDBConnectionMeta.type + ":" + _alicloudResourceName + ".connection_string"
+                value = _awsDependencyPrefix + aws_config.awsDBInstanceMeta.type + ":" + _cloudResourceName + ".address"
             }
         ]
+    }
+
+    # supplement database related configuration code on the platform side
+    database: storage.DataBase {
+        dataBaseAttr: storage.DBAttr {
+            # specify instance type for aws or alicloud rds
+            # for aws rds
+            instanceType = "db.t3.micro" 
+
+            # for alicloud rds
+            # instanceType = "mysql.n2.serverless.1c" 
+
+            # specify cloud charge type for alicloud rds
+            # extraMap = {
+            #     "cloudChargeType": "Serverless"
+            # }
+        }
     }
 }
 ```
 
 The configuration code files you need to pay attention to mainly include `dev/main.k` and `dev/platform.k`. Specifically: 
 
-- `dev/main.k` contains config codes for **App Dev** to concentrate on for the wordpress application deployment in dev environment. In addition to the application container image, it also assigns an instance of type `storage.DataBase` to the `frontend.Server.database` attribute, and thus declaring an Alicloud RDS with the charge type of `Serverless` and internet access capability. 
-- `dev/platform.k` contains config codes for **Platform Dev** to concentrate on for the wordpress application deployment in dev environment. Here, the main purpose is to specify the domain name of the cloud database to be connected to for the wordpress application container. 
+- `dev/main.k` contains config codes for **Developer** to concentrate on for the wordpress application deployment in dev environment. In addition to the application container image, it also assigns an instance of type `storage.DataBase` to the `frontend.Server.database` attribute, and thus declaring an RDS with MySQL as the database engine. 
+- `dev/platform.k` contains config codes for **Platform** to concentrate on for the wordpress application deployment in dev environment. Here, the main purpose is to specify the domain name of the cloud database to be connected to for the wordpress application container and the RDS instance type. In addition, we can also declare the RDS charging type and other configurations in `dev/platform.k`.  
 
-As shown above, benefited from the advanced features of KCL concerning variable, function and schema definition, we can abstract and encapsulate the Alicloud RDS resources, which shields many properties that App Dev does not need to be aware of (such as the network segment of VPC and vSwitch behind RDS). App Dev only needs to fill in a few necessary fields in the frontend model instance to complete the declaration of RDS resources, so that the application configuration can be organized more flexibly and efficiently. Moreover, under the collaboration of writing config codes in the Konfig repository, App Dev and Platform Dev from different teams can perform their roles, only focusing on their own respective configuration items, thereby improving the collaboration efficiency of application development and operation. 
+As shown above, benefited from the advanced features of KCL concerning variable, function and schema definition, we can abstract and encapsulate the RDS resources, which shields many properties that Developer does not need to be aware of (such as the network segment of VPC and vSwitch behind RDS). Developer only needs to fill in a few necessary fields in the frontend model instance to complete the declaration of RDS resources, so that the application configuration can be organized more flexibly and efficiently. Moreover, under the collaboration of writing config codes in the Konfig repository, Developer and Platform from different teams can perform their roles, only focusing on their own respective configuration items, thereby improving the collaboration efficiency of application development and operation. 
 
 :::info
 More details about Konfig models can be found in [Konfig](https://github.com/KusionStack/konfig)
 :::
 
-## Deliver Wordpress Application
+## Deliver WordPress Application
 
 You can complete the delivery of wordpress application using the following command line: 
 
@@ -141,7 +199,20 @@ You can complete the delivery of wordpress application using the following comma
 cd appops/wordpress/dev && kusion apply --yes
 ```
 
-![apply the wordpress application](/img/docs/user_docs/getting-started/apply-wordpress-application.png)
+<Tabs>
+<TabItem value="AWS" >
+
+![apply the wordpress application with aws rds](/img/docs/user_docs/getting-started/apply-wordpress-application-with-aws-rds.png)
+
+```mdx-code-block
+</TabItem>
+<TabItem value="Alicloud">
+```
+![apply the wordpress application with alicloud rds](/img/docs/user_docs/getting-started/apply-wordpress-application.png)
+
+```mdx-code-block
+</TabItem>
+</Tabs>
 
 After all the resources reconsiled, we can port-forward our local port (e.g. 12345) to the wordpress frontend service port (80) in the cluster: 
 
@@ -151,25 +222,40 @@ kubectl port-forward -n wordpress-example svc/wordpress 12345:80
 
 ![kubectl port-forward for wordpress](/img/docs/user_docs/getting-started/wordpress-port-forward.png)
 
-## Verify Wordpress Application
+## Verify WordPress Application
 
-Next, we will verify the wordpress site service we just delivered, along with the creation of Alicloud RDS instance it depends on. We can start using the wordpress site by accessing the link of local-forworded port [(http://localhost:12345)](http://localhost:12345) we just configured in the browser. 
+Next, we will verify the wordpress site service we just delivered, along with the creation of RDS instance it depends on. We can start using the wordpress site by accessing the link of local-forworded port [(http://localhost:12345)](http://localhost:12345) we just configured in the browser. 
 
 ![wordpress site page](/img/docs/user_docs/getting-started/wordpress-site-page.png)
 
-In addition, we can also log in to Alicloud Console page to view the RDS instance we just created. 
+In addition, we can also log in to cloud service console page to view the RDS instance we just created. 
+
+<Tabs>
+<TabItem value="AWS" >
+
+![aws rds instance](/img/docs/user_docs/getting-started/aws-rds-instance.png)
+![aws rds instance detailed information](/img/docs/user_docs/getting-started/aws-rds-instance-detail.png)
+
+```mdx-code-block
+</TabItem>
+<TabItem value="Alicloud">
+```
 
 ![alicloud rds instance](/img/docs/user_docs/getting-started/alicloud-rds-instance.png)
 
-## Modify Wordpress Application
+```mdx-code-block
+</TabItem>
+</Tabs>
+
+## Modify WordPress Application
 
 ### Compliance Check of Config Code Modification
 
 Using KCL to write application config codes naturally has the ability to perform type checking on configuration items. Validation logic can also be implemented through keywords like `assert` and `check`, making it more convenient to discover potential issues during the writing of application config codes and reduce the risk of delivering the application with wrong configuration. 
 
-Take creating an Alicloud RDS resources as an example, according to the relevant regulations of Alicloud, if the charge type of RDS is `Serverless`, we can only create `MySQL` instances. The server backend model in Konfig repository has completed the validation logic through the `assert` keyword. Therefor, when we try to modify the database engine of RDS to `PostgreSQL` but forget to modify the charge type of `Serverless`, Kusion will throw the corresponding assertion failure during the compilation process before applying the wordpress application. 
+When creating an RDS resource, for different types of cloud service vendors, we can declare the corresponding RDS instance type, and the Konfig backend model has added the validation logic for the RDS instance type through the `assert` keyword, so when we accidentally modify the RDS instance type to an invalid value in `dev/platform.k`, Kusion will throw a corresponding error during the compilation process before applying the resource. 
 
-![KCL Assertion Failure](/img/docs/user_docs/getting-started/kcl-assertion-failure.png)
+![KCL Assertion Failure](/img/docs/user_docs/getting-started/assert-rds-instance-type.png)
 
 ### Apply Config Code Modification
 
@@ -204,30 +290,38 @@ kusion apply --ignore-fields "metadata.managedFields"
 
 ![kusion 3-way diff](/img/docs/user_docs/getting-started/kusion-3-way-diff.png)
 
-## Delete Wordpress Application
+## Delete WordPress Application
 
-You can use the following command line to delete the wordpress application and related Alicloud RDS resources. 
+You can use the following command line to delete the wordpress application and related RDS resources. 
 
 ```shell
 kusion destroy --yes
 ```
 
-![kusion destroy](/img/docs/user_docs/getting-started/kusion-destroy-wordpress.png)
+<Tabs>
+<TabItem value="AWS" >
+
+![kusion destroy wordpress with aws rds](/img/docs/user_docs/getting-started/kusion-destroy-wordpress-with-aws-rds.png)
+
+```mdx-code-block
+</TabItem>
+<TabItem value="Alicloud">
+```
+
+![kusion destroy wordpress with alicloud rds](/img/docs/user_docs/getting-started/kusion-destroy-wordpress.png)
+
+```mdx-code-block
+</TabItem>
+</Tabs>
 
 ## Summary
 
-This tutorial demonstrates how to use KusionStack to deploy a wordpress application that depends on both Kubernetes and Alicloud RDS resources. During the process of writing and applying wordpress config codes, we can see that with the combination of KCL configuration and policy language, Konfig configuration code library and Kusion execution engine, KusionStack has the advantanges listed below: 
+This tutorial demonstrates how to use KusionStack to deploy a wordpress application that depends on both Kubernetes and RDS resources. During the process of writing and applying wordpress config codes, we can see that with the combination of KCL configuration and policy language, Konfig configuration code library and Kusion execution engine, KusionStack has the advantanges listed below: 
 
-1. **Hybrid resource orchestration**: using KCL to write application config codes make it easy to orchestrate and manage different types of resources in a unified way. In the example of delivering a wordpress application with both Kubernetes and Alicloud IaaS resources, all the necessary dependencies can be declared in a single KCL code file, enabling one-click deployment of the entire application and achieving application-centric operations. 
+1. **Hybrid resource orchestration**: using KCL to write application config codes make it easy to orchestrate and manage different types of resources in a unified way. In the example of delivering a wordpress application with both Kubernetes and IaaS resources provided by cloud vendors, all the necessary dependencies can be declared in a single KCL code file, enabling one-click deployment of the entire application and achieving application-centric operations. 
 
-2. **Application schema abstraction**: using KCL's advanced features such as built-in variables, functions and schema definition can easily abstract and encapsulate the dependent resources of the application, shielding developers from configuration attributes they don't need to be aware of. App Dev only needs to fill in a few necessary fields in the frontend model instance to declare the required resources, which makes it possible to organize application configuration more flexibly and efficiently. 
+2. **Application schema abstraction**: using KCL's advanced features such as built-in variables, functions and schema definition can easily abstract and encapsulate the dependent resources of the application, shielding developers from configuration attributes they don't need to be aware of. Developer only needs to fill in a few necessary fields in the frontend model instance to declare the required resources, which makes it possible to organize application configuration more flexibly and efficiently. 
 
-3. **Multi-team and multi-role collaboration**: under the collaboration of writing config codes in the Konfig repository, App Dev and Platform Dev from different teams can perform their roles, only focusing on their own respective configuration items, thereby improving the collaboration efficiency of application development and operation. 
+3. **Multi-team and multi-role collaboration**: under the collaboration of writing config codes in the Konfig repository, Developer and Platform from different teams can perform their roles, only focusing on their own respective configuration items, thereby improving the collaboration efficiency of application development and operation. 
 
 4. **Shift left compliance check**: using KCL to write application config codes naturally has the ability to perform type checking on configuration items. Additionally, keywords like `assert` and `check` can be used to implement configuration validation logic, making it more convenient to identify potential issues during the writing of application config codes and reducing the risk of delivering the application with wrong configuration. Furthermore, Kusion can provide the 3-way real-time diff before the application is applied, allowing users to preview the configuration changes and thus providing a safer workflow. 
-
-## Full Demonstration Video
-
-The following video will show you a complete demonstration of how to deploy a wordpress application and related Alicloud RDS resources with Kusion command-line tool. 
-
-[![kusionstack-delivery-wordpress-application](/img/docs/user_docs/getting-started/wordpress-video-cover.png)](https://www.youtube.com/watch?v=QHzKKsoKLQ0 "kusionstack-delivery-wordpress-application")
