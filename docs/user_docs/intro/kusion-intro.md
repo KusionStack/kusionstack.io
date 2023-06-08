@@ -15,7 +15,7 @@ To put it simply, KusionStack aims to help developers:
 
 Based on the concept of Platform as Code, developers could define the app delivery life cycle with a **unified organization and operation interface**, fully leverage the **hybrid capability of Kubernetes and cloud**, go through the **end-to-end delivery workflow**, and truly achieve the **centralized definition, arbitrary delivery**.
 
-![](/img/docs/user_docs/intro/kusion-stack-0.png)
+![](https://raw.githubusercontent.com/KusionStack/kusion/main/docs/arch.png)
 
 
 ## What can be done with KusionStack?

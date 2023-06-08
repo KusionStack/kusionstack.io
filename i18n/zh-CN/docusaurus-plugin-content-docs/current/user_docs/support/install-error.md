@@ -1,3 +1,6 @@
+---
+sidebar_position: 1
+---
 # 安装问题
 
 ## 1. 找不到 `libintl.dylib`
