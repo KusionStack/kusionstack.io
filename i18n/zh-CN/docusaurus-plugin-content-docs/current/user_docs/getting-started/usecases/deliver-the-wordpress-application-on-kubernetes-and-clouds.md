@@ -9,6 +9,12 @@ import TabItem from '@theme/TabItem';
 
 本教程将演示如何通过 KusionStack 一键部署 WordPress 应用 (该应用同时依赖 Kubernetes 和云厂商 IaaS 资源)。与我们之前介绍的部署在 Kubernetes 上的 Code-City 应用所不同的是，WordPress 应用还将依赖关系型数据库服务 RDS (Relational Database Service) 以便为 WordPress 网站的文章、页面、评论、用户等信息提供云端数据库解决方案。
 
+## 完整演示
+
+下面的视频将为您完整地演示如何通过 Kusion 命令行工具完成 WordPress 应用以及相关阿里云 RDS 资源的一键部署：
+
+[![kusionstack-delivery-wordpress-application](/img/docs/user_docs/getting-started/wordpress-video-cover.png)](https://www.youtube.com/watch?v=QHzKKsoKLQ0 "kusionstack-delivery-wordpress-application")
+
 ## 前置条件
 
 - [安装 Kusion](/docs/user_docs/getting-started/install)
@@ -319,9 +325,3 @@ kusion destroy --yes
 3. **多团队多角色协作**: 在 Konfig 大库中共同编写配置代码的协作模式下，可能来自于不同团队的 Developer 和 Platform 能够各司其职，不同的角色可以仅关注自己负责的配置代码，从而提高应用研发与运维的协作效率；
 
 4. **配置风险校验左移**: 使用 KCL 编写应用配置代码天然具备配置字段类型检查的能力，此外还可通过 `assert`、`check` 等关键字实现配置校验逻辑，从而能更加方便地在应用配置代码编写时就发现潜在的问题，减小错误配置生效带来的风险，同时，Kusion 还可以在配置生效前提供**三路实时差异比对**的能力，用以预览配置的变更，从而提供一个更加安全的工作流程。
-
-## 完整演示
-
-下面的视频将为您完整地演示如何通过 Kusion 命令行工具完成 WordPress 应用以及相关阿里云 RDS 资源的一键部署：
-
-[![kusionstack-delivery-wordpress-application](/img/docs/user_docs/getting-started/wordpress-video-cover.png)](https://www.youtube.com/watch?v=QHzKKsoKLQ0 "kusionstack-delivery-wordpress-application")
