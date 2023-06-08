@@ -140,15 +140,12 @@ For instructions on the kusion command line tool, execute `kusion -h`, or refer 
 
 ## Applying
 
-完成编译，现在开始下发配置。通过查看 `stdout.golden.yaml` 文件，可以看到 3 个资源：
 Compilation is completed, and now apply the configuration. At the `stdout.golden.yaml` file, you can see 3 resources:
 
 - a Deployment named `deployment-single-stackdev`
 - a Namespace named `deployment-single-stack`
 - a Service named `frontend-service`
 
-该文件的内容已经是 Kubernetes 能够识别的配置，可以使用 `kubectl apply -f stdout.golden.yaml` 直接下发配置，
-也可以使用 `kusion apply` 完成配置编译并下发（该命令包含了配置编译）。
 The content of this file can be directly accepted by Kubernetes.
 You can run `kusion apply` or `kubectl apply -f stdout.golden.yaml` to directly apply the configuration.
 
