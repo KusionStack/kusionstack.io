@@ -715,10 +715,6 @@
     "message": "Events 2022",
     "description": "The label for category Events 2022 in sidebar docs"
   },
-  "sidebar.docs.category.Kusionup Tools": {
-    "message": "Kusionup Tools",
-    "description": "The label for category Kusionup Tools in sidebar docs"
-  },
   "sidebar.docs.category.Prometheus": {
     "message": "Prometheus",
     "description": "The label for category Prometheus in sidebar docs"
@@ -726,10 +722,6 @@
   "sidebar.user_docs.category.Prometheus": {
     "message": "Prometheus",
     "description": "The label for category Prometheus in sidebar user_docs"
-  },
-  "sidebar.reference.category.Kusionup Tools": {
-    "message": "Kusionup Tools",
-    "description": "The label for category Kusionup Tools in sidebar reference"
   },
   "sidebar.events.category.Events 2022": {
     "message": "Events 2022",
