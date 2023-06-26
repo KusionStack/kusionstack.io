@@ -13,9 +13,9 @@ sidebar_position: 2
 + **Easy-to-use**: Originated from high-level languages ​​such as Python and Golang, incorporating functional language features with low side effects.
 + **Well-designed**: Independent Spec-driven syntax, semantics, runtime and system modules design.
 + **Quick modeling**: [Schema](https://kcl-lang.io/#schema)-centric configuration types and modular abstraction.
-+ **Rich capabilities**: Configuration with type, logic and policy based on [Config](https://kusionstack.io/docs/reference/lang/lang/codelab/simple), [Schema](https://kcl-lang.io/docs/reference/lang/tour#schema), [Lambda](https://kcl-lang.io/#function), [Rule](https://kcl-lang.io/#rule).
++ **Rich capabilities**: Configuration with type, logic and policy based on [Config](https://kusionstack.io/docs/reference/lang/lang/codelab/simple), [Schema](https://kcl-lang.io/docs/reference/lang/tour/#schema), [Lambda](https://kcl-lang.io/#function), [Rule](https://kcl-lang.io/#rule).
 + **Stability**: Configuration stability built on [static type system](https://kcl-lang.io/#type-system), [constraints](https://kcl-lang.io/#validation), and [rules](https://kcl-lang.io/#rule).
-+ **Scalability**: High scalability through [automatic merge mechanism](https://kcl-lang.io/docs/reference/lang/tour#operators) of isolated config blocks.
++ **Scalability**: High scalability through [automatic merge mechanism](https://kcl-lang.io/docs/reference/lang/tour/#operators) of isolated config blocks.
 + **Fast automation**: Gradient automation scheme of [CRUD APIs](https://kcl-lang.io/#kcl-cli-variable-override), [multilingual SDKs](https://kusionstack.io/docs/reference/lang/xlang-api/overview), [language plugin](https://github.com/KusionStack/kcl-plugin)
 + **High performance**: High compile time and runtime performance using Rust & C and [LLVM](https://llvm.org/), and support compilation to native code and [WASM](https://webassembly.org/).
 + **API affinity**: Native support API ecological specifications such as [OpenAPI](https://github.com/KusionStack/kcl-openapi), Kubernetes CRD, Kubernetes YAML spec.
