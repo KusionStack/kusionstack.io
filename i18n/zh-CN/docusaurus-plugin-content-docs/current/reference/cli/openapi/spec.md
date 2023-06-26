@@ -308,7 +308,7 @@ schema PersonAdditionalProperties:
 
 ## KCL 文档
 
-KCL doc 规范请参考：[传送门](../kcl/docgen.md)
+KCL doc 规范请参考：[传送门](https://kcl-lang.io/docs/tools/cli/kcl/docgen)
 KCL 文档包含 module 文档、schema 文档两类，其中 schema 文档可以由 OpenAPI 转换得到。KCL schema 文档包含：
 
 - schema 描述信息：位于 schema 声明之后、schema 属性声明之前，是对 schema 的总体介绍

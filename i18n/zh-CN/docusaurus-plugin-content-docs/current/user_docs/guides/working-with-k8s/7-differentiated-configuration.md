@@ -2,8 +2,6 @@
 
 应用的 KCL 配置代码中可以通过添加 if-else 语句搭配魔术变量设置需要的差异化配置，比如根据实际部署的集群名称设置不同的 labels。
 
-> 有关 KCL 语义相关的详细说明，请参阅[表达式](/reference/lang/lang/spec/expressions.md)。
-
 ## 1. 准备工作
 
 可参考：[部署应用服务/准备工作](./1-deploy-server.md#1-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C)

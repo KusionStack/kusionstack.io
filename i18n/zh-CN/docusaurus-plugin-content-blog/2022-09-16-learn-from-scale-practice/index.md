@@ -44,7 +44,7 @@ DevOps 理念在 10 多年前被提出，从 KVM 到容器再到云原生时代�
 
 有什么比一种专用语言更适合开放的、自服务的、面向领域业务的问题定义，同时需要满足自动化、低安全风险、低噪音、易治理的企业内部要求吗？正如记录音乐有五线谱，存储时间序列数据有时序数据库一样，在平台工程的特定问题域内，一批配置和策略语言用于编写和管理规模化复杂配置及策略。不同于混合编写范式、混合工程能力的高级通用语言，这类专用语言的核心逻辑是以收敛的有限的语法、语义集合解决领域问题近乎无限的变化和复杂性，将规模化复杂配置和策略编写思路和方式沉淀到语言特性中。
 
-在蚂蚁的平台工程实践中，我们强化了客户端的工作方式，将围绕应用运维生命周期的模型、编排、约束和策略稳定、可扩展的通过专用语言  [KCL](https://github.com/KusionStack/KCLVM)  编写维护在共享仓库 [Konfig](https://github.com/KusionStack/konfig) 中。 KCL 是一种面向有编程能力的应用研发者的静态强类型语言，提供现代高级语言的编写体验和围绕领域目的有限功能。在平台工程实践中 KCL 不是一种仅用于编写 K-V 对的语言，而是一种面向平台工程领域的专用语言。应用研发者、SRE、平台研发者面向 Konfig 协同研发，通过 KCL 原生功能编写应用配置，以及在 PaaS 领域更为高频和复杂的[模型](https://kusionstack.io/docs/reference/lang/lang/tour/#schema)抽象、[功能函数](https://kusionstack.io/docs/reference/lang/lang/tour/#function)和[约束](https://kusionstack.io/docs/reference/lang/lang/tour/#validation)[规则](https://kusionstack.io/docs/reference/lang/lang/tour/#rule)，即编写稳定、可扩展的业务模型、业务逻辑、防错约束和环境规则。Konfig 仓库则成为统一的编程界面，工作空间和业务层载体，而基于 KCL 的安全、低噪音、低副作用、一致的编写范式更有利于长期管理和治理。
+在蚂蚁的平台工程实践中，我们强化了客户端的工作方式，将围绕应用运维生命周期的模型、编排、约束和策略稳定、可扩展的通过专用语言  [KCL](https://github.com/KusionStack/KCLVM)  编写维护在共享仓库 [Konfig](https://github.com/KusionStack/konfig) 中。 KCL 是一种面向有编程能力的应用研发者的静态强类型语言，提供现代高级语言的编写体验和围绕领域目的有限功能。在平台工程实践中 KCL 不是一种仅用于编写 K-V 对的语言，而是一种面向平台工程领域的专用语言。应用研发者、SRE、平台研发者面向 Konfig 协同研发，通过 KCL 原生功能编写应用配置，以及在 PaaS 领域更为高频和复杂的[模型](https://kcl-lang.io/docs/reference/lang/tour/#schema)抽象、[功能函数](https://kcl-lang.io/docs/reference/lang/tour/#function)和[约束](https://kcl-lang.io/docs/reference/lang/tour/#validation)[规则](https://kcl-lang.io/docs/reference/lang/tour/#rule)，即编写稳定、可扩展的业务模型、业务逻辑、防错约束和环境规则。Konfig 仓库则成为统一的编程界面，工作空间和业务层载体，而基于 KCL 的安全、低噪音、低副作用、一致的编写范式更有利于长期管理和治理。
 
 ![](/img/blog/2022-09-16-learn-from-scale-practice/kcl-dev.png)
 
@@ -58,8 +58,8 @@ DevOps 理念在 10 多年前被提出，从 KVM 到容器再到云原生时代�
 在蚂蚁的实践中，Konfig  monorepo 是内部工程平台向研发者开放的编程界面和工作空间，帮助应用研发者以统一的编程界面编写围绕应用运维生命周期的配置和策略，从而编排和使用存量和新增的平台基础设施，按需创建管理云原生环境以及基于 RBAC 的权限，并通过 GitOps 方式管理交付过程。Konfig monorepo 为不同场景、项目、应用提供了独立的白盒的编程空间，其内生的扩展性来源于：
 
 - 灵活、可扩展、独立的客户端的 [工程结构设计](https://kusionstack.io/docs/user_docs/concepts/konfig)
-- 独立配置块 [自动合并技术](https://kusionstack.io/docs/reference/lang/lang/tour/#-operators-1)支持任意分块、可扩展的配置块组织
-- [静态类型系统](https://kusionstack.io/docs/reference/lang/lang/tour/#type-system)技术提供现代编程语言可复用、可扩展的类型化建模和约束功能
+- 独立配置块 [自动合并技术](https://kcl-lang.io/docs/reference/lang/tour/#-operators-1)支持任意分块、可扩展的配置块组织
+- [静态类型系统](https://kcl-lang.io/docs/reference/lang/tour/#type-system)技术提供现代编程语言可复用、可扩展的类型化建模和约束功能
 - 项目粒度的 GitOps CI 工作流程定义支持
 - 基于 [Kusion](https://github.com/KusionStack/kusion) 引擎的 provision 技术选择
 
@@ -83,8 +83,8 @@ Konfig monorepo 提供了分治的、可组合的工程结构设计、代码组�
 在蚂蚁的实践中，面向终端用户即应用研发者我们采用了抽象模型的方式，通过如下思路解决几个关键问题：
 
 - 面向典型应用场景（如蚂蚁的 Sofa 应用）建模，这些模型由平台研发者、平台 SRE 主导开发，与应用研发者共同维护，达到用户体验、成本和标准兼容的平衡，在蚂蚁的实践中抽象模型的信息熵收敛比约为 1：5，通过广泛的高频使用保证建模投入的边际收益。
-- 对于非典型用户场景或应用，由平台研发者、平台 SRE 支持应用研发者完成针对应用的模型设计。KCL [schema](https://kusionstack.io/docs/reference/lang/lang/tour/#schema) 和 [mixin](https://kusionstack.io/docs/reference/lang/lang/tour#protocol--mixin) 等机制帮助用户建模、抽象、继承、组合、复用，减少重复代码，事实上这样的建模设计工作也是应用 PaaS 领域的重点之一，但对于这样的场景我们需要更合理的分工。最终大量 “非标” 平台技术在蚂蚁内部首次以一致的方式被纳管，有效解决了长尾问题。在典型协同模式下，平台研发者、平台 SRE 编写平台能力基础组件成为 “Enabler”，帮助应用研发者使用平台能力基础组件快速“搭积木”，完成其应用模型的研发工作。
-- 面向平台技术，我们提供了平台 API Spec 到 KCL 类型代码的[生成技术](https://kusionstack.io/docs/reference/cli/openapi/)，并通过[组合编译技术](https://kusionstack.io/docs/reference/lang/lang/tour/#multi-file-compilation)原生支持对不同 Kubernetes API 版本的编译时选择，在内部实践中解决了应用抽象模型面向不同版本 Kubernetes 集群工作的灵活需求。同时，KCL 支持 [in-schema 约束](https://kusionstack.io/docs/reference/lang/lang/tour/#validation)和独立环境[规则](https://kusionstack.io/docs/reference/lang/lang/tour/#rule)的编写。此外，KCL 还提供了 [deprecated 装饰器](https://kusionstack.io/docs/reference/lang/lang/tour/#decorators)支持对已下线模型或模型属性的标注。通过在客户端健壮的、完备的模型和约束机制，在编译时暴露如配置错误、类型漂移等常见问题。相对于运行时左移的发现问题，避免推进到集群时发生运行时错误或故障，这也是企业内，特别是高风险等级企业，对生产环境稳定性的必须要求。
+- 对于非典型用户场景或应用，由平台研发者、平台 SRE 支持应用研发者完成针对应用的模型设计。KCL [schema](https://kcl-lang.io/docs/reference/lang/tour/#schema) 和 [mixin](https://kcl-lang.io/docs/reference/lang/tour/#protocol--mixin) 等机制帮助用户建模、抽象、继承、组合、复用，减少重复代码，事实上这样的建模设计工作也是应用 PaaS 领域的重点之一，但对于这样的场景我们需要更合理的分工。最终大量 “非标” 平台技术在蚂蚁内部首次以一致的方式被纳管，有效解决了长尾问题。在典型协同模式下，平台研发者、平台 SRE 编写平台能力基础组件成为 “Enabler”，帮助应用研发者使用平台能力基础组件快速“搭积木”，完成其应用模型的研发工作。
+- 面向平台技术，我们提供了平台 API Spec 到 KCL 类型代码的[生成技术](https://kusionstack.io/docs/reference/cli/openapi/)，并通过[组合编译技术](https://kcl-lang.io/docs/reference/lang/tour/#multi-file-compilation)原生支持对不同 Kubernetes API 版本的编译时选择，在内部实践中解决了应用抽象模型面向不同版本 Kubernetes 集群工作的灵活需求。同时，KCL 支持 [in-schema 约束](https://kcl-lang.io/docs/reference/lang/tour/#validation)和独立环境[规则](https://kcl-lang.io/docs/reference/lang/tour/#rule)的编写。此外，KCL 还提供了 [deprecated 装饰器](https://kcl-lang.io/docs/reference/lang/tour/#decorators)支持对已下线模型或模型属性的标注。通过在客户端健壮的、完备的模型和约束机制，在编译时暴露如配置错误、类型漂移等常见问题。相对于运行时左移的发现问题，避免推进到集群时发生运行时错误或故障，这也是企业内，特别是高风险等级企业，对生产环境稳定性的必须要求。
 
 对于基础平台技术的专家型用户，他们通常非常熟悉特定的技术领域，更希望以直面平台细节的显式的方式工作，语言提供必要的动态性和模块化支持，通过类型和约束机制保证稳定性。但这种显式的方式无法解决专家用户不熟悉跨领域平台技术使用细节的问题，也不能解决面向平台技术的扩展性和复杂性叠加的问题。在蚂蚁内部小范围基于 YAML 的显式的工程实践中，面向大量高度开放、可配置的平台技术，复杂性随着平台技术使用率持续叠加，最终陷入难以阅读、编写、约束、测试及维护的僵化状态。
 
@@ -114,7 +114,6 @@ Konfig monorepo 提供了分治的、可组合的工程结构设计、代码组�
 - [https://web.devopstopologies.com/#anti-types](https://web.devopstopologies.com/#anti-types)
 - [https://github.com/KusionStack/kusion](https://github.com/KusionStack/kusion)
 - [https://github.com/KusionStack/KCLVM](https://github.com/KusionStack/KCLVM)
-- [https://kusionstack.io/docs/reference/lang/lang/tour](https://kusionstack.io/docs/reference/lang/lang/tour/#%E9%85%8D%E7%BD%AE%E6%93%8D%E4%BD%9C)
 - [https://kusionstack.io/docs/user_docs/concepts/konfig](https://kusionstack.io/docs/user_docs/concepts/konfig)
 - [https://kcl-lang.io/blog/2022-declarative-config-overview#35-performance](https://kcl-lang.io/blog/2022-declarative-config-overview#35-performance)
 - [https://cacm.acm.org/magazines/2016/7/204032-why-google-stores-billions-of-lines-of-code-in-a-single-repository/fulltext](https://cacm.acm.org/magazines/2016/7/204032-why-google-stores-billions-of-lines-of-code-in-a-single-repository/fulltext)

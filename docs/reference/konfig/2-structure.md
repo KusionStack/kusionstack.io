@@ -1,6 +1,6 @@
 ---
 id: structure
-sidebar_label: dir-struct
+sidebar_label: Dir Struct
 ---
 # Konfig Dir Struct
 

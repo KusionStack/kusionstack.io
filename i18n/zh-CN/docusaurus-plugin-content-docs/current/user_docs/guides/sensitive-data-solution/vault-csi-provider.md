@@ -29,7 +29,7 @@
 2、下载开源 Konfig 大库
 
 在本篇指南中，需要用到部分已经抽象实现的 KCL 模型。
-有关 KCL 语言的介绍，可以参考 [Tour of KCL](/reference/lang/lang/tour.md)。
+有关 KCL 语言的介绍，可以参考 [Tour of KCL](https://kcl-lang.io/)。
 
 仓库地址： https://github.com/KusionStack/konfig.git
 

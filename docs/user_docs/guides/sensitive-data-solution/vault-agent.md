@@ -29,7 +29,7 @@ See [Download and Install](/docs/user_docs/getting-started/install) for more det
 2、Clone Konfig repo
 
 In this guide, we need some KCL models that [Konfig](https://github.com/KusionStack/konfig.git) offers.
-For more details on KCL language, please refer to [Tour of KCL](/docs/reference/lang/lang/tour).
+For more details on KCL language, please refer to [Tour of KCL](https://kcl-lang.io/).
 
 3、Running Kubernetes cluster
 

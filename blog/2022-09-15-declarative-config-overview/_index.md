@@ -170,11 +170,11 @@ Fig. 5: KCL core features.
 
 - **Easy-to-use**: Originated from high-level languages ​​such as Python and Golang, incorporating functional language features with low side effects.
 - **Well-designed**: Independent Spec-driven syntax, semantics, runtime and system modules design.
-- **Quick modeling**: [Schema](https://kusionstack.io/docs/reference/lang/lang/tour#schema)-centric configuration types and modular abstraction.
-- **Rich capabilities**: Configuration with type, logic and policy based on [Config](https://kusionstack.io/docs/reference/lang/lang/codelab/simple), [Schema](https://kusionstack.io/docs/reference/lang/lang/tour/#schema), [Lambda](https://kusionstack.io/docs/reference/lang/lang/tour/#function), [Rule](https://kusionstack.io/docs/reference/lang/lang/tour/#rule).
-- **Stability**: Configuration stability built on [static type system](https://kusionstack.io/docs/reference/lang/lang/tour/#type-system), [constraints](https://kusionstack.io/docs/reference/lang/lang/tour/#validation), and [rules](https://kusionstack.io/docs/reference/lang/lang/tour#rule).
-- **Scalability**: High scalability through [automatic merge mechanism](https://kusionstack.io/docs/reference/lang/lang/tour/#-operators-1) of isolated config blocks.
-- **Fast automation**: Gradient automation scheme of [CRUD APIs](https://kusionstack.io/docs/reference/lang/lang/tour/#kcl-cli-variable-override), [multilingual SDKs](https://kusionstack.io/docs/reference/lang/xlang-api/overview), [language plugin](https://github.com/KusionStack/kcl-plugin)
+- **Quick modeling**: [Schema](https://kcl-lang.io/docs/reference/lang/tour/#schema)-centric configuration types and modular abstraction.
+- **Rich capabilities**: Configuration with type, logic and policy based on [Config](https://kusionstack.io/docs/reference/lang/lang/codelab/simple), [Schema](https://kcl-lang.io/docs/reference/lang/tour/#schema), [Lambda](https://kcl-lang.io/docs/reference/lang/tour/#function), [Rule](https://kcl-lang.io/docs/reference/lang/tour/#rule).
+- **Stability**: Configuration stability built on [static type system](https://kcl-lang.io/docs/reference/lang/tour/#type-system), [constraints](https://kcl-lang.io/docs/reference/lang/tour/#validation), and [rules](https://kcl-lang.io/docs/reference/lang/tour/#rule).
+- **Scalability**: High scalability through [automatic merge mechanism](https://kcl-lang.io/docs/reference/lang/tour/#operators) of isolated config blocks.
+- **Fast automation**: Gradient automation scheme of [CRUD APIs](https://kcl-lang.io/docs/reference/lang/tour/#kcl-cli-variable-override), [multilingual SDKs](https://kusionstack.io/docs/reference/lang/xlang-api/overview), [language plugin](https://github.com/KusionStack/kcl-plugin)
 - **High performance**: High compile time and runtime performance using Rust & C and [LLVM](https://llvm.org/), and support compilation to native code and [WASM](https://webassembly.org/).
 - **API affinity**: Native support API ecological specifications such as [OpenAPI](https://github.com/KusionStack/kcl-openapi), Kubernetes CRD, Kubernetes YAML spec.
 - **Development friendly**: Friendly development experiences with rich [language tools](https://kusionstack.io/docs/reference/cli/kcl/) (Format, Lint, Test, Vet, Doc, etc.) and [IDE plugins](https://github.com/KusionStack/vscode-kcl).
@@ -185,7 +185,7 @@ Fig. 5: KCL core features.
 
 Fig. 6: KCL core design.
 
-For more language design and capabilities, see [KCL Documents](https://kusionstack.io/docs/reference/lang/lang/tour). Although KCL is not a general language, it has corresponding application scenarios. As shown in Fig. 6, developers can write **config**, **schema**, **function** and **rule** through KCL, where config is used to define data, schema is used to describe the model definition of data, rule is used to validate data, and schema and rule can also be combined to use models and constraints that fully describe data, In addition, we can also use the lambda pure function in KCL to organize data code, encapsulate common code, and call it directly when needed.
+For more language design and capabilities, see [KCL Documents](https://kcl-lang.io/docs/reference/lang/tour/). Although KCL is not a general language, it has corresponding application scenarios. As shown in Fig. 6, developers can write **config**, **schema**, **function** and **rule** through KCL, where config is used to define data, schema is used to describe the model definition of data, rule is used to validate data, and schema and rule can also be combined to use models and constraints that fully describe data, In addition, we can also use the lambda pure function in KCL to organize data code, encapsulate common code, and call it directly when needed.
 
 For use cases, KCL can perform structured K-V data validation complex configuration model definition and abstraction, strong constraint verification to avoid configuration errors, automation integration and engineering expansion. These features and use cases are described below.
 
@@ -759,7 +759,7 @@ The blog gives the landscape overview of declarative configuration technology, f
 - Kustomize: [https://kustomize.io/](https://kustomize.io/)
 - Kube-linter: [https://github.com/stackrox/kube-linter](https://github.com/stackrox/kube-linter)
 - Checkov: [https://github.com/bridgecrewio/checkov](https://github.com/bridgecrewio/checkov)
-- KCL Documents: [https://kusionstack.io/docs/reference/lang/lang/tour](https://kusionstack.io/docs/reference/lang/lang/tour)
+- KCL Documents: [https://kcl-lang.io/docs/reference/lang/tour/](https://kcl-lang.io/docs/reference/lang/tour/)
 - How Terraform Works: A Visual Intro: [https://betterprogramming.pub/how-terraform-works-a-visual-intro-6328cddbe067](https://betterprogramming.pub/how-terraform-works-a-visual-intro-6328cddbe067) 
 - How Terraform Works: Modules Illustrated: [https://awstip.com/terraform-modules-illustrate-26cbc48be83a](https://awstip.com/terraform-modules-illustrate-26cbc48be83a)
 - Helm: [https://helm.sh/](https://helm.sh/)

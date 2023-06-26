@@ -170,11 +170,11 @@ KCL 的核心特性是其**建模**和**约束**能力，KCL 核心功能基本�
 
 - **简单易用**：源于 Python、Golang 等高级语言，采纳函数式编程语言特性，低副作用
 - **设计良好**：独立的 Spec 驱动的语法、语义、运行时和系统库设计
-- **快速建模**：以 [Schema](https://kusionstack.io/docs/reference/lang/lang/tour#schema) 为中心的配置类型及模块化抽象
-- **功能完备**：基于 [Config](https://kusionstack.io/docs/reference/lang/lang/codelab/simple)、[Schema](https://kusionstack.io/docs/reference/lang/lang/tour/#schema)、[Lambda](https://kusionstack.io/docs/reference/lang/lang/tour/#function)、[Rule](https://kusionstack.io/docs/reference/lang/lang/tour/#rule) 的配置及其模型、逻辑和策略编写
-- **可靠稳定**：依赖[静态类型系统](https://kusionstack.io/docs/reference/lang/lang/tour/#type-system)、[约束](https://kusionstack.io/docs/reference/lang/lang/tour/#validation)和[自定义规则](https://kusionstack.io/docs/reference/lang/lang/tour#rule)的配置稳定性
-- **强可扩展**：通过独立配置块[自动合并机制](https://kusionstack.io/docs/reference/lang/lang/tour/#-operators-1)保证配置编写的高可扩展性
-- **易自动化**：[CRUD APIs](https://kusionstack.io/docs/reference/lang/lang/tour/#kcl-cli-variable-override)，[多语言 SDK](https://kusionstack.io/docs/reference/lang/xlang-api/overview)，[语言插件](https://github.com/KusionStack/kcl-plugin) 构成的梯度自动化方案
+- **快速建模**：以 [Schema](https://kcl-lang.io/docs/reference/lang/tour) 为中心的配置类型及模块化抽象
+- **功能完备**：基于 [Config](https://kusionstack.io/docs/reference/lang/lang/codelab/simple)、[Schema](https://kcl-lang.io/docs/reference/lang/tour/#schema)、[Lambda](https://kcl-lang.io/docs/reference/lang/tour/#function)、[Rule](https://kcl-lang.io/docs/reference/lang/tour/#rule) 的配置及其模型、逻辑和策略编写
+- **可靠稳定**：依赖[静态类型系统](https://kcl-lang.io/docs/reference/lang/tour/#type-system)、[约束](https://kcl-lang.io/docs/reference/lang/tour/#validation)和[自定义规则](https://kcl-lang.io/docs/reference/lang/tour/#rule)的配置稳定性
+- **强可扩展**：通过独立配置块[自动合并机制](https://kcl-lang.io/docs/reference/lang/tour/#operators)保证配置编写的高可扩展性
+- **易自动化**：[CRUD APIs](https://kcl-lang.io/docs/reference/lang/tour/#kcl-cli-variable-override)，[多语言 SDK](https://kusionstack.io/docs/reference/lang/xlang-api/overview)，[语言插件](https://github.com/KusionStack/kcl-plugin) 构成的梯度自动化方案
 - **极致性能**：使用 Rust & C，[LLVM](https://llvm.org/) 实现，支持编译到本地代码和 [WASM](https://webassembly.org/) 的高性能编译时和运行时
 - **API 亲和**：原生支持 [OpenAPI](https://github.com/KusionStack/kcl-openapi)、 Kubernetes CRD， Kubernetes YAML 等 API 生态规范
 - **开发友好**：[语言工具](https://kusionstack.io/docs/reference/cli/kcl/) (Format，Lint，Test，Vet，Doc 等)、 [IDE 插件](https://github.com/KusionStack/vscode-kcl) 构建良好的研发体验
@@ -184,7 +184,7 @@ KCL 的核心特性是其**建模**和**约束**能力，KCL 核心功能基本�
 ![](/img/blog/2022-09-15-declarative-config-overview/06-kcl-code-design.png)
 图 6 KCL 语言核心设计
 
-更多语言设计和能力详见 [KCL 文档](https://kusionstack.io/docs/reference/lang/lang/tour)，尽管 KCL 不是通用语言，但它有相应的应用场景，如图 6 所示，研发者可以通过 KCL 编写**配置(config)**、**模型(schema)**、**函数(lambda)**及**规则(rule)**，其中 Config 用于定义数据，Schema 用于对数据的模型定义进行描述，Rule 用于对数据进行校验，并且 Schema 和 Rule 还可以组合使用用于完整描述数据的模型及其约束，此外还可以使用 KCL 中的 lambda 纯函数进行数据代码组织，将常用代码封装起来,在需要使用时可以直接调用。 
+更多语言设计和能力详见 [KCL 文档](https://kcl-lang.io/)，尽管 KCL 不是通用语言，但它有相应的应用场景，如图 6 所示，研发者可以通过 KCL 编写**配置(config)**、**模型(schema)**、**函数(lambda)**及**规则(rule)**，其中 Config 用于定义数据，Schema 用于对数据的模型定义进行描述，Rule 用于对数据进行校验，并且 Schema 和 Rule 还可以组合使用用于完整描述数据的模型及其约束，此外还可以使用 KCL 中的 lambda 纯函数进行数据代码组织，将常用代码封装起来,在需要使用时可以直接调用。 
 
 对于使用场景而言，KCL 的可以进行结构化 KV 数据验证、复杂配置模型定义与抽象、强约束校验避免配置错误、分块编写及配置合并能力、自动化集成和工程扩展等能力，下面针对这些功能和使用场景进行阐述。
 
@@ -211,7 +211,7 @@ KCL 的核心特性是其**建模**和**约束**能力，KCL 核心功能基本�
 图 10 使用 KCL 的语言能力集成领域模型并抽象用户模型并使用
 
 - 更多参考文档
-  - KCL Schema：[https://kusionstack.io/docs/reference/lang/lang/tour#schema](https://kusionstack.io/docs/reference/lang/lang/tour#schema)
+  - KCL Schema：[https://kcl-lang.io/docs/reference/lang/tour/#schema](https://kcl-lang.io/docs/reference/lang/tour/#schema)
   - KCL OpenAPI 规范：[https://kusionstack.io/docs/reference/cli/openapi/spec](https://kusionstack.io/docs/reference/cli/openapi/spec)
   - KCL Konfig 配置大库概览：[https://kusionstack.io/docs/reference/konfig/overview](https://kusionstack.io/docs/reference/konfig/overview)
 
@@ -753,7 +753,7 @@ output "r10" {
 - Kustomize: [https://kustomize.io/](https://kustomize.io/)
 - Kube-linter: [https://github.com/stackrox/kube-linter](https://github.com/stackrox/kube-linter)
 - Checkov: [https://github.com/bridgecrewio/checkov](https://github.com/bridgecrewio/checkov)
-- KCL Documents: [https://kusionstack.io/docs/reference/lang/lang/tour](https://kusionstack.io/docs/reference/lang/lang/tour)
+- KCL Documents: [https://kcl-lang.io/](https://kcl-lang.io/)
 - How Terraform Works: A Visual Intro: [https://betterprogramming.pub/how-terraform-works-a-visual-intro-6328cddbe067](https://betterprogramming.pub/how-terraform-works-a-visual-intro-6328cddbe067) 
 - How Terraform Works: Modules Illustrated: [https://awstip.com/terraform-modules-illustrate-26cbc48be83a](https://awstip.com/terraform-modules-illustrate-26cbc48be83a)
 - Helm: [https://helm.sh/](https://helm.sh/)

@@ -1,4 +1,4 @@
-# Version Info
+# Version 
 
 打印 kusion 的版本信息
 

@@ -5,7 +5,7 @@ such as setting different labels according to the actual deployed cluster name.
 
 :::tip
 
-About KCL semantics, please read [Expressions](/docs/reference/lang/lang/spec/expressions) for more details.
+About KCL semantics, please visit [KCL](https://kcl-lang.io/) for more details.
 :::
 
 ## Prerequisites
