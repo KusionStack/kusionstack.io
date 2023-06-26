@@ -7,15 +7,15 @@ import TabItem from '@theme/TabItem';
 
 # Deliver the WordPress application on Kubernetes and clouds
 
-This tutorial will demonstrate how to deploy a wordpress application using KusionStack which relies on both Kubernetes and IaaS resources provided by cloud vendors. Unlike the code-city application we previously deployed on Kubernetes, the wordpress application will also rely on RDS (Relational Database Service) to provide a cloud-based database solution for wordpress website content such as articles, comments, users and other information. 
+This tutorial will demonstrate how to deploy a WordPress application using KusionStack, which relies on both Kubernetes and IaaS resources provided by cloud vendors. Unlike the code-city application we previously deployed on Kubernetes, the WordPress application will also rely on RDS (Relational Database Service) to provide a cloud-based database solution for WordPress website content, such as articles, comments, users, and other information. 
 
 ## Full Demonstration Video
 
-The following video will show you a complete demonstration of how to deploy a wordpress application and related Alicloud RDS resources with Kusion command-line tool. 
+The following video will show you a complete demonstration of how to deploy a WordPress application and related Alicloud RDS resources with the Kusion command-line tool.
 
 [![kusionstack-delivery-wordpress-application](/img/docs/user_docs/getting-started/wordpress-video-cover.png)](https://www.youtube.com/watch?v=QHzKKsoKLQ0 "kusionstack-delivery-wordpress-application")
 
-## Prerequesties
+## Prerequisites
 
 - [Install Kusion](/docs/user_docs/getting-started/install)
 - [Deploy Kubernetes](https://kubernetes.io/) or [Kind](https://kind.sigs.k8s.io/)
@@ -51,7 +51,7 @@ export ALICLOUD_SECRET_KEY="nxuowIxxx" # replace it with your SecretKey
 </Tabs>
 
 :::info
-Alternatively, Kusion provides a sensitive data management tool for handling the AccessKey and SecretKey mentioned above.
+Alternatively, Kusion provides a **Secret as Code** solution for handling the AccessKey and SecretKey mentioned above.
 :::
 
 ## Review Project Structure and Config Codes
@@ -64,7 +64,7 @@ Firstly, let's clone the Konfig repo and enter the root directory:
 git clone git@github.com:KusionStack/konfig.git && cd konfig
 ```
 
-Then we can locate the `wordpress` project under the `appops/` directory, which are composed of the following files: 
+Then we can locate the `wordpress` project under the `appops/` directory, which is composed of the following files: 
 
 ```shell
 cd appops/wordpress && tree
@@ -182,10 +182,10 @@ wordpress: frontend.Server {
 
 The configuration code files you need to pay attention to mainly include `dev/main.k` and `dev/platform.k`. Specifically: 
 
-- `dev/main.k` contains config codes for **Developer** to concentrate on for the wordpress application deployment in dev environment. In addition to the application container image, it also assigns an instance of type `storage.DataBase` to the `frontend.Server.database` attribute, and thus declaring an RDS with MySQL as the database engine. 
-- `dev/platform.k` contains config codes for **Platform** to concentrate on for the wordpress application deployment in dev environment. Here, the main purpose is to specify the domain name of the cloud database to be connected to for the wordpress application container and the RDS instance type. In addition, we can also declare the RDS charging type and other configurations in `dev/platform.k`.  
+- `dev/main.k` contains config codes for **Developer** to concentrate on for the WordPress application deployment in the dev environment. In addition to the application container image, it also assigns an instance of a type `storage.DataBase` to the `frontend.Server.database` attribute, and thus declaring an RDS with MySQL as the database engine. 
+- `dev/platform.k` contains config codes for **Platform** to concentrate on for the WordPress application deployment in the dev environment. Here, the main purpose is to specify the domain name of the cloud database to be connected to for the WordPress application container and the RDS instance type. In addition, we can also declare the RDS charging type and other configurations in `dev/platform.k`.  
 
-As shown above, benefited from the advanced features of KCL concerning variable, function and schema definition, we can abstract and encapsulate the RDS resources, which shields many properties that Developer does not need to be aware of (such as the network segment of VPC and vSwitch behind RDS). Developer only needs to fill in a few necessary fields in the frontend model instance to complete the declaration of RDS resources, so that the application configuration can be organized more flexibly and efficiently. Moreover, under the collaboration of writing config codes in the Konfig repository, Developer and Platform from different teams can perform their roles, only focusing on their own respective configuration items, thereby improving the collaboration efficiency of application development and operation. 
+As shown above, benefiting from the advanced features of KCL concerning variable, function, and schema definition, we can abstract and encapsulate the RDS resources, which shields many properties that the Developer does not need to be aware of (such as the network segment of VPC and vSwitch behind RDS). The developer only needs to fill in a few necessary fields in the frontend model instance to complete the declaration of RDS resources, so that the application configuration can be organized more flexibly and efficiently. Moreover, under the collaboration of writing config codes in the Konfig repository, Developers and Platforms from different teams can perform their roles, only focusing on their own respective configuration items, thereby improving the collaboration efficiency of application development and operation. 
 
 :::info
 More details about Konfig models can be found in [Konfig](https://github.com/KusionStack/konfig)
@@ -193,7 +193,7 @@ More details about Konfig models can be found in [Konfig](https://github.com/Kus
 
 ## Deliver WordPress Application
 
-You can complete the delivery of wordpress application using the following command line: 
+You can complete the delivery of the WordPress application using the following command line:
 
 ```shell
 cd appops/wordpress/dev && kusion apply --yes
@@ -214,7 +214,7 @@ cd appops/wordpress/dev && kusion apply --yes
 </TabItem>
 </Tabs>
 
-After all the resources reconsiled, we can port-forward our local port (e.g. 12345) to the wordpress frontend service port (80) in the cluster: 
+After all the resources reconciled, we can port-forward our local port (e.g. 12345) to the WordPress frontend service port (80) in the cluster:
 
 ```shell
 kubectl port-forward -n wordpress-example svc/wordpress 12345:80
@@ -224,11 +224,11 @@ kubectl port-forward -n wordpress-example svc/wordpress 12345:80
 
 ## Verify WordPress Application
 
-Next, we will verify the wordpress site service we just delivered, along with the creation of RDS instance it depends on. We can start using the wordpress site by accessing the link of local-forworded port [(http://localhost:12345)](http://localhost:12345) we just configured in the browser. 
+Next, we will verify the WordPress site service we just delivered, along with the creation of the RDS instance it depends on. We can start using the WordPress site by accessing the link of local-forwarded port [(http://localhost:12345)](http://localhost:12345) we just configured in the browser. 
 
 ![wordpress site page](/img/docs/user_docs/getting-started/wordpress-site-page.png)
 
-In addition, we can also log in to cloud service console page to view the RDS instance we just created. 
+In addition, we can also log in to the cloud service console page to view the RDS instance we just created.
 
 <Tabs>
 <TabItem value="AWS" >
@@ -251,7 +251,7 @@ In addition, we can also log in to cloud service console page to view the RDS in
 
 ### Compliance Check of Config Code Modification
 
-Using KCL to write application config codes naturally has the ability to perform type checking on configuration items. Validation logic can also be implemented through keywords like `assert` and `check`, making it more convenient to discover potential issues during the writing of application config codes and reduce the risk of delivering the application with wrong configuration. 
+Using KCL to write application config codes naturally has the ability to perform type-checking on configuration items. Validation logic can also be implemented through keywords like `assert` and `check`, making it more convenient to discover potential issues during the writing of application config codes and reduce the risk of delivering the application with the wrong configuration. 
 
 When creating an RDS resource, for different types of cloud service vendors, we can declare the corresponding RDS instance type, and the Konfig backend model has added the validation logic for the RDS instance type through the `assert` keyword, so when we accidentally modify the RDS instance type to an invalid value in `dev/platform.k`, Kusion will throw a corresponding error during the compilation process before applying the resource. 
 
@@ -259,7 +259,7 @@ When creating an RDS resource, for different types of cloud service vendors, we 
 
 ### Apply Config Code Modification
 
-As shown below, you can try to modify the config codes in `dev/main.k` to add an environment variable in the main container of the wordpress application. When using `kusion apply` to apply the config code modification, you can preview the resource changes with the capability of 3-way real-time diff of Kusion (note that we ignore the change of `metadata.managedFields` field in the following example for better demonstration). 
+As shown below, you can try to modify the config codes in the file `dev/main.k` to add an environment variable in the main container of the WordPress application. When using `kusion apply` to apply the config code modification, you can preview the resource changes with the capability of 3-way real-time diff of Kusion (note that we ignore the change of `metadata.managedFields` field in the following example for better demonstration). 
 
 ```python
 # dev/main.k
@@ -292,7 +292,7 @@ kusion apply --ignore-fields "metadata.managedFields"
 
 ## Delete WordPress Application
 
-You can use the following command line to delete the wordpress application and related RDS resources. 
+You can delete the WordPress application and related RDS resources using the following command line. 
 
 ```shell
 kusion destroy --yes
@@ -316,12 +316,12 @@ kusion destroy --yes
 
 ## Summary
 
-This tutorial demonstrates how to use KusionStack to deploy a wordpress application that depends on both Kubernetes and RDS resources. During the process of writing and applying wordpress config codes, we can see that with the combination of KCL configuration and policy language, Konfig configuration code library and Kusion execution engine, KusionStack has the advantanges listed below: 
+This tutorial demonstrates how to use KusionStack to deploy a WordPress application that depends on both Kubernetes and RDS resources. During the process of writing and applying WordPress config codes, we can see that with the combination of KCL configuration and policy language, Konfig configuration code library, and Kusion execution engine, KusionStack has the advantages listed below: 
 
-1. **Hybrid resource orchestration**: using KCL to write application config codes make it easy to orchestrate and manage different types of resources in a unified way. In the example of delivering a wordpress application with both Kubernetes and IaaS resources provided by cloud vendors, all the necessary dependencies can be declared in a single KCL code file, enabling one-click deployment of the entire application and achieving application-centric operations. 
+1. **Hybrid resource orchestration**: using KCL to write application config codes make it easy to orchestrate and manage different types of resources in a unified way. In the example of delivering a WordPress application with both Kubernetes and IaaS resources provided by cloud vendors, all the necessary dependencies can be declared in a single KCL code file, enabling the one-click deployment of the entire application and achieving application-centric operations. 
 
-2. **Application schema abstraction**: using KCL's advanced features such as built-in variables, functions and schema definition can easily abstract and encapsulate the dependent resources of the application, shielding developers from configuration attributes they don't need to be aware of. Developer only needs to fill in a few necessary fields in the frontend model instance to declare the required resources, which makes it possible to organize application configuration more flexibly and efficiently. 
+2. **Application schema abstraction**: using KCL’s advanced features such as built-in variables, functions, and schema definition can easily abstract and encapsulate the dependent resources of the application, shielding developers from configuration attributes they don’t need to be aware of. The developer only needs to fill in a few necessary fields in the frontend model instance to declare the required resources, which makes it possible to organize application configuration more flexibly and efficiently. 
 
-3. **Multi-team and multi-role collaboration**: under the collaboration of writing config codes in the Konfig repository, Developer and Platform from different teams can perform their roles, only focusing on their own respective configuration items, thereby improving the collaboration efficiency of application development and operation. 
+3. **Multi-team and multi-role collaboration**: under the cooperation of writing config codes in the Konfig repository, Developers and Platforms from different teams can perform their roles, only focusing on their own respective configuration items, thereby improving the collaboration efficiency of application development and operation. 
 
-4. **Shift left compliance check**: using KCL to write application config codes naturally has the ability to perform type checking on configuration items. Additionally, keywords like `assert` and `check` can be used to implement configuration validation logic, making it more convenient to identify potential issues during the writing of application config codes and reducing the risk of delivering the application with wrong configuration. Furthermore, Kusion can provide the 3-way real-time diff before the application is applied, allowing users to preview the configuration changes and thus providing a safer workflow. 
+4. **Shift left compliance check**: using KCL to write application config codes naturally has the ability to perform type checking on configuration items. Additionally, keywords like `assert` and `check` can be used to implement configuration validation logic, making it more convenient to identify potential issues during the writing of application config codes and reducing the risk of delivering the application with the wrong configuration. Furthermore, Kusion can provide the 3-way real-time diff before the application is applied, allowing users to preview the configuration changes and thus providing a safer workflow. 
