@@ -171,10 +171,10 @@ KCL 的核心特性是其**建模**和**约束**能力，KCL 核心功能基本�
 - **简单易用**：源于 Python、Golang 等高级语言，采纳函数式编程语言特性，低副作用
 - **设计良好**：独立的 Spec 驱动的语法、语义、运行时和系统库设计
 - **快速建模**：以 [Schema](https://kcl-lang.io/docs/reference/lang/tour) 为中心的配置类型及模块化抽象
-- **功能完备**：基于 [Config](https://kusionstack.io/docs/reference/lang/lang/codelab/simple)、[Schema](https://kcl-lang.io/docs/reference/lang/tour/#schema)、[Lambda](https://kcl-lang.io/#function)、[Rule](https://kcl-lang.io/#rule) 的配置及其模型、逻辑和策略编写
-- **可靠稳定**：依赖[静态类型系统](https://kcl-lang.io/#type-system)、[约束](https://kcl-lang.io/#validation)和[自定义规则](https://kcl-lang.io/#rule)的配置稳定性
+- **功能完备**：基于 [Config](https://kusionstack.io/docs/reference/lang/lang/codelab/simple)、[Schema](https://kcl-lang.io/docs/reference/lang/tour/#schema)、[Lambda](https://kcl-lang.io/docs/reference/lang/tour/#function)、[Rule](https://kcl-lang.io/docs/reference/lang/tour/#rule) 的配置及其模型、逻辑和策略编写
+- **可靠稳定**：依赖[静态类型系统](https://kcl-lang.io/docs/reference/lang/tour/#type-system)、[约束](https://kcl-lang.io/docs/reference/lang/tour/#validation)和[自定义规则](https://kcl-lang.io/docs/reference/lang/tour/#rule)的配置稳定性
 - **强可扩展**：通过独立配置块[自动合并机制](https://kcl-lang.io/docs/reference/lang/tour/#operators)保证配置编写的高可扩展性
-- **易自动化**：[CRUD APIs](https://kcl-lang.io/#kcl-cli-variable-override)，[多语言 SDK](https://kusionstack.io/docs/reference/lang/xlang-api/overview)，[语言插件](https://github.com/KusionStack/kcl-plugin) 构成的梯度自动化方案
+- **易自动化**：[CRUD APIs](https://kcl-lang.io/docs/reference/lang/tour/#kcl-cli-variable-override)，[多语言 SDK](https://kusionstack.io/docs/reference/lang/xlang-api/overview)，[语言插件](https://github.com/KusionStack/kcl-plugin) 构成的梯度自动化方案
 - **极致性能**：使用 Rust & C，[LLVM](https://llvm.org/) 实现，支持编译到本地代码和 [WASM](https://webassembly.org/) 的高性能编译时和运行时
 - **API 亲和**：原生支持 [OpenAPI](https://github.com/KusionStack/kcl-openapi)、 Kubernetes CRD， Kubernetes YAML 等 API 生态规范
 - **开发友好**：[语言工具](https://kusionstack.io/docs/reference/cli/kcl/) (Format，Lint，Test，Vet，Doc 等)、 [IDE 插件](https://github.com/KusionStack/vscode-kcl) 构建良好的研发体验
@@ -211,7 +211,7 @@ KCL 的核心特性是其**建模**和**约束**能力，KCL 核心功能基本�
 图 10 使用 KCL 的语言能力集成领域模型并抽象用户模型并使用
 
 - 更多参考文档
-  - KCL Schema：[https://kcl-lang.io/#schema](https://kcl-lang.io/#schema)
+  - KCL Schema：[https://kcl-lang.io/docs/reference/lang/tour/#schema](https://kcl-lang.io/docs/reference/lang/tour/#schema)
   - KCL OpenAPI 规范：[https://kusionstack.io/docs/reference/cli/openapi/spec](https://kusionstack.io/docs/reference/cli/openapi/spec)
   - KCL Konfig 配置大库概览：[https://kusionstack.io/docs/reference/konfig/overview](https://kusionstack.io/docs/reference/konfig/overview)
 
