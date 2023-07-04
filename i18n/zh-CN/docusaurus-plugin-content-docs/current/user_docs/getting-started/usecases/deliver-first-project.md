@@ -2,29 +2,30 @@
 sidebar_position: 1
 ---
 
-# Deliver Your First Project on Kubernetes
+# 在 Kubernetes 上交付你的第一个项目
 
-This tutorial will demonstrate how to deliver your first project(an App with a Loadbalancer) on Kubernetes in one Kusion command.
+本教程将演示如何只使用一个 Kusion 命令在 Kubernetes 上交付您的第一个项目（带有负载均衡器的应用程序）。
 
-## Prerequisites
+## 前置条件
 
 - [Kusion](/docs/user_docs/getting-started/install)
-- [Kubernetes](https://kubernetes.io/) or [Kind](https://kind.sigs.k8s.io/)
+- [Kubernetes](https://kubernetes.io/) 或者 [Kind](https://kind.sigs.k8s.io/)
 
-## Init Project 
+## 初始化项目
 
-Firstly, let's clone the Konfig repo and enter the root directory:
+首先，让我们克隆 Konfig 仓库并进入根目录：
 
 ```shell
 git clone git@github.com:KusionStack/konfig.git && cd konfig
 ```
 
-After this step, we can init this tutorial project with online templates
+在这一步之后，我们可以使用在线模板初始化这个教程项目
+
 ```shell
 kusion init --online
 ```
 
-All init templates are listed as follows:
+所有初始化模板如下：
 
 ```shell
 ➜  konfig git:(main) ✗ kusion init --online
@@ -34,12 +35,12 @@ All init templates are listed as follows:
   deployment-single-stack    A minimal kusion project of single stack
 ```
 
-Select `code-city` and press `Enter`. After that, we will see hints below and use the default value to config this project and stack.
+选择 `code-city` 并按 `Enter` 。 之后，我们将看到下面的提示，并使用默认值来配置这个项目和 Stack。
 
 ![](/img/docs/user_docs/getting-started/choose-template.gif)
 
+在此过程之后，我们可以使用此命令获取整个文件层次结构：
 
-After this process, we can get the whole file hierarchy with this command
 ```shell
 cd code-city && tree
 ```
@@ -61,40 +62,44 @@ cd code-city && tree
 ```
 
 :::info
- More details about the directory structure can be found in 
-[Konfig](/docs/user_docs/concepts/konfig).
+ 更多关于目录结构的细节请参见 [Konfig](/docs/user_docs/concepts/konfig).
 :::
 
-### Review Config Files
+### 查看配置文件
 
 ```python
 # main.k
 import base.pkg.kusion_models.kube.frontend
 
-# The application configuration in stack will overwrite 
-# the configuration with the same attribute in base.
+# 堆栈中的应用程序配置将被覆盖 base 中具有相同属性的配置。
 appConfiguration: frontend.Server {
     image = "howieyuen/gocity:latest"
 }
 ```
-`main.k` only contains 4 lines. Line 1 imports a pkg that contains the model `Server` which is an abstract model representing the App we will deliver later. This model hides the complexity of Kubernetes `Deployment` and `Service` and only one field `image` is needed to make this App ready to use. 
+
+`main.k` 只包含 4 行。 第 1 行导入一个包含模型 `Server` 的 包，它是一个抽象模型，表示我们稍后将交付的应用程序。这种模型隐藏了 Kubernetes `Deployment` 和 `Service` 的复杂性，只需要一个字段 `image` 就可以让这个 App 准备好被使用。
 
 :::info
-More details about Konfig Models can be found in [Konfig](https://github.com/KusionStack/konfig)
+更多关于 Konfig 模型的详细信息请参见 [Konfig](https://github.com/KusionStack/konfig)
 :::
-## Delivery
+
+## 交付
+
 ```shell
 cd dev && kusion apply --watch
 ```
-Go to the `dev` folder and we will deliver this App into a Kubernetes cluster with one command `kusion apply --watch`
+
+转到 `dev` 文件夹，我们将使用 `kusion apply --watch` 命令将此应用程序交付到 Kubernetes 集群中
 
 ![](/img/docs/user_docs/getting-started/apply.gif)
 
-Check `Deploy` status
+检查 `Deploy` 状态
+
 ```shell
 kubectl -ncode-city get deploy
 ```
-The expected output is shown as follows:
+
+预期输出如下所示：
 
 ```shell
 ➜  dev git:(main) ✗ kubectl -ncode-city get deploy
@@ -102,16 +107,18 @@ NAME           READY   UP-TO-DATE   AVAILABLE   AGE
 code-citydev   1/1     1            1           1m
 ```
 
-Port-forward our App with the `service`
+使用 `service` 转发该应用程序
+
 ```shell
 kubectl port-forward -ncode-city svc/gocity 4000:4000
 ```
+
 ```shell
 ➜  dev git:(main) ✗ kubectl port-forward -ncode-city svc/gocity 4000:4000
 Forwarding from 127.0.0.1:4000 -> 4000
 Forwarding from [::1]:4000 -> 4000
 ```
 
-Visit [http://localhost:4000/#/github.com/KusionStack/kusion](http://localhost:4000/#/github.com/KusionStack/kusion) in your browser and enjoy.
+随后在你的浏览器中访问 [http://localhost:4000/#/github.com/KusionStack/kusion](http://localhost:4000/#/github.com/KusionStack/kusion)。
 
 ![](/img/docs/user_docs/getting-started/gocity.png)

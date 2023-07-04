@@ -11,7 +11,7 @@ Powered by [Docusaurus 2](https://docusaurus.io/).
 
 ## Build local
 
-```
+```shell
 $ npm install
 $ npm run start
 ```
@@ -20,8 +20,8 @@ Open http://localhost:3000 in browser.
 
 ## Build local with i18n
 
-```
-$ npm build
+```shell
+$ npm run build
 $ npx http-server ./build
 ```
 
