@@ -58,7 +58,7 @@ const config = {
       autoCollapseSidebarCategories: true,
       announcementBar: {
         id: 'announcementBar-1', // Increment on change
-        content: `⭐️ If you like KusionStack, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/KusionStack">Github</a>`,
+        content: `⭐️ If you like KusionStack, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/KusionStack/kusion">Github</a>`,
       },
 
       algolia: {
@@ -113,7 +113,7 @@ const config = {
             ],
           },
           {
-            href: 'https://github.com/KusionStack',
+            href: 'https://github.com/KusionStack/kusion',
             className: 'header-github-link',
             'aria-label': 'GitHub repository',
             position: 'right',
