@@ -29,7 +29,7 @@ KCL_OPENAPI_CLI=kcl-openapi
 
 KCL_OPENAPI_CLI_FILE_PATH="${KCL_OPENAPI_BIN_DIR}/${KCL_OPENAPI_CLI}"
 
-GITHUB_ORG=KusionStack
+GITHUB_ORG=kcl-lang
 GITHUB_REPO=kcl-openapi
 
 DOWNLOAD_BASE="https://github.com/$GITHUB_ORG/$GITHUB_REPO/releases/download"
@@ -136,7 +136,7 @@ download() {
 	DOWNLOAD_URL="${DOWNLOAD_BASE}/${LATEST_RELEASE_TAG}/${KCL_OPENAPI_CLI_ARTIFACT}"
 
 	# Create the temp directory
-	KCL_OPENAPI_TMP_ROOT=$(mktemp -dt kcl-openapi-install-XXXXXX)
+	KCL_OPENAPI_TMP_ROOT=$(mktemp -dt kcl-openapi-install-tmp)
 	ARTIFACT_TMP_FILE="$KCL_OPENAPI_TMP_ROOT/$KCL_OPENAPI_CLI_ARTIFACT"
 
 	info "Downloading $DOWNLOAD_URL ..."
@@ -152,35 +152,31 @@ download() {
 }
 
 install() {
-	# Decompress
+	# Decompress to tmp directory
 	tar xf "$ARTIFACT_TMP_FILE" -C $KCL_OPENAPI_TMP_ROOT
 
 	# Clean old kcl-openapi binary
 	rm -rf "$KCL_OPENAPI_CLI_FILE_PATH"
 
-	runAsRoot mv "$KCL_OPENAPI_TMP_ROOT" "$KCL_OPENAPI_BIN_DIR"
+	# Move binary to target path
+	runAsRoot mv "$KCL_OPENAPI_TMP_ROOT/$KCL_OPENAPI_CLI" "$KCL_OPENAPI_BIN_DIR"
 
+	# Verify installation
 	if [ $? -eq 0 ] && [ -f "$KCL_OPENAPI_CLI_FILE_PATH" ]; then
-		info "kcl-openapi installed into KCL_OPENAPI_CLI_FILE_PATH successfully."
+		info "kcl-openapi installed into $KCL_OPENAPI_CLI_FILE_PATH successfully."
 	else
-		error "$KCL_OPENAPI_CLI_FILE_PATH not exists"
+		error "$KCL_OPENAPI_CLI_FILE_PATH not exists. Install failed."
 	fi
+
+	# clean tmp files
+	rm -rf $KCL_OPENAPI_TMP_ROOT
 }
 
-END_FISH_SCRIPT
-	else
-		# bash and zsh
-		cat <<END_BASH_SCRIPT
-
-
-END_BASH_SCRIPT
-	fi
-}
 
 fail_trap() {
 	result=$?
 	if [ "$result" != "0" ]; then
-		error "Failed to install kcl-openapi, go to https://kusionstack.io/docs/reference/cli/openapi/quick-start for more support."
+		error "Failed to install kcl-openapi, go to https://kcl-lang.io/docs/reference/cli/openapi/quick-start for more support."
 	fi
 	cleanup
 	exit $result
@@ -193,7 +189,7 @@ cleanup() {
 }
 
 installCompleted() {
-	info "For more information on how to started, please visit: https://kusionstack.io/docs/user_docs/guides/adopting/from_kubernetes"
+	info "For more information on how to started, please visit: https://kcl-lang.io/docs/user_docs/guides/adopting/from_kubernetes"
 }
 
 # -----------------------------------------------------------------------------
