@@ -9,23 +9,23 @@ Source for kusionstack.io site <https://kusionstack.io>.
 
 Powered by [Docusaurus 2](https://docusaurus.io/).
 
-## Build local
+## Build locally
 
 ```shell
 $ npm install
 $ npm run start
 ```
 
-Open http://localhost:3000 in browser.
+Open http://localhost:3000 in the browser.
 
-## Build local with i18n
+## Build locally with i18n
 
 ```shell
 $ npm run build
 $ npx http-server ./build
 ```
 
-Open http://localhost:8080 in browser.
+Open http://localhost:8080 in the browser.
 
 ## Notice
 

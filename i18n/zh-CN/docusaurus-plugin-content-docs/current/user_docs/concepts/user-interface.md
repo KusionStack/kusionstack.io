@@ -6,7 +6,7 @@ sidebar_position: 1
 
 ## 1. 单 App 应用界面
 
-Kusion 用户界面并不是仅仅指传统的网页控制台界面，它是用户在使用 Kusion 过程中直接感知的能力和功能界面。最简单的 Kusion 用户界面就是 [KusionCtl](/docs/user_docs/support/faq-concepts#5-kusionctl) 命令行工具。
+Kusion 用户界面并不是仅仅指传统的网页控制台界面，它是用户在使用 Kusion 过程中直接感知的能力和功能界面。最简单的 Kusion 用户界面就是 [KusionCtl](/docs/user_docs/support/faq-concepts#5-kusion) 命令行工具。
 
 ![](/img/docs/user_docs/concepts/kusion-user-interface-01.png)
 
@@ -14,7 +14,7 @@ Kusion 用户界面并不是仅仅指传统的网页控制台界面，它是用�
 
 ## 2. 规模化 App 应用界面
 
-Kusion 最初是针对规模化 App 应用运维而开发的可编程配置技术栈。为了开发效率，Kusion 同时为 kusionctl 命令行提供了配套和的提效工具：KCL 命令、DevOps 工具、IDE 插件等。此外为了和开发系统集成，Kusion 同时也可针对 Github Action、Gitlab Action 和 ArgoCD 等系统配置对应的能力。因此更详细的 Kusion 用户界面如下图所示：
+Kusion 最初是针对规模化 App 应用运维而开发的可编程配置技术栈。为了开发效率，Kusion 同时为 kusion 命令行提供了配套和的提效工具：KCL 命令、DevOps 工具、IDE 插件等。此外为了和开发系统集成，Kusion 同时也可针对 Github Action、Gitlab Action 和 ArgoCD 等系统配置对应的能力。因此更详细的 Kusion 用户界面如下图所示：
 
 ![](/img/docs/user_docs/concepts/kusion-user-interface-02.png)
 

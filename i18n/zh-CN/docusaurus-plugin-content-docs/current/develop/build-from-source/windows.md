@@ -76,7 +76,7 @@ Kusion 是更上层的工具集合，其核心命令是采用 Go 语言实现，
 
 克隆 Kusion 仓库：`git@github.com:KusionStack/kusion.git`
 
-然后进入 kusion 目录执行 `go run ./cmd/kusionctl` 命令。正常情况可以看到 kusion 命令的帮助信息。
+然后进入 kusion 目录执行 `go run ./cmd/kusion` 命令。正常情况可以看到 kusion 命令的帮助信息。
 
 ## 4. KCLOpenapi
 

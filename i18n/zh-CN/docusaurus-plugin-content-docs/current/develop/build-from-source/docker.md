@@ -149,10 +149,10 @@ root@ubuntu:~/kclvm# cd
 root@ubuntu:~# git clone git@github.com:KusionStack/kusion.git
 ```
 
-然后执行 `kusion/cmds/kusionctl` 程序：
+然后执行 `kusion/cmds/kusion` 程序：
 
 ```
-root@ubuntu:~/kusion# go run ./cmd/kusionctl
+root@ubuntu:~/kusion# go run ./cmd/kusion
 kusion 作为云原生可编程技术栈，通过代码管理 kubernetes 集群。
 ...
 ```
