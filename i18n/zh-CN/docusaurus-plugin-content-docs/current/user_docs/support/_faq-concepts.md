@@ -23,7 +23,7 @@ F**usion** Cloud Native on **K**ubernetes. Kusion 一词来源于 fusion（意�
 
 ## 5. KusionCtl
 
-Kusion Kubernetes Client。[KusionCtl](/docs/reference/cli/kusionctl/overview) 命令行工具旨在简化用户对 K8S 的使用，内置支持对 KCL 的编译、通过登录功能原生支持 Identity 能力，支持多集群访问，提供资源状态汇总及相应的白屏展示、对用户变更模型及其关联模型的变更追踪、链路可视化、live 对比、关键资源可视化、异常定位等功能。
+Kusion Kubernetes Client。[KusionCtl](/docs/reference/cli/kusion/overview) 命令行工具旨在简化用户对 K8S 的使用，内置支持对 KCL 的编译、通过登录功能原生支持 Identity 能力，支持多集群访问，提供资源状态汇总及相应的白屏展示、对用户变更模型及其关联模型的变更追踪、链路可视化、live 对比、关键资源可视化、异常定位等功能。
 
 ## 6. Konfig
 
