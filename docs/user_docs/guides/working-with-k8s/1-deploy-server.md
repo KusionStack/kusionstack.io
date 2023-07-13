@@ -135,7 +135,7 @@ The output is saved in the `deployment-single-stack/dev/ci-test/stdout.golden.ya
 
 :::tip
 
-For instructions on the kusion command line tool, execute `kusion -h`, or refer to the tool's online [documentation](/docs/reference/cli/kusion/overview)。
+For instructions on the kusion command line tool, execute `kusion -h`, or refer to the tool's online [documentation](/docs/reference/cli/kusion/index)。
 :::
 
 ## Applying

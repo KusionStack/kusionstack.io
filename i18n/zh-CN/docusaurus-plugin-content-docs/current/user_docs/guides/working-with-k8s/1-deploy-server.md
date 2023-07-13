@@ -107,7 +107,7 @@ cd deployment-single-stack/dev && kusion compile
 
 输出默认保存在 `deployment-single-stack/dev/ci-test/stdout.golden.yaml` 文件中。
 
-> 有关 kusion 命令行工具的说明，执行 `kusion -h`，或者参考工具的在线文档 [Overview of Kusion CLI](/docs/reference/cli/kusion/overview)。
+> 有关 kusion 命令行工具的说明，执行 `kusion -h`，或者参考工具的在线文档 [Overview of Kusion CLI](/docs/reference/cli/kusion/index)。
 
 ## 4. 配置生效
 
