@@ -55,7 +55,11 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // hideableSidebar: true,
-      autoCollapseSidebarCategories: true,
+      docs: {
+        sidebar: {
+          autoCollapseCategories: true
+        }
+      },
       announcementBar: {
         id: 'announcementBar-1', // Increment on change
         content: `⭐️ If you like KusionStack, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/KusionStack/kusion">Github</a>`,
@@ -95,7 +99,7 @@ const config = {
             label: 'Governance',
           },
 
-          {to: '/blog', label: 'Blog', position: 'left'},
+          { to: '/blog', label: 'Blog', position: 'left' },
 
           //{
           //  type: 'docsVersionDropdown',
