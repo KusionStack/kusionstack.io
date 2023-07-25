@@ -235,6 +235,10 @@
     "message": "GitHub Actions",
     "description": "The label for category GitHub Actions in sidebar docs"
   },
+  "sidebar.docs.category.KubeVela": {
+    "message": "KubeVela", 
+    "description": "The integration of KubeVela and KusionStack"
+  },
   "sidebar.user_docs.category.简介": {
     "message": "Intro",
     "description": "The label for category 简介 in sidebar user_docs"
@@ -279,6 +283,10 @@
     "message": "GitHub Actions",
     "description": "The label for category GitHub Actions in sidebar user_docs"
   },
+  "sidebar.user_docs.category.KubeVela": {
+    "message": "KubeVela", 
+    "description": "The integration of KubeVela and KusionStack"
+  }, 
   "sidebar.reference.category.命令行工具": {
     "message": "Command Line Tools",
     "description": "The label for category 命令行工具 in sidebar reference"
