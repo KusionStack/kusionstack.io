@@ -29,7 +29,7 @@ curl https://kusionstack.io/scripts/install.sh | sh
 你可以使用下面的命令安装 Kusion CLI 的最新版本：
 
 ```bash
-scoop add bucket KusionStack https://github.com/KusionStack/scoop-bucket.git
+scoop bucket add KusionStack https://github.com/KusionStack/scoop-bucket.git
 scoop install KusionStack/kusion
 ``` 
 
