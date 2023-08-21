@@ -8,11 +8,11 @@ KusionStack 是一个开源的、以应用为中心的可编程交付及运维�
 
 简单来说，KusionStack 旨在帮助研发者：
 
-1. 围绕现代应用程序交付以及使用 OCI 镜像对配置和策略进行**编码**和**统一**
+1. **编码**和**统一**现代应用程序交付过程中的应用配置、部署拓扑、工作流、策略
 2. **组织**应用程序资源，并在整个交付过程中通过**身份**确保安全
-3. 为**Kubernetes**和**云**精简应用交付工作流，并提供开发友好的体验
+3. 为**Kubernetes**、**云**和**自定义基础设施**精简应用交付工作流，并提供开发友好的体验
 
-基于 Platform as Code （平台服务即代码）理念，研发者可以用**统一的组织和操作界面**定义应用交付生命周期，充分利用**Kubernetes和云的混合能力**，通过**端到端的交付工作流程**，真正实现**集中定义、随处交付**。
+基于 **Platform as Code （平台服务即代码）**理念，研发者可以用统一的组织和操作界面定义应用交付生命周期，充分利用Kubernetes和云的混合能力，通过**端到端的交付工作流程**，真正实现**集中定义、随处交付**。
 
 ![](https://raw.githubusercontent.com/KusionStack/kusion/main/docs/arch.png)
 
@@ -41,7 +41,7 @@ KusionStack 是一个开源的、以应用为中心的可编程交付及运维�
 
 ### 灵活
 
-基于自主研发的编程语言 KCL，强大的引擎和丰富的可扩展机制，KusionStack 为承担运维工作的研发者提供了完整的灵活性。通过标准的 Project 和 Stack 结构，KusionStack 可以满足个人研发者、小型团队和大型团队的需求，并具有良好的可扩展性和可管理性。纯客户端的解决方案也确保了良好的可移植性，同时 KusionStack 具备丰富的 API 使其更容易集成和自动化。
+基于持续丰富的模型生态，强大的引擎和丰富的可扩展机制，KusionStack 为承担运维工作的研发者提供了完整的灵活性。通过标准的 Project 和 Stack 结构，KusionStack 可以满足个人研发者、小型团队和大型团队的需求，并具有良好的可扩展性和可管理性。纯客户端的解决方案也确保了良好的可移植性，同时 KusionStack 具备丰富的 API 使其更容易集成和自动化。
 
 ### 可协作
 
@@ -49,9 +49,8 @@ KusionStack 是一个开源的、以应用为中心的可编程交付及运维�
 
 ## KusionStack 组成
 
-KusionStack 由一系列工具和产品组成。其中，KCL 提供了类似于现代编程语言的可编程能力，Kusion 提供了强大的引擎和编排功能，Konfig 拥有应用程序交付模型和组件。您可以选择使用其中一种，例如 KCL，也可以将它们组合使用。
+KusionStack 由一系列工具和产品组成。其中，Kusion 提供了强大的引擎和编排功能，Konfig 拥有应用程序交付模型和组件。您可以选择使用其中一种，也可以将它们组合使用。
 
-+ [KCL](https://github.com/KusionStack/KCLVM)：面向应用研发者的配置策略专用高级编程语言，及其协议组，工具链及 IDE 插件
 + [Kusion](https://github.com/KusionStack/kusion)：运维引擎、工具链、服务层，IDE 工作空间及社区技术集成套件
 + [Konfig](https://github.com/KusionStack/konfig)：应用配置及基础模型共享仓库，及面向 GitOps 工作流程（如 GitHub Actions）的自定义 CI 套件
 
@@ -73,7 +72,7 @@ KusionStack 试图提供一种低噪声、低副作用、功能受限、易于�
 
 ### vs. CD 系统（如 KubeVela， ArgoCD）
 
-CD 系统通常以某种定义方式为源头，通过 Pull，Push 或两者结合的方式完成自动化的集群部署交付和配置漂移调和。Kusion 引擎可以视为一种在 push 模式下工作的 CD 引擎。如果您已采纳了 CD 系统，KusionStack 可以与其配合使用，如通过 ArgoCD 调和生效 KCL 代码，或者编写 OAM 模型并与 KubeVela 配合使用等。
+CD 系统通常以某种定义方式为源头，通过 Pull，Push 或两者结合的方式完成自动化的集群部署交付和配置漂移调和。Kusion 引擎可以视为一种在 push 模式下工作的 CD 引擎。如果您已采纳了 CD 系统，KusionStack 可以与其配合使用，如通过 ArgoCD 调和生效 Kusion 模型，或者编写 OAM 模型并与 KubeVela 配合使用等。
 
 ### vs. Helm
 
@@ -99,7 +98,7 @@ Kubernetes 是一种在世界范围内广泛采用的容器调度与管理运行
 
 KusionStack 处于开源早期。我们将继续专注于提供更好、更可用的**应用程序交付模型**，支持**多集群**和更多的**云**，并原生提供**身份**和**资源**管理机制。
 
-你可以在这里看到 [Kusion](https://github.com/KusionStack/kusion/releases) 和 [KCL](https://github.com/KusionStack/KCLVM/releases) 的发布版本，也可以通过 [社区](https://github.com/KusionStack/community) 加入我们。
+你可以在这里看到 [Kusion](https://github.com/KusionStack/kusion/releases) 的发布版本，也可以通过 [社区](https://github.com/KusionStack/community) 加入我们。
 
 ## 下一步
 
