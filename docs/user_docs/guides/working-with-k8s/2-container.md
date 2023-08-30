@@ -1,7 +1,7 @@
 # Configure Main Container
 
 The attribute `mainContainer` of `the Server` model is used to declare the main container configuration of the application.
-For the abstract definition of the main container, please see [here](/docs/reference/model/kusion_models/kube/frontend/container/doc_container) for more details.
+For the abstract definition of the main container, please see [here](/docs/reference/model/documentation//kusion_models/kube/frontend/container/container.md#main) for more details.
 
 ## Prerequisites
 

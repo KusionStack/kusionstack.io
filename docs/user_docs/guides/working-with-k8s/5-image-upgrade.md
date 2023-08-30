@@ -1,7 +1,7 @@
 # Upgrade Image
 
 The attribute `image` of the `Server` model is used to declare your app's business container image.
-For the definition of `image`, please see [here](/docs/reference/model/kusion_models/kube/frontend/doc_server) for more details.
+For the definition of `image`, please see [here](/docs/reference/model/documentation//kusion_models/kube/frontend/frontend.md#server) for more details.
 
 ## Prerequisites
 

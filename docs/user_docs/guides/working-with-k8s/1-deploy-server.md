@@ -3,7 +3,7 @@
 This guide shows you how to use the KCL language and Kusion CLIs to complete the deployment of an application running in Kubernetes.
 We call the abstraction of application operation and maintenance configuration as `Server`, and its instance as `Application`.
 It is essentially an operation and maintenance model defined by [KCL](https://kcl-lang.io/),
-and the complete definition can be seen [here](/docs/reference/model/kusion_models/kube/frontend/doc_server).
+and the complete definition can be seen [here](/docs/reference/model/documentation//kusion_models/kube/frontend/frontend.md#server).
 
 In actual production, the application online generally needs to update several k8s resources:
 

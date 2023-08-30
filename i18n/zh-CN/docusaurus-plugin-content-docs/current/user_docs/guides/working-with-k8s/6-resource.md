@@ -1,6 +1,6 @@
 # 应用扩缩容
 
-Server 模型中的 schedulingStrategy.resource 属性用于声明应用的业务容器的资源规格，有关资源规格的定义，可以查看 KCL Model 中 [base.pkg.kusion_models.kube.frontend.resource](/docs/reference/model/kusion_models/kube/frontend/resource/doc_resource) 模块的文档。
+Server 模型中的 schedulingStrategy.resource 属性用于声明应用的业务容器的资源规格，有关资源规格的定义，可以查看 KCL Model 中 [base.pkg.kusion_models.kube.frontend.resource](/docs/reference/model/documentation//kusion_models/kube/frontend/resource/resource.md#resource-1) 模块的文档。
 
 ## 1. 准备工作
 

@@ -1,6 +1,6 @@
 # 配置网络
 
-Server 模型中的 services 属性用于声明应用的网络配置，有关网络的抽象定义，可以查看 KCL Model 中 [base.pkg.kusion_models.kube.frontend.service](/docs/reference/model/kusion_models/kube/frontend/service/doc_service) 模块的文档。
+Server 模型中的 services 属性用于声明应用的网络配置，有关网络的抽象定义，可以查看 KCL Model 中 [base.pkg.kusion_models.kube.frontend.service](/docs/reference/model/documentation//kusion_models/kube/frontend/service/service.md#service-1) 模块的文档。
 
 ## 1. 准备工作
 
@@ -30,7 +30,7 @@ appConfiguration: frontend.Server {
 }
 ```
 
-上述代码是样例配置，可以根据 [Service](/docs/reference/model/kusion_models/kube/frontend/service/doc_service) 模型定义和实际情况添加自定义配置。
+上述代码是样例配置，可以根据 [Service](/docs/reference/model/documentation//kusion_models/kube/frontend/service/service.md#service-1) 模型定义和实际情况添加自定义配置。
 
 ## 3. 配置生效
 
