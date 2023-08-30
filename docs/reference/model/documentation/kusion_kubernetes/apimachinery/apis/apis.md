@@ -1,0 +1,216 @@
+# apis
+
+## Index
+
+- [LabelSelector](#labelselector)
+- [LabelSelectorRequirement](#labelselectorrequirement)
+- [ManagedFieldsEntry](#managedfieldsentry)
+- [ObjectMeta](#objectmeta)
+- [OwnerReference](#ownerreference)
+
+
+## Schemas
+
+### LabelSelector
+
+A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches no objects.
+
+#### Attributes
+
+**matchExpressions**
+
+`[LabelSelectorRequirement]`
+
+matchExpressions is a list of label selector requirements. The requirements are ANDed.
+
+**matchLabels**
+
+`{str:str}`
+
+matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is &#34;key&#34;, the operator is &#34;In&#34;, and the values array contains only &#34;value&#34;. The requirements are ANDed.
+
+### LabelSelectorRequirement
+
+A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.
+
+#### Attributes
+
+**key** *required*
+
+`str`
+
+key is the label key that the selector applies to.
+
+**operator** *required*
+
+`str`
+
+operator represents a key&#39;s relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.
+
+**values**
+
+`[str]`
+
+values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.
+
+### ManagedFieldsEntry
+
+ManagedFieldsEntry is a workflow-id, a FieldSet and the group version of the resource that the fieldset applies to.
+
+#### Attributes
+
+**apiVersion**
+
+`str`
+
+APIVersion defines the version of this resource that this field set applies to. The format is &#34;group/version&#34; just like the top-level APIVersion field. It is necessary to track the version of a field set because it cannot be automatically converted.
+
+**fieldsType**
+
+`str`
+
+FieldsType is the discriminator for the different fields format and version. There is currently only one possible value: &#34;FieldsV1&#34;
+
+**fieldsV1**
+
+`any`
+
+FieldsV1 holds the first JSON version format as described in the &#34;FieldsV1&#34; type.
+
+**manager**
+
+`str`
+
+Manager is an identifier of the workflow managing these fields.
+
+**operation**
+
+`str`
+
+Operation is the type of operation which lead to this ManagedFieldsEntry being created. The only valid values for this field are &#39;Apply&#39; and &#39;Update&#39;.
+
+**subresource**
+
+`str`
+
+Subresource is the name of the subresource used to update that object, or empty string if the object was updated through the main resource. The value of this field is used to distinguish between managers, even if they share the same name. For example, a status update will be distinct from a regular update using the same manager name. Note that the APIVersion field is not related to the Subresource field and it always corresponds to the version of the main resource.
+
+**time**
+
+`str`
+
+Time is timestamp of when these fields were set. It should always be empty if Operation is &#39;Apply&#39;
+
+### ObjectMeta
+
+ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+
+#### Attributes
+
+**annotations**
+
+`{str:str}`
+
+**clusterName**
+
+`str`
+
+**creationTimestamp**
+
+`str`
+
+**deletionGracePeriodSeconds**
+
+`int`
+
+**deletionTimestamp**
+
+`str`
+
+**finalizers**
+
+`[str]`
+
+**generateName**
+
+`str`
+
+**generation**
+
+`int`
+
+**labels**
+
+`{str:str}`
+
+**managedFields**
+
+`[ManagedFieldsEntry]`
+
+**name**
+
+`str`
+
+**namespace**
+
+`str`
+
+**ownerReferences**
+
+`[OwnerReference]`
+
+**resourceVersion**
+
+`str`
+
+**selfLink**
+
+`str`
+
+**uid**
+
+`str`
+
+### OwnerReference
+
+OwnerReference contains enough information to let you identify an owning object. An owning object must be in the same namespace as the dependent, or be cluster-scoped, so there is no namespace field.
+
+#### Attributes
+
+**apiVersion** *required*
+
+`str`
+
+API version of the referent.
+
+**blockOwnerDeletion**
+
+`bool`
+
+If true, AND if the owner has the &#34;foregroundDeletion&#34; finalizer, then the owner cannot be deleted from the key-value store until this reference is removed. Defaults to false. To set this field, a user needs &#34;delete&#34; permission of the owner, otherwise 422 (Unprocessable Entity) will be returned.
+
+**controller**
+
+`bool`
+
+If true, this reference points to the managing controller.
+
+**kind** *required*
+
+`str`
+
+Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+**name** *required*
+
+`str`
+
+Name of the referent. More info: http://kubernetes.io/docs/user-guide/identifiers#names
+
+**uid** *required*
+
+`str`
+
+UID of the referent. More info: http://kubernetes.io/docs/user-guide/identifiers#uids
+
+<!-- Auto generated by kcl-doc tool, please do not edit. -->

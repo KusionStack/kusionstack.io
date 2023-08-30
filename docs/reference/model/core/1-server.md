@@ -10,7 +10,7 @@
 **注意**：模型开放的属性遵守最小化原则
 :::
 
-请查阅 [Server](/docs/reference/model/kusion_models/kube/frontend/doc_server) 模型定义。
+请查阅 [Server](/docs/reference/model/documentation/kusion_models/kube/frontend/frontend.md#server) 模型定义。
 ### 1.2 最小示例
 
 ```python
@@ -110,7 +110,7 @@ appConfiguration: frontend.Server {
 
 ### 2.1 模型定义
 
-请查阅 [Container](/docs/reference/model/kusion_models/kube/frontend/container/doc_container) 模型定义。
+请查阅 [Container](/docs/reference/model/documentation/kusion_models/kube/frontend/container/container.md#main) 模型定义。
 ### 2.2 示例
 
 ```python
@@ -199,7 +199,7 @@ appConfiguration: frontend.Server {
 
 ### 3.1 模型定义
 
-请查阅 [Resource](/reference/model/kusion_models/kube/frontend/resource/doc_resource.md) 模型定义。
+请查阅 [Resource](/docs/reference/model/documentation/kusion_models/kube/frontend/resource/resource.md#resource-1) 模型定义。
 ### 3.2 示例
 
 ```python
@@ -220,7 +220,7 @@ res = res.Resource {
 
 ### 4.1 模型定义
 
-请查阅 [Scheduling Strategy](/docs/reference/model/kusion_models/kube/frontend/strategy/doc_scheduling_strategy) 模型定义。
+请查阅 [Scheduling Strategy](/docs/reference/model/documentation/kusion_models/kube/frontend/strategy/strategy.md#schedulingstrategy) 模型定义。
 
 ### 4.2 示例
 
@@ -245,7 +245,7 @@ appConfiguration: frontend.Server {
 
 ### 5.1 模型定义
 
-请查阅 [Volume](/docs/reference/model/kusion_models/kube/frontend/volume/doc_volume) 模型定义。
+请查阅 [Volume](/docs/reference/model/documentation/kusion_models/kube/frontend/volume/volume.md#volume-1) 模型定义。
 ### 5.2 示例
 
 ```python

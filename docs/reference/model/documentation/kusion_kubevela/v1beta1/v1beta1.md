@@ -1,0 +1,6529 @@
+# v1beta1
+
+## Index
+
+- [Application](#application)
+- [ApplicationRevision](#applicationrevision)
+- [CoreOamDevV1beta1ApplicationRevisionSpec](#coreoamdevv1beta1applicationrevisionspec)
+- [CoreOamDevV1beta1ApplicationRevisionSpecApplication](#coreoamdevv1beta1applicationrevisionspecapplication)
+- [CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpec](#coreoamdevv1beta1applicationrevisionspecapplicationspec)
+- [CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecComponentsItems0](#coreoamdevv1beta1applicationrevisionspecapplicationspeccomponentsitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecComponentsItems0InputsItems0](#coreoamdevv1beta1applicationrevisionspecapplicationspeccomponentsitems0inputsitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecComponentsItems0OutputsItems0](#coreoamdevv1beta1applicationrevisionspecapplicationspeccomponentsitems0outputsitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecComponentsItems0TraitsItems0](#coreoamdevv1beta1applicationrevisionspecapplicationspeccomponentsitems0traitsitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecPoliciesItems0](#coreoamdevv1beta1applicationrevisionspecapplicationspecpoliciesitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecWorkflow](#coreoamdevv1beta1applicationrevisionspecapplicationspecworkflow)
+- [CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecWorkflowMode](#coreoamdevv1beta1applicationrevisionspecapplicationspecworkflowmode)
+- [CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecWorkflowStepsItems0](#coreoamdevv1beta1applicationrevisionspecapplicationspecworkflowstepsitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecWorkflowStepsItems0InputsItems0](#coreoamdevv1beta1applicationrevisionspecapplicationspecworkflowstepsitems0inputsitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecWorkflowStepsItems0Meta](#coreoamdevv1beta1applicationrevisionspecapplicationspecworkflowstepsitems0meta)
+- [CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecWorkflowStepsItems0OutputsItems0](#coreoamdevv1beta1applicationrevisionspecapplicationspecworkflowstepsitems0outputsitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecWorkflowStepsItems0SubStepsItems0](#coreoamdevv1beta1applicationrevisionspecapplicationspecworkflowstepsitems0substepsitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecWorkflowStepsItems0SubStepsItems0InputsItems0](#coreoamdevv1beta1applicationrevisionspecapplicationspecworkflowstepsitems0substepsitems0inputsitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecWorkflowStepsItems0SubStepsItems0Meta](#coreoamdevv1beta1applicationrevisionspecapplicationspecworkflowstepsitems0substepsitems0meta)
+- [CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecWorkflowStepsItems0SubStepsItems0OutputsItems0](#coreoamdevv1beta1applicationrevisionspecapplicationspecworkflowstepsitems0substepsitems0outputsitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatus](#coreoamdevv1beta1applicationrevisionspecapplicationstatus)
+- [CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusAppliedResourcesItems0](#coreoamdevv1beta1applicationrevisionspecapplicationstatusappliedresourcesitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusComponentsItems0](#coreoamdevv1beta1applicationrevisionspecapplicationstatuscomponentsitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusConditionsItems0](#coreoamdevv1beta1applicationrevisionspecapplicationstatusconditionsitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusLatestRevision](#coreoamdevv1beta1applicationrevisionspecapplicationstatuslatestrevision)
+- [CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusPolicyItems0](#coreoamdevv1beta1applicationrevisionspecapplicationstatuspolicyitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusServicesItems0](#coreoamdevv1beta1applicationrevisionspecapplicationstatusservicesitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusServicesItems0ScopesItems0](#coreoamdevv1beta1applicationrevisionspecapplicationstatusservicesitems0scopesitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusServicesItems0TraitsItems0](#coreoamdevv1beta1applicationrevisionspecapplicationstatusservicesitems0traitsitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusServicesItems0WorkloadDefinition](#coreoamdevv1beta1applicationrevisionspecapplicationstatusservicesitems0workloaddefinition)
+- [CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusWorkflow](#coreoamdevv1beta1applicationrevisionspecapplicationstatusworkflow)
+- [CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusWorkflowContextBackend](#coreoamdevv1beta1applicationrevisionspecapplicationstatusworkflowcontextbackend)
+- [CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusWorkflowStepsItems0](#coreoamdevv1beta1applicationrevisionspecapplicationstatusworkflowstepsitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusWorkflowStepsItems0SubStepsItems0](#coreoamdevv1beta1applicationrevisionspecapplicationstatusworkflowstepsitems0substepsitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnon](#coreoamdevv1beta1applicationrevisionspeccomponentdefinitionsanon)
+- [CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpec](#coreoamdevv1beta1applicationrevisionspeccomponentdefinitionsanonspec)
+- [CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecChildResourceKindsItems0](#coreoamdevv1beta1applicationrevisionspeccomponentdefinitionsanonspecchildresourcekindsitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecSchematic](#coreoamdevv1beta1applicationrevisionspeccomponentdefinitionsanonspecschematic)
+- [CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecSchematicCue](#coreoamdevv1beta1applicationrevisionspeccomponentdefinitionsanonspecschematiccue)
+- [CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecSchematicHelm](#coreoamdevv1beta1applicationrevisionspeccomponentdefinitionsanonspecschematichelm)
+- [CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecSchematicKube](#coreoamdevv1beta1applicationrevisionspeccomponentdefinitionsanonspecschematickube)
+- [CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecSchematicKubeParametersItems0](#coreoamdevv1beta1applicationrevisionspeccomponentdefinitionsanonspecschematickubeparametersitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecSchematicTerraform](#coreoamdevv1beta1applicationrevisionspeccomponentdefinitionsanonspecschematicterraform)
+- [CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecSchematicTerraformProviderRef](#coreoamdevv1beta1applicationrevisionspeccomponentdefinitionsanonspecschematicterraformproviderref)
+- [CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecSchematicTerraformWriteConnectionSecretToRef](#coreoamdevv1beta1applicationrevisionspeccomponentdefinitionsanonspecschematicterraformwriteconnectionsecrettoref)
+- [CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecStatus](#coreoamdevv1beta1applicationrevisionspeccomponentdefinitionsanonspecstatus)
+- [CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecWorkload](#coreoamdevv1beta1applicationrevisionspeccomponentdefinitionsanonspecworkload)
+- [CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecWorkloadDefinition](#coreoamdevv1beta1applicationrevisionspeccomponentdefinitionsanonspecworkloaddefinition)
+- [CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonStatus](#coreoamdevv1beta1applicationrevisionspeccomponentdefinitionsanonstatus)
+- [CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonStatusConditionsItems0](#coreoamdevv1beta1applicationrevisionspeccomponentdefinitionsanonstatusconditionsitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonStatusLatestRevision](#coreoamdevv1beta1applicationrevisionspeccomponentdefinitionsanonstatuslatestrevision)
+- [CoreOamDevV1beta1ApplicationRevisionSpecCompression](#coreoamdevv1beta1applicationrevisionspeccompression)
+- [CoreOamDevV1beta1ApplicationRevisionSpecPoliciesAnon](#coreoamdevv1beta1applicationrevisionspecpoliciesanon)
+- [CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnon](#coreoamdevv1beta1applicationrevisionspecpolicydefinitionsanon)
+- [CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonSpec](#coreoamdevv1beta1applicationrevisionspecpolicydefinitionsanonspec)
+- [CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonSpecDefinitionRef](#coreoamdevv1beta1applicationrevisionspecpolicydefinitionsanonspecdefinitionref)
+- [CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonSpecSchematic](#coreoamdevv1beta1applicationrevisionspecpolicydefinitionsanonspecschematic)
+- [CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonSpecSchematicCue](#coreoamdevv1beta1applicationrevisionspecpolicydefinitionsanonspecschematiccue)
+- [CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonSpecSchematicHelm](#coreoamdevv1beta1applicationrevisionspecpolicydefinitionsanonspecschematichelm)
+- [CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonSpecSchematicKube](#coreoamdevv1beta1applicationrevisionspecpolicydefinitionsanonspecschematickube)
+- [CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonSpecSchematicKubeParametersItems0](#coreoamdevv1beta1applicationrevisionspecpolicydefinitionsanonspecschematickubeparametersitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonSpecSchematicTerraform](#coreoamdevv1beta1applicationrevisionspecpolicydefinitionsanonspecschematicterraform)
+- [CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonSpecSchematicTerraformProviderRef](#coreoamdevv1beta1applicationrevisionspecpolicydefinitionsanonspecschematicterraformproviderref)
+- [CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonSpecSchematicTerraformWriteConnectionSecretToRef](#coreoamdevv1beta1applicationrevisionspecpolicydefinitionsanonspecschematicterraformwriteconnectionsecrettoref)
+- [CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonStatus](#coreoamdevv1beta1applicationrevisionspecpolicydefinitionsanonstatus)
+- [CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonStatusConditionsItems0](#coreoamdevv1beta1applicationrevisionspecpolicydefinitionsanonstatusconditionsitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonStatusLatestRevision](#coreoamdevv1beta1applicationrevisionspecpolicydefinitionsanonstatuslatestrevision)
+- [CoreOamDevV1beta1ApplicationRevisionSpecScopeDefinitionsAnon](#coreoamdevv1beta1applicationrevisionspecscopedefinitionsanon)
+- [CoreOamDevV1beta1ApplicationRevisionSpecScopeDefinitionsAnonSpec](#coreoamdevv1beta1applicationrevisionspecscopedefinitionsanonspec)
+- [CoreOamDevV1beta1ApplicationRevisionSpecScopeDefinitionsAnonSpecDefinitionRef](#coreoamdevv1beta1applicationrevisionspecscopedefinitionsanonspecdefinitionref)
+- [CoreOamDevV1beta1ApplicationRevisionSpecScopeGVKAnon](#coreoamdevv1beta1applicationrevisionspecscopegvkanon)
+- [CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnon](#coreoamdevv1beta1applicationrevisionspectraitdefinitionsanon)
+- [CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonSpec](#coreoamdevv1beta1applicationrevisionspectraitdefinitionsanonspec)
+- [CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonSpecDefinitionRef](#coreoamdevv1beta1applicationrevisionspectraitdefinitionsanonspecdefinitionref)
+- [CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonSpecSchematic](#coreoamdevv1beta1applicationrevisionspectraitdefinitionsanonspecschematic)
+- [CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonSpecSchematicCue](#coreoamdevv1beta1applicationrevisionspectraitdefinitionsanonspecschematiccue)
+- [CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonSpecSchematicHelm](#coreoamdevv1beta1applicationrevisionspectraitdefinitionsanonspecschematichelm)
+- [CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonSpecSchematicKube](#coreoamdevv1beta1applicationrevisionspectraitdefinitionsanonspecschematickube)
+- [CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonSpecSchematicKubeParametersItems0](#coreoamdevv1beta1applicationrevisionspectraitdefinitionsanonspecschematickubeparametersitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonSpecSchematicTerraform](#coreoamdevv1beta1applicationrevisionspectraitdefinitionsanonspecschematicterraform)
+- [CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonSpecSchematicTerraformProviderRef](#coreoamdevv1beta1applicationrevisionspectraitdefinitionsanonspecschematicterraformproviderref)
+- [CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonSpecSchematicTerraformWriteConnectionSecretToRef](#coreoamdevv1beta1applicationrevisionspectraitdefinitionsanonspecschematicterraformwriteconnectionsecrettoref)
+- [CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonSpecStatus](#coreoamdevv1beta1applicationrevisionspectraitdefinitionsanonspecstatus)
+- [CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonStatus](#coreoamdevv1beta1applicationrevisionspectraitdefinitionsanonstatus)
+- [CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonStatusConditionsItems0](#coreoamdevv1beta1applicationrevisionspectraitdefinitionsanonstatusconditionsitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonStatusLatestRevision](#coreoamdevv1beta1applicationrevisionspectraitdefinitionsanonstatuslatestrevision)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkflow](#coreoamdevv1beta1applicationrevisionspecworkflow)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkflowMode](#coreoamdevv1beta1applicationrevisionspecworkflowmode)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnon](#coreoamdevv1beta1applicationrevisionspecworkflowstepdefinitionsanon)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonSpec](#coreoamdevv1beta1applicationrevisionspecworkflowstepdefinitionsanonspec)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonSpecDefinitionRef](#coreoamdevv1beta1applicationrevisionspecworkflowstepdefinitionsanonspecdefinitionref)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonSpecSchematic](#coreoamdevv1beta1applicationrevisionspecworkflowstepdefinitionsanonspecschematic)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonSpecSchematicCue](#coreoamdevv1beta1applicationrevisionspecworkflowstepdefinitionsanonspecschematiccue)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonSpecSchematicHelm](#coreoamdevv1beta1applicationrevisionspecworkflowstepdefinitionsanonspecschematichelm)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonSpecSchematicKube](#coreoamdevv1beta1applicationrevisionspecworkflowstepdefinitionsanonspecschematickube)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonSpecSchematicKubeParametersItems0](#coreoamdevv1beta1applicationrevisionspecworkflowstepdefinitionsanonspecschematickubeparametersitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonSpecSchematicTerraform](#coreoamdevv1beta1applicationrevisionspecworkflowstepdefinitionsanonspecschematicterraform)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonSpecSchematicTerraformProviderRef](#coreoamdevv1beta1applicationrevisionspecworkflowstepdefinitionsanonspecschematicterraformproviderref)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonSpecSchematicTerraformWriteConnectionSecretToRef](#coreoamdevv1beta1applicationrevisionspecworkflowstepdefinitionsanonspecschematicterraformwriteconnectionsecrettoref)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonStatus](#coreoamdevv1beta1applicationrevisionspecworkflowstepdefinitionsanonstatus)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonStatusConditionsItems0](#coreoamdevv1beta1applicationrevisionspecworkflowstepdefinitionsanonstatusconditionsitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonStatusLatestRevision](#coreoamdevv1beta1applicationrevisionspecworkflowstepdefinitionsanonstatuslatestrevision)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepsItems0](#coreoamdevv1beta1applicationrevisionspecworkflowstepsitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepsItems0InputsItems0](#coreoamdevv1beta1applicationrevisionspecworkflowstepsitems0inputsitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepsItems0Meta](#coreoamdevv1beta1applicationrevisionspecworkflowstepsitems0meta)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepsItems0OutputsItems0](#coreoamdevv1beta1applicationrevisionspecworkflowstepsitems0outputsitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepsItems0SubStepsItems0](#coreoamdevv1beta1applicationrevisionspecworkflowstepsitems0substepsitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepsItems0SubStepsItems0InputsItems0](#coreoamdevv1beta1applicationrevisionspecworkflowstepsitems0substepsitems0inputsitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepsItems0SubStepsItems0Meta](#coreoamdevv1beta1applicationrevisionspecworkflowstepsitems0substepsitems0meta)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepsItems0SubStepsItems0OutputsItems0](#coreoamdevv1beta1applicationrevisionspecworkflowstepsitems0substepsitems0outputsitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnon](#coreoamdevv1beta1applicationrevisionspecworkloaddefinitionsanon)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpec](#coreoamdevv1beta1applicationrevisionspecworkloaddefinitionsanonspec)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpecChildResourceKindsItems0](#coreoamdevv1beta1applicationrevisionspecworkloaddefinitionsanonspecchildresourcekindsitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpecDefinitionRef](#coreoamdevv1beta1applicationrevisionspecworkloaddefinitionsanonspecdefinitionref)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpecSchematic](#coreoamdevv1beta1applicationrevisionspecworkloaddefinitionsanonspecschematic)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpecSchematicCue](#coreoamdevv1beta1applicationrevisionspecworkloaddefinitionsanonspecschematiccue)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpecSchematicHelm](#coreoamdevv1beta1applicationrevisionspecworkloaddefinitionsanonspecschematichelm)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpecSchematicKube](#coreoamdevv1beta1applicationrevisionspecworkloaddefinitionsanonspecschematickube)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpecSchematicKubeParametersItems0](#coreoamdevv1beta1applicationrevisionspecworkloaddefinitionsanonspecschematickubeparametersitems0)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpecSchematicTerraform](#coreoamdevv1beta1applicationrevisionspecworkloaddefinitionsanonspecschematicterraform)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpecSchematicTerraformProviderRef](#coreoamdevv1beta1applicationrevisionspecworkloaddefinitionsanonspecschematicterraformproviderref)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpecSchematicTerraformWriteConnectionSecretToRef](#coreoamdevv1beta1applicationrevisionspecworkloaddefinitionsanonspecschematicterraformwriteconnectionsecrettoref)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpecStatus](#coreoamdevv1beta1applicationrevisionspecworkloaddefinitionsanonspecstatus)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonStatus](#coreoamdevv1beta1applicationrevisionspecworkloaddefinitionsanonstatus)
+- [CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonStatusConditionsItems0](#coreoamdevv1beta1applicationrevisionspecworkloaddefinitionsanonstatusconditionsitems0)
+- [CoreOamDevV1beta1ApplicationRevisionStatus](#coreoamdevv1beta1applicationrevisionstatus)
+- [CoreOamDevV1beta1ApplicationRevisionStatusWorkflow](#coreoamdevv1beta1applicationrevisionstatusworkflow)
+- [CoreOamDevV1beta1ApplicationRevisionStatusWorkflowContextBackend](#coreoamdevv1beta1applicationrevisionstatusworkflowcontextbackend)
+- [CoreOamDevV1beta1ApplicationRevisionStatusWorkflowStepsItems0](#coreoamdevv1beta1applicationrevisionstatusworkflowstepsitems0)
+- [CoreOamDevV1beta1ApplicationRevisionStatusWorkflowStepsItems0SubStepsItems0](#coreoamdevv1beta1applicationrevisionstatusworkflowstepsitems0substepsitems0)
+- [CoreOamDevV1beta1ApplicationSpec](#coreoamdevv1beta1applicationspec)
+- [CoreOamDevV1beta1ApplicationSpecComponentsItems0](#coreoamdevv1beta1applicationspeccomponentsitems0)
+- [CoreOamDevV1beta1ApplicationSpecComponentsItems0InputsItems0](#coreoamdevv1beta1applicationspeccomponentsitems0inputsitems0)
+- [CoreOamDevV1beta1ApplicationSpecComponentsItems0OutputsItems0](#coreoamdevv1beta1applicationspeccomponentsitems0outputsitems0)
+- [CoreOamDevV1beta1ApplicationSpecComponentsItems0TraitsItems0](#coreoamdevv1beta1applicationspeccomponentsitems0traitsitems0)
+- [CoreOamDevV1beta1ApplicationSpecPoliciesItems0](#coreoamdevv1beta1applicationspecpoliciesitems0)
+- [CoreOamDevV1beta1ApplicationSpecWorkflow](#coreoamdevv1beta1applicationspecworkflow)
+- [CoreOamDevV1beta1ApplicationSpecWorkflowMode](#coreoamdevv1beta1applicationspecworkflowmode)
+- [CoreOamDevV1beta1ApplicationSpecWorkflowStepsItems0](#coreoamdevv1beta1applicationspecworkflowstepsitems0)
+- [CoreOamDevV1beta1ApplicationSpecWorkflowStepsItems0InputsItems0](#coreoamdevv1beta1applicationspecworkflowstepsitems0inputsitems0)
+- [CoreOamDevV1beta1ApplicationSpecWorkflowStepsItems0Meta](#coreoamdevv1beta1applicationspecworkflowstepsitems0meta)
+- [CoreOamDevV1beta1ApplicationSpecWorkflowStepsItems0OutputsItems0](#coreoamdevv1beta1applicationspecworkflowstepsitems0outputsitems0)
+- [CoreOamDevV1beta1ApplicationSpecWorkflowStepsItems0SubStepsItems0](#coreoamdevv1beta1applicationspecworkflowstepsitems0substepsitems0)
+- [CoreOamDevV1beta1ApplicationSpecWorkflowStepsItems0SubStepsItems0InputsItems0](#coreoamdevv1beta1applicationspecworkflowstepsitems0substepsitems0inputsitems0)
+- [CoreOamDevV1beta1ApplicationSpecWorkflowStepsItems0SubStepsItems0Meta](#coreoamdevv1beta1applicationspecworkflowstepsitems0substepsitems0meta)
+- [CoreOamDevV1beta1ApplicationSpecWorkflowStepsItems0SubStepsItems0OutputsItems0](#coreoamdevv1beta1applicationspecworkflowstepsitems0substepsitems0outputsitems0)
+- [CoreOamDevV1beta1ApplicationStatus](#coreoamdevv1beta1applicationstatus)
+- [CoreOamDevV1beta1ApplicationStatusAppliedResourcesItems0](#coreoamdevv1beta1applicationstatusappliedresourcesitems0)
+- [CoreOamDevV1beta1ApplicationStatusComponentsItems0](#coreoamdevv1beta1applicationstatuscomponentsitems0)
+- [CoreOamDevV1beta1ApplicationStatusConditionsItems0](#coreoamdevv1beta1applicationstatusconditionsitems0)
+- [CoreOamDevV1beta1ApplicationStatusLatestRevision](#coreoamdevv1beta1applicationstatuslatestrevision)
+- [CoreOamDevV1beta1ApplicationStatusPolicyItems0](#coreoamdevv1beta1applicationstatuspolicyitems0)
+- [CoreOamDevV1beta1ApplicationStatusServicesItems0](#coreoamdevv1beta1applicationstatusservicesitems0)
+- [CoreOamDevV1beta1ApplicationStatusServicesItems0ScopesItems0](#coreoamdevv1beta1applicationstatusservicesitems0scopesitems0)
+- [CoreOamDevV1beta1ApplicationStatusServicesItems0TraitsItems0](#coreoamdevv1beta1applicationstatusservicesitems0traitsitems0)
+- [CoreOamDevV1beta1ApplicationStatusServicesItems0WorkloadDefinition](#coreoamdevv1beta1applicationstatusservicesitems0workloaddefinition)
+- [CoreOamDevV1beta1ApplicationStatusWorkflow](#coreoamdevv1beta1applicationstatusworkflow)
+- [CoreOamDevV1beta1ApplicationStatusWorkflowContextBackend](#coreoamdevv1beta1applicationstatusworkflowcontextbackend)
+- [CoreOamDevV1beta1ApplicationStatusWorkflowStepsItems0](#coreoamdevv1beta1applicationstatusworkflowstepsitems0)
+- [CoreOamDevV1beta1ApplicationStatusWorkflowStepsItems0SubStepsItems0](#coreoamdevv1beta1applicationstatusworkflowstepsitems0substepsitems0)
+- [CoreOamDevV1beta1PolicyDefinitionSpec](#coreoamdevv1beta1policydefinitionspec)
+- [CoreOamDevV1beta1PolicyDefinitionSpecDefinitionRef](#coreoamdevv1beta1policydefinitionspecdefinitionref)
+- [CoreOamDevV1beta1PolicyDefinitionSpecSchematic](#coreoamdevv1beta1policydefinitionspecschematic)
+- [CoreOamDevV1beta1PolicyDefinitionSpecSchematicCue](#coreoamdevv1beta1policydefinitionspecschematiccue)
+- [CoreOamDevV1beta1PolicyDefinitionSpecSchematicHelm](#coreoamdevv1beta1policydefinitionspecschematichelm)
+- [CoreOamDevV1beta1PolicyDefinitionSpecSchematicKube](#coreoamdevv1beta1policydefinitionspecschematickube)
+- [CoreOamDevV1beta1PolicyDefinitionSpecSchematicKubeParametersItems0](#coreoamdevv1beta1policydefinitionspecschematickubeparametersitems0)
+- [CoreOamDevV1beta1PolicyDefinitionSpecSchematicTerraform](#coreoamdevv1beta1policydefinitionspecschematicterraform)
+- [CoreOamDevV1beta1PolicyDefinitionSpecSchematicTerraformProviderRef](#coreoamdevv1beta1policydefinitionspecschematicterraformproviderref)
+- [CoreOamDevV1beta1PolicyDefinitionSpecSchematicTerraformWriteConnectionSecretToRef](#coreoamdevv1beta1policydefinitionspecschematicterraformwriteconnectionsecrettoref)
+- [CoreOamDevV1beta1PolicyDefinitionStatus](#coreoamdevv1beta1policydefinitionstatus)
+- [CoreOamDevV1beta1PolicyDefinitionStatusConditionsItems0](#coreoamdevv1beta1policydefinitionstatusconditionsitems0)
+- [CoreOamDevV1beta1PolicyDefinitionStatusLatestRevision](#coreoamdevv1beta1policydefinitionstatuslatestrevision)
+- [CoreOamDevV1beta1ResourceTrackerSpec](#coreoamdevv1beta1resourcetrackerspec)
+- [CoreOamDevV1beta1ResourceTrackerSpecCompression](#coreoamdevv1beta1resourcetrackerspeccompression)
+- [CoreOamDevV1beta1ResourceTrackerSpecManagedResourcesItems0](#coreoamdevv1beta1resourcetrackerspecmanagedresourcesitems0)
+- [CoreOamDevV1beta1ResourceTrackerStatus](#coreoamdevv1beta1resourcetrackerstatus)
+- [CoreOamDevV1beta1ResourceTrackerStatusTrackedResourcesItems0](#coreoamdevv1beta1resourcetrackerstatustrackedresourcesitems0)
+- [CoreOamDevV1beta1ScopeDefinitionSpec](#coreoamdevv1beta1scopedefinitionspec)
+- [CoreOamDevV1beta1ScopeDefinitionSpecDefinitionRef](#coreoamdevv1beta1scopedefinitionspecdefinitionref)
+- [CoreOamDevV1beta1WorkflowStepDefinitionSpec](#coreoamdevv1beta1workflowstepdefinitionspec)
+- [CoreOamDevV1beta1WorkflowStepDefinitionSpecDefinitionRef](#coreoamdevv1beta1workflowstepdefinitionspecdefinitionref)
+- [CoreOamDevV1beta1WorkflowStepDefinitionSpecSchematic](#coreoamdevv1beta1workflowstepdefinitionspecschematic)
+- [CoreOamDevV1beta1WorkflowStepDefinitionSpecSchematicCue](#coreoamdevv1beta1workflowstepdefinitionspecschematiccue)
+- [CoreOamDevV1beta1WorkflowStepDefinitionSpecSchematicHelm](#coreoamdevv1beta1workflowstepdefinitionspecschematichelm)
+- [CoreOamDevV1beta1WorkflowStepDefinitionSpecSchematicKube](#coreoamdevv1beta1workflowstepdefinitionspecschematickube)
+- [CoreOamDevV1beta1WorkflowStepDefinitionSpecSchematicKubeParametersItems0](#coreoamdevv1beta1workflowstepdefinitionspecschematickubeparametersitems0)
+- [CoreOamDevV1beta1WorkflowStepDefinitionSpecSchematicTerraform](#coreoamdevv1beta1workflowstepdefinitionspecschematicterraform)
+- [CoreOamDevV1beta1WorkflowStepDefinitionSpecSchematicTerraformProviderRef](#coreoamdevv1beta1workflowstepdefinitionspecschematicterraformproviderref)
+- [CoreOamDevV1beta1WorkflowStepDefinitionSpecSchematicTerraformWriteConnectionSecretToRef](#coreoamdevv1beta1workflowstepdefinitionspecschematicterraformwriteconnectionsecrettoref)
+- [CoreOamDevV1beta1WorkflowStepDefinitionStatus](#coreoamdevv1beta1workflowstepdefinitionstatus)
+- [CoreOamDevV1beta1WorkflowStepDefinitionStatusConditionsItems0](#coreoamdevv1beta1workflowstepdefinitionstatusconditionsitems0)
+- [CoreOamDevV1beta1WorkflowStepDefinitionStatusLatestRevision](#coreoamdevv1beta1workflowstepdefinitionstatuslatestrevision)
+- [CoreOamDevV1beta1WorkloadDefinitionSpec](#coreoamdevv1beta1workloaddefinitionspec)
+- [CoreOamDevV1beta1WorkloadDefinitionSpecChildResourceKindsItems0](#coreoamdevv1beta1workloaddefinitionspecchildresourcekindsitems0)
+- [CoreOamDevV1beta1WorkloadDefinitionSpecDefinitionRef](#coreoamdevv1beta1workloaddefinitionspecdefinitionref)
+- [CoreOamDevV1beta1WorkloadDefinitionSpecSchematic](#coreoamdevv1beta1workloaddefinitionspecschematic)
+- [CoreOamDevV1beta1WorkloadDefinitionSpecSchematicCue](#coreoamdevv1beta1workloaddefinitionspecschematiccue)
+- [CoreOamDevV1beta1WorkloadDefinitionSpecSchematicHelm](#coreoamdevv1beta1workloaddefinitionspecschematichelm)
+- [CoreOamDevV1beta1WorkloadDefinitionSpecSchematicKube](#coreoamdevv1beta1workloaddefinitionspecschematickube)
+- [CoreOamDevV1beta1WorkloadDefinitionSpecSchematicKubeParametersItems0](#coreoamdevv1beta1workloaddefinitionspecschematickubeparametersitems0)
+- [CoreOamDevV1beta1WorkloadDefinitionSpecSchematicTerraform](#coreoamdevv1beta1workloaddefinitionspecschematicterraform)
+- [CoreOamDevV1beta1WorkloadDefinitionSpecSchematicTerraformProviderRef](#coreoamdevv1beta1workloaddefinitionspecschematicterraformproviderref)
+- [CoreOamDevV1beta1WorkloadDefinitionSpecSchematicTerraformWriteConnectionSecretToRef](#coreoamdevv1beta1workloaddefinitionspecschematicterraformwriteconnectionsecrettoref)
+- [CoreOamDevV1beta1WorkloadDefinitionSpecStatus](#coreoamdevv1beta1workloaddefinitionspecstatus)
+- [CoreOamDevV1beta1WorkloadDefinitionStatus](#coreoamdevv1beta1workloaddefinitionstatus)
+- [CoreOamDevV1beta1WorkloadDefinitionStatusConditionsItems0](#coreoamdevv1beta1workloaddefinitionstatusconditionsitems0)
+- [PolicyDefinition](#policydefinition)
+- [ResourceTracker](#resourcetracker)
+- [ScopeDefinition](#scopedefinition)
+- [WorkflowStepDefinition](#workflowstepdefinition)
+- [WorkloadDefinition](#workloaddefinition)
+
+
+## Schemas
+
+### Application
+
+Application is the Schema for the applications API
+
+#### Attributes
+
+**apiVersion** *required* *readOnly*
+
+`"core.oam.dev/v1beta1"`
+
+APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+**kind** *required* *readOnly*
+
+`"Application"`
+
+Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+**metadata**
+
+`ObjectMeta`
+
+metadata
+
+**spec**
+
+`CoreOamDevV1beta1ApplicationSpec`
+
+spec
+
+**status**
+
+`CoreOamDevV1beta1ApplicationStatus`
+
+status
+
+### ApplicationRevision
+
+ApplicationRevision is the Schema for the ApplicationRevision API
+
+#### Attributes
+
+**apiVersion** *required* *readOnly*
+
+`"core.oam.dev/v1beta1"`
+
+APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+**kind** *required* *readOnly*
+
+`"ApplicationRevision"`
+
+Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+**metadata**
+
+`ObjectMeta`
+
+metadata
+
+**spec**
+
+`CoreOamDevV1beta1ApplicationRevisionSpec`
+
+spec
+
+**status**
+
+`CoreOamDevV1beta1ApplicationRevisionStatus`
+
+status
+
+### CoreOamDevV1beta1ApplicationRevisionSpec
+
+ApplicationRevisionSpec is the spec of ApplicationRevision
+
+#### Attributes
+
+**application** *required*
+
+`CoreOamDevV1beta1ApplicationRevisionSpecApplication`
+
+application
+
+**componentDefinitions**
+
+`{str:CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnon}`
+
+ComponentDefinitions records the snapshot of the componentDefinitions related with the created/modified Application
+
+**compression**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecCompression`
+
+compression
+
+**policies**
+
+`{str:CoreOamDevV1beta1ApplicationRevisionSpecPoliciesAnon}`
+
+Policies records the external policies
+
+**policyDefinitions**
+
+`{str:CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnon}`
+
+PolicyDefinitions records the snapshot of the PolicyDefinitions related with the created/modified Application
+
+**referredObjects**
+
+`[]`
+
+ReferredObjects records the referred objects used in the ref-object typed components
+
+**scopeDefinitions**
+
+`{str:CoreOamDevV1beta1ApplicationRevisionSpecScopeDefinitionsAnon}`
+
+ScopeDefinitions records the snapshot of the scopeDefinitions related with the created/modified Application
+
+**scopeGVK**
+
+`{str:CoreOamDevV1beta1ApplicationRevisionSpecScopeGVKAnon}`
+
+ScopeGVK records the apiVersion to GVK mapping
+
+**traitDefinitions**
+
+`{str:CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnon}`
+
+TraitDefinitions records the snapshot of the traitDefinitions related with the created/modified Application
+
+**workflow**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecWorkflow`
+
+workflow
+
+**workflowStepDefinitions**
+
+`{str:CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnon}`
+
+WorkflowStepDefinitions records the snapshot of the WorkflowStepDefinitions related with the created/modified Application
+
+**workloadDefinitions**
+
+`{str:CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnon}`
+
+WorkloadDefinitions records the snapshot of the workloadDefinitions related with the created/modified Application
+
+### CoreOamDevV1beta1ApplicationRevisionSpecApplication
+
+Application records the snapshot of the created/modified Application
+
+#### Attributes
+
+**apiVersion**
+
+`str`
+
+APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+**kind**
+
+`str`
+
+Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+**metadata**
+
+`any`
+
+metadata
+
+**spec**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpec`
+
+spec
+
+**status**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatus`
+
+status
+
+### CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpec
+
+ApplicationSpec is the spec of Application
+
+#### Attributes
+
+**components** *required*
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecComponentsItems0]`
+
+components
+
+**policies**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecPoliciesItems0]`
+
+Policies defines the global policies for all components in the app, e.g. security, metrics, gitops, multi-cluster placement rules, etc. Policies are applied after components are rendered and before workflow steps are executed.
+
+**workflow**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecWorkflow`
+
+workflow
+
+### CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecComponentsItems0
+
+ApplicationComponent describe the component of application
+
+#### Attributes
+
+**dependsOn**
+
+`[str]`
+
+depends on
+
+**externalRevision**
+
+`str`
+
+ExternalRevision specified the component revisionName
+
+**inputs**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecComponentsItems0InputsItems0]`
+
+StepInputs defines variable input of WorkflowStep
+
+**name** *required*
+
+`str`
+
+name
+
+**outputs**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecComponentsItems0OutputsItems0]`
+
+StepOutputs defines output variable of WorkflowStep
+
+**properties**
+
+`any`
+
+properties
+
+**scopes**
+
+`{str:str}`
+
+scopes in ApplicationComponent defines the component-level scopes the format is &lt;scope-type:scope-instance-name&gt; pairs, the key represents type of `ScopeDefinition` while the value represent the name of scope instance.
+
+**traits**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecComponentsItems0TraitsItems0]`
+
+Traits define the trait of one component, the type must be array to keep the order.
+
+**type** *required*
+
+`str`
+
+### CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecComponentsItems0InputsItems0
+
+core oam dev v1beta1 application revision spec application spec components items0 inputs items0
+
+#### Attributes
+
+**from** *required*
+
+`str`
+
+from
+
+**parameterKey** *required*
+
+`str`
+
+parameter key
+
+### CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecComponentsItems0OutputsItems0
+
+core oam dev v1beta1 application revision spec application spec components items0 outputs items0
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+name
+
+**valueFrom** *required*
+
+`str`
+
+value from
+
+### CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecComponentsItems0TraitsItems0
+
+ApplicationTrait defines the trait of application
+
+#### Attributes
+
+**properties**
+
+`any`
+
+properties
+
+**type** *required*
+
+`str`
+
+### CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecPoliciesItems0
+
+AppPolicy defines a global policy for all components in the app.
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+Name is the unique name of the policy.
+
+**properties**
+
+`any`
+
+properties
+
+**type** *required*
+
+`str`
+
+### CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecWorkflow
+
+Workflow defines how to customize the control logic. If workflow is specified, Vela won&#39;t apply any resource, but provide rendered output in AppRevision. Workflow steps are executed in array order, and each step: - will have a context in annotation. - should mark &#34;finish&#34; phase in status.conditions.
+
+#### Attributes
+
+**mode**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecWorkflowMode`
+
+mode
+
+**ref**
+
+`str`
+
+ref
+
+**steps**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecWorkflowStepsItems0]`
+
+steps
+
+### CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecWorkflowMode
+
+WorkflowExecuteMode defines the mode of workflow execution
+
+#### Attributes
+
+**steps**
+
+`str`
+
+Steps is the mode of workflow steps execution
+
+**subSteps**
+
+`str`
+
+SubSteps is the mode of workflow sub steps execution
+
+### CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecWorkflowStepsItems0
+
+WorkflowStep defines how to execute a workflow step.
+
+#### Attributes
+
+**dependsOn**
+
+`[str]`
+
+DependsOn is the dependency of the step
+
+**if**
+
+`str`
+
+**inputs**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecWorkflowStepsItems0InputsItems0]`
+
+Inputs is the inputs of the step
+
+**meta**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecWorkflowStepsItems0Meta`
+
+meta
+
+**name** *required*
+
+`str`
+
+Name is the unique name of the workflow step.
+
+**outputs**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecWorkflowStepsItems0OutputsItems0]`
+
+Outputs is the outputs of the step
+
+**properties**
+
+`any`
+
+Properties is the properties of the step
+
+**subSteps**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecWorkflowStepsItems0SubStepsItems0]`
+
+sub steps
+
+**timeout**
+
+`str`
+
+Timeout is the timeout of the step
+
+**type** *required*
+
+`str`
+
+### CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecWorkflowStepsItems0InputsItems0
+
+core oam dev v1beta1 application revision spec application spec workflow steps items0 inputs items0
+
+#### Attributes
+
+**from** *required*
+
+`str`
+
+from
+
+**parameterKey** *required*
+
+`str`
+
+parameter key
+
+### CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecWorkflowStepsItems0Meta
+
+Meta is the meta data of the workflow step.
+
+#### Attributes
+
+**alias**
+
+`str`
+
+alias
+
+### CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecWorkflowStepsItems0OutputsItems0
+
+core oam dev v1beta1 application revision spec application spec workflow steps items0 outputs items0
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+name
+
+**valueFrom** *required*
+
+`str`
+
+value from
+
+### CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecWorkflowStepsItems0SubStepsItems0
+
+WorkflowStepBase defines the workflow step base
+
+#### Attributes
+
+**dependsOn**
+
+`[str]`
+
+DependsOn is the dependency of the step
+
+**if**
+
+`str`
+
+**inputs**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecWorkflowStepsItems0SubStepsItems0InputsItems0]`
+
+Inputs is the inputs of the step
+
+**meta**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecWorkflowStepsItems0SubStepsItems0Meta`
+
+meta
+
+**name** *required*
+
+`str`
+
+Name is the unique name of the workflow step.
+
+**outputs**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecWorkflowStepsItems0SubStepsItems0OutputsItems0]`
+
+Outputs is the outputs of the step
+
+**properties**
+
+`any`
+
+Properties is the properties of the step
+
+**timeout**
+
+`str`
+
+Timeout is the timeout of the step
+
+**type** *required*
+
+`str`
+
+### CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecWorkflowStepsItems0SubStepsItems0InputsItems0
+
+core oam dev v1beta1 application revision spec application spec workflow steps items0 sub steps items0 inputs items0
+
+#### Attributes
+
+**from** *required*
+
+`str`
+
+from
+
+**parameterKey** *required*
+
+`str`
+
+parameter key
+
+### CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecWorkflowStepsItems0SubStepsItems0Meta
+
+Meta is the meta data of the workflow step.
+
+#### Attributes
+
+**alias**
+
+`str`
+
+alias
+
+### CoreOamDevV1beta1ApplicationRevisionSpecApplicationSpecWorkflowStepsItems0SubStepsItems0OutputsItems0
+
+core oam dev v1beta1 application revision spec application spec workflow steps items0 sub steps items0 outputs items0
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+name
+
+**valueFrom** *required*
+
+`str`
+
+value from
+
+### CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatus
+
+AppStatus defines the observed state of Application
+
+#### Attributes
+
+**appliedResources**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusAppliedResourcesItems0]`
+
+AppliedResources record the resources that the  workflow step apply.
+
+**components**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusComponentsItems0]`
+
+Components record the related Components created by Application Controller
+
+**conditions**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusConditionsItems0]`
+
+Conditions of the resource.
+
+**latestRevision**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusLatestRevision`
+
+latest revision
+
+**observedGeneration**
+
+`int`
+
+The generation observed by the application controller.
+
+**policy**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusPolicyItems0]`
+
+PolicyStatus records the status of policy Deprecated This field is only used by EnvBinding Policy which is deprecated.
+
+**services**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusServicesItems0]`
+
+Services record the status of the application services
+
+**status**
+
+`str`
+
+ApplicationPhase is a label for the condition of an application at the current time
+
+**workflow**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusWorkflow`
+
+workflow
+
+### CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusAppliedResourcesItems0
+
+ClusterObjectReference defines the object reference with cluster.
+
+#### Attributes
+
+**apiVersion**
+
+`str`
+
+API version of the referent.
+
+**cluster**
+
+`str`
+
+cluster
+
+**creator**
+
+`str`
+
+creator
+
+**fieldPath**
+
+`str`
+
+If referring to a piece of an object instead of an entire object, this string should contain a valid JSON/Go field access statement, such as desiredState.manifest.containers[2]. For example, if the object reference is to a container within a pod, this would take on a value like: &#34;spec.containers{name}&#34; (where &#34;name&#34; refers to the name of the container that triggered the event) or if no container name is specified &#34;spec.containers[2]&#34; (container with index 2 in this pod). This syntax is chosen only to have some well-defined way of referencing a part of an object. TODO: this design is not final and this field is subject to change in the future.
+
+**kind**
+
+`str`
+
+Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+**name**
+
+`str`
+
+Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+
+**namespace**
+
+`str`
+
+Namespace of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
+
+**resourceVersion**
+
+`str`
+
+Specific resourceVersion to which this reference is made, if any. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency
+
+**uid**
+
+`str`
+
+UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids
+
+### CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusComponentsItems0
+
+ObjectReference contains enough information to let you inspect or modify the referred object. --- New uses of this type are discouraged because of difficulty describing its usage when embedded in APIs. 1. Ignored fields.  It includes many fields which are not generally honored.  For instance, ResourceVersion and FieldPath are both very rarely valid in actual usage. 2. Invalid usage help.  It is impossible to add specific help for individual usage.  In most embedded usages, there are particular restrictions like, &#34;must refer only to types A and B&#34; or &#34;UID not honored&#34; or &#34;name must be restricted&#34;. Those cannot be well described when embedded. 3. Inconsistent validation.  Because the usages are different, the validation rules are different by usage, which makes it hard for users to predict what will happen. 4. The fields are both imprecise and overly precise.  Kind is not a precise mapping to a URL. This can produce ambiguity during interpretation and require a REST mapping.  In most cases, the dependency is on the group,resource tuple and the version of the actual struct is irrelevant. 5. We cannot easily change it.  Because this type is embedded in many locations, updates to this type will affect numerous schemas.  Don&#39;t make new APIs embed an underspecified API type they do not control. Instead of using this type, create a locally provided and used type that is well-focused on your reference. For example, ServiceReferences for admission registration: https://github.com/kubernetes/api/blob/release-1.17/admissionregistration/v1/types.go#L533 .
+
+#### Attributes
+
+**apiVersion**
+
+`str`
+
+API version of the referent.
+
+**fieldPath**
+
+`str`
+
+If referring to a piece of an object instead of an entire object, this string should contain a valid JSON/Go field access statement, such as desiredState.manifest.containers[2]. For example, if the object reference is to a container within a pod, this would take on a value like: &#34;spec.containers{name}&#34; (where &#34;name&#34; refers to the name of the container that triggered the event) or if no container name is specified &#34;spec.containers[2]&#34; (container with index 2 in this pod). This syntax is chosen only to have some well-defined way of referencing a part of an object. TODO: this design is not final and this field is subject to change in the future.
+
+**kind**
+
+`str`
+
+Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+**name**
+
+`str`
+
+Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+
+**namespace**
+
+`str`
+
+Namespace of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
+
+**resourceVersion**
+
+`str`
+
+Specific resourceVersion to which this reference is made, if any. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency
+
+**uid**
+
+`str`
+
+UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids
+
+### CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusConditionsItems0
+
+A Condition that may apply to a resource.
+
+#### Attributes
+
+**lastTransitionTime** *required*
+
+`str`
+
+LastTransitionTime is the last time this condition transitioned from one status to another.
+
+**message**
+
+`str`
+
+A Message containing details about this condition&#39;s last transition from one status to another, if any.
+
+**reason** *required*
+
+`str`
+
+A Reason for this condition&#39;s last transition from one status to another.
+
+**status** *required*
+
+`str`
+
+Status of this condition; is it currently True, False, or Unknown?
+
+**type** *required*
+
+`str`
+
+### CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusLatestRevision
+
+LatestRevision of the application configuration it generates
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+name
+
+**revision** *required*
+
+`int`
+
+revision
+
+**revisionHash**
+
+`str`
+
+RevisionHash record the hash value of the spec of ApplicationRevision object.
+
+### CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusPolicyItems0
+
+PolicyStatus records the status of policy Deprecated
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+name
+
+**status**
+
+`any`
+
+status
+
+**type** *required*
+
+`str`
+
+### CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusServicesItems0
+
+ApplicationComponentStatus record the health status of App component
+
+#### Attributes
+
+**cluster**
+
+`str`
+
+cluster
+
+**env**
+
+`str`
+
+env
+
+**healthy** *required*
+
+`bool`
+
+healthy
+
+**message**
+
+`str`
+
+message
+
+**name** *required*
+
+`str`
+
+name
+
+**namespace**
+
+`str`
+
+namespace
+
+**scopes**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusServicesItems0ScopesItems0]`
+
+scopes
+
+**traits**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusServicesItems0TraitsItems0]`
+
+traits
+
+**workloadDefinition**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusServicesItems0WorkloadDefinition`
+
+workload definition
+
+### CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusServicesItems0ScopesItems0
+
+ObjectReference contains enough information to let you inspect or modify the referred object. --- New uses of this type are discouraged because of difficulty describing its usage when embedded in APIs. 1. Ignored fields.  It includes many fields which are not generally honored.  For instance, ResourceVersion and FieldPath are both very rarely valid in actual usage. 2. Invalid usage help.  It is impossible to add specific help for individual usage.  In most embedded usages, there are particular restrictions like, &#34;must refer only to types A and B&#34; or &#34;UID not honored&#34; or &#34;name must be restricted&#34;. Those cannot be well described when embedded. 3. Inconsistent validation.  Because the usages are different, the validation rules are different by usage, which makes it hard for users to predict what will happen. 4. The fields are both imprecise and overly precise.  Kind is not a precise mapping to a URL. This can produce ambiguity during interpretation and require a REST mapping.  In most cases, the dependency is on the group,resource tuple and the version of the actual struct is irrelevant. 5. We cannot easily change it.  Because this type is embedded in many locations, updates to this type will affect numerous schemas.  Don&#39;t make new APIs embed an underspecified API type they do not control. Instead of using this type, create a locally provided and used type that is well-focused on your reference. For example, ServiceReferences for admission registration: https://github.com/kubernetes/api/blob/release-1.17/admissionregistration/v1/types.go#L533 .
+
+#### Attributes
+
+**apiVersion**
+
+`str`
+
+API version of the referent.
+
+**fieldPath**
+
+`str`
+
+If referring to a piece of an object instead of an entire object, this string should contain a valid JSON/Go field access statement, such as desiredState.manifest.containers[2]. For example, if the object reference is to a container within a pod, this would take on a value like: &#34;spec.containers{name}&#34; (where &#34;name&#34; refers to the name of the container that triggered the event) or if no container name is specified &#34;spec.containers[2]&#34; (container with index 2 in this pod). This syntax is chosen only to have some well-defined way of referencing a part of an object. TODO: this design is not final and this field is subject to change in the future.
+
+**kind**
+
+`str`
+
+Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+**name**
+
+`str`
+
+Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+
+**namespace**
+
+`str`
+
+Namespace of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
+
+**resourceVersion**
+
+`str`
+
+Specific resourceVersion to which this reference is made, if any. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency
+
+**uid**
+
+`str`
+
+UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids
+
+### CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusServicesItems0TraitsItems0
+
+ApplicationTraitStatus records the trait health status
+
+#### Attributes
+
+**healthy** *required*
+
+`bool`
+
+healthy
+
+**message**
+
+`str`
+
+message
+
+**type** *required*
+
+`str`
+
+### CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusServicesItems0WorkloadDefinition
+
+WorkloadDefinition is the definition of a WorkloadDefinition, such as deployments/apps.v1
+
+#### Attributes
+
+**apiVersion** *required*
+
+`str`
+
+api version
+
+**kind** *required*
+
+`str`
+
+kind
+
+### CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusWorkflow
+
+Workflow record the status of workflow
+
+#### Attributes
+
+**appRevision**
+
+`str`
+
+app revision
+
+**contextBackend**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusWorkflowContextBackend`
+
+context backend
+
+**endTime**
+
+`str`
+
+end time
+
+**finished** *required*
+
+`bool`
+
+finished
+
+**message**
+
+`str`
+
+message
+
+**mode** *required*
+
+`str`
+
+mode
+
+**startTime**
+
+`str`
+
+start time
+
+**status**
+
+`str`
+
+WorkflowRunPhase is a label for the condition of a WorkflowRun at the current time
+
+**steps**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusWorkflowStepsItems0]`
+
+steps
+
+**suspend** *required*
+
+`bool`
+
+suspend
+
+**suspendState**
+
+`str`
+
+suspend state
+
+**terminated** *required*
+
+`bool`
+
+terminated
+
+### CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusWorkflowContextBackend
+
+ObjectReference contains enough information to let you inspect or modify the referred object. --- New uses of this type are discouraged because of difficulty describing its usage when embedded in APIs. 1. Ignored fields.  It includes many fields which are not generally honored.  For instance, ResourceVersion and FieldPath are both very rarely valid in actual usage. 2. Invalid usage help.  It is impossible to add specific help for individual usage.  In most embedded usages, there are particular restrictions like, &#34;must refer only to types A and B&#34; or &#34;UID not honored&#34; or &#34;name must be restricted&#34;. Those cannot be well described when embedded. 3. Inconsistent validation.  Because the usages are different, the validation rules are different by usage, which makes it hard for users to predict what will happen. 4. The fields are both imprecise and overly precise.  Kind is not a precise mapping to a URL. This can produce ambiguity during interpretation and require a REST mapping.  In most cases, the dependency is on the group,resource tuple and the version of the actual struct is irrelevant. 5. We cannot easily change it.  Because this type is embedded in many locations, updates to this type will affect numerous schemas.  Don&#39;t make new APIs embed an underspecified API type they do not control. Instead of using this type, create a locally provided and used type that is well-focused on your reference. For example, ServiceReferences for admission registration: https://github.com/kubernetes/api/blob/release-1.17/admissionregistration/v1/types.go#L533 .
+
+#### Attributes
+
+**apiVersion**
+
+`str`
+
+API version of the referent.
+
+**fieldPath**
+
+`str`
+
+If referring to a piece of an object instead of an entire object, this string should contain a valid JSON/Go field access statement, such as desiredState.manifest.containers[2]. For example, if the object reference is to a container within a pod, this would take on a value like: &#34;spec.containers{name}&#34; (where &#34;name&#34; refers to the name of the container that triggered the event) or if no container name is specified &#34;spec.containers[2]&#34; (container with index 2 in this pod). This syntax is chosen only to have some well-defined way of referencing a part of an object. TODO: this design is not final and this field is subject to change in the future.
+
+**kind**
+
+`str`
+
+Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+**name**
+
+`str`
+
+Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+
+**namespace**
+
+`str`
+
+Namespace of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
+
+**resourceVersion**
+
+`str`
+
+Specific resourceVersion to which this reference is made, if any. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency
+
+**uid**
+
+`str`
+
+UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids
+
+### CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusWorkflowStepsItems0
+
+WorkflowStepStatus record the status of a workflow step, include step status and subStep status
+
+#### Attributes
+
+**firstExecuteTime**
+
+`str`
+
+FirstExecuteTime is the first time this step execution.
+
+**id** *required*
+
+`str`
+
+id
+
+**lastExecuteTime**
+
+`str`
+
+LastExecuteTime is the last time this step execution.
+
+**message**
+
+`str`
+
+A human readable message indicating details about why the workflowStep is in this state.
+
+**name**
+
+`str`
+
+name
+
+**phase**
+
+`str`
+
+WorkflowStepPhase describes the phase of a workflow step.
+
+**reason**
+
+`str`
+
+A brief CamelCase message indicating details about why the workflowStep is in this state.
+
+**subSteps**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusWorkflowStepsItems0SubStepsItems0]`
+
+sub steps
+
+**type**
+
+`str`
+
+### CoreOamDevV1beta1ApplicationRevisionSpecApplicationStatusWorkflowStepsItems0SubStepsItems0
+
+StepStatus record the base status of workflow step, which could be workflow step or subStep
+
+#### Attributes
+
+**firstExecuteTime**
+
+`str`
+
+FirstExecuteTime is the first time this step execution.
+
+**id** *required*
+
+`str`
+
+id
+
+**lastExecuteTime**
+
+`str`
+
+LastExecuteTime is the last time this step execution.
+
+**message**
+
+`str`
+
+A human readable message indicating details about why the workflowStep is in this state.
+
+**name**
+
+`str`
+
+name
+
+**phase**
+
+`str`
+
+WorkflowStepPhase describes the phase of a workflow step.
+
+**reason**
+
+`str`
+
+A brief CamelCase message indicating details about why the workflowStep is in this state.
+
+**type**
+
+`str`
+
+### CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnon
+
+ComponentDefinition is the Schema for the componentdefinitions API
+
+#### Attributes
+
+**apiVersion**
+
+`str`
+
+APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+**kind**
+
+`str`
+
+Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+**metadata**
+
+`any`
+
+metadata
+
+**spec**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpec`
+
+spec
+
+**status**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonStatus`
+
+status
+
+### CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpec
+
+ComponentDefinitionSpec defines the desired state of ComponentDefinition
+
+#### Attributes
+
+**childResourceKinds**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecChildResourceKindsItems0]`
+
+ChildResourceKinds are the list of GVK of the child resources this workload generates
+
+**extension**
+
+`any`
+
+Extension is used for extension needs by OAM platform builders
+
+**podSpecPath**
+
+`str`
+
+PodSpecPath indicates where/if this workload has K8s podSpec field if one workload has podSpec, trait can do lot&#39;s of assumption such as port, env, volume fields.
+
+**revisionLabel**
+
+`str`
+
+RevisionLabel indicates which label for underlying resources(e.g. pods) of this workload can be used by trait to create resource selectors(e.g. label selector for pods).
+
+**schematic**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecSchematic`
+
+schematic
+
+**status**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecStatus`
+
+status
+
+**workload** *required*
+
+`CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecWorkload`
+
+workload
+
+### CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecChildResourceKindsItems0
+
+A ChildResourceKind defines a child Kubernetes resource kind with a selector
+
+#### Attributes
+
+**apiVersion** *required*
+
+`str`
+
+APIVersion of the child resource
+
+**kind** *required*
+
+`str`
+
+Kind of the child resource
+
+**selector**
+
+`{str:str}`
+
+Selector to select the child resources that the workload wants to expose to traits
+
+### CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecSchematic
+
+Schematic defines the data format and template of the encapsulation of the workload
+
+#### Attributes
+
+**cue**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecSchematicCue`
+
+cue
+
+**helm**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecSchematicHelm`
+
+helm
+
+**kube**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecSchematicKube`
+
+kube
+
+**terraform**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecSchematicTerraform`
+
+terraform
+
+### CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecSchematicCue
+
+CUE defines the encapsulation in CUE format
+
+#### Attributes
+
+**template** *required*
+
+`str`
+
+Template defines the abstraction template data of the capability, it will replace the old CUE template in extension field. Template is a required field if CUE is defined in Capability Definition.
+
+### CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecSchematicHelm
+
+A Helm represents resources used by a Helm module
+
+#### Attributes
+
+**release** *required*
+
+`any`
+
+Release records a Helm release used by a Helm module workload.
+
+**repository** *required*
+
+`any`
+
+HelmRelease records a Helm repository used by a Helm module workload.
+
+### CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecSchematicKube
+
+Kube defines the encapsulation in raw Kubernetes resource format
+
+#### Attributes
+
+**parameters**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecSchematicKubeParametersItems0]`
+
+Parameters defines configurable parameters
+
+**template** *required*
+
+`any`
+
+Template defines the raw Kubernetes resource
+
+### CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecSchematicKubeParametersItems0
+
+A KubeParameter defines a configurable parameter of a component.
+
+#### Attributes
+
+**description**
+
+`str`
+
+Description of this parameter.
+
+**fieldPaths** *required*
+
+`[str]`
+
+FieldPaths specifies an array of fields within this workload that will be overwritten by the value of this parameter.     All fields must be of the same type. Fields are specified as JSON field paths without a leading dot, for example &#39;spec.replicas&#39;.
+
+**name** *required*
+
+`str`
+
+Name of this parameter
+
+**required**
+
+`bool`
+
+Required specifies whether or not a value for this parameter must be supplied when authoring an Application.
+
+**type** *required*
+
+`"string" | "number" | "boolean"`
+
+### CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecSchematicTerraform
+
+Terraform is the struct to describe cloud resources managed by Hashicorp Terraform
+
+#### Attributes
+
+**configuration** *required*
+
+`str`
+
+Configuration is Terraform Configuration
+
+**customRegion**
+
+`str`
+
+Region is cloud provider&#39;s region. It will override the region in the region field of ProviderReference
+
+**deleteResource**
+
+`bool`
+
+DeleteResource will determine whether provisioned cloud resources will be deleted when CR is deleted
+
+**path**
+
+`str`
+
+Path is the sub-directory of remote git repository. It&#39;s valid when remote is set
+
+**providerRef**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecSchematicTerraformProviderRef`
+
+provider ref
+
+**type**
+
+`"hcl" | "json" | "remote"`
+
+**writeConnectionSecretToRef**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecSchematicTerraformWriteConnectionSecretToRef`
+
+write connection secret to ref
+
+### CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecSchematicTerraformProviderRef
+
+ProviderReference specifies the reference to Provider
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+Name of the referenced object.
+
+**namespace**
+
+`str`
+
+Namespace of the referenced object.
+
+### CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecSchematicTerraformWriteConnectionSecretToRef
+
+WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+Name of the secret.
+
+**namespace**
+
+`str`
+
+Namespace of the secret.
+
+### CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecStatus
+
+Status defines the custom health policy and status message for workload
+
+#### Attributes
+
+**customStatus**
+
+`str`
+
+CustomStatus defines the custom status message that could display to user
+
+**healthPolicy**
+
+`str`
+
+HealthPolicy defines the health check policy for the abstraction
+
+### CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecWorkload
+
+Workload is a workload type descriptor
+
+#### Attributes
+
+**definition**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecWorkloadDefinition`
+
+definition
+
+**type**
+
+`str`
+
+### CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonSpecWorkloadDefinition
+
+Definition mutually exclusive to workload.type, a embedded WorkloadDefinition
+
+#### Attributes
+
+**apiVersion** *required*
+
+`str`
+
+api version
+
+**kind** *required*
+
+`str`
+
+kind
+
+### CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonStatus
+
+ComponentDefinitionStatus is the status of ComponentDefinition
+
+#### Attributes
+
+**conditions**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonStatusConditionsItems0]`
+
+Conditions of the resource.
+
+**configMapRef**
+
+`str`
+
+ConfigMapRef refer to a ConfigMap which contains OpenAPI V3 JSON schema of Component parameters.
+
+**latestRevision**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonStatusLatestRevision`
+
+latest revision
+
+### CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonStatusConditionsItems0
+
+A Condition that may apply to a resource.
+
+#### Attributes
+
+**lastTransitionTime** *required*
+
+`str`
+
+LastTransitionTime is the last time this condition transitioned from one status to another.
+
+**message**
+
+`str`
+
+A Message containing details about this condition&#39;s last transition from one status to another, if any.
+
+**reason** *required*
+
+`str`
+
+A Reason for this condition&#39;s last transition from one status to another.
+
+**status** *required*
+
+`str`
+
+Status of this condition; is it currently True, False, or Unknown?
+
+**type** *required*
+
+`str`
+
+### CoreOamDevV1beta1ApplicationRevisionSpecComponentDefinitionsAnonStatusLatestRevision
+
+LatestRevision of the component definition
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+name
+
+**revision** *required*
+
+`int`
+
+revision
+
+**revisionHash**
+
+`str`
+
+RevisionHash record the hash value of the spec of ApplicationRevision object.
+
+### CoreOamDevV1beta1ApplicationRevisionSpecCompression
+
+Compression represents the compressed components in apprev in base64 (if compression is enabled).
+
+#### Attributes
+
+**data**
+
+`str`
+
+data
+
+**type**
+
+`str`
+
+### CoreOamDevV1beta1ApplicationRevisionSpecPoliciesAnon
+
+Policy is the Schema for the policy API
+
+#### Attributes
+
+**apiVersion**
+
+`str`
+
+APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+**kind**
+
+`str`
+
+Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+**metadata**
+
+`any`
+
+metadata
+
+**properties**
+
+`any`
+
+properties
+
+**type** *required*
+
+`str`
+
+### CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnon
+
+PolicyDefinition is the Schema for the policydefinitions API
+
+#### Attributes
+
+**apiVersion**
+
+`str`
+
+APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+**kind**
+
+`str`
+
+Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+**metadata**
+
+`any`
+
+metadata
+
+**spec**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonSpec`
+
+spec
+
+**status**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonStatus`
+
+status
+
+### CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonSpec
+
+PolicyDefinitionSpec defines the desired state of PolicyDefinition
+
+#### Attributes
+
+**definitionRef**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonSpecDefinitionRef`
+
+definition ref
+
+**manageHealthCheck**
+
+`bool`
+
+ManageHealthCheck means the policy will handle health checking and skip application controller built-in health checking.
+
+**schematic**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonSpecSchematic`
+
+schematic
+
+### CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonSpecDefinitionRef
+
+Reference to the CustomResourceDefinition that defines this trait kind.
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+Name of the referenced CustomResourceDefinition.
+
+**version**
+
+`str`
+
+Version indicate which version should be used if CRD has multiple versions by default it will use the first one if not specified
+
+### CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonSpecSchematic
+
+Schematic defines the data format and template of the encapsulation of the policy definition. Only CUE schematic is supported for now.
+
+#### Attributes
+
+**cue**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonSpecSchematicCue`
+
+cue
+
+**helm**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonSpecSchematicHelm`
+
+helm
+
+**kube**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonSpecSchematicKube`
+
+kube
+
+**terraform**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonSpecSchematicTerraform`
+
+terraform
+
+### CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonSpecSchematicCue
+
+CUE defines the encapsulation in CUE format
+
+#### Attributes
+
+**template** *required*
+
+`str`
+
+Template defines the abstraction template data of the capability, it will replace the old CUE template in extension field. Template is a required field if CUE is defined in Capability Definition.
+
+### CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonSpecSchematicHelm
+
+A Helm represents resources used by a Helm module
+
+#### Attributes
+
+**release** *required*
+
+`any`
+
+Release records a Helm release used by a Helm module workload.
+
+**repository** *required*
+
+`any`
+
+HelmRelease records a Helm repository used by a Helm module workload.
+
+### CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonSpecSchematicKube
+
+Kube defines the encapsulation in raw Kubernetes resource format
+
+#### Attributes
+
+**parameters**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonSpecSchematicKubeParametersItems0]`
+
+Parameters defines configurable parameters
+
+**template** *required*
+
+`any`
+
+Template defines the raw Kubernetes resource
+
+### CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonSpecSchematicKubeParametersItems0
+
+A KubeParameter defines a configurable parameter of a component.
+
+#### Attributes
+
+**description**
+
+`str`
+
+Description of this parameter.
+
+**fieldPaths** *required*
+
+`[str]`
+
+FieldPaths specifies an array of fields within this workload that will be overwritten by the value of this parameter.     All fields must be of the same type. Fields are specified as JSON field paths without a leading dot, for example &#39;spec.replicas&#39;.
+
+**name** *required*
+
+`str`
+
+Name of this parameter
+
+**required**
+
+`bool`
+
+Required specifies whether or not a value for this parameter must be supplied when authoring an Application.
+
+**type** *required*
+
+`"string" | "number" | "boolean"`
+
+### CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonSpecSchematicTerraform
+
+Terraform is the struct to describe cloud resources managed by Hashicorp Terraform
+
+#### Attributes
+
+**configuration** *required*
+
+`str`
+
+Configuration is Terraform Configuration
+
+**customRegion**
+
+`str`
+
+Region is cloud provider&#39;s region. It will override the region in the region field of ProviderReference
+
+**deleteResource**
+
+`bool`
+
+DeleteResource will determine whether provisioned cloud resources will be deleted when CR is deleted
+
+**path**
+
+`str`
+
+Path is the sub-directory of remote git repository. It&#39;s valid when remote is set
+
+**providerRef**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonSpecSchematicTerraformProviderRef`
+
+provider ref
+
+**type**
+
+`"hcl" | "json" | "remote"`
+
+**writeConnectionSecretToRef**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonSpecSchematicTerraformWriteConnectionSecretToRef`
+
+write connection secret to ref
+
+### CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonSpecSchematicTerraformProviderRef
+
+ProviderReference specifies the reference to Provider
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+Name of the referenced object.
+
+**namespace**
+
+`str`
+
+Namespace of the referenced object.
+
+### CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonSpecSchematicTerraformWriteConnectionSecretToRef
+
+WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+Name of the secret.
+
+**namespace**
+
+`str`
+
+Namespace of the secret.
+
+### CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonStatus
+
+PolicyDefinitionStatus is the status of PolicyDefinition
+
+#### Attributes
+
+**conditions**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonStatusConditionsItems0]`
+
+Conditions of the resource.
+
+**configMapRef**
+
+`str`
+
+ConfigMapRef refer to a ConfigMap which contains OpenAPI V3 JSON schema of Component parameters.
+
+**latestRevision**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonStatusLatestRevision`
+
+latest revision
+
+### CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonStatusConditionsItems0
+
+A Condition that may apply to a resource.
+
+#### Attributes
+
+**lastTransitionTime** *required*
+
+`str`
+
+LastTransitionTime is the last time this condition transitioned from one status to another.
+
+**message**
+
+`str`
+
+A Message containing details about this condition&#39;s last transition from one status to another, if any.
+
+**reason** *required*
+
+`str`
+
+A Reason for this condition&#39;s last transition from one status to another.
+
+**status** *required*
+
+`str`
+
+Status of this condition; is it currently True, False, or Unknown?
+
+**type** *required*
+
+`str`
+
+### CoreOamDevV1beta1ApplicationRevisionSpecPolicyDefinitionsAnonStatusLatestRevision
+
+LatestRevision of the component definition
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+name
+
+**revision** *required*
+
+`int`
+
+revision
+
+**revisionHash**
+
+`str`
+
+RevisionHash record the hash value of the spec of ApplicationRevision object.
+
+### CoreOamDevV1beta1ApplicationRevisionSpecScopeDefinitionsAnon
+
+A ScopeDefinition registers a kind of Kubernetes custom resource as a valid OAM scope kind by referencing its CustomResourceDefinition. The CRD is used to validate the schema of the scope when it is embedded in an OAM ApplicationConfiguration.
+
+#### Attributes
+
+**apiVersion**
+
+`str`
+
+APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+**kind**
+
+`str`
+
+Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+**metadata**
+
+`any`
+
+metadata
+
+**spec**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecScopeDefinitionsAnonSpec`
+
+spec
+
+### CoreOamDevV1beta1ApplicationRevisionSpecScopeDefinitionsAnonSpec
+
+A ScopeDefinitionSpec defines the desired state of a ScopeDefinition.
+
+#### Attributes
+
+**allowComponentOverlap** *required*
+
+`bool`
+
+AllowComponentOverlap specifies whether an OAM component may exist in multiple instances of this kind of scope.
+
+**definitionRef** *required*
+
+`CoreOamDevV1beta1ApplicationRevisionSpecScopeDefinitionsAnonSpecDefinitionRef`
+
+definition ref
+
+**extension**
+
+`any`
+
+Extension is used for extension needs by OAM platform builders
+
+**workloadRefsPath**
+
+`str`
+
+WorkloadRefsPath indicates if/where a scope accepts workloadRef objects
+
+### CoreOamDevV1beta1ApplicationRevisionSpecScopeDefinitionsAnonSpecDefinitionRef
+
+Reference to the CustomResourceDefinition that defines this scope kind.
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+Name of the referenced CustomResourceDefinition.
+
+**version**
+
+`str`
+
+Version indicate which version should be used if CRD has multiple versions by default it will use the first one if not specified
+
+### CoreOamDevV1beta1ApplicationRevisionSpecScopeGVKAnon
+
+GroupVersionKind unambiguously identifies a kind.  It doesn&#39;t anonymously include GroupVersion to avoid automatic coercion.  It doesn&#39;t use a GroupVersion to avoid custom marshalling
+
+#### Attributes
+
+**group** *required*
+
+`str`
+
+group
+
+**kind** *required*
+
+`str`
+
+kind
+
+**version** *required*
+
+`str`
+
+version
+
+### CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnon
+
+A TraitDefinition registers a kind of Kubernetes custom resource as a valid OAM trait kind by referencing its CustomResourceDefinition. The CRD is used to validate the schema of the trait when it is embedded in an OAM ApplicationConfiguration.
+
+#### Attributes
+
+**apiVersion**
+
+`str`
+
+APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+**kind**
+
+`str`
+
+Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+**metadata**
+
+`any`
+
+metadata
+
+**spec**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonSpec`
+
+spec
+
+**status**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonStatus`
+
+status
+
+### CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonSpec
+
+A TraitDefinitionSpec defines the desired state of a TraitDefinition.
+
+#### Attributes
+
+**appliesToWorkloads**
+
+`[str]`
+
+AppliesToWorkloads specifies the list of workload kinds this trait applies to. Workload kinds are specified in resource.group/version format, e.g. server.core.oam.dev/v1alpha2. Traits that omit this field apply to all workload kinds.
+
+**conflictsWith**
+
+`[str]`
+
+ConflictsWith specifies the list of traits(CRD name, Definition name, CRD group) which could not apply to the same workloads with this trait. Traits that omit this field can work with any other traits. Example rules: &#34;service&#34; # Trait definition name &#34;services.k8s.io&#34; # API resource/crd name &#34;*.networking.k8s.io&#34; # API group &#34;labelSelector:foo=bar&#34; # label selector labelSelector format: https://pkg.go.dev/k8s.io/apimachinery/pkg/labels#Parse
+
+**controlPlaneOnly**
+
+`bool`
+
+ControlPlaneOnly defines which cluster is dispatched to
+
+**definitionRef**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonSpecDefinitionRef`
+
+definition ref
+
+**extension**
+
+`any`
+
+Extension is used for extension needs by OAM platform builders
+
+**manageWorkload**
+
+`bool`
+
+ManageWorkload defines the trait would be responsible for creating the workload
+
+**podDisruptive**
+
+`bool`
+
+PodDisruptive specifies whether using the trait will cause the pod to restart or not.
+
+**revisionEnabled**
+
+`bool`
+
+Revision indicates whether a trait is aware of component revision
+
+**schematic**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonSpecSchematic`
+
+schematic
+
+**stage**
+
+`str`
+
+Stage defines the stage information to which this trait resource processing belongs. Currently, PreDispatch and PostDispatch are provided, which are used to control resource pre-process and post-process respectively.
+
+**status**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonSpecStatus`
+
+status
+
+**workloadRefPath**
+
+`str`
+
+WorkloadRefPath indicates where/if a trait accepts a workloadRef object
+
+### CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonSpecDefinitionRef
+
+Reference to the CustomResourceDefinition that defines this trait kind.
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+Name of the referenced CustomResourceDefinition.
+
+**version**
+
+`str`
+
+Version indicate which version should be used if CRD has multiple versions by default it will use the first one if not specified
+
+### CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonSpecSchematic
+
+Schematic defines the data format and template of the encapsulation of the trait. Only CUE and Kube schematic are supported for now.
+
+#### Attributes
+
+**cue**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonSpecSchematicCue`
+
+cue
+
+**helm**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonSpecSchematicHelm`
+
+helm
+
+**kube**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonSpecSchematicKube`
+
+kube
+
+**terraform**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonSpecSchematicTerraform`
+
+terraform
+
+### CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonSpecSchematicCue
+
+CUE defines the encapsulation in CUE format
+
+#### Attributes
+
+**template** *required*
+
+`str`
+
+Template defines the abstraction template data of the capability, it will replace the old CUE template in extension field. Template is a required field if CUE is defined in Capability Definition.
+
+### CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonSpecSchematicHelm
+
+A Helm represents resources used by a Helm module
+
+#### Attributes
+
+**release** *required*
+
+`any`
+
+Release records a Helm release used by a Helm module workload.
+
+**repository** *required*
+
+`any`
+
+HelmRelease records a Helm repository used by a Helm module workload.
+
+### CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonSpecSchematicKube
+
+Kube defines the encapsulation in raw Kubernetes resource format
+
+#### Attributes
+
+**parameters**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonSpecSchematicKubeParametersItems0]`
+
+Parameters defines configurable parameters
+
+**template** *required*
+
+`any`
+
+Template defines the raw Kubernetes resource
+
+### CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonSpecSchematicKubeParametersItems0
+
+A KubeParameter defines a configurable parameter of a component.
+
+#### Attributes
+
+**description**
+
+`str`
+
+Description of this parameter.
+
+**fieldPaths** *required*
+
+`[str]`
+
+FieldPaths specifies an array of fields within this workload that will be overwritten by the value of this parameter.     All fields must be of the same type. Fields are specified as JSON field paths without a leading dot, for example &#39;spec.replicas&#39;.
+
+**name** *required*
+
+`str`
+
+Name of this parameter
+
+**required**
+
+`bool`
+
+Required specifies whether or not a value for this parameter must be supplied when authoring an Application.
+
+**type** *required*
+
+`"string" | "number" | "boolean"`
+
+### CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonSpecSchematicTerraform
+
+Terraform is the struct to describe cloud resources managed by Hashicorp Terraform
+
+#### Attributes
+
+**configuration** *required*
+
+`str`
+
+Configuration is Terraform Configuration
+
+**customRegion**
+
+`str`
+
+Region is cloud provider&#39;s region. It will override the region in the region field of ProviderReference
+
+**deleteResource**
+
+`bool`
+
+DeleteResource will determine whether provisioned cloud resources will be deleted when CR is deleted
+
+**path**
+
+`str`
+
+Path is the sub-directory of remote git repository. It&#39;s valid when remote is set
+
+**providerRef**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonSpecSchematicTerraformProviderRef`
+
+provider ref
+
+**type**
+
+`"hcl" | "json" | "remote"`
+
+**writeConnectionSecretToRef**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonSpecSchematicTerraformWriteConnectionSecretToRef`
+
+write connection secret to ref
+
+### CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonSpecSchematicTerraformProviderRef
+
+ProviderReference specifies the reference to Provider
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+Name of the referenced object.
+
+**namespace**
+
+`str`
+
+Namespace of the referenced object.
+
+### CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonSpecSchematicTerraformWriteConnectionSecretToRef
+
+WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+Name of the secret.
+
+**namespace**
+
+`str`
+
+Namespace of the secret.
+
+### CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonSpecStatus
+
+Status defines the custom health policy and status message for trait
+
+#### Attributes
+
+**customStatus**
+
+`str`
+
+CustomStatus defines the custom status message that could display to user
+
+**healthPolicy**
+
+`str`
+
+HealthPolicy defines the health check policy for the abstraction
+
+### CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonStatus
+
+TraitDefinitionStatus is the status of TraitDefinition
+
+#### Attributes
+
+**conditions**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonStatusConditionsItems0]`
+
+Conditions of the resource.
+
+**configMapRef**
+
+`str`
+
+ConfigMapRef refer to a ConfigMap which contains OpenAPI V3 JSON schema of Component parameters.
+
+**latestRevision**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonStatusLatestRevision`
+
+latest revision
+
+### CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonStatusConditionsItems0
+
+A Condition that may apply to a resource.
+
+#### Attributes
+
+**lastTransitionTime** *required*
+
+`str`
+
+LastTransitionTime is the last time this condition transitioned from one status to another.
+
+**message**
+
+`str`
+
+A Message containing details about this condition&#39;s last transition from one status to another, if any.
+
+**reason** *required*
+
+`str`
+
+A Reason for this condition&#39;s last transition from one status to another.
+
+**status** *required*
+
+`str`
+
+Status of this condition; is it currently True, False, or Unknown?
+
+**type** *required*
+
+`str`
+
+### CoreOamDevV1beta1ApplicationRevisionSpecTraitDefinitionsAnonStatusLatestRevision
+
+LatestRevision of the component definition
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+name
+
+**revision** *required*
+
+`int`
+
+revision
+
+**revisionHash**
+
+`str`
+
+RevisionHash record the hash value of the spec of ApplicationRevision object.
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkflow
+
+Workflow records the external workflow
+
+#### Attributes
+
+**apiVersion**
+
+`str`
+
+APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+**kind**
+
+`str`
+
+Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+**metadata**
+
+`any`
+
+metadata
+
+**mode**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecWorkflowMode`
+
+mode
+
+**steps**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepsItems0]`
+
+steps
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkflowMode
+
+WorkflowExecuteMode defines the mode of workflow execution
+
+#### Attributes
+
+**steps**
+
+`str`
+
+Steps is the mode of workflow steps execution
+
+**subSteps**
+
+`str`
+
+SubSteps is the mode of workflow sub steps execution
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnon
+
+WorkflowStepDefinition is the Schema for the workflowstepdefinitions API
+
+#### Attributes
+
+**apiVersion**
+
+`str`
+
+APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+**kind**
+
+`str`
+
+Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+**metadata**
+
+`any`
+
+metadata
+
+**spec**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonSpec`
+
+spec
+
+**status**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonStatus`
+
+status
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonSpec
+
+WorkflowStepDefinitionSpec defines the desired state of WorkflowStepDefinition
+
+#### Attributes
+
+**definitionRef**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonSpecDefinitionRef`
+
+definition ref
+
+**schematic**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonSpecSchematic`
+
+schematic
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonSpecDefinitionRef
+
+Reference to the CustomResourceDefinition that defines this trait kind.
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+Name of the referenced CustomResourceDefinition.
+
+**version**
+
+`str`
+
+Version indicate which version should be used if CRD has multiple versions by default it will use the first one if not specified
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonSpecSchematic
+
+Schematic defines the data format and template of the encapsulation of the workflow step definition. Only CUE schematic is supported for now.
+
+#### Attributes
+
+**cue**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonSpecSchematicCue`
+
+cue
+
+**helm**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonSpecSchematicHelm`
+
+helm
+
+**kube**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonSpecSchematicKube`
+
+kube
+
+**terraform**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonSpecSchematicTerraform`
+
+terraform
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonSpecSchematicCue
+
+CUE defines the encapsulation in CUE format
+
+#### Attributes
+
+**template** *required*
+
+`str`
+
+Template defines the abstraction template data of the capability, it will replace the old CUE template in extension field. Template is a required field if CUE is defined in Capability Definition.
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonSpecSchematicHelm
+
+A Helm represents resources used by a Helm module
+
+#### Attributes
+
+**release** *required*
+
+`any`
+
+Release records a Helm release used by a Helm module workload.
+
+**repository** *required*
+
+`any`
+
+HelmRelease records a Helm repository used by a Helm module workload.
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonSpecSchematicKube
+
+Kube defines the encapsulation in raw Kubernetes resource format
+
+#### Attributes
+
+**parameters**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonSpecSchematicKubeParametersItems0]`
+
+Parameters defines configurable parameters
+
+**template** *required*
+
+`any`
+
+Template defines the raw Kubernetes resource
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonSpecSchematicKubeParametersItems0
+
+A KubeParameter defines a configurable parameter of a component.
+
+#### Attributes
+
+**description**
+
+`str`
+
+Description of this parameter.
+
+**fieldPaths** *required*
+
+`[str]`
+
+FieldPaths specifies an array of fields within this workload that will be overwritten by the value of this parameter.     All fields must be of the same type. Fields are specified as JSON field paths without a leading dot, for example &#39;spec.replicas&#39;.
+
+**name** *required*
+
+`str`
+
+Name of this parameter
+
+**required**
+
+`bool`
+
+Required specifies whether or not a value for this parameter must be supplied when authoring an Application.
+
+**type** *required*
+
+`"string" | "number" | "boolean"`
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonSpecSchematicTerraform
+
+Terraform is the struct to describe cloud resources managed by Hashicorp Terraform
+
+#### Attributes
+
+**configuration** *required*
+
+`str`
+
+Configuration is Terraform Configuration
+
+**customRegion**
+
+`str`
+
+Region is cloud provider&#39;s region. It will override the region in the region field of ProviderReference
+
+**deleteResource**
+
+`bool`
+
+DeleteResource will determine whether provisioned cloud resources will be deleted when CR is deleted
+
+**path**
+
+`str`
+
+Path is the sub-directory of remote git repository. It&#39;s valid when remote is set
+
+**providerRef**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonSpecSchematicTerraformProviderRef`
+
+provider ref
+
+**type**
+
+`"hcl" | "json" | "remote"`
+
+**writeConnectionSecretToRef**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonSpecSchematicTerraformWriteConnectionSecretToRef`
+
+write connection secret to ref
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonSpecSchematicTerraformProviderRef
+
+ProviderReference specifies the reference to Provider
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+Name of the referenced object.
+
+**namespace**
+
+`str`
+
+Namespace of the referenced object.
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonSpecSchematicTerraformWriteConnectionSecretToRef
+
+WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+Name of the secret.
+
+**namespace**
+
+`str`
+
+Namespace of the secret.
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonStatus
+
+WorkflowStepDefinitionStatus is the status of WorkflowStepDefinition
+
+#### Attributes
+
+**conditions**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonStatusConditionsItems0]`
+
+Conditions of the resource.
+
+**configMapRef**
+
+`str`
+
+ConfigMapRef refer to a ConfigMap which contains OpenAPI V3 JSON schema of Component parameters.
+
+**latestRevision**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonStatusLatestRevision`
+
+latest revision
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonStatusConditionsItems0
+
+A Condition that may apply to a resource.
+
+#### Attributes
+
+**lastTransitionTime** *required*
+
+`str`
+
+LastTransitionTime is the last time this condition transitioned from one status to another.
+
+**message**
+
+`str`
+
+A Message containing details about this condition&#39;s last transition from one status to another, if any.
+
+**reason** *required*
+
+`str`
+
+A Reason for this condition&#39;s last transition from one status to another.
+
+**status** *required*
+
+`str`
+
+Status of this condition; is it currently True, False, or Unknown?
+
+**type** *required*
+
+`str`
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepDefinitionsAnonStatusLatestRevision
+
+LatestRevision of the component definition
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+name
+
+**revision** *required*
+
+`int`
+
+revision
+
+**revisionHash**
+
+`str`
+
+RevisionHash record the hash value of the spec of ApplicationRevision object.
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepsItems0
+
+WorkflowStep defines how to execute a workflow step.
+
+#### Attributes
+
+**dependsOn**
+
+`[str]`
+
+DependsOn is the dependency of the step
+
+**if**
+
+`str`
+
+**inputs**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepsItems0InputsItems0]`
+
+Inputs is the inputs of the step
+
+**meta**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepsItems0Meta`
+
+meta
+
+**name** *required*
+
+`str`
+
+Name is the unique name of the workflow step.
+
+**outputs**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepsItems0OutputsItems0]`
+
+Outputs is the outputs of the step
+
+**properties**
+
+`any`
+
+Properties is the properties of the step
+
+**subSteps**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepsItems0SubStepsItems0]`
+
+sub steps
+
+**timeout**
+
+`str`
+
+Timeout is the timeout of the step
+
+**type** *required*
+
+`str`
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepsItems0InputsItems0
+
+core oam dev v1beta1 application revision spec workflow steps items0 inputs items0
+
+#### Attributes
+
+**from** *required*
+
+`str`
+
+from
+
+**parameterKey** *required*
+
+`str`
+
+parameter key
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepsItems0Meta
+
+Meta is the meta data of the workflow step.
+
+#### Attributes
+
+**alias**
+
+`str`
+
+alias
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepsItems0OutputsItems0
+
+core oam dev v1beta1 application revision spec workflow steps items0 outputs items0
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+name
+
+**valueFrom** *required*
+
+`str`
+
+value from
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepsItems0SubStepsItems0
+
+WorkflowStepBase defines the workflow step base
+
+#### Attributes
+
+**dependsOn**
+
+`[str]`
+
+DependsOn is the dependency of the step
+
+**if**
+
+`str`
+
+**inputs**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepsItems0SubStepsItems0InputsItems0]`
+
+Inputs is the inputs of the step
+
+**meta**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepsItems0SubStepsItems0Meta`
+
+meta
+
+**name** *required*
+
+`str`
+
+Name is the unique name of the workflow step.
+
+**outputs**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepsItems0SubStepsItems0OutputsItems0]`
+
+Outputs is the outputs of the step
+
+**properties**
+
+`any`
+
+Properties is the properties of the step
+
+**timeout**
+
+`str`
+
+Timeout is the timeout of the step
+
+**type** *required*
+
+`str`
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepsItems0SubStepsItems0InputsItems0
+
+core oam dev v1beta1 application revision spec workflow steps items0 sub steps items0 inputs items0
+
+#### Attributes
+
+**from** *required*
+
+`str`
+
+from
+
+**parameterKey** *required*
+
+`str`
+
+parameter key
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepsItems0SubStepsItems0Meta
+
+Meta is the meta data of the workflow step.
+
+#### Attributes
+
+**alias**
+
+`str`
+
+alias
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkflowStepsItems0SubStepsItems0OutputsItems0
+
+core oam dev v1beta1 application revision spec workflow steps items0 sub steps items0 outputs items0
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+name
+
+**valueFrom** *required*
+
+`str`
+
+value from
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnon
+
+A WorkloadDefinition registers a kind of Kubernetes custom resource as a valid OAM workload kind by referencing its CustomResourceDefinition. The CRD is used to validate the schema of the workload when it is embedded in an OAM Component.
+
+#### Attributes
+
+**apiVersion**
+
+`str`
+
+APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+**kind**
+
+`str`
+
+Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+**metadata**
+
+`any`
+
+metadata
+
+**spec**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpec`
+
+spec
+
+**status**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonStatus`
+
+status
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpec
+
+A WorkloadDefinitionSpec defines the desired state of a WorkloadDefinition.
+
+#### Attributes
+
+**childResourceKinds**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpecChildResourceKindsItems0]`
+
+ChildResourceKinds are the list of GVK of the child resources this workload generates
+
+**definitionRef** *required*
+
+`CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpecDefinitionRef`
+
+definition ref
+
+**extension**
+
+`any`
+
+Extension is used for extension needs by OAM platform builders
+
+**podSpecPath**
+
+`str`
+
+PodSpecPath indicates where/if this workload has K8s podSpec field if one workload has podSpec, trait can do lot&#39;s of assumption such as port, env, volume fields.
+
+**revisionLabel**
+
+`str`
+
+RevisionLabel indicates which label for underlying resources(e.g. pods) of this workload can be used by trait to create resource selectors(e.g. label selector for pods).
+
+**schematic**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpecSchematic`
+
+schematic
+
+**status**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpecStatus`
+
+status
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpecChildResourceKindsItems0
+
+A ChildResourceKind defines a child Kubernetes resource kind with a selector
+
+#### Attributes
+
+**apiVersion** *required*
+
+`str`
+
+APIVersion of the child resource
+
+**kind** *required*
+
+`str`
+
+Kind of the child resource
+
+**selector**
+
+`{str:str}`
+
+Selector to select the child resources that the workload wants to expose to traits
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpecDefinitionRef
+
+Reference to the CustomResourceDefinition that defines this workload kind.
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+Name of the referenced CustomResourceDefinition.
+
+**version**
+
+`str`
+
+Version indicate which version should be used if CRD has multiple versions by default it will use the first one if not specified
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpecSchematic
+
+Schematic defines the data format and template of the encapsulation of the workload
+
+#### Attributes
+
+**cue**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpecSchematicCue`
+
+cue
+
+**helm**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpecSchematicHelm`
+
+helm
+
+**kube**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpecSchematicKube`
+
+kube
+
+**terraform**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpecSchematicTerraform`
+
+terraform
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpecSchematicCue
+
+CUE defines the encapsulation in CUE format
+
+#### Attributes
+
+**template** *required*
+
+`str`
+
+Template defines the abstraction template data of the capability, it will replace the old CUE template in extension field. Template is a required field if CUE is defined in Capability Definition.
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpecSchematicHelm
+
+A Helm represents resources used by a Helm module
+
+#### Attributes
+
+**release** *required*
+
+`any`
+
+Release records a Helm release used by a Helm module workload.
+
+**repository** *required*
+
+`any`
+
+HelmRelease records a Helm repository used by a Helm module workload.
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpecSchematicKube
+
+Kube defines the encapsulation in raw Kubernetes resource format
+
+#### Attributes
+
+**parameters**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpecSchematicKubeParametersItems0]`
+
+Parameters defines configurable parameters
+
+**template** *required*
+
+`any`
+
+Template defines the raw Kubernetes resource
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpecSchematicKubeParametersItems0
+
+A KubeParameter defines a configurable parameter of a component.
+
+#### Attributes
+
+**description**
+
+`str`
+
+Description of this parameter.
+
+**fieldPaths** *required*
+
+`[str]`
+
+FieldPaths specifies an array of fields within this workload that will be overwritten by the value of this parameter.     All fields must be of the same type. Fields are specified as JSON field paths without a leading dot, for example &#39;spec.replicas&#39;.
+
+**name** *required*
+
+`str`
+
+Name of this parameter
+
+**required**
+
+`bool`
+
+Required specifies whether or not a value for this parameter must be supplied when authoring an Application.
+
+**type** *required*
+
+`"string" | "number" | "boolean"`
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpecSchematicTerraform
+
+Terraform is the struct to describe cloud resources managed by Hashicorp Terraform
+
+#### Attributes
+
+**configuration** *required*
+
+`str`
+
+Configuration is Terraform Configuration
+
+**customRegion**
+
+`str`
+
+Region is cloud provider&#39;s region. It will override the region in the region field of ProviderReference
+
+**deleteResource**
+
+`bool`
+
+DeleteResource will determine whether provisioned cloud resources will be deleted when CR is deleted
+
+**path**
+
+`str`
+
+Path is the sub-directory of remote git repository. It&#39;s valid when remote is set
+
+**providerRef**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpecSchematicTerraformProviderRef`
+
+provider ref
+
+**type**
+
+`"hcl" | "json" | "remote"`
+
+**writeConnectionSecretToRef**
+
+`CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpecSchematicTerraformWriteConnectionSecretToRef`
+
+write connection secret to ref
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpecSchematicTerraformProviderRef
+
+ProviderReference specifies the reference to Provider
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+Name of the referenced object.
+
+**namespace**
+
+`str`
+
+Namespace of the referenced object.
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpecSchematicTerraformWriteConnectionSecretToRef
+
+WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+Name of the secret.
+
+**namespace**
+
+`str`
+
+Namespace of the secret.
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonSpecStatus
+
+Status defines the custom health policy and status message for workload
+
+#### Attributes
+
+**customStatus**
+
+`str`
+
+CustomStatus defines the custom status message that could display to user
+
+**healthPolicy**
+
+`str`
+
+HealthPolicy defines the health check policy for the abstraction
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonStatus
+
+WorkloadDefinitionStatus is the status of WorkloadDefinition
+
+#### Attributes
+
+**conditions**
+
+`[CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonStatusConditionsItems0]`
+
+Conditions of the resource.
+
+### CoreOamDevV1beta1ApplicationRevisionSpecWorkloadDefinitionsAnonStatusConditionsItems0
+
+A Condition that may apply to a resource.
+
+#### Attributes
+
+**lastTransitionTime** *required*
+
+`str`
+
+LastTransitionTime is the last time this condition transitioned from one status to another.
+
+**message**
+
+`str`
+
+A Message containing details about this condition&#39;s last transition from one status to another, if any.
+
+**reason** *required*
+
+`str`
+
+A Reason for this condition&#39;s last transition from one status to another.
+
+**status** *required*
+
+`str`
+
+Status of this condition; is it currently True, False, or Unknown?
+
+**type** *required*
+
+`str`
+
+### CoreOamDevV1beta1ApplicationRevisionStatus
+
+ApplicationRevisionStatus is the status of ApplicationRevision
+
+#### Attributes
+
+**succeeded** *required*
+
+`bool`
+
+Succeeded records if the workflow finished running with success
+
+**workflow**
+
+`CoreOamDevV1beta1ApplicationRevisionStatusWorkflow`
+
+workflow
+
+### CoreOamDevV1beta1ApplicationRevisionStatusWorkflow
+
+Workflow the running status of the workflow
+
+#### Attributes
+
+**appRevision**
+
+`str`
+
+app revision
+
+**contextBackend**
+
+`CoreOamDevV1beta1ApplicationRevisionStatusWorkflowContextBackend`
+
+context backend
+
+**endTime**
+
+`str`
+
+end time
+
+**finished** *required*
+
+`bool`
+
+finished
+
+**message**
+
+`str`
+
+message
+
+**mode** *required*
+
+`str`
+
+mode
+
+**startTime**
+
+`str`
+
+start time
+
+**status**
+
+`str`
+
+WorkflowRunPhase is a label for the condition of a WorkflowRun at the current time
+
+**steps**
+
+`[CoreOamDevV1beta1ApplicationRevisionStatusWorkflowStepsItems0]`
+
+steps
+
+**suspend** *required*
+
+`bool`
+
+suspend
+
+**suspendState**
+
+`str`
+
+suspend state
+
+**terminated** *required*
+
+`bool`
+
+terminated
+
+### CoreOamDevV1beta1ApplicationRevisionStatusWorkflowContextBackend
+
+ObjectReference contains enough information to let you inspect or modify the referred object. --- New uses of this type are discouraged because of difficulty describing its usage when embedded in APIs. 1. Ignored fields.  It includes many fields which are not generally honored.  For instance, ResourceVersion and FieldPath are both very rarely valid in actual usage. 2. Invalid usage help.  It is impossible to add specific help for individual usage.  In most embedded usages, there are particular restrictions like, &#34;must refer only to types A and B&#34; or &#34;UID not honored&#34; or &#34;name must be restricted&#34;. Those cannot be well described when embedded. 3. Inconsistent validation.  Because the usages are different, the validation rules are different by usage, which makes it hard for users to predict what will happen. 4. The fields are both imprecise and overly precise.  Kind is not a precise mapping to a URL. This can produce ambiguity during interpretation and require a REST mapping.  In most cases, the dependency is on the group,resource tuple and the version of the actual struct is irrelevant. 5. We cannot easily change it.  Because this type is embedded in many locations, updates to this type will affect numerous schemas.  Don&#39;t make new APIs embed an underspecified API type they do not control. Instead of using this type, create a locally provided and used type that is well-focused on your reference. For example, ServiceReferences for admission registration: https://github.com/kubernetes/api/blob/release-1.17/admissionregistration/v1/types.go#L533 .
+
+#### Attributes
+
+**apiVersion**
+
+`str`
+
+API version of the referent.
+
+**fieldPath**
+
+`str`
+
+If referring to a piece of an object instead of an entire object, this string should contain a valid JSON/Go field access statement, such as desiredState.manifest.containers[2]. For example, if the object reference is to a container within a pod, this would take on a value like: &#34;spec.containers{name}&#34; (where &#34;name&#34; refers to the name of the container that triggered the event) or if no container name is specified &#34;spec.containers[2]&#34; (container with index 2 in this pod). This syntax is chosen only to have some well-defined way of referencing a part of an object. TODO: this design is not final and this field is subject to change in the future.
+
+**kind**
+
+`str`
+
+Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+**name**
+
+`str`
+
+Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+
+**namespace**
+
+`str`
+
+Namespace of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
+
+**resourceVersion**
+
+`str`
+
+Specific resourceVersion to which this reference is made, if any. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency
+
+**uid**
+
+`str`
+
+UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids
+
+### CoreOamDevV1beta1ApplicationRevisionStatusWorkflowStepsItems0
+
+WorkflowStepStatus record the status of a workflow step, include step status and subStep status
+
+#### Attributes
+
+**firstExecuteTime**
+
+`str`
+
+FirstExecuteTime is the first time this step execution.
+
+**id** *required*
+
+`str`
+
+id
+
+**lastExecuteTime**
+
+`str`
+
+LastExecuteTime is the last time this step execution.
+
+**message**
+
+`str`
+
+A human readable message indicating details about why the workflowStep is in this state.
+
+**name**
+
+`str`
+
+name
+
+**phase**
+
+`str`
+
+WorkflowStepPhase describes the phase of a workflow step.
+
+**reason**
+
+`str`
+
+A brief CamelCase message indicating details about why the workflowStep is in this state.
+
+**subSteps**
+
+`[CoreOamDevV1beta1ApplicationRevisionStatusWorkflowStepsItems0SubStepsItems0]`
+
+sub steps
+
+**type**
+
+`str`
+
+### CoreOamDevV1beta1ApplicationRevisionStatusWorkflowStepsItems0SubStepsItems0
+
+StepStatus record the base status of workflow step, which could be workflow step or subStep
+
+#### Attributes
+
+**firstExecuteTime**
+
+`str`
+
+FirstExecuteTime is the first time this step execution.
+
+**id** *required*
+
+`str`
+
+id
+
+**lastExecuteTime**
+
+`str`
+
+LastExecuteTime is the last time this step execution.
+
+**message**
+
+`str`
+
+A human readable message indicating details about why the workflowStep is in this state.
+
+**name**
+
+`str`
+
+name
+
+**phase**
+
+`str`
+
+WorkflowStepPhase describes the phase of a workflow step.
+
+**reason**
+
+`str`
+
+A brief CamelCase message indicating details about why the workflowStep is in this state.
+
+**type**
+
+`str`
+
+### CoreOamDevV1beta1ApplicationSpec
+
+ApplicationSpec is the spec of Application
+
+#### Attributes
+
+**components** *required*
+
+`[CoreOamDevV1beta1ApplicationSpecComponentsItems0]`
+
+components
+
+**policies**
+
+`[CoreOamDevV1beta1ApplicationSpecPoliciesItems0]`
+
+Policies defines the global policies for all components in the app, e.g. security, metrics, gitops, multi-cluster placement rules, etc. Policies are applied after components are rendered and before workflow steps are executed.
+
+**workflow**
+
+`CoreOamDevV1beta1ApplicationSpecWorkflow`
+
+workflow
+
+### CoreOamDevV1beta1ApplicationSpecComponentsItems0
+
+ApplicationComponent describe the component of application
+
+#### Attributes
+
+**dependsOn**
+
+`[str]`
+
+depends on
+
+**externalRevision**
+
+`str`
+
+ExternalRevision specified the component revisionName
+
+**inputs**
+
+`[CoreOamDevV1beta1ApplicationSpecComponentsItems0InputsItems0]`
+
+StepInputs defines variable input of WorkflowStep
+
+**name** *required*
+
+`str`
+
+name
+
+**outputs**
+
+`[CoreOamDevV1beta1ApplicationSpecComponentsItems0OutputsItems0]`
+
+StepOutputs defines output variable of WorkflowStep
+
+**properties**
+
+`any`
+
+properties
+
+**scopes**
+
+`{str:str}`
+
+scopes in ApplicationComponent defines the component-level scopes the format is &lt;scope-type:scope-instance-name&gt; pairs, the key represents type of `ScopeDefinition` while the value represent the name of scope instance.
+
+**traits**
+
+`[CoreOamDevV1beta1ApplicationSpecComponentsItems0TraitsItems0]`
+
+Traits define the trait of one component, the type must be array to keep the order.
+
+**type** *required*
+
+`str`
+
+### CoreOamDevV1beta1ApplicationSpecComponentsItems0InputsItems0
+
+core oam dev v1beta1 application spec components items0 inputs items0
+
+#### Attributes
+
+**from** *required*
+
+`str`
+
+from
+
+**parameterKey** *required*
+
+`str`
+
+parameter key
+
+### CoreOamDevV1beta1ApplicationSpecComponentsItems0OutputsItems0
+
+core oam dev v1beta1 application spec components items0 outputs items0
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+name
+
+**valueFrom** *required*
+
+`str`
+
+value from
+
+### CoreOamDevV1beta1ApplicationSpecComponentsItems0TraitsItems0
+
+ApplicationTrait defines the trait of application
+
+#### Attributes
+
+**properties**
+
+`any`
+
+properties
+
+**type** *required*
+
+`str`
+
+### CoreOamDevV1beta1ApplicationSpecPoliciesItems0
+
+AppPolicy defines a global policy for all components in the app.
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+Name is the unique name of the policy.
+
+**properties**
+
+`any`
+
+properties
+
+**type** *required*
+
+`str`
+
+### CoreOamDevV1beta1ApplicationSpecWorkflow
+
+Workflow defines how to customize the control logic. If workflow is specified, Vela won&#39;t apply any resource, but provide rendered output in AppRevision. Workflow steps are executed in array order, and each step: - will have a context in annotation. - should mark &#34;finish&#34; phase in status.conditions.
+
+#### Attributes
+
+**mode**
+
+`CoreOamDevV1beta1ApplicationSpecWorkflowMode`
+
+mode
+
+**ref**
+
+`str`
+
+ref
+
+**steps**
+
+`[CoreOamDevV1beta1ApplicationSpecWorkflowStepsItems0]`
+
+steps
+
+### CoreOamDevV1beta1ApplicationSpecWorkflowMode
+
+WorkflowExecuteMode defines the mode of workflow execution
+
+#### Attributes
+
+**steps**
+
+`str`
+
+Steps is the mode of workflow steps execution
+
+**subSteps**
+
+`str`
+
+SubSteps is the mode of workflow sub steps execution
+
+### CoreOamDevV1beta1ApplicationSpecWorkflowStepsItems0
+
+WorkflowStep defines how to execute a workflow step.
+
+#### Attributes
+
+**dependsOn**
+
+`[str]`
+
+DependsOn is the dependency of the step
+
+**if**
+
+`str`
+
+**inputs**
+
+`[CoreOamDevV1beta1ApplicationSpecWorkflowStepsItems0InputsItems0]`
+
+Inputs is the inputs of the step
+
+**meta**
+
+`CoreOamDevV1beta1ApplicationSpecWorkflowStepsItems0Meta`
+
+meta
+
+**name** *required*
+
+`str`
+
+Name is the unique name of the workflow step.
+
+**outputs**
+
+`[CoreOamDevV1beta1ApplicationSpecWorkflowStepsItems0OutputsItems0]`
+
+Outputs is the outputs of the step
+
+**properties**
+
+`any`
+
+Properties is the properties of the step
+
+**subSteps**
+
+`[CoreOamDevV1beta1ApplicationSpecWorkflowStepsItems0SubStepsItems0]`
+
+sub steps
+
+**timeout**
+
+`str`
+
+Timeout is the timeout of the step
+
+**type** *required*
+
+`str`
+
+### CoreOamDevV1beta1ApplicationSpecWorkflowStepsItems0InputsItems0
+
+core oam dev v1beta1 application spec workflow steps items0 inputs items0
+
+#### Attributes
+
+**from** *required*
+
+`str`
+
+from
+
+**parameterKey** *required*
+
+`str`
+
+parameter key
+
+### CoreOamDevV1beta1ApplicationSpecWorkflowStepsItems0Meta
+
+Meta is the meta data of the workflow step.
+
+#### Attributes
+
+**alias**
+
+`str`
+
+alias
+
+### CoreOamDevV1beta1ApplicationSpecWorkflowStepsItems0OutputsItems0
+
+core oam dev v1beta1 application spec workflow steps items0 outputs items0
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+name
+
+**valueFrom** *required*
+
+`str`
+
+value from
+
+### CoreOamDevV1beta1ApplicationSpecWorkflowStepsItems0SubStepsItems0
+
+WorkflowStepBase defines the workflow step base
+
+#### Attributes
+
+**dependsOn**
+
+`[str]`
+
+DependsOn is the dependency of the step
+
+**if**
+
+`str`
+
+**inputs**
+
+`[CoreOamDevV1beta1ApplicationSpecWorkflowStepsItems0SubStepsItems0InputsItems0]`
+
+Inputs is the inputs of the step
+
+**meta**
+
+`CoreOamDevV1beta1ApplicationSpecWorkflowStepsItems0SubStepsItems0Meta`
+
+meta
+
+**name** *required*
+
+`str`
+
+Name is the unique name of the workflow step.
+
+**outputs**
+
+`[CoreOamDevV1beta1ApplicationSpecWorkflowStepsItems0SubStepsItems0OutputsItems0]`
+
+Outputs is the outputs of the step
+
+**properties**
+
+`any`
+
+Properties is the properties of the step
+
+**timeout**
+
+`str`
+
+Timeout is the timeout of the step
+
+**type** *required*
+
+`str`
+
+### CoreOamDevV1beta1ApplicationSpecWorkflowStepsItems0SubStepsItems0InputsItems0
+
+core oam dev v1beta1 application spec workflow steps items0 sub steps items0 inputs items0
+
+#### Attributes
+
+**from** *required*
+
+`str`
+
+from
+
+**parameterKey** *required*
+
+`str`
+
+parameter key
+
+### CoreOamDevV1beta1ApplicationSpecWorkflowStepsItems0SubStepsItems0Meta
+
+Meta is the meta data of the workflow step.
+
+#### Attributes
+
+**alias**
+
+`str`
+
+alias
+
+### CoreOamDevV1beta1ApplicationSpecWorkflowStepsItems0SubStepsItems0OutputsItems0
+
+core oam dev v1beta1 application spec workflow steps items0 sub steps items0 outputs items0
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+name
+
+**valueFrom** *required*
+
+`str`
+
+value from
+
+### CoreOamDevV1beta1ApplicationStatus
+
+AppStatus defines the observed state of Application
+
+#### Attributes
+
+**appliedResources**
+
+`[CoreOamDevV1beta1ApplicationStatusAppliedResourcesItems0]`
+
+AppliedResources record the resources that the  workflow step apply.
+
+**components**
+
+`[CoreOamDevV1beta1ApplicationStatusComponentsItems0]`
+
+Components record the related Components created by Application Controller
+
+**conditions**
+
+`[CoreOamDevV1beta1ApplicationStatusConditionsItems0]`
+
+Conditions of the resource.
+
+**latestRevision**
+
+`CoreOamDevV1beta1ApplicationStatusLatestRevision`
+
+latest revision
+
+**observedGeneration**
+
+`int`
+
+The generation observed by the application controller.
+
+**policy**
+
+`[CoreOamDevV1beta1ApplicationStatusPolicyItems0]`
+
+PolicyStatus records the status of policy Deprecated This field is only used by EnvBinding Policy which is deprecated.
+
+**services**
+
+`[CoreOamDevV1beta1ApplicationStatusServicesItems0]`
+
+Services record the status of the application services
+
+**status**
+
+`str`
+
+ApplicationPhase is a label for the condition of an application at the current time
+
+**workflow**
+
+`CoreOamDevV1beta1ApplicationStatusWorkflow`
+
+workflow
+
+### CoreOamDevV1beta1ApplicationStatusAppliedResourcesItems0
+
+ClusterObjectReference defines the object reference with cluster.
+
+#### Attributes
+
+**apiVersion**
+
+`str`
+
+API version of the referent.
+
+**cluster**
+
+`str`
+
+cluster
+
+**creator**
+
+`str`
+
+creator
+
+**fieldPath**
+
+`str`
+
+If referring to a piece of an object instead of an entire object, this string should contain a valid JSON/Go field access statement, such as desiredState.manifest.containers[2]. For example, if the object reference is to a container within a pod, this would take on a value like: &#34;spec.containers{name}&#34; (where &#34;name&#34; refers to the name of the container that triggered the event) or if no container name is specified &#34;spec.containers[2]&#34; (container with index 2 in this pod). This syntax is chosen only to have some well-defined way of referencing a part of an object. TODO: this design is not final and this field is subject to change in the future.
+
+**kind**
+
+`str`
+
+Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+**name**
+
+`str`
+
+Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+
+**namespace**
+
+`str`
+
+Namespace of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
+
+**resourceVersion**
+
+`str`
+
+Specific resourceVersion to which this reference is made, if any. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency
+
+**uid**
+
+`str`
+
+UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids
+
+### CoreOamDevV1beta1ApplicationStatusComponentsItems0
+
+ObjectReference contains enough information to let you inspect or modify the referred object. --- New uses of this type are discouraged because of difficulty describing its usage when embedded in APIs. 1. Ignored fields.  It includes many fields which are not generally honored.  For instance, ResourceVersion and FieldPath are both very rarely valid in actual usage. 2. Invalid usage help.  It is impossible to add specific help for individual usage.  In most embedded usages, there are particular restrictions like, &#34;must refer only to types A and B&#34; or &#34;UID not honored&#34; or &#34;name must be restricted&#34;. Those cannot be well described when embedded. 3. Inconsistent validation.  Because the usages are different, the validation rules are different by usage, which makes it hard for users to predict what will happen. 4. The fields are both imprecise and overly precise.  Kind is not a precise mapping to a URL. This can produce ambiguity during interpretation and require a REST mapping.  In most cases, the dependency is on the group,resource tuple and the version of the actual struct is irrelevant. 5. We cannot easily change it.  Because this type is embedded in many locations, updates to this type will affect numerous schemas.  Don&#39;t make new APIs embed an underspecified API type they do not control. Instead of using this type, create a locally provided and used type that is well-focused on your reference. For example, ServiceReferences for admission registration: https://github.com/kubernetes/api/blob/release-1.17/admissionregistration/v1/types.go#L533 .
+
+#### Attributes
+
+**apiVersion**
+
+`str`
+
+API version of the referent.
+
+**fieldPath**
+
+`str`
+
+If referring to a piece of an object instead of an entire object, this string should contain a valid JSON/Go field access statement, such as desiredState.manifest.containers[2]. For example, if the object reference is to a container within a pod, this would take on a value like: &#34;spec.containers{name}&#34; (where &#34;name&#34; refers to the name of the container that triggered the event) or if no container name is specified &#34;spec.containers[2]&#34; (container with index 2 in this pod). This syntax is chosen only to have some well-defined way of referencing a part of an object. TODO: this design is not final and this field is subject to change in the future.
+
+**kind**
+
+`str`
+
+Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+**name**
+
+`str`
+
+Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+
+**namespace**
+
+`str`
+
+Namespace of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
+
+**resourceVersion**
+
+`str`
+
+Specific resourceVersion to which this reference is made, if any. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency
+
+**uid**
+
+`str`
+
+UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids
+
+### CoreOamDevV1beta1ApplicationStatusConditionsItems0
+
+A Condition that may apply to a resource.
+
+#### Attributes
+
+**lastTransitionTime** *required*
+
+`str`
+
+LastTransitionTime is the last time this condition transitioned from one status to another.
+
+**message**
+
+`str`
+
+A Message containing details about this condition&#39;s last transition from one status to another, if any.
+
+**reason** *required*
+
+`str`
+
+A Reason for this condition&#39;s last transition from one status to another.
+
+**status** *required*
+
+`str`
+
+Status of this condition; is it currently True, False, or Unknown?
+
+**type** *required*
+
+`str`
+
+### CoreOamDevV1beta1ApplicationStatusLatestRevision
+
+LatestRevision of the application configuration it generates
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+name
+
+**revision** *required*
+
+`int`
+
+revision
+
+**revisionHash**
+
+`str`
+
+RevisionHash record the hash value of the spec of ApplicationRevision object.
+
+### CoreOamDevV1beta1ApplicationStatusPolicyItems0
+
+PolicyStatus records the status of policy Deprecated
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+name
+
+**status**
+
+`any`
+
+status
+
+**type** *required*
+
+`str`
+
+### CoreOamDevV1beta1ApplicationStatusServicesItems0
+
+ApplicationComponentStatus record the health status of App component
+
+#### Attributes
+
+**cluster**
+
+`str`
+
+cluster
+
+**env**
+
+`str`
+
+env
+
+**healthy** *required*
+
+`bool`
+
+healthy
+
+**message**
+
+`str`
+
+message
+
+**name** *required*
+
+`str`
+
+name
+
+**namespace**
+
+`str`
+
+namespace
+
+**scopes**
+
+`[CoreOamDevV1beta1ApplicationStatusServicesItems0ScopesItems0]`
+
+scopes
+
+**traits**
+
+`[CoreOamDevV1beta1ApplicationStatusServicesItems0TraitsItems0]`
+
+traits
+
+**workloadDefinition**
+
+`CoreOamDevV1beta1ApplicationStatusServicesItems0WorkloadDefinition`
+
+workload definition
+
+### CoreOamDevV1beta1ApplicationStatusServicesItems0ScopesItems0
+
+ObjectReference contains enough information to let you inspect or modify the referred object. --- New uses of this type are discouraged because of difficulty describing its usage when embedded in APIs. 1. Ignored fields.  It includes many fields which are not generally honored.  For instance, ResourceVersion and FieldPath are both very rarely valid in actual usage. 2. Invalid usage help.  It is impossible to add specific help for individual usage.  In most embedded usages, there are particular restrictions like, &#34;must refer only to types A and B&#34; or &#34;UID not honored&#34; or &#34;name must be restricted&#34;. Those cannot be well described when embedded. 3. Inconsistent validation.  Because the usages are different, the validation rules are different by usage, which makes it hard for users to predict what will happen. 4. The fields are both imprecise and overly precise.  Kind is not a precise mapping to a URL. This can produce ambiguity during interpretation and require a REST mapping.  In most cases, the dependency is on the group,resource tuple and the version of the actual struct is irrelevant. 5. We cannot easily change it.  Because this type is embedded in many locations, updates to this type will affect numerous schemas.  Don&#39;t make new APIs embed an underspecified API type they do not control. Instead of using this type, create a locally provided and used type that is well-focused on your reference. For example, ServiceReferences for admission registration: https://github.com/kubernetes/api/blob/release-1.17/admissionregistration/v1/types.go#L533 .
+
+#### Attributes
+
+**apiVersion**
+
+`str`
+
+API version of the referent.
+
+**fieldPath**
+
+`str`
+
+If referring to a piece of an object instead of an entire object, this string should contain a valid JSON/Go field access statement, such as desiredState.manifest.containers[2]. For example, if the object reference is to a container within a pod, this would take on a value like: &#34;spec.containers{name}&#34; (where &#34;name&#34; refers to the name of the container that triggered the event) or if no container name is specified &#34;spec.containers[2]&#34; (container with index 2 in this pod). This syntax is chosen only to have some well-defined way of referencing a part of an object. TODO: this design is not final and this field is subject to change in the future.
+
+**kind**
+
+`str`
+
+Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+**name**
+
+`str`
+
+Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+
+**namespace**
+
+`str`
+
+Namespace of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
+
+**resourceVersion**
+
+`str`
+
+Specific resourceVersion to which this reference is made, if any. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency
+
+**uid**
+
+`str`
+
+UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids
+
+### CoreOamDevV1beta1ApplicationStatusServicesItems0TraitsItems0
+
+ApplicationTraitStatus records the trait health status
+
+#### Attributes
+
+**healthy** *required*
+
+`bool`
+
+healthy
+
+**message**
+
+`str`
+
+message
+
+**type** *required*
+
+`str`
+
+### CoreOamDevV1beta1ApplicationStatusServicesItems0WorkloadDefinition
+
+WorkloadDefinition is the definition of a WorkloadDefinition, such as deployments/apps.v1
+
+#### Attributes
+
+**apiVersion** *required*
+
+`str`
+
+api version
+
+**kind** *required*
+
+`str`
+
+kind
+
+### CoreOamDevV1beta1ApplicationStatusWorkflow
+
+Workflow record the status of workflow
+
+#### Attributes
+
+**appRevision**
+
+`str`
+
+app revision
+
+**contextBackend**
+
+`CoreOamDevV1beta1ApplicationStatusWorkflowContextBackend`
+
+context backend
+
+**endTime**
+
+`str`
+
+end time
+
+**finished** *required*
+
+`bool`
+
+finished
+
+**message**
+
+`str`
+
+message
+
+**mode** *required*
+
+`str`
+
+mode
+
+**startTime**
+
+`str`
+
+start time
+
+**status**
+
+`str`
+
+WorkflowRunPhase is a label for the condition of a WorkflowRun at the current time
+
+**steps**
+
+`[CoreOamDevV1beta1ApplicationStatusWorkflowStepsItems0]`
+
+steps
+
+**suspend** *required*
+
+`bool`
+
+suspend
+
+**suspendState**
+
+`str`
+
+suspend state
+
+**terminated** *required*
+
+`bool`
+
+terminated
+
+### CoreOamDevV1beta1ApplicationStatusWorkflowContextBackend
+
+ObjectReference contains enough information to let you inspect or modify the referred object. --- New uses of this type are discouraged because of difficulty describing its usage when embedded in APIs. 1. Ignored fields.  It includes many fields which are not generally honored.  For instance, ResourceVersion and FieldPath are both very rarely valid in actual usage. 2. Invalid usage help.  It is impossible to add specific help for individual usage.  In most embedded usages, there are particular restrictions like, &#34;must refer only to types A and B&#34; or &#34;UID not honored&#34; or &#34;name must be restricted&#34;. Those cannot be well described when embedded. 3. Inconsistent validation.  Because the usages are different, the validation rules are different by usage, which makes it hard for users to predict what will happen. 4. The fields are both imprecise and overly precise.  Kind is not a precise mapping to a URL. This can produce ambiguity during interpretation and require a REST mapping.  In most cases, the dependency is on the group,resource tuple and the version of the actual struct is irrelevant. 5. We cannot easily change it.  Because this type is embedded in many locations, updates to this type will affect numerous schemas.  Don&#39;t make new APIs embed an underspecified API type they do not control. Instead of using this type, create a locally provided and used type that is well-focused on your reference. For example, ServiceReferences for admission registration: https://github.com/kubernetes/api/blob/release-1.17/admissionregistration/v1/types.go#L533 .
+
+#### Attributes
+
+**apiVersion**
+
+`str`
+
+API version of the referent.
+
+**fieldPath**
+
+`str`
+
+If referring to a piece of an object instead of an entire object, this string should contain a valid JSON/Go field access statement, such as desiredState.manifest.containers[2]. For example, if the object reference is to a container within a pod, this would take on a value like: &#34;spec.containers{name}&#34; (where &#34;name&#34; refers to the name of the container that triggered the event) or if no container name is specified &#34;spec.containers[2]&#34; (container with index 2 in this pod). This syntax is chosen only to have some well-defined way of referencing a part of an object. TODO: this design is not final and this field is subject to change in the future.
+
+**kind**
+
+`str`
+
+Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+**name**
+
+`str`
+
+Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+
+**namespace**
+
+`str`
+
+Namespace of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
+
+**resourceVersion**
+
+`str`
+
+Specific resourceVersion to which this reference is made, if any. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency
+
+**uid**
+
+`str`
+
+UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids
+
+### CoreOamDevV1beta1ApplicationStatusWorkflowStepsItems0
+
+WorkflowStepStatus record the status of a workflow step, include step status and subStep status
+
+#### Attributes
+
+**firstExecuteTime**
+
+`str`
+
+FirstExecuteTime is the first time this step execution.
+
+**id** *required*
+
+`str`
+
+id
+
+**lastExecuteTime**
+
+`str`
+
+LastExecuteTime is the last time this step execution.
+
+**message**
+
+`str`
+
+A human readable message indicating details about why the workflowStep is in this state.
+
+**name**
+
+`str`
+
+name
+
+**phase**
+
+`str`
+
+WorkflowStepPhase describes the phase of a workflow step.
+
+**reason**
+
+`str`
+
+A brief CamelCase message indicating details about why the workflowStep is in this state.
+
+**subSteps**
+
+`[CoreOamDevV1beta1ApplicationStatusWorkflowStepsItems0SubStepsItems0]`
+
+sub steps
+
+**type**
+
+`str`
+
+### CoreOamDevV1beta1ApplicationStatusWorkflowStepsItems0SubStepsItems0
+
+StepStatus record the base status of workflow step, which could be workflow step or subStep
+
+#### Attributes
+
+**firstExecuteTime**
+
+`str`
+
+FirstExecuteTime is the first time this step execution.
+
+**id** *required*
+
+`str`
+
+id
+
+**lastExecuteTime**
+
+`str`
+
+LastExecuteTime is the last time this step execution.
+
+**message**
+
+`str`
+
+A human readable message indicating details about why the workflowStep is in this state.
+
+**name**
+
+`str`
+
+name
+
+**phase**
+
+`str`
+
+WorkflowStepPhase describes the phase of a workflow step.
+
+**reason**
+
+`str`
+
+A brief CamelCase message indicating details about why the workflowStep is in this state.
+
+**type**
+
+`str`
+
+### CoreOamDevV1beta1PolicyDefinitionSpec
+
+PolicyDefinitionSpec defines the desired state of PolicyDefinition
+
+#### Attributes
+
+**definitionRef**
+
+`CoreOamDevV1beta1PolicyDefinitionSpecDefinitionRef`
+
+definition ref
+
+**manageHealthCheck**
+
+`bool`
+
+ManageHealthCheck means the policy will handle health checking and skip application controller built-in health checking.
+
+**schematic**
+
+`CoreOamDevV1beta1PolicyDefinitionSpecSchematic`
+
+schematic
+
+### CoreOamDevV1beta1PolicyDefinitionSpecDefinitionRef
+
+Reference to the CustomResourceDefinition that defines this trait kind.
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+Name of the referenced CustomResourceDefinition.
+
+**version**
+
+`str`
+
+Version indicate which version should be used if CRD has multiple versions by default it will use the first one if not specified
+
+### CoreOamDevV1beta1PolicyDefinitionSpecSchematic
+
+Schematic defines the data format and template of the encapsulation of the policy definition. Only CUE schematic is supported for now.
+
+#### Attributes
+
+**cue**
+
+`CoreOamDevV1beta1PolicyDefinitionSpecSchematicCue`
+
+cue
+
+**helm**
+
+`CoreOamDevV1beta1PolicyDefinitionSpecSchematicHelm`
+
+helm
+
+**kube**
+
+`CoreOamDevV1beta1PolicyDefinitionSpecSchematicKube`
+
+kube
+
+**terraform**
+
+`CoreOamDevV1beta1PolicyDefinitionSpecSchematicTerraform`
+
+terraform
+
+### CoreOamDevV1beta1PolicyDefinitionSpecSchematicCue
+
+CUE defines the encapsulation in CUE format
+
+#### Attributes
+
+**template** *required*
+
+`str`
+
+Template defines the abstraction template data of the capability, it will replace the old CUE template in extension field. Template is a required field if CUE is defined in Capability Definition.
+
+### CoreOamDevV1beta1PolicyDefinitionSpecSchematicHelm
+
+A Helm represents resources used by a Helm module
+
+#### Attributes
+
+**release** *required*
+
+`any`
+
+Release records a Helm release used by a Helm module workload.
+
+**repository** *required*
+
+`any`
+
+HelmRelease records a Helm repository used by a Helm module workload.
+
+### CoreOamDevV1beta1PolicyDefinitionSpecSchematicKube
+
+Kube defines the encapsulation in raw Kubernetes resource format
+
+#### Attributes
+
+**parameters**
+
+`[CoreOamDevV1beta1PolicyDefinitionSpecSchematicKubeParametersItems0]`
+
+Parameters defines configurable parameters
+
+**template** *required*
+
+`any`
+
+Template defines the raw Kubernetes resource
+
+### CoreOamDevV1beta1PolicyDefinitionSpecSchematicKubeParametersItems0
+
+A KubeParameter defines a configurable parameter of a component.
+
+#### Attributes
+
+**description**
+
+`str`
+
+Description of this parameter.
+
+**fieldPaths** *required*
+
+`[str]`
+
+FieldPaths specifies an array of fields within this workload that will be overwritten by the value of this parameter.     All fields must be of the same type. Fields are specified as JSON field paths without a leading dot, for example &#39;spec.replicas&#39;.
+
+**name** *required*
+
+`str`
+
+Name of this parameter
+
+**required**
+
+`bool`
+
+Required specifies whether or not a value for this parameter must be supplied when authoring an Application.
+
+**type** *required*
+
+`"string" | "number" | "boolean"`
+
+### CoreOamDevV1beta1PolicyDefinitionSpecSchematicTerraform
+
+Terraform is the struct to describe cloud resources managed by Hashicorp Terraform
+
+#### Attributes
+
+**configuration** *required*
+
+`str`
+
+Configuration is Terraform Configuration
+
+**customRegion**
+
+`str`
+
+Region is cloud provider&#39;s region. It will override the region in the region field of ProviderReference
+
+**deleteResource**
+
+`bool`
+
+DeleteResource will determine whether provisioned cloud resources will be deleted when CR is deleted
+
+**path**
+
+`str`
+
+Path is the sub-directory of remote git repository. It&#39;s valid when remote is set
+
+**providerRef**
+
+`CoreOamDevV1beta1PolicyDefinitionSpecSchematicTerraformProviderRef`
+
+provider ref
+
+**type**
+
+`"hcl" | "json" | "remote"`
+
+**writeConnectionSecretToRef**
+
+`CoreOamDevV1beta1PolicyDefinitionSpecSchematicTerraformWriteConnectionSecretToRef`
+
+write connection secret to ref
+
+### CoreOamDevV1beta1PolicyDefinitionSpecSchematicTerraformProviderRef
+
+ProviderReference specifies the reference to Provider
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+Name of the referenced object.
+
+**namespace**
+
+`str`
+
+Namespace of the referenced object.
+
+### CoreOamDevV1beta1PolicyDefinitionSpecSchematicTerraformWriteConnectionSecretToRef
+
+WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+Name of the secret.
+
+**namespace**
+
+`str`
+
+Namespace of the secret.
+
+### CoreOamDevV1beta1PolicyDefinitionStatus
+
+PolicyDefinitionStatus is the status of PolicyDefinition
+
+#### Attributes
+
+**conditions**
+
+`[CoreOamDevV1beta1PolicyDefinitionStatusConditionsItems0]`
+
+Conditions of the resource.
+
+**configMapRef**
+
+`str`
+
+ConfigMapRef refer to a ConfigMap which contains OpenAPI V3 JSON schema of Component parameters.
+
+**latestRevision**
+
+`CoreOamDevV1beta1PolicyDefinitionStatusLatestRevision`
+
+latest revision
+
+### CoreOamDevV1beta1PolicyDefinitionStatusConditionsItems0
+
+A Condition that may apply to a resource.
+
+#### Attributes
+
+**lastTransitionTime** *required*
+
+`str`
+
+LastTransitionTime is the last time this condition transitioned from one status to another.
+
+**message**
+
+`str`
+
+A Message containing details about this condition&#39;s last transition from one status to another, if any.
+
+**reason** *required*
+
+`str`
+
+A Reason for this condition&#39;s last transition from one status to another.
+
+**status** *required*
+
+`str`
+
+Status of this condition; is it currently True, False, or Unknown?
+
+**type** *required*
+
+`str`
+
+### CoreOamDevV1beta1PolicyDefinitionStatusLatestRevision
+
+LatestRevision of the component definition
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+name
+
+**revision** *required*
+
+`int`
+
+revision
+
+**revisionHash**
+
+`str`
+
+RevisionHash record the hash value of the spec of ApplicationRevision object.
+
+### CoreOamDevV1beta1ResourceTrackerSpec
+
+ResourceTrackerSpec define the spec of resourceTracker
+
+#### Attributes
+
+**applicationGeneration** *required*
+
+`int`
+
+application generation
+
+**compression**
+
+`CoreOamDevV1beta1ResourceTrackerSpecCompression`
+
+compression
+
+**managedResources**
+
+`[CoreOamDevV1beta1ResourceTrackerSpecManagedResourcesItems0]`
+
+managed resources
+
+**type**
+
+`str`
+
+### CoreOamDevV1beta1ResourceTrackerSpecCompression
+
+ResourceTrackerCompression represents the compressed components in ResourceTracker.
+
+#### Attributes
+
+**data**
+
+`str`
+
+data
+
+**type**
+
+`str`
+
+### CoreOamDevV1beta1ResourceTrackerSpecManagedResourcesItems0
+
+ManagedResource define the resource to be managed by ResourceTracker
+
+#### Attributes
+
+**apiVersion**
+
+`str`
+
+API version of the referent.
+
+**cluster**
+
+`str`
+
+cluster
+
+**component**
+
+`str`
+
+component
+
+**creator**
+
+`str`
+
+creator
+
+**deleted**
+
+`bool`
+
+Deleted marks the resource to be deleted
+
+**env**
+
+`str`
+
+env
+
+**fieldPath**
+
+`str`
+
+If referring to a piece of an object instead of an entire object, this string should contain a valid JSON/Go field access statement, such as desiredState.manifest.containers[2]. For example, if the object reference is to a container within a pod, this would take on a value like: &#34;spec.containers{name}&#34; (where &#34;name&#34; refers to the name of the container that triggered the event) or if no container name is specified &#34;spec.containers[2]&#34; (container with index 2 in this pod). This syntax is chosen only to have some well-defined way of referencing a part of an object. TODO: this design is not final and this field is subject to change in the future.
+
+**kind**
+
+`str`
+
+Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+**name**
+
+`str`
+
+Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+
+**namespace**
+
+`str`
+
+Namespace of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
+
+**raw**
+
+`any`
+
+raw
+
+**resourceVersion**
+
+`str`
+
+Specific resourceVersion to which this reference is made, if any. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency
+
+**skipGC**
+
+`bool`
+
+SkipGC marks the resource to skip gc
+
+**trait**
+
+`str`
+
+trait
+
+**uid**
+
+`str`
+
+UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids
+
+### CoreOamDevV1beta1ResourceTrackerStatus
+
+ResourceTrackerStatus define the status of resourceTracker For backward-compatibility
+
+#### Attributes
+
+**trackedResources**
+
+`[CoreOamDevV1beta1ResourceTrackerStatusTrackedResourcesItems0]`
+
+Deprecated
+
+### CoreOamDevV1beta1ResourceTrackerStatusTrackedResourcesItems0
+
+ClusterObjectReference defines the object reference with cluster.
+
+#### Attributes
+
+**apiVersion**
+
+`str`
+
+API version of the referent.
+
+**cluster**
+
+`str`
+
+cluster
+
+**creator**
+
+`str`
+
+creator
+
+**fieldPath**
+
+`str`
+
+If referring to a piece of an object instead of an entire object, this string should contain a valid JSON/Go field access statement, such as desiredState.manifest.containers[2]. For example, if the object reference is to a container within a pod, this would take on a value like: &#34;spec.containers{name}&#34; (where &#34;name&#34; refers to the name of the container that triggered the event) or if no container name is specified &#34;spec.containers[2]&#34; (container with index 2 in this pod). This syntax is chosen only to have some well-defined way of referencing a part of an object. TODO: this design is not final and this field is subject to change in the future.
+
+**kind**
+
+`str`
+
+Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+**name**
+
+`str`
+
+Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+
+**namespace**
+
+`str`
+
+Namespace of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
+
+**resourceVersion**
+
+`str`
+
+Specific resourceVersion to which this reference is made, if any. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency
+
+**uid**
+
+`str`
+
+UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids
+
+### CoreOamDevV1beta1ScopeDefinitionSpec
+
+A ScopeDefinitionSpec defines the desired state of a ScopeDefinition.
+
+#### Attributes
+
+**allowComponentOverlap** *required*
+
+`bool`
+
+AllowComponentOverlap specifies whether an OAM component may exist in multiple instances of this kind of scope.
+
+**definitionRef** *required*
+
+`CoreOamDevV1beta1ScopeDefinitionSpecDefinitionRef`
+
+definition ref
+
+**extension**
+
+`any`
+
+Extension is used for extension needs by OAM platform builders
+
+**workloadRefsPath**
+
+`str`
+
+WorkloadRefsPath indicates if/where a scope accepts workloadRef objects
+
+### CoreOamDevV1beta1ScopeDefinitionSpecDefinitionRef
+
+Reference to the CustomResourceDefinition that defines this scope kind.
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+Name of the referenced CustomResourceDefinition.
+
+**version**
+
+`str`
+
+Version indicate which version should be used if CRD has multiple versions by default it will use the first one if not specified
+
+### CoreOamDevV1beta1WorkflowStepDefinitionSpec
+
+WorkflowStepDefinitionSpec defines the desired state of WorkflowStepDefinition
+
+#### Attributes
+
+**definitionRef**
+
+`CoreOamDevV1beta1WorkflowStepDefinitionSpecDefinitionRef`
+
+definition ref
+
+**schematic**
+
+`CoreOamDevV1beta1WorkflowStepDefinitionSpecSchematic`
+
+schematic
+
+### CoreOamDevV1beta1WorkflowStepDefinitionSpecDefinitionRef
+
+Reference to the CustomResourceDefinition that defines this trait kind.
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+Name of the referenced CustomResourceDefinition.
+
+**version**
+
+`str`
+
+Version indicate which version should be used if CRD has multiple versions by default it will use the first one if not specified
+
+### CoreOamDevV1beta1WorkflowStepDefinitionSpecSchematic
+
+Schematic defines the data format and template of the encapsulation of the workflow step definition. Only CUE schematic is supported for now.
+
+#### Attributes
+
+**cue**
+
+`CoreOamDevV1beta1WorkflowStepDefinitionSpecSchematicCue`
+
+cue
+
+**helm**
+
+`CoreOamDevV1beta1WorkflowStepDefinitionSpecSchematicHelm`
+
+helm
+
+**kube**
+
+`CoreOamDevV1beta1WorkflowStepDefinitionSpecSchematicKube`
+
+kube
+
+**terraform**
+
+`CoreOamDevV1beta1WorkflowStepDefinitionSpecSchematicTerraform`
+
+terraform
+
+### CoreOamDevV1beta1WorkflowStepDefinitionSpecSchematicCue
+
+CUE defines the encapsulation in CUE format
+
+#### Attributes
+
+**template** *required*
+
+`str`
+
+Template defines the abstraction template data of the capability, it will replace the old CUE template in extension field. Template is a required field if CUE is defined in Capability Definition.
+
+### CoreOamDevV1beta1WorkflowStepDefinitionSpecSchematicHelm
+
+A Helm represents resources used by a Helm module
+
+#### Attributes
+
+**release** *required*
+
+`any`
+
+Release records a Helm release used by a Helm module workload.
+
+**repository** *required*
+
+`any`
+
+HelmRelease records a Helm repository used by a Helm module workload.
+
+### CoreOamDevV1beta1WorkflowStepDefinitionSpecSchematicKube
+
+Kube defines the encapsulation in raw Kubernetes resource format
+
+#### Attributes
+
+**parameters**
+
+`[CoreOamDevV1beta1WorkflowStepDefinitionSpecSchematicKubeParametersItems0]`
+
+Parameters defines configurable parameters
+
+**template** *required*
+
+`any`
+
+Template defines the raw Kubernetes resource
+
+### CoreOamDevV1beta1WorkflowStepDefinitionSpecSchematicKubeParametersItems0
+
+A KubeParameter defines a configurable parameter of a component.
+
+#### Attributes
+
+**description**
+
+`str`
+
+Description of this parameter.
+
+**fieldPaths** *required*
+
+`[str]`
+
+FieldPaths specifies an array of fields within this workload that will be overwritten by the value of this parameter.     All fields must be of the same type. Fields are specified as JSON field paths without a leading dot, for example &#39;spec.replicas&#39;.
+
+**name** *required*
+
+`str`
+
+Name of this parameter
+
+**required**
+
+`bool`
+
+Required specifies whether or not a value for this parameter must be supplied when authoring an Application.
+
+**type** *required*
+
+`"string" | "number" | "boolean"`
+
+### CoreOamDevV1beta1WorkflowStepDefinitionSpecSchematicTerraform
+
+Terraform is the struct to describe cloud resources managed by Hashicorp Terraform
+
+#### Attributes
+
+**configuration** *required*
+
+`str`
+
+Configuration is Terraform Configuration
+
+**customRegion**
+
+`str`
+
+Region is cloud provider&#39;s region. It will override the region in the region field of ProviderReference
+
+**deleteResource**
+
+`bool`
+
+DeleteResource will determine whether provisioned cloud resources will be deleted when CR is deleted
+
+**path**
+
+`str`
+
+Path is the sub-directory of remote git repository. It&#39;s valid when remote is set
+
+**providerRef**
+
+`CoreOamDevV1beta1WorkflowStepDefinitionSpecSchematicTerraformProviderRef`
+
+provider ref
+
+**type**
+
+`"hcl" | "json" | "remote"`
+
+**writeConnectionSecretToRef**
+
+`CoreOamDevV1beta1WorkflowStepDefinitionSpecSchematicTerraformWriteConnectionSecretToRef`
+
+write connection secret to ref
+
+### CoreOamDevV1beta1WorkflowStepDefinitionSpecSchematicTerraformProviderRef
+
+ProviderReference specifies the reference to Provider
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+Name of the referenced object.
+
+**namespace**
+
+`str`
+
+Namespace of the referenced object.
+
+### CoreOamDevV1beta1WorkflowStepDefinitionSpecSchematicTerraformWriteConnectionSecretToRef
+
+WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+Name of the secret.
+
+**namespace**
+
+`str`
+
+Namespace of the secret.
+
+### CoreOamDevV1beta1WorkflowStepDefinitionStatus
+
+WorkflowStepDefinitionStatus is the status of WorkflowStepDefinition
+
+#### Attributes
+
+**conditions**
+
+`[CoreOamDevV1beta1WorkflowStepDefinitionStatusConditionsItems0]`
+
+Conditions of the resource.
+
+**configMapRef**
+
+`str`
+
+ConfigMapRef refer to a ConfigMap which contains OpenAPI V3 JSON schema of Component parameters.
+
+**latestRevision**
+
+`CoreOamDevV1beta1WorkflowStepDefinitionStatusLatestRevision`
+
+latest revision
+
+### CoreOamDevV1beta1WorkflowStepDefinitionStatusConditionsItems0
+
+A Condition that may apply to a resource.
+
+#### Attributes
+
+**lastTransitionTime** *required*
+
+`str`
+
+LastTransitionTime is the last time this condition transitioned from one status to another.
+
+**message**
+
+`str`
+
+A Message containing details about this condition&#39;s last transition from one status to another, if any.
+
+**reason** *required*
+
+`str`
+
+A Reason for this condition&#39;s last transition from one status to another.
+
+**status** *required*
+
+`str`
+
+Status of this condition; is it currently True, False, or Unknown?
+
+**type** *required*
+
+`str`
+
+### CoreOamDevV1beta1WorkflowStepDefinitionStatusLatestRevision
+
+LatestRevision of the component definition
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+name
+
+**revision** *required*
+
+`int`
+
+revision
+
+**revisionHash**
+
+`str`
+
+RevisionHash record the hash value of the spec of ApplicationRevision object.
+
+### CoreOamDevV1beta1WorkloadDefinitionSpec
+
+A WorkloadDefinitionSpec defines the desired state of a WorkloadDefinition.
+
+#### Attributes
+
+**childResourceKinds**
+
+`[CoreOamDevV1beta1WorkloadDefinitionSpecChildResourceKindsItems0]`
+
+ChildResourceKinds are the list of GVK of the child resources this workload generates
+
+**definitionRef** *required*
+
+`CoreOamDevV1beta1WorkloadDefinitionSpecDefinitionRef`
+
+definition ref
+
+**extension**
+
+`any`
+
+Extension is used for extension needs by OAM platform builders
+
+**podSpecPath**
+
+`str`
+
+PodSpecPath indicates where/if this workload has K8s podSpec field if one workload has podSpec, trait can do lot&#39;s of assumption such as port, env, volume fields.
+
+**revisionLabel**
+
+`str`
+
+RevisionLabel indicates which label for underlying resources(e.g. pods) of this workload can be used by trait to create resource selectors(e.g. label selector for pods).
+
+**schematic**
+
+`CoreOamDevV1beta1WorkloadDefinitionSpecSchematic`
+
+schematic
+
+**status**
+
+`CoreOamDevV1beta1WorkloadDefinitionSpecStatus`
+
+status
+
+### CoreOamDevV1beta1WorkloadDefinitionSpecChildResourceKindsItems0
+
+A ChildResourceKind defines a child Kubernetes resource kind with a selector
+
+#### Attributes
+
+**apiVersion** *required*
+
+`str`
+
+APIVersion of the child resource
+
+**kind** *required*
+
+`str`
+
+Kind of the child resource
+
+**selector**
+
+`{str:str}`
+
+Selector to select the child resources that the workload wants to expose to traits
+
+### CoreOamDevV1beta1WorkloadDefinitionSpecDefinitionRef
+
+Reference to the CustomResourceDefinition that defines this workload kind.
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+Name of the referenced CustomResourceDefinition.
+
+**version**
+
+`str`
+
+Version indicate which version should be used if CRD has multiple versions by default it will use the first one if not specified
+
+### CoreOamDevV1beta1WorkloadDefinitionSpecSchematic
+
+Schematic defines the data format and template of the encapsulation of the workload
+
+#### Attributes
+
+**cue**
+
+`CoreOamDevV1beta1WorkloadDefinitionSpecSchematicCue`
+
+cue
+
+**helm**
+
+`CoreOamDevV1beta1WorkloadDefinitionSpecSchematicHelm`
+
+helm
+
+**kube**
+
+`CoreOamDevV1beta1WorkloadDefinitionSpecSchematicKube`
+
+kube
+
+**terraform**
+
+`CoreOamDevV1beta1WorkloadDefinitionSpecSchematicTerraform`
+
+terraform
+
+### CoreOamDevV1beta1WorkloadDefinitionSpecSchematicCue
+
+CUE defines the encapsulation in CUE format
+
+#### Attributes
+
+**template** *required*
+
+`str`
+
+Template defines the abstraction template data of the capability, it will replace the old CUE template in extension field. Template is a required field if CUE is defined in Capability Definition.
+
+### CoreOamDevV1beta1WorkloadDefinitionSpecSchematicHelm
+
+A Helm represents resources used by a Helm module
+
+#### Attributes
+
+**release** *required*
+
+`any`
+
+Release records a Helm release used by a Helm module workload.
+
+**repository** *required*
+
+`any`
+
+HelmRelease records a Helm repository used by a Helm module workload.
+
+### CoreOamDevV1beta1WorkloadDefinitionSpecSchematicKube
+
+Kube defines the encapsulation in raw Kubernetes resource format
+
+#### Attributes
+
+**parameters**
+
+`[CoreOamDevV1beta1WorkloadDefinitionSpecSchematicKubeParametersItems0]`
+
+Parameters defines configurable parameters
+
+**template** *required*
+
+`any`
+
+Template defines the raw Kubernetes resource
+
+### CoreOamDevV1beta1WorkloadDefinitionSpecSchematicKubeParametersItems0
+
+A KubeParameter defines a configurable parameter of a component.
+
+#### Attributes
+
+**description**
+
+`str`
+
+Description of this parameter.
+
+**fieldPaths** *required*
+
+`[str]`
+
+FieldPaths specifies an array of fields within this workload that will be overwritten by the value of this parameter.     All fields must be of the same type. Fields are specified as JSON field paths without a leading dot, for example &#39;spec.replicas&#39;.
+
+**name** *required*
+
+`str`
+
+Name of this parameter
+
+**required**
+
+`bool`
+
+Required specifies whether or not a value for this parameter must be supplied when authoring an Application.
+
+**type** *required*
+
+`"string" | "number" | "boolean"`
+
+### CoreOamDevV1beta1WorkloadDefinitionSpecSchematicTerraform
+
+Terraform is the struct to describe cloud resources managed by Hashicorp Terraform
+
+#### Attributes
+
+**configuration** *required*
+
+`str`
+
+Configuration is Terraform Configuration
+
+**customRegion**
+
+`str`
+
+Region is cloud provider&#39;s region. It will override the region in the region field of ProviderReference
+
+**deleteResource**
+
+`bool`
+
+DeleteResource will determine whether provisioned cloud resources will be deleted when CR is deleted
+
+**path**
+
+`str`
+
+Path is the sub-directory of remote git repository. It&#39;s valid when remote is set
+
+**providerRef**
+
+`CoreOamDevV1beta1WorkloadDefinitionSpecSchematicTerraformProviderRef`
+
+provider ref
+
+**type**
+
+`"hcl" | "json" | "remote"`
+
+**writeConnectionSecretToRef**
+
+`CoreOamDevV1beta1WorkloadDefinitionSpecSchematicTerraformWriteConnectionSecretToRef`
+
+write connection secret to ref
+
+### CoreOamDevV1beta1WorkloadDefinitionSpecSchematicTerraformProviderRef
+
+ProviderReference specifies the reference to Provider
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+Name of the referenced object.
+
+**namespace**
+
+`str`
+
+Namespace of the referenced object.
+
+### CoreOamDevV1beta1WorkloadDefinitionSpecSchematicTerraformWriteConnectionSecretToRef
+
+WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+
+#### Attributes
+
+**name** *required*
+
+`str`
+
+Name of the secret.
+
+**namespace**
+
+`str`
+
+Namespace of the secret.
+
+### CoreOamDevV1beta1WorkloadDefinitionSpecStatus
+
+Status defines the custom health policy and status message for workload
+
+#### Attributes
+
+**customStatus**
+
+`str`
+
+CustomStatus defines the custom status message that could display to user
+
+**healthPolicy**
+
+`str`
+
+HealthPolicy defines the health check policy for the abstraction
+
+### CoreOamDevV1beta1WorkloadDefinitionStatus
+
+WorkloadDefinitionStatus is the status of WorkloadDefinition
+
+#### Attributes
+
+**conditions**
+
+`[CoreOamDevV1beta1WorkloadDefinitionStatusConditionsItems0]`
+
+Conditions of the resource.
+
+### CoreOamDevV1beta1WorkloadDefinitionStatusConditionsItems0
+
+A Condition that may apply to a resource.
+
+#### Attributes
+
+**lastTransitionTime** *required*
+
+`str`
+
+LastTransitionTime is the last time this condition transitioned from one status to another.
+
+**message**
+
+`str`
+
+A Message containing details about this condition&#39;s last transition from one status to another, if any.
+
+**reason** *required*
+
+`str`
+
+A Reason for this condition&#39;s last transition from one status to another.
+
+**status** *required*
+
+`str`
+
+Status of this condition; is it currently True, False, or Unknown?
+
+**type** *required*
+
+`str`
+
+### PolicyDefinition
+
+PolicyDefinition is the Schema for the policydefinitions API
+
+#### Attributes
+
+**apiVersion** *required* *readOnly*
+
+`"core.oam.dev/v1beta1"`
+
+APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+**kind** *required* *readOnly*
+
+`"PolicyDefinition"`
+
+Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+**metadata**
+
+`ObjectMeta`
+
+metadata
+
+**spec**
+
+`CoreOamDevV1beta1PolicyDefinitionSpec`
+
+spec
+
+**status**
+
+`CoreOamDevV1beta1PolicyDefinitionStatus`
+
+status
+
+### ResourceTracker
+
+An ResourceTracker represents a tracker for track cross namespace resources
+
+#### Attributes
+
+**apiVersion** *required* *readOnly*
+
+`"core.oam.dev/v1beta1"`
+
+APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+**kind** *required* *readOnly*
+
+`"ResourceTracker"`
+
+Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+**metadata**
+
+`ObjectMeta`
+
+metadata
+
+**spec**
+
+`CoreOamDevV1beta1ResourceTrackerSpec`
+
+spec
+
+**status**
+
+`CoreOamDevV1beta1ResourceTrackerStatus`
+
+status
+
+### ScopeDefinition
+
+A ScopeDefinition registers a kind of Kubernetes custom resource as a valid OAM scope kind by referencing its CustomResourceDefinition. The CRD is used to validate the schema of the scope when it is embedded in an OAM ApplicationConfiguration.
+
+#### Attributes
+
+**apiVersion** *required* *readOnly*
+
+`"core.oam.dev/v1beta1"`
+
+APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+**kind** *required* *readOnly*
+
+`"ScopeDefinition"`
+
+Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+**metadata**
+
+`ObjectMeta`
+
+metadata
+
+**spec**
+
+`CoreOamDevV1beta1ScopeDefinitionSpec`
+
+spec
+
+### WorkflowStepDefinition
+
+WorkflowStepDefinition is the Schema for the workflowstepdefinitions API
+
+#### Attributes
+
+**apiVersion** *required* *readOnly*
+
+`"core.oam.dev/v1beta1"`
+
+APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+**kind** *required* *readOnly*
+
+`"WorkflowStepDefinition"`
+
+Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+**metadata**
+
+`ObjectMeta`
+
+metadata
+
+**spec**
+
+`CoreOamDevV1beta1WorkflowStepDefinitionSpec`
+
+spec
+
+**status**
+
+`CoreOamDevV1beta1WorkflowStepDefinitionStatus`
+
+status
+
+### WorkloadDefinition
+
+A WorkloadDefinition registers a kind of Kubernetes custom resource as a valid OAM workload kind by referencing its CustomResourceDefinition. The CRD is used to validate the schema of the workload when it is embedded in an OAM Component.
+
+#### Attributes
+
+**apiVersion** *required* *readOnly*
+
+`"core.oam.dev/v1beta1"`
+
+APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+**kind** *required* *readOnly*
+
+`"WorkloadDefinition"`
+
+Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+**metadata**
+
+`ObjectMeta`
+
+metadata
+
+**spec**
+
+`CoreOamDevV1beta1WorkloadDefinitionSpec`
+
+spec
+
+**status**
+
+`CoreOamDevV1beta1WorkloadDefinitionStatus`
+
+status
+
+<!-- Auto generated by kcl-doc tool, please do not edit. -->
