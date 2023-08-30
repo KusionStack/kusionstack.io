@@ -1,6 +1,6 @@
 # 部署应用
 
-本篇指南向你展示，如何使用 KCL 语言与其相对应的 CLI 工具 Kusion，完成一个运行在 Kubernetes 中的 Long-Running 应用的部署，我们将组织配置的单位叫做应用（Application），描述应用部署和运维细节的配置集合叫做应用服务（Server），它本质上是通过 KCL 定义的运维模型，完整的 Server 模型定义可见：[server](/docs/reference/model/kusion_models/kube/frontend/doc_server)
+本篇指南向你展示，如何使用 KCL 语言与其相对应的 CLI 工具 Kusion，完成一个运行在 Kubernetes 中的 Long-Running 应用的部署，我们将组织配置的单位叫做应用（Application），描述应用部署和运维细节的配置集合叫做应用服务（Server），它本质上是通过 KCL 定义的运维模型，完整的 Server 模型定义可见：[server](/docs/reference/model/documentation//kusion_models/kube/frontend/frontend.md#server)
 
 要将一个运行在 Kubernetes 中的应用完全部署起来，一般需要下发多个 Kubernetes 资源，本次演示的样例涉及以下 Kubernetes 资源：
 

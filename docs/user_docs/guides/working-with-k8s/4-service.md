@@ -1,7 +1,7 @@
 # Expose Service
 
 The attribute `services` of the `Server` model is used to declare your app's network configuration.
-For the abstract definition of `service`, please see [here](/docs/reference/model/kusion_models/kube/frontend/service/doc_service) for more details.
+For the abstract definition of `service`, please see [here](/docs/reference/model/documentation//kusion_models/kube/frontend/service/service.md#service-1) for more details.
 
 ## Prerequisites
 

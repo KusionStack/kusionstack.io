@@ -1,7 +1,7 @@
 # Configure Resource Specification
 
 The attribute `schedulingStrategy` of the `Server` model is used to declare the resource spec of an application's business container.
-About the definition of resource spec, please see [here](/docs/reference/model/kusion_models/kube/frontend/resource/doc_resource) for more details.
+About the definition of resource spec, please see [here](/docs/reference/model/documentation//kusion_models/kube/frontend/resource/resource.md#resource-1) for more details.
 
 ## Prerequisites
 

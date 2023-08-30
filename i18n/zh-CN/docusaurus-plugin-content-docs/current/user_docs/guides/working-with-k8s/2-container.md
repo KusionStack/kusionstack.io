@@ -1,6 +1,6 @@
 # 配置业务容器
 
-Server 模型中的 mainContainer 属性用于声明应用的业务容器配置，有关业务容器的抽象定义，可以查看 KCL Model 中 [base.pkg.kusion_models.kube.frontend.container](/docs/reference/model/kusion_models/kube/frontend/container/doc_container) 模块的文档。
+Server 模型中的 mainContainer 属性用于声明应用的业务容器配置，有关业务容器的抽象定义，可以查看 KCL Model 中 [base.pkg.kusion_models.kube.frontend.container](/docs/reference/model/documentation//kusion_models/kube/frontend/container/container.md#main) 模块的文档。
 
 ## 1. 准备工作
 
