@@ -1,3 +1,9 @@
+---
+id: doc_app_configuration
+sidebar_label: App Configuration
+sidebar_position: 1
+---
+
 # app_configuration
 
 ## Schema AppConfiguration
@@ -18,12 +24,12 @@ AppConfiguration is a developer-centric definition that describes how to run an 
 ```python
 # Instantiate an App with a long-running service and its image is "nginx:v1"
 
-import models.schema.v1 as ac
-import models.schema.v1.workload as wl
-import models.schema.v1.workload.container as c
-import models.schema.v1.accessories.database as db
-import models.schema.v1.accessories.monitoring as m
-import models.schema.v1.accessories.trait as t
+import catalog.models.schema.v1 as ac
+import catalog.models.schema.v1.workload as wl
+import catalog.models.schema.v1.workload.container as c
+import catalog.models.schema.v1.accessories.database as db
+import catalog.models.schema.v1.accessories.monitoring as m
+import catalog.models.schema.v1.accessories.trait as t
 
 appConfiguration = ac.AppConfiguration {
     workload: wl.Service {

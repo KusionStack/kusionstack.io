@@ -13,7 +13,7 @@ Secret can be used to store sensitive data.
 |**immutable**<br />Immutable, if set to true, ensures that data stored in the Secret cannot be updated.|bool|Undefined|optional|
 ### Examples
 ```python
-import models.schema.v1.workload.secret as sec
+import catalog.models.schema.v1.workload.secret as sec
 
 basicAuth = sec.Secret {
     type: "basic"

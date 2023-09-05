@@ -17,7 +17,7 @@ Probe describes a health check to be performed against a container to determine 
 |**terminationGracePeriod**|int|Undefined|optional|
 ### Examples
 ```python
-import models.schema.v1.workload.container.probe as p
+import catalog.models.schema.v1.workload.container.probe as p
 
 probe = p.Probe {
     probeHandler: p.Http {
@@ -38,7 +38,7 @@ Exec describes a "run in container" action.
 |**command**<br />The command line to execute inside the container.|[str]|Undefined|**required**|
 ### Examples
 ```python
-import models.schema.v1.workload.container.probe as p
+import catalog.models.schema.v1.workload.container.probe as p
 
 execProbe = p.Exec {
     command: ["probe.sh"]
@@ -57,7 +57,7 @@ Http describes an action based on HTTP Get requests.
 |**headers**<br />Collection of custom headers to set in the request|{str: str}|Undefined|optional|
 ### Examples
 ```python
-import models.schema.v1.workload.container.probe as p
+import catalog.models.schema.v1.workload.container.probe as p
 
 httpProbe = p.Http {
     url: "http://localhost:80"
@@ -78,7 +78,7 @@ Tcp describes an action based on opening a socket.
 |**url**<br />The full qualified url to open a socket.|str|Undefined|**required**|
 ### Examples
 ```python
-import models.schema.v1.workload.container.probe as p
+import catalog.models.schema.v1.workload.container.probe as p
 
 tcpProbe = p.Tcp {
     url: "tcp://localhost:1234"

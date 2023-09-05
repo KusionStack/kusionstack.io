@@ -23,7 +23,7 @@ As an important supporting accessory, Database describes the attributes<br />to 
 ```python
 Instantiate an aws rds with mysql 5.7. 
 
-import models.schema.v1.accessories.database as db
+import catalog.models.schema.v1.accessories.database as db
 
 database: db.Database {
     type: "aws"

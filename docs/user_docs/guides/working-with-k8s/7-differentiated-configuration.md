@@ -1,31 +1,75 @@
 # Differentiated Configurations
 
-In the KCL code of the application, you can set the required differential configuration by adding an `if-else` statement with magic variables, 
-such as setting different labels according to the actual deployed cluster name.
+When describing an application, you can set different, stack-specific values in `main.k` in the stack directory, while keeping the common configuration in `base/base.k` in the project directory.
 
 :::tip
 
-About KCL semantics, please visit [KCL](https://kcl-lang.io/) for more details.
+About Project and Stack, please see [Project&Stack](/user_docs/concepts/glossary.md) for more details.
 :::
 
-## Prerequisites
+## Pre-requisite
+Please refer to the [prerequisites](1-deploy-application.md#prerequisites) in the guide for deploying an application.
 
-Please refer to the [prerequisites](/docs/user_docs/guides/working-with-k8s/deploy-server#prerequisites) in the guide for deploying an application.
+The example below also requires you to have [initialized the project](1-deploy-application.md#initializing) using the `kusion init` command, which will generate a [`kcl.mod` file](1-deploy-application.md#kclmod) under the project directory.
 
 ## Example
-
-Pod Label in `base/bask.k`:
-
+Base config in the `helloworld/base/base.k`:
 ```py
-appConfiguration: frontend.Server {
-    podMetadata.labels = {
-        if __META_CLUSTER_NAME in ["minikube", "kind"]:
-            cluster = __META_CLUSTER_NAME
-        else:
-            cluster = "other"
+import catalog.models.schema.v1 as ac
+import catalog.models.schema.v1.workload as wl
+import catalog.models.schema.v1.workload.container as c
+import catalog.models.schema.v1.workload.network as n
+import catalog.models.schema.v1.workload.container.probe as p
+
+helloworld: ac.AppConfiguration {
+    workload: wl.Service {
+        containers: {
+            "helloworld": c.Container {
+                image: "nginx"
+                # Two environment variables will be set
+                env: {
+                    "env1": "VALUE"
+                    "env2": "VALUE2"
+                }
+                resources: {
+                    "cpu": "500m"
+                    "memory": "512Mi"
+                }
+                # Configure an HTTP readiness probe
+                readinessProbe: p.Probe {
+                    probeHandler: p.Http {
+                        url: "http://localhost:80"
+                    }
+                    initialDelaySeconds: 10
+                }
+            }
+        }
+        replicas: 2
+        ports: [
+            n.Port {
+                port: 8080
+                targetPort: 80
+            }
+        ]
+    }
+}
+```
+In the `dev` stack config in the `helloworld/dev/main.k`:
+```py
+import catalog.models.schema.v1 as ac
+
+# main.k declares customized configurations for dev stack.
+helloworld: ac.AppConfiguration {
+    workload.containers.helloworld: {
+        # dev stack has different app configuration
+        image = "gcr.io/google-samples/gb-frontend:v5"
+        resources = {
+            "cpu": "250m"
+            "memory": "256Mi"
+        }
+        replicas = 3
     }
 }
 ```
 
-Through the above KCL code, you can get the actual cluster name according to the magic variables in the Konfig library,
-and selectively inject labels into the application container to be recognized by 3rd services or for other purposes.
+This will be merged with the `helloworld` AppConfiguration in `base.k` and override the common configuration defined in `base.k`, such as `image`, `resources` and `replicas`.

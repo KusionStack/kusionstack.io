@@ -22,7 +22,7 @@ Container describes how the Application's tasks are expected to be run. Dependin
 |**lifecycle**<br />Lifecycle refers to actions that the management system should take in response to container lifecycle events.|[lc.Lifecycle](lifecycle/doc_lifecycle#schema-lifecycle)|Undefined|optional|
 ### Examples
 ```python
-import models.schema.v1.workload.container as c
+import catalog.models.schema.v1.workload.container as c
 
 web = c.Container {
     image:   "nginx:latest"
@@ -50,7 +50,7 @@ FileSpec defines the target file in a Container.
 |**mode**<br />Mode bits used to set permissions on this file, must be an octal value<br />between 0000 and 0777 or a decimal value between 0 and 511|str|Undefined|**required**|
 ### Examples
 ```python
-import models.schema.v1.workload.container as c
+import catalog.models.schema.v1.workload.container as c
 
 tmpFile = c.FileSpec {
     content: "some file contents"

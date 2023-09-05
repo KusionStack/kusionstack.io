@@ -32,7 +32,7 @@ All init templates are listed as follows:
 ? Please choose a template:  [Use arrows to move, type to filter]
 > code-city                  Code City metaphor for visualizing Go source code in 3D.
   deployment-multi-stack     A minimal kusion project of multi stacks
-  deployment-single-stack    A minimal kusion project of single stack
+  single-stack-sample    A minimal kusion project of single stack
 ```
 
 Select `code-city` and press `Enter`. After that, we will see hints below and use the default value to config this project and stack.
