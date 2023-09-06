@@ -31,8 +31,8 @@ Service is a kind of workload profile that describes how to run your application
 ```python
 # Instantiate a long-running service and its image is "nginx:v1"
 
-import models.schema.v1.workload as wl
-import models.schema.v1.workload.container as c
+import catalog.models.schema.v1.workload as wl
+import catalog.models.schema.v1.workload.container as c
 
 svc = wl.Service {
     containers: {
@@ -77,7 +77,7 @@ Container describes how the Application's tasks are expected to be run. Dependin
 |**lifecycle**<br />Lifecycle refers to actions that the management system should take in response to container lifecycle events.|[lc.Lifecycle](#schema-lifecycle)|Undefined|optional|
 ### Examples
 ```python
-import models.schema.v1.workload.container as c
+import catalog.models.schema.v1.workload.container as c
 
 web = c.Container {
     image:   "nginx:latest"
@@ -105,7 +105,7 @@ FileSpec defines the target file in a Container.
 |**contentFrom**<br />Source for the file content, reference to a secret of configmap value.|str|Undefined|optional|
 ### Examples
 ```python
-import models.schema.v1.workload.container as c
+import catalog.models.schema.v1.workload.container as c
 
 tmpFile = c.FileSpec {
     content: "some file contents"
@@ -130,7 +130,7 @@ Probe describes a health check to be performed against a container to determine 
 |**terminationGracePeriod**|int|Undefined|optional|
 ### Examples
 ```python
-import models.schema.v1.workload.container.probe as p
+import catalog.models.schema.v1.workload.container.probe as p
 
 probe = p.Probe {
     probeHandler: p.Http {
@@ -151,7 +151,7 @@ Exec describes a "run in container" action.
 |**command**<br />The command line to execute inside the container.|[str]|Undefined|**required**|
 ### Examples
 ```python
-import models.schema.v1.workload.container.probe as p
+import catalog.models.schema.v1.workload.container.probe as p
 
 execProbe = p.Exec {
     command: ["probe.sh"]
@@ -170,7 +170,7 @@ Http describes an action based on HTTP Get requests.
 |**headers**<br />Collection of custom headers to set in the request|{str: str}|Undefined|optional|
 ### Examples
 ```python
-import models.schema.v1.workload.container.probe as p
+import catalog.models.schema.v1.workload.container.probe as p
 
 httpProbe = p.Http {
     url: "http://localhost:80"
@@ -191,7 +191,7 @@ Tcp describes an action based on opening a socket.
 |**url**<br />The full qualified url to open a socket.|str|Undefined|**required**|
 ### Examples
 ```python
-import models.schema.v1.workload.container.probe as p
+import catalog.models.schema.v1.workload.container.probe as p
 
 tcpProbe = p.Tcp {
     url: "tcp://localhost:1234"
@@ -210,8 +210,8 @@ Lifecycle describes actions that the management system should take in response<b
 |**postStart**<br />The action to be taken after a container is created.<br />More info: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/\#container-hooks|[probe.Exec](#schema-exec) \| [probe.Http](#schema-http)|Undefined|optional|
 ### Examples
 ```python
-import models.schema.v1.workload.container.probe as p
-import models.schema.v1.workload.container.lifecycle as lc
+import catalog.models.schema.v1.workload.container.probe as p
+import catalog.models.schema.v1.workload.container.lifecycle as lc
 
 lifecycleHook = lc.Lifecycle {
     preStop: p.Exec {
@@ -236,7 +236,7 @@ Secret can be used to store sensitive data.
 |**immutable**<br />Immutable, if set to true, ensures that data stored in the Secret cannot be updated.|bool|Undefined|optional|
 ### Examples
 ```python
-import models.schema.v1.workload.secret as sec
+import catalog.models.schema.v1.workload.secret as sec
 
 basicAuth = sec.Secret {
     type: "basic"
@@ -261,7 +261,7 @@ Port defines the exposed port of Service, which can be used to describe how the 
 |**targetPort**<br />The backend container port. If empty, set it the same as the port.|int|Undefined|optional|
 ### Examples
 ```python
-import models.schema.v1.workload.network as n
+import catalog.models.schema.v1.workload.network as n
 
 port = n.Port {
     port: 80

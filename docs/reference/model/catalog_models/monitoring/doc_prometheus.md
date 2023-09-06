@@ -15,7 +15,7 @@ Prometheus can be used to define monitoring requirements
 |**scheme**<br />The scheme to scrape metrics from. Possible values are http and https.|"http" \| "https"|http|optional|
 ### Examples
 ```python
-import models.schema.v1.monitoring as m
+import catalog.models.schema.v1.monitoring as m
 
 monitoring: m.Prometheus{
     interval:       "30s"

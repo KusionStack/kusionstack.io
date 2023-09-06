@@ -14,7 +14,7 @@ Port defines the exposed port of Service, which can be used to describe how the 
 |**public**<br />Public defines whether the port can be accessed through Internet.|bool|False|**required**|
 ### Examples
 ```python
-import models.schema.v1.workload.network as n
+import catalog.models.schema.v1.workload.network as n
 
 port = n.Port {
     port: 80

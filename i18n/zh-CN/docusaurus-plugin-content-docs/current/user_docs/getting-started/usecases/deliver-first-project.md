@@ -32,7 +32,7 @@ kusion init --online
 ? Please choose a template:  [Use arrows to move, type to filter]
 > code-city                  Code City metaphor for visualizing Go source code in 3D.
   deployment-multi-stack     A minimal kusion project of multi stacks
-  deployment-single-stack    A minimal kusion project of single stack
+  single-stack-sample    A minimal kusion project of single stack
 ```
 
 选择 `code-city` 并按 `Enter` 。 之后，我们将看到下面的提示，并使用默认值来配置这个项目和 Stack。

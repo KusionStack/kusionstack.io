@@ -12,8 +12,8 @@ Lifecycle describes actions that the management system should take in response<b
 |**postStart**<br />The action to be taken after a container is created.<br />More info: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/\#container-hooks|[probe.Exec](../probe/doc_probe#schema-exec) \| [probe.Http](../probe/doc_probe#schema-http)|Undefined|optional|
 ### Examples
 ```python
-import models.schema.v1.workload.container.probe as p
-import models.schema.v1.workload.container.lifecycle as lc
+import catalog.models.schema.v1.workload.container.probe as p
+import catalog.models.schema.v1.workload.container.lifecycle as lc
 
 lifecycleHook = lc.Lifecycle {
     preStop: p.Exec {
