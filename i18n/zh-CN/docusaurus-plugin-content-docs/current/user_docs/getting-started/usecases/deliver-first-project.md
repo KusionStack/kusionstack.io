@@ -62,7 +62,7 @@ cd code-city && tree
 ```
 
 :::info
- 更多关于目录结构的细节请参见 [Konfig](/docs/user_docs/concepts/konfig).
+ 更多关于目录结构的细节请参见 [Konfig](/docs/user_docs/concepts/glossary).
 :::
 
 ### 查看配置文件

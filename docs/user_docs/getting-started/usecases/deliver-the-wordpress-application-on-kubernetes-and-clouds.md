@@ -86,7 +86,7 @@ cd appops/wordpress && tree
 ```
 
 :::info
-More details about the directory structure can be found in [Konfig](/docs/user_docs/concepts/konfig)
+More details about the directory structure can be found in [Konfig](/docs/user_docs/concepts/glossary)
 :::
 
 ### Config Codes

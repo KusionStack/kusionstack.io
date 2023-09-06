@@ -85,7 +85,7 @@ cd appops/wordpress && tree
 ```
 
 :::info
-关于 Konfig 项目目录结构的更多详细信息，请查看 [Konfig 基本概念](/docs/user_docs/concepts/konfig)。
+关于 Konfig 项目目录结构的更多详细信息，请查看 [Konfig 基本概念](/docs/user_docs/concepts/glossary)。
 :::
 
 ### 配置代码

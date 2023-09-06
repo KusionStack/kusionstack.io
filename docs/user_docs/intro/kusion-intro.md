@@ -106,4 +106,4 @@ You can check out the release versions of [Kusion](https://github.com/KusionStac
 ## Next step
 
 + [Installation](/docs/user_docs/getting-started/install)
-+ Learn about [core concepts](/docs/user_docs/concepts/konfig) and [technical architecture](/docs/user_docs/concepts/arch)
++ Learn about [core concepts](/docs/user_docs/concepts/glossary) and [technical architecture](/docs/user_docs/concepts/arch)

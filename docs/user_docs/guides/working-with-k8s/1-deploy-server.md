@@ -79,7 +79,7 @@ Now, we have successfully initialized a KCL project `deployment-single-stack`, w
 
 :::info
 
-See [Project&Stack](/user_docs/concepts/konfig.md) for more details about Project and Stack.
+See [Project&Stack](/user_docs/concepts/glossary.md) for more details about Project and Stack.
 :::
 
 The directory structure is as follows:

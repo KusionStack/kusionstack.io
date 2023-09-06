@@ -103,4 +103,4 @@ KusionStack 处于开源早期。我们将继续专注于提供更好、更可�
 ## 下一步
 
 + [安装指南](/docs/user_docs/getting-started/install)
-+ 了解[核心概念](/docs/user_docs/concepts/konfig)和[技术架构](/docs/user_docs/concepts/arch)
++ 了解[核心概念](/docs/user_docs/concepts/glossary)和[技术架构](/docs/user_docs/concepts/arch)
