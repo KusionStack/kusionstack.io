@@ -2,15 +2,49 @@
 id: overview
 sidebar_label: Overview
 ---
-# Kusion Model Overview
+# 总览
 
-**Kusion 模型库**也叫做 `Kusion Model`，是 KusionStack 中预置的、使用 KCL 描述的配置模型，它提供给用户开箱即用、高度抽象的配置界面，模型库最初朴素的出发点就是改善 YAML 用户的效率和体验，我们希望通过将代码更繁杂的模型抽象封装到统一的模型中，从而简化用户侧配置代码的编写。
+KusionStack 预置了使用 KCL 描述的应用配置模型，这些模型被称为 **Kusion 模型**，而用于存储这些模型的仓库是 [KusionStack/catalog](https://github.com/KusionStack/catalog)，又被称为 **Kusion 模型库**。
 
-⚡️ **Kusion 模型库**由以下部分组成：
+Kusion 模型设计的初衷是提升和改善 YAML 用户的效率和体验。通过代码将繁杂的配置项抽象、封装到统一的模型中，省略重复的、可推导的配置，暴露必要的属性，并辅以必要的校验逻辑；提供给用户开箱即用、易于理解的配置界面，降低用户配置的难度，提高配置的可靠性。
 
-- **核心模型库**：
-  - **前端模型**：前端模型即「用户界面」，包含平台侧暴露给用户的所有可配置属性，其中省略了一些重复的、可推导的配置，抽象出必要属性暴露给用户，具有用户友好的特性，比如 `server.k`。
-  - **后端模型**：后端模型是「模型实现」，是让前端模型属性生效的模型，主要包含前端模型实例的渲染逻辑，后端模型中可借助 KCL 编写校验、逻辑判断、代码片段复用等代码，提高配置代码复用性和健壮性，对用户不感知，比如 `server_backend.k`
-- **底层模型**：是不包含任何实现逻辑和抽象的模型，往往由工具转换生成，无需修改，和真正生效的 YAML 属性一一对应，底层模型需要经过进一步抽象，一般不直接被用户使用。比如，`kusion_kubernetes` 是 Kubernetes 场景的底层模型库；
+Kusion 模型库目前提供了 AppConfiguration 这一 Kusion 模型。AppConfiguration 模型的设计以开发者为中心，基于蚂蚁集团数十年搭建、管理超大规模 IDP（内部开发者平台）的经验，并结合社区最佳实践；对应用的全生命周期进行了描述。
 
-![](/img/docs/reference/model/kusion-model-01.png)
+使用 AppConfiguration 描述应用配置的一个简单示例如下：
+
+```bash
+wordpress: ac.AppConfiguration {
+    workload: wl.Service {
+        containers: {
+            "wordpress": c.Container {
+                image: "wordpress:latest"
+                env: {
+                    "WORDPRESS_DB_HOST": "secret://wordpress-db/hostAddress"
+                    "WORDPRESS_DB_PASSWORD": "secret://wordpress-db/password"
+                }
+                resources: {
+                    "cpu": "1"
+                    "memory": "2Gi"
+                }
+            }
+        }
+        replicas: 2
+        ports: [
+            n.Port {
+                port: 80
+                public: True
+            }
+        ]
+    }
+    
+    database: db.Database {
+        type: "alicloud"
+        engine: "MySQL"
+        version: "5.7"
+        size: 20
+        instanceType: "mysql.n2.serverless.1c"
+        category: "serverless_basic"
+    }
+}
+
+```
