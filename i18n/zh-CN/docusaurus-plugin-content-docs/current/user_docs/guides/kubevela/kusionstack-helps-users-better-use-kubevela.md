@@ -134,7 +134,7 @@ cd appops/wordpress-kubevela && tree
 ```
 
 :::info
-关于 konfig 项目目录结构的更多详细信息，请查看 [Konfig](/docs/user_docs/concepts/konfig) 基本概念
+关于 konfig 项目目录结构的更多详细信息，请查看 [Konfig](/docs/user_docs/concepts/glossary) 基本概念
 :::
 
 #### 配置代码

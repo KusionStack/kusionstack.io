@@ -66,7 +66,7 @@ Created project 'deployment-single-stack'
 剩余三个字段，是模板中需要用户填入的三个属性，`Stack` 表示配置栈的名称，可以理解为配置的隔离标识；
 `ClusterName` 是指集群名称，在本例中暂未使用；`Image` 表示应用的业务容器的镜像地址。
 
-> 有关 Project 和 Stack 的设计说明，请参阅 [Project&Stack](/user_docs/concepts/konfig.md)。
+> 有关 Project 和 Stack 的设计说明，请参阅 [Project&Stack](/user_docs/concepts/glossary.md)。
 
 该项目的目录结构如下：
 

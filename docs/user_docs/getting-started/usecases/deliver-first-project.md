@@ -63,7 +63,7 @@ cd code-city && tree
 
 :::info
  More details about the directory structure can be found in 
-[Konfig](/docs/user_docs/concepts/konfig).
+[Konfig](/docs/user_docs/concepts/glossary).
 :::
 
 ### Review Config Files
