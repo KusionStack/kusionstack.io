@@ -314,5 +314,13 @@
   "sidebar.reference.category.volume": {
     "message": "volume",
     "description": "The label for category volume in sidebar reference"
+  },
+  "sidebar.reference.category.Kusion Model Library": {
+    "message": "Kusion 模型库",
+    "description": "The label for category Kusion Model Library in sidebar reference"
+  },
+  "sidebar.reference.category.Command Line Tools": {
+    "message": "命令行工具",
+    "description": "The label for category Command Line Tools in sidebar reference"
   }
 }

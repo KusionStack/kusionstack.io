@@ -2,15 +2,15 @@
 id: overview
 sidebar_label: Overview
 ---
-# 总览
+# Overview
 
-KusionStack 预置了使用 KCL 描述的应用配置模型，这些模型被称为 **Kusion 模型**，而用于存储这些模型的仓库是 [KusionStack/catalog](https://github.com/KusionStack/catalog)，又被称为 **Kusion 模型库**。
+KusionStack presets application configuration models described by KCL, where the model is called **Kusion Model**. The GitHub repository [KusionStack/catalog](https://github.com/KusionStack/catalog) is used to store these models, which is known as **Kusion Model Library**.
 
-Kusion 模型设计的初衷是提升和改善 YAML 用户的效率和体验。通过代码将繁杂的配置项抽象、封装到统一的模型中，省略重复的、可推导的配置，暴露必要的属性，并辅以必要的校验逻辑；提供给用户开箱即用、易于理解的配置界面，降低用户配置的难度，提高配置的可靠性。
+The original intention of designing Kusion Model is to enhance the efficiency and improve the experience of YAML users. Through the unified application model defined by code, abstract and encapsulate complex configuration items, omit repetitive and derivable configurations, and supplement with necessary verification logic. Only the necessary attributes get exposed, users get an out-of-the-box, easy-to-understand configuration interface, which reduces the difficulty and improves the reliability of the configuration work.
 
-Kusion 模型库目前提供了 AppConfiguration 这一 Kusion 模型。AppConfiguration 模型的设计以开发者为中心，基于蚂蚁集团数十年搭建、管理超大规模 IDP（内部开发者平台）的经验，并结合社区最佳实践；对应用的全生命周期进行了描述。
+Kusion Model Library currently provides the Kusion Model `AppConfiguration`. The design of `AppConfiguration` is developer-centric, based on Ant Group's decades of practice in building and managing hyperscale IDP (Internal Developer Platform), and the best practice of community. `AppConfiguration` describes the full lifecycle of an application.
 
-使用 AppConfiguration 描述应用配置的一个简单示例如下：
+A simple example of using `AppConfiguration` to describe an application is as follows:
 
 ```bash
 wordpress: ac.AppConfiguration {
@@ -46,5 +46,4 @@ wordpress: ac.AppConfiguration {
         category: "serverless_basic"
     }
 }
-
 ```
