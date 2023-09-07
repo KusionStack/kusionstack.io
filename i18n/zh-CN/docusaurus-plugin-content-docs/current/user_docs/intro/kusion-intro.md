@@ -14,7 +14,7 @@ KusionStack 是一个开源的、以应用为中心的可编程交付及运维�
 
 基于 **Platform as Code （平台服务即代码）**理念，研发者可以用统一的组织和操作界面定义应用交付生命周期，充分利用Kubernetes和云的混合能力，通过**端到端的交付工作流程**，真正实现**集中定义、随处交付**。
 
-![](https://raw.githubusercontent.com/KusionStack/kusion/main/docs/arch.png)
+![](https://raw.githubusercontent.com/KusionStack/kusion/main/docs/workflow.png)
 
 ## KusionStack 可以做什么？
 

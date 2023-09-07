@@ -3,13 +3,12 @@ sidebar_position: 1
 ---
 
 # Architecture
-![](https://raw.githubusercontent.com/KusionStack/kusion/main/docs/arch.png)
+![](https://raw.githubusercontent.com/KusionStack/kusion/main/docs/workflow.png)
 
 
-KusionStack includes three core components:
+KusionStack includes two core components:
 
-- [KCL](https://github.com/KusionStack/KCLVM): A constraint-based record & functional language used in configuration and policy scenarios.
-- [Konfig](https://github.com/KusionStack/konfig): A mono-codespace for programmable app configuration and shared schemas.
-- [Kusion](https://github.com/KusionStack/kusion): The engine to deliver intentions to clouds.
-  
+- [Kusion](https://github.com/KusionStack/kusion): The engine to deliver intentions to Kubernetes and Clouds
+- [Catalog](https://github.com/KusionStack/catalog): Catalog of shared Kusion Models and Generators.
+
 The image above illustrates the workflow of KusionStack and how it works. In the next section, we will describe each of these components in detail.
