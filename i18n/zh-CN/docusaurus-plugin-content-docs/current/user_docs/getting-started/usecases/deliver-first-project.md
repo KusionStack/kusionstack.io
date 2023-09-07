@@ -4,22 +4,24 @@ sidebar_position: 1
 
 # 在 Kubernetes 上交付你的第一个项目
 
-本教程将演示如何只使用一个 Kusion 命令在 Kubernetes 上交付您的第一个项目（带有负载均衡器的应用程序）。
+本教程将演示如何只使用一个 Kusion 命令在 Kubernetes 上交付您的第一个单应用，单Stack的项目。
 
 ## 前置条件
 
-- [Kusion](/docs/user_docs/getting-started/install)
-- [Kubernetes](https://kubernetes.io/) 或者 [Kind](https://kind.sigs.k8s.io/)
+在开始之前，我们需要做以下准备工作：
+
+1、安装 Kusion 工具链
+
+我们推荐使用 HomeBrew(Mac)，Scoop(Windows)，或者安装脚本安装Kusion。详情信息请参阅[下载和安装](/docs/user_docs/getting-started/install)。
+
+2、可用的 Kubernetes 集群
+
+必须要有一个 Kubernetes 集群，同时 Kubernetes 集群最好带有 [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) 命令行工具。
+如果您还没有集群，您可以通过 [Minikube](https://minikube.sigs.k8s.io/docs/tutorials/multi_node/) 构建一个您自己的集群。
 
 ## 初始化项目
 
-首先，让我们克隆 Konfig 仓库并进入根目录：
-
-```shell
-git clone git@github.com:KusionStack/konfig.git && cd konfig
-```
-
-在这一步之后，我们可以使用在线模板初始化这个教程项目
+我们可以使用在线模板初始化这个教程项目
 
 ```shell
 kusion init --online
@@ -28,16 +30,17 @@ kusion init --online
 所有初始化模板如下：
 
 ```shell
-➜  konfig git:(main) ✗ kusion init --online
+~/playground$ kusion init --online
 ? Please choose a template:  [Use arrows to move, type to filter]
 > code-city                  Code City metaphor for visualizing Go source code in 3D.
-  deployment-multi-stack     A minimal kusion project of multi stacks
-  single-stack-sample    A minimal kusion project of single stack
+  deployment-multi-stack     A minimal kusion project of multiple stacks
+  deployment-single-stack    A minimal kusion project of single stack
+  wordpress                  A sample wordpress project
 ```
 
 选择 `code-city` 并按 `Enter` 。 之后，我们将看到下面的提示，并使用默认值来配置这个项目和 Stack。
 
-![](/img/docs/user_docs/getting-started/choose-template.gif)
+![](/img/docs/user_docs/getting-started/init-gocity.gif)
 
 在此过程之后，我们可以使用此命令获取整个文件层次结构：
 
@@ -46,47 +49,62 @@ cd code-city && tree
 ```
 
 ```shell
-➜  konfig git:(main) ✗ cd code-city && tree
-.
-├── base
-│   └── base.k
+~/playground$ tree code-city/
+code-city/
 ├── dev
-│   ├── ci-test
-│   │   └── settings.yaml
-│   ├── kcl.yaml
+│   ├── kcl.mod
+│   ├── kcl.mod.lock
 │   ├── main.k
 │   └── stack.yaml
 └── project.yaml
 
-3 directories, 6 files
+2 directories, 5 files
 ```
 
 :::info
- 更多关于目录结构的细节请参见 [Konfig](/docs/user_docs/concepts/glossary).
+更多关于目录结构的细节请参见 [Concepts](/docs/user_docs/concepts/glossary).
 :::
 
 ### 查看配置文件
 
+我们来看一下`code-city/dev/main.k`下的配置文件：
 ```python
-# main.k
-import base.pkg.kusion_models.kube.frontend
+import catalog.models.schema.v1 as ac
+import catalog.models.schema.v1.workload as wl
+import catalog.models.schema.v1.workload.network as n
+import catalog.models.schema.v1.workload.container as c
 
-# 堆栈中的应用程序配置将被覆盖 base 中具有相同属性的配置。
-appConfiguration: frontend.Server {
-    image = "howieyuen/gocity:latest"
+gocity: ac.AppConfiguration {
+    workload: wl.Service {
+        containers: {
+            "gocity": c.Container {
+                image = "howieyuen/gocity:latest"
+                resources: {
+                    "cpu": "500m"
+                    "memory": "512Mi"
+                }
+            }
+        }
+        replicas: 1
+        ports: [
+            n.Port {
+                port: 4000
+            }
+        ]
+    }
 }
 ```
 
-`main.k` 只包含 4 行。 第 1 行导入一个包含模型 `Server` 的 包，它是一个抽象模型，表示我们稍后将交付的应用程序。这种模型隐藏了 Kubernetes `Deployment` 和 `Service` 的复杂性，只需要一个字段 `image` 就可以让这个 App 准备好被使用。
+`main.k` 配置文件包含了一个名为`gocity` 的 `AppConfiguration` 实例。它代表了一个应用，这个应用有一个`wl.Service`类型的工作负载，工作负载有一个副本，并且对外暴露4000端口。这份配置屏蔽了复杂的 Kubernetes 基础设施细节，比如 `Namespace`, `Deployment` 和 `Service` 等，只对外暴露以应用为中心和与基础设施无关的概念。
 
 :::info
-更多关于 Konfig 模型的详细信息请参见 [Konfig](https://github.com/KusionStack/konfig)
+更多关于模型的详细信息请参见 [Catalog](https://github.com/KusionStack/catalog)
 :::
 
 ## 交付
 
 ```shell
-cd dev && kusion apply --watch
+cd code-city/dev && kusion apply --watch
 ```
 
 转到 `dev` 文件夹，我们将使用 `kusion apply --watch` 命令将此应用程序交付到 Kubernetes 集群中
@@ -96,25 +114,25 @@ cd dev && kusion apply --watch
 检查 `Deploy` 状态
 
 ```shell
-kubectl -ncode-city get deploy
+kubectl -n gocity get deploy
 ```
 
 预期输出如下所示：
 
 ```shell
-➜  dev git:(main) ✗ kubectl -ncode-city get deploy
-NAME           READY   UP-TO-DATE   AVAILABLE   AGE
-code-citydev   1/1     1            1           1m
+~/playground/code-city/dev$ kubectl -n gocity get deploy
+NAME                READY   UP-TO-DATE   AVAILABLE   AGE
+gocity-dev-gocity   1/1     1            1           3m37s
 ```
 
 使用 `service` 转发该应用程序
 
 ```shell
-kubectl port-forward -ncode-city svc/gocity 4000:4000
+kubectl port-forward -n gocity svc/gocity-dev-gocity-private 4000:4000
 ```
 
 ```shell
-➜  dev git:(main) ✗ kubectl port-forward -ncode-city svc/gocity 4000:4000
+~/playground/code-city/dev$ kubectl port-forward -n gocity svc/gocity-dev-gocity-private 4000:4000
 Forwarding from 127.0.0.1:4000 -> 4000
 Forwarding from [::1]:4000 -> 4000
 ```
