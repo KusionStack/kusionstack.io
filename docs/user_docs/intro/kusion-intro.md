@@ -51,7 +51,7 @@ In addition to the general advantages of as-code solutions, KusionStack hopes to
 KusionStack consists of a series of tools and products. Among them, Kusion turns blueprints into reality with powerful engines and orchestration capabilities, and Konfig holds app delivery models and components. You can choose to use one of them or use them in combination.
 
 + [Kusion](https://github.com/KusionStack/kusion): Operation engine, toolchains, service, IDE workspace
-+ [Konfig](https://github.com/KusionStack/konfig): Shared repository of application models and components, and CI suite for GitOps workflows (such as GitHub Actions suite)
++ [catalog](https://github.com/KusionStack/cata): Catalog of shared Kusion Models and Generators
 
 ## KusionStack vs. X
 
@@ -65,12 +65,6 @@ Terraform is a programmable operation product widely used in cloud resource deli
 
 In contrast, KusionStack attempts to help developers work with an abstract app delivery model and also makes it easier for different roles to collaborate to build and manage the abstraction. KusionStack natively supports scalability, automation, and high performance for enterprise-level requirements. KusionStack works in a Kubernetes-first way and leverages Terraform to manage non-Kubernetes resources.
 
-**vs. Pulumi**
-
-Pulumi is a programmable technology stack that combines a GPL(general purpose language) SDK and the Terraform technology framework. In terms of programming capabilities, Pulumi provides well-designed multi-GPL client SDKs and fully builds a Terraform-like engine and Provider framework.
-
-KusionStack tries to provide a coding method with low noise, low side effects, limited functions, and easy automation and governance, while GPL is overkill and difficult to automate and govern uniformly. In addition, Pulumi helps users write a client-side runtime to access the server, while KusionStack allows users to write runtime-independent config, constraints, and policies, thereby bringing better left-shift stability. From a technical point of view, KusionStack works in a Kubernetes-first way and leverages Terraform to manage non-Kubernetes resources.
-
 **vs. CD systems (eg KubeVela, ArgoCD)**
 
 CD systems are usually sourced in some declarative format and complete automated delivery and configuration drift reconciliation through Pull, Push, or the combination of Pull & Push. The Kusion engine can be regarded as a CD engine implementation in the push mode. If you have adopted a CD system, KusionStack can be integrated with it, such as reconciling Kusion models through ArgoCD or writing codify OAM model and running with KubeVela, etc.
@@ -78,18 +72,6 @@ CD systems are usually sourced in some declarative format and complete automated
 **vs. Helm**
 
 The concept of Helm originates from the package management mechanism of the operating system. It is a package management tool based on templated YAML files and supports the execution and management of resources in the package. KusionStack naturally provides a superset of Helm capabilities with the modeled key-value pairs, so that developers can use KusionStack directly as a programable alternative to avoid the pain of writing text templates. For users who have adopted Helm, the stack compilation results in KusionStack can be packaged and used in Helm format.
-
-**vs. OAM**
-
-OAM is a standard, open-source open application model specification. It is mainly used in the cloud-native CD control plane KubeVela and is implemented by cloud-native technology CRD and operator and supports any custom resource as a payload. KusionStack provides an out-of-the-box application model, as well as allows developers to define different app delivery models according to their preferences. KusionStack could also act as a means of implementing the OAM model on the client side as well as be used in combination with KubeVela.
-
-**vs. CrossPlane**
-
-CrossPlane is an open-source cloud-native control plane framework, with its XRM model based on the KRM model, that redefines, reconciles, and manages imperative cloud APIs, fully leveraging the advantages of Kubernetes API extension. KusionStack adopts a lightweight client-side approach to build a unified app delivery model, natively providing better scalability and manageability. KusionStack does not require CRDs and operators installation on the Kubernetes API server which reduces the pressure on the Kubernetes API side in large-scale scenarios. Since KusionStack natively supports full usage of the Kubernetes API server capabilities, it can be used in combination seamlessly with CrossPlane.
-
-**vs. Kubernetes**
-
-Kubernetes is a container scheduling and management runtime widely used around the world, an "operating system" core for containers, and a platform for building platforms. Above the Kubernetes API layer, KusionStack aims to provide app-centric **abstraction** and unified **workspace**, better **user experience** and automation **workflow**, and helps developers build the app delivery model easily and collaboratively.
 
 **vs. App PaaS**
 
