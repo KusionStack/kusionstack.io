@@ -304,7 +304,7 @@
     "description": "The label for category OpenAPI 工具 in sidebar reference"
   },
   "sidebar.reference.category.Kusion 模型库": {
-    "message": "Kusion Model",
+    "message": "Kusion Model Library",
     "description": "The label for category Kusion 模型库 in sidebar reference"
   },
   "sidebar.reference.category.核心模型库": {

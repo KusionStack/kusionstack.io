@@ -2,15 +2,48 @@
 id: overview
 sidebar_label: Overview
 ---
-# Kusion Model Overview
+# Overview
 
-**Kusion 模型库**也叫做 `Kusion Model`，是 KusionStack 中预置的、使用 KCL 描述的配置模型，它提供给用户开箱即用、高度抽象的配置界面，模型库最初朴素的出发点就是改善 YAML 用户的效率和体验，我们希望通过将代码更繁杂的模型抽象封装到统一的模型中，从而简化用户侧配置代码的编写。
+KusionStack presets application configuration models described by KCL, where the model is called **Kusion Model**. The GitHub repository [KusionStack/catalog](https://github.com/KusionStack/catalog) is used to store these models, which is known as **Kusion Model Library**.
 
-⚡️ **Kusion 模型库**由以下部分组成：
+The original intention of designing Kusion Model is to enhance the efficiency and improve the experience of YAML users. Through the unified application model defined by code, abstract and encapsulate complex configuration items, omit repetitive and derivable configurations, and supplement with necessary verification logic. Only the necessary attributes get exposed, users get an out-of-the-box, easy-to-understand configuration interface, which reduces the difficulty and improves the reliability of the configuration work.
 
-- **核心模型库**：
-  - **前端模型**：前端模型即「用户界面」，包含平台侧暴露给用户的所有可配置属性，其中省略了一些重复的、可推导的配置，抽象出必要属性暴露给用户，具有用户友好的特性，比如 `server.k`。
-  - **后端模型**：后端模型是「模型实现」，是让前端模型属性生效的模型，主要包含前端模型实例的渲染逻辑，后端模型中可借助 KCL 编写校验、逻辑判断、代码片段复用等代码，提高配置代码复用性和健壮性，对用户不感知，比如 `server_backend.k`
-- **底层模型**：是不包含任何实现逻辑和抽象的模型，往往由工具转换生成，无需修改，和真正生效的 YAML 属性一一对应，底层模型需要经过进一步抽象，一般不直接被用户使用。比如，`kusion_kubernetes` 是 Kubernetes 场景的底层模型库；
+Kusion Model Library currently provides the Kusion Model `AppConfiguration`. The design of `AppConfiguration` is developer-centric, based on Ant Group's decades of practice in building and managing hyperscale IDP (Internal Developer Platform), and the best practice of community. `AppConfiguration` describes the full lifecycle of an application.
 
-![](/img/docs/reference/model/kusion-model-01.png)
+A simple example of using `AppConfiguration` to describe an application is as follows:
+
+```bash
+wordpress: ac.AppConfiguration {
+    workload: wl.Service {
+        containers: {
+            "wordpress": c.Container {
+                image: "wordpress:latest"
+                env: {
+                    "WORDPRESS_DB_HOST": "secret://wordpress-db/hostAddress"
+                    "WORDPRESS_DB_PASSWORD": "secret://wordpress-db/password"
+                }
+                resources: {
+                    "cpu": "1"
+                    "memory": "2Gi"
+                }
+            }
+        }
+        replicas: 2
+        ports: [
+            n.Port {
+                port: 80
+                public: True
+            }
+        ]
+    }
+    
+    database: db.Database {
+        type: "alicloud"
+        engine: "MySQL"
+        version: "5.7"
+        size: 20
+        instanceType: "mysql.n2.serverless.1c"
+        category: "serverless_basic"
+    }
+}
+```
