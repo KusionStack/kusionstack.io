@@ -51,7 +51,7 @@ In addition to the general advantages of as-code solutions, KusionStack hopes to
 KusionStack consists of a series of tools and products. Among them, Kusion turns blueprints into reality with powerful engines and orchestration capabilities, and Konfig holds app delivery models and components. You can choose to use one of them or use them in combination.
 
 + [Kusion](https://github.com/KusionStack/kusion): Operation engine, toolchains, service, IDE workspace
-+ [catalog](https://github.com/KusionStack/cata): Catalog of shared Kusion Models and Generators
++ [Catalog](https://github.com/KusionStack/cata): Catalog of shared Kusion Models and Generators
 
 ## KusionStack vs. X
 

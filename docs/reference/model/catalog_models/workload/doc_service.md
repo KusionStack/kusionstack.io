@@ -22,7 +22,7 @@ Service is a kind of workload profile that describes how to run your application
 |--------------------|----|-------------|--------|
 |**containers**<br />Containers defines the templates of containers to be ran.<br />More info: https://kubernetes.io/docs/concepts/containers|{str: [container.Container](#schema-container)}|Undefined|**required**|
 |**replicas**<br />Number of container replicas based on this configuration that should be ran.|int|2|**required**|
-|**ports**<br />The list of ports of the Service should get exposed.|[[network.Port](#schema-port)]|Undefined|**required**|
+|**ports**<br />The list of ports of the Service should get exposed.|[[network.Port](#schema-port)]|Undefined|optional|
 |**secrets**|{str: [secret.Secret](#schema-secret)}|Undefined|optional|
 |**labels**<br />Labels are key/value pairs that are attached to the workload.|{str: str}|Undefined|optional|
 |**annotations**<br />Annotations are key/value pairs that attach arbitrary non-identifying metadata to the workload.|{str: str}|Undefined|optional|

@@ -52,7 +52,7 @@ KusionStack 是一个开源的、以应用为中心的可编程交付及运维�
 KusionStack 由一系列工具和产品组成。其中，Kusion 提供了强大的引擎和编排功能，Konfig 拥有应用程序交付模型和组件。您可以选择使用其中一种，也可以将它们组合使用。
 
 + [Kusion](https://github.com/KusionStack/kusion)：运维引擎、工具链、服务层，IDE 工作空间及社区技术集成套件
-+ [catalog](https://github.com/KusionStack/catalog)：Kusion 基础模型及配套的 Generator 仓库
++ [Catalog](https://github.com/KusionStack/Catalog)：Kusion 基础模型及配套的 Generator 仓库
 
 ## KusionStack vs. X
 
