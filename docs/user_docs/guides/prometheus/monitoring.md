@@ -1,4 +1,4 @@
-# Configure Monitoring Behavior
+# Configure Monitoring Behavior With Prometheus
 
 This document provides the step-by-step instruction to set up monitoring for your application. 
 
@@ -21,9 +21,9 @@ If you are not familiar with the relevant concepts, please refer to the links be
 :::
 
 ## Pre-requisite
-Please refer to the [prerequisites](1-deploy-application.md#prerequisites) in the guide for deploying an application.
+Please refer to the [prerequisites](../working-with-k8s/1-deploy-application.md#prerequisites) in the guide for deploying an application.
 
-The example below also requires you to have [initialized the project](1-deploy-application.md#initializing) using the `kusion init` command, which will generate a [`kcl.mod` file](1-deploy-application.md#kclmod) under the project directory.
+The example below also requires you to have [initialized the project](../working-with-k8s/1-deploy-application.md#initializing) using the `kusion init` command, which will generate a [`kcl.mod` file](../working-with-k8s/1-deploy-application.md#kclmod) under the project directory.
 
 ## Setting up your own Prometheus
 
@@ -117,7 +117,8 @@ You can adjust the requests and limits accordingly if you have a larger cluster.
 
 ### Exposing the Prometheus portal (optional)
 Once you have the managed Prometheus instance created via the Prometheus CR above, you should be able to see a service created called `prometheus-operated`:
-![prometheus-operated](../../../../static/img/docs/user_docs/guides/working-with-k8s/prometheus-operated.png)
+
+![prometheus-operated](../../../../static/img/docs/user_docs/guides/prometheus/prometheus-operated.png)
 
 If you are also running on minikube, you can expose it onto your localhost via kubectl:
 ```
@@ -125,7 +126,8 @@ kubectl port-forward svc/prometheus-operated 9099:9090
 ``` 
 
 You should then be able to see the Prometheus portal via `localhost:9099` in your browser:
-![prometheus-portal](../../../../static/img/docs/user_docs/guides/working-with-k8s/prometheus-portal.png)
+
+![prometheus-portal](../../../../static/img/docs/user_docs/guides/prometheus/prometheus-portal.png)
 
 If you are running a non-local cluster, you can try to expose it via another way, through an ingress controller for example.
 
@@ -170,19 +172,19 @@ helloworld: ac.AppConfiguration {
 The KCL file above represents an application with a service type workload, exposing the port 8080, and would like Prometheus to scrape the `/metrics` endpoint every 30 seconds.
 
 Running `kusion apply` would show that kusion will create a `Namespace`, a `Deployment`, a `Service` and a `ServiceMonitor`:
-![kusion-apply-with-monitor](../../../../static/img/docs/user_docs/guides/working-with-k8s/kusion-apply-with-monitor.png)
+![kusion-apply-with-monitor](../../../../static/img/docs/user_docs/guides/prometheus/kusion-apply-with-monitor.png)
 
 Continue applying all resources:
-![kusion-apply-success](../../../../static/img/docs/user_docs/guides/working-with-k8s/kusion-apply-success.png)
+![kusion-apply-success](../../../../static/img/docs/user_docs/guides/prometheus/kusion-apply-success.png)
 
 If we want to, we can verify the service monitor has been created successfully:
-![service-monitor](../../../../static/img/docs/user_docs/guides/working-with-k8s/service-monitor.png)
+![service-monitor](../../../../static/img/docs/user_docs/guides/prometheus/service-monitor.png)
 
 In a few seconds, you should be able to see in the Prometheus portal that the service we just deployed has now been discovered and monitored by Prometheus:
-![prometheus-targets](../../../../static/img/docs/user_docs/guides/working-with-k8s/prometheus-targets.png)
+![prometheus-targets](../../../../static/img/docs/user_docs/guides/prometheus/prometheus-targets.png)
 
 You can run a few simply queries for the data that Prometheus scraped from your application:
-![prometheus-simple-query](../../../../static/img/docs/user_docs/guides/working-with-k8s/prometheus-simple-query.png)
+![prometheus-simple-query](../../../../static/img/docs/user_docs/guides/prometheus/prometheus-simple-query.png)
 
 For more info about PromQL, you can find them [here](https://prometheus.io/docs/prometheus/latest/querying/basics/)<sup>[4]</sup>.
 

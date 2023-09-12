@@ -1,4 +1,4 @@
-# 配置监控
+# 使用 Prometheus 配置监控
 
 本篇指南向您展示，如何使用 Kusion命令行工具，管理基于 Prometheus 的应用监控配置。未来我们会添加更多与云服务商整合的监控方案，包括 AWS CloudWatch， Azure Monitor等。
 
@@ -18,9 +18,9 @@
 
 ## 1. 准备工作
 
-可参考：[部署应用服务/准备工作](./1-deploy-application.md#1-准备工作)
+可参考：[部署应用服务/准备工作](../working-with-k8s/1-deploy-application.md#1-准备工作)
 
-下文中案例需要您已经正确使用`kusion init`[初始化项目](1-deploy-application.md#2-初始化)。初始化会自动生成一个`kcl.mod`文件位于当前的配置栈(Stack)下。
+下文中案例需要您已经正确使用`kusion init`[初始化项目](../working-with-k8s/1-deploy-application.md#2-初始化)。初始化会自动生成一个`kcl.mod`文件位于当前的配置栈(Stack)下。
 
 ## 2. 准备 Prometheus 服务
 
@@ -116,7 +116,7 @@ spec:
 
 ### 暴露 Prometheus 界面 (可选)
 当以上 Prometheus 实例被创建后，您应该可以看见一个名为`prometheus-operated`的服务被创建出来：
-![prometheus-operated](../../../../../../../static/img/docs/user_docs/guides/working-with-k8s/prometheus-operated.png)
+![prometheus-operated](../../../../../../../static/img/docs/user_docs/guides/prometheus/prometheus-operated.png)
 
 在minikube上, 您可以通过`kubectl`端口转发从本地访问这个 Prometheus 界面:
 ```
@@ -124,7 +124,7 @@ kubectl port-forward svc/prometheus-operated 9099:9090
 ``` 
 
 您应当可以通过浏览器访问`localhost:9099`来访问 Prometheus 界面：
-![prometheus-portal](../../../../../../../static/img/docs/user_docs/guides/working-with-k8s/prometheus-portal.png)
+![prometheus-portal](../../../../../../../static/img/docs/user_docs/guides/prometheus/prometheus-portal.png)
 
 如果不在minikube上运行，您可以通过别的方式暴露 Prometheus 的界面，比如通过 Ingress Controller。
 
@@ -169,19 +169,19 @@ helloworld: ac.AppConfiguration {
 以上这份配置包含了一个 Service 类型的工作负载，对外暴露8080的端口，并且希望 Prometheus 每30秒抓取一个`/metrics`接口的监控数据。
 
 执行`kusion apply`会创建一个`Namespace`，一个`Deployment`，一个`Service`和一个`ServiceMonitor`：
-![kusion-apply-with-monitor](../../../../../../../static/img/docs/user_docs/guides/working-with-k8s/kusion-apply-with-monitor.png)
+![kusion-apply-with-monitor](../../../../../../../static/img/docs/user_docs/guides/prometheus/kusion-apply-with-monitor.png)
 
 继续执行`kusion apply`:
-![kusion-apply-success](../../../../../../../static/img/docs/user_docs/guides/working-with-k8s/kusion-apply-success.png)
+![kusion-apply-success](../../../../../../../static/img/docs/user_docs/guides/prometheus/kusion-apply-success.png)
 
 我们可以通过`kubectl`验证`ServiceMonitor`被成功创建:
-![service-monitor](../../../../../../../static/img/docs/user_docs/guides/working-with-k8s/service-monitor.png)
+![service-monitor](../../../../../../../static/img/docs/user_docs/guides/prometheus/service-monitor.png)
 
 几秒中之内，我们可以通过 Prometheus 的前端界面看到我们刚刚部署的服务被 Prometheus 捕捉到并纳入监控了：
-![prometheus-targets](../../../../../../../static/img/docs/user_docs/guides/working-with-k8s/prometheus-targets.png)
+![prometheus-targets](../../../../../../../static/img/docs/user_docs/guides/prometheus/prometheus-targets.png)
 
 您可以通过一些简单的 query 查询 Prometheus 抓取的监控配置：
-![prometheus-simple-query](../../../../../../../static/img/docs/user_docs/guides/working-with-k8s/prometheus-simple-query.png)
+![prometheus-simple-query](../../../../../../../static/img/docs/user_docs/guides/prometheus/prometheus-simple-query.png)
 
 更多关于 PromQL 的信息, 可以在[这里](https://prometheus.io/docs/prometheus/latest/querying/basics/)<sup>[4]</sup> 查看。
 
