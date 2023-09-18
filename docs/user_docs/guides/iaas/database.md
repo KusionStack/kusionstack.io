@@ -3,17 +3,17 @@ import TabItem from '@theme/TabItem';
 
 # Configure Database
 
-You can declare the use of **relational database service** by configuring the `database` accessory in `AppConfiguration`. Kusion will automatically generate the resources needed for your application to use the database based on your configuration code, including random password and services provided by cloud vendors like **AWS** and **Alicloud**. Moreover, Kusion will inject the information of database **host address**, **username** and **password** into the application container as environment variables with Kubernetes Secret. You can access the corresponding database in your application code through the relevant environment variables. The naming conventions of the environment variables are more detailed explained [here](docs/reference/model/naming-conventions.md#sensitive-database-information)
+You can declare the use of **relational database service** by configuring the `database` accessory in `AppConfiguration`. Kusion will automatically generate the resources needed for your application to use the database based on your configuration code, including random password and services provided by cloud vendors like **AWS** and **Alicloud**. Moreover, Kusion will inject the information of database **host address**, **username** and **password** into the application container as environment variables with Kubernetes Secret. You can access the corresponding database in your application code through the relevant environment variables. The naming conventions of the environment variables are more detailed explained [here](/docs/reference/model/naming-conventions.md#sensitive-database-information)
 
 ## Prerequisites
 
-Please refer to the [prerequisites](docs/user_docs/getting-started/usecases/deliver-the-wordpress-application-on-kubernetes-and-clouds.md#prerequisites) in the guide for delivering the WordPress application on Kubernetes and clouds. 
+Please refer to the [prerequisites](/docs/user_docs/getting-started/usecases/deliver-the-wordpress-application-on-kubernetes-and-clouds.md#prerequisites) in the guide for delivering the WordPress application on Kubernetes and clouds. 
 
-The example below also requires you to have [initialized the project](docs/user_docs/getting-started/usecases/deliver-the-wordpress-application-on-kubernetes-and-clouds.md#init-project) using the `kusion init` command, which will generate a [`kcl.mod`](docs/user_docs/guides/working-with-k8s/1-deploy-application.md#kclmod) file under the stack directory. 
+The example below also requires you to have [initialized the project](/docs/user_docs/getting-started/usecases/deliver-the-wordpress-application-on-kubernetes-and-clouds.md#init-project) using the `kusion init` command, which will generate a [`kcl.mod`](/docs/user_docs/guides/working-with-k8s/1-deploy-application.md#kclmod) file under the stack directory. 
 
 ## Example
 
-Below shows you how to configure relational database service for your application provided by AWS or Alicloud. Note that if your application defines its own environment variables for accessing the database, you can export them with `$(KUSION_DB_HOST)`, `$(KUSION_DB_USERNAME)` and `$(KUSION_DB_PASSWORD)`, just like the example shown below. You can find more information about the attributes of database accessory [here](docs/reference/model/catalog_models/database/doc_database.md). 
+Below shows you how to configure relational database service for your application provided by AWS or Alicloud. Note that if your application defines its own environment variables for accessing the database, you can export them with `$(KUSION_DB_HOST)`, `$(KUSION_DB_USERNAME)` and `$(KUSION_DB_PASSWORD)`, just like the example shown below. You can find more information about the attributes of database accessory [here](/docs/reference/model/catalog_models/database/doc_database.md). 
 
 <Tabs>
 <TabItem value="AWS" >

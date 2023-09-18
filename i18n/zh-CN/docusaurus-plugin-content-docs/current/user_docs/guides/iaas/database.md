@@ -3,17 +3,17 @@ import TabItem from '@theme/TabItem';
 
 # 数据库配置
 
-您可以通过配置 `AppConfiguration` 模型中的 `Database` 配件来声明关系型数据库服务 (**Relational Database Service**)。Kusion 将基于您的配置代码自动地为您的应用产生使用数据库所需的资源，包括随机生成的密码和云服务商 (比如 **AWS** 和 **阿里云**) 提供的服务。此外，Kusion 会将数据库的 **连接地址**、**用户名**和**密码**等信息通过挂载 Kubernetes Secret 以环境变量的形式注入进您的应用容器中。您可以在自己的应用代码里使用相关环境变量来访问数据库。数据库相关环境变量的命名规范在[这里](docs/reference/model/naming-conventions.md#sensitive-database-information)有更详细的说明。
+您可以通过配置 `AppConfiguration` 模型中的 `Database` 配件来声明关系型数据库服务 (**Relational Database Service**)。Kusion 将基于您的配置代码自动地为您的应用产生使用数据库所需的资源，包括随机生成的密码和云服务商 (比如 **AWS** 和 **阿里云**) 提供的服务。此外，Kusion 会将数据库的 **连接地址**、**用户名**和**密码**等信息通过挂载 Kubernetes Secret 以环境变量的形式注入进您的应用容器中。您可以在自己的应用代码里使用相关环境变量来访问数据库。数据库相关环境变量的命名规范在[这里](/i18n/zh-CN/docusaurus-plugin-content-docs/current/reference/model/naming-conventions.md#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF)有更详细的说明。
 
 ## 前置条件
 
-请参考在 Kubernetes 和云上部署 WordPress 应用中的[前置条件](docs/user_docs/getting-started/usecases/deliver-the-wordpress-application-on-kubernetes-and-clouds.md#prerequisites)的相关说明。
+请参考在 Kubernetes 和云上部署 WordPress 应用中的[前置条件](/i18n/zh-CN/docusaurus-plugin-content-docs/current/user_docs/getting-started/usecases/deliver-the-wordpress-application-on-kubernetes-and-clouds.md#%E5%89%8D%E7%BD%AE%E6%9D%A1%E4%BB%B6)的相关说明。
 
-下面的参考示例同时还需要您已经使用 `kusion init` 命令[初始化了项目](docs/user_docs/getting-started/usecases/deliver-the-wordpress-application-on-kubernetes-and-clouds.md#init-project)，这将在 Stack 目录下产生一份 [`kcl.mod`](docs/user_docs/guides/working-with-k8s/1-deploy-application.md#kclmod) 文件。
+下面的参考示例同时还需要您已经使用 `kusion init` 命令[初始化了项目](/i18n/zh-CN/docusaurus-plugin-content-docs/current/user_docs/getting-started/usecases/deliver-the-wordpress-application-on-kubernetes-and-clouds.md#%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%B9%E7%9B%AE)，这将在 Stack 目录下产生一份 [`kcl.mod`](/i18n/zh-CN/docusaurus-plugin-content-docs/current/user_docs/guides/working-with-k8s/1-deploy-application.md#kclmod) 文件。
 
 ## 参考示例
 
-下面为您展示了如何为您的应用配置由 AWS 或阿里云提供的关系型数据库服务。注意如果您的应用为访问数据库定义了单独的环境变量，您可以参考下面的示例通过 `$(KUSION_DB_HOST)`、`$(KUSION_DB_USERNAME)` 和 `$(KUSION_DB_PASSWORD)` 进行导入赋值。您可以在[这里](docs/reference/model/catalog_models/database/doc_database.md)找到更多关于数据库的配置项说明。
+下面为您展示了如何为您的应用配置由 AWS 或阿里云提供的关系型数据库服务。注意如果您的应用为访问数据库定义了单独的环境变量，您可以参考下面的示例通过 `$(KUSION_DB_HOST)`、`$(KUSION_DB_USERNAME)` 和 `$(KUSION_DB_PASSWORD)` 进行导入赋值。您可以在[这里](/docs/reference/model/catalog_models/database/doc_database.md)找到更多关于数据库的配置项说明。
 
 <Tabs>
 <TabItem value="AWS" >
