@@ -92,12 +92,12 @@ const config = {
                         sidebarId: 'reference',
                         label: 'Reference',
                     },
-                    {
-                        type: 'docSidebar',
-                        position: 'left',
-                        sidebarId: 'governance',
-                        label: 'Governance',
-                    },
+                    // {
+                    //     type: 'docSidebar',
+                    //     position: 'left',
+                    //     sidebarId: 'governance',
+                    //     label: 'Governance',
+                    // },
 
                     { to: 'https://medium.com/@kusionstack', label: 'Blog', position: 'left' },
 
