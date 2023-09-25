@@ -87,4 +87,4 @@ $ npm run build
 
 ## 7. 更新模型文档
 
-Konfig 中的 [模型文档](/docs/reference/model) 是从 KCL 代码，通过 [docgen](/docs/reference/cli/kcl/docgen) 工具自动提取产生（比如自动生成的 [ConfigMap](/docs/reference/model/kusion_models/kube/frontend/configmap/doc_configmap) 模型文档）。如果希望完善模型文档，首先需要到 [Konfig 代码仓库](https://github.com/KusionStack/konfig) 添加或更新文档，然后重新生成文档（目前还不能自动同步，有兴趣的用户可以尝试 [提供帮助](/docs/governance/contribute/contribute-docs)）。
+Konfig 中的 [模型文档](/docs/user_docs/reference/model) 是从 KCL 代码，通过 [docgen](/docs/user_docs/reference/cli/kcl/docgen) 工具自动提取产生（比如自动生成的 [ConfigMap](/docs/user_docs/reference/model/kusion_models/kube/frontend/configmap/doc_configmap) 模型文档）。如果希望完善模型文档，首先需要到 [Konfig 代码仓库](https://github.com/KusionStack/konfig) 添加或更新文档，然后重新生成文档（目前还不能自动同步，有兴趣的用户可以尝试 [提供帮助](/docs/governance/contribute/contribute-docs)）。

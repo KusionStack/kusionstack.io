@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # Konfig Dir Struct
 
-本文主要解释 Konfig 配置大库的目录和代码结构，其中涉及的基本概念解释可见[《模型概览》](/docs/reference/model/overview)。
+本文主要解释 Konfig 配置大库的目录和代码结构，其中涉及的基本概念解释可见[《模型概览》](/docs/user_docs/reference/model/overview)。
 
 ## 1. 整体结构
 

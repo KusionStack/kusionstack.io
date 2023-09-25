@@ -57,6 +57,6 @@ Konfig 配置大库整体结构如下：
 
 ![](/img/docs/user_docs/getting-started/konfig-arch-01.png)
 
-核心模型内部通过前端模型和后端模型两层抽象简化前端用户的配置代码，底层模型则是通过 [KCL OpenAPI](/docs/reference/cli/openapi) 工具自动生成。
+核心模型内部通过前端模型和后端模型两层抽象简化前端用户的配置代码，底层模型则是通过 [KCL OpenAPI](/docs/user_docs/reference/cli/openapi) 工具自动生成。
 
-模型的更详细文档可参考 [参考手册/Kusion 模型库](/docs/reference/model)。
+模型的更详细文档可参考 [参考手册/Kusion 模型库](/docs/user_docs/reference/model)。

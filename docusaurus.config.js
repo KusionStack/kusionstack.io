@@ -89,8 +89,8 @@ const config = {
                     {
                         type: 'docSidebar',
                         position: 'left',
-                        sidebarId: 'reference',
-                        label: 'Reference',
+                        sidebarId: 'operating',
+                        label: 'Operating',
                     },
                     // {
                     //     type: 'docSidebar',

@@ -2,7 +2,7 @@
 
 You can manage container-level resource specification in the `AppConfiguration` model via the `resources` field (under the `Container` schema).
 
-For the full `Container` schema reference, please see [here](/docs/reference/model/catalog_models/workload/doc_service.md#schema-container) for more details.
+For the full `Container` schema reference, please see [here](/docs/user_docs/reference/model/catalog_models/workload/doc_service.md#schema-container) for more details.
 
 ## Prerequisites
 
