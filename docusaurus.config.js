@@ -92,6 +92,12 @@ const config = {
                         sidebarId: 'operating',
                         label: 'Operating',
                     },
+                    {
+                        type: 'docSidebar',
+                        position: 'left',
+                        sidebarId: 'ctrlmesh',
+                        label: 'Ctrlmesh',
+                    },
                     // {
                     //     type: 'docSidebar',
                     //     position: 'left',
@@ -117,7 +123,7 @@ const config = {
                     //     ],
                     // },
                     {
-                        href: 'https://github.com/KusionStack/kusion',
+                        href: 'https://github.com/KusionStack',
                         className: 'header-github-link',
                         'aria-label': 'GitHub repository',
                         position: 'right',
@@ -131,12 +137,12 @@ const config = {
                         title: 'Document',
                         items: [
                             {
-                                label: 'Introduction',
+                                label: 'Kusion',
                                 to: '/docs/user_docs/intro/kusion-intro',
                             },
                             {
-                                label: 'Get Started',
-                                to: '/docs/user_docs/getting-started',
+                                label: 'ControllerMesh',
+                                to: '/docs/ctrlmesh/intro/',
                             },
                             {
                                 label: 'FAQ',
