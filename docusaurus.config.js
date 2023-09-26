@@ -101,21 +101,21 @@ const config = {
 
                     { to: 'https://medium.com/@kusionstack', label: 'Blog', position: 'left' },
 
-                    //{
+                    // {
                     //  type: 'docsVersionDropdown',
                     //  position: 'right',
                     //  dropdownActiveClassDisabled: true
-                    //},
-                    {
-                        type: 'localeDropdown',
-                        position: 'right',
-                        dropdownItemsAfter: [
-                            {
-                                href: 'https://github.com/KusionStack/kusionstack.io/issues/25',
-                                label: 'Help Us Translate',
-                            },
-                        ],
-                    },
+                    // },
+                    // {
+                    //     type: 'localeDropdown',
+                    //     position: 'right',
+                    //     dropdownItemsAfter: [
+                    //         {
+                    //             href: 'https://github.com/KusionStack/kusionstack.io/issues/25',
+                    //             label: 'Help Us Translate',
+                    //         },
+                    //     ],
+                    // },
                     {
                         href: 'https://github.com/KusionStack/kusion',
                         className: 'header-github-link',
