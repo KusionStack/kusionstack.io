@@ -20,7 +20,7 @@ const config = {
 
     i18n: {
         defaultLocale: 'en',
-        locales: ['en', 'zh-CN'],
+        locales: ['en'],
     },
     scripts: [],
 
@@ -89,33 +89,33 @@ const config = {
                     {
                         type: 'docSidebar',
                         position: 'left',
-                        sidebarId: 'reference',
-                        label: 'Reference',
+                        sidebarId: 'operating',
+                        label: 'Operating',
                     },
-                    {
-                        type: 'docSidebar',
-                        position: 'left',
-                        sidebarId: 'governance',
-                        label: 'Governance',
-                    },
+                    // {
+                    //     type: 'docSidebar',
+                    //     position: 'left',
+                    //     sidebarId: 'governance',
+                    //     label: 'Governance',
+                    // },
 
                     { to: 'https://medium.com/@kusionstack', label: 'Blog', position: 'left' },
 
-                    //{
+                    // {
                     //  type: 'docsVersionDropdown',
                     //  position: 'right',
                     //  dropdownActiveClassDisabled: true
-                    //},
-                    {
-                        type: 'localeDropdown',
-                        position: 'right',
-                        dropdownItemsAfter: [
-                            {
-                                href: 'https://github.com/KusionStack/kusionstack.io/issues/25',
-                                label: 'Help Us Translate',
-                            },
-                        ],
-                    },
+                    // },
+                    // {
+                    //     type: 'localeDropdown',
+                    //     position: 'right',
+                    //     dropdownItemsAfter: [
+                    //         {
+                    //             href: 'https://github.com/KusionStack/kusionstack.io/issues/25',
+                    //             label: 'Help Us Translate',
+                    //         },
+                    //     ],
+                    // },
                     {
                         href: 'https://github.com/KusionStack/kusion',
                         className: 'header-github-link',

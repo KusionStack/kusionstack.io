@@ -4,11 +4,11 @@
     "description": "The title in the navbar"
   },
   "item.label.UserDoc": {
-    "message": "Documentation",
+    "message": "Kusion",
     "description": "Navbar item with label UserDoc"
   },
   "item.label.Reference": {
-    "message": "Reference",
+    "message": "Operating",
     "description": "Navbar item with label Reference"
   },
   "item.label.DevDoc": {

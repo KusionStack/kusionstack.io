@@ -2,7 +2,7 @@
 
 This guide shows you how to use Kusion CLIs to complete the deployment of an application running in Kubernetes.
 We call the abstraction of application operation and maintenance configuration as `AppConfiguration`, and its instance as `Application`.
-It is essentially an configuration model that describes an application. The complete definition can be seen [here](/docs/reference/model/catalog_models/doc_app_configuration.md).
+It is essentially an configuration model that describes an application. The complete definition can be seen [here](/docs/user_docs/reference/model/catalog_models/doc_app_configuration.md).
 
 In production, the application generally includes minimally several k8s resources:
 
@@ -124,7 +124,7 @@ The output of `kusion compile` is the spec format.
 
 :::tip
 
-For instructions on the kusion command line tool, execute `kusion -h`, or refer to the tool's online [documentation](/docs/reference/cli/kusion/index)。
+For instructions on the kusion command line tool, execute `kusion -h`, or refer to the tool's online [documentation](/docs/user_docs/reference/cli/kusion/index)。
 :::
 
 ## Applying

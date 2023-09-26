@@ -73,7 +73,7 @@ The [example](https://github.com/KusionStack/konfig/actions/runs/5132912522/jobs
 
 ### Check Lint Style
 
-For the maintainability and scalability of the Konfig reposiroty, the job [lint](https://github.com/KusionStack/konfig/blob/main/.github/workflows/main.yml#L89) is provided, which performs lint style check for the changed codes. The job lint is based on [kcl lint](https://kusionstack.io/docs/reference/cli/kcl/lint/), which checks import compliance, etc.
+For the maintainability and scalability of the Konfig reposiroty, the job [lint](https://github.com/KusionStack/konfig/blob/main/.github/workflows/main.yml#L89) is provided, which performs lint style check for the changed codes. The job lint is based on [kcl lint](https://kusionstack.io/docs/user_docs/reference/cli/kcl/lint/), which checks import compliance, etc.
 
 Similar to the above jobs, the job lint will also generate a report named `link-report`.
 
