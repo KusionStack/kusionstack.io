@@ -5,13 +5,14 @@ sidebar_position: 4
 # PodTransitionRule
 In normal pod lifecycle,  some phases are defined. For example, K8s Pods follow a defined lifecycle，starting in the `Pending` phase, moving through `Running` if at least one of its primary containers starts `OK`, and then through either the `Succeeded` or `Failed` phases depending on whether any container in the Pod terminated in failure.
 
-These phase definitions can fulfill basic Pod change scenarios, but it are ambiguous. Actually, between `Pending` and `Running`, in scenarios with traffic, there might be a `TrafficOn` phase; before containers stop, there might be a `TrafficOff` phase as well. Fortunately, Operating-PodLifecycle extends and supports these phases.
+These phase definitions can fulfill basic Pod change scenarios, but it are ambiguous. 
+Actually, before pod upgrade or ready, it is necessary to have some check mechanisms in place to ensure the safety of pod changes. Fortunately, [PodOpsLifecycle](../concepts/podopslifecycle.md) extends and supports some check stages: `PreCheck` before pod upgrade and `PostCheck` before pod ready.
 
-To ensure a more fine-grained and controlled change process for Pods, we introduce custom rules or perform additional tasks as prerequisites for state transitions before the desired state of a Pod is achieved. Similar to the Pod `readinessGates`, where certain conditions must be met for a Pod to be considered readiness. For example, we consider a Pod ready for the `TrafficOn` phase only if it has specific labels. For this purpose, we introduce the `PodTransitionRule` as a prerequisite for the state transition of a Pod.
+To ensure a more fine-grained and controlled change process for Pods, we introduce custom rules or perform additional tasks as prerequisites for state transitions before the desired state of a Pod is achieved. Similar to the Pod `readinessGates`, where certain conditions must be met for a Pod to be considered readiness. For example, we consider a Pod ready for the `PostCheck` phase only if it has specific labels. For this purpose, we introduce the `PodTransitionRule` as a prerequisite for the state transition of a Pod.
 
 ## Rule Definition
 
-You can use `PodTransitionRule` define a set of transition rules for your workload pods.
+You can use `PodTransitionRule` to define a set of transition rules for your workload pods.
 Each rule will be executed at the corresponding stage, and it will be blocked if the conditions are not met.
 
 Here is an example:
@@ -25,13 +26,13 @@ spec:
   - availablePolicy:
       maxUnavailableValue: 50%
     name: maxUnavailable
-  - stage: PreTrafficOff  # stages are supported by PodLifecycle
+  - stage: PreCheck  # stages are supported by PodOpsLifecycle
     labelCheck:
       requires:
         matchLabels:
           app.custom/ready: 'true' 
     name: labelCheck
-  - stage: PreTrafficOff 
+  - stage: PostCheck 
     webhook:
       clientConfig:
         url: https://...
@@ -64,7 +65,7 @@ Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%
 Absolute number is calculated from percentage by rounding down.
 This can not be 0.
 
-#### mainAvailable
+#### minAvailable
 ```yaml
 availablePolicy:
   minAvailable:
@@ -75,7 +76,7 @@ availablePolicy:
 ### Label Check
 
 A `labelCheck` rule is used to check if labels are satisfied.
-
+You can define your own labels as change check conditions and modify the labels according to your needs.
 ```yaml
 labelCheck:
   requirs:

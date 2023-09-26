@@ -5,7 +5,7 @@ sidebar_position: 2
 # Installation
 
 ## Install with helm
-Operating requires **Kubernetes version >= 1.18**
+KusionStack Operating requires **Kubernetes version >= 1.18**
 ```shell
 # Firstly add charts repository if you haven't do this.
 $ helm repo add kusionstack https://kusionstack.io/charts
