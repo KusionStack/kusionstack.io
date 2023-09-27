@@ -159,62 +159,6 @@ Now we can visit [http://localhost:12345](http://localhost:12345) in our browser
 
 ![](/img/docs/user_docs/getting-started/wordpress-site-page.png)
 
-## Modify WordPress Application
-
-As shown below, we can try to modify the config codes in the file `dev/main.k` to add an environment variable in the container of the WordPress application. When using `kusion apply` to apply the config code modification, we can preview the resource changes with the capability of 3-way real-time diff of Kusion (note that we ignore the change of `metadata.managedFields` field in the following example for better demonstration). 
-
-```python
-# dev/main.k
-import catalog.models.schema.v1 as ac
-import catalog.models.schema.v1.trait as t
-import catalog.models.schema.v1.workload as wl
-import catalog.models.schema.v1.workload.container as c
-import catalog.models.schema.v1.workload.container.probe as p
-import catalog.models.schema.v1.workload.secret as sec
-import catalog.models.schema.v1.workload.network as n
-import catalog.models.schema.v1.monitoring as m
-import catalog.models.schema.v1.accessories.database as db
-
-# main.k declares reusable configurations for dev stacks.
-wordpress: ac.AppConfiguration {
-    workload: wl.Service {
-        containers: {
-            wordpress: c.Container {
-                image = "wordpress:6.3"
-                env: {
-                    "WORDPRESS_DB_HOST": "$(KUSION_DB_HOST)"
-                    "WORDPRESS_DB_USER": "$(KUSION_DB_USERNAME)"
-                    "WORDPRESS_DB_PASSWORD": "$(KUSION_DB_PASSWORD)"
-                    "WORDPRESS_DB_NAME": "mysql"
-                    "EXAMPLE_APP_NAME_ENV": "example.wordpress"
-                }
-                resources: {
-                    "cpu": "500m"
-                    "memory": "512Mi"
-                }
-            }
-        }
-        replicas: 1
-        ports: [
-            n.Port {
-                port: 80
-            }
-        ]
-    }
-    database: db.Database {
-        type: "local"
-        engine: "mysql"
-        version: "8.0"
-    }
-}
-```
-
-```shell
-kusion apply --watch --ignore-fields "metadata.managedFields"
-```
-
-![](/img/docs/user_docs/getting-started/wordpress-with-local-db-diff.gif)
-
 ## Delete WordPress Application
 
 We can delete the WordPress application and related database resources using the following command line: 
