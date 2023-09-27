@@ -3,19 +3,19 @@
 Applications always provide its service along with traffic routing.
 On Kubernetes, they should be a set of Pods and a corresponding Kubernetes Service resource to expose the service.
 
-However, during operations such as updating Pod revisions, 
-there is a risk that client request traffic may be lost. This can lead to a poor user experience for developers. 
+However, during operations such as updating Pod revisions,
+there is a risk that client request traffic may be lost. This can lead to a poor user experience for developers.
 
-This tutorial will demonstrate how to operate Pods gracefully in a KusionStack Operating way on Aliyun ACK 
+This tutorial will demonstrate how to operate Pods gracefully in a KusionStack Operating way on Aliyun ACK
 with SLB as a Service backend provider.
 
-> You can also get the same point from [this video](https://www.bilibili.com/video/BV1n8411q7sP/?t=15.7), 
+> You can also get the same point from [this video](https://www.bilibili.com/video/BV1n8411q7sP/?t=15.7),
 > which shows the same case using both KusionStack Kusion and Operating.
 > The sample used in this video can be found from [KusionStack Catalog](https://github.com/KusionStack/catalog/tree/main/models/samples/wordpress).
 
 ## Preparing
 
-First, ensure that you have an Aliyun ACK Kubernetes cluster set up in order to provision an Aliyun SLB. 
+First, ensure that you have an Aliyun ACK Kubernetes cluster set up in order to provision an Aliyun SLB.
 
 Next, install KusionStack Operating on this Kubernetes cluster
 following [installation doc](https://kusionstack.io/docs/operating/started/install).
@@ -42,8 +42,6 @@ kind: CollaSet
 metadata:
   name: server
 spec:
-  updateStrategy:
-    operationDelaySeconds: 2
   replicas: 3
   selector:
     matchLabels:
@@ -86,7 +84,7 @@ server-p6wrx   1/1     Running   0          2m23s
 server-zn62c   1/1     Running   0          2m23s
 ```
 
-Then create a Kubernetes Service by running following command, 
+Then create a Kubernetes Service by running following command,
 which will provision Aliyun SLB to expose service.
 
 ```shell
@@ -119,10 +117,10 @@ NAME     TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)        AGE
 server   LoadBalancer   192.168.225.55   47.101.49.182   80:30146/TCP   51s
 ```
 
-The label `kusionstack.io/control: "true"` on Service is very important. 
+The label `kusionstack.io/control: "true"` on Service is very important.
 It means this service resource will be recognized by ResourceConsist framework, and then participate in PodOpsLifecycle
-to control the Aliyun SLB to switch off traffic before updating each Pod and switch on traffic after it finished, 
-in order to protect the service. 
+to control the Aliyun SLB to switch off traffic before updating each Pod and switch on traffic after it finished,
+in order to protect the service.
 
 ### Provision a client
 
@@ -186,7 +184,7 @@ server-p6wrx   1/1     Running   0          19m
 server-zn62c   1/1     Running   0          19m
 ```
 
-This client will continuously access the service using the configuration provided in the command. 
+This client will continuously access the service using the configuration provided in the command.
 You can monitor the response codes from its logs:
 
 ```shell
@@ -205,7 +203,7 @@ The accesses are all successful.
 
 ### Update Pod revision
 
-To trigger a Pod revision update, run the following command 
+To trigger a Pod revision update, run the following command
 to edit the container image and command in the PodTemplate of CollaSet:
 
 ```shell
@@ -215,8 +213,6 @@ kind: CollaSet
 metadata:
   name: server
 spec:
-  updateStrategy:
-    operationDelaySeconds: 2
   replicas: 3
   selector:
     matchLabels:
@@ -249,7 +245,7 @@ spec:
 ' | kubectl -n operating-tutorial apply -f -
 ```
 
-It will trigger all Pods updated simultaneously. So the application `server` has no Pod to serve. 
+It will trigger all Pods updated simultaneously. So the application `server` has no Pod to serve.
 We can observe the error from client logs.
 
 ```shell
@@ -286,7 +282,7 @@ spec:
 ' | kubectl -n operating-tutorial apply -f -
 ```
 
-After updating the CollaSet of the server to trigger an update, you will see the Pods rolling update one by one, 
+After updating the CollaSet of the server to trigger an update, you will see the Pods rolling update one by one,
 ensuring that at least one Pod is always available to serve.
 
 ```shell
@@ -329,16 +325,16 @@ Kubernetes like Aliyun SLB service. However, KusionStack Operating offers severa
 
 * Pod level vs Container level
 
-Operating offers a Pod level hooks which have more complete information than one container, 
+Operating offers a Pod level hooks which have more complete information than one container,
 especially there are several containers in one Pod.
 
 * Plugin-able
 
-Through KusionStack Operating, you can decouple operations executed before or after Pods actually change. 
+Through KusionStack Operating, you can decouple operations executed before or after Pods actually change.
 For example, traffic control can be added or removed without modifying the Pod's preStop configuration.
 
 * Rollback option
 
 In case of issues, rollback becomes a viable option when using the Operating approach to update Pods.
-Since Operating does not modify the Pods or their containers during the update, 
+Since Operating does not modify the Pods or their containers during the update,
 if the traffic service experiences problems, there is an opportunity to cancel the update.
