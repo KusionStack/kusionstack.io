@@ -1,7 +1,7 @@
 # What is KusionStack Operating?
 
 KusionStack Operating consists of workloads and operators built on Kubernetes Custom Resource Definitions,
-with a primary aim of bridging the gap between platform development and Kubernetes.
+with a primary aim of simplify platform development on Kubernetes.
 
 By keeping more operation works finished in Kubernetes layer,
 KusionStack Operating reduces complexity when interacting with Kubernetes
@@ -29,7 +29,7 @@ like in-place update with container image and pod revision consistency.
 
 ### Streamlined Pod Operation
 
-KusionStack Operating introduces resource consist framework that facilitates a graceful way 
+KusionStack Operating introduces resource consist framework that offers a graceful way 
 to integrate resource management around Pods, like traffic control, into PodOpsLifecycle.
 It simplifies the work for platform developers dealing with Pod operation details. KusionStack also integrates some resources
 by default, such as Aliyun SLB.
