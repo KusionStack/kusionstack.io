@@ -5,13 +5,12 @@ with a primary aim of bridging the gap between platform development and Kubernet
 
 By keeping more operation works finished in Kubernetes layer,
 KusionStack Operating reduces complexity when interacting with Kubernetes
-and enhances convenience for platform and application developers.
+and enhances convenience for platform developers.
 
 ## Key features
 
-In order to make it easy to build a platform or directly manage application resources on Kubernetes,
 KusionStack Operating currently provides the following features,
-streamlining both platform development and application operations based on Kubernetes:
+streamlining application operations when developing platforms based on Kubernetes:
 
 ### Advanced workloads
 
@@ -42,5 +41,5 @@ Furthermore, it allows for custom rules through extension via webhooks and label
 ## Future works
 
 KusionStack Operating project is currently in its early stages.
-Our goal is to simplify platform development. we will continue building in areas such as application operations,
+Our goal is to simplify platform development. We will continue building in areas such as application operations,
 observability, and insight. We hope the Operating will make it easier for you to build platforms.
