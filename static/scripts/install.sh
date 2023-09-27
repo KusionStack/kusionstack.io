@@ -129,15 +129,15 @@ toInstallVersion() {
     fi
 }
 
-# todo: only "grep -v rc" is not correct, only va.b.c is formal release tag
+# todo: only va.b.c is formal release tag, now support all version
 getLatestReleaseVersion() {
     local KusionReleaseURL="${RELEASE_URL}"
     local latest_release=""
 
     if [ "$KUSION_HTTP_REQUEST_CLI" == "curl" ]; then
-        latest_release=$(curl -s $KusionReleaseURL | grep \"tag_name\" | grep -v rc | awk 'NR==1{print $2}' |  sed -n 's/\"\(.*\)\",/\1/p')
+        latest_release=$(runAsRoot curl -s $KusionReleaseURL | grep \"tag_name\" | awk 'NR==1{print $2}' |  sed -n 's/\"\(.*\)\",/\1/p')
     else
-        latest_release=$(wget -q --header="Accept: application/json" -O - $KusionReleaseURL | grep \"tag_name\" | grep -v rc | awk 'NR==1{print $2}' |  sed -n 's/\"\(.*\)\",/\1/p')
+        latest_release=$(runAsRoot wget -q --header="Accept: application/json" -O - $KusionReleaseURL | grep \"tag_name\" | awk 'NR==1{print $2}' |  sed -n 's/\"\(.*\)\",/\1/p')
     fi
 
     echo "${latest_release:1}"
@@ -155,9 +155,9 @@ download() {
 
 	info "Downloading installation package from $DOWNLOAD_URL..."
 	if [ "$KUSION_HTTP_REQUEST_CLI" == "curl" ]; then
-		curl -SL "$DOWNLOAD_URL" -o "$ARTIFACT_TMP_FILE"
+		runAsRoot curl -SL "$DOWNLOAD_URL" -o "$ARTIFACT_TMP_FILE"
 	else
-		wget -O "$ARTIFACT_TMP_FILE" "$DOWNLOAD_URL"
+		runAsRoot wget -O "$ARTIFACT_TMP_FILE" "$DOWNLOAD_URL"
 	fi
 
 	if [ ! -f "$ARTIFACT_TMP_FILE" ]; then
