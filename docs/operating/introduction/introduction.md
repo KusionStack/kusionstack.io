@@ -12,25 +12,29 @@ and enhances convenience for platform developers.
 KusionStack Operating currently provides the following features,
 streamlining application operations when developing platforms based on Kubernetes:
 
+### Fine-grained operation
+
+KusionStack Operating introduces PodOpsLifecycle to extend native Pod lifecycle with extra phases like PreCheck, Preparing, etc. 
+All operators in KusionStack Operating will respect PodOpsLifecycle. 
+And PodOpsLifecycle will orchestrate all of other operators how to operate one Pod together. 
+
 ### Advanced workloads
 
 KusionStack Operating offers several workloads to ensure it is convenient and effective to delivery and operate application resources.
 
-Recently, Operating introduced the workload CollaSet.
+Recently, Operating provides the workload CollaSet.
 Besides the basic ability of scaling and updating Pods like Deployment and StatefulSet of Kubernetes,
 CollaSet also provides a range of scale and update strategies,
 like in-place update with container image and pod revision consistency.
 
 ### Streamlined Pod Operation
 
-KusionStack Operating introduces PodOpsLifecycle that facilitates the graceful participation
-of multiple resources related to Pods in a Pod operation process.
-For instance, the resource consist framework in PodOpsLifecycle is able to incorporate traffic management
-into each Pod operation process.
-It simplifies the work for platform developers dealing with Pod operation details. KusionStack also adapt some resources
+KusionStack Operating introduces resource consist framework that facilitates a graceful way 
+to integrate resource management around Pods, like traffic control, into PodOpsLifecycle.
+It simplifies the work for platform developers dealing with Pod operation details. KusionStack also integrates some resources
 by default, such as Aliyun SLB.
 
-### Integrated risk management
+### Risk management
 
 Building upon the PodOpsLifecycle, KusionStack Operating introduces the workload named PodTransitionRule
 which will keep risks of pod operation under control.
