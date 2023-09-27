@@ -26,10 +26,10 @@ All init templates are listed as follows:
 ```shell
 ➜  kusion_playground kusion init --online
 ? Please choose a template:  [Use arrows to move, type to filter]
-> code-city                  Code City metaphor for visualizing Go source code in 3D.
+  code-city                  Code City metaphor for visualizing Go source code in 3D.
   deployment-multi-stack     A minimal kusion project of multiple stacks
   deployment-single-stack    A minimal kusion project of single stack
-  wordpress                  A sample wordpress project
+> wordpress                  A sample wordpress project
   wordpress-cloud-rds        A sample wordpress project with cloud rds
 ```
 
