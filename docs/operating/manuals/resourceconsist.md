@@ -1,26 +1,27 @@
-# Motivation
-## Goals
+# ResourceConsist
+## Motivation
+### Goals
 Making a customized controller can be realized easily, and offering the ability of controllers following PodOpsLifecycle.
 
 The only thing users need to do to realize a customized controller is writing an adapter implementing ReconcileAdapter.
-## Non-Goals
+### Non-Goals
 Making resource consist as a pkg like controller-runtime.
 
 A customized controller can be started by command like "resource-consist enable".
-# Proposal
-## Key Concepts
-### Employer
+## Proposal
+### Key Concepts
+#### Employer
 **Employer** is the entity responsible for managing and coordinating the utilization of another resource, similar to how a service selects and controls pods.
 
 Employer can be any kind, and CRD is of course can be used as Employer.
-### Employee
+#### Employee
 **Employee** is the resource managed by another resource, like pods selected by service.
 
 Same with Employer, Employee can be any kind, and CRD is of course can be used as Employee.
 
 If an adapter implementing ReconcileAdapter and following PodOpsLifecycle, the Employee should be Pod.
-## Key Interface/Struct Definitions
-### ReconcileAdapter
+### Key Interface/Struct Definitions
+#### ReconcileAdapter
 **ReconcileAdapter** is an interface specifying a set of methods as follows.
 ```
 // ReconcileOptions includes max concurrent reconciles and rate limiter,
@@ -70,7 +71,7 @@ A customized controller should realize an adapter implementing the ReconcileAdap
 ReconcileOptions and ReconcileWatchOptions Interfaces can be optional implemented, dependent on whether customized controllers need specify some reconcile options like rate limiter.
 
 Service/Pod will be default Employer/Employee, if ReconcileWatchOptions not implemented. And there is a default Predicate which filters out Services without **Label "kusionstack.io/control": "true"**.
-### IEmployer/IEmployee
+#### IEmployer/IEmployee
 **IEmployer/IEmployee** are interfaces defined as follows.
 ```
 type IEmployer interface {
@@ -86,7 +87,7 @@ type IEmployee interface {
 	EmployeeEqual(employee IEmployee) (bool, error)
 }
 ```
-### PodEmployeeStatuses
+#### PodEmployeeStatuses
 **PodEmployeeStatuses** is a built-in struct implementing EmployeeStatus.EmployeeStatuses.
 ExtraStatus in PodEmployeeStatuses is an interface so that adapters can implement it as they wished. Normally, ExtraStatus is extra info beyond basic pod status related to backend provider, like the traffic status of backend server(pod) under load balancer.
 ```
@@ -99,7 +100,7 @@ type PodEmployeeStatuses struct {
 	ExtraStatus interface{} `json:"extraStatus,omitempty"`
 }
 ```
-### PodAvailableConditions
+#### PodAvailableConditions
 Used if PodOpsLifecycle followed.
 
 **PodAvailableConditions** is an annotation on pod, indicating what finalizer should be added to achieve service-available state.
@@ -124,8 +125,8 @@ func GenerateLifecycleFinalizer(employerName string) string {
 	return v1alpha1.PodOperationProtectionFinalizerPrefix + "/" + hex.EncodeToString(b[:])[8:24]
 }
 ```
-## Key Finalizers
-### LifecycleFinalizer
+### Key Finalizers
+#### LifecycleFinalizer
 **LifecycleFinalizer** prefixed with <mark>"prot.podopslifecycle.kusionstack.io"</mark>, is a finalizer on Employee used to following PodOpsLifecycle, removed in preparing period of PodOpsLifecycle and added in completing period of PodOpsLifecycle
 ```
 const (
@@ -142,7 +143,7 @@ func GenerateLifecycleFinalizer(employerName string) string {
 	return v1alpha1.PodOperationProtectionFinalizerPrefix + "/" + hex.EncodeToString(b[:])[8:24]
 }
 ```
-### CleanFinalizer
+#### CleanFinalizer
 **CleanFinalizer** is a finalizer on Employer, used to bind Employer and Employee.
 
 CleanFinalizer should be added in the first Reconcile of the resource, and be removed only when there is no more relation between Employer and Employee and during deletion.
@@ -151,14 +152,14 @@ CleanFinalizer should be added in the first Reconcile of the resource, and be re
 	
 	cleanFlz := cleanFinalizerPrefix + employer.GetName()
 ```
-## Main Logic of Reconcile in ResourceConsist Controller
-### Ensure clean finalizer of Employer
+### Main Logic of Reconcile in ResourceConsist Controller
+#### Ensure clean finalizer of Employer
 Clean finalizer will be added to Employer before everything, and all resources related to Employer will be cleaned before clean finalizer removed, so that nothing related to Employer will be remained.
-### Ensure PodAvailableConditions if PodOpsLifecycle followed
+#### Ensure PodAvailableConditions if PodOpsLifecycle followed
 An expected LifecycleFinalizer related to Employer will be added into PodAvailableConditions.
-### Get Expect/Current Employer/Employee, make diff, and do sync
+#### Get Expect/Current Employer/Employee, make diff, and do sync
 Adapters should implement these methods, and Resource Consist Controller will call it.
-# Tutorials
+## Tutorials
 ```pkg/controllers/alibabacloudslb``` is an adapter that implements ReconcileAdapter. It follows **PodOpsLifecycle** to handle various scenarios during pod operations, such as creating a new pod, deleting an existing pod, or handling changes to pod configurations. This adapter ensures minimal traffic loss and provides a seamless experience for users accessing services load balanced by Alibaba Cloud SLB.
 
 In ```pkg/controllers/alibabacloudslb```, the real server is removed from SLB before pod operation in ACK. The LB management and real server management are handled by CCM in ACK. If the cluster is not in ACK or CCM is not working in the cluster, the alibabacloudslb controller should implement additional methods of ReconcileAdapter.
