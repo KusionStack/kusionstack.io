@@ -1,7 +1,7 @@
 # What is KusionStack Operating?
 
 KusionStack Operating consists of workloads and operators built on Kubernetes Custom Resource Definitions,
-with a primary aim of simplify platform development on Kubernetes.
+with a primary aim of simplifying platform development on Kubernetes.
 
 By keeping more operation works finished in Kubernetes layer,
 KusionStack Operating reduces complexity when interacting with Kubernetes
