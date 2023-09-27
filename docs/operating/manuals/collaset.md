@@ -1,3 +1,7 @@
+---
+sidebar_position: 1
+---
+
 # CollaSet
 CollaSet is responsible for managing a set of Pods. Similar to Kubernetes Deployment and StatefulSet, it also supports scaling and updating Pods. Additionally, CollaSet offers advanced features to provide users with more granular control over managing Pods.
 
