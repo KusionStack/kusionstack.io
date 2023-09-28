@@ -1,59 +1,55 @@
 ---
 sidebar_position: 1
-sidebar_label: Installation
+sidebar_label: Install Kusion
 ---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-# Installation Guide
+# Install Kusion
 
-## Homebrew (MacOS & Linux)
+You can install the latest Kusion CLI on MacOS and Linux. Choose the one you prefer from the methods below.
 
-The preferred method for installing on Mac and Linux is to use the brew package manager.
+<Tabs>
+<TabItem value="Homebrew" >
 
-You can install the latest Kusion CLI with the following:
+The recommended method for installing on MacOS and Linux is to use the brew package manager.
+
+**Install Kusion**
 
 ```bash
 brew install KusionStack/tap/kusion
 ```
 
-You can also follow the binary installation below.
+**Update Kusion**
 
-## Curl|sh install (MacOS & Linux)
+```bash
+brew upgrade KusionStack/tap/kusion`
+```
 
-If you don't have homebrew, you can install the CLI with this one-liner:
+**Uninstall Kusion**
+
+```bash
+brew uninstall KusionStack/tap/kusion
+```
+
+```mdx-code-block
+</TabItem>
+<TabItem value="curl|sh">
+```
+
+**Install Kusion**
 
 ```bash
 curl https://kusionstack.io/scripts/install.sh | sh
 ```
 
-## Scoop (Windows)
-
-You can install the latest Kusion CLI with the following:
+**Uninstall Kusion**
 
 ```bash
-scoop bucket add KusionStack https://github.com/KusionStack/scoop-bucket.git
-scoop install KusionStack/kusion
-``` 
-
-## Powershell (Windows)
-
-Run the following command in *powershell* with administrator privilege:
-
-```bash
-powershell -Command "iwr -useb https://kusionstack.io/scripts/install.ps1 | iex"
+curl https://kusionstack.io/scripts/uninstall.sh | sh
 ```
 
-## Docker Image
-
-If the upper installation doesn't support your environment, you can use the docker image of Kusion instead.
-
-First, pull the latest image:
-
-```bash
-docker pull kusionstack/kusion:latest
-```
-
-Next, run Kusion in an interactive mode:
-
-```bash
-docker run --rm -it kusionstack/kusion:latest bash
+```mdx-code-block
+</TabItem>
+</Tabs>
 ```
