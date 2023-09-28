@@ -13,7 +13,7 @@
   },
   "link.item.label.Introduction": {
     "message": "Introduction",
-    "description": "The label of footer link with label=Introduction linking to /docs/user_docs/intro/kusion-intro"
+    "description": "The label of footer link with label=Introduction linking to /docs/user_docs/intro/overview"
   },
   "link.item.label.Blog": {
     "message": "Blog",
