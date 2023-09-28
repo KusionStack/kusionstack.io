@@ -81,7 +81,7 @@ $ npm run build
 
 ## 6. 内部链接
 
-网址内部的相对链接可以通过 Markdown 文件的相对路径映射，比如 [`/docs/develop/build-docs`](https://github.com/KusionStack/kusionstack.io/docs/develop/build-docs) 文件中可以通过 [`/docs/user_docs/intro/kusion-intro`](/docs/user_docs/intro/kusion-intro) 绝对路径或 [`../repos`](../repos) 相对路径引用。
+网址内部的相对链接可以通过 Markdown 文件的相对路径映射，比如 [`/docs/develop/build-docs`](https://github.com/KusionStack/kusionstack.io/docs/develop/build-docs) 文件中可以通过 [`/docs/user_docs/intro/overview`](/docs/user_docs/intro/overview) 绝对路径或 [`../repos`](../repos) 相对路径引用。
 
 注意：目录内部的 `index.md` 或与目录同名的 Markdonwn 文件对应目录链接的页面。
 

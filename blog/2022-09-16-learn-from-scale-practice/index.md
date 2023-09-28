@@ -9,7 +9,7 @@ tags: [KusionStack, Kusion, Large-scale, Platform Engineering]
 
 **Abstract:** This blog attempts to talk about the challenges and best practices in the process of large-scale platform engineering from the perspectives of engineering, programing language, divide-and-conquer, modeling, automation, and collaborative culture. Hopefully, by sharing the concepts and practices of our platform engineering with more companies and teams, we can make some interesting changes happen together.
 
-This blog is based on the platform engineering and automation practice of [KusionStack](https://kusionstack.io/docs/user_docs/intro/kusion-intro) in Ant Group.
+This blog is based on the platform engineering and automation practice of [KusionStack](https://kusionstack.io/docs/user_docs/intro/overview) in Ant Group.
 
 
 ## 1. Platform Engineering: Making Enterprise DevOps Happen
@@ -111,7 +111,7 @@ Finally, I would like to talk about the next step. There’re still possibilitie
 
 ## 8. Reference
 
-- [https://kusionstack.io/docs/user_docs/intro/kusion-intro](https://kusionstack.io/docs/user_docs/intro/kusion-intro)
+- [https://kusionstack.io/docs/user_docs/intro/overview](https://kusionstack.io/docs/user_docs/intro/overview)
 - [https://platformengineering.org/blog/what-is-platform-engineering](https://platformengineering.org/blog/what-is-platform-engineering)
 - [https://internaldeveloperplatform.org/what-is-an-internal-developer-platform/](https://internaldeveloperplatform.org/what-is-an-internal-developer-platform/)
 - [https://web.devopstopologies.com/#anti-types](https://web.devopstopologies.com/#anti-types)

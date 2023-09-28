@@ -138,7 +138,7 @@ const config = {
                         items: [
                             {
                                 label: 'Kusion',
-                                to: '/docs/user_docs/intro/kusion-intro',
+                                to: '/docs/user_docs/intro/overview',
                             },
                             {
                                 label: 'ControllerMesh',
