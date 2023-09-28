@@ -1,8 +1,8 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 ---
 
-# Kusion 
+# How Kusion Works
 
 Kusion is the platform engineering engine of [KusionStack](https://github.com/KusionStack). It delivers intentions described with Kusion Models defined in [Catalog](https://github.com/KusionStack/catalog) to Kubernetes, Clouds and On-Prem infrastructures.
 
