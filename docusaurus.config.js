@@ -105,7 +105,12 @@ const config = {
                     //     label: 'Governance',
                     // },
 
-                    { to: 'https://medium.com/@kusionstack', label: 'Blog', position: 'left' },
+                    {
+                        to: 'https://medium.com/@kusionstack',
+                        label: 'Blog',
+                        position: 'left',
+                        target: '_self'
+                    },
 
                     // {
                     //  type: 'docsVersionDropdown',
