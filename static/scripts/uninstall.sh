@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # ------------------------------------------------------------
 # Copyright 2022 The KusionStack Authors
@@ -15,7 +15,6 @@
 
 set -o errexit
 set -o nounset
-set -o pipefail
 
 # Sudo is required to delete binary from KUSION_HOME_DIR
 USE_SUDO=${USE_SUDO:-"false"}
