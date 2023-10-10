@@ -6,20 +6,34 @@ sidebar_position: 2
 
 It can be difficult to understand how different software compare to each other. Is one a replacement for the other? Are they complementary? etc. In this section, we compare Kusion to other software.
 
-**vs. Terraform**
+**vs. GitOps (ArgoCD, FluxCD, etc.)**
+ 
+According to the [open GitOps principles](https://opengitops.dev/), GitOps systems typically have its desired state expressed declaratively, continuously observe actual system state and attempt to apply the desired state. In the design of Kusion toolchain, we refer to those principles but have no intention to reinvent any GitOps systems wheel. 
 
-Terraform is a programmable operation product widely used in cloud resource delivery scenarios. It helps operators access different cloud APIs easily with programmable resource blocks, state management, and API providers. Terraform reduces the difficulty of using imperative APIs of various cloud vendors and provides a good declarative operation experience with a concise workflow.
+Kusion adopts your GitOps process and improves it with richness of features. The declarative [AppConfiguration](/docs/user_docs/concepts/appconfiguration) model can be used to express desired intent, once intent is declared [Kusion CLI](/docs/user_docs/reference/cli/kusion) takes the role to make production match intent as safely as possible. 
 
-In contrast, Kusion attempts to help developers work with an abstract app delivery model and also makes it easier for different roles to collaborate to build and manage the abstraction. Kusion natively supports scalability, automation, and high performance for enterprise-level requirements. Kusion works in a Kubernetes-first way and leverages Terraform to manage non-Kubernetes resources.
+**vs. PaaS (Heroku, Vercel, etc.)**
 
-**vs. CD systems (eg KubeVela, ArgoCD)**
+Kusion shares the same goal with traditional PaaS platforms to provide application delivery and management capabilities. The intuitive difference from the full functionality PaaS platforms is that Kusion is a client-side toolchain, not a complete PaaS platform. 
 
-CD systems are usually sourced in some declarative format and complete automated delivery and configuration drift reconciliation through Pull, Push, or the combination of Pull & Push. The Kusion engine can be regarded as a CD engine implementation in the push mode. If you have adopted a CD system, Kusion can be integrated with it, such as reconciling Kusion models through ArgoCD or writing codify OAM model and running with KubeVela, etc.
+Also traditional PaaS platforms typically constrain the type of applications they can run but there is no such constrain for Kusion which means Kusion provides greater flexibility.
+
+Kusion allows you to have platform-like features without the constraints of a traditional PaaS. However, Kusion is not attempting to replace any PaaS platforms, instead Kusion can be used to deploy to a platform such as Heroku.
+
+**vs. KubeVela**
+
+KubeVela is a modern software delivery and management control plane. KubeVela makes it easier to deploy and operate applications on top of Kubernetes.
+
+Kusion is not a control plane. Kusion is a client-side tool for describing application intent in  a declarative way and providing consistent workflow to apply that desired state.
+
+With proper Generator implementation, the target Spec of [AppConfiguration](/docs/user_docs/concepts/appconfiguration) can be [KubeVela Application](https://kubevela.io/docs/getting-started/core-concept/) and Kusion can use KubeVela to satisfy the "apply" step.
 
 **vs. Helm**
 
-The concept of Helm originates from the package management mechanism of the operating system. It is a package management tool based on templated YAML files and supports the execution and management of resources in the package. Kusion naturally provides a superset of Helm capabilities with the modeled key-value pairs, so that developers can use Kusion directly as a programable alternative to avoid the pain of writing text templates. For users who have adopted Helm, the stack compilation results in Kusion can be packaged and used in Helm format.
+The concept of Helm originates from the [package management](https://en.wikipedia.org/wiki/Package_manager) mechanism of the operating system. It is a package management tool based on templated YAML files and supports the execution and management of resources in the package. 
 
-**vs. App PaaS**
+Kusion is not a package manager. Kusion naturally provides a superset of Helm capabilities with the modeled key-value pairs, so that developers can use Kusion directly as a programable alternative to avoid the pain of writing text templates. For users who have adopted Helm, the stack compilation results in Kusion can be packaged and used in Helm format.
 
-Compared with application delivery products or platforms, Kusion is a client-side programmable technology stack, which is not a complete App PaaS. Kusion can be used as part of App PaaS, or as the basis for building your App PaaS as a platform engineering solution.
+**vs. Kubernetes**
+
+Kubernetes(K8s) is a container scheduling and management runtime widely used around the world, an "operating system" core for containers, and a platform for building platforms. Above the Kubernetes API layer, Kusion aims to provide app-centric **abstraction** and unified **workspace**, better **user experience** and automation **workflow**, and helps developers build the app delivery model easily and collaboratively.
