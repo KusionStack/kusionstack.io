@@ -106,7 +106,7 @@ const config = {
                     // },
 
                     {
-                        to: 'https://medium.com/@kusionstack',
+                        to: 'https://blog.kusionstack.io',
                         label: 'Blog',
                         position: 'left',
                         target: '_self'
