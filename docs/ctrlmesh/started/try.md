@@ -89,7 +89,7 @@ spec:
 You can configure the ShardingConfig according to your requirements.
 ```bash
 # Apply shardingconfig
-$ kubectl apply shardingconfig.yaml
+$ kubectl apply -f shardingconfig.yaml
 
 # Waiting for pods to be recreate and ready.
 # The mesh-proxy container will be automatically injected into the pod.
