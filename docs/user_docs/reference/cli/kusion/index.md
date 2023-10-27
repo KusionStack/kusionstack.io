@@ -1,4 +1,4 @@
-# kusion
+# Kusion Command Line
 
 Kusion is the platform engineering engine of KusionStack
 
