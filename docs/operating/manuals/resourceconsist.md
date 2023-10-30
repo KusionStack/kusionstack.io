@@ -37,6 +37,10 @@ type ReconcileOptions interface {
 
 // ReconcileWatchOptions defines what employer and employee is and how controller watch
 // default employer: Service, default employee: Pod
+// Recommend:
+// implement ReconcileWatchOptions if Employer resource might be reconciled by other controller,
+// different Predicates make an employer won't be reconciled by more than one controller so that LifecycleFinalizer won't
+// be solved incorrectly.
 type ReconcileWatchOptions interface {
 	NewEmployer() client.Object
 	NewEmployee() client.Object
@@ -46,28 +50,40 @@ type ReconcileWatchOptions interface {
 	EmployeePredicates() predicate.Funcs
 }
 
+
+// ReconcileLifecycleOptions defines whether PodOpsLifecycle followed and
+// whether employees' LifecycleFinalizer conditions need to be Recorded/Erased to employer's anno.
+// Actually NeedRecordEmployees only needed for those adapters that follow PodOpsLifecycle,
+// in the case of employment relationship might change and resources in backend provider might be changed by others.
+// If not implemented, the two options would be FollowPodOpsLifeCycle: true and NeedRecordEmployees: false
+type ReconcileLifecycleOptions interface {
+	FollowPodOpsLifeCycle() bool
+	NeedRecordEmployees() bool
+}
+
 // ReconcileAdapter is the interface that customized controllers should implement.
 type ReconcileAdapter interface {
 	GetControllerName() string
-	NotFollowPodOpsLifeCycle() bool
 
 	GetSelectedEmployeeNames(ctx context.Context, employer client.Object) ([]string, error)
 
-	// GetExpectEmployer and GetCurrentEmployer return expect/current status of employer from related backend provider
-	GetExpectEmployer(ctx context.Context, employer client.Object) ([]IEmployer, error)
+	// GetExpectedEmployer and GetCurrentEmployer return expect/current status of employer from related backend provider
+	GetExpectedEmployer(ctx context.Context, employer client.Object) ([]IEmployer, error)
 	GetCurrentEmployer(ctx context.Context, employer client.Object) ([]IEmployer, error)
 
-	CreateEmployer(ctx context.Context, employer client.Object, toCreate []IEmployer) ([]IEmployer, []IEmployer, error)
-	UpdateEmployer(ctx context.Context, employer client.Object, toUpdate []IEmployer) ([]IEmployer, []IEmployer, error)
-	DeleteEmployer(ctx context.Context, employer client.Object, toDelete []IEmployer) ([]IEmployer, []IEmployer, error)
+	// CreateEmployer/UpdateEmployer/DeleteEmployer handles creation/update/deletion of resources related to employer on related backend provider
+	CreateEmployer(ctx context.Context, employer client.Object, toCreates []IEmployer) ([]IEmployer, []IEmployer, error)
+	UpdateEmployer(ctx context.Context, employer client.Object, toUpdates []IEmployer) ([]IEmployer, []IEmployer, error)
+	DeleteEmployer(ctx context.Context, employer client.Object, toDeletes []IEmployer) ([]IEmployer, []IEmployer, error)
 
-	// GetExpectEmployee and GetCurrentEmployee return expect/current status of employees from related backend provider
-	GetExpectEmployee(ctx context.Context, employer client.Object) ([]IEmployee, error)
+	// GetExpectedEmployee and GetCurrentEmployee return expect/current status of employees from related backend provider
+	GetExpectedEmployee(ctx context.Context, employer client.Object) ([]IEmployee, error)
 	GetCurrentEmployee(ctx context.Context, employer client.Object) ([]IEmployee, error)
 
-	CreateEmployees(ctx context.Context, employer client.Object, toCreate []IEmployee) ([]IEmployee, []IEmployee, error)
-	UpdateEmployees(ctx context.Context, employer client.Object, toUpdate []IEmployee) ([]IEmployee, []IEmployee, error)
-	DeleteEmployees(ctx context.Context, employer client.Object, toDelete []IEmployee) ([]IEmployee, []IEmployee, error)
+	// CreateEmployees/UpdateEmployees/DeleteEmployees handles creation/update/deletion of resources related to employee on related backend provider
+	CreateEmployees(ctx context.Context, employer client.Object, toCreates []IEmployee) ([]IEmployee, []IEmployee, error)
+	UpdateEmployees(ctx context.Context, employer client.Object, toUpdates []IEmployee) ([]IEmployee, []IEmployee, error)
+	DeleteEmployees(ctx context.Context, employer client.Object, toDeletes []IEmployee) ([]IEmployee, []IEmployee, error)
 }
 ```
 A customized controller should realize an adapter implementing the ReconcileAdapter.
