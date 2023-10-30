@@ -52,7 +52,7 @@ type ReconcileWatchOptions interface {
 
 
 // ReconcileLifecycleOptions defines whether PodOpsLifecycle followed and
-// whether employees' LifecycleFinalizer conditions need to be Record/Erase to employer's anno.
+// whether employees' LifecycleFinalizer conditions need to be Recorded/Erased to employer's anno.
 // Actually NeedRecordEmployees only needed for those adapters that follow PodOpsLifecycle,
 // in the case of employment relationship might change and resources in backend provider might be changed by others.
 // If not implemented, the two options would be FollowPodOpsLifeCycle: true and NeedRecordEmployees: false
