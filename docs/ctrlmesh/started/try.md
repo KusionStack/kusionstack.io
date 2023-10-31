@@ -1,7 +1,7 @@
 ---
 sidebar_position: 4
 ---
-# Try a Demo
+# Try a Sample
 This guide lets you quickly evaluate KusionStack Controller Mesh. 
 
 
@@ -28,49 +28,69 @@ ctrlmesh-57d6b4df57-mtv2s   1/1     Running   0          40s
 [Install manager with more options](install.md)
 ## Enable Custom Operator Sharding
 
- 1. Deploy the sample operator application:
+You can use the **[Operating v0.1.1](https://kusionstack.io/docs/operating/introduction/)** available here.
+
+Deploy the sample operator with ShardingConfig:
 
 ```bash
-$ helm install sample kusionstack/sample-operator --version v0.1.2
+$ helm repo update
+$ helm install sample-operating kusionstack/operating \
+  --version v0.1.1 \
+  --set sharding.enabled=true \
+  --set sharding.isDemo=true
 
-$ kubeconfig kubectl -n ctrlmesh get sts
-NAME            READY   AGE
-demo-operator   2/2     10s
+$ kubectl -n kusionstack-system get sts
+NAME                    READY   AGE
+kusionstack-operating   5/5     1m45s
 
-$ kubectl -n ctrlmesh get po
-NAME                        READY   STATUS    RESTARTS   AGE
-ctrlmesh-57d6b4df57-mdslc   1/1     Running   0          1m
-ctrlmesh-57d6b4df57-mtv2s   1/1     Running   0          1m
-demo-operator-0             1/1     Running   0          17s
-demo-operator-1             1/1     Running   0          16s
+# The proxy container will be automatically injected into the pod
+$ kubectl -n kusionstack-system get po
+NAME                      READY   STATUS              RESTARTS   AGE
+kusionstack-operating-0   2/2     Running             0          42s
+kusionstack-operating-1   2/2     Running             0          32s
+kusionstack-operating-2   2/2     Running             0          21s
+kusionstack-operating-3   2/2     Running             0          12s
+kusionstack-operating-4   0/2     ContainerCreating   0          1s
+
+# Now we have three shards with three lease.
+#  operating-0-canary -> [kusionstack-operating-0]
+#  operating-1-normal -> [kusionstack-operating-1, kusionstack-operating-2]
+#  operating-2-normal -> [kusionstack-operating-3, kusionstack-operating-4]
+$ kubectl -n kusionstack-system get lease
+NAME                                                  HOLDER                                                         AGE
+kusionstack-controller-manager---operating-0-canary   kusionstack-operating-0_81b5bbae-be63-45ed-a939-e67e0c3d6326   12m
+kusionstack-controller-manager---operating-1-normal   kusionstack-operating-1_e4bbad49-e6ec-42fa-8ffd-caae82156a3e   12m
+kusionstack-controller-manager---operating-2-normal   kusionstack-operating-3_94f7f81a-f9e6-47d6-b72b-e16da479e9be   12m
 ```
 
- 2. Config and apply shardingconfig:
+ Show the sample ShardingConfig:
 
 ```bash
-# Show demo shardingconfig
-$ helm template sample kusionstack/sample-operator --version v0.1.1 --set sharding.enable=true --show-only templates/shardingconfig.yaml > shardingconfig.yaml
-$ cat shardingconfig.yaml
+$ helm template sample-operating kusionstack/operating \
+  --version v0.1.1 \
+  --set sharding.enabled=true \
+  --set sharding.isDemo=true \
+  --show-only templates/shardingconfig.yaml
 ```
 
 Here is a sample `ShardingConfig`:
 ```yaml
 ---
-# Source: sample-operator/templates/shardingconfig.yaml
+# Source: operating/templates/shardingconfig.yaml
 apiVersion: ctrlmesh.kusionstack.io/v1alpha1
 kind: ShardingConfig
 metadata:
   name: sharding-root
-  namespace: ctrlmesh
+  namespace: kusionstack-system
 spec:
-  # auto sharding config
+  # Auto sharding config
   root:
-    prefix: sample-demo
-    targetStatefulSet: sample-operator
+    prefix: operating
+    targetStatefulSet: kusionstack-operating
     canary:
       replicas: 1
       inNamespaces:
-      - demo-0a
+      - kusionstack-system
     auto:
       everyShardReplicas: 2
       shardingSize: 2
@@ -80,37 +100,27 @@ spec:
         - '*'
         resources:
         - configmaps
-      selector:
-        matchLabels:
-          control-by: demo
+        - pods
+        - endpoints
+        - services
+        - replicasets
+      - apiGroups:
+        - apps.kusionstack.io
+        resources:
+        - '*'
   controller:
-    leaderElectionName: demo-manager
+    leaderElectionName: kusionstack-controller-manager
 ```
 You can configure the ShardingConfig according to your requirements.
-```bash
-# Apply shardingconfig
-$ kubectl apply shardingconfig.yaml
 
-# Waiting for pods to be recreate and ready.
-# The mesh-proxy container will be automatically injected into the pod.
-$ kubectl -n ctrlmesh get po
-NAME                        READY   STATUS    RESTARTS   AGE
-ctrlmesh-57d6b4df57-mdslc   1/1     Running   0          6m
-ctrlmesh-57d6b4df57-mtv2s   1/1     Running   0          6m
-sample-operator-0           2/2     Running   0          22s
-sample-operator-1           2/2     Running   0          17s
-sample-operator-2           2/2     Running   0          13s
-sample-operator-3           2/2     Running   0          9s
-sample-operator-4           2/2     Running   0          5s
+:::info
+In order to enable the ShardingConfig, you also need to add the following label to the pod template.  
+`ctrlmesh.kusionstack.io/enable-proxy: 'true'`  
+We plan to deprecate it in future versions.
+:::
 
-# Now we have three shards with three lease.
-#  sample-demo-0-canary -> [sample-operator-0]
-#  sample-demo-1-normal -> [sample-operator-1, sample-operator-2]
-#  sample-demo-2-normal -> [sample-operator-3, sample-operator-4]
-$ kubectl -n ctrlmesh get lease
-NAME                                  HOLDER                                                           AGE
-ctrlmesh-manager                      ctrlmesh-57d6b4df57-mdslc_a804c1cc-4bca-4acc-a0c3-54762b459cb3   6m
-demo-manager---sample-demo-0-canary   sample-operator-0_55a0909a-a72b-469b-86c6-cbabccee1269           85s
-demo-manager---sample-demo-1-normal   sample-operator-1_45efc2fa-4928-4073-81c4-9b0892a7398d           81s
-demo-manager---sample-demo-2-normal   sample-operator-3_55914401-a735-445b-84d2-17120dca0e05           73s
-```
+:::info
+Supported OS/ARCH  
+**ControllerMesh** v0.1.0: `linux/amd64`, `linux/arm64`.  
+**Operating** v0.1.1: `linux/amd64`, `linux/arm64`.  
+:::
