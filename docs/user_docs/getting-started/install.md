@@ -23,7 +23,7 @@ brew install KusionStack/tap/kusion
 **Update Kusion**
 
 ```bash
-brew upgrade KusionStack/tap/kusion`
+brew upgrade KusionStack/tap/kusion
 ```
 
 **Uninstall Kusion**
