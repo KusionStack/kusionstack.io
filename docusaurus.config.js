@@ -98,13 +98,12 @@ const config = {
                         sidebarId: 'ctrlmesh',
                         label: 'Ctrlmesh',
                     },
-                    // {
-                    //     type: 'docSidebar',
-                    //     position: 'left',
-                    //     sidebarId: 'governance',
-                    //     label: 'Governance',
-                    // },
-
+                    {
+                        type: 'docSidebar',
+                        position: 'left',
+                        sidebarId: 'community',
+                        label: 'Community',
+                    },
                     {
                         to: 'https://blog.kusionstack.io',
                         label: 'Blog',
