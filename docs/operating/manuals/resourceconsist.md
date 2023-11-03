@@ -15,7 +15,8 @@ Reconcile and Employer/Employees' spec&status. If you wrote an adapter in your o
 ]and call AddToMgr to start a controller.
 
 >webhookAdapter is only necessary to be implemented for controllers following PodOpsLifecycle.
-```Go
+
+```go
 import (
     controllerframe "kusionstack.io/resourceconsist/pkg/frame/controller"
     webhookframe "kusionstack.io/resourceconsist/pkg/frame/webhook"
@@ -30,7 +31,7 @@ func main() {
 The adapters, ```kusionstack.io/resourceconsist/pkg/adapters```, consists of built-in adapters. You can start a
 controller with built-in adapters just calling AddBuiltinControllerAdaptersToMgr and AddBuiltinWebhookAdaptersToMgr,
 passing built-in adapters' names. Currently, an aliababacloudslb adapter has released. You can use it as follows:
-```Go
+```go
 import (
     "kusionstack.io/resourceconsist/pkg/adapters"
 )
@@ -94,7 +95,7 @@ are mocked as resources in the backend provider.
 How the demo controller adapter realized will be introduced in detail as follows,
 ```DemoControllerAdapter``` was defined, including a kubernetes client and a resourceProviderClient. What included in
 the Adapter struct can be defined as needed.
-```Go
+```go
 type DemoControllerAdapter struct {
 	client.Client
 	resourceProviderClient *DemoResourceProviderClient
@@ -103,13 +104,13 @@ type DemoControllerAdapter struct {
 Declaring that the DemoControllerAdapter implemented ```ReconcileAdapter``` and ```ReconcileLifecycleOptions```.
 Implementing ```RconcileAdapter``` is a must action, while ```ReconcileLifecycleOptions``` isn't, check the remarks
 for ```ReconcileLifecycleOptions``` in ```kusionstack.io/resourceconsist/pkg/frame/controller/types.go``` to find why.
-```Go
+```go
 var _ ReconcileAdapter = &DemoControllerAdapter{}
 var _ ReconcileLifecycleOptions = &DemoControllerAdapter{}
 ```
 Following two methods for DemoControllerAdapter inplementing ```ReconcileLifecycleOptions```, defines whether
 DemoControllerAdapter following PodOpsLifecycle and need record employees.
-```Go
+```go
 func (r *DemoControllerAdapter) FollowPodOpsLifeCycle() bool {
 	return true
 }
@@ -120,7 +121,7 @@ func (r *DemoControllerAdapter) NeedRecordEmployees() bool {
 ```
 ```IEmployer``` and ```IEmployee``` are interfaces that includes several methods indicating the status employer and
 employee.
-```Go
+```go
 type IEmployer interface {
 	GetEmployerId() string
 	GetEmployerStatuses() interface{}
@@ -153,7 +154,7 @@ type DemoPodStatus struct {
 ```GetSelectedEmployeeNames``` returns all employees' names selected by employer, here is pods' names selected by
 service. ```GetSelectedEmployeeNames``` is used for ensuring LifecycleFinalizer and ExpectedFinalizer, so you can give
 it an empty return if your adapter doesn't follow PodOpsLifecycle.
-```Go
+```go
 func (r *DemoControllerAdapter) GetSelectedEmployeeNames(ctx context.Context, employer client.Object) ([]string, error) {
 	svc, ok := employer.(*corev1.Service)
 	if !ok {
@@ -177,7 +178,7 @@ func (r *DemoControllerAdapter) GetSelectedEmployeeNames(ctx context.Context, em
 ```GetExpectedEmployer``` and ```GetCurrentEmployer``` defines what is expected under the spec of employer and what is
 current status, like the load balancer from a cloud provider. Here in the demo adapter, expected is defined by hardcode
 and current is retrieved from a fake resource provider ```demoResourceVipStatusInProvider```.
-```Go
+```go
 func (r *DemoControllerAdapter) GetExpectedEmployer(ctx context.Context, employer client.Object) ([]IEmployer, error) {
 	if !employer.GetDeletionTimestamp().IsZero() {
 		return nil, nil
@@ -214,7 +215,7 @@ func (r *DemoControllerAdapter) GetCurrentEmployer(ctx context.Context, employer
 ```CreateEmployer/UpdateEmployer/DeleteEmployer``` handles creation/update/deletion of resources related to employer on
 related backend provider. Here in the demo adapter, ```CreateEmployer/UpdateEmployer/DeleteEmployer``` handles
 ```demoResourceVipStatusInProvider```.
-```Go
+```go
 func (r *DemoControllerAdapter) CreateEmployer(ctx context.Context, employer client.Object, toCreates []IEmployer) ([]IEmployer, []IEmployer, error) {
 	if toCreates == nil || len(toCreates) == 0 {
 		return toCreates, nil, nil
@@ -287,7 +288,7 @@ func (r *DemoControllerAdapter) DeleteEmployer(ctx context.Context, employer cli
 ```GetExpectedEmployee```and```GetCurrentEmployee``` defines what is expected under the spec of employer and employees
 and what is current status, like real servers under the load balancer from a cloud provider. Here in the demo adapter,
 expected is calculated from pods and current is retrieved from a fake resource provider ```demoResourceRsStatusInProvider```.
-```Go
+```go
 // GetExpectEmployeeStatus return expect employee status
 func (r *DemoControllerAdapter) GetExpectedEmployee(ctx context.Context, employer client.Object) ([]IEmployee, error) {
 	if !employer.GetDeletionTimestamp().IsZero() {
@@ -357,7 +358,7 @@ func (r *DemoControllerAdapter) GetCurrentEmployee(ctx context.Context, employer
 ```CreateEmployees/UpdateEmployees/DeleteEmployees``` handles creation/update/deletion of resources related to employee
 on related backend provider. Here in the demo adapter, ```CreateEmployees/UpdateEmployees/DeleteEmployees```
 handles ```demoResourceRsStatusInProvider```.
-```Go
+```go
 func (r *DemoControllerAdapter) CreateEmployees(ctx context.Context, employer client.Object, toCreates []IEmployee) ([]IEmployee, []IEmployee, error) {
 	if toCreates == nil || len(toCreates) == 0 {
 		return toCreates, nil, nil
