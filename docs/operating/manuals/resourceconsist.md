@@ -17,6 +17,8 @@ Reconcile and Employer/Employees' spec&status. If you wrote an adapter in your o
 >webhookAdapter is only necessary to be implemented for controllers following PodOpsLifecycle.
 
 ```go
+package main
+
 import (
     controllerframe "kusionstack.io/resourceconsist/pkg/frame/controller"
     webhookframe "kusionstack.io/resourceconsist/pkg/frame/webhook"
