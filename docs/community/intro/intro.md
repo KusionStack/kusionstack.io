@@ -11,7 +11,11 @@ Welcome to the KusionStack open source community! Your participation is vital fo
 
 # CONTRIBUTING
 
-We welcome community contributions! Please see the `CONTRIBUTING.md` file in the respective KusionStack repository for instructions on how to submit changes.
+We welcome community contributions! Please see the `CONTRIBUTING.md` file in the respective KusionStack repository for instructions on how to submit changes. The `CONTRIBUTING.md` files are as follows:
+We appreciate contributions from the community! To submit changes, please refer to the contributing file in the corresponding KusionStack repository. The files are available at the following links:
+* [Kusion](https://github.com/KusionStack/kusion/blob/main/docs/CODE_OF_CONDUCT.md)
+* [Operating](https://github.com/KusionStack/operating/blob/main/docs/contributing.md)
+
 
 # CODE OF CONDUCT
-To make KusionStack a welcoming and harassment-free experience for everyone, we follow the [Kusion Code of Conduct](https://github.com/KusionStack/kusion/blob/main/docs/CODE_OF_CONDUCT.md).
+To make KusionStack a welcoming and harassment-free experience for everyone, we follow the [KusionStack Code of Conduct](https://github.com/KusionStack/kusion/blob/main/docs/CODE_OF_CONDUCT.md).
