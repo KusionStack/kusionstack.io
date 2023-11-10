@@ -34,19 +34,19 @@ brew uninstall KusionStack/tap/kusion
 
 ```mdx-code-block
 </TabItem>
-<TabItem value="curl|sh">
+<TabItem value="curl | sh">
 ```
 
 **Install Kusion**
 
 ```bash
-curl https://kusionstack.io/scripts/install.sh | sh
+curl https://www.kusionstack.io/scripts/install.sh | sh
 ```
 
 **Uninstall Kusion**
 
 ```bash
-curl https://kusionstack.io/scripts/uninstall.sh | sh
+curl https://www.kusionstack.io/scripts/uninstall.sh | sh
 ```
 
 ```mdx-code-block
