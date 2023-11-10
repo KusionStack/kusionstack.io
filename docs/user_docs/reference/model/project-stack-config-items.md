@@ -13,8 +13,6 @@ Here is an example of `project.yaml`.
 ```yaml
 # The project basic info
 name: helloworld
-generator:
-  type: AppConfiguration
 prometheus:
   operatorMode: True
   monitorType: Service
@@ -23,9 +21,6 @@ prometheus:
 The config items in `project.yaml` are explained below. 
 
 - `name`: The name of the project. 
-- `generator`: 
-    - `type`: The type of the generator to generate the resource Spec of the application, which can be one of `KCL` or `AppConfiguration`. 
-    `KCL` is the default option when this field is empty. 
 - `prometheus`: 
     - `operatorMode`: Decides whether Kusion runs Prometheus in **Operator** mode. Kusion will generate a **Custom Resource** if it is **true**, while generate some annotations if it is **false**. 
     - `monitorType`: The type of the monitored resource, which can be one of `Service` or `Pod`. 
