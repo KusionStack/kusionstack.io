@@ -7,7 +7,7 @@ sidebar_position: 1
 Controller Mesh requires **Kubernetes version >= 1.18**
 ```shell
 # Firstly add charts repository if you haven't do this.
-$ helm repo add kusionstack https://kusionstack.io/charts
+$ helm repo add kusionstack https://kusionstack.github.io/charts
 
 # To update the kusionstack repo.
 $ helm repo update kusionstack
