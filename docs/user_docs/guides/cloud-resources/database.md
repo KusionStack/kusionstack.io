@@ -251,7 +251,7 @@ More details about Catalog models can be found in [Catalog](https://github.com/K
 You can complete the delivery of the WordPress application using the following command line: 
 
 ```shell
-cd wordpress-cloud-rds && kusion apply --yes
+cd wordpress-cloud-rds/dev && kusion apply --yes
 ```
 
 <Tabs>

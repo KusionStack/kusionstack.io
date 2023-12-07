@@ -16,6 +16,8 @@ name: helloworld
 prometheus:
   operatorMode: True
   monitorType: Service
+generator:
+  type: AppConfiguration
 ```
 
 The config items in `project.yaml` are explained below. 
@@ -24,6 +26,8 @@ The config items in `project.yaml` are explained below.
 - `prometheus`: 
     - `operatorMode`: Decides whether Kusion runs Prometheus in **Operator** mode. Kusion will generate a **Custom Resource** if it is **true**, while generate some annotations if it is **false**. 
     - `monitorType`: The type of the monitored resource, which can be one of `Service` or `Pod`. 
+- `generator`: 
+    - `type`: Specify the generator type of the project, which can be one of `AppConfiguration` or `KCL` and defaults to `AppConfiguration`. 
 
 ### Backend Configuration
 
