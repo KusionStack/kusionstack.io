@@ -16,8 +16,8 @@ name: helloworld
 prometheus:
   operatorMode: True
   monitorType: Service
-generator:
-  type: AppConfiguration
+# generator:
+#   type: AppConfiguration
 ```
 
 The config items in `project.yaml` are explained below. 
