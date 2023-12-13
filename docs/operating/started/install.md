@@ -15,12 +15,6 @@ $ helm repo update kusionstack
 
 # Install the latest version.
 $ helm install operating kusionstack/operating 
-
-# Upgrade to the latest version 
-$ helm upgrade operating kusionstack/operating 
-
-# Uninstall
-$ helm uninstall operating
 ```
 
 
@@ -40,4 +34,22 @@ The following table lists the configurable parameters of the chart and their def
 | `resources.limits.cpu`      | CPU resource limit of operating-manager container      | `500m` |
 | `resources.limits.memory` | Memory resource limit of operating-manager container   | `128Mi` |
 | `resources.requests.cpu`    | CPU resource request of operating-manager container    | `10m` |
-| `resources.requests.memory` | Memory resource request of operating-manager container | `64Mi` | 
+| `resources.requests.memory` | Memory resource request of operating-manager container | `64Mi` |
+
+### Upgrade
+
+Run following command to upgrade KusionStack Operating to the latest version.
+
+```shell
+# Upgrade to the latest version 
+$ helm upgrade operating kusionstack/operating 
+```
+
+### Uninstall
+
+Run following command to uninstall KusionStack Operating.
+
+```shell
+# Uninstall
+$ helm uninstall operating
+```
