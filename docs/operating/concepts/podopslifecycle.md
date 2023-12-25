@@ -1,53 +1,212 @@
 ---
 sidebar_position: 2
 ---
+
 # PodOpsLifecycle
 
-Kubernetes provides a set of default controllers for workload management, like StatefulSet, Deployment, DaemonSet for instances. While user services outside Kubernetes have difficulty to participate in the operation lifecycle of a pod.
+## Background
 
-PodOpsLifecycle attempts to provide Kubernetes administrators and developers with finer-grained control the entire lifecycle of a pod. For example, we can develop a controller to do some necessary things in both the PreCheck and PostCheck phases to avoid traffic loss.
+Kubernetes provides a set of default controllers for workload management, such as StatefulSet, Deployment, and DaemonSet, which are responsible for Pod operations. 
+Meanwhile, application users may also have some services outside the Kubernetes cluster that are closely related to the Pod Lifecycle, including traffic routing, service discovery, or alert monitoring. 
+However, they face challenges in participating in the operational lifecycle of a Pod, even if they are connected to Kubernetes by developing a controller that watches the Pods.
 
-## Goals
+PodOpsLifecycle aims to offer Kubernetes administrators and developers finer-grained control over the entire lifecycle of a Pod. 
+It enables developers to execute necessary actions before, during, and after specific phases of a Pod operation. 
+For instance, removing the Pod's IP from the traffic route before initiating the Pod operation, performing the actual Pod operations, and adding it back after the Pod operation is completed to achieve a smooth and graceful Pod operation, and prevent any traffic loss.
 
-1. Provides extensibility that allows users to control the whole lifecycle of pods using the PodOpsLifecycle mechanism.
-2. Provide some concurrency, multi controllers can operate the pod in the same time. For example, when a pod is going to be updated, other controllers may want to delete it.
-3. All the lifecycle phases of a pod can be traced.
+## Introduction
 
-## Proposal
+In PodOpsLifecycle, participants are classified into two roles: `operation controllers` and `cooperation controllers`.
+- **Operation controllers** are responsible for operating Pods, such as Deployments and StatefulSets from Kubernetes, and CollaSets from Operating which intend to scale, update, or recreate Pods.
+- **Cooperation controllers** are sensitive with Pod status. They handle resources or configurations around Pods, which may include traffic controller, alert monitoring controller, etc. These controllers typically reconcile Kubernetes resources around Pods with external services, such as sync Pod IPs with the LB provider, or maintaining Pods' metadata with application monitoring system.
 
-### User Stories
+The two types of controllers do not need to be aware of each other. All controllers are organized by PodOpsLifecycle. Additionally, KusionStack Operating introduces extra phases around the native Kubernetes Pod Lifecycle: ServiceAvailable, Preparing, and Completing.
 
-#### Story 1
+<img src="../../../static/img/operating/concepts/podopslifecycle/pod-ops-lifecycle.png" width="800"/>
 
-As a developer that focuses on pod traffic, I should remove the endpoint once the readiness gate `pod.kusionstack.io/service-ready` set to false which means traffic to the pod should be turned off, and I should add the endpoint once the readiness gate `pod.kusionstack.io/service-ready` set to false and pod is ready which means traffic to the pod should be turned on.
+- **Completing**: After a Pod is created or updated and becomes ready, Operating marks its PodOpsLifecycle as the `Completing` phase. During this phase, the Pod is in a ready condition, prompting cooperation controllers to perform actions such as registering the Pod IP in the traffic route. Once all cooperation controllers complete their tasks, Operating sets the PodOpsLifecycle to the `ServiceAvailable` phase.
+- **ServiceAvailable**: This phase indicates that the Pod is in a normal state and ready to serve. If everything goes smoothly, the Pod remains in the `ServiceAvailable` phase until the next operation.
+- **Preparing**: When an operation controller needs to operate the Pod, it triggers a new PodOpsLifecycle. The Pod then transitions from the `ServiceAvailable` phase to the `Preparing` phase. During this phase, the Pod is initially marked as Unready by setting ReadinessGate to false. All cooperation controllers then begin preparing tasks, such as removing the Pod's IP from the traffic route. After completing these tasks, the Pod enters the `Operating` phase.
+- **Operating**: If a Pod enters the `Operating` phase, it is expected to accept any kind of operation without any damage, including recreation, scaling-in, upgrading, etc. Operation controllers are permitted to apply any changes to this Pod. Once all these operations are completed, the Pod advances to the next phase — `Completing`, and the PodOpsLifecycle continues.
+  The relationship between PodOpsLifecycle and Kubernetes native Pod Lifecycle can be checked by following sequence diagram.
 
-![](https://mermaid.ink/svg/pako:eNqtksFqwzAMhl9F-Jy29zACgx43GO1t-KLaSmuaWJ6tZJTSd5-SbRkb9DafbPmX_P2WrsaxJ1ObQm8DRUfbgMeMvY1W0Aln2NJIHSfKUyhhluBCwijwwt5G0LUoYNU0U7iGp1AEMHp4R3EnSN9SvZxFS0oNO0IfIpUCRxSapOvzUALHogDndeBNoTwGR6usygsUEhCGFrtCd9_f9TwSyImAok8cFLfN3EPH6OGAHarT_G9IoYDkgaqHQ940s21NAcfRB9Gsud6iusv86P1vYnX5h9dUpqfcY_DasetUyRpN6cmaWreeWhw6scbGm0pxEN5fojP1TGeG5NXOV4NNPf9gZbSXr8w_Z1Jozs-fUzEPx-0DO3m-sA)
+<img src="../../../static/img/operating/concepts/podopslifecycle/pod-ops-lifecycle-sequence-diagram.png"/>
 
-The finalizer can be added and removed automatically if we implement interface ReconcileAdapter provided by resourceconsist controller.
+## Developer's Guide
 
-#### Story 2
+This section introduces how to develop operation controllers and cooperation controllers to interact with PodOpsLifecycle.
+- The operation controller is responsible for a set of Pod operation tasks. KusionStack Operating has already provided various types of operation controllers. Users only need to develop a new operation controller if a new kind of Pod operation needs to be added.
+- The cooperation controller participates in PodOpsLifecycle before and after operating on a Pod, such as the Traffic controller, alert monitoring controller, and other controllers responsible for maintaining the Pod and application status. Users should develop a new cooperation controller only when there is a new type of service or status around the Pod that needs to be maintained, such as integrating with a new traffic provider.
 
-1. As a developer that maintain a system that provide pod operations like update and scale, I should add the label `operating.podopslifecycle.kusionstack.io/<id>=<time>` and `operation-type.podopslifecycle.kusionstack.io/<id>=<type>` at the same time when I want to operate a pod.
-2. If the operation is completed I should remove the label `operating.podopslifecycle.kusionstack.io/<id>=<time>` and `operation-type.podopslifecycle.kusionstack.io/<id>=<type>` at the same time when.
-3. If I want to cancel the operation, I need to add the label `undo-operation-type.podopslifecycle.kusionstack.io/<id>=<type>`.
+### Operation Controller
 
-The sequence diagram below describes how to update a pod.
+The operation controller is responsible for Pod operations. The tasks that an operation controller needs to perform during PodOpsLifecycle include triggering a PodOpsLifecycle, checking whether the Pod has entered the Operating phase, performing Pod operations, and marking Pod operations as finished. These actions interacting with PodOpsLifecycle are provided in the package `kusionstack.io/operating/pkg/controllers/utils/podopslifecycle/utils.go`.
 
-![](https://mermaid.ink/svg/pako:eNqtUk1LAzEU_CuPnLfb-1IXhB4VRPEiubwmr21ovkzeVpbS_26ylSpi1UNzSoZhZjLMQaigSXQi0-tAXtHS4Cahk14yKg4JlrQnGyKlCkVMbJSJ6BkegpYeyjkzYNb3Fe7gzmQG9BrekNX2Iu1Wa7C4IgsVRzZ-08agQ8zWrEmNylK7G7IJPpc0u9aE-cLo_mbBxlHfwGKV5n21we9Cwc94jPRPtcLsARl4S5DREVT99hS7BJ0Cn-OX331x-suiRqPLRT1HXTQm4_hLn4_kwp6u01X6QesadYlGOEoOjS5zOtSvSFEYjqToylXTGgfLUkh_LFQcODyNXomO00CNGKYiPtYnujXaXNAytJcQPt-kTdnk_Wmy03KP7zEC-QI)
+A simple operation controller reconcile method would look like this:
 
-#### Story 3
+```go
+import (
+    "context"
 
-As a developer that cares about pod operation observability, I can use the `<id>=<time>` and `<id>=<type>` in the labels to tracing a pod. The `<time>` is a unix nano time, and the `<type>` is a string that describe the operation type, and the `<id>` is a string that used in the whole operation lifecycle.
+    corev1 "k8s.io/api/core/v1"
+    "sigs.k8s.io/controller-runtime/pkg/reconcile"
+    "sigs.k8s.io/controller-runtime/pkg/client"
+    
+    "kusionstack.io/operating/pkg/controllers/utils/podopslifecycle"
+)
 
-## Design Details
+var operationAdapter = &OperationOpsLifecycleAdapter{}
 
-1. Podopslifecycle mechanism is provided by a mutating webhook server and a controller. The mutating webhook server will chage the labels at the right time, and the controller will set the readinessgate `pod.kusionstack.io/service-ready` to true or false if necessary. The controller will also chage the label at some time.
-2. The label `operating.podopslifecycle.kusionstack.io/<id>=<time>` and `operation-type.podopslifecycle.kusionstack.io/<id>=<type>` will be validated by a validating webhook server, they must be added or removed at the same time by the operation controller.
-3. Traffic controller should turn the traffic on or off based on the readiness gate `pod.kusionstack.io/service-ready` and pod condition `Ready`.
-4. Protection finalizer names must have prefix `prot.podopslifecycle.kusionstack.io`. They are used to determine whether the traffic has been completely removed or is fully prepared.
-5. The special label `podopslifecycle.kusionstack.io/service-available` indicate a pod is available to serve.
-6. We can use the message `<id>=<time>` and `<id>=<type>` in the labels to tracing a pod. The `<time>` is a unix time.
+type OperationOpsLifecycleAdapter struct {
+}
 
-Below we use a sequence diagram to show how to use podopslifecycle mechanism to avoid traffic loss. You can also use this podopslifecycle mechanism to do others things, for example, to prevent tasks to be interrupted when they are need to run for a long time.
+// GetID indicates ID of the PodOpsLifecycle
+func (a *OperationOpsLifecycleAdapter) GetID() string {
+    return "new-id"
+}
 
-![](https://mermaid.ink/svg/pako:eNrNWF2O0zAQvoqVF0BqC1sWAdVSCcELErAIkJBQH3DtSWutYwfb2VVB3IAjcSeuwDhOmqQJbZMuEk-brsfjz99885N8j5jmEM0iC18zUAxeCroyNFmohaOZ0ypLlmD8r5QaJ5hIqXLkMgVDndCKvNDKGS1l2-ad5h3_ukztaxED2zAJHcsfDVVWeM_vs7YBrsaxYM1D0cYAc8SslvTu2fn5aPrwycj_fTA5v-dXF64LLhnP5_7EGXnOOdHBQq0mqeY6tbLEOLnKLG60jrKridD3LwSfP7twIoH5iFwszf05rbZrNXabFI70gZZzQh1xayCWJkC810lA_FY7IEas1o7oOMD8BIRRRTIL_Y4jTpMVhGO8uXeIfgQvjtoJSsXLpzWoQcQQpAT4718_t_ykBsZsDWh5vJcKXlMUFcBLlOsg102AJTlMGwM21YrjdQNVS2oBo6vydcGLiAskUEpiEIwlN8KtcStu8gDLsKbU2r9QAHyAxhQnTZ3hQyKs33bQW46oSWpLXk2KZ7UEx3Uu4hgMYAJ6VzaX4RKZBxNrkyBBeH2WGW8hN9s7I-SbNSBxhgi3f08gscoDT31g2hIOzl9V4Zblxqvf3LEVD95NkdD51UDx3ZIwffRoNJ1OR2ePH9ZKwn7VHx-sIKUiTM7vLYKNdWtYOZFWE4uSNEBRiGAtWVGMFjra3YxcXAsGY2-5IdSSGDeXFaRdK3fu2Nc_xsLDys8YEY4gNcZKAUMX1GwwfHhfW4bfhSMSfQ0dyRULRaX4hpjyJ7nZF7yzp9PR9MHxwfO5mRpUOMsVsj3LkjVFNEvYIuMNtFWCQf8yRaULD4e6Ta2qwlHaKjEi457ISvpSXGESQyop85yiLwwLSHDFr3om1sNxSq_z4my66d_zCsYAdbSfsi1nr-JCQ9u1Gz8OYGPDssJANokp741Vx651JkPpzBTX45MxlwptBPywHGv4-nVSSZe-yewXbhGQIZ2w1l92vQztUy15DGxVndCKqrr10IFhN5dPaLdcKzhZM4eGuf6HHJro6pnV0mZTnKdlRbv5lcHP2z6KF6HsNHdEmZu_inczA8_oGgQq7Ydkr8R_W0prJPctjBD5XNq8XC8VNut-NVRo6_7BFB0GniG-2-E_fpRuiKDnJL3F2ovVv40Y3a-MxwV3IJT2CxLTSYqdG25jXvyvxkVnMqRL-ajxKrjkfWnj12sv0jmpHbPb5LYGv3ZqNapIn-rXblCn9YuOhjckK_e5ObGnD1BpyPNigjPgQ6506Awh4f1btY_8lwM-S3XRayryqehLmdDRKEqw8FPBo1n0faEIWUR4WAKLaIaPHGKa4bAWLdQPNPUftT5sFItmufSiLOUY9uKrVzQLrzdRStVnravfgLrV5k34VJZ_MfvxBzhuFb0)
+// GetType indicates type for this Operation Controller
+func (a *OperationOpsLifecycleAdapter) GetType() podopslifecycle.OperationType {
+    return "new-type"
+}
+
+// AllowMultiType indicates whether multiple IDs which have the same Type are allowed
+func (a *OperationOpsLifecycleAdapter) AllowMultiType() bool {
+    return true
+}
+
+// WhenBegin is a hook, which will be executed when begin a lifecycle
+func (a *OperationOpsLifecycleAdapter) WhenBegin(pod client.Object) (bool, error) {
+    return false, nil
+}
+
+// WhenFinish is a hook, which will be executed when finish a lifecycle
+func (a *OperationOpsLifecycleAdapter) WhenFinish(pod client.Object) (bool, error) {
+    return false, nil
+}
+
+......
+func (r *PodOperationReconciler) Reconcile(ctx context.Context, req reconcile.Request) (ctrl.Result, error) {
+    // get the Pod
+    pod := &corev1.Pod{}
+    if err := r.Get(ctx, req.NamespacedName, pod); err != nil {
+        if !errors.IsNotFound(err) {
+            return reconcile.Result{}, err
+        }
+        return reconcile.Result{}, nil
+    }
+
+    // check if the Pod needs operation
+    if !r.needOperation(pod) {
+        return reconcile.Result{}, nil
+    }
+
+    // if PodOpsLifecycle has not been triggered, trigger it
+    if !podopslifecycle.IsDuringOps(OpsLifecycleAdapter, pod) {
+        if updated, err := podopslifecycle.Begin(r, operationAdapter, pod); err != nil {
+            return reconcile.Result{}, err
+        } else if updated {
+            return reconcile.Result{}, nil
+        }
+    }
+
+    // waiting until Pod enters operating phase
+    if _, allowed := podopslifecycle.AllowOps(operationAdapter, 0, pod); !allowed {
+        return reconcile.Result{}, nil
+    }
+
+    // do operation works
+    if completed := r.doPodOperation(pod); !completed {
+        return reconcile.Result{}, nil
+    }
+
+    // after operation works completed, finish operating phase to continue PodOpsLifecycle
+    if _, err := podopslifecycle.Finish(r, operationAdapter, pod); err != nil {
+        return reconcile.Result{}, err
+    }
+}
+```
+
+### Pod Cooperation Controller
+
+There are two ways to develop a cooperation controller. 
+One way is to develop a controller using the controller runtime and adhering to some conventions of PodOpsLifecycle and Kubernetes. 
+Another way is to take the use of [ResourceConsist](https://github.com/KusionStack/resourceconsist) framework provided by KusionStack, which can be referenced from its [documentation](https://www.kusionstack.io/docs/operating/manuals/resourceconsist).
+
+The following outlines the first approach.
+
+```go
+import (
+    "context"
+
+    corev1 "k8s.io/api/core/v1"
+    "k8s.io/apimachinery/pkg/api/errors"
+    k8spod "k8s.io/kubernetes/pkg/api/v1/pod/util.go"
+    "sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
+    "sigs.k8s.io/controller-runtime/pkg/reconcile"
+
+    operatingapps "kusionstack.io/operating/apis/apps/v1alpha1"
+)
+
+const (
+    // Finalizer needs to have prefix: `prot.podopslifecycle.kusionstack.io`.
+    // KusionStack Operating keeps this prefix back-compatible,
+    // so that it can be hard code to decouple with KusionStack Operating.
+    finalizerPrefix = operatingapps.PodOperationProtectionFinalizerPrefix
+
+    protectionFinalizer = finalizerPrefix + "/" + "unique-id"
+)
+
+......
+func (r *PodResourceReconciler) Reconcile(ctx context.Context, req reconcile.Request) (reconcile.Result, error) {
+    // get the Pod
+    pod := &corev1.Pod{}
+    if err := r.Get(ctx, req.NamespacedName, pod); err != nil {
+        if !errors.IsNotFound(err) {
+            return reconcile.Result{}, err
+        }
+        return reconcile.Result{}, nil
+    }
+
+    if k8spod.IsPodReady(pod) {
+        // do resource reconcile like add Pod IP to traffic route
+        r.trafficOn(pod.status.PodIP)
+        // It is important to add a unique finalizer on this Pod
+        return reconcile.Result{}, r.addFinalizer(ctx, pod, protectionFinalizer)
+    }
+
+    if !k8spod.IsPodReady(pod) {
+        // do resource reconcile like remove Pod IP from traffic route
+        r.trafficOff(pod.status.PodIP)
+        // It is important to remove the unique finalizer from this Pod
+        return reconcile.Result{}, r.removeFinalizer(ctx, pod, protectionFinalizer)
+    }
+}
+
+func (r *PodResourceReconciler) addFinalizer(ctx context.Context, pod *corev1.Pod, finalizer string) error {
+    if controllerutil.ContainsFinalizer(pod, finalizer) {
+        return nil
+    }
+
+    controllerutil.AddFinalizer(pod, finalizer)
+    return r.Update(ctx, pod)
+}
+
+func (r *PodResourceReconciler) removeFinalizer(ctx context.Context, pod *corev1.Pod, finalizer string) error {
+    if !controllerutil.ContainsFinalizer(pod, finalizer) {
+        return nil
+    }
+
+    controllerutil.RemoveFinalizer(pod, finalizer)
+    return r.Update(ctx, pod)
+}
+```
+
+## Key Features
+
+### Concurrency Support
+
+PodOpsLifecycle in KusionStack Operating supports concurrency. 
+It means PodOpsLifecycle is able to organize and track multi controllers operating the same pod at the same time. 
+For example, when a controller is going to update Pod, other controllers are allowed to do other operations at the same time, like delete, restart, recreate it, 
+although the result may not be meaningful.
