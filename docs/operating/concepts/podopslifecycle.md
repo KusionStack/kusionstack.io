@@ -127,7 +127,7 @@ func (r *PodOperationReconciler) Reconcile(ctx context.Context, req reconcile.Re
 }
 ```
 
-### Pod sensitive controller
+### Pod Sensitive Controller
 
 There are two ways to develop a Pod sensitive controller. 
 One way is to develop a controller using the controller runtime and adhering to some conventions of PodOpsLifecycle and Kubernetes. 
