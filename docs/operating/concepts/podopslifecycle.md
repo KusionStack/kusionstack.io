@@ -6,13 +6,13 @@ sidebar_position: 2
 
 ## Background
 
-Kubernetes provides a set of default controllers for workload management, such as StatefulSet, Deployment, and DaemonSet for instances, which are responsible for Pod operations. 
+Kubernetes provides a set of default controllers for workload management, such as StatefulSet, Deployment, and DaemonSet, which are responsible for Pod operations. 
 Meanwhile, application users may also have some services outside the Kubernetes cluster that are closely related to the Pod Lifecycle, including traffic routing, service discovery, or alert monitoring. 
 However, they face challenges in participating in the operational lifecycle of a Pod, even if they are connected to Kubernetes by developing a controller that watches the Pods.
 
 PodOpsLifecycle aims to offer Kubernetes administrators and developers finer-grained control over the entire lifecycle of a Pod. 
 It enables developers to execute necessary actions before, during, and after specific phases of a Pod operation. 
-For instance, removing the Pod's IP from the traffic route before initiating the Pod operation, performing the actual Pod operations, and adding it back after the Pod operation is completed to achieve a smooth and graceful Pod operation, preventing any traffic loss.
+For instance, removing the Pod's IP from the traffic route before initiating the Pod operation, performing the actual Pod operations, and adding it back after the Pod operation is completed to achieve a smooth and graceful Pod operation, and prevent any traffic loss.
 
 ## Introduction
 
@@ -62,27 +62,27 @@ type OperationOpsLifecycleAdapter struct {
 
 // GetID indicates ID of the PodOpsLifecycle
 func (a *OperationOpsLifecycleAdapter) GetID() string {
-	return "new-id"
+    return "new-id"
 }
 
 // GetType indicates type for this Operation Controller
 func (a *OperationOpsLifecycleAdapter) GetType() podopslifecycle.OperationType {
-	return "new-type"
+    return "new-type"
 }
 
 // AllowMultiType indicates whether multiple IDs which have the same Type are allowed
 func (a *OperationOpsLifecycleAdapter) AllowMultiType() bool {
-	return true
+    return true
 }
 
 // WhenBegin is a hook, which will be executed when begin a lifecycle
 func (a *OperationOpsLifecycleAdapter) WhenBegin(pod client.Object) (bool, error) {
-	return false, nil
+    return false, nil
 }
 
 // WhenFinish is a hook, which will be executed when finish a lifecycle
 func (a *OperationOpsLifecycleAdapter) WhenFinish(pod client.Object) (bool, error) {
-	return false, nil
+    return false, nil
 }
 
 ......
@@ -90,11 +90,11 @@ func (r *PodOperationReconciler) Reconcile(ctx context.Context, req reconcile.Re
     // get the Pod
     pod := &corev1.Pod{}
     if err := r.Get(ctx, req.NamespacedName, pod); err != nil {
-		if !errors.IsNotFound(err) {
-			return reconcile.Result{}, err
-		}
-		return reconcile.Result{}, nil
-	}
+        if !errors.IsNotFound(err) {
+            return reconcile.Result{}, err
+        }
+        return reconcile.Result{}, nil
+    }
 
     // check if the Pod needs operation
     if !r.needOperation(pod) {
@@ -162,11 +162,11 @@ func (r *PodResourceReconciler) Reconcile(ctx context.Context, req reconcile.Req
     // get the Pod
     pod := &corev1.Pod{}
     if err := r.Get(ctx, req.NamespacedName, pod); err != nil {
-		if !errors.IsNotFound(err) {
-			return reconcile.Result{}, err
-		}
-		return reconcile.Result{}, nil
-	}
+        if !errors.IsNotFound(err) {
+            return reconcile.Result{}, err
+        }
+        return reconcile.Result{}, nil
+    }
 
     if k8spod.IsPodReady(pod) {
         // do resource reconcile like add Pod IP to traffic route
@@ -184,7 +184,7 @@ func (r *PodResourceReconciler) Reconcile(ctx context.Context, req reconcile.Req
 }
 
 func (r *PodResourceReconciler) addFinalizer(ctx context.Context, pod *corev1.Pod, finalizer string) error {
-	if controllerutil.ContainsFinalizer(pod, finalizer) {
+    if controllerutil.ContainsFinalizer(pod, finalizer) {
         return nil
     }
 
@@ -193,7 +193,7 @@ func (r *PodResourceReconciler) addFinalizer(ctx context.Context, pod *corev1.Po
 }
 
 func (r *PodResourceReconciler) removeFinalizer(ctx context.Context, pod *corev1.Pod, finalizer string) error {
-	if !controllerutil.ContainsFinalizer(pod, finalizer) {
+    if !controllerutil.ContainsFinalizer(pod, finalizer) {
         return nil
     }
 
