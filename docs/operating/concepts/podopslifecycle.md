@@ -16,17 +16,17 @@ For instance, removing the Pod's IP from the traffic route before initiating the
 
 ## Introduction
 
-In PodOpsLifecycle, participants are classified into two roles: `Pod operation controllers` and `Pod sensitive controllers`.
-- **Pod operation controllers** are responsible for operating Pods, such as Deployments and StatefulSets from Kubernetes, and CollaSets from Operating which intend to scaling, udating, or recreating Pods.
-- **Pod sensitive controllers** handle resources or configurations around Pods, which may include traffic controllers, alert monitoring controller, etc. These controllers typically reconcile Kubernetes resources around Pods with external services, such as Kubernetes Service resources with the LB provider, or alert monitoring controller with application monitoring system.
+In PodOpsLifecycle, participants are classified into two roles: `operation controllers` and `cooperation controllers`.
+- **Operation controllers** are responsible for operating Pods, such as Deployments and StatefulSets from Kubernetes, and CollaSets from Operating which intend to scale, update, or recreate Pods.
+- **Cooperation controllers** are sensitive with Pod status. They handle resources or configurations around Pods, which may include traffic controller, alert monitoring controller, etc. These controllers typically reconcile Kubernetes resources around Pods with external services, such as sync Pod IPs with the LB provider, or maintaining Pods' metadata with application monitoring system.
 
 The two types of controllers do not need to be aware of each other. All controllers are organized by PodOpsLifecycle. Additionally, KusionStack Operating introduces extra phases around the native Kubernetes Pod Lifecycle: ServiceAvailable, Preparing, and Completing.
 
 <img src="../../../static/img/operating/concepts/podopslifecycle/pod-ops-lifecycle.png" width="800"/>
 
-- **Completing**: After a Pod is created or updated and becomes ready, Operating marks its PodOpsLifecycle as the `Completing` phase. During this phase, the Pod is in a ready condition, prompting Pod sensitive controllers to perform actions such as registering the Pod IP in the traffic route. Once all Pod sensitive controllers complete their tasks, Operating sets the PodOpsLifecycle to the `ServiceAvailable` phase.
+- **Completing**: After a Pod is created or updated and becomes ready, Operating marks its PodOpsLifecycle as the `Completing` phase. During this phase, the Pod is in a ready condition, prompting cooperation controllers to perform actions such as registering the Pod IP in the traffic route. Once all cooperation controllers complete their tasks, Operating sets the PodOpsLifecycle to the `ServiceAvailable` phase.
 - **ServiceAvailable**: This phase indicates that the Pod is in a normal state and ready to serve. If everything goes smoothly, the Pod remains in the `ServiceAvailable` phase until the next operation.
-- **Preparing**: When an operation controller needs to operate the Pod, it triggers a new PodOpsLifecycle. The Pod then transitions from the `ServiceAvailable` phase to the `Preparing` phase. During this phase, the Pod is initially marked as Unready by setting ReadinessGate to false. All Pod sensitive controllers then begin preparing tasks, such as removing the Pod's IP from the traffic route. After completing these tasks, the Pod enters the `Operating` phase.
+- **Preparing**: When an operation controller needs to operate the Pod, it triggers a new PodOpsLifecycle. The Pod then transitions from the `ServiceAvailable` phase to the `Preparing` phase. During this phase, the Pod is initially marked as Unready by setting ReadinessGate to false. All cooperation controllers then begin preparing tasks, such as removing the Pod's IP from the traffic route. After completing these tasks, the Pod enters the `Operating` phase.
 - **Operating**: If a Pod enters the `Operating` phase, it is expected to accept any kind of operation without any damage, including recreation, scaling-in, upgrading, etc. Operation controllers are permitted to apply any changes to this Pod. Once all these operations are completed, the Pod advances to the next phase — `Completing`, and the PodOpsLifecycle continues.
   The relationship between PodOpsLifecycle and Kubernetes native Pod Lifecycle can be checked by following sequence diagram.
 
@@ -34,9 +34,9 @@ The two types of controllers do not need to be aware of each other. All controll
 
 ## Developer's Guide
 
-This section introduces how to develop operation controllers and Pod sensitive controllers to interact with PodOpsLifecycle.
-- The Pod operation controller is responsible for a set of Pod operation tasks. KusionStack Operating has already provided various types of operation controllers. Users only need to develop a new operation controller if a new kind of Pod operation needs to be added.
-- The Pod sensitive controller participates in PodOpsLifecycle before and after operating on a Pod, such as the Traffic controller, alert monitoring controller, and other controllers responsible for maintaining the Pod and application status. Users should develop a new Pod sensitive controller only when there is a new type of service or status around the Pod that needs to be maintained, such as integrating with a new traffic provider.
+This section introduces how to develop operation controllers and cooperation controllers to interact with PodOpsLifecycle.
+- The operation controller is responsible for a set of Pod operation tasks. KusionStack Operating has already provided various types of operation controllers. Users only need to develop a new operation controller if a new kind of Pod operation needs to be added.
+- The cooperation controller participates in PodOpsLifecycle before and after operating on a Pod, such as the Traffic controller, alert monitoring controller, and other controllers responsible for maintaining the Pod and application status. Users should develop a new cooperation controller only when there is a new type of service or status around the Pod that needs to be maintained, such as integrating with a new traffic provider.
 
 ### Operation Controller
 
@@ -127,9 +127,9 @@ func (r *PodOperationReconciler) Reconcile(ctx context.Context, req reconcile.Re
 }
 ```
 
-### Pod Sensitive Controller
+### Pod Cooperation Controller
 
-There are two ways to develop a Pod sensitive controller. 
+There are two ways to develop a cooperation controller. 
 One way is to develop a controller using the controller runtime and adhering to some conventions of PodOpsLifecycle and Kubernetes. 
 Another way is to take the use of [ResourceConsist](https://github.com/KusionStack/resourceconsist) framework provided by KusionStack, which can be referenced from its [documentation](https://www.kusionstack.io/docs/operating/manuals/resourceconsist).
 
