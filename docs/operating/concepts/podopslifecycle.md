@@ -28,7 +28,8 @@ The two types of controllers do not need to be aware of each other. All controll
 - **ServiceAvailable**: This phase indicates that the Pod is in a normal state and ready to serve. If everything goes smoothly, the Pod remains in the `ServiceAvailable` phase until the next operation.
 - **Preparing**: When an operation controller needs to operate the Pod, it triggers a new PodOpsLifecycle. The Pod then transitions from the `ServiceAvailable` phase to the `Preparing` phase. During this phase, the Pod is initially marked as Unready by setting ReadinessGate to false. All cooperation controllers then begin preparing tasks, such as removing the Pod's IP from the traffic route. After completing these tasks, the Pod enters the `Operating` phase.
 - **Operating**: If a Pod enters the `Operating` phase, it is expected to accept any kind of operation without any damage, including recreation, scaling-in, upgrading, etc. Operation controllers are permitted to apply any changes to this Pod. Once all these operations are completed, the Pod advances to the next phase — `Completing`, and the PodOpsLifecycle continues.
-  The relationship between PodOpsLifecycle and Kubernetes native Pod Lifecycle can be checked by following sequence diagram.
+
+The PodOpsLifecycle detail and the relationship with Kubernetes native Pod Lifecycle is showed by following sequence diagram.
 
 ![pod-ops-lifecycle-sequence-diagram](../../../static/img/operating/concepts/podopslifecycle/pod-ops-lifecycle-sequence-diagram.png)
 
