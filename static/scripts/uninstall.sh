@@ -30,7 +30,8 @@ KUSION_HOME_DIR=${KUSION_HOME_DIR:-"$HOME/.kusion"}
 SKIP_CLEAR_SOURCE_KUSION_ENV=${SKIP_CLEAR_SOURCE_KUSION_ENV:-"false"}
 
 # Source kusion env file content
-SOURCE_KUSION_CONTENT='source $HOME/.kusion/.env'
+install_dir=$(echo "$KUSION_HOME_DIR" | sed "s:^$HOME:\$HOME:")
+SOURCE_KUSION_CONTENT="source $install_dir/.env"
 SOURCE_KUSION_ANNOTATION_CONTENT='# Source kusion env file'
 
 info() {

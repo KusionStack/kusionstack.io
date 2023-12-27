@@ -129,22 +129,21 @@ toInstallVersion() {
     fi
 }
 
-# todo: only va.b.c is formal release tag, now support all version
 getLatestReleaseVersion() {
     local KusionReleaseURL="${RELEASE_URL}"
     local latest_release=""
 
     if [ "$KUSION_HTTP_REQUEST_CLI" == "curl" ]; then
-        latest_release=$(runAsRoot curl -s $KusionReleaseURL | grep \"tag_name\" | awk 'NR==1{print $2}' |  sed -n 's/\"\(.*\)\",/\1/p')
+        latest_release=$(runAsRoot curl -s $KusionReleaseURL | grep \"tag_name\" | awk '{print $2}' | sed -n 's/\"\(.*\)\",/\1/p' | grep -o '^v[0-9]\+\.[0-9]\+\.[0-9]\+$' | head -n 1)
     else
-        latest_release=$(runAsRoot wget -q --header="Accept: application/json" -O - $KusionReleaseURL | grep \"tag_name\" | awk 'NR==1{print $2}' |  sed -n 's/\"\(.*\)\",/\1/p')
+        latest_release=$(runAsRoot wget -q --header="Accept: application/json" -O - $KusionReleaseURL | grep \"tag_name\" | awk '{print $2}' | sed -n 's/\"\(.*\)\",/\1/p' | grep -o '^v[0-9]\+\.[0-9]\+\.[0-9]\+$' | head -n 1)
     fi
 
     echo "${latest_release:1}"
 }
 
 download() {
-    local kusion_version="$1"
+  local kusion_version="$1"
 	local kusion_tag="v${kusion_version}"
 	KUSION_CLI_ARTIFACT="${KUSION_CLI}_${kusion_version}_${OS}_${ARCH}.tar.gz"
 	DOWNLOAD_URL="${DOWNLOAD_BASE}/${kusion_tag}/${KUSION_CLI_ARTIFACT}"
@@ -210,7 +209,7 @@ install() {
 	# move from tmp dir to kusion home
 	runAsRoot mv "$KUSION_TMP_ROOT" "$KUSION_HOME_DIR"
 	if [ ! -f "$KUSION_CLI_FILE_PATH" ]; then
-		error "Failed to move binary from tmp folder, $KUSION_CLI_FILE_PATH does not exists."
+		error "Failed to move binary from tmp folder, $KUSION_CLI_FILE_PATH does not exist."
 		return 1
 	fi
 
