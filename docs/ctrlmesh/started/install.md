@@ -13,7 +13,7 @@ $ helm repo add kusionstack https://kusionstack.github.io/charts
 $ helm repo update kusionstack
 
 # Install the latest version.
-$ helm install ctrlmesh kusionstack/ctrlmesh --version v0.1.0
+$ helm install ctrlmesh kusionstack/ctrlmesh
 
 # Upgrade to the latest version 
 $ helm upgrade ctrlmesh kusionstack/ctrlmesh 

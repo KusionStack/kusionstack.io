@@ -17,7 +17,7 @@ $ helm repo add kusionstack https://kusionstack.github.io/charts
 $ helm repo update kusionstack
 
 # Install the latest version.
-$ helm install ctrlmesh kusionstack/ctrlmesh --version v0.1.0
+$ helm install ctrlmesh kusionstack/ctrlmesh
 
 # Wait manager ready
 $ kubectl -n ctrlmesh get po
@@ -35,7 +35,7 @@ Deploy the sample operator with ShardingConfig:
 ```bash
 $ helm repo update
 $ helm install sample-operating kusionstack/operating \
-  --version v0.1.1 \
+  --version v0.2.0 \
   --set sharding.enabled=true \
   --set sharding.isDemo=true
 
