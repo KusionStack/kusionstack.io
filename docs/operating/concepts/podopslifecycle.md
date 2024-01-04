@@ -22,7 +22,7 @@ In PodOpsLifecycle, participants are classified into two roles: `operation contr
 
 The two types of controllers do not need to be aware of each other. All controllers are organized by PodOpsLifecycle. Additionally, KusionStack Operating introduces extra phases around the native Kubernetes Pod Lifecycle: ServiceAvailable, Preparing, and Completing.
 
-![pod-ops-lifecycle](../../../static/img/operating/concepts/podopslifecycle/pod-ops-lifecycle.png)
+![pod-ops-lifecycle](/img/operating/concepts/podopslifecycle/pod-ops-lifecycle.png)
 
 - **Completing**: After a Pod is created or updated and becomes ready, Operating marks its PodOpsLifecycle as the `Completing` phase. During this phase, the Pod is in a ready condition, prompting cooperation controllers to perform actions such as registering the Pod IP in the traffic route. Once all cooperation controllers complete their tasks, Operating sets the PodOpsLifecycle to the `ServiceAvailable` phase.
 - **ServiceAvailable**: This phase indicates that the Pod is in a normal state and ready to serve. If everything goes smoothly, the Pod remains in the `ServiceAvailable` phase until the next operation.
@@ -31,7 +31,7 @@ The two types of controllers do not need to be aware of each other. All controll
 
 The PodOpsLifecycle detail and the relationship with Kubernetes native Pod Lifecycle is showed by following sequence diagram.
 
-![pod-ops-lifecycle-sequence-diagram](../../../static/img/operating/concepts/podopslifecycle/pod-ops-lifecycle-sequence-diagram.png)
+![pod-ops-lifecycle-sequence-diagram](/img/operating/concepts/podopslifecycle/pod-ops-lifecycle-sequence-diagram.png)
 
 ## Developer's Guide
 

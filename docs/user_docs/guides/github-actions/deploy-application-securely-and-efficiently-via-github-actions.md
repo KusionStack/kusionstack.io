@@ -14,7 +14,7 @@ Kusion has a commendable integration with Github Actions. You can use Github Act
 
 [KusionStack/konfig](https://github.com/KusionStack/konfig) is the official example repository, and provides the GitHub Actions workflow [main.yml](https://github.com/KusionStack/konfig/blob/main/.github/workflows/main.yml). The main.yml is triggered by a push or a pull request on the main branch, and includes multiple jobs, which ensures the reliability of configuration code, and deploys the changed application.
 
-![workflow](../../../../static/img/docs/user_docs/guides/github-actions/workflow.png)
+![workflow](/img/docs/user_docs/guides/github-actions/workflow.png)
 
 The workflow to deploy an application is shown above, which includes the following jobs:
 
@@ -37,7 +37,7 @@ The jobs, [get-changed-project-stack](https://github.com/KusionStack/konfig/blob
 
 The [example](https://github.com/KusionStack/konfig/actions/runs/6325320773/job/17176584497) changes the file `example/multi-stack/base/base.k`, where the affected project is `example/multi-stack`, and the stack is `example/multi-stack/dev` and `example/multi-stack/prod`. Delightfully, the result, which is shown below, meets our expectation.
 
-![changed-project-stack](../../../../static/img/docs/user_docs/guides/github-actions/changed-project-stack.png)
+![changed-project-stack](/img/docs/user_docs/guides/github-actions/changed-project-stack.png)
 
 ## Check Project and Stack Structure
 
@@ -50,7 +50,7 @@ The success of structure-check means the correctness of structure. A [pytest](ht
 
 The [example](https://github.com/KusionStack/konfig/actions/runs/6325320773/job/17176592318) passes the directory structure verification. It is clear from the report that the changed project and stack have get checked, and the result is passed.
 
-![check-structure](../../../../static/img/docs/user_docs/guides/github-actions/check-structure.png)
+![check-structure](/img/docs/user_docs/guides/github-actions/check-structure.png)
 
 ## Test Code Correctness
 
@@ -60,7 +60,7 @@ The report whose name is `test-correctness-report` get generated.
 
 The [example](https://github.com/KusionStack/konfig/actions/runs/6325320773/job/17176592034) passes the code correctness test. The report shows that the tested stack is `example/multi-stack/dev` and `example/multi-stack/prod`, and the result is passed.
 
-![test-correctness](../../../../static/img/docs/user_docs/guides/github-actions/test-correctness.png)
+![test-correctness](/img/docs/user_docs/guides/github-actions/test-correctness.png)
 
 ## Preview Changed Stack
 
@@ -68,7 +68,7 @@ After passing the above jobs, security of the configuration change is guaranteed
 
 The [example](https://github.com/KusionStack/konfig/actions/runs/6325320773/job/17176612053) changes stack `example/multi-stack/dev` and `example/multi-stack/prod`. The following picture shows the preview result of `example/multi-stack/prod`, where the result is to create a Kubernetes Namespace, Service and Deployment if call `kusion apply`.
  
-![preview](../../../../static/img/docs/user_docs/guides/github-actions/preview.png)
+![preview](/img/docs/user_docs/guides/github-actions/preview.png)
 
 
 ## Apply Changed Stack
@@ -76,7 +76,7 @@ Finally, the last step is arrived, i.e. deploy application. The job [apply](http
 
 For the stack `example/multi-stack/prod` in the [example](https://github.com/KusionStack/konfig/actions/runs/6325320773/job/17176645252), a Kubernetes Namespace, Service and Deployment get created, which is consistent with the preview result.
 
-![apply](../../../../static/img/docs/user_docs/guides/github-actions/apply.png)
+![apply](/img/docs/user_docs/guides/github-actions/apply.png)
 
 ## Summary
 This tutorial demonstrates how Kusion integrates with GitHub Actions to deploy an application. By structure check, correctness test, preview and apply, Kusion with GitHub Actions enables you deploy application efficiently and securely.

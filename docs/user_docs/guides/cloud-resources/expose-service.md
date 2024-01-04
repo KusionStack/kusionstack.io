@@ -72,21 +72,21 @@ Kusion uses Load Balancer (LB) provided by the CSP to expose service publicly. F
 
 Execute `kusion preview` under the stack path, you will get what will be created in the real infrastructure. The picture below gives the preview result of the example. A Namespace, Service and Deployment will be created, which meets the expectation. The service name has a suffix `public`, which shows it can be accessed publicly.
 
-![preview-public](../../../../static/img/docs/user_docs/cloud-resources/expose-service/preview-public.png)
+![preview-public](/img/docs/user_docs/cloud-resources/expose-service/preview-public.png)
 
 Then, execute `kusion apply --yes` to do the real deploying job. Just a command and a few minutes, you have accomplished deploying application and expose it publicly.
 
-![apply-public](../../../../static/img/docs/user_docs/cloud-resources/expose-service/apply-public.png)
+![apply-public](/img/docs/user_docs/cloud-resources/expose-service/apply-public.png)
 
 ### Verify Accessibility
 
 In the example, the kubernetes Namespace whose name is nginx, and a Service and Deployment under the Namespace should be created. Use `kubectl get` to check, the Service whose type is `LoadBalancer` and Deployment are created indeed. And the Service has `EXTERNAL-IP` 106.5.190.109, which means it can be accessed from outside the cluster.
 
-![k8s-resource-public](../../../../static/img/docs/user_docs/cloud-resources/expose-service/k8s-resource-public.png)
+![k8s-resource-public](/img/docs/user_docs/cloud-resources/expose-service/k8s-resource-public.png)
 
 Visit the `EXTERNAL-IP` via browser, the correct result is returned, which illustrates the servie get publicly exposed successfully.
 
-![result-public](../../../../static/img/docs/user_docs/cloud-resources/expose-service/result-public.png)
+![result-public](/img/docs/user_docs/cloud-resources/expose-service/result-public.png)
 
 ## Expose Service Inside Cluster
 
@@ -112,11 +112,11 @@ nginx: ac.AppConfiguration {
 
 Execute `kusion apply --yes`, the generated Service has suffix `private`.
 
-![apply-private](../../../../static/img/docs/user_docs/cloud-resources/expose-service/apply-private.png)
+![apply-private](/img/docs/user_docs/cloud-resources/expose-service/apply-private.png)
 
 And the Service type is `ClusterIP`, only has `CLUSTER_IP` and no `EXTERNAL_IP`, which means it cannot get accessed from outside the cluster. 
 
-![k8s-resource-private](../../../../static/img/docs/user_docs/cloud-resources/expose-service/k8s-resource-private.png)
+![k8s-resource-private](/img/docs/user_docs/cloud-resources/expose-service/k8s-resource-private.png)
 
 ## Summary
 This tutorial demonstrates how to expose service of the application deployed on the CSP Kubernetes. By configuring schema Port, Kusion enables you expose service simply and efficiently.

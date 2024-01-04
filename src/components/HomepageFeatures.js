@@ -6,7 +6,7 @@ import Translate, {translate} from '@docusaurus/Translate';
 const FeatureList = [
   {
     title: translate({'id': 'homepage.feature.kcl', 'message': 'KCL 语言'}),
-    Svg: require('../../static/img/undraw_docusaurus_mountain.svg').default,
+    Svg: require('/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <Translate id="homepage.feature.kcl.description">
       面向配置和策略场景的基于约束的记录及函数语言
@@ -15,7 +15,7 @@ const FeatureList = [
   },
   {
     title: translate({'id': 'homepage.feature.konfig', 'message': 'Konfig'}),
-    Svg: require('../../static/img/undraw_docusaurus_tree.svg').default,
+    Svg: require('/img/undraw_docusaurus_tree.svg').default,
     description: (
       <Translate id="homepage.feature.konfig.description">
       Konfig 是一个配置大库，存放了用户用 KCL 描述的运维意图。它提供给用户开箱即用的云原生应用配置模型，方便用户快速开始云原生应用发布之旅。
@@ -24,7 +24,7 @@ const FeatureList = [
   },
   {
     title: translate({'id': 'homepage.feature.kusion', 'message': 'Kusion 引擎'}),
-    Svg: require('../../static/img/undraw_docusaurus_react.svg').default,
+    Svg: require('/img/undraw_docusaurus_react.svg').default,
     description: (
       <Translate id="homepage.feature.kusion.description">
         Kusion 引擎编译、实施 Konfig 中描述的运维意图，屏蔽基础设施复杂性，为多运行时、多云提供一致的运维体验。

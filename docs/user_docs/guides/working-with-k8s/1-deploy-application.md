@@ -214,4 +214,4 @@ kubectl port-forward svc/helloworld-dev-helloworld-private -n helloworld 30000:8
 
 Open browser and visit [http://127.0.0.1:30000](http://127.0.0.1:30000)：
 
-![app-preview](../../../../static/img/docs/user_docs/guides/working-with-k8s/app-preview.png)
+![app-preview](/img/docs/user_docs/guides/working-with-k8s/app-preview.png)

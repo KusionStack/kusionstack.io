@@ -49,7 +49,7 @@ The design of AppConfiguration should emphasize separation of concern between th
 
 The AppConfiguration model consolidates all the necessary components and their dependent accessories for the application deployment, along with any workflow, policy and operational requirements into one standardized, infrastructure-independent declarative specification. This declarative specification represents the intuitive user intent for the application, which drives a standardized and efficient application delivery and operation process in a hybrid environment. This enables application developers the ability to self-service based on concepts and semantics that are intuitive and self-explanatory.
 
-![appconfig.png](../../../static/img/docs/concept/appconfig.png)
+![appconfig.png](/img/docs/concept/appconfig.png)
 
 AppConfiguration consists of five core concepts, namely `Components`, `Topologies`, `Pipeline`, `PolicySets`, and `Dependency`. We will walk through these concepts one by one.
 
