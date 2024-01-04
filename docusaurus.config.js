@@ -3,6 +3,23 @@
 
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const versions = require('./versions.json');
+
+function getLastReleasedVersion() {
+  return versions[0];
+}
+
+function getNextVersionName() {
+    const expectedPrefix = 'v0.';
+    const lastReleasedVersion = getLastReleasedVersion();
+    if (!lastReleasedVersion.includes(expectedPrefix)) {
+        throw new Error(
+            'this code is only meant to be used during the 1.0 phase.',
+        );
+    }
+    const version = parseInt(lastReleasedVersion.replace(expectedPrefix, ''), 10);
+    return `${expectedPrefix}${version + 1}`;
+}
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -30,10 +47,20 @@ const config = {
             /** @type {import('@docusaurus/preset-classic').Options} */
             ({
                 docs: {
-                    // default version: Next
-                    // lastVersion: 'current',
-
                     sidebarPath: require.resolve('./sidebars.js'),
+
+                    // Versionning related configs
+                    lastVersion: getLastReleasedVersion(),
+                    versions: {
+                        current: {
+                            label: `${getNextVersionName()} 🚧`,
+                        },
+                    },
+                    // includeCurrentVersion: true,
+                    // onlyIncludeVersions: (() => {
+                    //     return ['current', ...versions.slice(0, 2)];
+                    // })(),
+
                     // Please change this to your repo.
                     editUrl: 'https://github.com/KusionStack/kusionstack.io/blob/main',
                     showLastUpdateAuthor: true,
@@ -110,12 +137,10 @@ const config = {
                         position: 'left',
                         target: '_self'
                     },
-
-                    // {
-                    //  type: 'docsVersionDropdown',
-                    //  position: 'right',
-                    //  dropdownActiveClassDisabled: true
-                    // },
+                    {
+                        type: 'docsVersionDropdown',
+                        position: 'right'
+                    },
                     // {
                     //     type: 'localeDropdown',
                     //     position: 'right',
