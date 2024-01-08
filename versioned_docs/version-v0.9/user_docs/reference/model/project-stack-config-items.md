@@ -27,7 +27,7 @@ The config items in `project.yaml` are explained below.
 
 ### Backend Configuration
 
-Kusion supports configuring the storage of state through the `backend` field in the `project.yaml` file. Detailed instructions can be found in [Backend Configuration](/docs/user_docs/reference/cli/backend/backend-configuration.md)
+Kusion supports configuring the storage of state through the `backend` field in the `project.yaml` file. Detailed instructions can be found in [Backend Configuration](../cli/backend/backend-configuration.md)
 
 ## stack.yaml
 
