@@ -1,6 +1,6 @@
 # Expose Application Service Deployed on CSP Kubernetes
 
-Deploying application on the Kuberentes provided by CSP (Cloud Service Provider) is convenient and reliable, which is adopted by many enterprises. Kusion has a good integration with CSP Kuberentes service. You can deploy your application to the Kubernetes cluster, and expose the service in a quite easy way. 
+Deploying application on the Kubernetes provided by CSP (Cloud Service Provider) is convenient and reliable, which is adopted by many enterprises. Kusion has a good integration with CSP Kubernetes service. You can deploy your application to the Kubernetes cluster, and expose the service in a quite easy way. 
 
 This tutorial demonstrates how to expose service of the application deployed on CSP Kubernetes. And the responsibilities of platform engineers and application developers are also clearly defined. In this article, *[exposing the service of nginx](https://github.com/KusionStack/konfig/blob/main/example/nginx/dev/main.k) (referred to "the example" in the below)*  is given as an example.
 
@@ -17,7 +17,7 @@ If you want the application can be accessed from outside the cluster, you should
 
 ### Set up Workspace
 
-Create the workspace as the target where the application will be deployed to. The workspace is usually set up by platform engineers, which contains platform-standard and application-agnostic configurations. The workspace configurations are originazed through a YAML file.
+Create the workspace as the target where the application will be deployed to. The workspace is usually set up by platform engineers, which contains platform-standard and application-agnostic configurations. The workspace configurations are organized through a YAML file.
 
 ```yaml
 modules:
@@ -32,7 +32,7 @@ runtimes:
     kubeconfig: "<your kube-config file path>"
 ```
 
-The YAML shown above gives an example of the workspace configuration to expose service on ACK. The file contains two top-level blcoks `modules` and `runtimes`, and the block `port` under `modules`,  `kubernetes` under `runtimes`. 
+The YAML shown above gives an example of the workspace configuration to expose service on ACK. The file contains two top-level blocks `modules` and `runtimes`, and the block `port` under `modules`,  `kubernetes` under `runtimes`. 
 
 The block `port` contains the workspace configuration of module port, which has the following fields:
 
@@ -50,7 +50,7 @@ You can also configure kube-config by environment variables, which has higher pr
 export KUBE_CONFIG="<kube-config file>"
 ```
 
-Then, create the workspace with the configutaion file. Be attention, the workspace name must be the same as the stack name. The following commnad creates a workspace named `dev` with configuration file `workspace.yaml`.
+Then, create the workspace with the configuration file. Be attention, the workspace name must be the same as the stack name. The following command creates a workspace named `dev` with configuration file `workspace.yaml`.
 
 ```bash
 kusion workspace create prod workspace.yaml
