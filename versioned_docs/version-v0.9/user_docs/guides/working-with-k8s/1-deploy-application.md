@@ -124,7 +124,7 @@ The output of `kusion compile` is the spec format.
 
 :::tip
 
-For instructions on the kusion command line tool, execute `kusion -h`, or refer to the tool's online [documentation](/docs/user_docs/reference/cli/kusion/index)。
+For instructions on the kusion command line tool, execute `kusion -h`, or refer to the tool's online [documentation](../../reference/cli/kusion/index.md).
 :::
 
 ## Applying
