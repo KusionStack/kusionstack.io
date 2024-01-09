@@ -41,7 +41,7 @@ For the sensitive information, Kusion supports configuring them by environment v
 Users can specify the type of backend with the option `--backend-type`, and configure the detailed information with `--backend-config` or `-C`, for instance: 
 
 ```shell
-user_docs apply --backend-type mysql -C dbName=<your-db-name> -C user=<your-user> -C password=<your-password> -C host=<your-host> -C port=<your-port>
+kusion apply --backend-type mysql -C dbName=<your-db-name> -C user=<your-user> -C password=<your-password> -C host=<your-host> -C port=<your-port>
 ```
 
 ### Configuration Combination
@@ -83,7 +83,7 @@ export KUSION_BACKEND_MYSQL_PASSWORD=<your-password>
 
 ```shell
 # command line parameters
-user_docs apply --backend-type mysql -C dbName=<your-db-name> -C user=<your-user> -C password=<your-password> -C host=<your-host> -C port=<your-port>
+kusion apply --backend-type mysql -C dbName=<your-db-name> -C user=<your-user> -C password=<your-password> -C host=<your-host> -C port=<your-port>
 ```
 
 * dbName - `required` the name of the database
@@ -99,7 +99,7 @@ CREATE TABLE `state` (
    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'primary key',
    `tenant` varchar(100) DEFAULT NULL COMMENT 'tenant',
    `project` varchar(100) NOT NULL COMMENT 'project',
-   `kusion_version` varchar(50) DEFAULT NULL COMMENT 'user_docs version',
+   `kusion_version` varchar(50) DEFAULT NULL COMMENT 'kusion version',
    `version` int(10) unsigned NOT NULL COMMENT 'current state format version，may upgrade in the future',
    `serial` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT 'modification times for state，can be used in concurrent control',
    `operator` varchar(100) DEFAULT NULL COMMENT 'last modifier',
@@ -143,7 +143,7 @@ export OSS_ACCESS_KEY_SECRET=<your-access-key-secret>
 
 ```shell
 # command line parameters
-user_docs apply --backend-type oss -C endpoint=<your-endpoint> -C bucket=<your-bucket> -C accessKeyID=<your-access-key-ID> -C accessKeySecret=<your-access-key-secret>
+kusion apply --backend-type oss -C endpoint=<your-endpoint> -C bucket=<your-bucket> -C accessKeyID=<your-access-key-ID> -C accessKeySecret=<your-access-key-secret>
 ```
 
 * endpoint - `required` specify the access endpoint for alicloud oss bucket
@@ -175,7 +175,7 @@ export AWS_REGION=<your-region>
 
 ```shell
 # command line parameters
-user_docs apply --backend-type s3 -C endpoint=<your-endpoint> -C bucket=<your-bucket> -C accessKeyID=<your-access-key-ID> -C accessKeySecret=<your-access-key-secret> -C region=<your-region>
+kusion apply --backend-type s3 -C endpoint=<your-endpoint> -C bucket=<your-bucket> -C accessKeyID=<your-access-key-ID> -C accessKeySecret=<your-access-key-secret> -C region=<your-region>
 ```
 
 * endpoint - `optional` specify the access endpoint for aws s3 bucket

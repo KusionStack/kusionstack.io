@@ -18,19 +18,19 @@ The recommended method for installing on MacOS and Linux is to use the brew pack
 **Install Kusion**
 
 ```bash
-brew install KusionStack/tap/user_docs
+brew install KusionStack/tap/kusion
 ```
 
 **Update Kusion**
 
 ```bash
-brew upgrade KusionStack/tap/user_docs
+brew upgrade KusionStack/tap/kusion
 ```
 
 **Uninstall Kusion**
 
 ```bash
-brew uninstall KusionStack/tap/user_docs
+brew uninstall KusionStack/tap/kusion
 ```
 
 ```mdx-code-block

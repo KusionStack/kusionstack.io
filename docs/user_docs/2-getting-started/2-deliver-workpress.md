@@ -18,17 +18,17 @@ Before we start to play with this example, we need to have the Kusion CLI instal
 We can start by initializing this tutorial project with online templates: 
 
 ```shell
-user_docs init --online
+kusion init --online
 ```
 
 All init templates are listed as follows: 
 
 ```shell
-➜  kusion_playground user_docs init --online
+➜  kusion_playground kusion init --online
 ? Please choose a template:  [Use arrows to move, type to filter]
   code-city                  Code City metaphor for visualizing Go source code in 3D.
-  deployment-multi-stack     A minimal user_docs project of multiple stacks
-  deployment-single-stack    A minimal user_docs project of single stack
+  deployment-multi-stack     A minimal kusion project of multiple stacks
+  deployment-single-stack    A minimal kusion project of single stack
 > wordpress                  A sample wordpress project
   wordpress-cloud-rds        A sample wordpress project with cloud rds
 ```
@@ -120,7 +120,7 @@ More details about the Models can be found in [Catalog](https://github.com/Kusio
 ## Delivery
 
 ```shell
-cd dev && user_docs apply --watch
+cd dev && kusion apply --watch
 ```
 
 Go to the `dev` folder and we will deliver the WordPress application into the Kubernetes cluster with one command `kusion apply --watch`. 
@@ -164,7 +164,7 @@ Now we can visit [http://localhost:12345](http://localhost:12345) in our browser
 We can delete the WordPress application and related database resources using the following command line: 
 
 ```shell
-user_docs destroy --yes
+kusion destroy --yes
 ```
 
 ![](/img/docs/user_docs/getting-started/wordpress-with-local-db-destroy.gif)
