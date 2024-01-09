@@ -10,7 +10,7 @@ It can be difficult to understand how different software compare to each other. 
  
 According to the [open GitOps principles](https://opengitops.dev/), GitOps systems typically have its desired state expressed declaratively, continuously observe actual system state and attempt to apply the desired state. In the design of Kusion toolchain, we refer to those principles but have no intention to reinvent any GitOps systems wheel. 
 
-Kusion adopts your GitOps process and improves it with richness of features. The declarative [AppConfiguration](/docs/user_docs/concepts/appconfiguration) model can be used to express desired intent, once intent is declared [Kusion CLI](/docs/user_docs/reference/cli/kusion) takes the role to make production match intent as safely as possible. 
+Kusion adopts your GitOps process and improves it with richness of features. The declarative [AppConfiguration](../concepts/appconfiguration.md) model can be used to express desired intent, once intent is declared [Kusion CLI](../reference/commands/index.md) takes the role to make production match intent as safely as possible. 
 
 **vs. PaaS (Heroku, Vercel, etc.)**
 
