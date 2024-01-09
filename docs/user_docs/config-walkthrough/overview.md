@@ -9,6 +9,7 @@ Kusion consumes one or more declarative configuration files (written in KCL) tha
 This documentation series walks you through the odds and ends of managing such configuration files.
 
 ## Table of Content
+
 - [Configuration File Overview](#configuration-file-overview)
   - [Table of Content](#table-of-content)
   - [Directory Structure](#directory-structure)
@@ -28,7 +29,7 @@ Kusion expects the configuration file to be placed in a certain directory struct
 
 :::info
 
-See [Project](../concepts/project/definition.md) and [Stack](../concepts/stack/definition.md) for more details about Project and Stack.
+See [Project](../concepts/project/definition.md) and [Stack](../concepts/stack/definition.md) for more details.
 :::
 
 A sample multi-stack directory structure looks like the following:
@@ -40,12 +41,10 @@ multi-stack-project/
 │   └── base.k
 ├── dev
 │   ├── kcl.mod
-│   ├── kcl.mod.lock
 │   ├── main.k
 │   └── stack.yaml
 ├── prod
 │   ├── kcl.mod
-│   ├── kcl.mod.lock
 │   ├── main.k
 │   └── stack.yaml
 └── project.yaml
@@ -67,11 +66,11 @@ The schema for `AppConfiguration` is defined in the [KusionStack/catalog](https:
 
 `AppConfiguration` consists of multiple sub-components that each represent either the application workload itself, its dependencies, relevant workflows or operational expectations. We will deep dive into the details on how to author each of these elements in this upcoming documentation series.
 
-For more details on the `AppConfiguration`, please refer to the [design documentation - WIP](https://github.com/KusionStack/kusion/pull/420/files).
+For more details on the `AppConfiguration`, please refer to the [design documentation](../concepts/appconfiguration.md).
 
 ## Authoring Configuration Files
 
-[KCL](https://kcl-lang.io/) is the choice of configuration language consumed by Kusion. KCL is an open source constraint-based record and functional language. KCL works well with a large number of complex configurations via modern programming language technology and practice, and is committed to provide better modularity, scalability, stability and extensibility.
+[KCL](https://kcl-lang.io/) is the choice of configuration language consumed by Kusion. KCL is an open-source constraint-based record and functional language. KCL works well with a large number of complex configurations via modern programming language technology and practice, and is committed to provide better modularity, scalability, stability and extensibility.
 
 ### Identifying KCL file
 
@@ -79,7 +78,7 @@ KCL files are identified with `.k` suffix in the filename.
 
 ### KCL Packages and Import
 
-Similar to most modern General Programming Languages (GPLs), KCL packages are used to organize collections of related KCL source files into modular and re-usable units.
+Similar to most modern General Programming Languages (GPLs), KCL packages are used to organize collections of related KCL source files into modular and reusable units.
 
 In the context of Kusion, we use KCL packages to define models that could best abstract the behavior of an application. Specifically, we provide an official out-of-the-box KCL package(will keep iterating) with the name [catalog](https://github.com/KusionStack/catalog). When authoring an application configuration file, you can simply import the [catalog](https://github.com/KusionStack/catalog) package in the source code and use all the schemas (including AppConfiguration) defined in the `catalog` package.
 
@@ -114,7 +113,7 @@ Please note this `kcl.mod` will be automatically generated if you are using `kus
 
 There are 3 sections in a `kcl.mod` file:
 - `package`, representing the metadata for the current package.
-- `dependencies`, describing the packages the current package depend on. Supports  referencing either a git repository or an OCI artifact.
+- `dependencies`, describing the packages the current package depends on. Supports referencing either a git repository or an OCI artifact.
 - `profile`, defining the behavior for Kusion. In the example below, it describes the list of files Kusion should look for when parsing the application configuration.
 
 An example of `kcl.mod`:
@@ -135,7 +134,7 @@ entries = ["../base/base.k", "main.k"]
 
 ### Building Blocks
 
-Configuration files consist of building blocks that are made of instances of schemas. An `AppConfiguration` instance consists of several child schemas, most of which are optional. The only mandatory one is the `workload` instance. We will take a closer look in the [workload walkthrough](/docs/user_docs/config-walkthrough/workload.md). The order of the building blocks does NOT matter.
+Configuration files consist of building blocks that are made of instances of schemas. An `AppConfiguration` instance consists of several child schemas, most of which are optional. The only mandatory one is the `workload` instance. We will take a closer look at the [workload](/docs/user_docs/config-walkthrough/workload.md) walkthrough](/docs/user_docs/config-walkthrough/workload.md). The order of the building blocks does NOT matter.
 
 The major building blocks as of version `0.9.0`:
 ```
@@ -194,9 +193,9 @@ Don't worry about what `workload` or `ports` stand for at the moment. We will de
 
 ### Using `kusion init`
 
-Kusion offers a `kusion init` sub-command which initializes a new project using some pre-built templates, which saves you from the hassle to manually build the aforementioned directory structure that Kusion expects.
+Kusion offers a `kusion init` sub-command which initializes a new project using some pre-built templates, which saves you from the hassle of manually building the aforementioned directory structure that Kusion expects.
 
-There is a built-in template `single-stack-sample` in the kusion binary that can be used offline. 
+There is a built-in template `single-stack-sample` in the Kusion binary that can be used offline. 
 
 We also maintain a [kusion-templates repository](https://github.com/KusionStack/kusion-templates) that hosts a list of more comprehensive project scaffolds. You can access them via `kusion init --online` command which requires connectivity to `github.com`.
 
@@ -206,6 +205,6 @@ The pre-built templates are meant to help you get off the ground quickly with so
 
 The reference documentation for the `catalog` package is located in [Reference](/docs/user_docs/reference/model/catalog_models/doc_app_configuration.md).
 
-If you are using the `catalog` package out of the box, the reference documentation provides a comprehensive view for each schema involved, including all the attribute names and description, their types, default value if any, and whether a particular attribute is required or not. There will also be an example attached to each schema reference.
+If you are using the `catalog` package out of the box, the reference documentation provides a comprehensive view for each schema involved, including all the attribute names and description, their types, default values if any, and whether a particular attribute is required or not. There will also be an example attached to each schema reference.
 
 We will also deep dive into some common examples in the upcoming sections.
