@@ -9,15 +9,17 @@ Kusion consumes one or more declarative configuration files (written in KCL) tha
 This documentation series walks you through the odds and ends of managing such configuration files.
 
 ## Table of Content
-- [Directory Structure](#directory-structure)
-- [AppConfiguration Model](#appconfiguration-model)
-- [Authoring Configuration Files](#authoring-configuration-files)
+- [Configuration File Overview](#configuration-file-overview)
+  - [Table of Content](#table-of-content)
+  - [Directory Structure](#directory-structure)
+  - [AppConfiguration Model](#appconfiguration-model)
+  - [Authoring Configuration Files](#authoring-configuration-files)
     - [Identifying KCL file](#identifying-kcl-file)
-    - [KCL Packages and imports](#kcl-packages-and-import)
+    - [KCL Packages and Import](#kcl-packages-and-import)
     - [Understanding kcl.mod](#understanding-kclmod)
-    - [Building blocks](#building-blocks)
-    - [Instantiate an application](#instantiating-an-application)
-    - [Using kusion init](#using-kusion-init)
+    - [Building Blocks](#building-blocks)
+    - [Instantiating an application](#instantiating-an-application)
+    - [Using `kusion init`](#using-kusion-init)
     - [Using references](#using-references)
 
 ## Directory Structure
@@ -26,7 +28,7 @@ Kusion expects the configuration file to be placed in a certain directory struct
 
 :::info
 
-See [Glossary](/user_docs/concepts/glossary.md) for more details about Project and Stack.
+See [Project](/user_docs/concepts/project/project.md) and [Stack](/user_docs/concepts/stack/stack.md) for more details about Project and Stack.
 :::
 
 A sample multi-stack directory structure looks like the following:

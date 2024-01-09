@@ -74,8 +74,7 @@ Now, we have successfully initialized a project `helloworld` using the `single-s
 - `Image` represents the image address of the application container.
 
 :::info
-
-See [Project&Stack](/user_docs/concepts/glossary.md) for more details about Project and Stack.
+See [Project](/user_docs/concepts/project/project.md) and [Stack](/user_docs/concepts/stack/stack.md) for more details about Project and Stack.
 :::
 
 The directory structure is as follows:
