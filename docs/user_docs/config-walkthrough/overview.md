@@ -28,7 +28,7 @@ Kusion expects the configuration file to be placed in a certain directory struct
 
 :::info
 
-See [Project](/user_docs/concepts/project/project.md) and [Stack](/user_docs/concepts/stack/stack.md) for more details about Project and Stack.
+See [Project](../concepts/project/definition.md) and [Stack](../concepts/stack/definition.md) for more details about Project and Stack.
 :::
 
 A sample multi-stack directory structure looks like the following:
