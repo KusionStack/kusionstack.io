@@ -47,8 +47,8 @@ Built-in adapters can also be used like how frame used. You can call NewAdapter 
 and the call frame.AddToMgr to start a controller/webhook
 
 More built-in adapters will be implemented in the future. To make this repo stable, all new built-in adapters will
-be added to ```kusionstack.io/pkg/experimental/adapters``` first, and then moved to ```kusionstack.io/pkg/adapters```
-until ready to be released.
+be added to ```kusionstack.io/resourceconsist/pkg/experimental/adapters``` first, and then moved to 
+```kusionstack.io/resourceconsist/pkg/adapters``` until ready to be released.
 #### alibabacloudslb adapter
 ```pkg/adapters/alibabacloudslb``` is an adapter that implements ReconcileAdapter. It follows **PodOpsLifecycle** to
 handle various scenarios during pod operations, such as creating a new pod, deleting an existing pod, or handling
