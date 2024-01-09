@@ -108,10 +108,9 @@ const config = {
                 items: [
                     {
                         type: 'docSidebar',
-                        docId: 'intro/kusion-intro',
                         position: 'left',
-                        sidebarId: 'user_docs',
-                        label: 'UserDoc',
+                        sidebarId: 'kusion',
+                        label: 'Kusion',
                     },
                     {
                         type: 'docSidebar',
@@ -167,7 +166,7 @@ const config = {
                         items: [
                             {
                                 label: 'Kusion',
-                                to: '/docs',
+                                to: '/docs/kusion/intro/',
                             },
                             {
                                 label: 'ControllerMesh',
