@@ -3,7 +3,7 @@
     "message": "KusionStack",
     "description": "The title in the navbar"
   },
-  "item.label.UserDoc": {
+  "item.label.Kusion": {
     "message": "Kusion",
     "description": "Navbar item with label UserDoc"
   },

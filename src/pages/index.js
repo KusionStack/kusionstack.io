@@ -42,14 +42,14 @@ function Home() {
             </p>
             <div className={styles.indexCtas}>
               <div>
-                <Link className={clsx("button button--lg button--secondary", styles.button)} to="/docs/user_docs/getting-started/deliver-the-wordpress-application-on-kubernetes">
+                <Link className={clsx("button button--lg button--secondary", styles.button)} to="/docs">
                   <Translate description="homepage getting started button">
                     Getting started
                   </Translate>
                 </Link>
               </div>
               <div>
-                <Link className={clsx("button button--primary button--lg", styles.button)} to="/docs/user_docs/getting-started/install">
+                <Link className={clsx("button button--primary button--lg", styles.button)} to="/docs/kusion/getting-started/install-kusion">
                   <Translate description="homepage getting started button">
                     Install
                   </Translate>
