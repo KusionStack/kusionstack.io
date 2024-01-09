@@ -26,7 +26,7 @@ Kusion expects the configuration file to be placed in a certain directory struct
 
 :::info
 
-See [Glossary](/user_docs/concepts/glossary.md) for more details about Project and Stack.
+See [Glossary](../concepts/glossary) for more details about Project and Stack.
 :::
 
 A sample multi-stack directory structure looks like the following:
@@ -55,7 +55,7 @@ You may notice there is a `base` directory besides all the stacks. The `base` di
 
 In practice, the applications deployed into dev and prod might very likely end up with a similar set of configurations except a few fields such as the application image (dev might be on newer versions), resource requirements (prod might require more resources), etc.
 
-As a general best practice, we recommend managing the common configurations in `base.k` as much as possible to minimize duplicate code. We will cover how override works in [Base and Override](/docs/user_docs/config-walkthrough/base_override.md).
+As a general best practice, we recommend managing the common configurations in `base.k` as much as possible to minimize duplicate code. We will cover how override works in [Base and Override](base_override).
 
 ## AppConfiguration Model
 
@@ -133,7 +133,7 @@ entries = ["../base/base.k", "main.k"]
 
 ### Building Blocks
 
-Configuration files consist of building blocks that are made of instances of schemas. An `AppConfiguration` instance consists of several child schemas, most of which are optional. The only mandatory one is the `workload` instance. We will take a closer look in the [workload walkthrough](/docs/user_docs/config-walkthrough/workload.md). The order of the building blocks does NOT matter.
+Configuration files consist of building blocks that are made of instances of schemas. An `AppConfiguration` instance consists of several child schemas, most of which are optional. The only mandatory one is the `workload` instance. We will take a closer look in the [workload walkthrough](workload). The order of the building blocks does NOT matter.
 
 The major building blocks as of version `0.9.0`:
 ```
@@ -198,11 +198,11 @@ There is a built-in template `single-stack-sample` in the kusion binary that can
 
 We also maintain a [kusion-templates repository](https://github.com/KusionStack/kusion-templates) that hosts a list of more comprehensive project scaffolds. You can access them via `kusion init --online` command which requires connectivity to `github.com`.
 
-The pre-built templates are meant to help you get off the ground quickly with some simple out-of-the-box examples. You can refer to the [QuickStart documentation](/docs/user_docs/getting-started/deliver-the-wordpress-application-on-kubernetes.md) for some step-by-step tutorials.
+The pre-built templates are meant to help you get off the ground quickly with some simple out-of-the-box examples. You can refer to the [QuickStart documentation](../getting-started/deliver-the-wordpress-application-on-kubernetes) for some step-by-step tutorials.
 
 ### Using references
 
-The reference documentation for the `catalog` package is located in [Reference](/docs/user_docs/reference/model/catalog_models/doc_app_configuration.md).
+The reference documentation for the `catalog` package is located in [Reference](../reference/model/catalog_models/doc_app_configuration).
 
 If you are using the `catalog` package out of the box, the reference documentation provides a comprehensive view for each schema involved, including all the attribute names and description, their types, default value if any, and whether a particular attribute is required or not. There will also be an example attached to each schema reference.
 

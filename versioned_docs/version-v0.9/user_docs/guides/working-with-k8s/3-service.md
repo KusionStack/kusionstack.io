@@ -4,13 +4,13 @@ You can determine how to expose your service in the `AppConfiguration` model via
 
 Unless explicitly defined, each of the ports exposed is by default exposed privately as a `ClusterIP` type service. You can expose a port publicly by specifying the `exposeInternet` field in the `Port` schema. At the moment, the implementation for publicly access is done via Load Balancer type service backed by cloud providers. Ingress will be supported in a future version of kusion.
 
-For the `Port` schema reference, please see [here](/docs/user_docs/reference/model/catalog_models/workload/doc_service.md#schema-port) for more details.
+For the `Port` schema reference, please see [here](../../reference/model/catalog_models/workload/doc_service#schema-port) for more details.
 
 ## Prerequisites
 
-Please refer to the [prerequisites](1-deploy-application.md#prerequisites) in the guide for deploying an application.
+Please refer to the [prerequisites](deploy-application#prerequisites) in the guide for deploying an application.
 
-The example below also requires you to have [initialized the project](1-deploy-application.md#initializing) using the `kusion init` command, which will generate a [`kcl.mod` file](1-deploy-application.md#kclmod) under the project directory.
+The example below also requires you to have [initialized the project](deploy-application#initializing) using the `kusion init` command, which will generate a [`kcl.mod` file](deploy-application#kclmod) under the project directory.
 
 ## Example
 
@@ -59,7 +59,7 @@ The code above changes the service port to expose from `80` in the last guide to
 
 ## Applying
 
-Re-run steps in [Applying](/docs/user_docs/guides/working-with-k8s/1-deploy-application.md#applying), new service configuration can be applied.
+Re-run steps in [Applying](deploy-application#applying), new service configuration can be applied.
 
 ```
 $ kusion apply

@@ -65,7 +65,7 @@ Simply put, we can define `Components` with the following expression:
 
 `Components = Workload + Accessories`
 
-The concept of `Components` and `Accessories` itself is implicit when [authoring the configuration files](/docs/user_docs/config-walkthrough/overview.md). You can define the workload and any type of accessories (such as database or monitoring) directly under the AppConfiguration model.
+The concept of `Components` and `Accessories` itself is implicit when [authoring the configuration files](../config-walkthrough/overview). You can define the workload and any type of accessories (such as database or monitoring) directly under the AppConfiguration model.
 
 From a collaboration perspective, platform developers and SREs are responsible for continuously adding any new schema (as abstractions for the underlying infrastructure) and implementations that can be used out-of-the-box. Application developers SREs should be able to leverage the corresponding schemas to cover the evolving application needs. This helps software organizations achieve separation of concern, so that different roles can focus on the subject matter they are an expert of.
 

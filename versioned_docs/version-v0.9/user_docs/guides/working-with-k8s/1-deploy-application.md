@@ -2,7 +2,7 @@
 
 This guide shows you how to use Kusion CLIs to complete the deployment of an application running in Kubernetes.
 We call the abstraction of application operation and maintenance configuration as `AppConfiguration`, and its instance as `Application`.
-It is essentially an configuration model that describes an application. The complete definition can be seen [here](/docs/user_docs/reference/model/catalog_models/doc_app_configuration.md).
+It is essentially an configuration model that describes an application. The complete definition can be seen [here](../../reference/model/catalog_models/doc_app_configuration).
 
 In production, the application generally includes minimally several k8s resources:
 
@@ -28,7 +28,7 @@ Before we start, we need to complete the following steps:
 1、Install Kusion
 
 We recommend using HomeBrew(Mac), Scoop(Windows), or an installation shell script to download and install Kusion.
-See [Download and Install](/docs/user_docs/getting-started/install) for more details.
+See [Download and Install](../../getting-started/install) for more details.
 
 2、Running Kubernetes cluster
 
@@ -75,7 +75,7 @@ Now, we have successfully initialized a project `helloworld` using the `single-s
 
 :::info
 
-See [Project&Stack](/user_docs/concepts/glossary.md) for more details about Project and Stack.
+See [Project&Stack](../../concepts/glossary) for more details about Project and Stack.
 :::
 
 The directory structure is as follows:
@@ -124,7 +124,7 @@ The output of `kusion compile` is the spec format.
 
 :::tip
 
-For instructions on the kusion command line tool, execute `kusion -h`, or refer to the tool's online [documentation](../../reference/cli/kusion/index.md).
+For instructions on the kusion command line tool, execute `kusion -h`, or refer to the tool's online [documentation](../../reference/cli/kusion).
 :::
 
 ## Applying

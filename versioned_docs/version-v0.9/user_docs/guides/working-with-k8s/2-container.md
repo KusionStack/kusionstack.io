@@ -2,12 +2,12 @@
 
 You can manage container-level configurations in the `AppConfiguration` model via the `containers` field (under the `workload` schemas). By default, everything defined in the `containers` field will be treated as application containers. Sidecar containers will be supported in a future version of kusion.
 
-For the full `Container` schema reference, please see [here](/docs/user_docs/reference/model/catalog_models/workload/doc_service.md#schema-container) for more details.
+For the full `Container` schema reference, please see [here](../../reference/model/catalog_models/workload/doc_service#schema-container) for more details.
 
 ## Pre-requisite
-Please refer to the [prerequisites](1-deploy-application.md#prerequisites) in the guide for deploying an application.
+Please refer to the [prerequisites](deploy-application#prerequisites) in the guide for deploying an application.
 
-The example below also requires you to have [initialized the project](1-deploy-application.md#initializing) using the `kusion init` command, which will generate a [`kcl.mod` file](1-deploy-application.md#kclmod) under the stack directory.
+The example below also requires you to have [initialized the project](deploy-application#initializing) using the `kusion init` command, which will generate a [`kcl.mod` file](deploy-application#kclmod) under the stack directory.
 
 ## Example
 `helloworld/dev/main.k`:
@@ -52,7 +52,7 @@ helloworld: ac.AppConfiguration {
 
 ## Apply
 
-Re-run steps in [Applying](/docs/user_docs/guides/working-with-k8s/1-deploy-application.md#applying), new container configuration can be applied.
+Re-run steps in [Applying](deploy-application#applying), new container configuration can be applied.
 
 ```
 $ kusion apply

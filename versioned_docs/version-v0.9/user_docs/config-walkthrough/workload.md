@@ -24,7 +24,7 @@ A `workload` maps to an `AppConfiguration` instance 1:1. If there are more than 
 
 ## Import
 
-In the examples below, we are using schemas defined in the `catalog` package. For more details on KCL package import, please refer to the [Configuration File Overview](/docs/user_docs/config-walkthrough/overview.md).
+In the examples below, we are using schemas defined in the `catalog` package. For more details on KCL package import, please refer to the [Configuration File Overview](overview).
 
 The `import` statements needed for the following walkthrough:
 ```
@@ -298,7 +298,7 @@ The two types of workloads, namely `Service` and `Job`, share a majority of the 
 
 ### Exposure
 
-A `Service` usually represents a long-running, scalable workload that responds to short-lived latency-sensitive requests and never go down. Hence a `Service` has an additional attribute that determines how it is exposed and can be accessed. A `Job` does NOT the option to be exposed. We will explore more in the [application networking walkthrough](/docs/user_docs/config-walkthrough/networking.md).
+A `Service` usually represents a long-running, scalable workload that responds to short-lived latency-sensitive requests and never go down. Hence a `Service` has an additional attribute that determines how it is exposed and can be accessed. A `Job` does NOT the option to be exposed. We will explore more in the [application networking walkthrough](networking).
 
 ### Workload Implementations
 
@@ -332,6 +332,6 @@ myapp: wl.Job {
 
 ## Workload References
 
-You can find workload references [here](/docs/user_docs/reference/model/catalog_models/workload/doc_service.md).
+You can find workload references [here](../reference/model/catalog_models/workload/doc_service).
 
 You can find workload schema source [here](https://github.com/KusionStack/catalog/tree/main/models/schema/v1/workload).

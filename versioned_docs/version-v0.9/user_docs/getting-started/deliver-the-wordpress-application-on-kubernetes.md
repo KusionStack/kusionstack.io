@@ -10,7 +10,7 @@ In this tutorial we will walk through how to deploy a WordPress application on K
 
 Before we start to play with this example, we need to have the Kusion CLI installed and run a Kubernetes cluster. Here are some helpful documentations: 
 
-- Install [Kusion CLI](/docs/user_docs/getting-started/install.md)
+- Install [Kusion CLI](install)
 - Install [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) CLI and run a [Kubernetes](https://kubernetes.io/) cluster. Some light and convenient options for local deployment include [k3s](https://docs.k3s.io/quick-start), [k3d](https://k3d.io/v5.4.4/#installation), and [MiniKube](https://minikube.sigs.k8s.io/docs/tutorials/multi_node/). 
 
 ## Init Project
@@ -58,7 +58,7 @@ cd wordpress && tree
 ```
 
 :::info
-More details about the directory structure can be found in [Concepts](/docs/user_docs/concepts/glossary). 
+More details about the directory structure can be found in [Concepts](../concepts/glossary). 
 :::
 
 ### Review Config Files
@@ -109,7 +109,7 @@ wordpress: ac.AppConfiguration {
 }
 ```
 
-The configuration file `main.k` includes an `AppConfiguration` with the name of `wordpress`. The `wordpress` application includes a wordload of type `wl.Service`, which runs on 1 replica and exposes `80` to be accessed. Besides, it declares a local `db.Database` accessory with the engine of `mysql:8.0` for the application. The necessary Kubernetes resources for deploying and using the local database will be generated, and users can get the `host address`, `username` and `paasword` through the [magic variables for sensitive database information](/docs/user_docs/reference/model/naming-conventions.md#sensitive-database-information) of Kusion in application containers. 
+The configuration file `main.k` includes an `AppConfiguration` with the name of `wordpress`. The `wordpress` application includes a wordload of type `wl.Service`, which runs on 1 replica and exposes `80` to be accessed. Besides, it declares a local `db.Database` accessory with the engine of `mysql:8.0` for the application. The necessary Kubernetes resources for deploying and using the local database will be generated, and users can get the `host address`, `username` and `paasword` through the [magic variables for sensitive database information](../reference/model/naming-conventions#sensitive-database-information) of Kusion in application containers. 
 
 This model hides the major complexity of Kubernetes resources such as `Namespace`, `Deployment` and `Service`, which providing the concepts that are application-centric and infrastructure-agnostic. 
 

@@ -10,7 +10,7 @@ You can currently have only one `database` per `AppConfiguration`.
 
 ## Import
 
-In the examples below, we are using schemas defined in the `catalog` package. For more details on KCL package import, please refer to the [Configuration File Overview](/docs/user_docs/config-walkthrough/overview.md).
+In the examples below, we are using schemas defined in the `catalog` package. For more details on KCL package import, please refer to the [Configuration File Overview](../config-walkthrough/overview).
 
 The `import` statements needed for the following walkthrough:
 ```
@@ -32,7 +32,7 @@ Alternatively, Kusion also supports creating a database at `localhost` for local
 :::info
 
 You do need a local Kubernetes cluster to run the database workloads. You can refer to [Minikube](https://minikube.sigs.k8s.io/docs/start/) or [Kind](https://kind.sigs.k8s.io/docs/user/quick-start/) to get started.
-To see an end-to-end use case for standing up a local testing environment including a local database, please refer to the [Kusion Quickstart](/docs/user_docs/getting-started/deliver-the-wordpress-application-on-kubernetes).
+To see an end-to-end use case for standing up a local testing environment including a local database, please refer to the [Kusion Quickstart](../getting-started/deliver-the-wordpress-application-on-kubernetes).
 :::
 
 ## Cloud Credentials and Permissions
@@ -266,7 +266,7 @@ wordpress: ac.AppConfiguration {
 }
 ```
 
-Kusion will then generate a private FQDN and inject it into the application runtime as the environment variable `KUSION_DB_HOST` for the application to use. A complete list of Kusion-managed environment variable can be found [here](/docs/user_docs/reference/model/naming-conventions#list-of-magic-variables).
+Kusion will then generate a private FQDN and inject it into the application runtime as the environment variable `KUSION_DB_HOST` for the application to use. A complete list of Kusion-managed environment variable can be found [here](../reference/model/naming-conventions#list-of-magic-variables).
 
 Otherwise when using the public FQDN to connect to a database from the workload, the route will depend on cloud provider's routing preference. The options are generally either:
 - Travel as far as possible on the cloud provider's global backbone network, or also referred to as cold potato routing, or

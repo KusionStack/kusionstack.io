@@ -7,7 +7,7 @@ This tutorial will demonstrate how to deploy a WordPress application with Kusion
 
 ## Prerequisites
 
-- [Install Kusion](/docs/user_docs/getting-started/install)
+- [Install Kusion](../getting-started/install)
 - [Deploy Kubernetes](https://kubernetes.io/) or [Kind](https://kind.sigs.k8s.io/) or [Minikube](https://minikube.sigs.k8s.io/docs/tutorials/multi_node/)
 - [Install Terraform](https://www.terraform.io/)
 - Prepare a cloud service account and create a user with `VPCFullAccess` and `RDSFullAccess` permissions to use the Relational Database Service (RDS). This kind of user can be created and managed in the Identity and Access Management (IAM) console

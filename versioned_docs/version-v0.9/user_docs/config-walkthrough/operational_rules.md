@@ -13,7 +13,7 @@ The `opsRules` attribute requires the target cluster to have installed the [Kusi
 
 ## Import
 
-In the examples below, we are using schemas defined in the `catalog` package. For more details on KCL package import, please refer to the [Configuration File Overview](/docs/user_docs/config-walkthrough/overview.md).
+In the examples below, we are using schemas defined in the `catalog` package. For more details on KCL package import, please refer to the [Configuration File Overview](../config-walkthrough/overview).
 
 The `import` statements needed for the following walkthrough:
 ```

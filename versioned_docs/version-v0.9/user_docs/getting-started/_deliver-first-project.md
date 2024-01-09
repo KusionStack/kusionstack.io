@@ -13,7 +13,7 @@ Before we start, we need to complete the following steps:
 1、Install Kusion
 
 We recommend using HomeBrew(Mac), Scoop(Windows), or an installation shell script to manage Kusion installation.
-See [Download and Install](/docs/user_docs/getting-started/install) for more details.
+See [Download and Install](install) for more details.
 
 2、Running Kubernetes cluster
 
@@ -64,7 +64,7 @@ code-city/
 
 :::info
 More details about the directory structure can be found in 
-[Concepts](/docs/user_docs/concepts/glossary).
+[Concepts](../concepts/glossary).
 :::
 
 ### Review Config Files

@@ -12,12 +12,12 @@ As of version 0.9.0, Kusion supports integration with Prometheus by managing scr
 
 The `monitoring` attribute requires the target cluster to have installed Prometheus correctly, either as a Kubernetes operator or a server/agent.
 
-More about how to set up Prometheus can be found in the [Prometheus User Guide for Kusion](/docs/user_docs/guides/observability/prometheus)
+More about how to set up Prometheus can be found in the [Prometheus User Guide for Kusion](../guides/observability/prometheus)
 :::
 
 ## Import
 
-In the examples below, we are using schemas defined in the `catalog` package. For more details on KCL package import, please refer to the [Configuration File Overview](/docs/user_docs/config-walkthrough/overview.md).
+In the examples below, we are using schemas defined in the `catalog` package. For more details on KCL package import, please refer to the [Configuration File Overview](../config-walkthrough/overview).
 
 The `import` statements needed for the following walkthrough:
 ```
@@ -115,4 +115,4 @@ myapp: ac.AppConfiguration {
 }
 ```
 
-More details about how the Prometheus integration works can be found in the [design documentation](https://github.com/KusionStack/kusion/blob/main/docs/prometheus.md).
+More details about how the Prometheus integration works can be found in the [design documentation](https://github.com/KusionStack/kusion/blob/main/docs/prometheus).

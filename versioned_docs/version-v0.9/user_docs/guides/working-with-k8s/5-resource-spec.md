@@ -2,13 +2,13 @@
 
 You can manage container-level resource specification in the `AppConfiguration` model via the `resources` field (under the `Container` schema).
 
-For the full `Container` schema reference, please see [here](/docs/user_docs/reference/model/catalog_models/workload/doc_service.md#schema-container) for more details.
+For the full `Container` schema reference, please see [here](../../reference/model/catalog_models/workload/doc_service#schema-container) for more details.
 
 ## Prerequisites
 
-Please refer to the [prerequisites](1-deploy-application.md#prerequisites) in the guide for deploying an application.
+Please refer to the [prerequisites](deploy-application#prerequisites) in the guide for deploying an application.
 
-The example below also requires you to have [initialized the project](1-deploy-application.md#initializing) using the `kusion init` command, which will generate a [`kcl.mod` file](1-deploy-application.md#kclmod) under the project directory.
+The example below also requires you to have [initialized the project](deploy-application#initializing) using the `kusion init` command, which will generate a [`kcl.mod` file](deploy-application#kclmod) under the project directory.
 
 ## Example
 Update the resources value in `dev/main.k`:
@@ -37,7 +37,7 @@ Everything else in `main.k` stay the same.
 
 ## Applying
 
-Re-run steps in [Applying](/docs/user_docs/guides/working-with-k8s/deploy-application#applying), resource scaling is completed.
+Re-run steps in [Applying](deploy-application#applying), resource scaling is completed.
 
 ```
 $ kusion apply

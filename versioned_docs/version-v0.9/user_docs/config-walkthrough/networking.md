@@ -4,13 +4,13 @@ sidebar_position: 5
 
 # Application Networking
 
-In addition to configuring application's [container specifications](workload.md#configure-containers), you can also configure its networking behaviors, including how to expose the application and how it can be accessed.
+In addition to configuring application's [container specifications](workload#configure-containers), you can also configure its networking behaviors, including how to expose the application and how it can be accessed.
 
 In future versions, this will also include ingress-based routing strategy and DNS configurations.
 
 ## Import
 
-In the examples below, we are using schemas defined in the `catalog` package. For more details on KCL package import, please refer to the [Configuration File Overview](overview.md).
+In the examples below, we are using schemas defined in the `catalog` package. For more details on KCL package import, please refer to the [Configuration File Overview](overview).
 
 The `import` statements needed for the following walkthrough:
 ```

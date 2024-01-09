@@ -65,7 +65,7 @@ To public the service, you should assign the `type` (aliyun for ACK, aws for EKS
 That's all what you need to configure! Next, preview and apply the configuration, the application will get deployed and exposed publicly.
 
 :::info
-Kusion uses Load Balancer (LB) provided by the CSP to expose service publicly. For more detailed network configuration, please refer to [Application Networking](https://kusionstack.io/docs/user_docs/config-walkthrough/networking)
+Kusion uses Load Balancer (LB) provided by the CSP to expose service publicly. For more detailed network configuration, please refer to [Application Networking](../config-walkthrough/networking)
 :::
 
 ### Preview and Apply
