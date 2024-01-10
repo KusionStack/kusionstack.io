@@ -37,9 +37,46 @@ If you don't have a cluster yet, you can use [Minikube](https://minikube.sigs.k8
 
 ## Initializing
 
-This guide is to deploy an app using Kusion, relying on the Kusion CLI and a Kubernetes cluster.
+This guide is to deploy an app using Kusion, relying on the Kusion CLI and an existing a Kubernetes cluster.
 
-To initialize the application configuration:
+## Initializing workspace configuration
+
+In version 0.10.0, we have introduced the new concept of [workspaces](../../concepts/workspace), which is a logical layer whose configurations represent an opinionated set of defaults, often appointed by the platform team. In most cases workspaces are represented with an "environment" in traditional SDLC terms. These workspaces provide a means to separate the concerns between the application developers who wish to focus on business logic, and a group of platform engineers who wish to standardize the applications on the platform.
+
+Driven by the discipline of Platform Engineering, management of the workspaces, including create/updating/deleting workspaces and their configurations should be done by dedicated platform engineers in a large software organizations to facilitate a more mature and scalable collaboration pattern.
+
+:::tip
+
+More on the collaboration pattern can be found in the [design doc](https://github.com/KusionStack/kusion/blob/main/docs/design/collaboration/collaboration_paradigm.md).
+:::
+
+However, if that does NOT apply to your scenario, e.g. if you work in a smaller org without platform engineers or if you are an individual developer, we wish Kusion can still be a value tool to have when delivering an application. In this guide, we are NOT distinctively highlighting the different roles or what the best practices entails (the design doc above has all that) but rather the steps needed to get Kusion tool to work.
+
+As of version 0.10.0, workspace configurations in Kusion are managed on the local filesystem and their values are sourced from YAML files. Remotely-managed workspaces will be supported in future versions.
+
+To initialize the workspace configuration:
+
+```bash
+~/playground$ touch ~/dev.yaml
+~/playground$ kusion workspace create dev -f ~/dev.yaml
+create workspace dev successfully
+```
+
+To verify the workspace has been created properly:
+```
+~/playground$ kusion workspace list
+- dev
+~/playground$ kusion workspace show dev
+{}
+```
+
+Note that `show` command tells us the workspace configuration is currently empty, which is expected because we created the `dev` workspace with an empty YAML file. An empty workspace configuration will suffice in some cases, where no platform configurations are needed.
+
+We will progressively add more workspace configurations throughout this user guide.
+
+## Initializing application configuration
+
+Now that workspaces are properly initialized, we can begin by initializing the application configuration:
 
 ```bash
 kusion init
@@ -106,20 +143,20 @@ In general, the `.k` files are the KCL source code that represents the applicati
 ### kcl.mod
 There should be a `kcl.mod` file generated automatically under the project directory. The `kcl.mod` file describes the dependency for the current project or stack. By default, it should contain a reference to the official [`catalog` repository](https://github.com/KusionStack/catalog) which holds some common model definitions that fits best practices. You can also create your own models library and reference that.
 
-## Compiling
+## Building
 
 At this point, the project has been initialized with the Kusion built-in template.
-The configuration is written in KCL, not JSON/YAML which Kubernetes recognizes, so it needs to be compiled to get the final output.
+The configuration is written in KCL, not JSON/YAML which Kubernetes recognizes, so it needs to be built to get the final output.
 
-Enter stack dir `helloworld/dev` and compile:
+Enter stack dir `helloworld/dev` and build:
 
 ```bash
-cd helloworld/dev && kusion compile
+cd helloworld/dev && kusion build
 ```
 
-The output is printed to `stdout` by default. You can save it to a file using the `-o/--output` flag when running `kusion compile`.
+The output is printed to `stdout` by default. You can save it to a file using the `-o/--output` flag when running `kusion build`.
 
-The output of `kusion compile` is the spec format.
+The output of `kusion build` is the [intent](../../concepts/intent) format.
 
 :::tip
 
@@ -128,7 +165,7 @@ For instructions on the kusion command line tool, execute `kusion -h`, or refer 
 
 ## Applying
 
-Compilation is now completed. We can apply the configuration as the next step. In the output from `kusion compile`, you can see 3 resources:
+Build is now completed. We can apply the configuration as the next step. In the output from `kusion build`, you can see 3 resources:
 
 - a Namespace named `helloworld`
 - a Deployment named `helloworld-dev-helloworld` in the `helloworld` namespace
@@ -143,7 +180,7 @@ kusion apply
 The output is similar to:
 
 ```
- ✔︎  Generating Spec in the Stack dev...                                                                                                                                                                                                                                         
+ ✔︎  Generating Intent in the Stack dev...                                                                                                                                                                                                                                         
 Stack: dev  ID                                                       Action
 * ├─     v1:Namespace:helloworld                                  Create
 * ├─     v1:Service:helloworld:helloworld-dev-helloworld-private  Create
