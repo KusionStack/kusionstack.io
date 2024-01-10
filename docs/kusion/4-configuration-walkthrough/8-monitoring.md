@@ -1,7 +1,3 @@
----
-sidebar_position: 8
----
-
 # Application Monitoring
 
 The `monitoring` attribute in the `AppConfiguration` instance is used to describe the specification for the collection of monitoring requirements for the application.
