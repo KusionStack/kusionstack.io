@@ -70,6 +70,8 @@ myapp: ac.AppConfiguration {
 
 Note that numbered ports only work when your Prometheus is not running as an operator. 
 
+Neither `path` and `port` are required fields if Prometheus runs as an operator. If omitted, `path` defaults to `/metrics`, and `port` defaults to the container port or service port, depending on which resource is being monitored. If Prometheus does not run as an operator, both fields are required.
+
 Scraping scheme, interval and timeout are considered platform-managed configurations and are therefore managed as part of the [workspace configurations](../user-guides/observability/prometheus#setting-up-workspace-configs).
 
 More details about how the Prometheus integration works can be found in the [design documentation](https://github.com/KusionStack/kusion/blob/main/docs/prometheus.md).
