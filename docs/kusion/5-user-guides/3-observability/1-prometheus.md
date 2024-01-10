@@ -1,5 +1,3 @@
-[Setting](#setting-up-workspace-configs)
-
 # Configure Monitoring Behavior With Prometheus
 
 This document provides the step-by-step instruction to set up monitoring for your application. 
