@@ -1,12 +1,8 @@
----
-id: workspace
----
-
 # Workspace
 
 ## Definition
 
-A workspace is a logical concept that represents a target environment for deploying a stack. It contains a set of configurations, Kubeconfig, and provider authentication information that can be reused by multiple stacks. We recommend organizing workspaces by SDLC (Software Development Life Cycle) phases or by cloud vendors. For example, workspaces could be named `dev`, `staging`, and `prod`, or according to cloud vendors such as `AWS`, `Azure`, and `Aliyun`.
+A workspace is a logical concept that represents a target environment for deploying a stack. It contains platform configurations, including a set of configurations, Kubeconfig, and provider authentication information, all of which can be reused by multiple stacks. We recommend organizing workspaces by SDLC (Software Development Life Cycle) phases or by cloud vendors. For example, workspaces could be named `dev`, `staging`, and `prod`, or according to cloud vendors such as `AWS`, `Azure`, and `Alibaba Cloud`.
 
 For clarity, workspace data is categorized into two types: configuration and secret. The configuration data is non-sensitive and is stored locally in YAML files, including module inputs, runtime configurations, and backend configurations. The secret data is sensitive and should be stored as workspace variables. For example, when using AWS, users must set the correct workspace variables for `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
 
