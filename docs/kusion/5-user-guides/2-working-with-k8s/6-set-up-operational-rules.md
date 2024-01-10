@@ -69,7 +69,7 @@ Re-run steps in [Applying](deploy-application#applying), resource scaling is com
 
 ```
 $ kusion apply
-✔︎  Generating Spec in the Stack dev...                                                                                                                                                                                                                                         
+✔︎  Generating Intent in the Stack dev...                                                                                                                                                                                                                                         
 Stack: dev  ID                                                       Action
 * ├─     v1:Namespace:helloworld                                  UnChanged
 * ├─     v1:Service:helloworld:helloworld-dev-helloworld-private  UnChanged
