@@ -108,10 +108,9 @@ const config = {
                 items: [
                     {
                         type: 'docSidebar',
-                        docId: 'intro/kusion-intro',
                         position: 'left',
-                        sidebarId: 'user_docs',
-                        label: 'UserDoc',
+                        sidebarId: 'kusion',
+                        label: 'Kusion',
                     },
                     {
                         type: 'docSidebar',
@@ -173,10 +172,6 @@ const config = {
                                 label: 'ControllerMesh',
                                 to: '/docs/ctrlmesh/intro/',
                             },
-                            {
-                                label: 'FAQ',
-                                to: '/docs/user_docs/support',
-                            }
                         ],
                     },
                     {
@@ -184,7 +179,7 @@ const config = {
                         items: [
                             {
                                 label: 'Blog',
-                                to: '/blog',
+                                to: "https://blog.kusionstack.io/",
                             },
                             {
                                 label: 'Github',
