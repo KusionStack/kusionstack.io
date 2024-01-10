@@ -332,6 +332,6 @@ myapp: wl.Job {
 
 ## Workload References
 
-You can find workload references [here](../reference/modules/workload/service).
+You can find workload references [here](../reference/modules/catalog-models/workload/service).
 
 You can find workload schema source [here](https://github.com/KusionStack/catalog/tree/main/models/schema/v1/workload).

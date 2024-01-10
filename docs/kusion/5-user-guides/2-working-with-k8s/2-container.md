@@ -2,7 +2,7 @@
 
 You can manage container-level configurations in the `AppConfiguration` model via the `containers` field (under the `workload` schemas). By default, everything defined in the `containers` field will be treated as application containers. Sidecar containers will be supported in a future version of kusion.
 
-For the full `Container` schema reference, please see [here](../../reference/modules/workload/service#schema-container) for more details.
+For the full `Container` schema reference, please see [here](../../reference/modules/catalog-models/workload/service#schema-container) for more details.
 
 ## Pre-requisite
 Please refer to the [prerequisites](deploy-application#prerequisites) in the guide for deploying an application.

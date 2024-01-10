@@ -2,7 +2,7 @@
 
 You can declare the application's container image via `image` field of the `Container` schema.
 
-For the full `Container` schema reference, please see [here](../../reference/modules/workload/service#schema-container) for more details.
+For the full `Container` schema reference, please see [here](../../reference/modules/catalog-models/workload/service#schema-container) for more details.
 
 ## Pre-requisite
 Please refer to the [prerequisites](deploy-application#prerequisites) in the guide for deploying an application.
