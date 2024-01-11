@@ -33,9 +33,7 @@ If the platform engineers have set the default workload to [Kusion Operation](ht
 
 ## Example
 
-### AppConfiguration
-
-Add the `opsRule` snippet to the `AppConfiguration` in `dev/main.k`
+Add the `opsRule` snippet to the `AppConfiguration` in `simple-service/dev/main.k`:
 
 ```py
 import catalog.models.schema.v1 as ac
@@ -45,18 +43,9 @@ import catalog.models.schema.v1.trait as t
 
 helloworld: ac.AppConfiguration {
     workload: wl.Service {
-        containers: {
-            "helloworld": c.Container {
-                image: "gcr.io/google-samples/gb-frontend:v4"
-                resources: {
-                    "cpu": "500m"
-                    "memory": "512M"
-                }
-            }
-        }
-        replicas: 2
+        ...
     }
-    # config the maxUnavailable rule
+    # Configure the maxUnavailable rule
     opsRule = t.OpsRule {
         maxUnavailable: "30%"
     }
@@ -69,19 +58,19 @@ Re-run steps in [Applying](deploy-application#applying), resource scaling is com
 
 ```
 $ kusion apply
-✔︎  Generating Intent in the Stack dev...                                                                                                                                                                                                                                         
-Stack: dev  ID                                                       Action
-* ├─     v1:Namespace:helloworld                                  UnChanged
-* ├─     v1:Service:helloworld:helloworld-dev-helloworld-private  UnChanged
-* └─     apps/v1:Deployment:helloworld:helloworld-dev-helloworld  Update
+✔︎  Generating Intent in the Stack dev...                                                                                                                                                                                                     
+Stack: dev  ID                                                               Action
+* ├─     v1:Namespace:simple-service                                      UnChanged
+* ├─     v1:Service:simple-service:simple-service-dev-helloworld-private  UnChanged
+* └─     apps/v1:Deployment:simple-service:simple-service-dev-helloworld  Update
 
 
 ? Do you want to apply these diffs? yes
 Start applying diffs ...
- SUCCESS  UnChanged v1:Namespace:helloworld, skip                                                                                                                                                                                                                               
- SUCCESS  UnChanged v1:Service:helloworld:helloworld-dev-helloworld-private, skip                                                                                                                                                                                               
- SUCCESS  Update apps/v1:Deployment:helloworld:helloworld-dev-helloworld success                                                                                                                                                                                                
-Update apps/v1:Deployment:helloworld:helloworld-dev-helloworld success [3/3] █████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████ 100% | 0s
+ SUCCESS  UnChanged v1:Namespace:simple-service, skip                                                                                                                                                                                         
+ SUCCESS  UnChanged v1:Service:simple-service:simple-service-dev-helloworld-private, skip                                                                                                                                                     
+ SUCCESS  Update apps/v1:Deployment:simple-service:simple-service-dev-helloworld success                                                                                                                                                      
+Update apps/v1:Deployment:simple-service:simple-service-dev-helloworld success [3/3] ███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████ 100% | 0s
 Apply complete! Resources: 0 created, 1 updated, 0 deleted.
 ```
 
@@ -90,7 +79,7 @@ Apply complete! Resources: 0 created, 1 updated, 0 deleted.
 We can verify the application deployment strategy now has the updated attributes `maxUnavailable: 30%` in the container configuration:
 
 ```shell
-kubectl get deployment -n helloworld -o yaml
+kubectl get deployment -n simple-service -o yaml
 ...
 apiVersion: apps/v1
     kind: Deployment

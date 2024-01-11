@@ -14,9 +14,9 @@ In the first guide in this series, we introduced a step to [initialize a workspa
 
 ## Example
 
-To schedule a job with cron expression, update `helloworld/dev/main.k` to the following:
+To schedule a job with cron expression, update `simple-service/dev/main.k` to the following:
 
-`helloworld/dev/main.k`:
+`simple-service/dev/main.k`:
 ```py
 import catalog.models.schema.v1 as ac
 import catalog.models.schema.v1.workload as wl
@@ -51,15 +51,15 @@ If you are starting from scratch, all resources are created on the spot:
 $ kusion apply
  ✔︎  Generating Intent in the Stack dev...                                                                                                                                                                                                     
 Stack: dev  ID                                                    Action
-* ├─     v1:Namespace:helloworld                               Create
-* └─     batch/v1:CronJob:helloworld:helloworld-dev-samplejob  Create
+* ├─     v1:Namespace:simple-service                               Create
+* └─     batch/v1:CronJob:simple-service:simple-service-dev-samplejob  Create
 
 
 ? Do you want to apply these diffs? yes
 Start applying diffs ...
- SUCCESS  Create v1:Namespace:helloworld success                                                                                                                                                                                              
- SUCCESS  Create batch/v1:CronJob:helloworld:helloworld-dev-samplejob success                                                                                                                                                                 
-Create batch/v1:CronJob:helloworld:helloworld-dev-samplejob success [2/2] ██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████ 100% | 0s
+ SUCCESS  Create v1:Namespace:simple-service success                                                                                                                                                                                              
+ SUCCESS  Create batch/v1:CronJob:simple-service:samplejob-dev-samplejob success                                                                                                                                                                 
+Create batch/v1:CronJob:simple-service:simple-service-dev-samplejob success [2/2] ██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████ 100% | 0s
 Apply complete! Resources: 2 created, 0 updated, 0 deleted.
 ```
 
@@ -67,20 +67,20 @@ If you are starting from the last guide which configures an `opsRule`, the outpu
 ```
 $ kusion apply
  ✔︎  Generating Intent in the Stack dev...                                                                                                                                                                                                     
-Stack: dev  ID                                                       Action
-* ├─     v1:Namespace:helloworld                                  UnChanged
-* ├─     batch/v1:CronJob:helloworld:helloworld-dev-samplejob     Create
-* ├─     apps/v1:Deployment:helloworld:helloworld-dev-helloworld  Delete
-* └─     v1:Service:helloworld:helloworld-dev-helloworld-private  Delete
+Stack: dev  ID                                                               Action
+* ├─     v1:Namespace:simple-service                                      UnChanged
+* ├─     batch/v1:CronJob:simple-service:simple-service-dev-samplejob     Create
+* ├─     apps/v1:Deployment:simple-service:simple-service-dev-helloworld  Delete
+* └─     v1:Service:simple-service:simple-service-dev-helloworld-private  Delete
 
 
 ? Do you want to apply these diffs? yes
 Start applying diffs ...
- SUCCESS  UnChanged v1:Namespace:helloworld, skip                                                                                                                                                                                             
- SUCCESS  Delete apps/v1:Deployment:helloworld:helloworld-dev-helloworld success                                                                                                                                                              
- SUCCESS  Create batch/v1:CronJob:helloworld:helloworld-dev-samplejob success                                                                                                                                                                 
- SUCCESS  Delete v1:Service:helloworld:helloworld-dev-helloworld-private success                                                                                                                                                              
-Delete v1:Service:helloworld:helloworld-dev-helloworld-private success [4/4] ███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████ 100% | 0s
+ SUCCESS  UnChanged v1:Namespace:simple-service, skip                                                                                                                                                                                         
+ SUCCESS  Delete apps/v1:Deployment:simple-service:simple-service-dev-helloworld success                                                                                                                                                      
+ SUCCESS  Create batch/v1:CronJob:simple-service:simple-service-dev-samplejob success                                                                                                                                                         
+ SUCCESS  Delete v1:Service:simple-service:simple-service-dev-helloworld-private success                                                                                                                                                      
+Delete v1:Service:simple-service:simple-service-dev-helloworld-private success [4/4] ███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████ 100% | 0s
 Apply complete! Resources: 1 created, 0 updated, 2 deleted.
 ```
 
@@ -89,14 +89,14 @@ Apply complete! Resources: 1 created, 0 updated, 2 deleted.
 We can verify the job has now been scheduled:
 
 ```shell
-$ kubectl get cronjob -n helloworld
+$ kubectl get cronjob -n simple-service
 NAME                       SCHEDULE    SUSPEND   ACTIVE   LAST SCHEDULE   AGE
-helloworld-dev-samplejob   * * * * *   False     0        <none>          2m18s
+simple-service-dev-samplejob   * * * * *   False     0        <none>          2m18s
 ```
 
 Verify the job has been triggered after the minute mark since we scheduled it to run every minute:
 ```shell
-$ kubectl get job -n helloworld
+$ kubectl get job -n simple-service
 NAME                                COMPLETIONS   DURATION   AGE
-helloworld-dev-samplejob-28415748   1/1           5s         11s
+simple-service-dev-samplejob-28415748   1/1           5s         11s
 ```

@@ -95,16 +95,15 @@ Enter a value or leave blank to accept the (default), and press <ENTER>.
 Press ^C at any time to quit.
 
 Project Config:
-✔ Project Name: helloworld
+✔ Project Name: simple-service
 ✔ AppName: helloworld
-✔ ProjectName: helloworld
+✔ ProjectName: simple-service
 Stack Config: dev
 ✔ Image: gcr.io/google-samples/gb-frontend:v4
-
-Created project 'helloworld'
+Created project 'simple-service'
 ```
 
-Now, we have successfully initialized a project `helloworld` using the `single-stack-sample` template, which contains a `dev` stack. 
+Now, we have successfully initialized a project `simple-service` using the `single-stack-sample` template, which contains a `dev` stack. 
 
 - `AppName` represents the name of the sample application, which is recorded in the generated `main.k` as the name of the `AppConfiguration` instance.
 - `ProjectName` and `Project Name` represent the name of the sample project, which is used as the generated folder name and then recorded in the generated `project.yaml`.
@@ -117,16 +116,16 @@ See [Project](../../concepts/project/overview) and [Stack](../../concepts/stack/
 The directory structure is as follows:
 
 ```
-helloworld
-  ├── README.md
-  ├── dev
-  │   ├── main.k
-  │   ├── kcl.mod
-  │   ├── kcl.mod.lock
-  │   └── stack.yaml
-  └── project.yaml
+simple-service/
+├── README.md
+├── dev
+│   ├── kcl.mod
+│   ├── kcl.mod.lock
+│   ├── main.k
+│   └── stack.yaml
+└── project.yaml
 
-1 directory, 6 files
+2 directories, 6 files
 ```
 
 The project directory has the following files that are automatically generated:
@@ -148,10 +147,10 @@ There should be a `kcl.mod` file generated automatically under the project direc
 At this point, the project has been initialized with the Kusion built-in template.
 The configuration is written in KCL, not JSON/YAML which Kubernetes recognizes, so it needs to be built to get the final output.
 
-Enter stack dir `helloworld/dev` and build:
+Enter stack dir `simple-service/dev` and build:
 
 ```bash
-cd helloworld/dev && kusion build
+cd simple-service/dev && kusion build
 ```
 
 The output is printed to `stdout` by default. You can save it to a file using the `-o/--output` flag when running `kusion build`.
@@ -167,9 +166,9 @@ For instructions on the kusion command line tool, execute `kusion -h`, or refer 
 
 Build is now completed. We can apply the configuration as the next step. In the output from `kusion build`, you can see 3 resources:
 
-- a Namespace named `helloworld`
-- a Deployment named `helloworld-dev-helloworld` in the `helloworld` namespace
-- a Service named `helloworld-dev-helloworld-private` in the `helloworld` namespace
+- a Namespace named `simple-service`
+- a Deployment named `simple-service-dev-helloworld` in the `simple-service` namespace
+- a Service named `simple-service-dev-helloworld-private` in the `simple-service` namespace
 
 Execute command:
 
@@ -180,19 +179,19 @@ kusion apply
 The output is similar to:
 
 ```
- ✔︎  Generating Intent in the Stack dev...                                                                                                                                                                                                                                         
-Stack: dev  ID                                                       Action
-* ├─     v1:Namespace:helloworld                                  Create
-* ├─     v1:Service:helloworld:helloworld-dev-helloworld-private  Create
-* └─     apps/v1:Deployment:helloworld:helloworld-dev-helloworld  Create
+ ✔︎  Generating Intent in the Stack dev...                                                                                                                                                                                                     
+Stack: dev  ID                                                               Action
+* ├─     v1:Namespace:simple-service                                      Create
+* ├─     v1:Service:simple-service:simple-service-dev-helloworld-private  Create
+* └─     apps/v1:Deployment:simple-service:simple-service-dev-helloworld  Create
 
 
 ? Do you want to apply these diffs? yes
 Start applying diffs ...
- SUCCESS  Create v1:Namespace:helloworld success                                                                                                                                                                                                                                
- SUCCESS  Create v1:Service:helloworld:helloworld-dev-helloworld-private success                                                                                                                                                                                                
- SUCCESS  Create apps/v1:Deployment:helloworld:helloworld-dev-helloworld success                                                                                                                                                                                                
-Create apps/v1:Deployment:helloworld:helloworld-dev-helloworld success [3/3] █████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████ 100% | 0s
+ SUCCESS  Create v1:Namespace:simple-service success                                                                                                                                                                                          
+ SUCCESS  Create v1:Service:simple-service:simple-service-dev-helloworld-private success                                                                                                                                                      
+ SUCCESS  Create apps/v1:Deployment:simple-service:simple-service-dev-helloworld success                                                                                                                                                      
+Create apps/v1:Deployment:simple-service:simple-service-dev-helloworld success [3/3] ███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████ 100% | 0s
 Apply complete! Resources: 3 created, 0 updated, 0 deleted.
 ```
 
@@ -209,7 +208,7 @@ The output is similar to:
 ```
 NAME                   STATUS   AGE
 default                Active   117d
-helloworld             Active   63s
+simple-service         Active   38s
 kube-system            Active   117d
 ...
 ```
@@ -217,27 +216,27 @@ kube-system            Active   117d
 2、Check Deployment
 
 ```bash
-kubectl get deploy -n helloworld
+kubectl get deploy -n simple-service
 ```
 
 The output is similar to:
 
 ```
-NAME                        READY   UP-TO-DATE   AVAILABLE   AGE
-helloworld-dev-helloworld   2/2     2            2           111s
+NAME                            READY   UP-TO-DATE   AVAILABLE   AGE
+simple-service-dev-helloworld   1/1     1            1           59s
 ```
 
 3、Check Service
 
 ```bash
-kubectl get svc -n helloworld
+kubectl get svc -n simple-service
 ```
 
 The output is similar to:
 
 ```
-NAME                                TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
-helloworld-dev-helloworld-private   ClusterIP   10.111.183.0   <none>        80/TCP   2m6s
+NAME                                    TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
+simple-service-dev-helloworld-private   ClusterIP   10.98.89.104   <none>        80/TCP    79s
 ```
 
 4、Validate app
@@ -245,7 +244,7 @@ helloworld-dev-helloworld-private   ClusterIP   10.111.183.0   <none>        80/
 Using the `kubectl` tool, forward native port `30000` to the service port `80`.
 
 ```bash
-kubectl port-forward svc/helloworld-dev-helloworld-private -n helloworld 30000:80
+kubectl port-forward svc/simple-service-dev-helloworld-private -n simple-service 30000:80
 ```
 
 Open browser and visit [http://127.0.0.1:30000](http://127.0.0.1:30000)：

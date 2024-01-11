@@ -15,14 +15,13 @@ The example below also requires you to have [initialized the project](deploy-app
 In the first guide in this series, we introduced a step to [initialize a workspace](deploy-application#initializing-workspace-configuration) with an empty configuration. The same empty configuration will still work in this guide, no changes are required there.
 
 ## Example
-Update the resources value in `dev/main.k`:
+Update the resources value in `simple-service/dev/main.k`:
 ```py
 import catalog.models.schema.v1 as ac
 
 helloworld: ac.AppConfiguration {
     workload.containers.helloworld: {
-        # dev stack has different resource requirements
-        # set resources to your want
+        ...
         # before:
         # resources: {
         #     "cpu": "500m"
@@ -33,6 +32,7 @@ helloworld: ac.AppConfiguration {
             "cpu": "250m"
             "memory": "256Mi"
         }
+        ...
     }
 }
 ```
@@ -45,26 +45,26 @@ Re-run steps in [Applying](deploy-application#applying), resource scaling is com
 
 ```
 $ kusion apply
-✔︎  Generating Intent in the Stack dev...                                                                                                                                                                                                                                         
-Stack: dev  ID                                                       Action
-* ├─     v1:Namespace:helloworld                                  UnChanged
-* ├─     v1:Service:helloworld:helloworld-dev-helloworld-private  UnChanged
-* └─     apps/v1:Deployment:helloworld:helloworld-dev-helloworld  Update
+ ✔︎  Generating Intent in the Stack dev...                                                                                                                                                                                                     
+Stack: dev  ID                                                               Action
+* ├─     v1:Namespace:simple-service                                      UnChanged
+* ├─     v1:Service:simple-service:simple-service-dev-helloworld-private  UnChanged
+* └─     apps/v1:Deployment:simple-service:simple-service-dev-helloworld  Update
 
 
 ? Do you want to apply these diffs? yes
 Start applying diffs ...
- SUCCESS  UnChanged v1:Namespace:helloworld, skip                                                                                                                                                                                                                               
- SUCCESS  UnChanged v1:Service:helloworld:helloworld-dev-helloworld-private, skip                                                                                                                                                                                               
- SUCCESS  Update apps/v1:Deployment:helloworld:helloworld-dev-helloworld success                                                                                                                                                                                                
-Update apps/v1:Deployment:helloworld:helloworld-dev-helloworld success [3/3] █████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████ 100% | 0s
+ SUCCESS  UnChanged v1:Namespace:simple-service, skip                                                                                                                                                                                         
+ SUCCESS  UnChanged v1:Service:simple-service:simple-service-dev-helloworld-private, skip                                                                                                                                                     
+ SUCCESS  Update apps/v1:Deployment:simple-service:simple-service-dev-helloworld success                                                                                                                                                      
+Update apps/v1:Deployment:simple-service:simple-service-dev-helloworld success [3/3] ███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████ 100% | 0s
 Apply complete! Resources: 0 created, 1 updated, 0 deleted.
 ```
 
 ## Validation
 We can verify the application container (in the deployment template) now has the updated resources attributes (cpu:250m, memory:256Mi) as defined in the container configuration:
 ```
-kubectl get deployment -n helloworld -o yaml
+kubectl get deployment -n simple-service -o yaml
 ...
     template:
       ...
@@ -72,7 +72,7 @@ kubectl get deployment -n helloworld -o yaml
         containers:
         - env:
           ...
-          image: gcr.io/google-samples/gb-frontend:v4
+          image: gcr.io/google-samples/gb-frontend:v5
           ...
           resources:
             limits:
