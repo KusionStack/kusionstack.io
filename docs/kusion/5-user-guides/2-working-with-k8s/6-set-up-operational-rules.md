@@ -35,7 +35,7 @@ If the platform engineers have set the default workload to [Kusion Operation](ht
 
 ### AppConfiguration
 
- Add the `opsRule` snippet to the `AppConfiguration` in `dev/main.k`
+Add the `opsRule` snippet to the `AppConfiguration` in `dev/main.k`
 
 ```py
 import catalog.models.schema.v1 as ac
