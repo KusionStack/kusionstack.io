@@ -75,6 +75,15 @@ const config = {
                 theme: {
                     customCss: require.resolve('./src/css/custom.css'),
                 },
+                // The default Global Site Tag (gtag.js) plugin.
+                // It is a JavaScript tagging framework and API that allows you to send event data to 
+                // Google Analytics, Google Ads, and Google Marketing Platform.
+                //
+                // More see: https://docusaurus.io/docs/3.0.1/api/plugins/@docusaurus/plugin-google-gtag
+                gtag: {
+                    trackingID: 'G-XC4Z27TLBR',
+                    anonymizeIP: false,
+                },
             }),
         ],
     ],
