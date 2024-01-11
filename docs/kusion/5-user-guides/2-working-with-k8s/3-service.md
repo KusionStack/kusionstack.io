@@ -12,13 +12,13 @@ Please refer to the [prerequisites](deploy-application#prerequisites) in the gui
 
 The example below also requires you to have [initialized the project](deploy-application#initializing) using the `kusion workspace create` and `kusion init` command, which will create a workspace and also generate a [`kcl.mod` file](deploy-application#kclmod) under the stack directory.
 
-## Managing workspace configuration
+## Managing Workspace Configuration
 
 In the first guide in this series, we introduced a step to [initialize a workspace](deploy-application#initializing-workspace-configuration) with an empty configuration. The same empty configuration will still work in this guide, no changes are required there.
 
 ## Example
 
-`helloworld/dev/main.k`:
+`simple-service/dev/main.k`:
 ```py
 import catalog.models.schema.v1 as ac
 import catalog.models.schema.v1.workload as wl
@@ -67,31 +67,31 @@ Re-run steps in [Applying](deploy-application#applying), new service configurati
 
 ```
 $ kusion apply
- ✔︎  Generating Intent in the Stack dev...                         
-Stack: dev  ID                                                       Action
-* ├─     v1:Namespace:helloworld                                  UnChanged
-* ├─     v1:Service:helloworld:helloworld-dev-helloworld-private  Update
-* └─     apps/v1:Deployment:helloworld:helloworld-dev-helloworld  UnChanged
+ ✔︎  Generating Intent in the Stack dev...                                                                                                                                                                                                     
+Stack: dev  ID                                                               Action
+* ├─     v1:Namespace:simple-service                                      UnChanged
+* ├─     v1:Service:simple-service:simple-service-dev-helloworld-private  Update
+* └─     apps/v1:Deployment:simple-service:simple-service-dev-helloworld  UnChanged
 
 
 ? Do you want to apply these diffs? yes
 Start applying diffs ...
- SUCCESS  UnChanged v1:Namespace:helloworld, skip                                                                                                                                                                                                                               
- SUCCESS  Update v1:Service:helloworld:helloworld-dev-helloworld-private success                                                                                                                                                                                                
- SUCCESS  UnChanged apps/v1:Deployment:helloworld:helloworld-dev-helloworld, skip                                                                                                                                                                                               
-UnChanged apps/v1:Deployment:helloworld:helloworld-dev-helloworld, skip [3/3] ████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████ 100% | 0s
+ SUCCESS  UnChanged v1:Namespace:simple-service, skip                                                                                                                                                                                         
+ SUCCESS  Update v1:Service:simple-service:simple-service-dev-helloworld-private success                                                                                                                                                      
+ SUCCESS  UnChanged apps/v1:Deployment:simple-service:simple-service-dev-helloworld, skip                                                                                                                                                     
+UnChanged apps/v1:Deployment:simple-service:simple-service-dev-helloworld, skip [3/3] ██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████ 100% | 0s
 Apply complete! Resources: 0 created, 1 updated, 0 deleted.
 ```
 
 ## Validation
 We can verify the Kubernetes service now has the updated attributes (mapping service port 8080 to container port 80) as defined in the `ports` configuration:
 ```
-kubectl get svc -n helloworld -o yaml
+kubectl get svc -n simple-service -o yaml
 ...
   spec:
     ...
     ports:
-    - name: helloworld-dev-helloworld-private-8080-tcp
+    - name: simple-service-dev-helloworld-private-8080-tcp
       port: 8080
       protocol: TCP
       targetPort: 80
@@ -100,7 +100,7 @@ kubectl get svc -n helloworld -o yaml
 
 Exposing service port 8080:
 ```
-kubectl port-forward svc/helloworld-dev-helloworld-private -n helloworld 30000:8080
+kubectl port-forward svc/simple-service-dev-helloworld-private -n simple-service 30000:8080
 ```
 
 Open browser and visit [http://127.0.0.1:30000](http://127.0.0.1:30000), the application should be up and running：

@@ -10,12 +10,12 @@ Please refer to the [prerequisites](deploy-application#prerequisites) in the gui
 
 The example below also requires you to have [initialized the project](deploy-application#initializing) using the `kusion workspace create` and `kusion init` command, which will create a workspace and also generate a [`kcl.mod` file](deploy-application#kclmod) under the stack directory.
 
-## Managing workspace configuration
+## Managing Workspace Configuration
 
 In the last guide, we introduced a step to [initialize a workspace](deploy-application#initializing-workspace-configuration) with an empty configuration. The same empty configuration will still work in this guide, no changes are required there.
 
 ## Example
-`helloworld/dev/main.k`:
+`simple-service/dev/main.k`:
 ```py
 import catalog.models.schema.v1 as ac
 import catalog.models.schema.v1.workload as wl
@@ -61,19 +61,19 @@ Re-run steps in [Applying](deploy-application#applying), new container configura
 
 ```
 $ kusion apply
- ✔︎  Generating Intent in the Stack dev...                                                                                                                                                                                                                                         
-Stack: dev  ID                                                       Action
-* ├─     v1:Namespace:helloworld                                  UnChanged
-* ├─     v1:Service:helloworld:helloworld-dev-helloworld-private  UnChanged
-* └─     apps/v1:Deployment:helloworld:helloworld-dev-helloworld  Update
+  ✔︎  Generating Intent in the Stack dev...                                                                                                                                                                                                     
+Stack: dev  ID                                                               Action
+* ├─     v1:Namespace:simple-service                                      UnChanged
+* ├─     v1:Service:simple-service:simple-service-dev-helloworld-private  UnChanged
+* └─     apps/v1:Deployment:simple-service:simple-service-dev-helloworld  Update
 
 
 ? Do you want to apply these diffs? yes
 Start applying diffs ...
- SUCCESS  UnChanged v1:Namespace:helloworld, skip                                                                                                                                                                                                                               
- SUCCESS  UnChanged v1:Service:helloworld:helloworld-dev-helloworld-private, skip                                                                                                                                                                                               
- SUCCESS  Update apps/v1:Deployment:helloworld:helloworld-dev-helloworld success                                                                                                                                                                                                
-Update apps/v1:Deployment:helloworld:helloworld-dev-helloworld success [3/3] █████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████ 100% | 0s
+ SUCCESS  UnChanged v1:Namespace:simple-service, skip                                                                                                                                                                                         
+ SUCCESS  UnChanged v1:Service:simple-service:simple-service-dev-helloworld-private, skip                                                                                                                                                     
+ SUCCESS  Update apps/v1:Deployment:simple-service:simple-service-dev-helloworld success                                                                                                                                                      
+Update apps/v1:Deployment:simple-service:simple-service-dev-helloworld success [3/3] ███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████ 100% | 0s
 Apply complete! Resources: 0 created, 1 updated, 0 deleted.
 ```
 
@@ -81,7 +81,7 @@ Apply complete! Resources: 0 created, 1 updated, 0 deleted.
 
 We can verify the container (in the deployment template) now has the updated attributes as defined in the container configuration:
 ```
-$ kubectl get deployment -n helloworld -o yaml
+$ kubectl get deployment -n simple-service -o yaml
 ...
     template:
       ...
