@@ -6,7 +6,30 @@ You can set up operational rules in the `AppConfiguration` model via the `opsRul
 
 Please refer to the [prerequisites](deploy-application#prerequisites) in the guide for deploying an application.
 
-The example below also requires you to have [initialized the project](deploy-application#initializing) using the `kusion init` command, which will generate a [`kcl.mod`](deploy-application#kclmod) file under the project directory.
+The example below also requires you to have [initialized the project](deploy-application#initializing) using the `kusion workspace create` and `kusion init` command, which will create a workspace and also generate a [`kcl.mod` file](deploy-application#kclmod) under the stack directory.
+
+## Managing workspace configuration
+
+In the first guide in this series, we introduced a step to [initialize a workspace](deploy-application#initializing-workspace-configuration) with an empty configuration. The same empty configuration will still work in this guide, no changes are required there.
+
+However, if you (or the platform team) would like to set default values for the opsRule to standardize the behavior of applications, you can do so by updating the `~/dev.yaml`:
+```yaml
+modules:
+    opsRule:
+        default:
+            maxUnavailable: "40%"
+```
+
+Please note that the `maxUnavailable` in the workspace configuration only works as a default value and will be overridden by the value set in the application configuration.
+
+The workspace configuration need to be updated with the command:
+```bash
+kusion workspace update dev -f ~/dev.yaml
+```
+
+:::info
+If the platform engineers have set the default workload to [Kusion Operation](https://github.com/KusionStack/operating) and installed the Kusion Operation controllers properly, the `opsRules` module will generate a [PodTransitionRule](https://www.kusionstack.io/docs/operating/manuals/podtransitionrule) instead of updating the `maxUnavailable` value in the deployment
+:::
 
 ## Example
 
@@ -40,28 +63,13 @@ helloworld: ac.AppConfiguration {
 }
 ```
 
-### Platform configuration
-
-For platform engineers, you can also set default values of the opsRule in the `~/.kusion/workspace/dev.yaml` to standardize the behavior of applications. The `maxUnavailable` in the platform configuration will be overridden by the value set in the application configuration.
-
-:::info
-If the platform engineers have set the default workload to [Kusion Operation](https://github.com/KusionStack/operating) and installed the Kusion Operation controllers properly, the `opsRules` module will generate a [PodTransitionRule](https://www.kusionstack.io/docs/operating/manuals/podtransitionrule) instead of updating the `maxUnavailable` value in the deployment
-:::
-
-```yaml
-modules:
-    opsRule:
-        default:
-            maxUnavailable: "40%"
-```
-
 ## Applying
 
 Re-run steps in [Applying](deploy-application#applying), resource scaling is completed.
 
 ```
 $ kusion apply
-✔︎  Generating Spec in the Stack dev...                                                                                                                                                                                                                                         
+✔︎  Generating Intent in the Stack dev...                                                                                                                                                                                                                                         
 Stack: dev  ID                                                       Action
 * ├─     v1:Namespace:helloworld                                  UnChanged
 * ├─     v1:Service:helloworld:helloworld-dev-helloworld-private  UnChanged

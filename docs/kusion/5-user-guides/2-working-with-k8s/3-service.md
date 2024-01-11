@@ -10,7 +10,11 @@ For the `Port` schema reference, please see [here](../../reference/modules/catal
 
 Please refer to the [prerequisites](deploy-application#prerequisites) in the guide for deploying an application.
 
-The example below also requires you to have [initialized the project](deploy-application#initializing) using the `kusion init` command, which will generate a [`kcl.mod` file](deploy-application#kclmod) under the project directory.
+The example below also requires you to have [initialized the project](deploy-application#initializing) using the `kusion workspace create` and `kusion init` command, which will create a workspace and also generate a [`kcl.mod` file](deploy-application#kclmod) under the stack directory.
+
+## Managing workspace configuration
+
+In the first guide in this series, we introduced a step to [initialize a workspace](deploy-application#initializing-workspace-configuration) with an empty configuration. The same empty configuration will still work in this guide, no changes are required there.
 
 ## Example
 
@@ -63,7 +67,7 @@ Re-run steps in [Applying](deploy-application#applying), new service configurati
 
 ```
 $ kusion apply
- ✔︎  Generating Spec in the Stack dev...                         
+ ✔︎  Generating Intent in the Stack dev...                         
 Stack: dev  ID                                                       Action
 * ├─     v1:Namespace:helloworld                                  UnChanged
 * ├─     v1:Service:helloworld:helloworld-dev-helloworld-private  Update
