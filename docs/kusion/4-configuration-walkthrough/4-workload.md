@@ -1,10 +1,6 @@
----
-id: workload
----
-
 # Workload
 
-The `workload` attribute in the `AppConfiguration` instance is used to describe the specification for the application workload. The application workload generally represents the computing component for the application. It is the only required field when instantiating an `AppConfiguration`.
+The `workload` attribute in the `AppConfiguration` instance is used to describe the specification for the application workload. The application workload generally represents the computing component for the application.
 
 A `workload` maps to an `AppConfiguration` instance 1:1. If there are more than one workload, they should be considered different applications.
 
@@ -19,7 +15,7 @@ A `workload` maps to an `AppConfiguration` instance 1:1. If there are more than 
     - [Create Files](#create-files)
     - [Customize container initialization](#customize-container-initialization)
 - [Configure Replicas](#configure-replicas)
-- [Differences between Services and Jobs](#differences-between-services-and-jobs)
+- [Differences between Service and Job](#differences-between-service-and-job)
 - [Workload References](#workload-references)
 
 ## Import
@@ -37,7 +33,8 @@ import catalog.models.schema.v1.workload.container.lifecycle as lc
 
 ## Types of Workloads
 
-There are currently two types of workloads defined in the `AppConfiguration` model:
+There are currently two types of workloads:
+
 - `Service`, representing a long-running, scalable workload type that should "never" go down and respond to short-lived latency-sensitive requests. This workload type is commonly used for web applications and services that expose APIs.
 - `Job`, representing batch tasks that take from a few seconds to days to complete and then stop. These are commonly used for batch processing that is less sensitive to short-term performance fluctuations.
 
@@ -72,7 +69,7 @@ Everything defined in the `containers` attribute is considered an application co
 
 In most of the cases, only one application container is needed. Ideally, we recommend mapping an `AppConfiguration` instance to a microservice in the microservice terminology.
 
-We will walkthrough the details of configuring a container using an example of the `Service` type.
+We will walk through the details of configuring a container using an example of the `Service` type.
 
 To add an application container:
 ```
@@ -150,6 +147,7 @@ myapp: ac.AppConfiguration {
 ### Health Probes
 
 There are three types of `Probe` defined in a `Container`:
+
 - `livenessProbe` - used to determine if the container is healthy and running
 - `readinessProbe` - used to determine if the container is ready to accept traffic
 - `startupProbe` - used to determine if the container has started properly. Liveness and readiness probes don't start until `startupProbe` succeeds. Commonly used for containers that takes a while to start
@@ -193,6 +191,7 @@ myapp: ac.AppConfiguration {
 You can also configure lifecycle hooks that triggers in response to container lifecycle events such as liveness/startup probe failure, preemption, resource contention, etc.
 
 There are two types that is currently supported:
+
 - `PreStop` - triggers before the container is terminated.
 - `PostStart` - triggers after the container is initialized.
 
@@ -290,31 +289,13 @@ myapp: ac.AppConfiguration {
 }
 ```
 
-Autoscaling will be supported in a future version of Kusion, at which point you will be able to specify a range of replicas.
-
-## Differences between Services and Jobs
+## Differences between Service and Job
 
 The two types of workloads, namely `Service` and `Job`, share a majority of the attributes with some minor differences.
 
 ### Exposure
 
-A `Service` usually represents a long-running, scalable workload that responds to short-lived latency-sensitive requests and never go down. Hence a `Service` has an additional attribute that determines how it is exposed and can be accessed. A `Job` does NOT the option to be exposed. We will explore more in the [application networking walkthrough](networking).
-
-### Workload Implementations
-
-Kusion also supports multiple kinds of Kubernetes workload implementations for a `Service` type workload. The current supported kinds are `Deployment`(default) and `CollaSet`, which is a workload type defined in the [KusionStack-operating toolkit](https://github.com/KusionStack/operating) under the KusionStack family. You can learn more about `CollaSet` [here](https://kusionstack.io/).
-
-To specify a `CollaSet` kind `Service`:
-```
-myapp: ac.AppConfiguration {
-    workload: wl.Service {
-        type: "CollaSet"
-        # ...
-    }
-}
-```
-
-If `type` is not provided, Kusion defaults to use the Kubernetes `Deployment`.
+A `Service` usually represents a long-running, scalable workload that responds to short-lived latency-sensitive requests and never go down. Hence, a `Service` has an additional attribute that determines how it is exposed and can be accessed. A `Job` does NOT have the option to be exposed. We will explore more in the [application networking walkthrough](networking).
 
 ### Job Schedule
 
