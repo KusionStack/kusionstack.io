@@ -12,7 +12,7 @@ Please refer to the [prerequisites](deploy-application#prerequisites) in the gui
 
 The example below also requires you to have [initialized the project](deploy-application#initializing) using the `kusion workspace create` and `kusion init` command, which will create a workspace and also generate a [`kcl.mod` file](deploy-application#kclmod) under the stack directory.
 
-## Managing workspace configuration
+## Managing Workspace Configuration
 
 In the first guide in this series, we introduced a step to [initialize a workspace](deploy-application#initializing-workspace-configuration) with an empty configuration. The same empty configuration will still work in this guide, no changes are required there.
 
