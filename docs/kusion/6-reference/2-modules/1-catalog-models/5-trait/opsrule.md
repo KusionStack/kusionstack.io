@@ -11,9 +11,9 @@ OpsRule describes operation rules for various Day-2 Operations. Once declared, t
 |**maxUnavailable**<br />The maximum percentage of the total pod instances in the component that can be<br />simultaneously unhealthy.|int \| str|Undefined|optional|
 ### Examples
 ```python
-import catalog.models.schema.v1.component.trait as t
+import catalog.models.schema.v1.trait as t
 
-opsRule = t.OpsRule {
+opsRule : t.OpsRule {
     maxUnavailable: "30%"
 }
 ```

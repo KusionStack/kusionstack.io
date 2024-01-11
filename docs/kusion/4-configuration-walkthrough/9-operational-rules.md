@@ -14,7 +14,7 @@ The `import` statements needed for the following walkthrough:
 ```
 import catalog.models.schema.v1 as ac
 import catalog.models.schema.v1.workload as wl
-import models.schema.v1.trait as t
+import catalog.models.schema.v1.trait as t
 ```
 
 ## Max Unavailable Replicas

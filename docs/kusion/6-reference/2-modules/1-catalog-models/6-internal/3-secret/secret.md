@@ -2,13 +2,14 @@
 
 ## Schema Secret
 
-Secret can be used to store sensitive data.
+Secrets are used to provide data that is considered sensitive like passwords, API keys,<br />TLS certificates, tokens or other credentials.
 
 ### Attributes
 
 |Name and Description|Type|Default Value|Required|
 |--------------------|----|-------------|--------|
-|**type**<br />Type of secret, used to facilitate programmatic handling of secret data.<br />More info: https://kubernetes.io/docs/concepts/configuration/secret/\#secret-types|"basic" \| "opaque"|opaque|**required**|
+|**type**<br />Type of secret, used to facilitate programmatic handling of secret data.|"basic" \| "token" \| "opaque" \| "certificate" \| "external"|Undefined|**required**|
+|**params**<br />Collection of parameters used to facilitate programmatic handling of secret data.|{str: str}|Undefined|optional|
 |**data**<br />Data contains the non-binary secret data in string form.|{str: str}|Undefined|optional|
 |**immutable**<br />Immutable, if set to true, ensures that data stored in the Secret cannot be updated.|bool|Undefined|optional|
 ### Examples
