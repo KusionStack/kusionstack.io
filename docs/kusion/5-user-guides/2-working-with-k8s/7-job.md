@@ -22,7 +22,7 @@ import catalog.models.schema.v1 as ac
 import catalog.models.schema.v1.workload as wl
 import catalog.models.schema.v1.workload.container as c
 
-samplejob: ac.AppConfiguration {
+helloworld: ac.AppConfiguration {
     workload: wl.Job {
         containers: {
             "busybox": c.Container {
@@ -52,14 +52,14 @@ $ kusion apply
  ✔︎  Generating Intent in the Stack dev...                                                                                                                                                                                                     
 Stack: dev  ID                                                    Action
 * ├─     v1:Namespace:simple-service                               Create
-* └─     batch/v1:CronJob:simple-service:simple-service-dev-samplejob  Create
+* └─     batch/v1:CronJob:simple-service:simple-service-dev-helloworld  Create
 
 
 ? Do you want to apply these diffs? yes
 Start applying diffs ...
  SUCCESS  Create v1:Namespace:simple-service success                                                                                                                                                                                              
- SUCCESS  Create batch/v1:CronJob:simple-service:samplejob-dev-samplejob success                                                                                                                                                                 
-Create batch/v1:CronJob:simple-service:simple-service-dev-samplejob success [2/2] ██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████ 100% | 0s
+ SUCCESS  Create batch/v1:CronJob:simple-service:helloworld-dev-helloworld success                                                                                                                                                                 
+Create batch/v1:CronJob:simple-service:simple-service-dev-helloworld success [2/2] ██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████ 100% | 0s
 Apply complete! Resources: 2 created, 0 updated, 0 deleted.
 ```
 
@@ -69,7 +69,7 @@ $ kusion apply
  ✔︎  Generating Intent in the Stack dev...                                                                                                                                                                                                     
 Stack: dev  ID                                                               Action
 * ├─     v1:Namespace:simple-service                                      UnChanged
-* ├─     batch/v1:CronJob:simple-service:simple-service-dev-samplejob     Create
+* ├─     batch/v1:CronJob:simple-service:simple-service-dev-helloworld     Create
 * ├─     apps/v1:Deployment:simple-service:simple-service-dev-helloworld  Delete
 * └─     v1:Service:simple-service:simple-service-dev-helloworld-private  Delete
 
@@ -78,7 +78,7 @@ Stack: dev  ID                                                               Act
 Start applying diffs ...
  SUCCESS  UnChanged v1:Namespace:simple-service, skip                                                                                                                                                                                         
  SUCCESS  Delete apps/v1:Deployment:simple-service:simple-service-dev-helloworld success                                                                                                                                                      
- SUCCESS  Create batch/v1:CronJob:simple-service:simple-service-dev-samplejob success                                                                                                                                                         
+ SUCCESS  Create batch/v1:CronJob:simple-service:simple-service-dev-helloworld success                                                                                                                                                         
  SUCCESS  Delete v1:Service:simple-service:simple-service-dev-helloworld-private success                                                                                                                                                      
 Delete v1:Service:simple-service:simple-service-dev-helloworld-private success [4/4] ███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████ 100% | 0s
 Apply complete! Resources: 1 created, 0 updated, 2 deleted.
@@ -91,12 +91,12 @@ We can verify the job has now been scheduled:
 ```shell
 $ kubectl get cronjob -n simple-service
 NAME                       SCHEDULE    SUSPEND   ACTIVE   LAST SCHEDULE   AGE
-simple-service-dev-samplejob   * * * * *   False     0        <none>          2m18s
+simple-service-dev-helloworld   * * * * *   False     0        <none>          2m18s
 ```
 
 Verify the job has been triggered after the minute mark since we scheduled it to run every minute:
 ```shell
 $ kubectl get job -n simple-service
 NAME                                COMPLETIONS   DURATION   AGE
-simple-service-dev-samplejob-28415748   1/1           5s         11s
+simple-service-dev-helloworld-28415748   1/1           5s         11s
 ```
