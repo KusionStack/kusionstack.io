@@ -15,7 +15,7 @@ AppConfiguration is a developer-centric definition that describes how to run an 
 |--------------------|--------------------------------------------------------------|-------------|--------|
 |**workload**<br />Workload defines how to run your application code. Currently supported workload profile<br />includes Service and Job.| [workload.Service](workload/service#schema-service) \        | [workload.Job](workload/job#schema-job)|Undefined|**required**|
 |**opsRule**<br />OpsRule specifies collection of rules that will be checked for Day-2 operation.| [trait.OpsRule](trait/opsrule#schema-opsrule)                |Undefined|optional|
-|**database**| [database.Database](database/database#schema-database)     |Undefined|optional|
+|**database**<br />Database describes a locally deployed or a cloud provider managed database instance for the workload.|{str: [mysql.MySQL](database/mysql#schema-mysql) \| [postgres.PostgreSQL](database/postgres#schema-postgresql)}|Undefined|optional|
 |**monitoring**| [monitoring.Prometheus](monitoring/prometheus#schema-prometheus) |Undefined|optional|
 |**labels**| {str: str}                                                   |Undefined|optional|
 |**annotations**| {str: str}                                                   |Undefined|optional|
