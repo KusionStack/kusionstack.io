@@ -1,9 +1,4 @@
----
-id: app-configuration
-sidebar_label: AppConfiguration
----
-
-# AppConfiguration
+# appconfiguration
 
 ## Schema AppConfiguration
 

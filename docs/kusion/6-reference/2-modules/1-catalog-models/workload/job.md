@@ -1,4 +1,4 @@
-# Job
+# job
 
 ## Schemas
 - [Job](#schema-job)

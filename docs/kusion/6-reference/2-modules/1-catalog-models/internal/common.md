@@ -8,8 +8,8 @@ WorkloadBase defines set of attributes shared by different workload profile, e.g
 
 |Name and Description|Type|Default Value|Required|
 |--------------------|----|-------------|--------|
-|**containers**<br />Containers defines the templates of containers to be ran.<br />More info: https://kubernetes.io/docs/concepts/containers|{str: [container.Container](container/container#schema-container)}|Undefined|**required**|
-|**secrets**|{str: [secret.Secret](secret/secret#schema-secret)}|Undefined|optional|
+|**containers**<br />Containers defines the templates of containers to be ran.<br />More info: https://kubernetes.io/docs/concepts/containers|{str: [container.Container](container/container.md#schema-container)}|Undefined|**required**|
+|**secrets**|{str: [secret.Secret](secret/secret.md#schema-secret)}|Undefined|optional|
 |**replicas**<br />Number of container replicas based on this configuration that should be ran.|int|2|**required**|
 |**labels**<br />Labels are key/value pairs that are attached to the workload.|{str: str}|Undefined|optional|
 |**annotations**<br />Annotations are key/value pairs that attach arbitrary non-identifying metadata to the workload.|{str: str}|Undefined|optional|

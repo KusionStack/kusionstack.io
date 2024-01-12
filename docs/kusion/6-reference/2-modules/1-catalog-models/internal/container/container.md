@@ -16,10 +16,10 @@ Container describes how the Application's tasks are expected to be run. Dependin
 |**resources**<br />Map of resource requirements the container should run with.<br />The resources parameter is a dict with the key being the resource name and the value being<br />the resource value.|{str: str}|Undefined|optional|
 |**files**<br />List of files to create in the container.<br />The files parameter is a dict with the key being the file name in the container and the value<br />being the target file specification.|{str: [container.FileSpec](#schema-filespec)}|Undefined|optional|
 |**dirs**<br />Collection of volumes mount into the container's filesystem.<br />The dirs parameter is a dict with the key being the folder name in the container and the value<br />being the referenced volume.|{str: str}|Undefined|optional|
-|**livenessProbe**<br />LivenessProbe indicates if a running process is healthy.<br />Container will be restarted if the probe fails.|[p.Probe](probe/probe#schema-probe)|Undefined|optional|
-|**readinessProbe**<br />ReadinessProbe indicates whether an application is available to handle requests.|[p.Probe](probe/probe#schema-probe)|Undefined|optional|
-|**startupProbe**<br />StartupProbe indicates that the container has started for the first time.<br />Container will be restarted if the probe fails.|[p.Probe](probe/probe#schema-probe)|Undefined|optional|
-|**lifecycle**<br />Lifecycle refers to actions that the management system should take in response to container lifecycle events.|[lc.Lifecycle](lifecycle/lifecycle#schema-lifecycle)|Undefined|optional|
+|**livenessProbe**<br />LivenessProbe indicates if a running process is healthy.<br />Container will be restarted if the probe fails.|[p.Probe](probe/probe.md#schema-probe)|Undefined|optional|
+|**readinessProbe**<br />ReadinessProbe indicates whether an application is available to handle requests.|[p.Probe](probe/probe.md#schema-probe)|Undefined|optional|
+|**startupProbe**<br />StartupProbe indicates that the container has started for the first time.<br />Container will be restarted if the probe fails.|[p.Probe](probe/probe.md#schema-probe)|Undefined|optional|
+|**lifecycle**<br />Lifecycle refers to actions that the management system should take in response to container lifecycle events.|[lc.Lifecycle](lifecycle/lifecycle.md#schema-lifecycle)|Undefined|optional|
 ### Examples
 ```python
 import catalog.models.schema.v1.workload.container as c

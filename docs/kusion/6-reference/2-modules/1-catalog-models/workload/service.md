@@ -1,4 +1,4 @@
-# Service
+# service
 
 ## Schemas
 - [Service](#schema-service)
