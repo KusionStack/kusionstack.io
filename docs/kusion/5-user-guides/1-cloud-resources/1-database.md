@@ -7,13 +7,13 @@ This tutorial will demonstrate how to deploy a WordPress application with Kusion
 
 ## Prerequisites
 
-- [Install Kusion](../../getting-started/install-kusion)
-- [Deploy Kubernetes](https://kubernetes.io/) or [Kind](https://kind.sigs.k8s.io/) or [Minikube](https://minikube.sigs.k8s.io/docs/tutorials/multi_node/)
-- [Install Terraform](https://www.terraform.io/)
+- Install [Kusion](../../2-getting-started/1-install-kusion.md)
+- Deploy [Kubernetes](https://kubernetes.io/) or [Kind](https://kind.sigs.k8s.io/) or [Minikube](https://minikube.sigs.k8s.io/docs/tutorials/multi_node/)
+- Install [Terraform](https://www.terraform.io/)
 - Prepare a cloud service account and create a user with `VPCFullAccess` and `RDSFullAccess` permissions to use the Relational Database Service (RDS). This kind of user can be created and managed in the Identity and Access Management (IAM) console
 - The environment that executes `kusion` need to have connectivity to terraform registry to download the terraform providers
 
-Additionally, we also need to configure the obtained AccessKey and SecretKey as environment variables, along with the region if you are using certain cloud provider: 
+Additionally, we also need to configure the obtained AccessKey and SecretKey as environment variables for specific cloud provider: 
 
 <Tabs>
 <TabItem value="AWS" >
@@ -21,7 +21,6 @@ Additionally, we also need to configure the obtained AccessKey and SecretKey as 
 ```bash
 export AWS_ACCESS_KEY_ID="AKIAQZDxxxx" # replace it with your AccessKey
 export AWS_SECRET_ACCESS_KEY="oE/xxxx" # replace it with your SecretKey
-export AWS_PROVIDER_REGION="xx-xxxx-x" # replace it with your AWS Region
 ```
 
 ![aws iam account](/img/docs/user_docs/getting-started/aws-iam-account.png)
@@ -34,7 +33,6 @@ export AWS_PROVIDER_REGION="xx-xxxx-x" # replace it with your AWS Region
 ```bash
 export ALICLOUD_ACCESS_KEY="LTAI5txxx" # replace it with your AccessKey
 export ALICLOUD_SECRET_KEY="nxuowIxxx" # replace it with your SecretKey
-export ALICLOUD_PROVIDER_REGION="xx-xxxxxxx" # replace it with your AliCloud Region
 ```
 
 ![alicloud iam account](/img/docs/user_docs/getting-started/set-rds-access.png)
@@ -43,6 +41,101 @@ export ALICLOUD_PROVIDER_REGION="xx-xxxxxxx" # replace it with your AliCloud Reg
 </TabItem>
 </Tabs>
 ```
+
+## Init Workspace
+
+To deploy the WordPress application with cloud rds, we first need to initiate a `Workspace` for the targeted stack (here we are using `dev`). Please copy the following example YAML file to your local `workspace.yaml`. 
+
+<Tabs>
+<TabItem value="AWS" >
+
+`workspace.yaml`
+```yaml
+runtimes: 
+  kubernetes:
+    kubeConfig: /etc/kubeconfig.yaml # Please replace with your own kubeconfig file path
+  terraform: 
+    random: 
+      version: 3.5.1
+      source: hashicorp/random
+    aws: 
+      version: 5.0.1
+      source: hashicorp/aws
+      region: us-east-1
+
+# MySQL configurations for AWS RDS
+modules: 
+  mysql: 
+    default: 
+      cloud: aws
+      size: 20
+      instanceType: db.t3.micro
+      privateRouting: false
+      suffix: "-mysql"
+```
+
+```mdx-code-block
+</TabItem>
+<TabItem value="Alicloud">
+```
+
+`workspace.yaml`
+```yaml
+runtimes: 
+  kubernetes:
+    kubeConfig: /etc/kubeconfig.yaml # Replace with your own kubeconfig file path
+  terraform: 
+    random: 
+      version: 3.5.1
+      source: hashicorp/random
+    alicloud: 
+      version: 1.209.1
+      source: aliyun/alicloud
+      region: cn-beijing
+
+# MySQL configurations for Alicloud RDS
+modules: 
+  mysql: 
+    default: 
+      cloud: alicloud
+      size: 20
+      instanceType: mysql.n2.serverless.1c
+      category: serverless_basic
+      privateRouting: false
+      subnetID: [your-subnet-id]
+      suffix: "-mysql"
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+You can replace the `runtimes.kubernetes.kubeConfig` field with your own kubeconfig file path in `workspace.yaml`, and if you would like to try creating the `Alicloud` RDS instance, you should also replace the `[your-subnet-id]` of `modules.mysql.default.subnetID` field with the Alicloud `vSwitchID` to provision the database in. After that, you can execute the following command line to initiate the workspace configuration for `dev` stack. 
+
+```shell
+kusion workspace create dev -f workspace.yaml
+```
+
+If you already create the workspace configuration for `dev` stack, you can append the Terraform runtime configs and MySQL module configs to your workspace YAML file and use the following command line to update the workspace configuration. 
+
+```shell
+kusion workspace update dev -f workspace.yaml
+```
+
+You can use the following command lines to list and show the workspace configurations for `dev` stack. 
+
+```shell
+kusion workspace list
+
+kusion workspace show dev
+```
+
+The `workspace.yaml` is a sample configuration file for workspace management, including `Kubernetes` and `Terraform` runtime configs and `MySQL` module config. Workspace configurations are usually declared by **Platform Engineers** and will take effect through the corresponding stack. 
+
+:::info
+More details about the configuration of Workspace can be found in [Workspace Management](https://github.com/KusionStack/kusion/blob/main/docs/design/workspace_management/workspace_management.md). 
+:::
 
 ## Init Project
 
@@ -65,63 +158,58 @@ Press ^C at any time to quit.
 Project Config:
 ? Project Name: wordpress-cloud-rds
 ? AppName: wordpress
-? ProjectName: wordpress
+? ProjectName: wordpress-cloud-rds
 Stack Config: dev
 ? Image: wordpress:6.3
 Created project 'wordpress-cloud-rds'
 ```
 
-Select `wordpress-cloud-rds` and press `Enter`. After that, we will see hints below and use the default value to config this project and stack.
+Select `wordpress-cloud-rds` and press `Enter`. After that, we will see hints below and use the default values to config this project and stack.
 
-
-![](/img/docs/user_docs/getting-started/init-wordpress-with-rds.gif)
+![](/img/docs/user_docs/getting-started/init-wordpress-cloud-rds.gif)
 
 The directory structure looks like the following:
 
 ```shell
-➜  kusion_playground tree wordpress-cloud-rds
-wordpress-cloud-rds
-├── dev
-│   ├── kcl.mod
-│   ├── kcl.mod.lock
-│   ├── main.k
-│   ├── platform.k
-│   └── stack.yaml
-└── project.yaml
+cd wordpress-cloud-rds/dev && tree
+```
 
-1 directory, 6 files
+```shell
+➜  kusion_playground cd wordpress-cloud-rds/dev && tree
+.
+├── kcl.mod
+├── kcl.mod.lock
+├── main.k
+└── stack.yaml
+
+1 directory, 4 files
 ```
 
 :::info
-More details about the directory structure can be found in [Concepts](../../concepts/project/overview).
+More details about the directory structure can be found in [Project](../../3-concepts/1-project/1-overview.md) and [Stack](../../3-concepts/2-stack/1-overview.md). 
 :::
 
-### Review Config Files
+### Review Configuration Files
 
-Let's take a look at the configuration files located in `wordpress-cloud-rds/dev`.
+Now let's take a look at the configuration files located in `dev/main.k`.
 
-`dev/main.k`
 ```python
 import catalog.models.schema.v1 as ac
-import catalog.models.schema.v1.trait as t
 import catalog.models.schema.v1.workload as wl
 import catalog.models.schema.v1.workload.container as c
-import catalog.models.schema.v1.workload.container.probe as p
-import catalog.models.schema.v1.workload.secret as sec
 import catalog.models.schema.v1.workload.network as n
-import catalog.models.schema.v1.monitoring as m
-import catalog.models.schema.v1.accessories.database as db
+import catalog.models.schema.v1.accessories.mysql
 
-# main.k declares reusable configurations for dev stacks.
+# main.k declares customized configurations for dev stacks.
 wordpress: ac.AppConfiguration {
     workload: wl.Service {
         containers: {
             wordpress: c.Container {
-                image = "wordpress:6.3"
+                image: "wordpress:6.3"
                 env: {
-                    "WORDPRESS_DB_HOST": "$(KUSION_DB_HOST)"
-                    "WORDPRESS_DB_USER": "$(KUSION_DB_USERNAME)"
-                    "WORDPRESS_DB_PASSWORD": "$(KUSION_DB_PASSWORD)"
+                    "WORDPRESS_DB_HOST": "$(KUSION_DB_HOST_WORDPRESS_MYSQL)"
+                    "WORDPRESS_DB_USER": "$(KUSION_DB_USERNAME_WORDPRESS_MYSQL)"
+                    "WORDPRESS_DB_PASSWORD": "$(KUSION_DB_PASSWORD_WORDPRESS_MYSQL)"
                     "WORDPRESS_DB_NAME": "mysql"
                 }
                 resources: {
@@ -137,133 +225,45 @@ wordpress: ac.AppConfiguration {
             }
         ]
     }
-    database: db.Database {
-        type: "aws"
-        engine: "MySQL"
-        version: "8.0"
-        size: 20
-        instanceType: "db.t3.micro"
-    }
-}
-```
-
-`dev/platform.k`
-```python
-import catalog.models.schema.v1 as ac
-
-# platform.k declares customized configurations
-wordpress: ac.AppConfiguration {
     database: {
-        privateRouting = False
-
-        # SubnetID defines the virtual subnet ID associated with the VPC that the rds
-        # instance will be created in. The rds instance won't be created in user's own VPC
-        # but in default VPC of cloud vendor, if this field is not provided.
-        # subnetID = [your-subnet-id]
-
-        # category = "serverless_basic"
-    }
-}
-```
-
-The template project defaults to use `AWS` RDS instance for the WordPress application. If you would like to try creating the `Alicloud` RDS instance, you could modify the `dev/main.k` and `dev/platform.k` to the following and replace the `[your-subnet-id]` in `dev/platform.k` with the `vSwitchID` to provision the database in. 
-
-`dev/main.k`
-```python
-import catalog.models.schema.v1 as ac
-import catalog.models.schema.v1.trait as t
-import catalog.models.schema.v1.workload as wl
-import catalog.models.schema.v1.workload.container as c
-import catalog.models.schema.v1.workload.container.probe as p
-import catalog.models.schema.v1.workload.secret as sec
-import catalog.models.schema.v1.workload.network as n
-import catalog.models.schema.v1.monitoring as m
-import catalog.models.schema.v1.accessories.database as db
-
-# main.k declares reusable configurations for dev stacks.
-wordpress: ac.AppConfiguration {
-    workload: wl.Service {
-        containers: {
-            wordpress: c.Container {
-                image = "wordpress:6.3"
-                env: {
-                    "WORDPRESS_DB_HOST": "$(KUSION_DB_HOST)"
-                    "WORDPRESS_DB_USER": "$(KUSION_DB_USERNAME)"
-                    "WORDPRESS_DB_PASSWORD": "$(KUSION_DB_PASSWORD)"
-                    "WORDPRESS_DB_NAME": "mysql"
-                }
-                resources: {
-                    "cpu": "500m"
-                    "memory": "512Mi"
-                }
-            }
+        wordpress: mysql.MySQL {
+            type: "cloud"
+            version: "8.0"
         }
-        replicas: 1
-        ports: [
-            n.Port {
-                port: 80
-            }
-        ]
-    }
-    database: db.Database {
-        type: "alicloud"
-        engine: "MySQL"
-        version: "8.0"
-        size: 20
-        instanceType: "mysql.n2.serverless.1c"
     }
 }
 ```
 
-`dev/platform.k`
-```python
-import catalog.models.schema.v1 as ac
-
-# platform.k declares customized configurations
-wordpress: ac.AppConfiguration {
-    database: {
-        privateRouting = False
-
-        # SubnetID defines the virtual subnet ID associated with the VPC that the rds
-        # instance will be created in. The rds instance won't be created in user's own VPC
-        # but in default VPC of cloud vendor, if this field is not provided.
-        subnetID = [your-subnet-id]
-
-        category = "serverless_basic"
-    }
-}
-```
-
-The configuration code files you need to pay attention are mainly `dev/main.k` and `dev/platform.k`. Specifically: 
-
-- `dev/main.k` contains configurations for the **Development team** to fill out on how the application should run in the dev environment. In addition to declaring its application container attributes such as image, environment variables, resource requirements, its network attributes such as opening the port 80 to provide service, it also declares that it needs an RDS instance.
-- `dev/platform.k` contains config codes for **Platform team** to fill out for the WordPress application deployment in the dev environment on AliCloud. Here, the main purpose is to specify the details on the cloud database (such as how network access is managed, what category of service to get from the cloud vendor) for it to be connected from the WordPress application container.
-
-As shown above, benefiting from the advanced features of KCL concerning variable, function, and schema definition, we can abstract and encapsulate the RDS resources, which shields many properties that the Developer does not need to be aware of. The developer only needs to fill in a few necessary fields in the AppConfiguration instance to complete the declaration of RDS resources, so that the application configuration can be organized more flexibly and efficiently. 
+The configuration file `main.k`, usually written by the **App Developers**, declares customized configurations for `dev` stack, which includes an `AppConfiguration` with the name of `wordpress`. And the `wordpress` application includes a workload of type `workload.Service`, which runs on 1 replica and exposes `80` port to be accessed. Besides, it declares a cloud `mysql.MySQL` as the database accessory with the engine version of `8.0` for the application. 
+The necessary Terraform resources for deploying and using the cloud rds (relational database service) will be generated, and users can get the `host`, `username` and `password` of the database through the [mysql credentials and connectivity](../6-reference/2-modules/1-catalog-models/database/mysql.md#credentials-and-connectivity) of Kusion in application containers. 
 
 :::info
 More details about Catalog models can be found in [Catalog](https://github.com/KusionStack/catalog)
 :::
 
-## Deliver WordPress Application
+:::info
+The collaboration paradigm between App Developers and Platform Engineers with Kusion can be found in [Collaboration Paradigm](https://github.com/KusionStack/kusion/blob/main/docs/design/collaboration/collaboration_paradigm.md)
+:::
 
-You can complete the delivery of the WordPress application using the following command line: 
+## Application Delivery
+
+You can complete the delivery of the WordPress application in the folder of `wordpress-cloud-rds/dev` using the following command line: 
 
 ```shell
-cd wordpress-cloud-rds && kusion apply --yes
+kusion apply --watch
 ```
 
 <Tabs>
 <TabItem value="AWS" >
 
-![apply the wordpress application with aws rds](/img/docs/user_docs/getting-started/apply-wordpress-application-with-aws-rds.png)
+![apply the wordpress application with aws rds](/img/docs/user_docs/getting-started/apply-wordpress-cloud-rds-aws.png)
 
 ```mdx-code-block
 </TabItem>
 <TabItem value="Alicloud">
 ```
 
-![apply the wordpress application with alicloud rds](/img/docs/user_docs/getting-started/apply-wordpress-application.png)
+![apply the wordpress application with alicloud rds](/img/docs/user_docs/getting-started/apply-wordpress-cloud-rds-alicloud.png)
 
 ```mdx-code-block
 </TabItem>
@@ -273,10 +273,10 @@ cd wordpress-cloud-rds && kusion apply --yes
 After all the resources reconciled, we can port-forward our local port (e.g. 12345) to the WordPress frontend service port (80) in the cluster:
 
 ```shell
-kubectl port-forward -n wordpress svc/wordpress-dev-wordpress-private 12345:80
+kubectl port-forward -n wordpress-cloud-rds svc/wordpress-cloud-rds-dev-wordpress-private 12345:80
 ```
 
-![kubectl port-forward for wordpress](/img/docs/user_docs/getting-started/wordpress-port-forward.png)
+![kubectl port-forward for wordpress](/img/docs/user_docs/getting-started/wordpress-cloud-rds-port-forward.png)
 
 ## Verify WordPress Application
 
@@ -289,15 +289,14 @@ In addition, we can also log in to the cloud service console page to view the RD
 <Tabs>
 <TabItem value="AWS" >
 
-![aws rds instance](/img/docs/user_docs/getting-started/aws-rds-instance.png)
-![aws rds instance detailed information](/img/docs/user_docs/getting-started/aws-rds-instance-detail.png)
+![aws rds instance](/img/docs/user_docs/getting-started/cloud-rds-instance-aws.png)
 
 ```mdx-code-block
 </TabItem>
 <TabItem value="Alicloud">
 ```
 
-![alicloud rds instance](/img/docs/user_docs/getting-started/alicloud-rds-instance.png)
+![alicloud rds instance](/img/docs/user_docs/getting-started/cloud-rds-instance-alicloud.png)
 
 ```mdx-code-block
 </TabItem>
@@ -315,14 +314,14 @@ kusion destroy --yes
 <Tabs>
 <TabItem value="AWS" >
 
-![kusion destroy wordpress with aws rds](/img/docs/user_docs/getting-started/kusion-destroy-wordpress-with-aws-rds.png)
+![kusion destroy wordpress with aws rds](/img/docs/user_docs/getting-started/destroy-wordpress-cloud-rds-aws.png)
 
 ```mdx-code-block
 </TabItem>
 <TabItem value="Alicloud">
 ```
 
-![kusion destroy wordpress with alicloud rds](/img/docs/user_docs/getting-started/kusion-destroy-wordpress.png)
+![kusion destroy wordpress with alicloud rds](/img/docs/user_docs/getting-started/destroy-wordpress-cloud-rds-alicloud.png)
 
 ```mdx-code-block
 </TabItem>
