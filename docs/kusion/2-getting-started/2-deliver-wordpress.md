@@ -91,11 +91,10 @@ cd wordpress-local-db/dev && tree
 ➜  kusion_playground cd wordpress-local-db/dev && tree
 .
 ├── kcl.mod
-├── kcl.mod.lock
 ├── main.k
 └── stack.yaml
 
-1 directory, 4 files
+1 directory, 3 files
 ```
 
 :::info

@@ -178,11 +178,10 @@ cd wordpress-cloud-rds/dev && tree
 ➜  kusion_playground cd wordpress-cloud-rds/dev && tree
 .
 ├── kcl.mod
-├── kcl.mod.lock
 ├── main.k
 └── stack.yaml
 
-1 directory, 4 files
+1 directory, 3 files
 ```
 
 :::info
