@@ -156,9 +156,8 @@ Enter a value or leave blank to accept the (default), and press <ENTER>.
 Press ^C at any time to quit.
 
 Project Config:
-? Project Name: wordpress-cloud-rds
-? AppName: wordpress
 ? ProjectName: wordpress-cloud-rds
+? AppName: wordpress
 Stack Config: dev
 ? Image: wordpress:6.3
 Created project 'wordpress-cloud-rds'

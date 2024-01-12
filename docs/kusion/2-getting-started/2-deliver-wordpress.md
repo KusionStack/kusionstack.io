@@ -69,9 +69,8 @@ Enter a value or leave blank to accept the (default), and press <ENTER>.
 Press ^C at any time to quit.
 
 Project Config:
-? Project Name: wordpress-local-db
-? AppName: wordpress
 ? ProjectName: wordpress-local-db
+? AppName: wordpress
 Stack Config: dev
 ? Image: wordpress:6.3
 Created project 'wordpress-local-db'
