@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # ------------------------------------------------------------
 # Copyright 2022 The KusionStack Authors
@@ -15,10 +15,12 @@
 
 set -o errexit
 set -o nounset
-set -o pipefail
 
 # Sudo is required to delete binary from KUSION_HOME_DIR
 USE_SUDO=${USE_SUDO:-"false"}
+
+# SHELL
+SHELL=${SHELL:-""}
 
 # Specified profile
 PROFILE=${PROFILE:-""}
@@ -49,7 +51,7 @@ error() {
 runAsRoot() {
 	local CMD="$*"
 
-	if [ $EUID -ne 0 ] && [ $USE_SUDO = "true" ]; then
+	if [ $USE_SUDO = "true" ]; then
 		CMD="sudo $CMD"
 	fi
 
@@ -61,12 +63,12 @@ echoFexists() {
 }
 
 removeInstallationDir() {
-    info "Removing kusion installation dir $KUSION_HOME_DIR..."
-    runAsRoot rm -rf "$KUSION_HOME_DIR"
-    if [ -d "$KUSION_HOME_DIR" ]; then
-        error "Removing kusion installation dir failed."
-        return 1
-    fi
+  info "Removing kusion installation dir $KUSION_HOME_DIR..."
+  runAsRoot rm -rf "$KUSION_HOME_DIR"
+  if [ -d "$KUSION_HOME_DIR" ]; then
+      error "Removing kusion installation dir failed."
+      return 1
+  fi
 }
 
 clearProfileSource() {
@@ -75,13 +77,18 @@ clearProfileSource() {
 		return 0
 	fi
 
-    detected_profile=$(detectProfile "$(basename $SHELL)" "$(uname -s)")
-    if [ -z "${detected_profile-}" ]; then
-        warn "No supported user profile found. Already tried \$PROFILE ($PROFILE), ~/.bashrc, ~/.bash_profile, ~/.zshrc, ~/.profile, and ~/.config/fish/config.fish. Skip clearing kusion env in user profile."
-		return 0
-    fi
+	# detect profile
+	local shell_name=""
+	if [ "$SHELL" ]; then
+	  shell_name=$(basename $SHELL)
+	fi
+  detected_profile=$(detectProfile "$shell_name" "$(uname -s)")
+  if [ -z "${detected_profile-}" ]; then
+    warn "No supported user profile found. Already tried \$PROFILE ($PROFILE), ~/.bashrc, ~/.bash_profile, ~/.zshrc, ~/.profile, and ~/.config/fish/config.fish. Skip clearing kusion env in user profile."
+	return 0
+	fi
 
-    info "Clearing kusion env in profile $detected_profile..."
+  info "Clearing kusion env in profile $detected_profile..."
 	deleteProfileSourceContent "$detected_profile"
 }
 
@@ -120,48 +127,64 @@ detectProfile() {
 	*)
 		# Fall back to checking for profile file existence. Once again, the order
 		# differs between macOS and everything else.
-		local profiles
 		case $uname in
-		Darwin)
-			profiles=(.profile .bash_profile .bashrc .zshrc .config/fish/config.fish)
-			;;
-		*)
-			profiles=(.profile .bashrc .bash_profile .zshrc .config/fish/config.fish)
+    Darwin)
+      if [ -f "$HOME/.profile" ]; then
+        echo "$HOME/.profile"
+      elif [ -f "$HOME/.bash_profile" ]; then
+        echo "$HOME/.bash_profile"
+      elif [ -f "$HOME/.bashrc" ]; then
+        echo "$HOME/.bashrc"
+      elif [ -f "$HOME/.zshrc" ]; then
+        echo "$HOME/.zshrc"
+      elif [ -f "$HOME/.config/fish/config.fish" ]; then
+        echo "$HOME/.config/fish/config.fish"
+      fi
+      ;;
+    *)
+      if [ -f "$HOME/.profile" ]; then
+        echo "$HOME/.profile"
+      elif [ -f "$HOME/.bashrc" ]; then
+        echo "$HOME/.bashrc"
+      elif [ -f "$HOME/.bash_profile" ]; then
+        echo "$HOME/.bash_profile"
+      elif [ -f "$HOME/.zshrc" ]; then
+        echo "$HOME/.zshrc"
+      elif [ -f "$HOME/.config/fish/config.fish" ]; then
+        echo "$HOME/.config/fish/config.fish"
+      fi
 			;;
 		esac
-
-		for profile in "${profiles[@]}"; do
-			echoFexists "$HOME/$profile" && break
-		done
 		;;
 	esac
 }
 
 deleteProfileSourceContent() {
-    local profile="$1"
-    local source_line_pattern="^$SOURCE_KUSION_CONTENT$"
+  local profile="$1"
+  local source_line_pattern="^$SOURCE_KUSION_CONTENT$"
 	local source_line_annotation_pattern="^$SOURCE_KUSION_ANNOTATION_CONTENT$"
 
-    if grep -qc "$source_line_pattern" "$profile"; then
-        line_number=$(grep -n "$source_line_pattern" "$profile" | cut -d: -f1)
-        sed -i '' ''"$line_number"'d' "$profile"
-    fi
-    if grep -q "$source_line_pattern" "$profile"; then
-        warn "Failed to delete $SOURCE_KUSION_CONTENT in $profile, please delete it manually."
-    else
-        info "Delete $SOURCE_KUSION_CONTENT in $profile succeeded."
-    fi
+  if grep -qc "$source_line_pattern" "$profile"; then
+    line_number=$(grep -n "$source_line_pattern" "$profile" | cut -d: -f1)
+    temp_file=$(mktemp)
+    sed ''"$line_number"'d' "$profile" > "$temp_file" && mv "$temp_file" "$profile"
+  fi
+  if grep -q "$source_line_pattern" "$profile"; then
+    warn "Failed to delete $SOURCE_KUSION_CONTENT in $profile, please delete it manually."
+  else
+    info "Delete $SOURCE_KUSION_CONTENT in $profile succeeded."
+  fi
 
 	if grep -q "$source_line_annotation_pattern" "$profile"; then
-        annotation_line_number=$(grep -n "$source_line_annotation_pattern" "$profile" | cut -d: -f1)
-        sed -i '' ''"$annotation_line_number"'d' "$profile"
-    fi
+    annotation_line_number=$(grep -n "$source_line_annotation_pattern" "$profile" | cut -d: -f1)
+    annotation_temp_file=$(mktemp)
+    sed ''"$annotation_line_number"'d' "$profile" > "$annotation_temp_file" && mv "$annotation_temp_file" "$profile"
+  fi
 }
 
 exit_trap() {
 	result=$?
 	if [ "$result" != "0" ]; then
-        # todo: update to install faq page when determined
 		error "Failed to uninstall kusion. Please go to https://kusionstack.io for more support."
 	else
 		info "Uninstall kusion succeeded. Hope you can use kusion again, visit https://kusionstack.io for more information."

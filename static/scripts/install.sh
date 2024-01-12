@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # ------------------------------------------------------------
 # Copyright 2022 The KusionStack Authors
@@ -17,13 +17,15 @@
 
 set -o errexit
 set -o nounset
-set -o pipefail
 
 # Sudo is required to copy binary to KUSION_HOME_DIR
 USE_SUDO=${USE_SUDO:-"false"}
 
 # Specified profile
 PROFILE=${PROFILE:-""}
+
+# SHELL
+SHELL=${SHELL:-""}
 
 # specifed Kusion version to install
 KUSION_VERSION=${1:-""}
@@ -70,13 +72,13 @@ error() {
 }
 
 runAsRoot() {
-	local CMD="$*"
+  local CMD="$*"
 
-	if [ $EUID -ne 0 ] && [ $USE_SUDO = "true" ]; then
-		CMD="sudo $CMD"
-	fi
+  if [ $USE_SUDO = "true" ]; then
+    CMD="sudo $CMD"
+  fi
 
-	$CMD
+  $CMD
 }
 
 echoFexists() {
@@ -95,18 +97,18 @@ getSystemInfo() {
 }
 
 verifySupported() {
-	local supported=(darwin-amd64 linux-amd64 darwin-arm64)
 	local current_os_arch="${OS}-${ARCH}"
 
-	for osarch in "${supported[@]}"; do
-		if [ "$osarch" == "$current_os_arch" ]; then
-			info "Your system is ${OS}_${ARCH}."
-			return
-		fi
-	done
-
-	error "No prebuilt installation package for ${current_os_arch}"
-	exit 1
+  if [ "${current_os_arch}" = "darwin-amd64" ]; then
+    info "Your system is ${current_os_arch}."
+  elif [ "${current_os_arch}" = "darwin-arm64" ]; then
+    info "Your system is ${current_os_arch}."
+  elif [ "${current_os_arch}" = "linux-amd64" ]; then
+    info "Your system is ${current_os_arch}."
+  else
+    error "No prebuilt installation package for ${current_os_arch}"
+    exit 1
+  fi
 }
 
 checkHttpRequestCLI() {
@@ -121,25 +123,25 @@ checkHttpRequestCLI() {
 }
 
 toInstallVersion() {
-    if [ -z "$KUSION_VERSION" ]; then
-	    info "Getting the latest Kusion version..."
-	    getLatestReleaseVersion
-    else
-	    echo "$KUSION_VERSION"
-    fi
+  if [ -z "$KUSION_VERSION" ]; then
+    info "Getting the latest Kusion version..."
+    getLatestReleaseVersion
+  else
+    echo "$KUSION_VERSION"
+  fi
 }
 
 getLatestReleaseVersion() {
-    local KusionReleaseURL="${RELEASE_URL}"
-    local latest_release=""
+  local KusionReleaseURL="${RELEASE_URL}"
+  local latest_release=""
 
-    if [ "$KUSION_HTTP_REQUEST_CLI" == "curl" ]; then
-        latest_release=$(runAsRoot curl -s $KusionReleaseURL | grep \"tag_name\" | awk '{print $2}' | sed -n 's/\"\(.*\)\",/\1/p' | grep -o '^v[0-9]\+\.[0-9]\+\.[0-9]\+$' | head -n 1)
-    else
-        latest_release=$(runAsRoot wget -q --header="Accept: application/json" -O - $KusionReleaseURL | grep \"tag_name\" | awk '{print $2}' | sed -n 's/\"\(.*\)\",/\1/p' | grep -o '^v[0-9]\+\.[0-9]\+\.[0-9]\+$' | head -n 1)
-    fi
+  if [ "$KUSION_HTTP_REQUEST_CLI" = "curl" ]; then
+      latest_release=$(runAsRoot curl -s $KusionReleaseURL | grep \"tag_name\" | awk '{print $2}' | sed -n 's/\"\(.*\)\",/\1/p' | awk '/^v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}$/{print $0}' | head -1)
+  else
+      latest_release=$(runAsRoot wget -q --header="Accept: application/json" -O - $KusionReleaseURL | grep \"tag_name\" | awk '{print $2}' | sed -n 's/\"\(.*\)\",/\1/p' | awk '/^v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}$/{print $0}' | head -1)
+  fi
 
-    echo "${latest_release:1}"
+  echo "$latest_release" | cut -c2-
 }
 
 download() {
@@ -153,7 +155,7 @@ download() {
 	ARTIFACT_TMP_FILE="$KUSION_TMP_ROOT/$KUSION_CLI_ARTIFACT"
 
 	info "Downloading installation package from $DOWNLOAD_URL..."
-	if [ "$KUSION_HTTP_REQUEST_CLI" == "curl" ]; then
+	if [ "$KUSION_HTTP_REQUEST_CLI" = "curl" ]; then
 		runAsRoot curl -SL "$DOWNLOAD_URL" -o "$ARTIFACT_TMP_FILE"
 	else
 		runAsRoot wget -O "$ARTIFACT_TMP_FILE" "$DOWNLOAD_URL"
@@ -187,9 +189,13 @@ install() {
 	fi
 
 	# detect profile
-	detected_profile=$(detectProfile "$(basename $SHELL)" "$(uname -s)")
+	local shell_name=""
+	if [ "$SHELL" ]; then
+	  shell_name=$(basename $SHELL)
+	fi
+	detected_profile=$(detectProfile "$shell_name" "$(uname -s)")
 	if [ -z "${detected_profile-}" ]; then
-		error "No supported user profile found. Already tried \$PROFILE ($PROFILE), ~/.bashrc, ~/.bash_profile, ~/.zshrc, ~/.profile, and ~/.config/fish/config.fish."
+		error "No supported user profile found. Already tried \$PROFILE, ~/.bashrc, ~/.bash_profile, ~/.zshrc, ~/.profile, and ~/.config/fish/config.fish."
 		return 1
 	fi
 
@@ -257,25 +263,40 @@ detectProfile() {
 	*)
 		# Fall back to checking for profile file existence. Once again, the order
 		# differs between macOS and everything else.
-		local profiles
 		case $uname in
 		Darwin)
-			profiles=(.profile .bash_profile .bashrc .zshrc .config/fish/config.fish)
+			if [ -f "$HOME/.profile" ]; then
+  		  echo "$HOME/.profile"
+  		elif [ -f "$HOME/.bash_profile" ]; then
+  		  echo "$HOME/.bash_profile"
+  		elif [ -f "$HOME/.bashrc" ]; then
+  		  echo "$HOME/.bashrc"
+  		elif [ -f "$HOME/.zshrc" ]; then
+  		  echo "$HOME/.zshrc"
+  		elif [ -f "$HOME/.config/fish/config.fish" ]; then
+  		  echo "$HOME/.config/fish/config.fish"
+  		fi
 			;;
 		*)
-			profiles=(.profile .bashrc .bash_profile .zshrc .config/fish/config.fish)
+      if [ -f "$HOME/.profile" ]; then
+        echo "$HOME/.profile"
+      elif [ -f "$HOME/.bashrc" ]; then
+        echo "$HOME/.bashrc"
+      elif [ -f "$HOME/.bash_profile" ]; then
+        echo "$HOME/.bash_profile"
+      elif [ -f "$HOME/.zshrc" ]; then
+        echo "$HOME/.zshrc"
+      elif [ -f "$HOME/.config/fish/config.fish" ]; then
+        echo "$HOME/.config/fish/config.fish"
+      fi
 			;;
 		esac
-
-		for profile in "${profiles[@]}"; do
-			echoFexists "$HOME/$profile" && break
-		done
 		;;
 	esac
 }
 
 buildEnvFile() {
-    local profile="$1"
+  local profile="$1"
 	local install_dir="$2"
 	local env_file_path="$3"
 
@@ -288,7 +309,7 @@ buildEnvContent() {
 	local profile="$1"
 	local install_dir="$2"
 
-	if [[ $profile =~ \.fish$ ]]; then
+	if [ $profile = "$HOME/.config/fish/config.fish" ]; then
 		# fish uses a little different syntax to modify the PATH
 		cat <<END_FISH_SCRIPT
 set -gx KUSION_HOME "$install_dir"
@@ -308,7 +329,7 @@ END_BASH_SCRIPT
 }
 
 updateProfile() {
-    local profile="$1"
+  local profile="$1"
 	local env_file_path="$2"
 	local source_line_pattern="^source $env_file_path$"
 
@@ -334,7 +355,6 @@ END_SOURCE_SCRIPT
 exit_trap() {
 	result=$?
 	if [ "$result" != "0" ]; then
-		# todo: update to install faq page when determined
 		error "Failed to install kusion. Please go to https://kusionstack.io for more support."
 	else
 		info "Install kusion into $KUSION_HOME_DIR succeeded:"
