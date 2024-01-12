@@ -46,8 +46,7 @@ KUSION_CLI="kusion"
 KUSION_ENV_FILE=".env"
 
 # Kusion binary path
-# todo: update to "${KUSION_HOME_DIR}/bin/${KUSION_CLI}" in the future, should update .env file and kusion_tmp_cli_path
-KUSION_CLI_FILE_PATH="${KUSION_HOME_DIR}/${KUSION_CLI}"
+KUSION_CLI_FILE_PATH="${KUSION_HOME_DIR}/bin/${KUSION_CLI}"
 
 # Kusion github basic information
 GITHUB_ORG=KusionStack
@@ -188,6 +187,16 @@ install() {
 		return 1
 	fi
 
+	# move kusion binary under /bin
+	kusion_tmp_bin_dir="$KUSION_TMP_ROOT/bin"
+	runAsRoot mkdir "$kusion_tmp_bin_dir"
+	kusion_tmp_bin_cli_path="$kusion_tmp_bin_dir/$KUSION_CLI"
+	runAsRoot mv "$kusion_tmp_cli_path" "$kusion_tmp_bin_cli_path"
+	if [ ! -f "$kusion_tmp_bin_cli_path" ]; then
+		error "Failed to move kusion cli binary to /bin."
+		return 1
+	fi
+
 	# detect profile
 	local shell_name=""
 	if [ "$SHELL" ]; then
@@ -313,16 +322,14 @@ buildEnvContent() {
 		# fish uses a little different syntax to modify the PATH
 		cat <<END_FISH_SCRIPT
 set -gx KUSION_HOME "$install_dir"
-set -gx KUSION_PATH "\$KUSION_HOME"
-set -gx PATH "\$KUSION_HOME" \$PATH
+set -gx PATH "\$KUSION_HOME/bin" \$PATH
 
 END_FISH_SCRIPT
 	else
 		# bash and zsh
 		cat <<END_BASH_SCRIPT
 export KUSION_HOME="$install_dir"
-export KUSION_PATH="\$KUSION_HOME"
-export PATH="\$KUSION_HOME:\$PATH"
+export PATH="\$KUSION_HOME/bin:\$PATH"
 
 END_BASH_SCRIPT
 	fi
