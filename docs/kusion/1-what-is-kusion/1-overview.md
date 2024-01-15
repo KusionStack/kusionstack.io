@@ -13,7 +13,7 @@ Welcome to Kusion! This introduction section covers what Kusion is, the problem 
 Kusion is a modern application delivery and management toolchain that enables developers to specify desired intent in a declarative way and then using a consistent workflow to drive continuous deployment through application lifecycle. Inspired by the phrase **Fusion on Kubernetes**, Kusion aims to help application and platform developers to develop and deliver in a self-serviceable, fast, reliable, and collaborative way.
 
 
-![](/img/docs/user_docs/intro/kusion.png)
+![arch](https://raw.githubusercontent.com/KusionStack/kusion/main/docs/workflow.png)
 
 
 ## Why Kusion?

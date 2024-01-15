@@ -20,7 +20,8 @@ In product design, Kusion does not support deploying to multiple clouds or multi
 
 The configuration of a workspace is stored in a single YAML file, which consists of three components: `modules`, `runtimes`, and `backends`.
 
-A `module` configuration comprises default configs and several patchers, where the name of each patcher must not be **default**. For the default configuration or a specific patcher, field keys must be the same as module input field names defined by the module. Module configurations can be found in the [Kusion Modules](../reference/modules)
+A `module` configuration comprises default configs and several patchers, where the name of each patcher must not be **default**. Configurations in the `default` block will be applied to all applications in this workspace and configurations in the patcher block will only be applied to projects in the `projectSelector`. Values in patchers will override default configs with the same field name.
+For the default configuration or a specific patcher, field keys must be the same as module input field names defined by the module. Module configurations can be found in the [Kusion Modules](../reference/modules)
 
 The `runtime` configuration currently supports Kubernetes and Terraform, where the former includes the field `kubeConfig` to specify the path of Kube Config, and the latter contains data for Terraform providers, which vary across different providers. For Terraform providers, sensitive data should be stored in environment variables.
 
