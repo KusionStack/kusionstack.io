@@ -16,6 +16,25 @@ The example below also requires you to have [initialized the project](deploy-app
 
 In the first guide in this series, we introduced a step to [initialize a workspace](deploy-application#initializing-workspace-configuration) with an empty configuration. The same empty configuration will still work in this guide, no changes are required there.
 
+However, if you (or the platform team) would like to set default values for the services to standardize the behavior of applications in the `dev` workspace, you can do so by updating the `~/dev.yaml`:
+```yaml
+modules:
+  port:
+    default:
+      type: alicloud
+      labels:
+        kusionstack.io/control: "true"
+      annotations:
+        service.beta.kubernetes.io/alibaba-cloud-loadbalancer-spec: slb.s1.small
+```
+
+The workspace configuration need to be updated with the command:
+```bash
+kusion workspace update dev -f ~/dev.yaml
+```
+
+For a full reference of what can be configured in the workspace level, please see the [workspace reference](../../reference/modules/workspace-configs/networking/port).
+
 ## Example
 
 `simple-service/dev/main.k`:
