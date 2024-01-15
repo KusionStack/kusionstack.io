@@ -8,7 +8,7 @@ OpsRule describes operation rules for various Day-2 Operations. Once declared, t
 
 |Name and Description|Type|Default Value|Required|
 |--------------------|----|-------------|--------|
-|**maxUnavailable**<br />The maximum percentage of the total pod instances in the component that can be<br />simultaneously unhealthy.|int \| str|Undefined|optional|
+|**maxUnavailable**<br />The maximum percentage of the total pod instances in the component that can be<br />simultaneously unhealthy.|int \| str|"25%"|optional|
 ### Examples
 ```python
 import catalog.models.schema.v1.trait as t
