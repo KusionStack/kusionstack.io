@@ -14,6 +14,28 @@ The example below also requires you to have [initialized the project](deploy-app
 
 In the last guide, we introduced a step to [initialize a workspace](deploy-application#initializing-workspace-configuration) with an empty configuration. The same empty configuration will still work in this guide, no changes are required there.
 
+However, if you (or the platform team) would like to set default values for the workloads to standardize the behavior of applications in the `dev` workspace, you can do so by updating the `~/dev.yaml`:
+```yaml
+modules:
+  service:
+    default:
+      replicas: 3
+      labels:
+        label-key: label-value
+      annotations:
+        annotation-key: annotation-value
+      type: CollaSet
+```
+
+Please note that the `replicas` in the workspace configuration only works as a default value and will be overridden by the value set in the application configuration.
+
+The workspace configuration need to be updated with the command:
+```bash
+kusion workspace update dev -f ~/dev.yaml
+```
+
+For a full reference of what can be configured in the workspace level, please see the [workspace reference](../../reference/modules/workspace-configs/workload/service).
+
 ## Example
 `simple-service/dev/main.k`:
 ```py
