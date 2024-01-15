@@ -10,17 +10,15 @@ const DocsRating = ({ label }) => {
   }
 
   const giveFeedback = (value) => {
-    if (window.ga) {
-      console.info("Google Analytics is available.");
-      window.ga("send", {
-        hitType: "event",
-        eventCategory: "button",
-        eventAction: "feedback",
-        eventLabel: label,
-        eventValue: value,
+    if (window.gtag) {
+      console.info("Google Analytics 4 API is available.");
+      window.gtag("event", "feedback", {
+        event_category: "button",
+        event_label: label,
+        value: value,
       });
     } else {
-      console.warn("Google Analytics is not available.");
+      console.warn("Google Analytics 4 API is not available.");
     }
     setHaveVoted(true);
   };
