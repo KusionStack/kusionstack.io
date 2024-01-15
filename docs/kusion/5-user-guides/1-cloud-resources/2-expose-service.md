@@ -11,6 +11,12 @@ Create a Kubernetes cluster, the following CSP Kubernetes services are supported
 - [Alibaba Cloud Container Service for Kubernetes (ACK)](https://www.alibabacloud.com/product/kubernetes)
 - [Amazon Elastic Kubernetes Service (EKS)](https://aws.amazon.com/eks).
 
+Get the example from the official example repository.
+
+```bash
+git clone https://github.com/KusionStack/konfig.git && cd konfig/example/nginx
+```
+
 ## Expose Service Publicly
 
 If you want the application can be accessed from outside the cluster, you should expose the service publicly. Follow the steps below, you will simply hit the goal.
