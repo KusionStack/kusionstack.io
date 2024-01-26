@@ -23,7 +23,7 @@ function getNextVersionName() {
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-    title: 'Evolve your Internal Developer Platform with KusionStack',
+    title: 'Evolve Your Internal Developer Platform with KusionStack',
     tagline: 'Build a more efficient and secure enterprise-grade Internal Developer Platform in Kubernetes and Clouds',
 
     url: 'https://kusionstack.io',

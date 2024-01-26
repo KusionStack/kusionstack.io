@@ -5,16 +5,15 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import Layout from '@theme/Layout'
 import clsx from 'clsx'
 import React from 'react'
-import { ExampleScroller } from "../components/ExampleScroller"
 import ThemedImage from '@theme/ThemedImage'
 
 import whoIsUsing from '../data/whoIsUsing'
 import styles from './index.module.css'
-import { FcInTransit, FcDeployment, FcApproval } from "react-icons/fc";
+import { FcShipped, FcCollaboration, FcApproval } from "react-icons/fc";
 
-function Feature({ icon, title, description, reverse }) {
+function Feature({ icon, title, description, reverse, outStyles }) {
   return (
-    <div className={clsx('row', styles.feature, reverse && styles.featureReverse)}>
+    <div style={{...outStyles}} className={clsx('row', styles.feature, reverse && styles.featureReverse)}>
       <div className="col col--6 text--center">
         {icon}
       </div>
@@ -44,7 +43,7 @@ function Home() {
               <div>
                 <Link className={clsx("button button--lg button--secondary", styles.button)} to="/docs">
                   <Translate description="homepage getting started button">
-                    Getting started
+                    Getting Started
                   </Translate>
                 </Link>
               </div>
@@ -65,7 +64,7 @@ function Home() {
         <div className="container">
           <div className="container text--center">
             <h2 className={styles.subtitle} style={{ color: "var(--ifm-color-primary)" }}>
-              <Translate id="home.quickstart">All about your modern app by Platform Engineering</Translate>
+              <Translate id="home.quickstart">All About Your Modern Apps by Platform Engineering</Translate>
             </h2>
           </div>
         </div>
@@ -78,30 +77,30 @@ function Home() {
         <div className="container">
           <div className="container">
             <Feature
-              icon={<FcInTransit size={224} />}
-              title={<Translate id="home.easyshipping">Easy App Shipping</Translate>}
+              icon={<FcShipped size={224} />}
+              title={<Translate id="home.easyshipping">Dynamic Configuration Management</Translate>}
               description={
                 <>
                   <p>
                     <Translate
                       id="home.easyshipping.1">
-                      Faster development, simplified delivery
+                      Manage all application operations in one place, in a unified easy way
                     </Translate>
                   </p>
                   <ul className='left-align-ul'>
                     <li>
                       <Translate id="home.easyshipping.2">
-                        Declarative, application-centric spec
+                        Environment-agnostic application configurations
                       </Translate>
                     </li>
                     <li>
                       <Translate id="home.easyshipping.3">
-                        Managed resource orchestration and provisioning in Kubernetes and Clouds
+                        Standardized and flexible platform configurations
                       </Translate>
                     </li>
                     <li>
                       <Translate id="home.easyshipping.4">
-                        Kubernetes-first, lightweight and dev-friendly
+                        Kubernetes-first, lightweight and user-friendly
                       </Translate>
                     </li>
                   </ul>
@@ -109,25 +108,58 @@ function Home() {
               }
             />
             <Feature
-              icon={<FcApproval size={224} />}
-              title={<Translate id="home.enterpriseops">Secure By Design</Translate>}
+              outStyles={{marginLeft:32}}
+              icon={<FcCollaboration size={224} />}
+              title={<Translate id="home.platformengineering">Enable Developer Self-Service</Translate>}
+              description={
+                <>
+                  <p>
+                    <Translate
+                      id="home.platformengineering.1">
+                      Fulfill the customized needs with reusable building blocks
+                    </Translate>
+                  </p>
+                  <ul className='left-align-ul'>
+                    <li>
+                      <Translate id="home.platformengineering.2">
+                        A growing open module ecosystem integrated with various cloud-native infrastructures
+                      </Translate>
+                    </li>
+                    <li>
+                      <Translate id="home.platformengineering.3">
+                        An efficient collaboration paradigm between App Developers and Platform Engineers
+                      </Translate>
+                    </li>
+                    <li>
+                      <Translate id="home.platformengineering.4">
+                        Building the golden path for end-to-end DevOps lifecycle management
+                      </Translate>
+                    </li>
+                  </ul>
+                </>
+              }
+              reverse={true}
+            />
+            <Feature
+              icon={<FcApproval size={224}/>}
+              title={<Translate id="home.enterpriseops">Built-in Security and Compliance</Translate>}
               description={
                 <>
                   <p>
                     <Translate
                       id="home.enterpriseops.1">
-                      From the first line of code to the production
+                      From the first line of codes to production runtime
                     </Translate>
                   </p>
                   <ul className='left-align-ul'>
                     <li>
                       <Translate id="home.enterpriseops.2">
-                        Shift-left validation to detect risks early
+                        Codified shift-left validation to detect configuration risks
                       </Translate>
                     </li>
                     <li>
                       <Translate id="home.enterpriseops.3">
-                        Codified rules and policies from operating best practice
+                        Extended check stages for workload lifecycle
                       </Translate>
                     </li>
                     <li>
@@ -138,62 +170,8 @@ function Home() {
                   </ul>
                 </>
               }
-              reverse={true}
-            />
-            <Feature
-              icon={<FcDeployment size={224} />}
-              title={<Translate id="home.platformengineering">Enable Developer Self-Service</Translate>}
-              description={
-                <>
-                  <p>
-                    <Translate
-                      id="home.platformengineering.1">
-                      Build universal abstraction and golden path
-                    </Translate>
-                  </p>
-                  <ul className='left-align-ul'>
-                    <li>
-                      <Translate id="home.platformengineering.2">
-                        Schema-based abstraction to build your models and validations
-                      </Translate>
-                    </li>
-                    <li>
-                      <Translate id="home.platformengineering.3">
-                        Building blocks to establish your paved path
-                      </Translate>
-                    </li>
-                    <li>
-                      <Translate id="home.platformengineering.4">
-                        Integration with iterative platform capabilities to meet evolving needs
-                      </Translate>
-                    </li>
-                  </ul>
-                </>
-              }
             />
           </div>
-        </div>
-
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-
-        <div className="container">
-          <h2
-            className={clsx(
-              "text--center", styles.poppinsFont,
-            )}
-            style={{ color: "var(--ifm-color-primary)" }}
-          >
-            Codify Your Modern Delivery
-          </h2>
-          <p className={clsx(
-            "text--center", styles.description
-          )}>
-            With configs, models, functions and rules
-          </p>
-          <ExampleScroller />
         </div>
 
         <br></br>
