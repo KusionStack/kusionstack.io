@@ -7,40 +7,32 @@ sidebar_label: AppConfiguration
 
 As a modern cloud-native application delivery toolchain, declarative intent-based actuation is the central idea of Kusion, and `AppConfiguration` model plays the role of describing the intent, which provides a simpler path for on-boarding developers to the platform without leaking low level details in runtime infrastructure and allows developers to fully focus on the application logic itself.
 
-The `AppConfiguration` model consolidates all the necessary components and their dependent accessories for the application deployment, along with any workflow, policy and operational requirements into one standardized, infrastructure-independent declarative specification. This declarative specification represents the intuitive user intent for the application, which drives a standardized and efficient application delivery and operation process in a hybrid environment.
+The `AppConfiguration` model consolidates workload and their dependent accessories for the application deployment, along with any pipeline and operational requirements into one standardized, infrastructure-independent declarative specification. This declarative specification represents the intuitive user intent for the application, which drives a standardized and efficient application delivery and operation process in a hybrid environment.
 
 ![appconfig.png](/img/docs/concept/appconfig.png)
 
-AppConfiguration consists of five core concepts, namely `Components`, `Topologies`, `Pipeline`, `PolicySets`, and `Dependency`. We will walk through these concepts one by one.
+AppConfiguration consists of four core concepts, namely `Workload`, `Accessory`, `Pipeline`, and `Dependency`. We will walk through these concepts one by one.
 
-#### Component
+#### Workload
 
-`Components` defines the foundation of any application configuration. Generally speaking, we believe that a comprehensive application description should at least consist of a core deployable workload that is frequently iterated and a collection of any other core services that the workload depends on, such as databases, caches or any other cloud services.
+Workload is a representation of the business logic that runs in the cluster. Common workload types include long-running services that should “never” go down and batch jobs that take from a few seconds to a few days to complete. A valid AppConfiguration instance must include at least one Workload, which is made of one or more containers, along with their configurations, such as the container image, environment variables, and resource requirements.
 
-Components are conceptually split into two categories, `Workload` and `Accessories`. The former revolves around the configuration for the computing resource. The latter represents any third-party runtime capabilities and operational requirements that the application needs. Each AppConfiguration consists of exactly one workload and any number of accessories.
+In most cases, a Workload is a backend service or the frontend of an Application. For example, in a micro-service architecture, each service would be represented by a distinct Workload. This allows developers to manage and deploy their code in a more organized and efficient manner.
 
-Simply put, we can define `Components` with the following expression:
+#### Accessory
 
-`Components = Workload + Accessories`
+Using the analogy of a car, workload is the core engine of application, but only having the engine isn’t enough for the application to function properly. In most cases there must be other supporting parts for the workload to operate as intended. For those supporting parts we call them Accessory. Accessory refers to various runtime capabilities and operational requirements provided by the underlying infrastructure, such as database, network load-balancer, storage and so on.
 
-The concept of `Components` and `Accessories` itself is implicit when [authoring the configuration files](../configuration-walkthrough/overview). You can define the workload and any type of accessories (such as database or monitoring) directly under the AppConfiguration model.
-
-From a collaboration perspective, platform developers and SREs are responsible for continuously adding any new schema (as abstractions for the underlying infrastructure) and implementations that can be used out-of-the-box. Application developers SREs should be able to leverage the corresponding schemas to cover the evolving application needs. This helps software organizations achieve separation of concern, so that different roles can focus on the subject matter they are an expert of.
+From the perspective of team collaboration, the platform team should be responsible for creating and maintaining various accessory definitions, providing reusable building blocks out-of-the-box. Application developers just need to leverage the existing accessories to cover the evolving application needs. This helps software organizations achieve separation of concern, so that different roles can focus on the subject matter they are an expert of.
 
 #### Pipeline
 
-In most of the cases, the platform is capable of providing a consistent application delivery process that can meet most application needs. In the case that an application warrants any customization in the delivery workflow, the `Pipeline` section in AppConfiguration provides an approach to extend the workflow as needed. 
+Running reliable applications requires reliable delivery pipelines. By default, Kusion provides a relatively fixed built-in application delivery pipeline, which should be sufficient for most use cases. However, as the application scale and complexity grows, so does the need for a customizable delivery pipeline. Developers wish for more fine-tuned control and customization over the workflow to delivery their applications. That’s why we introduced the Pipeline section in AppConfiguration model.
 
-A typical delivery workflow is made of several stages, each corresponds to some logic that needs to be executed, such as manual approval, data transfer, coordinated multi-cluster release, notification, etc. Implementation-wise, the execution of each stage should be carried out with a plugin, developed and managed by the platform owners.
+A customized delivery pipeline is made of several steps, each corresponds to an operation that needs to be executed, such as running certain tests after a deployment, scanning artifacts for vulnerabilities prior to a deployment, and so on. Implementation-wise, the execution of each step should be carried out in the form of a plugin, developed and managed by the platform owners.
 
 #### Topologies
 
-In reality, what we have observed for production-grade applications is that they usually need to be deployed to a wide range of different targets including different clouds, regions, availability zones or runtimes for availability/cost/regulation/performance or disaster recovery related reasons. The `Topologies` section in AppConfiguration highlights the different deployment targets in the application delivery and provides a single pane of glass that overlooks the entire deployment topology.
+Application dependencies refer to the external services or other software that an application relies on in order to function properly. These dependencies may be required in order to provide certain functionality or to use certain features in the application.
 
-#### PolicySets
-
-The `PolicySets` section is responsible for defining the set of rules and procedures that should be followed in the application delivery process. They generally represent the guidelines with the purpose of minimizing any technical, security or compliance risks. Some examples include release strategies, risk management policies, and self-healing strategies. The collections of policies are expected to be managed as a joint effort from all the stakeholders, including platform owners, infrastructure owners, and security and compliance stakeholders. Some policy sets (usually security and compliance related) are expected to be mandatory. Some can be switched on and off by the application owner (self-healing strategy for instance) depending on their specific needs.
-
-#### Dependency
-
-In a production-scale environment, there are usually intricate dependencies between multiple applications. The `Dependency` section is responsible for describing the dependencies between multiple applications.
+Similar to declaring a dependency from an application to an accessory, AppConfiguration lets you declare the dependencies between different applications in the same way.
