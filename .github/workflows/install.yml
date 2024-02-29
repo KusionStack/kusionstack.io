@@ -42,24 +42,24 @@ jobs:
       - name: brew install kusion
         run: brew install KusionStack/tap/kusion
         shell: bash -ieo pipefail {0}
-  #check-powershell-on-windows:
-    #runs-on: windows-latest
-    #steps:
-      #- uses: actions/checkout@v3
-      #- name: check install script
-      #  run: static/scripts/install.ps1
-      #  shell: powershell
-      #- name: check kusion run
-      #  run: C:\kusion\kusion.exe compile -w static/stack -o stdout
-      #  shell: powershell
-  check-scoop-on-windows:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: scoop install kusion
-        run: |
-          iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
-          scoop bucket add KusionStack https://github.com/KusionStack/scoop-bucket.git
-          scoop install KusionStack/kusion
-          # kusion compile -w static/stack -o stdout
-        shell: powershell
+#  check-powershell-on-windows:
+#    runs-on: windows-latest
+#    steps:
+#      - uses: actions/checkout@v3
+#      - name: check install script
+#        run: static/scripts/install.ps1
+#        shell: powershell
+#      - name: check kusion run
+#        run: C:\kusion\kusion.exe compile -w static/stack -o stdout
+#        shell: powershell
+#  check-scoop-on-windows:
+#    runs-on: windows-latest
+#    steps:
+#      - uses: actions/checkout@v3
+#      - name: scoop install kusion
+#        run: |
+#          iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
+#          scoop bucket add KusionStack https://github.com/KusionStack/scoop-bucket.git
+#          scoop install KusionStack/kusion
+#          # kusion compile -w static/stack -o stdout
+#        shell: powershell

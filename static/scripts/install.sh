@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # ------------------------------------------------------------
-# Copyright 2022 The KusionStack Authors
+# Copyright 2024 The KusionStack Authors
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -366,7 +366,7 @@ exit_trap() {
 	else
 		info "Install kusion into $KUSION_HOME_DIR succeeded:"
 		$KUSION_CLI_FILE_PATH version
-		info "Open a new terminal, and start using kusion! For more information on how to started, please visit https://kusionstack.io."
+		info "Open a new terminal, and start using kusion! For more information on how to start, please visit https://kusionstack.io."
 	fi
 
 	cleanup
