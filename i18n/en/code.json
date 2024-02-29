@@ -288,7 +288,7 @@
     "message": "Kusion engine is to compile and deliver intents in Konfig to hybrid runtime on multi-cloud with less complexity and a consistent experience."
   },
   "Getting started": {
-    "message": "Getting started",
+    "message": "Getting Started",
     "description": "homepage getting started button"
   },
   "Install": {
@@ -296,37 +296,37 @@
     "description": "homepage getting started button"
   },
   "home.quickstart": {
-    "message": "All about your modern app by Platform Engineering"
+    "message": "All About Your Modern Apps by Platform Engineering"
   },
   "siteConfig.tagline": {
     "message": "Build a more efficient and secure enterprise-grade Internal Developer Platform in Kubernetes and Clouds"
   },
   "home.easyshipping": {
-    "message": "Easy App Shipping"
+    "message": "Dynamic Configuration Management"
   },
   "home.easyshipping.1": {
-    "message": "Faster development, simplified delivery"
+    "message": "Manage all application operations in one place, in a unified easy way"
   },
   "home.easyshipping.2": {
-    "message": "Declarative, application-centric spec"
+    "message": "Environment-agnostic application configurations"
   },
   "home.easyshipping.3": {
-    "message": "Managed resource orchestration and provisioning in Kubernetes and Clouds"
+    "message": "Standardized and flexible platform configurations"
   },
   "home.easyshipping.4": {
-    "message": "Kubernetes-first, lightweight and dev-friendly"
+    "message": "Kubernetes-first, lightweight and user-friendly"
   },
   "home.enterpriseops": {
-    "message": "Secure By Design"
+    "message": "Built-in Security and Compliance"
   },
   "home.enterpriseops.1": {
-    "message": "From the first line of code to the production"
+    "message": "From the first line of codes to production runtime"
   },
   "home.enterpriseops.2": {
-    "message": "Shift-left validation to detect risks early"
+    "message": "Codified shift-left validation to detect configuration risks"
   },
   "home.enterpriseops.3": {
-    "message": "Codified rules and policies from operating best practice"
+    "message": "Extended check stages for workload lifecycle"
   },
   "home.enterpriseops.4": {
     "message": "Enterprise-grade fine-grained cluster control for Kubernetes"
@@ -335,16 +335,16 @@
     "message": "Enable Developer Self-Service"
   },
   "home.platformengineering.1": {
-    "message": "Build universal abstraction and golden path"
+    "message": "Fulfill the customized needs with reusable building blocks"
   },
   "home.platformengineering.2": {
-    "message": "Schema-based abstraction to build your models and validations"
+    "message": "A growing open module ecosystem integrated with various cloud-native infrastructures"
   },
   "home.platformengineering.3": {
-    "message": "Building blocks to establish your paved path"
+    "message": "An efficient collaboration paradigm between App Developers and Platform Engineers"
   },
   "home.platformengineering.4": {
-    "message": "Integration with iterative platform capabilities to meet evolving needs"
+    "message": "Building the golden path for end-to-end DevOps lifecycle management"
   },
   "home.whoisusing": {
     "message": "Adopted by"
