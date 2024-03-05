@@ -107,7 +107,7 @@ To public the service, you should set `public` as True. Besides, schema `Service
 That's all what an application developer need to configure! Next, preview and apply the configuration, the application will get deployed and exposed publicly.
 
 :::info
-Kusion uses Load Balancer (LB) provided by the CSP to expose service publicly. For more detailed network configuration, please refer to [Application Networking](https://kusionstack.io/docs/user_docs/config-walkthrough/networking)
+Kusion uses Load Balancer (LB) provided by the CSP to expose service publicly. For more detailed network configuration, please refer to [Application Networking](https://www.kusionstack.io/docs/kusion/configuration-walkthrough/networking)
 :::
 
 ### Preview and Apply

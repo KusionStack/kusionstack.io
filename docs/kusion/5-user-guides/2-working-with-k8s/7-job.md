@@ -61,7 +61,7 @@ helloworld: ac.AppConfiguration {
 
 The KCL snippet above schedules a job. Alternatively, if you want a one-time job without cron, simply remove the `schedule` from the configuration.
 
-You can find the full example in here in the [konfig repo](https://github.com/KusionStack/konfig/tree/main/example/sample-job).
+You can find the full example in here in the [konfig repo](https://github.com/KusionStack/konfig/tree/main/example/simple-job).
 
 ## Applying
 
