@@ -524,7 +524,7 @@ $ kubectl edit cls foo
  ......
  spec:
 -  replicas: 2
-+  replicas: 1
++  replicas: 1 # scale in 1 pod
    selector:
      matchLabels:
        app: foo
@@ -539,7 +539,7 @@ collaset.apps.kusionstack.io/foo edited
 
 $ kubectl -n default get pod
 NAME        READY   STATUS    RESTARTS   AGE
-foo-tkc5m   0/1     Terminating   0          27s
+foo-tkc5m   0/1     Terminating   0          27s # related pvc is terminating
 foo-vwtcm   1/1     Running       0          27s
 
 $ kubectl -n default get pvc
@@ -555,7 +555,7 @@ $ kubectl -n default edit cls foo
  ......
  spec:
 -  replicas: 1
-+  replicas: 0
++  replicas: 0 # scale in 1 pod
    selector:
      matchLabels:
        app: foo
@@ -573,7 +573,7 @@ collaset.apps.kusionstack.io/foo edited
 
 $ kubectl -n default get pod
 NAME        READY   STATUS        RESTARTS   AGE
-foo-vwtcm -n default   1/1     Terminating   0          62s
+foo-vwtcm -n default   1/1     Terminating   0          62s # related pvc is retentioned
 
 $ kubectl -n default get pvc
 NAME            STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
@@ -587,12 +587,8 @@ $ kubectl -n default edit cls foo
  ......
  spec:
 -  replicas: 0
-+  replicas: 2
++  replicas: 2 # scale out 2 pods
    ......
-   scaleStrategy:
-     persistentVolumeClaimRetentionPolicy:
-       whenScaled: Retain
- ......
 ```
 
 PVC `foo-www-r4vlh` is retained by Pod `foo-px487` as they have the same `instance-id`. 
@@ -617,7 +613,7 @@ $ kubectl -n default get pod foo-px487 -o yaml | grep instance-id
       collaset.kusionstack.io/instance-id: "1"
 
 $ kubectl -n default get pvc foo-www-r4vlh -o yaml | grep instance-id
-      collaset.kusionstack.io/instance-id: "1"
+      collaset.kusionstack.io/instance-id: "1" # pvc foo-www-r4vlh is retained
 ```
 
 #### whenDelete
@@ -628,7 +624,7 @@ $ kubectl -n default edit cls foo
    scaleStrategy:
      persistentVolumeClaimRetentionPolicy:
        whenScaled: Retain
-+      whenDelete: Retain
++      whenDelete: Retain # retention the pvc after collaset is deleted
    ......
 collaset.apps.kusionstack.io/foo edited
 
@@ -656,8 +652,8 @@ $ kubectl -n default get pod foo-px487 -o yaml | grep instance-id
       collaset.kusionstack.io/instance-id: "1"
 
 $ kubectl -n default get pvc foo-www-r4vlh -o yaml | grep instance-id
-      collaset.kusionstack.io/instance-id: "0"
-      collaset.kusionstack.io/instance-id: "1"
+      collaset.kusionstack.io/instance-id: "0" # pvc foo-www-d48gx is retained
+      collaset.kusionstack.io/instance-id: "1" # pvc foo-www-r4vlh is retained
 ```
 
 #### Update VolumeClaimTemplates
@@ -684,7 +680,7 @@ $ kubectl -n default edit cls foo
      resources:
        requests:
 -        storage: 1Gi
-+        storage: 2Gi
++        storage: 2Gi # update pvc template to expand storage
 ......
 ```
 
@@ -709,9 +705,9 @@ foo-www-dswt6   Bound         pvc-640463d0-22fd-46ea-a34c-2d107b949e4c   2Gi    
 foo-www-mbzhc   Bound         pvc-047c755a-3bd1-4840-9dbf-4b7dbc0bfd4f   2Gi        RWO            standard       8s
       
 $ kubectl -n default get pvc -o yaml | grep pvc-template-hash
+      collaset.kusionstack.io/pvc-template-hash: 594d8857f9 # hash value of old pvc 
       collaset.kusionstack.io/pvc-template-hash: 594d8857f9
-      collaset.kusionstack.io/pvc-template-hash: 594d8857f9
-      collaset.kusionstack.io/pvc-template-hash: d78c5ff6b
+      collaset.kusionstack.io/pvc-template-hash: d78c5ff6b # hash value of new pvc 
       collaset.kusionstack.io/pvc-template-hash: d78c5ff6b
 ```
 
