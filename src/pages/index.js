@@ -41,7 +41,7 @@ function Home() {
             </p>
             <div className={styles.indexCtas}>
               <div>
-                <Link className={clsx("button button--lg button--secondary", styles.button)} to="/docs">
+                <Link className={clsx("button button--lg button--secondary", styles.button)} to="/docs/">
                   <Translate description="homepage getting started button">
                     Getting Started
                   </Translate>
@@ -49,7 +49,7 @@ function Home() {
               </div>
               <div>
                 <Link className={clsx("button button--primary button--lg", styles.button)} to="/docs/kusion/getting-started/install-kusion">
-                  <Translate description="homepage getting started button">
+                  <Translate description="homepage install button">
                     Install
                   </Translate>
                 </Link>
