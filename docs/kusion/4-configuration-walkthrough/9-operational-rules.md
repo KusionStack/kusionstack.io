@@ -4,22 +4,22 @@ id: operational-rules
 
 # Operational Rules
 
-The `opsRule` attribute in the `AppConfiguration` instance is used to describe the specification for the collection of operational rule requirements for the application. Operational rules are used as a preemptive measure to police and stop any unwanted changes.
+You could also specify the collection of operational rule requirements for the application. That can be achieved via a `opsrule` module (or bring-your-own-module) in the `accessories` field in `AppConfiguration` to achieve that. Operational rules are used as a preemptive measure to police and stop any unwanted changes.
 
 ## Import
 
-In the examples below, we are using schemas defined in the `catalog` package. For more details on KCL package import, please refer to the [Configuration File Overview](overview).
+In the examples below, we are using schemas defined in the `kam` package and the `opsrule` Kusion Module. For more details on KCL package and module import, please refer to the [Configuration File Overview](overview).
 
 The `import` statements needed for the following walkthrough:
 ```
-import catalog.models.schema.v1 as ac
-import catalog.models.schema.v1.workload as wl
-import catalog.models.schema.v1.trait as t
+import kam.v1.app_configuration as ac
+import kam.v1.workload as wl
+import opsrule as o
 ```
 
 ## Max Unavailable Replicas
 
-Currently, `OpsRule` supports setting a `maxUnavailable` parameter, which specifies the maximum number of pods that can be rendered unavailable at any time. It can be either a fraction of the total pods for the current application or a fixed number. This operational rule is particularly helpful against unexpected changes or deletes to the workloads. It can also prevent too many workloads from going down during an application upgrade.
+Currently, the `opsrule` module supports setting a `maxUnavailable` parameter, which specifies the maximum number of pods that can be rendered unavailable at any time. It can be either a fraction of the total pods for the current application or a fixed number. This operational rule is particularly helpful against unexpected changes or deletes to the workloads. It can also prevent too many workloads from going down during an application upgrade.
 
 More rules will be available in future versions of Kusion.
 
@@ -31,8 +31,10 @@ myapp: ac.AppConfiguration {
             # ...
         }
     }
-    opsRule: t.OpsRule {
-        maxUnavailable: "30%"
+    accessories: {
+        "opsRule": o.OpsRule {
+            maxUnavailable: "30%"
+        }
     }
 }
 ```
@@ -43,8 +45,10 @@ myapp: ac.AppConfiguration {
     workload: wl.Service {
         # ...
     }
-    opsRule: t.OpsRule {
-        maxUnavailable: 2
+    accessories: {
+        "opsRule": o.OpsRule {
+            maxUnavailable: 2
+        }
     }
 }
 ```

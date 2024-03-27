@@ -62,9 +62,9 @@ As a general best practice, we recommend managing the common configurations in `
 
 `AppConfiguration` is the out-of-the-box model we build that describes an application. It serves as the declarative intent for a given application.
 
-The schema for `AppConfiguration` is defined in the [KusionStack/catalog](https://github.com/KusionStack/catalog) repository. It is designed as a unified, application-centric model that encapsulates the comprehensive configuration details and in the meantime, hides the complexity of the infrastructure as much as possible.
+The schema for `AppConfiguration` is defined in the [KusionStack/kam](https://github.com/KusionStack/kam/blob/main/v1/app_configuration.k) repository. It is designed as a unified, application-centric model that encapsulates the comprehensive configuration details and in the meantime, hides the complexity of the infrastructure as much as possible.
 
-`AppConfiguration` consists of multiple sub-components that each represent either the application workload itself, its dependencies, relevant workflows or operational expectations. We will deep dive into the details on how to author each of these elements in this upcoming documentation series.
+`AppConfiguration` consists of multiple sub-components that each represent either the application workload itself, its dependencies (in the form of [Kusion Modules](../concepts/kusion-module)), relevant workflows or operational expectations. We will deep dive into the details on how to author each of these elements in this upcoming documentation series.
 
 For more details on the `AppConfiguration`, please refer to the [design documentation](../concepts/app-configuration).
 
@@ -76,35 +76,41 @@ For more details on the `AppConfiguration`, please refer to the [design document
 
 KCL files are identified with `.k` suffix in the filename.
 
-### KCL Packages and Import
+### KCL Schemas and KAM
 
-Similar to most modern General Programming Languages (GPLs), KCL packages are used to organize collections of related KCL source files into modular and re-usable units.
+Similar to most modern General Programming Languages (GPLs), KCL provide packages that are used to organize collections of related KCL source files into modular and re-usable units.
 
-In the context of Kusion, we use KCL packages to define models that could best abstract the behavior of an application. Specifically, we provide an official out-of-the-box KCL package(will keep iterating) with the name [catalog](https://github.com/KusionStack/catalog). When authoring an application configuration file, you can simply import the [catalog](https://github.com/KusionStack/catalog) package in the source code and use all the schemas (including AppConfiguration) defined in the `catalog` package.
+In the context of Kusion, we abstracted a core set of KCL Schemas (such as the aforementioned `AppConfiguration`, `Workload`, `Container`, etc)that represent the concepts that we believe that are relatively universal and developer-friendly, also known as [Kusion Application Model](https://github.com/KusionStack/kam), or KAM.
 
-Similarly, if the schemas in the [catalog](https://github.com/KusionStack/catalog) package does not meet your needs, you can always fork it and make modifications, then import the modified package; or create a brand new package altogether and import it.
+### Kusion Modules
 
-The Kusion ecosystem can be easily expanded in this manner.
+To extend the capabilities beyond the core KAM model, we use a concept known as [Kusion Modules](../concepts/kusion-module) to define components that could best abstract the capabilities during an application delivery. We provide a collection of official out-of-the-box Kusion Modules that represents the most common capabilities. They are maintained in [KusionStack's GitHub container registry](https://github.com/orgs/KusionStack/packages). When authoring an application configuration file, you can simply declare said Kusion Modules as dependencies and import them to declare ship-time capabilities that the application requires.
+
+If the modules in the KusionStack container registry does not meet the needs of your applications, Kusion provides the necessary mechanisms to extend with custom-built Kusion Modules. You can always create and publish your own module, then import the new module in your application configuration written in KCL.
+
+For the steps to develop your own module, please refer to the Module developer guide.
+
+### Import Statements
 
 An example of the import looks like the following:
 ```
-### import from the official catalog package
-import catalog.models.schema.v1 as ac
-import catalog.models.schema.v1.workload as wl
-import catalog.models.schema.v1.workload.container as c
+### import from the official kam package
+import kam.v1.app_configuration as ac
+import kam.v1.workload as wl
+import kam.v1.workload.container as c
 
-### import my own modified package
-import my_own_catalog.models.schema.v1 as moc
-import my_other_package.schema.v1.redis as myredis
+### import kusion modules
+import monitoring as m
+import network.network as n
 ```
 
-Take `import catalog.models.schema.v1.workload as wl` as an example, the `.models.schema.v1.workload` part after `import catalog` represents the relative path of a specific schema to import. In this case, the `workload` schemas is defined under `models/schema/v1/workload` directory in the `catalog` package.
+Take `import kam.v1.workload as wl` as an example, the `.v1.workload` part after `import kam` represents the relative path of a specific schema to import. In this case, the `workload` schema is defined under `v1/workload` directory in the `kam` package.
 
 ### Understanding kcl.mod
 
 Much similar to the concept of `go.mod`, Kusion uses `kcl.mod` as the source of truth to manage metadata (such as package name, dependencies, etc.) for the current package. Kusion will also auto-generate a `kcl.mod.lock` as the dependency lock file.
 
-The most common usage for `kcl.mod` is to manage the dependency of your application configurations. 
+The most common usage for `kcl.mod` is to manage the dependency of your application configuration file. 
 
 :::info
 
@@ -124,9 +130,10 @@ edition = "0.5.0"
 version = "0.1.0"
 
 [dependencies]
-catalog = { git = "https://github.com/KusionStack/catalog.git", tag = "0.1.0" }
-# Uncomment the line below to use your own modified package
-# my-package = ghcr.io/kcl-lang/my-package
+monitoring = { oci = "oci://ghcr.io/kusionstack/monitoring", tag = "0.1.0" }
+kam = { git = "https://github.com/KusionStack/kam.git", tag = "0.1.0" }
+# Uncomment the line below to use your own modified module
+# my-module = { oci = "oci://ghcr.io/my-repository/my-package", tag = "my-version" }
 
 [profile]
 entries = ["../base/base.k", "main.k"]
@@ -136,7 +143,7 @@ entries = ["../base/base.k", "main.k"]
 
 Configuration files consist of building blocks that are made of instances of schemas. An `AppConfiguration` instance consists of several child schemas, most of which are optional. The only mandatory one is the `workload` instance. We will take a closer look in the [workload walkthrough](workload). The order of the building blocks does NOT matter.
 
-The major building blocks as of version `0.9.0`:
+The major building blocks as of version `0.11.0`:
 ```
 myapp: ac.AppConfiguration {
     workload: wl.Service {
@@ -144,12 +151,13 @@ myapp: ac.AppConfiguration {
             "myapp": c.Container {}
             ...
         }
-        ports: []
         secrets: {}
+        ...
     }
-    database: d.Database{}
-    monitoring: m.Prometheus{}
-    opsRule: t.OpsRule {}
+    # optional dependencies, usually expressed in kusion modules
+    accessories: {
+        ...
+    }
     ...
 }
 ```
@@ -163,10 +171,10 @@ In Kusion's out-of-the-box experience, an application is identified with an inst
 Here's an example of a configuration that can be consumed by Kusion (assuming it is placed inside the proper directory structure that includes project and stack configurations, with a `kcl.mod` present):
 
 ```
-import catalog.models.schema.v1 as ac
-import catalog.models.schema.v1.workload as wl
-import catalog.models.schema.v1.workload.network as n
-import catalog.models.schema.v1.workload.container as c
+import kam.v1.app_configuration as ac
+import kam.v1.workload as wl
+import kam.v1.workload.container as c
+import network.network as n
 
 gocity: ac.AppConfiguration {
     workload: wl.Service {
@@ -180,16 +188,21 @@ gocity: ac.AppConfiguration {
             }
         }
         replicas: 1
-        ports: [
-            n.Port {
-                port: 4000
-            }
-        ]
+    }
+    accessories: {
+        "network": n.Network {
+            ports: [
+                n.Port {
+                    port: 80
+                    public: True
+                }
+            ]
+        }
     }
 }
 ```
 
-Don't worry about what `workload` or `ports` stand for at the moment. We will deep dive into each one of them in this upcoming documentation series.
+Don't worry about what `workload` or `n.Network` stand for at the moment. We will deep dive into each one of them in this upcoming documentation series.
 
 ### Using `kusion init`
 
@@ -203,8 +216,8 @@ The pre-built templates are meant to help you get off the ground quickly with so
 
 ### Using references
 
-The reference documentation for the `catalog` package is located in [Reference](../reference/modules/catalog-models/app-configuration).
+The reference documentation for the `kam` package and the official Kusion Modules is located in [Reference](../reference).
 
-If you are using the `catalog` package out of the box, the reference documentation provides a comprehensive view for each schema involved, including all the attribute names and description, their types, default value if any, and whether a particular attribute is required or not. There will also be an example attached to each schema reference.
+If you are using them out of the box, the reference documentation provides a comprehensive view for each schema involved, including all the attribute names and description, their types, default value if any, and whether a particular attribute is required or not. There will also be an example attached to each schema reference.
 
 We will also deep dive into some common examples in the upcoming sections.

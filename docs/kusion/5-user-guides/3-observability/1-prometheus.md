@@ -155,10 +155,10 @@ For differences between [Prometheus operator](https://github.com/prometheus-oper
 The `monitorType` flag indicates the kind of monitor Kusion will create. It only applies when `operatorMode` is set to `True`. As of version 0.10.0, Kusion provides options to scrape metrics from either the application pods or its corresponding Kubernetes services. This determines the different kinds of resources Kusion manages when Prometheus runs as an operator in the target cluster.
 
 A sample `workspace.yaml` with Prometheus settings:
-```
+```yaml
 modules:
   ...
-  monitoring:
+  kusionstack/monitoring@0.1.0:
     default:
       operatorMode: True
       monitorType: Service
@@ -169,10 +169,10 @@ modules:
 ```
 
 To instruct Prometheus to scrape from pod targets instead:
-```
+```yaml
 modules:
   ...
-  monitoring:
+  kusionstack/monitoring@0.1.0:
     default:
       operatorMode: True
       monitorType: Pod
@@ -182,7 +182,7 @@ modules:
 ...
 ```
 
-If the `prometheus` section is missing from the `workspace.yaml`, Kusion defaults `operatorMode` to false.
+If the `operatorMode` is omitted from the `workspace.yaml`, Kusion defaults `operatorMode` to false.
 
 ### Overriding with projectSelector
 
@@ -191,10 +191,10 @@ Workspace configurations contain a set of default setting group for all projects
 Projects with the name matching those in projectSelector will use the values defined in that override group instead of the default. If a key is not present in the override group, the default value will be used.
 
 Take a look at the sample `workspace.yaml`:
-```
+```yaml
 modules:
   ...
-  monitoring:
+  kusionstack/monitoring@0.1.0:
     default:
       operatorMode: True
       monitorType: Pod
@@ -222,9 +222,9 @@ For a full reference of what can be configured in the workspace level, please se
 ## Updating the workspace config
 
 Assuming you now have a `workspace.yaml` that looks like the following:
-```
+```yaml
 modules:
-  monitoring:
+  kusionstack/monitoring@0.1.0:
     default:
       operatorMode: True
       monitorType: Service
@@ -251,13 +251,26 @@ The monitoring in an AppConfiguration is declared in the `monitoring` field. See
 
 Please note we are using a new image `quay.io/brancz/prometheus-example-app` since the app itself need to expose metrics for Prometheus to scrape:
 
+`helloworld/dev/kcl.mod`:
+```
+[package]
+name = "helloworld"
+
+[dependencies]
+monitoring = { oci = "oci://ghcr.io/kusionstack/monitoring", tag = "0.1.0" }
+kam = { git = "https://github.com/KusionStack/kam.git", tag = "0.1.0" }
+
+[profile]
+entries = ["main.k"]
+```
+
 `helloworld/dev/main.k`:
 ```
-import catalog.models.schema.v1 as ac
-import catalog.models.schema.v1.workload as wl
-import catalog.models.schema.v1.workload.container as c
-import catalog.models.schema.v1.monitoring as m
-import catalog.models.schema.v1.workload.network as n
+import kam.v1.app_configuration as ac
+import kam.v1.workload as wl
+import kam.v1.workload.container as c
+import monitoring as m
+import network.network as n
 
 helloworld: ac.AppConfiguration {
     workload: wl.Service {
@@ -266,14 +279,19 @@ helloworld: ac.AppConfiguration {
                 image: "quay.io/brancz/prometheus-example-app:v0.3.0"
             }
         }
-        ports: [
-            n.Port {
-                port: 8080
-            }
-        ]
     }
-    monitoring: m.Prometheus{
-        path:           "/metrics"
+    # Add the monitoring configuration backed by Prometheus
+    accessories: {
+        "monitoring": m.Prometheus {
+            path:           "/metrics"
+        }
+        "network": n.Network {
+            ports: [
+                n.Port {
+                    port: 8080
+                }
+            ]
+        }
     }
 }
 ```

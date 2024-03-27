@@ -4,19 +4,29 @@ id: networking
 
 # Application Networking
 
-In addition to configuring application's [container specifications](workload#configure-containers), you can also configure its networking behaviors, including how to expose the application and how it can be accessed.
+In addition to configuring application's [container specifications](workload#configure-containers), you can also configure its networking behaviors, including how to expose the application and how it can be accessed. You can specify a `network` module in the `accessories` field in `AppConfiguration` to achieve that.
 
 In future versions, this will also include ingress-based routing strategy and DNS configurations.
 
 ## Import
 
-In the examples below, we are using schemas defined in the `catalog` package. For more details on KCL package import, please refer to the [Configuration File Overview](overview).
+In the examples below, we are using schemas defined in the `kam` package and the `network` Kusion Module. For more details on KCL package and module import, please refer to the [Configuration File Overview](overview).
 
 The `import` statements needed for the following walkthrough:
 ```
-import catalog.models.schema.v1 as ac
-import catalog.models.schema.v1.workload as wl
-import catalog.models.schema.v1.workload.network as n
+import kam.v1.app_configuration as ac
+import kam.v1.workload as wl
+import network.network as n
+```
+
+The `kcl.mod` must contain reference to the network module:
+```
+#...
+
+[dependencies]
+network = { oci = "oci://ghcr.io/kusionstack/network", tag = "0.1.0" }
+
+#...
 ```
 
 ## Private vs Public Access
@@ -32,11 +42,15 @@ To expose port 80 to be accessed privately:
 myapp: ac.AppConfiguration {
     workload: wl.Service {
         # ...
-        ports: [
-            n.Port {
-                port: 80
-            }
-        ]
+    }
+    accessories: {
+        "network": n.Network {
+            ports: [
+                n.Port {
+                    port: 80
+                }
+            ]
+        }
     }
 }
 ```
@@ -46,12 +60,16 @@ To expose port 80 to be accessed publicly:
 myapp: ac.AppConfiguration {
     workload: wl.Service {
         # ...
-        ports: [
-            n.Port {
-                port: 80
-                public: True
-            }
-        ]
+    }
+    accessories: {
+        "network": n.Network {
+            ports: [
+                n.Port {
+                    port: 80
+                    public: True
+                }
+            ]
+        }
     }
 }
 ```
@@ -67,12 +85,16 @@ To expose a port `80` that maps to a different port `8088` on the container:
 myapp: ac.AppConfiguration {
     workload: wl.Service {
         # ...
-        ports: [
-            n.Port {
-                port: 80
-                targetPort: 8088
-            }
-        ]
+    }
+    accessories: {
+        "network": n.Network {
+            ports: [
+                n.Port {
+                    port: 80
+                    targetPort: 8088
+                }
+            ]
+        }
     }
 }
 ```
@@ -86,15 +108,19 @@ To expose port 80 to be accessed publicly, and port 9099 for private access (to 
 myapp: ac.AppConfiguration {
     workload: wl.Service {
         # ...
-        ports: [
-            n.Port {
-                port: 80
-                public: True
-            }
-            n.Port {
-                port: 9099
-            }
-        ]
+    }
+    accessories: {
+        "network": n.Network {
+            ports: [
+                n.Port {
+                    port: 80
+                    public: True
+                }
+                n.Port {
+                    port: 9099
+                }
+            ]
+        }
     }
 }
 ```
@@ -106,13 +132,17 @@ To expose a port using the `UDP` protocol:
 myapp: ac.AppConfiguration {
     workload: wl.Service {
         # ...
-        ports: [
-            n.Port {
-                port: 80
-                targetPort: 8088
-                protocol: "UDP"
-            }
-        ]
+    }
+    accessories: {
+        "network": n.Network {
+            ports: [
+                n.Port {
+                    port: 80
+                    targetPort: 8088
+                    protocol: "UDP"
+                }
+            ]
+        }
     }
 }
 ```

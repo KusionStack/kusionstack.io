@@ -30,7 +30,7 @@ You will be able to override a variable assignment via the `=` operator. We will
 
 KCL supports `int`, `float`, `bool` and `string` as the built-in types.
 
-Other types are defined in the packages that are imported into the application configuration files. One such example would be the `AppConfiguration` object (or `Container`, `Probe`, `Port` object, etc) that are defined in the `catalog` repository.
+Other types are defined in the packages that are imported into the application configuration files. One such example would be the `AppConfiguration` object (or `Container`, `Probe`, `Port` object, etc) that are defined in the `kam` repository.
 
 ## Lists and maps
 
@@ -56,9 +56,9 @@ You can also use basic control flow statements when writing the configuration fi
 
 An example that sets the value of `replicas` conditionally based on the value of `containers.myapp.resources.cpu`:
 ```
-import catalog.models.schema.v1 as ac
-import catalog.models.schema.v1.workload as wl
-import catalog.models.schema.v1.workload.container as c
+import kam.v1.app_configuration as ac
+import kam.v1.workload as wl
+import kam.v1.workload.container as c
 
 myapp: ac.AppConfiguration {
     workload: wl.Service {

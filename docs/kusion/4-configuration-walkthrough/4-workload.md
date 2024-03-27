@@ -24,11 +24,11 @@ In the examples below, we are using schemas defined in the `catalog` package. Fo
 
 The `import` statements needed for the following walkthrough:
 ```
-import catalog.models.schema.v1 as ac
-import catalog.models.schema.v1.workload as wl
-import catalog.models.schema.v1.workload.container as c
-import catalog.models.schema.v1.workload.container.probe as p
-import catalog.models.schema.v1.workload.container.lifecycle as lc
+import kam.v1.app_configuration as ac
+import kam.v1.workload as wl
+import kam.v1.workload.container as c
+import kam.v1.workload.container.probe as p
+import kam.v1.workload.container.lifecycle as lc
 ```
 
 ## Types of Workloads
@@ -303,12 +303,19 @@ A `Job` can be configured to run in a recurring manner. In this case, the job wi
 
 To configure a job to run at 21:00 every night:
 ```
-myapp: wl.Job {
+myjob: ac.AppConfiguration {
+    workload: wl.Job {
         containers: {
-            # ...
+            "busybox": c.Container {
+                image: "busybox:1.28"
+                # Run the following command as defined
+                command: ["/bin/sh", "-c", "echo hello"]
+            }
         }
-        schedule: "0 21 * * *"
+        # Run every hour.
+        schedule: "0 * * * *"
     }
+}
 ```
 
 ## Workload References
