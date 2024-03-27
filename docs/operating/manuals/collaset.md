@@ -202,8 +202,7 @@ spec:
 Subsequently, each Pod will only be updated if it's marked with the label `collaset.kusionstack.io/update-included`.
 
 ## Advanced Features
-### Scaling Pods
-#### Pod Instance ID
+### Pod Instance ID
 Each Pod created by CollaSet has a unique ID held by the label `collaset.kusionstack.io/instance-id`, which can be used to identify each individual Pod.
 
 ``` yaml
@@ -295,7 +294,7 @@ $ kubectl -n default get pod -o yaml | grep collaset.kusionstack.io/instance-id
 
 Now, the 4 Pods created by these 2 CollaSets will have a unique instance ID.
 
-#### Revision Consistency
+### Revision Consistency
 Pods within a CollaSet can utilize more than two different Pod templates simultaneously, including both the current and updated revisions. This can result from partial updates. To ensure the stability of Pod revisions over time, CollaSet records this information. When a Pod is deleted, CollaSet recreates it using its previous revision.
 
 It can be reproduced by following steps:
@@ -389,8 +388,7 @@ $ kubectl get pod -o yaml | grep "image: nginx"
     - image: nginx:1.23.4
 ```
 
-### Updating Pods
-#### Update Policy
+### In-Place Update Pod
 In addition to the `ReCreate` update policy, which is identical to Deployment and StatefulSet, CollaSet offers the `InPlaceIfPossible` update policy.
 
 ``` yaml
@@ -401,7 +399,7 @@ metadata:
 spec:
   ...
   updateStrategy:
-    podUpgradePolicy: InPlaceIfPossible  # Options: InPlaceIfPossible, ReCreate
+    podUpgradePolicy: InPlaceIfPossible  # Options: InPlaceIfPossible, ReCreate, Replace
 ```
 
 `InPlaceIfPossible` is the default value, which instructs CollaSets to try to update Pods in place when only container images, labels, and annotations have changed. If some other fields have changed too, the policy will back off to the `ReCreate` policy.
@@ -437,3 +435,45 @@ collaset-sample-5wvlh    1/1     Running   1 (6s ago)   2m10s
 collaset-sample-ldvrg    1/1     Running   1 (6s ago)   2m10s
 collaset-sample-pbz75    1/1     Running   1 (6s ago)   2m10s
 ```
+
+### Replace Update Pod
+
+CollaSet provides the `Replace` policy for certain applications that are sensitive to the available number of Pods.
+
+``` yaml
+apiVersion: apps.kusionstack.io/v1alpha1
+kind: CollaSet
+metadata:
+  name: collaset-sample
+spec:
+  ...
+  updateStrategy:
+    podUpgradePolicy: Replace  # Options: InPlaceIfPossible, ReCreate, Replace
+```
+
+The `Replace` policy indicates that CollaSet should update a Pod by creating a new one to replace it. 
+Unlike the `Recreate` policy, which deletes the old Pod before creating a new updated one, or the `InPlaceIfPossible` policy, which updates the current Pod in place, 
+the `Replace` policy first creates a new Pod with the updated revision. It then deletes the old Pod once the new one becomes available for service.
+
+```yaml
+# Before updating CollaSet
+$ kubectl -n default get pod
+NAME                    READY   STATUS        RESTARTS   AGE
+collaset-sample-dwkls   1/1     Running       0          6m55s
+
+# After updating CollaSet, the updated Pod is created first
+$ kubectl -n default get pod
+NAME                    READY   STATUS              RESTARTS   AGE
+collaset-sample-dwkls   1/1     Running             0          6m55s
+collaset-sample-rcmbv   0/1     ContainerCreating   0          0s
+
+# Once the created Pod is available for service, the old Pod will be deleted
+$ kubectl -n default get pod
+NAME                    READY   STATUS              RESTARTS   AGE
+collaset-sample-rcmbv   1/1     Running             0          1s
+collaset-sample-dwkls   1/1     Terminating         0          7m12s
+```
+
+The two Pods will have a pair of labels to identify their relationship. The new Pod will have the label `collaset.kusionstack.io/replace-pair-origin-name` to indicate the name of the old Pod, and the old Pod will have the label `collaset.kusionstack.io/replace-pair-new-id` to indicate the instance ID of the new Pod.
+
+Additionally, the new Pod and old Pod will each begin their own PodOpsLifecycles, which are independent of each other.
