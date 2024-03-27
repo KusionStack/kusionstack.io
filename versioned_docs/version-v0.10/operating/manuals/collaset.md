@@ -569,7 +569,7 @@ Otherwise, old PVCs can be deleted by default policy `Delete`.
 #### PVC Retention Policy
 CollaSet provides control over PVC lifecycle by configuring `persistentVolumeClaimRetentionPolicy`.
 Users can retain or delete PVCs after the related Pod is scaled down and CollaSet is deleted. 
-Note that this feature is supported by [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#persistentvolumeclaim-retention) v1.27.
+Note that this feature is supported by [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#persistentvolumeclaim-retention) since v1.27.
 Basic rule is detailed as follows:
 - `WhenScale` : decides to delete or retain PVCs after Pod is scaled down.
 - `WhenDeleted`: decides to delete or retain PVCs after CollaSet is deleted.
