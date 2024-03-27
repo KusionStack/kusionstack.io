@@ -216,7 +216,7 @@ The pre-built templates are meant to help you get off the ground quickly with so
 
 ### Using references
 
-The reference documentation for the `kam` package and the official Kusion Modules is located in [Reference](../reference).
+The reference documentation for the `kam` package and the official Kusion Modules is located in [Reference](../reference/modules/catalog-models/app-configuration).
 
 If you are using them out of the box, the reference documentation provides a comprehensive view for each schema involved, including all the attribute names and description, their types, default value if any, and whether a particular attribute is required or not. There will also be an example attached to each schema reference.
 
