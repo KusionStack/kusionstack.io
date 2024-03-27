@@ -214,7 +214,7 @@ There is a built-in template `single-stack-sample` in the Kusion binary that can
 
 We also maintain a [kusion-templates repository](https://github.com/KusionStack/kusion-templates) that hosts a list of more comprehensive project scaffolds. You can access them via `kusion init --online` command which requires connectivity to `github.com`.
 
-The pre-built templates are meant to help you get off the ground quickly with some simple out-of-the-box examples. You can refer to the [QuickStart documentation](../getting-started/deliver-wordpress) for some step-by-step tutorials.
+The pre-built templates are meant to help you get off the ground quickly with some simple out-of-the-box examples. You can refer to the [QuickStart documentation](../getting-started/deliver-quickstart) for some step-by-step tutorials.
 
 ### Using references
 

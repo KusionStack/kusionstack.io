@@ -45,7 +45,7 @@ Alternatively, Kusion also supports creating a database at `localhost` for local
 
 :::info
 You do need a local Kubernetes cluster to run the local database workloads. You can refer to [Minikube](https://minikube.sigs.k8s.io/docs/start/) or [Kind](https://kind.sigs.k8s.io/docs/user/quick-start/) to get started.
-To see an end-to-end use case for standing up a local testing environment including a local database, please refer to the [Kusion Quickstart](../2-getting-started/2-deliver-wordpress.md).
+To see an end-to-end use case for standing up a local testing environment including a local database, please refer to the [Kusion Quickstart](../2-getting-started/2-deliver-quickstart.md).
 :::
 
 ## Cloud Credentials and Permissions
