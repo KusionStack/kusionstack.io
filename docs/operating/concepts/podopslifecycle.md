@@ -211,3 +211,18 @@ PodOpsLifecycle in KusionStack Operating supports concurrency.
 It means PodOpsLifecycle is able to organize and track multi controllers operating the same pod at the same time. 
 For example, when a controller is going to update Pod, other controllers are allowed to do other operations at the same time, like delete, restart, recreate it, 
 although the result may not be meaningful.
+
+### General Workload Support
+
+PodOpsLifecycle offers seamless integration with various workload types, including Deployment and StatefulSet. 
+To enable this functionality, ensure the feature gate for `GraceDeleteWebhook` is enabled when starting the KusionStack Operating controller:
+
+```shell
+# Enable the GraceDeleteWebhook feature when starting the controller with this argument
+$ /manager --feature-gates=GraceDeleteWebhook=true
+```
+
+Once enabled, any Pod labeled with `kusionstack.io/control=true` under a general workload, such as Deployment, becomes manageable by PodOpsLifecycle.
+This feature provides workloads a way to work closer with Pod Cooperation Controllers.
+
+
