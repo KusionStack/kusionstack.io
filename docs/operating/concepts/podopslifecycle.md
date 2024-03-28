@@ -225,4 +225,8 @@ $ /manager --feature-gates=GraceDeleteWebhook=true
 Once enabled, any Pod labeled with `kusionstack.io/control=true` under a general workload, such as Deployment, becomes manageable by PodOpsLifecycle.
 This feature provides workloads a way to work closer with Pod Cooperation Controllers.
 
-
+> Due to the Kubernetes webhook mechanism, the following error will be returned when workloads or users delete a pod. This error is intentional and serves to indicate that the pod deletion process has started and is being managed by PodOpsLifecycle.   
+> ```shell
+> $ kubectl -n default delete pod collaset-sample-74fsv
+> Error from server (failed to validate GraceDeleteWebhook, pod deletion process is underway and being managed by PodOpsLifecycle): admission webhook "validating-pod.apps.kusionstack.io" denied the request: failed to validate GraceDeleteWebhook, pod deletion process is underway and being managed by PodOpsLifecycle
+> ```
