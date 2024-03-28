@@ -455,7 +455,7 @@ The `Replace` policy indicates that CollaSet should update a Pod by creating a n
 Unlike the `Recreate` policy, which deletes the old Pod before creating a new updated one, or the `InPlaceIfPossible` policy, which updates the current Pod in place, 
 the `Replace` policy first creates a new Pod with the updated revision. It then deletes the old Pod once the new one becomes available for service.
 
-```yaml
+```shell
 # Before updating CollaSet
 $ kubectl -n default get pod
 NAME                    READY   STATUS        RESTARTS   AGE
@@ -477,3 +477,82 @@ collaset-sample-dwkls   1/1     Terminating         0          7m12s
 The two Pods will have a pair of labels to identify their relationship. The new Pod will have the label `collaset.kusionstack.io/replace-pair-origin-name` to indicate the name of the old Pod, and the old Pod will have the label `collaset.kusionstack.io/replace-pair-new-id` to indicate the instance ID of the new Pod.
 
 Additionally, the new Pod and old Pod will each begin their own PodOpsLifecycles, which are independent of each other.
+
+### Recreate And Replace Specified Pod
+
+In practice, users often need to recreate or replace specified Pods under a CollaSet.
+
+To delete a Pod, users can simply call the Kubernetes API, like executing `kubectl delete pod <pod-name>`. 
+However, this will bypass the [PodOpsLifecycle](https://www.kusionstack.io/docs/operating/concepts/podopslifecycle) Mechanism. 
+We provide following two options:
+
+1. Enable the feature `GraceDeleteWebhook` so that it is possible to delete Pods through `PodOpsLifecycle`.
+```shell
+# Enable the GraceDeleteWebhook feature when starting the controller with this argument
+$ /manager --feature-gates=GraceDeleteWebhook=true
+```
+```shell
+$ kubectl -n default get pod
+NAME                    READY   STATUS        RESTARTS   AGE
+collaset-sample-vqccr   1/1     Running       0          21s
+
+# Delete the pod directly. A message will respond indicating that the Pod deletion is handled by PodOpsLifecycle
+kubectl -n default delete pod collaset-sample-vqccr
+Error from server (failed to validate GraceDeleteWebhook, podOpsLifecycle denied delete request, since related resources and finalizers have not been processed. Waiting for removing finalizers: []): admission webhook "validating-pod.apps.kusionstack.io" denied the request: failed to validate GraceDeleteWebhook, podOpsLifecycle denied delete request, since related resources and finalizers have not been processed. Waiting for removing finalizers: []
+
+# The old Pod is deleted, and a new Pod will be created 
+$ kubectl -n default get pod -w
+collaset-sample-vqccr   1/1     Terminating   0          71s
+collaset-sample-nbl6t   0/1     Pending       0          0s
+collaset-sample-nbl6t   0/1     Pending       0          0s
+collaset-sample-vqccr   1/1     Terminating   0          71s
+collaset-sample-nbl6t   0/1     ContainerCreating   0          0s
+collaset-sample-nbl6t   0/1     ContainerCreating   0          0s
+collaset-sample-nbl6t   1/1     Running             0          0s
+collaset-sample-nbl6t   1/1     Running             0          0s
+collaset-sample-vqccr   1/1     Terminating         0          72s
+collaset-sample-vqccr   0/1     Terminating         0          73s
+collaset-sample-vqccr   0/1     Terminating         0          73s
+collaset-sample-vqccr   0/1     Terminating         0          73s
+```
+2. Label the Pod with `podopslifecycle.kusionstack.io/to-delete`, so that CollaSet will delete the Pod through PodOpsLifecycle.
+
+```shell
+# Label Pod
+$ kubectl -n default label pod collaset-sample-nbl6t podopslifecycle.kusionstack.io/to-delete=true
+
+# The old Pod is deleted, and a new Pod will be recreated 
+$ kubectl -n default get pod -w
+collaset-sample-nbl6t   1/1     Running       0          5m28s
+collaset-sample-nbl6t   1/1     Running       0          5m28s
+collaset-sample-nbl6t   1/1     Running       0          5m28s
+collaset-sample-nbl6t   1/1     Running       0          5m28s
+collaset-sample-nbl6t   1/1     Terminating   0          5m28s
+collaset-sample-w6x69   0/1     Pending       0          0s
+collaset-sample-w6x69   0/1     Pending       0          0s
+collaset-sample-w6x69   0/1     ContainerCreating   0          0s
+collaset-sample-w6x69   0/1     ContainerCreating   0          0s
+collaset-sample-w6x69   1/1     Running             0          2s
+collaset-sample-w6x69   1/1     Running             0          2s
+```
+
+Recreating a Pod will delete the old Pod first and then create a new one. This will affect the available Pod count. 
+To avoid this, CollaSet provides a feature to replace Pods by labeling them with `podopslifecycle.kusionstack.io/to-replace`.
+
+```shell
+# Replace Pod by label
+$ kubectl -n echo label pod collaset-sample-w6x69 podopslifecycle.kusionstack.io/to-replace=true
+
+# The old Pod is deleted, and a new Pod will be created 
+$ kubectl -n default get pod -w
+collaset-sample-w6x69   1/1     Running       0          5m29s
+collaset-sample-74fsv   0/1     Pending       0          0s
+collaset-sample-74fsv   0/1     Pending       0          0s
+collaset-sample-74fsv   0/1     ContainerCreating   0          0s
+collaset-sample-w6x69   1/1     Running             0          5m29s
+......
+collaset-sample-74fsv   1/1     Running             0          2s
+collaset-sample-74fsv   1/1     Running             0          2s
+collaset-sample-w6x69   1/1     Terminating         0          5m32s
+collaset-sample-w6x69   0/1     Terminating         0          5m33s
+```
