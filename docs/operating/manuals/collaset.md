@@ -389,7 +389,7 @@ $ kubectl get pod -o yaml | grep "image: nginx"
 ```
 
 ### In-Place Update Pod
-In addition to the `ReCreate` update policy, which is identical to Deployment and StatefulSet, CollaSet offers the `InPlaceIfPossible` update policy.
+In addition to the `Recreate` update policy, which is identical to Deployment and StatefulSet, CollaSet offers the `InPlaceIfPossible` update policy.
 
 ``` yaml
 apiVersion: apps.kusionstack.io/v1alpha1
@@ -399,12 +399,12 @@ metadata:
 spec:
   ...
   updateStrategy:
-    podUpgradePolicy: InPlaceIfPossible  # Options: InPlaceIfPossible, ReCreate, Replace
+    podUpgradePolicy: InPlaceIfPossible  # Options: InPlaceIfPossible, Recreate, Replace
 ```
 
-`InPlaceIfPossible` is the default value, which instructs CollaSets to try to update Pods in place when only container images, labels, and annotations have changed. If some other fields have changed too, the policy will back off to the `ReCreate` policy.
+`InPlaceIfPossible` is the default value, which instructs CollaSets to try to update Pods in place when only container images, labels, and annotations have changed. If some other fields have changed too, the policy will back off to the `Recreate` policy.
 
-`ReCreate` indicates CollaSets always delete the old Pod and create a new one with an updated revision.
+`Recreate` indicates CollaSets always delete the old Pod and create a new one with an updated revision.
 
 If update pod template with `InPlaceIfPossible` policy as following example, the Pod will not be recreated.
 
@@ -448,7 +448,7 @@ metadata:
 spec:
   ...
   updateStrategy:
-    podUpgradePolicy: Replace  # Options: InPlaceIfPossible, ReCreate, Replace
+    podUpgradePolicy: Replace  # Options: InPlaceIfPossible, Recreate, Replace
 ```
 
 The `Replace` policy indicates that CollaSet should update a Pod by creating a new one to replace it. 
