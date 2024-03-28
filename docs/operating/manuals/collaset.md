@@ -202,8 +202,7 @@ spec:
 Subsequently, each Pod will only be updated if it's marked with the label `collaset.kusionstack.io/update-included`.
 
 ## Advanced Features
-### Scaling Pods
-#### Pod Instance ID
+### Pod Instance ID
 Each Pod created by CollaSet has a unique ID held by the label `collaset.kusionstack.io/instance-id`, which can be used to identify each individual Pod.
 
 ``` yaml
@@ -295,7 +294,7 @@ $ kubectl -n default get pod -o yaml | grep collaset.kusionstack.io/instance-id
 
 Now, the 4 Pods created by these 2 CollaSets will have a unique instance ID.
 
-#### Revision Consistency
+### Revision Consistency
 Pods within a CollaSet can utilize more than two different Pod templates simultaneously, including both the current and updated revisions. This can result from partial updates. To ensure the stability of Pod revisions over time, CollaSet records this information. When a Pod is deleted, CollaSet recreates it using its previous revision.
 
 It can be reproduced by following steps:
@@ -389,9 +388,8 @@ $ kubectl get pod -o yaml | grep "image: nginx"
     - image: nginx:1.23.4
 ```
 
-### Updating Pods
-#### Update Policy
-In addition to the `ReCreate` update policy, which is identical to Deployment and StatefulSet, CollaSet offers the `InPlaceIfPossible` update policy.
+### In-Place Update Pod
+In addition to the `Recreate` update policy, which is identical to Deployment and StatefulSet, CollaSet offers the `InPlaceIfPossible` update policy.
 
 ``` yaml
 apiVersion: apps.kusionstack.io/v1alpha1
@@ -401,12 +399,12 @@ metadata:
 spec:
   ...
   updateStrategy:
-    podUpgradePolicy: InPlaceIfPossible  # Options: InPlaceIfPossible, ReCreate
+    podUpgradePolicy: InPlaceIfPossible  # Options: InPlaceIfPossible, Recreate, Replace
 ```
 
-`InPlaceIfPossible` is the default value, which instructs CollaSets to try to update Pods in place when only container images, labels, and annotations have changed. If some other fields have changed too, the policy will back off to the `ReCreate` policy.
+`InPlaceIfPossible` is the default value, which instructs CollaSets to try to update Pods in place when only container images, labels, and annotations have changed. If some other fields have changed too, the policy will back off to the `Recreate` policy.
 
-`ReCreate` indicates CollaSets always delete the old Pod and create a new one with an updated revision.
+`Recreate` indicates CollaSets always delete the old Pod and create a new one with an updated revision.
 
 If update pod template with `InPlaceIfPossible` policy as following example, the Pod will not be recreated.
 
@@ -436,4 +434,114 @@ NAME                     READY   STATUS    RESTARTS     AGE
 collaset-sample-5wvlh    1/1     Running   1 (6s ago)   2m10s
 collaset-sample-ldvrg    1/1     Running   1 (6s ago)   2m10s
 collaset-sample-pbz75    1/1     Running   1 (6s ago)   2m10s
+```
+
+### Replace Update Pod
+
+CollaSet provides the `Replace` policy for certain applications that are sensitive to the available number of Pods.
+
+``` yaml
+apiVersion: apps.kusionstack.io/v1alpha1
+kind: CollaSet
+metadata:
+  name: collaset-sample
+spec:
+  ...
+  updateStrategy:
+    podUpgradePolicy: Replace  # Options: InPlaceIfPossible, Recreate, Replace
+```
+
+The `Replace` policy indicates that CollaSet should update a Pod by creating a new one to replace it. 
+Unlike the `Recreate` policy, which deletes the old Pod before creating a new updated one, or the `InPlaceIfPossible` policy, which updates the current Pod in place, 
+the `Replace` policy first creates a new Pod with the updated revision. It then deletes the old Pod once the new one becomes available for service.
+
+```shell
+# Before updating CollaSet
+$ kubectl -n default get pod
+NAME                    READY   STATUS        RESTARTS   AGE
+collaset-sample-dwkls   1/1     Running       0          6m55s
+
+# After updating CollaSet, the updated Pod is created first
+$ kubectl -n default get pod
+NAME                    READY   STATUS              RESTARTS   AGE
+collaset-sample-dwkls   1/1     Running             0          6m55s
+collaset-sample-rcmbv   0/1     ContainerCreating   0          0s
+
+# Once the created Pod is available for service, the old Pod will be deleted
+$ kubectl -n default get pod
+NAME                    READY   STATUS              RESTARTS   AGE
+collaset-sample-rcmbv   1/1     Running             0          1s
+collaset-sample-dwkls   1/1     Terminating         0          7m12s
+```
+
+The two Pods will have a pair of labels to identify their relationship. The new Pod will have the label `collaset.kusionstack.io/replace-pair-origin-name` to indicate the name of the old Pod, and the old Pod will have the label `collaset.kusionstack.io/replace-pair-new-id` to indicate the instance ID of the new Pod.
+
+Additionally, the new Pod and old Pod will each begin their own PodOpsLifecycles, which are independent of each other.
+
+### Recreate And Replace Specified Pod
+
+In practice, users often need to recreate or replace specified Pods under a CollaSet.
+
+To delete a Pod, users can simply call the Kubernetes API, like executing `kubectl delete pod <pod-name>`. 
+However, this will bypass the [PodOpsLifecycle](https://www.kusionstack.io/docs/operating/concepts/podopslifecycle) Mechanism. 
+We provide following two options:
+
+1. Enable the feature `GraceDeleteWebhook` so that it is possible to delete Pods through `PodOpsLifecycle`.
+```shell
+# Enable the GraceDeleteWebhook feature when starting the controller with this argument
+$ /manager --feature-gates=GraceDeleteWebhook=true
+```
+```shell
+$ kubectl -n default get pod
+NAME                    READY   STATUS        RESTARTS   AGE
+collaset-sample-vqccr   1/1     Running       0          21s
+
+# Delete the pod directly. A message will respond indicating that the Pod deletion is handled by PodOpsLifecycle
+kubectl -n default delete pod collaset-sample-vqccr
+Error from server (failed to validate GraceDeleteWebhook, pod deletion process is underway and being managed by PodOpsLifecycle): admission webhook "validating-pod.apps.kusionstack.io" denied the request: failed to validate GraceDeleteWebhook, pod deletion process is underway and being managed by PodOpsLifecycle
+
+# The old Pod is deleted, and a new Pod will be created 
+$ kubectl -n default get pod -w
+collaset-sample-vqccr   1/1     Running       0          71s
+collaset-sample-vqccr   1/1     Terminating   0          71s
+......
+collaset-sample-nbl6t   0/1     Pending       0          0s
+collaset-sample-nbl6t   0/1     ContainerCreating   0          0s
+......
+collaset-sample-nbl6t   1/1     Running             0          0s
+```
+2. Label the Pod with `podopslifecycle.kusionstack.io/to-delete`, so that CollaSet will delete the Pod through PodOpsLifecycle.
+
+```shell
+# Label Pod
+$ kubectl -n default label pod collaset-sample-nbl6t podopslifecycle.kusionstack.io/to-delete=true
+
+# The old Pod is deleted, and a new Pod will be recreated 
+$ kubectl -n default get pod -w
+collaset-sample-nbl6t   1/1     Running       0          5m28s
+collaset-sample-nbl6t   1/1     Terminating   0          5m28s
+......
+collaset-sample-w6x69   0/1     Pending       0          0s
+......
+collaset-sample-w6x69   0/1     ContainerCreating   0          0s
+......
+collaset-sample-w6x69   1/1     Running             0          2s
+```
+
+Recreating a Pod will delete the old Pod first and then create a new one. This will affect the available Pod count. 
+To avoid this, CollaSet provides a feature to replace Pods by labeling them with `podopslifecycle.kusionstack.io/to-replace`.
+
+```shell
+# Replace Pod by label
+$ kubectl -n echo label pod collaset-sample-w6x69 podopslifecycle.kusionstack.io/to-replace=true
+
+# The old Pod is deleted, and a new Pod will be created 
+$ kubectl -n default get pod -w
+collaset-sample-w6x69   1/1     Running       0          5m29s
+collaset-sample-74fsv   0/1     Pending       0          0s
+collaset-sample-74fsv   0/1     ContainerCreating   0          0s
+......
+collaset-sample-74fsv   1/1     Running             0          2s
+......
+collaset-sample-w6x69   0/1     Terminating         0          5m33s
 ```
