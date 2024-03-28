@@ -16,7 +16,9 @@ This documentation series walks you through the odds and ends of managing such c
   - [AppConfiguration Model](#appconfiguration-model)
   - [Authoring Configuration Files](#authoring-configuration-files)
     - [Identifying KCL file](#identifying-kcl-file)
-    - [KCL Packages and Import](#kcl-packages-and-import)
+    - [KCL Schemas and KAM](#kcl-schemas-and-kam)
+    - [Kusion Modules](#kusion-modules)
+    - [Import Statements](#import-statements)
     - [Understanding kcl.mod](#understanding-kclmod)
     - [Building Blocks](#building-blocks)
     - [Instantiating an application](#instantiating-an-application)
@@ -64,7 +66,7 @@ As a general best practice, we recommend managing the common configurations in `
 
 The schema for `AppConfiguration` is defined in the [KusionStack/kam](https://github.com/KusionStack/kam/blob/main/v1/app_configuration.k) repository. It is designed as a unified, application-centric model that encapsulates the comprehensive configuration details and in the meantime, hides the complexity of the infrastructure as much as possible.
 
-`AppConfiguration` consists of multiple sub-components that each represent either the application workload itself, its dependencies (in the form of [Kusion Modules](../concepts/kusion-module)), relevant workflows or operational expectations. We will deep dive into the details on how to author each of these elements in this upcoming documentation series.
+`AppConfiguration` consists of multiple sub-components that each represent either the application workload itself, its dependencies (in the form of [Kusion Modules](../concepts/kusion-module/overview)), relevant workflows or operational expectations. We will deep dive into the details on how to author each of these elements in this upcoming documentation series.
 
 For more details on the `AppConfiguration`, please refer to the [design documentation](../concepts/app-configuration).
 
@@ -84,7 +86,7 @@ In the context of Kusion, we abstracted a core set of KCL Schemas (such as the a
 
 ### Kusion Modules
 
-To extend the capabilities beyond the core KAM model, we use a concept known as [Kusion Modules](../concepts/kusion-module) to define components that could best abstract the capabilities during an application delivery. We provide a collection of official out-of-the-box Kusion Modules that represents the most common capabilities. They are maintained in [KusionStack's GitHub container registry](https://github.com/orgs/KusionStack/packages). When authoring an application configuration file, you can simply declare said Kusion Modules as dependencies and import them to declare ship-time capabilities that the application requires.
+To extend the capabilities beyond the core KAM model, we use a concept known as [Kusion Modules](../concepts/kusion-module/overview) to define components that could best abstract the capabilities during an application delivery. We provide a collection of official out-of-the-box Kusion Modules that represents the most common capabilities. They are maintained in [KusionStack's GitHub container registry](https://github.com/orgs/KusionStack/packages). When authoring an application configuration file, you can simply declare said Kusion Modules as dependencies and import them to declare ship-time capabilities that the application requires.
 
 If the modules in the KusionStack container registry does not meet the needs of your applications, Kusion provides the necessary mechanisms to extend with custom-built Kusion Modules. You can always create and publish your own module, then import the new module in your application configuration written in KCL.
 

@@ -155,7 +155,7 @@ cd simple-service/dev && kusion build
 
 The output is printed to `stdout` by default. You can save it to a file using the `-o/--output` flag when running `kusion build`.
 
-The output of `kusion build` is the [intent](../../concepts/intent) format.
+The output of `kusion build` is the [Spec](../../concepts/spec) format.
 
 :::tip
 
