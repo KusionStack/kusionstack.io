@@ -1,24 +1,27 @@
-# mysql
+# postgres
 
-## Schema MySQL
+## Schema PostgreSQL
 
-MySQL describes the attributes to locally deploy or create a cloud provider<br />managed mysql database instance for the workload. 
+PostgreSQL describes the attributes to locally deploy or create a cloud provider<br />managed postgresql database instance for the workload. 
 
 ### Attributes
 
-|Name and Description|Type|Default Value|Required|
-|--------------------|----|-------------|--------|
-|**type**<br />Type defines whether the mysql database is deployed locally or provided by <br />cloud vendor. |"local" \| "cloud"|Undefined|**required**|
-|**version**<br />Version defines the mysql version to use. |str|Undefined|**required**|
+| name | type | description | default value |
+| --- | --- | --- | --- |
+|**type** `required`|"local" | "cloud"|Type defines whether the postgresql database is deployed locally or provided by<br />cloud vendor.||
+|**version** `required`|str|Version defines the postgres version to use.||
+
 ### Examples
 ```python
-Instantiate a local mysql database with version of 5.7. 
+#Instantiate a local postgresql database with image version of 14.0. 
 
-import catalog.models.schema.v1.accessories.mysql
+import postgres as postgres
 
-mysql: mysql.MySQL {
-    type: "local"
-    version: "5.7"
+accessories: {
+    "postgres": postgres.PostgreSQL {
+        type:   "local"
+        version: "14.0"
+    }
 }
 ```
 

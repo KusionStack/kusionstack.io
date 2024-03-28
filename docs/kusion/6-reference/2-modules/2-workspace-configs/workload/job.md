@@ -13,7 +13,7 @@
 ### Examples
 ```yaml
 modules:
-  service:
+  job:
     default:
       replicas: 3
       labels:

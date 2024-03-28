@@ -1,6 +1,6 @@
-# port
+# network
 
-`port` can be used to define workspace-level networking configurations.
+`network` can be used to define workspace-level networking configurations.
 
 ## Attributes
 
@@ -14,7 +14,7 @@
 
 ```yaml
 modules:
-  port:
+  kusionstack/network@0.1.0:
     default:
       type: alicloud
       labels:

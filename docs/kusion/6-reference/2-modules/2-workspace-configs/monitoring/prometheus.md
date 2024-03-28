@@ -15,7 +15,7 @@
 ### Examples
 ```yaml
 modules:
-  monitoring:
+  kusionstack/monitoring@0.1.0:
     default:
       operatorMode: True
       monitorType: Pod
