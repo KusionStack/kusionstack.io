@@ -7,25 +7,35 @@ import TabItem from '@theme/TabItem';
 
 # Managed Databases
 
-The `database` attribute in the `AppConfiguration` instance is used to describe the specification for any databases needed for the application.
+You could also specify a database needed for the application. That can be achieved via a `mysql` or a `postgres` module (or bring-your-own-module) in the `accessories` field in `AppConfiguration` to achieve that.
 
 You can currently have several databases with **different database names** for an application at the same time.
 
 ## Import
 
-In the examples below, we are using schemas defined in the `catalog` package. For more details on KCL package import, please refer to the [Configuration File Overview](./1-overview.md#configuration-file-overview).
+In the examples below, we are using schemas defined in the `kam` package and the `mysql` Kusion Module. For more details on KCL package and module import, please refer to the [Configuration File Overview](./1-overview.md#configuration-file-overview).
 
 The `import` statements needed for the following walkthrough:
 ```
-import catalog.models.schema.v1 as ac
-import catalog.models.schema.v1.workload as wl
-import catalog.models.schema.v1.accessories.mysql
-import catalog.models.schema.v1.accessories.postgres
+import kam.v1.app_configuration as ac
+import kam.v1.workload as wl
+import mysql.mysql
+import postgres.postgres
+```
+
+The `kcl.mod` must contain reference to the `mysql` module or `postgres` module:
+```
+#...
+
+[dependencies]
+mysql = { oci = "oci://ghcr.io/kusionstack/mysql", tag = "0.1.0" }
+postgres = { oci = "oci://ghcr.io/kusionstack/postgres", tag = "0.1.0" }
+#...
 ```
 
 ## Types of Database offerings
 
-As of version 0.10.0, Kusion supports the following database offerings on the cloud:
+As of version 0.11.0, Kusion supports the following database offerings on the cloud:
 - MySQL and PostgreSQL Relational Database Service (RDS) on [AWS](https://aws.amazon.com/rds/)
 - MySQL and PostgreSQL Relational Database Service (RDS) on [AliCloud](https://www.alibabacloud.com/product/databases)
 
@@ -91,7 +101,7 @@ runtimes:
 
 # MySQL configurations for AWS RDS
 modules: 
-  mysql: 
+  kusionstack/mysql@0.1.0:
     default: 
       cloud: aws
       size: 20
@@ -118,7 +128,7 @@ runtimes:
 
 # PostgreSQL configurations for AWS RDS
 modules: 
-  postgres: 
+  kusionstack/postgres@0.1.0:
     default: 
       cloud: aws
       size: 20
@@ -141,9 +151,9 @@ For KCL configuration file declarations:
 ```python
 wordpress: ac.AppConfiguration {
     # ...
-    database: {
-        wordpress: mysql.MySQL {
-            type: "cloud"
+    accessories: {
+        "mysql": mysql.MySQL {
+            type:   "cloud"
             version: "8.0"
         }
     }
@@ -158,9 +168,9 @@ wordpress: ac.AppConfiguration {
 ```python
 pgadmin: ac.AppConfiguration {
     # ...
-    database: {
-        pgadmin: postgres.PostgreSQL {
-            type: "cloud"
+    accessories: {
+        "postgres": postgres.PostgreSQL {
+            type:   "cloud"
             version: "14.0"
         }
     }
@@ -200,7 +210,7 @@ runtimes:
 
 # MySQL configurations for Alicloud RDS
 modules: 
-  mysql: 
+  kusionstack/mysql@0.1.0: 
     default: 
       cloud: alicloud
       size: 20
@@ -230,7 +240,7 @@ runtimes:
 
 # PostgreSQL configurations for Alicloud RDS
 modules: 
-  postgres:
+  kusionstack/postgres@0.1.0:
     default:
       cloud: alicloud
       size: 20
@@ -256,9 +266,9 @@ For KCL configuration file declarations:
 ```python
 wordpress: ac.AppConfiguration {
     # ...
-    database: {
-        wordpress: mysql.MySQL {
-            type: "cloud"
+    accessories: {
+        "mysql": mysql.MySQL {
+            type:   "cloud"
             version: "8.0"
         }
     }
@@ -273,9 +283,9 @@ wordpress: ac.AppConfiguration {
 ```python
 pgadmin: ac.AppConfiguration {
     # ...
-    database: {
-        pgadmin: postgres.PostgreSQL {
-            type: "cloud"
+    accessories: {
+        "postgres": postgres.PostgreSQL {
+            type:   "cloud"
             version: "14.0"
         }
     }
@@ -303,8 +313,8 @@ To deploy a local database with MySQL v8.0 or PostgreSQL v14.0:
 ```python
 wordpress: ac.AppConfiguration {
     # ...
-    database: {
-        wordpress: mysql.MySQL {
+    accessories: {
+        "mysql": mysql.MySQL {
             type: "local"
             version: "8.0"
         }
@@ -320,9 +330,9 @@ wordpress: ac.AppConfiguration {
 ```python
 pgadmin: ac.AppConfiguration {
     # ...
-    database: {
-        pgadmin: postgres.PostgreSQL {
-            type: "local"
+    accessories: {
+        "postgres": postgres.PostgreSQL {
+            type:   "local"
             version: "14.0"
         }
     }
@@ -341,7 +351,7 @@ There is no need to manage the database credentials manually. Kusion will automa
 You have the option to BYO (Bring Your Own) username for the database credential by specifying the `username` attribute in the `workspace.yaml`:
 ```yaml
 modules:
-  mysql:
+  kusionstack/mysql@0.1.0:
     default:
       # ...
       username: "my_username"
@@ -380,7 +390,7 @@ wordpress: ac.AppConfiguration {
         }
         # ...
     }
-    database: {
+    accessories: {
         # ...
     }
 }
@@ -398,7 +408,7 @@ To configure AWS RDS to restrict network access from a VPC with a CIDR of `10.0.
 
 ```yaml
 modules: 
-  mysql: 
+  kusionstack/mysql@0.1.0: 
     default: 
       cloud: aws
       # ...
@@ -419,7 +429,7 @@ To place the RDS instance into a specific VPC on Alicloud:
 
 ```yaml
 modules: 
-  mysql: 
+  kusionstack/mysql@0.1.0: 
     default: 
       cloud: alicloud
       # ...
@@ -436,7 +446,7 @@ To enforce private routing on AliCloud:
 
 ```yaml
 modules: 
-  mysql: 
+  kusionstack/mysql@0.1.0: 
     default: 
       cloud: alicloud
       # ...
