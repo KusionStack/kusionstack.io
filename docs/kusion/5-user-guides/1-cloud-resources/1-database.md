@@ -233,7 +233,7 @@ wordpress: ac.AppConfiguration {
 ```
 
 The configuration file `main.k`, usually written by the **App Developers**, declares customized configurations for `dev` stack, which includes an `AppConfiguration` with the name of `wordpress`. And the `wordpress` application includes a workload of type `workload.Service`, which runs on 1 replica and exposes `80` port to be accessed. Besides, it declares a cloud `mysql.MySQL` as the database accessory with the engine version of `8.0` for the application. 
-The necessary Terraform resources for deploying and using the cloud rds (relational database service) will be generated, and users can get the `host`, `username` and `password` of the database through the [mysql credentials and connectivity](../../6-reference/2-modules/1-catalog-models/database/mysql.md#credentials-and-connectivity) of Kusion in application containers. 
+The necessary Terraform resources for deploying and using the cloud rds (relational database service) will be generated, and users can get the `host`, `username` and `password` of the database through the [mysql credentials and connectivity](../../6-reference/2-modules/1-developer-schemas/database/mysql.md#credentials-and-connectivity) of Kusion in application containers. 
 
 :::info
 More details about Catalog models can be found in [Catalog](https://github.com/KusionStack/catalog)

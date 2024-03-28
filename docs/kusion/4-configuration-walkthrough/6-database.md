@@ -368,7 +368,7 @@ KUSION_DB_PASSWORD_WORDPRESS_MYSQL=xxxxxxxxx
 ```
 
 :::info
-More details about the environment of database credentials injected by Kusion can be found at [mysql credentials and connectivity](../6-reference/2-modules/1-catalog-models/database/mysql.md#credentials-and-connectivity) and [postgres credentials and connectivity](../6-reference/2-modules/1-catalog-models/database/postgres.md#credentials-and-connectivity)
+More details about the environment of database credentials injected by Kusion can be found at [mysql credentials and connectivity](../6-reference/2-modules/1-developer-schemas/database/mysql.md#credentials-and-connectivity) and [postgres credentials and connectivity](../6-reference/2-modules/1-developer-schemas/database/postgres.md#credentials-and-connectivity)
 :::
 
 You can use these environment variables out of the box. Or most likely, your application might retrieve the connection details from a different set of environment variables. In that case, you can map the kusion environment variables to the ones expected by your application using the `$()` expression. 
@@ -453,7 +453,7 @@ modules:
       privateRouting: true
 ```
 
-Kusion will then generate a private FQDN and inject it into the application runtime as the environment variable `KUSION_DB_HOST_<DATABASE_NAME>` for the application to use. A complete list of Kusion-managed environment variables for mysql database can be found [here](../6-reference/2-modules/1-catalog-models/database/mysql.md#credentials-and-connectivity).
+Kusion will then generate a private FQDN and inject it into the application runtime as the environment variable `KUSION_DB_HOST_<DATABASE_NAME>` for the application to use. A complete list of Kusion-managed environment variables for mysql database can be found [here](../6-reference/2-modules/1-developer-schemas/database/mysql.md#credentials-and-connectivity).
 
 Otherwise when using the public FQDN to connect to a database from the workload, the route will depend on cloud provider's routing preference. The options are generally either:
 - Travel as far as possible on the cloud provider's global backbone network, or also referred to as cold potato routing, or

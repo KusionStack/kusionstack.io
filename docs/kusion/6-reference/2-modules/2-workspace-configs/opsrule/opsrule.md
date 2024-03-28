@@ -13,7 +13,7 @@
 
 ```yaml
 modules:
-    opsRule:
+    kusionstack/opsrule@0.1.0:
         default:
             maxUnavailable: "40%"
 ```

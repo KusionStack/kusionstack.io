@@ -4,7 +4,7 @@ You can determine how to expose your service in the `AppConfiguration` model via
 
 Unless explicitly defined, each of the ports exposed is by default exposed privately as a `ClusterIP` type service. You can expose a port publicly by specifying the `exposeInternet` field in the `Port` schema. At the moment, the implementation for publicly access is done via Load Balancer type service backed by cloud providers. Ingress will be supported in a future version of kusion.
 
-For the `Port` schema reference, please see [here](../../reference/modules/catalog-models/workload/service#schema-port) for more details.
+For the `Port` schema reference, please see [here](../../reference/modules/developer-schemas/workload/service#schema-port) for more details.
 
 ## Prerequisites
 
@@ -33,7 +33,7 @@ The workspace configuration need to be updated with the command:
 kusion workspace update dev -f ~/dev.yaml
 ```
 
-For a full reference of what can be configured in the workspace level, please see the [workspace reference](../../reference/modules/workspace-configs/networking/port).
+For a full reference of what can be configured in the workspace level, please see the [workspace reference](../../reference/modules/workspace-configs/networking/network).
 
 ## Example
 
