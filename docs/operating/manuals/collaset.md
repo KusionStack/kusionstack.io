@@ -502,18 +502,13 @@ Error from server (failed to validate GraceDeleteWebhook, pod deletion process i
 
 # The old Pod is deleted, and a new Pod will be created 
 $ kubectl -n default get pod -w
+collaset-sample-vqccr   1/1     Running       0          71s
 collaset-sample-vqccr   1/1     Terminating   0          71s
+......
 collaset-sample-nbl6t   0/1     Pending       0          0s
-collaset-sample-nbl6t   0/1     Pending       0          0s
-collaset-sample-vqccr   1/1     Terminating   0          71s
 collaset-sample-nbl6t   0/1     ContainerCreating   0          0s
-collaset-sample-nbl6t   0/1     ContainerCreating   0          0s
+......
 collaset-sample-nbl6t   1/1     Running             0          0s
-collaset-sample-nbl6t   1/1     Running             0          0s
-collaset-sample-vqccr   1/1     Terminating         0          72s
-collaset-sample-vqccr   0/1     Terminating         0          73s
-collaset-sample-vqccr   0/1     Terminating         0          73s
-collaset-sample-vqccr   0/1     Terminating         0          73s
 ```
 2. Label the Pod with `podopslifecycle.kusionstack.io/to-delete`, so that CollaSet will delete the Pod through PodOpsLifecycle.
 
@@ -524,15 +519,12 @@ $ kubectl -n default label pod collaset-sample-nbl6t podopslifecycle.kusionstack
 # The old Pod is deleted, and a new Pod will be recreated 
 $ kubectl -n default get pod -w
 collaset-sample-nbl6t   1/1     Running       0          5m28s
-collaset-sample-nbl6t   1/1     Running       0          5m28s
-collaset-sample-nbl6t   1/1     Running       0          5m28s
-collaset-sample-nbl6t   1/1     Running       0          5m28s
 collaset-sample-nbl6t   1/1     Terminating   0          5m28s
+......
 collaset-sample-w6x69   0/1     Pending       0          0s
-collaset-sample-w6x69   0/1     Pending       0          0s
+......
 collaset-sample-w6x69   0/1     ContainerCreating   0          0s
-collaset-sample-w6x69   0/1     ContainerCreating   0          0s
-collaset-sample-w6x69   1/1     Running             0          2s
+......
 collaset-sample-w6x69   1/1     Running             0          2s
 ```
 
@@ -547,12 +539,9 @@ $ kubectl -n echo label pod collaset-sample-w6x69 podopslifecycle.kusionstack.io
 $ kubectl -n default get pod -w
 collaset-sample-w6x69   1/1     Running       0          5m29s
 collaset-sample-74fsv   0/1     Pending       0          0s
-collaset-sample-74fsv   0/1     Pending       0          0s
 collaset-sample-74fsv   0/1     ContainerCreating   0          0s
-collaset-sample-w6x69   1/1     Running             0          5m29s
 ......
 collaset-sample-74fsv   1/1     Running             0          2s
-collaset-sample-74fsv   1/1     Running             0          2s
-collaset-sample-w6x69   1/1     Terminating         0          5m32s
+......
 collaset-sample-w6x69   0/1     Terminating         0          5m33s
 ```
