@@ -437,3 +437,282 @@ collaset-sample-5wvlh    1/1     Running   1 (6s ago)   2m10s
 collaset-sample-ldvrg    1/1     Running   1 (6s ago)   2m10s
 collaset-sample-pbz75    1/1     Running   1 (6s ago)   2m10s
 ```
+
+### Supprting PVCs
+CollaSet introduces support for PVCs, allowing user to declare `VolumeClaimTemplates` to create PVCs for each Pod. 
+Furthermore, in response to common issues with PVCs management, such as high modification costs and difficult control, CollaSet extends its functionality with the following advantages vs. StatefulSet:
+
+1. Support update, add and delete on `volumeClaimTemplates`.
+2. Provide control over PVC lifecycle.
+
+#### Provision PVCs
+The `collaset-pvc.yaml` file declares a CollaSet with `VolumeClaimTemplates` to provision a PVC with `1Gi` storage for each Pod.
+These PVCs are then mounted on the container at the path `/path/mount/www`.
+
+``` yaml
+apiVersion: apps.kusionstack.io/v1alpha1
+kind: CollaSet
+metadata:
+  name: foo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: foo
+  template:
+    metadata:
+      labels:
+        app: foo
+    spec:
+      containers:
+      - image: nginx:1.25
+        name: nginx
+        volumeMounts: 
+        - mountPath: /path/mount/www # path to mount PVC 
+          name: www
+  volumeClaimTemplates:
+  - metadata:
+      name: www
+    spec:
+      storageClassName: standard
+      volumeMode: Filesystem
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+```
+
+Pods and PVCs can be provisioned by CollaSet.
+
+``` shell
+$ kubectl -n default apply -f collaset-pvc.yaml
+collaset.apps.kusionstack.io/foo created
+
+$ kubectl -n default get pod
+NAME        READY   STATUS    RESTARTS   AGE
+foo-7nv7h   1/1     Running   0          6s
+foo-dbfj2   1/1     Running   0          6s
+
+$ kubectl -n default get pvc
+NAME            STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+foo-www-nxvjc   Bound    pvc-0733c214-e001-43e4-84b9-af32aa90a958   1Gi        RWO            standard       7s
+foo-www-x6z5v   Bound    pvc-5ec48455-8297-4e36-aef8-4f8486f0fdee   1Gi        RWO            standard       7s
+```
+
+Each Pod and its related PVC have the same value of label `collaset.kusionstack.io/instance-id`.
+
+``` shell
+$ kubectl -n default get pod -o yaml | grep instance-id
+      collaset.kusionstack.io/instance-id: "1"
+      collaset.kusionstack.io/instance-id: "0"
+
+$ kubectl -n default get pvc -o yaml | grep instance-id
+      collaset.kusionstack.io/instance-id: "1"
+      collaset.kusionstack.io/instance-id: "0"
+```
+
+#### Update PVCs
+To save the operating costs of PVCs, i.e. expand storage capacity, CollaSet supports update, add and delete on `volumeClaimTemplates`.
+
+To achieve this, for each PVC, CollaSet calculates a hash value based on its template, and attatch it to label `collaset.kusionstack.io/pvc-template-hash`.
+Once users modify the templates, CollaSet recognizes, caculates a new hash value and attach it on new PVCs to replace old ones.
+
+Let's give it a try, update the storage of PVC template from `1Gi` to `2Gi`.
+``` shell
+$ kubectl -n default edit cls foo
+ ......
+ volumeClaimTemplates:
+ - metadata:
+     name: www
+   spec:
+     storageClassName: standard
+     volumeModes: Filesystem
+     accessModes: [ "ReadWriteOnce" ]
+     resources:
+       requests:
+-        storage: 1Gi
++        storage: 2Gi # update pvc template to expand storage
+......
+```
+
+There are 2 new PVCs with `2Gi` storage created with different hash values.
+
+``` shell
+$ kubectl -n default edit cls foo
+collaset.apps.kusionstack.io/foo edited
+
+$ kubectl -n default get pod
+NAME        READY   STATUS        RESTARTS   AGE
+foo-7nv7h   1/1     Terminating   0          18s
+foo-dbfj2   1/1     Terminating   0          18s
+foo-tdltl   0/1     Pending       0          1s
+foo-zssqf   0/1     Pending       0          1s
+
+$ kubectl -n default get pvc
+NAME            STATUS        VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+foo-www-nxvjc   Terminating   pvc-0733c214-e001-43e4-84b9-af32aa90a958   1Gi        RWO            standard       20s
+foo-www-x6z5v   Terminating   pvc-5ec48455-8297-4e36-aef8-4f8486f0fdee   1Gi        RWO            standard       20s
+foo-www-dmdb8   Bound         pvc-aa52a6b1-62c9-4d74-8232-20b78908b159   2Gi        RWO            standard       3s
+foo-www-tkptl   Bound         pvc-00d8c8b0-b9a8-4e73-9778-aab783904a0e   2Gi        RWO            standard       3s
+      
+$ kubectl -n default get pvc -o yaml | grep pvc-template-hash
+      collaset.kusionstack.io/pvc-template-hash: 594d8857f9 # hash value of old pvc 
+      collaset.kusionstack.io/pvc-template-hash: 594d8857f9
+      collaset.kusionstack.io/pvc-template-hash: d78c5ff6b # hash value of new pvc 
+      collaset.kusionstack.io/pvc-template-hash: d78c5ff6b
+```
+
+For old Pvcs, users can retain them by configuring `whenScaled` policy to `Retain` .
+Then old PVCs can be re-mount on its related Pod after rolling back.
+Otherwise, old PVCs can be deleted by default policy `Delete`.
+
+#### PVC Retention Policy
+CollaSet provides control over PVC lifecycle by configuring `spec.persistentVolumeClaimRetentionPolicy`.
+Users can retain or delete PVCs after its related Pod is scaled down or CollaSet is deleted, respectively.
+This feature is also supported by [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#persistentvolumeclaim-retention) since v1.27.
+Basic rule is detailed as follows:
+- `whenScale` : decides to delete or retain PVCs after Pod is scaled down.
+- `whenDeleted`: decides to delete or retain PVCs after CollaSet is deleted.
+
+For each policy users can set the value to either Delete (by default) or Retain. 
+Note that for StatefulSet, the default policy is Retain.
+
+#### whenScaled
+Apply `collaset-pvc.yaml` and edit foo to scale replicas to 1.
+``` shell
+$ kubectl apply -f collaset-pvc.yaml
+collaset.apps.kusionstack.io/foo created
+
+$ kubectl edit cls foo
+ ......
+ spec:
+-  replicas: 2
++  replicas: 1 # scale in 1 pod
+   selector:
+     matchLabels:
+       app: foo
+ ......
+```
+As the `whenScaled` is not configured, thus its value is `Delete` by default.
+Consequently, PVC `foo-www-wzwbq` is deleted as its related Pod `foo-tkc5m`  is scaling down.
+
+``` shell
+$ kubectl -n default edit cls foo
+collaset.apps.kusionstack.io/foo edited
+
+$ kubectl -n default get pod
+NAME        READY   STATUS    RESTARTS   AGE
+foo-tkc5m   0/1     Terminating   0          27s # related pvc is terminating
+foo-vwtcm   1/1     Running       0          27s
+
+$ kubectl -n default get pvc
+NAME            STATUS        VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+foo-www-wzwbq   Terminating   pvc-b92c28c6-59ad-4976-810c-8d538c4a22c6   1Gi        RWO            standard       29s
+foo-www-r4vlh   Bound         pvc-dd7f7cce-a3cb-4bba-a106-e5ad264959a2   1Gi        RWO            standard       29s
+```
+
+Set `Retain` to `whenScaled`, and scale replicas to 0.
+
+``` shell
+$ kubectl -n default edit cls foo
+ ......
+ spec:
+-  replicas: 1
++  replicas: 0 # scale in 1 pod
+   selector:
+     matchLabels:
+       app: foo
++  scaleStrategy:
++    persistentVolumeClaimRetentionPolicy:
++      whenScaled: Retain # retain the pvc after pod is scaled down
+ ......
+```
+
+Pod `foo-vwtcm` is terminating, while its related PVC `foo-www-r4vlh` is retained.
+
+``` shell
+$ kubectl -n default edit cls foo
+collaset.apps.kusionstack.io/foo edited
+
+$ kubectl -n default get pod
+NAME        READY   STATUS        RESTARTS   AGE
+foo-vwtcm -n default   1/1     Terminating   0          62s # related pvc is retained
+
+$ kubectl -n default get pvc
+NAME            STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+foo-www-r4vlh   Bound    pvc-dd7f7cce-a3cb-4bba-a106-e5ad264959a2   1Gi        RWO            standard       63s
+```
+
+To validate the retention policy, try ro scale replicas to 2, and the remaining PVC should be mounted again.
+
+``` shell
+$ kubectl -n default edit cls foo
+ ......
+ spec:
+-  replicas: 0
++  replicas: 2 # scale out 2 pods
+   ......
+```
+
+We can see that PVC `foo-www-r4vlh` is retained by Pod `foo-px487` as they have the same `instance-id`. 
+
+``` shell
+$ kubectl -n default edit cls foo
+collaset.apps.kusionstack.io/foo edited
+
+$ kubectl -n default get pod
+NAME        READY   STATUS    RESTARTS   AGE
+foo-ld5xc   1/1     Running   0          27s
+foo-px487   1/1     Running   0          27s
+
+$ kubectl -n default get pvc
+NAME            STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+foo-www-d48gx   Bound    pvc-1884ee45-5cc9-48ee-b01a-20f5ad63d6d4   1Gi        RWO            standard       29s
+foo-www-r4vlh   Bound    pvc-dd7f7cce-a3cb-4bba-a106-e5ad264959a2   1Gi        RWO            standard       2m47s
+
+$ kubectl -n default get pod foo-px487 -o yaml | grep instance-id
+      collaset.kusionstack.io/instance-id: "1"
+
+$ kubectl -n default get pvc foo-www-r4vlh -o yaml | grep instance-id
+      collaset.kusionstack.io/instance-id: "1" # pvc foo-www-r4vlh is retained
+```
+
+#### whenDelete
+Edit `foo` to configure `Retain` policy for `whenDelete`, and then delete this CollaSet.
+``` shell
+$ kubectl -n default edit cls foo
+   ......
+   scaleStrategy:
+     persistentVolumeClaimRetentionPolicy:
+       whenScaled: Retain
++      whenDelete: Retain # retain the pvc after collaset is deleted
+   ......
+collaset.apps.kusionstack.io/foo edited
+
+$ kubectl -n default delete cls foo
+collaset.apps.kusionstack.io "foo" deleted
+```
+
+Now, try to recreate `foo` with 2 replicas, and the result shows both PVCs are retained.
+``` shell
+$ kubectl -n default apply -f collaset-pvc.yaml
+collaset.apps.kusionstack.io/foo created
+
+$ kubectl -n default get pod
+NAME        READY   STATUS    RESTARTS   AGE
+foo-qhh8t   1/1     Running   0          2s
+foo-ss255   1/1     Running   0          2s
+
+$ kubectl -n default get pvc
+NAME            STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+foo-www-d48gx   Bound    pvc-1884ee45-5cc9-48ee-b01a-20f5ad63d6d4   1Gi        RWO            standard       4m29s
+foo-www-r4vlh   Bound    pvc-dd7f7cce-a3cb-4bba-a106-e5ad264959a2   1Gi        RWO            standard       6m47s
+
+$ kubectl -n default get pod foo-px487 -o yaml | grep instance-id
+      collaset.kusionstack.io/instance-id: "0"
+      collaset.kusionstack.io/instance-id: "1"
+
+$ kubectl -n default get pvc foo-www-r4vlh -o yaml | grep instance-id
+      collaset.kusionstack.io/instance-id: "0" # pvc foo-www-d48gx is retained
+      collaset.kusionstack.io/instance-id: "1" # pvc foo-www-r4vlh is retained
+```
