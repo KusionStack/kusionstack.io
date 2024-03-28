@@ -498,7 +498,7 @@ collaset-sample-vqccr   1/1     Running       0          21s
 
 # Delete the pod directly. A message will respond indicating that the Pod deletion is handled by PodOpsLifecycle
 kubectl -n default delete pod collaset-sample-vqccr
-Error from server (failed to validate GraceDeleteWebhook, podOpsLifecycle denied delete request, since related resources and finalizers have not been processed. Waiting for removing finalizers: []): admission webhook "validating-pod.apps.kusionstack.io" denied the request: failed to validate GraceDeleteWebhook, podOpsLifecycle denied delete request, since related resources and finalizers have not been processed. Waiting for removing finalizers: []
+Error from server (failed to validate GraceDeleteWebhook, pod deletion process is underway and being managed by PodOpsLifecycle): admission webhook "validating-pod.apps.kusionstack.io" denied the request: failed to validate GraceDeleteWebhook, pod deletion process is underway and being managed by PodOpsLifecycle
 
 # The old Pod is deleted, and a new Pod will be created 
 $ kubectl -n default get pod -w
