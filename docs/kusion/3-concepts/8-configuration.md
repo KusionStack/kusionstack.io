@@ -74,15 +74,15 @@ The backend configurations define the place to store Workspace, Spec and State f
 ### Available Configuration Items
 
 - **backends.current**: type `string`, the current used backend name. It can be set as the configured backend name. If not set, the default local backend will be used.
-- **backends.{$name}**: type `map`, a total backend configuration, contains type and config items, whose format is as below. It can be unset when the backend is not the current.
+- **backends.${name}**: type `map`, a total backend configuration, contains type and config items, whose format is as below. It can be unset when the backend is not the current.
 ```yaml
 {
   "type": "${backend_type}", # type string, required, support local, mysql, oss, s3.
-  "configs": ${backend_configs} # type map, optional for type local, required for the others, the specific keys depend on the type, refer to the description of backends.{$name}.configs.
+  "configs": ${backend_configs} # type map, optional for type local, required for the others, the specific keys depend on the type, refer to the description of backends.${name}.configs.
 }
 ```
-- **backends.{$name}.type**: type `string`, the backend type, support `local`, `mysql`, `s3` and `oss`. It can be unset when the backend is not the current, and the corresponding `backends.{$name}.configs` are empty.
-- **backends.{$name}.configs**: type `map`, the backend config items, whose format depends on the backend type and is as below. It must be set after `backends.{$name}.type`.
+- **backends.${name}.type**: type `string`, the backend type, support `local`, `mysql`, `s3` and `oss`. It can be unset when the backend is not the current, and the corresponding `backends.${name}.configs` are empty.
+- **backends.${name}.configs**: type `map`, the backend config items, whose format depends on the backend type and is as below. It must be set after `backends.${name}.type`.
 ```yaml
 # type local
 {
@@ -117,15 +117,15 @@ The backend configurations define the place to store Workspace, Spec and State f
     "prefix": "${s3_prefix}" # type string, optional, the prefix to store the files.
   }
 ```
-- **backends.{$name}.configs.path**: type `string`, the path of local type backend. It must be set after `backends.{$name}.type` and which must be `local`. 
-- **backends.{$name}.configs.dbName**: type `string`, the database name of mysql type backend. It must be set after `backends.{$name}.type` and which must be `mysql`.
-- **backends.{$name}.configs.user**: type `string`, the database user of mysql type backend. It must be set after `backends.{$name}.type` and which must be `mysql`. 
-- **backends.{$name}.configs.password**: type `string`, the database password of mysql type backend. It must be set after `backends.{$name}.type` and which must be `mysql`. It can be also obtained by environment variable `KUSION_BACKEND_MYSQL_PASSWORD`.
-- **backends.{$name}.configs.host**: type `string`, the database host of mysql type backend. It must be set after `backends.{$name}.type` and which must be `mysql`. 
-- **backends.{$name}.configs.port**: type `int`, the database port of mysql type backend. It must be set after `backends.{$name}.type` and which must be `mysql`. If not set, the default value `3306` will be used.
-- **backends.{$name}.configs.endpoint**: type `string`, the endpoint of oss or s3 type backend. It must be set after `backends.{$name}.type` and which must be `oss` or `s3`. 
-- **backends.{$name}.configs.accessKeyID**: type `string`, the access key id of oss or s3 type backend. It must be set after `backends.{$name}.type` and which must be `oss` or `s3`. For `oss`, it can be also obtained by environment variable `OSS_ACCESS_KEY_ID`; while for s3, it is `AWS_ACCESS_KEY_ID`.
-- **backends.{$name}.configs.accessKeySecret**: type `string`, the access key secret of oss or s3 type backend. It must be set after `backends.{$name}.type` and which must be `oss` or `s3`. For `oss`, it can be also obtained by environment variable `OSS_ACCESS_KEY_SECRET`; while for s3, it is `AWS_SECRET_ACCESS_KEY`.
-- **backends.{$name}.configs.bucket**: type `string`, the bucket of oss or s3 type backend. It must be set after `backends.{$name}.type` and which must be `oss` or `s3`. 
-- **backends.{$name}.configs.prefix**: type `string`, the prefix to store the files of oss or s3 type backend. It must be set after `backends.{$name}.type` and which must be `oss` or `s3`. 
-- **backends.{$name}.configs.region**: type `string`, the aws region of s3 type backend. It must be set after `backends.{$name}.type` and which must be `s3`. It can be also obtained by environment variables `AWS_REGION` and `AWS_DEFAULT_REGION`, where the former is priority.
+- **backends.${name}.configs.path**: type `string`, the path of local type backend. It must be set after `backends.${name}.type` and which must be `local`. 
+- **backends.${name}.configs.dbName**: type `string`, the database name of mysql type backend. It must be set after `backends.${name}.type` and which must be `mysql`.
+- **backends.${name}.configs.user**: type `string`, the database user of mysql type backend. It must be set after `backends.${name}.type` and which must be `mysql`. 
+- **backends.${name}.configs.password**: type `string`, the database password of mysql type backend. It must be set after `backends.${name}.type` and which must be `mysql`. It can be also obtained by environment variable `KUSION_BACKEND_MYSQL_PASSWORD`.
+- **backends.${name}.configs.host**: type `string`, the database host of mysql type backend. It must be set after `backends.${name}.type` and which must be `mysql`. 
+- **backends.${name}.configs.port**: type `int`, the database port of mysql type backend. It must be set after `backends.${name}.type` and which must be `mysql`. If not set, the default value `3306` will be used.
+- **backends.${name}.configs.endpoint**: type `string`, the endpoint of oss or s3 type backend. It must be set after `backends.${name}.type` and which must be `oss` or `s3`. 
+- **backends.${name}.configs.accessKeyID**: type `string`, the access key id of oss or s3 type backend. It must be set after `backends.${name}.type` and which must be `oss` or `s3`. For `oss`, it can be also obtained by environment variable `OSS_ACCESS_KEY_ID`; while for s3, it is `AWS_ACCESS_KEY_ID`.
+- **backends.${name}.configs.accessKeySecret**: type `string`, the access key secret of oss or s3 type backend. It must be set after `backends.${name}.type` and which must be `oss` or `s3`. For `oss`, it can be also obtained by environment variable `OSS_ACCESS_KEY_SECRET`; while for s3, it is `AWS_SECRET_ACCESS_KEY`.
+- **backends.${name}.configs.bucket**: type `string`, the bucket of oss or s3 type backend. It must be set after `backends.${name}.type` and which must be `oss` or `s3`. 
+- **backends.${name}.configs.prefix**: type `string`, the prefix to store the files of oss or s3 type backend. It must be set after `backends.${name}.type` and which must be `oss` or `s3`. 
+- **backends.${name}.configs.region**: type `string`, the aws region of s3 type backend. It must be set after `backends.${name}.type` and which must be `s3`. It can be also obtained by environment variables `AWS_REGION` and `AWS_DEFAULT_REGION`, where the former is priority.
