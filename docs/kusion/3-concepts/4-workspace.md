@@ -25,7 +25,7 @@ For the default configuration or a specific patcher, field keys must be the same
 
 The `runtime` configuration currently supports Kubernetes and Terraform, where the former includes the field `kubeConfig` to specify the path of Kube Config, and the latter contains data for Terraform providers, which vary across different providers. For Terraform providers, sensitive data should be stored in environment variables.
 
-The `backend` configuration currently supports local, oss, s3, database, and http. This defines the backend for state, intent, and other Kusion data that may require storage in the future. This format requires that all Kusion data share the same backend. As with sensitive data in the runtime configuration, these details should also be stored in environment variables. Backend configurations can be found in the [Backend Configuration](backend-configuration)
+The `backend` configuration currently supports local, oss, s3, database, and http. This defines the backend for state, intent, and other Kusion data that may require storage in the future. This format requires that all Kusion data share the same backend. As with sensitive data in the runtime configuration, these details should also be stored in environment variables. Backend configurations can be found in the [Backend](backend)
 
 An example is shown as below:
 
