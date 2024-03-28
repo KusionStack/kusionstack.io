@@ -571,14 +571,14 @@ CollaSet provides control over PVC lifecycle by configuring `spec.persistentVolu
 Users can retain or delete PVCs after its related Pod is scaled down or CollaSet is deleted, respectively.
 This feature is also supported by [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#persistentvolumeclaim-retention) since v1.27.
 Basic rule is detailed as follows:
-- `WhenScale` : decides to delete or retain PVCs after Pod is scaled down.
-- `WhenDeleted`: decides to delete or retain PVCs after CollaSet is deleted.
+- `whenScale` : decides to delete or retain PVCs after Pod is scaled down.
+- `whenDeleted`: decides to delete or retain PVCs after CollaSet is deleted.
 
-For each policy users can set the value to either `Delete` (by default) or `Retain`. 
-Note that for StatefulSet, the default policy is `Retain`.
+For each policy users can set the value to either Delete (by default) or Retain. 
+Note that for StatefulSet, the default policy is Retain.
 
 #### whenScaled
-Apply `collaset-pvc.yaml` and edit `foo` to scale replicas to 1.
+Apply `collaset-pvc.yaml` and edit foo to scale replicas to 1.
 ``` shell
 $ kubectl apply -f collaset-pvc.yaml
 collaset.apps.kusionstack.io/foo created
