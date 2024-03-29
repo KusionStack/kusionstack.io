@@ -1,6 +1,10 @@
+---
+id: job
+---
+
 # Schedule a Job
 
-The guides above provide examples on how to configure workloads of the type `wl.Service`, which is typically used for long-running web applications that should "never" go down. Alternatively, you could also schedule another kind of workload profile, namely `wl.Job` which corresponds to a one-off or recurring execution of tasks that run to completion and then stop.
+The guides above provide examples on how to configure workloads of the type `wl.Service`, which is typically used for long-running web applications that should **never** go down. Alternatively, you could also schedule another kind of workload profile, namely `wl.Job` which corresponds to a one-off or recurring execution of tasks that run to completion and then stop.
 
 ## Prerequisites
 
@@ -13,6 +17,7 @@ The example below also requires you to have [initialized the project](deploy-app
 In the first guide in this series, we introduced a step to [initialize a workspace](deploy-application#initializing-workspace-configuration) with an empty configuration. The same empty configuration will still work in this guide, no changes are required there. Alternatively, if you have updated your workspace config in the previous guides, no changes need to be made either.
 
 However, if you (or the platform team) would like to set default values for the workloads to standardize the behavior of applications in the `dev` workspace, you can do so by updating the `~/dev.yaml`:
+
 ```yaml
 modules:
   service:
@@ -27,6 +32,7 @@ modules:
 Please note that the `replicas` in the workspace configuration only works as a default value and will be overridden by the value set in the application configuration.
 
 The workspace configuration need to be updated with the command:
+
 ```bash
 kusion workspace update dev -f ~/dev.yaml
 ```
@@ -39,9 +45,9 @@ To schedule a job with cron expression, update `simple-service/dev/main.k` to th
 
 `simple-service/dev/main.k`:
 ```py
-import catalog.models.schema.v1 as ac
-import catalog.models.schema.v1.workload as wl
-import catalog.models.schema.v1.workload.container as c
+import kam.v1.app_configuration as ac
+import kam.v1.workload as wl
+import kam.v1.workload.container as c
 
 helloworld: ac.AppConfiguration {
     workload: wl.Job {
@@ -68,9 +74,10 @@ You can find the full example in here in the [konfig repo](https://github.com/Ku
 Re-run steps in [Applying](deploy-application#applying) and schedule the job. Your output might look like one of the following:
 
 If you are starting from scratch, all resources are created on the spot:
+
 ```
 $ kusion apply
- ✔︎  Generating Intent in the Stack dev...                                                                                                                                                                                                     
+ ✔︎  Generating Spec in the Stack dev...                                                                                                                                                                                                     
 Stack: dev  ID                                                    Action
 * ├─     v1:Namespace:simple-service                               Create
 * └─     batch/v1:CronJob:simple-service:simple-service-dev-helloworld  Create
@@ -84,10 +91,11 @@ Create batch/v1:CronJob:simple-service:simple-service-dev-helloworld success [2/
 Apply complete! Resources: 2 created, 0 updated, 0 deleted.
 ```
 
-If you are starting from the last guide which configures an `opsRule`, the output looks like the following which destroys the `Deployment` and `Service` and replace it with a `CronJob`:
+If you are starting from the last guide which configures an `opsrule`, the output looks like the following which destroys the `Deployment` and `Service` and replace it with a `CronJob`:
+
 ```
 $ kusion apply
- ✔︎  Generating Intent in the Stack dev...                                                                                                                                                                                                     
+ ✔︎  Generating Spec in the Stack dev...                                                                                                                                                                                                     
 Stack: dev  ID                                                               Action
 * ├─     v1:Namespace:simple-service                                      UnChanged
 * ├─     batch/v1:CronJob:simple-service:simple-service-dev-helloworld     Create

@@ -1,8 +1,12 @@
+---
+id: service
+---
+
 # Expose Service
 
-You can determine how to expose your service in the `AppConfiguration` model via the `ports` field (under the `workload` schemas). The `ports` field defines a list of all the `Port`s you want to expose for the application (and their corresponding listening ports on the container, if they don't match the service ports), so that it can be consumed by other applications.
+You can determine how to expose your service in the `AppConfiguration` model via the `ports` field (under the `network` accessory). The `ports` field defines a list of all the `Port`s you want to expose for the application (and their corresponding listening ports on the container, if they don't match the service ports), so that it can be consumed by other applications.
 
-Unless explicitly defined, each of the ports exposed is by default exposed privately as a `ClusterIP` type service. You can expose a port publicly by specifying the `exposeInternet` field in the `Port` schema. At the moment, the implementation for publicly access is done via Load Balancer type service backed by cloud providers. Ingress will be supported in a future version of kusion.
+Unless explicitly defined, each of the ports exposed is by default exposed privately as a `ClusterIP` type service. You can expose a port publicly by specifying the `public` field in the `Port` schema. At the moment, the implementation for publicly access is done via Load Balancer type service backed by cloud providers. Ingress will be supported in a future version of kusion.
 
 For the `Port` schema reference, please see [here](../../reference/modules/developer-schemas/workload/service#schema-port) for more details.
 
@@ -17,18 +21,21 @@ The example below also requires you to have [initialized the project](deploy-app
 In the first guide in this series, we introduced a step to [initialize a workspace](deploy-application#initializing-workspace-configuration) with an empty configuration. The same empty configuration will still work in this guide, no changes are required there.
 
 However, if you (or the platform team) would like to set default values for the services to standardize the behavior of applications in the `dev` workspace, you can do so by updating the `~/dev.yaml`:
+
 ```yaml
 modules:
-  port:
+  kusionstack/network@0.1.0: 
     default:
-      type: alicloud
-      labels:
-        kusionstack.io/control: "true"
-      annotations:
-        service.beta.kubernetes.io/alibaba-cloud-loadbalancer-spec: slb.s1.small
+      port: 
+        type: alicloud
+        labels:
+            kusionstack.io/control: "true"
+        annotations:
+            service.beta.kubernetes.io/alibaba-cloud-loadbalancer-spec: slb.s1.small
 ```
 
 The workspace configuration need to be updated with the command:
+
 ```bash
 kusion workspace update dev -f ~/dev.yaml
 ```
@@ -38,25 +45,24 @@ For a full reference of what can be configured in the workspace level, please se
 ## Example
 
 `simple-service/dev/main.k`:
-```py
-import catalog.models.schema.v1 as ac
-import catalog.models.schema.v1.workload as wl
-import catalog.models.schema.v1.workload.container as c
-import catalog.models.schema.v1.workload.container.probe as p
-import catalog.models.schema.v1.workload.network as n
+```python
+import kam.v1.app_configuration as ac
+import kam.v1.workload as wl
+import kam.v1.workload.container as c
+import network as n
 
-helloworld: ac.AppConfiguration {
+"helloworld": ac.AppConfiguration {
     workload: wl.Service {
         containers: {
             "helloworld": c.Container {
-                image: "gcr.io/google-samples/gb-frontend:v4"
+                image = "gcr.io/google-samples/gb-frontend:v4"
                 env: {
                     "env1": "VALUE"
                     "env2": "VALUE2"
                 }
                 resources: {
                     "cpu": "500m"
-                    "memory": "512M"
+                    "memory": "512Mi"
                 }
                 # Configure an HTTP readiness probe
                 readinessProbe: p.Probe {
@@ -68,12 +74,16 @@ helloworld: ac.AppConfiguration {
             }
         }
         replicas: 2
-        ports: [
-            n.Port {
-                port: 8080
-                targetPort: 80
-            }
-        ]
+    }
+    accessories: {
+        "network": n.Network {
+            ports: [
+              n.Port {
+                  port: 8080
+                  targetPort: 80
+              }
+            ]
+        }
     }
 }
 ```
@@ -86,7 +96,7 @@ Re-run steps in [Applying](deploy-application#applying), new service configurati
 
 ```
 $ kusion apply
- ✔︎  Generating Intent in the Stack dev...                                                                                                                                                                                                     
+ ✔︎  Generating Spec in the Stack dev...                                                                                                                                                                                                     
 Stack: dev  ID                                                               Action
 * ├─     v1:Namespace:simple-service                                      UnChanged
 * ├─     v1:Service:simple-service:simple-service-dev-helloworld-private  Update
@@ -103,7 +113,9 @@ Apply complete! Resources: 0 created, 1 updated, 0 deleted.
 ```
 
 ## Validation
+
 We can verify the Kubernetes service now has the updated attributes (mapping service port 8080 to container port 80) as defined in the `ports` configuration:
+
 ```
 kubectl get svc -n simple-service -o yaml
 ...

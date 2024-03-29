@@ -1,3 +1,7 @@
+---
+id: image-upgrade
+---
+
 # Upgrade Image
 
 You can declare the application's container image via `image` field of the `Container` schema.
@@ -5,6 +9,7 @@ You can declare the application's container image via `image` field of the `Cont
 For the full `Container` schema reference, please see [here](../../reference/modules/developer-schemas/workload/service#schema-container) for more details.
 
 ## Pre-requisite
+
 Please refer to the [prerequisites](deploy-application#prerequisites) in the guide for deploying an application.
 
 The example below also requires you to have [initialized the project](deploy-application#initializing) using the `kusion workspace create` and `kusion init` command, which will create a workspace and also generate a [`kcl.mod` file](deploy-application#kclmod) under the stack directory.
@@ -16,8 +21,8 @@ In the first guide in this series, we introduced a step to [initialize a workspa
 ## Example
 
 Update the image value in `simple-service/dev/main.k`:
-```py
-import catalog.models.schema.v1 as ac
+```python
+import kam.v1.app_configuration as ac
 
 helloworld: ac.AppConfiguration {
     workload.containers.nginx: {
@@ -39,7 +44,7 @@ Re-run steps in [Applying](deploy-application#applying), update image is complet
 
 ```
 $ kusion apply
- ✔︎  Generating Intent in the Stack dev...                                                                                                                                                                                                     
+ ✔︎  Generating Spec in the Stack dev...                                                                                                                                                                                                     
 Stack: dev  ID                                                               Action
 * ├─     v1:Namespace:simple-service                                      UnChanged
 * ├─     v1:Service:simple-service:simple-service-dev-helloworld-private  UnChanged
@@ -56,6 +61,7 @@ Apply complete! Resources: 0 created, 1 updated, 0 deleted.
 ```
 
 ## Validation
+
 We can verify the application container (in the deployment template) now has the updated image (v5) as defined in the container configuration:
 ```
 kubectl get deployment -n simple-service -o yaml

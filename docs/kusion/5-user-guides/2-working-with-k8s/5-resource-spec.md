@@ -1,3 +1,7 @@
+---
+id: resource-spec
+---
+
 # Configure Resource Specification
 
 You can manage container-level resource specification in the `AppConfiguration` model via the `resources` field (under the `Container` schema).
@@ -15,9 +19,11 @@ The example below also requires you to have [initialized the project](deploy-app
 In the first guide in this series, we introduced a step to [initialize a workspace](deploy-application#initializing-workspace-configuration) with an empty configuration. The same empty configuration will still work in this guide, no changes are required there.
 
 ## Example
+
 Update the resources value in `simple-service/dev/main.k`:
+
 ```py
-import catalog.models.schema.v1 as ac
+import kam.v1.app_configuration as ac
 
 helloworld: ac.AppConfiguration {
     workload.containers.helloworld: {
@@ -45,7 +51,7 @@ Re-run steps in [Applying](deploy-application#applying), resource scaling is com
 
 ```
 $ kusion apply
- ✔︎  Generating Intent in the Stack dev...                                                                                                                                                                                                     
+ ✔︎  Generating Spec in the Stack dev...                                                                                                                                                                                                     
 Stack: dev  ID                                                               Action
 * ├─     v1:Namespace:simple-service                                      UnChanged
 * ├─     v1:Service:simple-service:simple-service-dev-helloworld-private  UnChanged
@@ -62,7 +68,9 @@ Apply complete! Resources: 0 created, 1 updated, 0 deleted.
 ```
 
 ## Validation
+
 We can verify the application container (in the deployment template) now has the updated resources attributes (cpu:250m, memory:256Mi) as defined in the container configuration:
+
 ```
 kubectl get deployment -n simple-service -o yaml
 ...
