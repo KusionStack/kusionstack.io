@@ -28,7 +28,7 @@ kusion mod
 
 ### SEE ALSO
 
-* [kusion](index.md)	 - Kusion is the Platform Orchestrator of Internal Developer Platform
+* [kusion](index.md)	 - Kusion is the Platform Orchestrator of KusionStack
 * [kusion mod init](kusion-mod-init.md)	 - Create a kusion module along with common files and directories in the current directory
 * [kusion mod push](kusion-mod-push.md)	 - Push a module to OCI registry
 

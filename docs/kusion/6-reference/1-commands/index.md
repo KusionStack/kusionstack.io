@@ -1,12 +1,10 @@
 # Kusion Commands
 
-Kusion is the Platform Orchestrator of Internal Developer Platform
+Kusion is the Platform Orchestrator of KusionStack
 
 ### Synopsis
 
-As a Platform Orchestrator, Kusion delivers user intentions to Kubernetes, Clouds and On-Premise resources. Also enables asynchronous cooperation between the development and the platform team and drives separation of concerns.
-
- Find more information at: https://www.kusionstack.io/docs/user_docs/reference/cli/kusion/
+As a Platform Orchestrator, Kusion delivers user intentions to Kubernetes, Clouds and On-Premise resources. Also enables asynchronous cooperation between the development and the platform team and drives the separation of concerns.
 
 ```
 kusion [flags]

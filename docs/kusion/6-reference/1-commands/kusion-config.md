@@ -25,7 +25,7 @@ kusion config [flags]
 
 ### SEE ALSO
 
-* [kusion](index.md)	 - Kusion is the Platform Orchestrator of Internal Developer Platform
+* [kusion](index.md)	 - Kusion is the Platform Orchestrator of KusionStack
 * [kusion config get](kusion-config-get.md)	 - Get a config item
 * [kusion config list](kusion-config-list.md)	 - List all config items
 * [kusion config set](kusion-config-set.md)	 - Set a config item

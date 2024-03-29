@@ -27,7 +27,7 @@ kusion workspace [flags]
 
 ### SEE ALSO
 
-* [kusion](index.md)	 - Kusion is the Platform Orchestrator of Internal Developer Platform
+* [kusion](index.md)	 - Kusion is the Platform Orchestrator of KusionStack
 * [kusion workspace create](kusion-workspace-create.md)	 - Create a new workspace
 * [kusion workspace delete](kusion-workspace-delete.md)	 - Delete a workspace
 * [kusion workspace list](kusion-workspace-list.md)	 - List all workspace names
