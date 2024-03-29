@@ -1,27 +1,26 @@
-## kusion version
+## kusion options
 
-Print the Kusion version information for the current context
+Print the list of flags inherited by all commands
 
 ### Synopsis
 
-Print the Kusion version information for the current context
+Print the list of flags inherited by all commands
 
 ```
-kusion version [flags]
+kusion options [flags]
 ```
 
 ### Examples
 
 ```
-  # Print the Kusion version
-  kusion version
+  # Print flags inherited by all commands
+  kubectl options
 ```
 
 ### Options
 
 ```
-  -h, --help            help for version
-  -o, --output string   Output format. Only json format is supported for now
+  -h, --help   help for options
 ```
 
 ### Options inherited from parent commands

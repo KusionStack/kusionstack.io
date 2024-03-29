@@ -1,33 +1,30 @@
-## kusion workspace show
+## kusion workspace switch
 
-Show a workspace configuration
+Switch the current workspace
 
 ### Synopsis
 
-This command gets the current or a specified workspace configuration.
+This command switches the workspace, where the workspace must be created.
 
 ```
-kusion workspace show
+kusion workspace switch
 ```
 
 ### Examples
 
 ```
-  # Show current workspace configuration
-  kusion workspace show
+  # Switch the current workspace
+  kusion workspace switch dev
   
-  # Show a specified workspace configuration
-  kusion workspace show dev
-  
-  # Show a specified workspace in a specified backend
-  kusion workspace show prod --backend oss-prod
+  # Switch the current workspace in a specified backend
+  kusion workspace switch prod --backend oss-prod
 ```
 
 ### Options
 
 ```
       --backend string   the backend name
-  -h, --help             help for show
+  -h, --help             help for switch
 ```
 
 ### Options inherited from parent commands

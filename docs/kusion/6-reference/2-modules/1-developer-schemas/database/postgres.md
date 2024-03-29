@@ -36,4 +36,4 @@ For sensitive information such as the **host**, **username** and **password** fo
 | KUSION_DB\_USERNAME\_`<DATABASE_NAME>` | Account username for accessing the database instance |
 | KUSION_DB\_PASSWORD\_`<DATABASE_NAME>` | Account password for accessing the database instance |
 
-The `<DATABASE_NAME>` is composed of two parts, one of which is the `key` of database declared in `AppConfiguration` and the other is the `suffix` declared in `workspace` configuration. Kusion will concatenate the database key and suffix, convert them to uppercase, and replace `-` with `_`. And the `<DATABASE_TYPE>` supported now includes `mysql` and `postgres`. 
+The `databaseName` can be declared in [workspace configs of postgres](../../2-workspace-configs/database/postgres.md), and Kusion will automatically concatenate the `<PROJECT_NAME>`, `<STACK_NAME>`, `<APP_NAME>` and `postgres` with `-` if not specified. When injecting the credentials into containers' environment variables, Kusion will convert the `databaseName` to uppercase, and replace `-` with `_`.
