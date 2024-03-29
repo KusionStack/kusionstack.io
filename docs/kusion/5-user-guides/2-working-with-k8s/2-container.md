@@ -1,6 +1,10 @@
+---
+id: container
+---
+
 # Configure Containers
 
-You can manage container-level configurations in the `AppConfiguration` model via the `containers` field (under the `workload` schemas). By default, everything defined in the `containers` field will be treated as application containers. Sidecar containers will be supported in a future version of kusion.
+You can manage container-level configurations in the `AppConfiguration` model via the `containers` field (under the `workload` schema). By default, everything defined in the `containers` field will be treated as application containers. Sidecar containers will be supported in a future version of kusion.
 
 For the full `Container` schema reference, please see [here](../../reference/modules/developer-schemas/workload/service#schema-container) for more details.
 
@@ -15,6 +19,7 @@ The example below also requires you to have [initialized the project](deploy-app
 In the last guide, we introduced a step to [initialize a workspace](deploy-application#initializing-workspace-configuration) with an empty configuration. The same empty configuration will still work in this guide, no changes are required there.
 
 However, if you (or the platform team) would like to set default values for the workloads to standardize the behavior of applications in the `dev` workspace, you can do so by updating the `~/dev.yaml`:
+
 ```yaml
 modules:
   service:
@@ -30,6 +35,7 @@ modules:
 Please note that the `replicas` in the workspace configuration only works as a default value and will be overridden by the value set in the application configuration.
 
 The workspace configuration need to be updated with the command:
+
 ```bash
 kusion workspace update dev -f ~/dev.yaml
 ```
@@ -37,26 +43,26 @@ kusion workspace update dev -f ~/dev.yaml
 For a full reference of what can be configured in the workspace level, please see the [workspace reference](../../reference/modules/workspace-configs/workload/service).
 
 ## Example
-`simple-service/dev/main.k`:
-```py
-import catalog.models.schema.v1 as ac
-import catalog.models.schema.v1.workload as wl
-import catalog.models.schema.v1.workload.container as c
-import catalog.models.schema.v1.workload.container.probe as p
-import catalog.models.schema.v1.workload.network as n
 
-helloworld: ac.AppConfiguration {
+`simple-service/dev/main.k`:
+```python
+import kam.v1.app_configuration as ac
+import kam.v1.workload as wl
+import kam.v1.workload.container as c
+import network as n
+
+"helloworld": ac.AppConfiguration {
     workload: wl.Service {
         containers: {
             "helloworld": c.Container {
-                image: "gcr.io/google-samples/gb-frontend:v4"
+                image = "gcr.io/google-samples/gb-frontend:v4"
                 env: {
                     "env1": "VALUE"
                     "env2": "VALUE2"
                 }
                 resources: {
                     "cpu": "500m"
-                    "memory": "512M"
+                    "memory": "512Mi"
                 }
                 # Configure an HTTP readiness probe
                 readinessProbe: p.Probe {
@@ -68,11 +74,15 @@ helloworld: ac.AppConfiguration {
             }
         }
         replicas: 2
-        ports: [
-            n.Port {
-                port: 80
-            }
-        ]
+    }
+    accessories: {
+        "network": n.Network {
+            ports: [
+              n.Port {
+                  port: 80
+              }
+            ]
+        }
     }
 }
 ```
@@ -83,7 +93,7 @@ Re-run steps in [Applying](deploy-application#applying), new container configura
 
 ```
 $ kusion apply
-  ✔︎  Generating Intent in the Stack dev...                                                                                                                                                                                                     
+  ✔︎  Generating Spec in the Stack dev...                                                                                                                                                                                                     
 Stack: dev  ID                                                               Action
 * ├─     v1:Namespace:simple-service                                      UnChanged
 * ├─     v1:Service:simple-service:simple-service-dev-helloworld-private  UnChanged

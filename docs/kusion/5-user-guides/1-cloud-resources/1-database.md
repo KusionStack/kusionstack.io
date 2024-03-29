@@ -1,17 +1,20 @@
+---
+id: database
+---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 # Deliver the WordPress Application with Cloud RDS
 
-This tutorial will demonstrate how to deploy a WordPress application with Kusion, which relies on both Kubernetes and IaaS resources provided by cloud vendors. We can learn how to declare the Relational Database Service (RDS) to provide a cloud-based database solution for our application from this article. 
+This tutorial will demonstrate how to deploy a WordPress application with Kusion, which relies on both Kubernetes and IaaS resources provided by cloud vendors. We can learn how to declare the Relational Database Service (RDS) to provide a cloud-based database solution with Kusion for our application from this article. 
 
 ## Prerequisites
 
 - Install [Kusion](../../2-getting-started/1-install-kusion.md)
-- Deploy [Kubernetes](https://kubernetes.io/) or [Kind](https://kind.sigs.k8s.io/) or [Minikube](https://minikube.sigs.k8s.io/docs/tutorials/multi_node/)
-- Install [Terraform](https://www.terraform.io/)
-- Prepare a cloud service account and create a user with `VPCFullAccess` and `RDSFullAccess` permissions to use the Relational Database Service (RDS). This kind of user can be created and managed in the Identity and Access Management (IAM) console
-- The environment that executes `kusion` need to have connectivity to terraform registry to download the terraform providers
+- Install [kubectl CLI](https://kubernetes.io/docs/tasks/tools/#kubectl) and run a [Kubernetes](https://kubernetes.io/) or [Kind](https://kind.sigs.k8s.io/) or [Minikube](https://minikube.sigs.k8s.io/docs/tutorials/multi_node/) cluster
+- Prepare a cloud service account and create a user with at least `VPCFullAccess` and `RDSFullAccess` related permissions to use the Relational Database Service (RDS). This kind of user can be created and managed in the Identity and Access Management (IAM) console of the cloud vendor
+- The environment that executes `kusion` needs to have connectivity to terraform registry to download the terraform providers
 
 Additionally, we also need to configure the obtained AccessKey and SecretKey as environment variables for specific cloud provider: 
 
@@ -51,27 +54,15 @@ To deploy the WordPress application with cloud rds, we first need to initiate a 
 
 `workspace.yaml`
 ```yaml
-runtimes: 
-  kubernetes:
-    kubeConfig: /etc/kubeconfig.yaml # Please replace with your own kubeconfig file path
-  terraform: 
-    random: 
-      version: 3.5.1
-      source: hashicorp/random
-    aws: 
-      version: 5.0.1
-      source: hashicorp/aws
-      region: us-east-1
-
 # MySQL configurations for AWS RDS
 modules: 
-  mysql: 
+  kusionstack/mysql@0.1.0: 
     default: 
       cloud: aws
       size: 20
       instanceType: db.t3.micro
       privateRouting: false
-      suffix: "-mysql"
+      databaseName: "wordpress-mysql"
 ```
 
 ```mdx-code-block
@@ -81,21 +72,9 @@ modules:
 
 `workspace.yaml`
 ```yaml
-runtimes: 
-  kubernetes:
-    kubeConfig: /etc/kubeconfig.yaml # Replace with your own kubeconfig file path
-  terraform: 
-    random: 
-      version: 3.5.1
-      source: hashicorp/random
-    alicloud: 
-      version: 1.209.1
-      source: aliyun/alicloud
-      region: cn-beijing
-
 # MySQL configurations for Alicloud RDS
 modules: 
-  mysql: 
+  kusionstack/mysql@0.1.0: 
     default: 
       cloud: alicloud
       size: 20
@@ -103,7 +82,7 @@ modules:
       category: serverless_basic
       privateRouting: false
       subnetID: [your-subnet-id]
-      suffix: "-mysql"
+      databaseName: "wordpress-mysql"
 ```
 
 ```mdx-code-block
@@ -111,92 +90,92 @@ modules:
 </Tabs>
 ```
 
-You can replace the `runtimes.kubernetes.kubeConfig` field with your own kubeconfig file path in `workspace.yaml`, and if you would like to try creating the `Alicloud` RDS instance, you should also replace the `[your-subnet-id]` of `modules.mysql.default.subnetID` field with the Alicloud `vSwitchID` to provision the database in. After that, you can execute the following command line to initiate the workspace configuration for `dev` stack. 
+If you would like to try creating the `Alicloud` RDS instance, you should replace the `[your-subnet-id]` of `modules.kusionstack/mysql@0.1.0.default.subnetID` field with the Alicloud `vSwitchID` to which the database will be provisioned in. After that, you can execute the following command line to initiate the workspace configuration for `dev` stack. 
 
 ```shell
 kusion workspace create dev -f workspace.yaml
 ```
 
-If you already create the workspace configuration for `dev` stack, you can append the Terraform runtime configs and MySQL module configs to your workspace YAML file and use the following command line to update the workspace configuration. 
+Since Kusion by default use the `default` workspace, we can switch to the `dev` workspace with the following cmd: 
+
+```shell
+kusion workspace switch dev
+```
+
+If you already create and use the configuration of `dev` workspace, you can append the MySQL module configs to your workspace YAML file and use the following command line to update the workspace configuration. 
 
 ```shell
 kusion workspace update dev -f workspace.yaml
 ```
 
-You can use the following command lines to list and show the workspace configurations for `dev` stack. 
+We can use the following command lines to show the current workspace configurations for `dev` workspace. 
 
 ```shell
-kusion workspace list
-
-kusion workspace show dev
+kusion workspace show
 ```
 
-The `workspace.yaml` is a sample configuration file for workspace management, including `Kubernetes` and `Terraform` runtime configs and `MySQL` module config. Workspace configurations are usually declared by **Platform Engineers** and will take effect through the corresponding stack. 
+The `workspace.yaml` is a sample configuration file for workspace management, including `MySQL` module configs. Workspace configurations are usually declared by **Platform Engineers** and will take effect through the corresponding stack. 
 
 :::info
-More details about the configuration of Workspace can be found in [Workspace Management](https://github.com/KusionStack/kusion/blob/main/docs/design/workspace_management/workspace_management.md). 
+More details about the configuration of Workspace can be found in [Concepts of Workspace](../../3-concepts/4-workspace.md). 
 :::
 
 ## Init Project
 
-We can start by initializing this tutorial project with online templates: 
+We can start by initializing this tutorial project with `kusion init` cmd: 
 
 ```shell
-kusion init --online
+# Create a new directory and nevigate into it. 
+mkdir wordpress-rds-cloud && cd wordpress-rds-cloud
+
+# Initialize the demo project with the name of the current directory. 
+kusion init
 ```
 
-All init templates are listed as follows:
+The created project structure looks like below: 
 
 ```shell
-➜  kusion_playground kusion init --online
-? Please choose a template: wordpress-cloud-rds        A sample wordpress project with cloud rds
-This command will walk you through creating a new kusion project.
-
-Enter a value or leave blank to accept the (default), and press <ENTER>.
-Press ^C at any time to quit.
-
-Project Config:
-? ProjectName: wordpress-cloud-rds
-? AppName: wordpress
-Stack Config: dev
-? Image: wordpress:6.3
-Created project 'wordpress-cloud-rds'
-```
-
-Select `wordpress-cloud-rds` and press `Enter`. After that, we will see hints below and use the default values to config this project and stack.
-
-![](/img/docs/user_docs/getting-started/init-wordpress-cloud-rds.gif)
-
-The directory structure looks like the following:
-
-```shell
-cd wordpress-cloud-rds/dev && tree
-```
-
-```shell
-➜  kusion_playground cd wordpress-cloud-rds/dev && tree
+tree
 .
-├── kcl.mod
-├── main.k
-└── stack.yaml
+├── dev
+│   ├── kcl.mod
+│   ├── main.k
+│   └── stack.yaml
+└── project.yaml
 
-1 directory, 3 files
+2 directories, 4 files
 ```
 
 :::info
 More details about the directory structure can be found in [Project](../../3-concepts/1-project/1-overview.md) and [Stack](../../3-concepts/2-stack/1-overview.md). 
 :::
 
-### Review Configuration Files
+### Update And Review Configuration Codes
 
-Now let's take a look at the configuration files located in `dev/main.k`.
+The initiated configuration codes are for the demo quickstart application, we should replace the `dev/kcl.mod` and `dev/main.k` with the below codes: 
 
+`dev/kcl.mod`
+```shell
+[package]
+name = "wordpress-cloud-rds"
+version = "0.1.0"
+
+[dependencies]
+kam = { git = "https://github.com/KusionStack/kam.git", tag = "0.1.0" }
+network = { oci = "oci://ghcr.io/kusionstack/network", tag = "0.1.0" }
+mysql = { oci = "oci://ghcr.io/kusionstack/mysql", tag = "0.1.0" }
+
+[profile]
+entries = ["main.k"]
+```
+
+`dev/main.k`
 ```python
-import catalog.models.schema.v1 as ac
-import catalog.models.schema.v1.workload as wl
-import catalog.models.schema.v1.workload.container as c
-import catalog.models.schema.v1.workload.network as n
-import catalog.models.schema.v1.accessories.mysql
+import kam.v1.app_configuration as ac
+import kam.v1.workload as wl
+import kam.v1.workload.container as c
+import network as n
+import mysql
 
 # main.k declares customized configurations for dev stacks.
 wordpress: ac.AppConfiguration {
@@ -217,14 +196,16 @@ wordpress: ac.AppConfiguration {
             }
         }
         replicas: 1
-        ports: [
-            n.Port {
-                port: 80
-            }
-        ]
     }
-    database: {
-        wordpress: mysql.MySQL {
+    accessories: {
+        "network": n.Network {
+            ports: [
+              n.Port {
+                  port: 80
+              }
+            ]
+        }
+        "mysql": mysql.MySQL {
             type: "cloud"
             version: "8.0"
         }
@@ -232,11 +213,12 @@ wordpress: ac.AppConfiguration {
 }
 ```
 
-The configuration file `main.k`, usually written by the **App Developers**, declares customized configurations for `dev` stack, which includes an `AppConfiguration` with the name of `wordpress`. And the `wordpress` application includes a workload of type `workload.Service`, which runs on 1 replica and exposes `80` port to be accessed. Besides, it declares a cloud `mysql.MySQL` as the database accessory with the engine version of `8.0` for the application. 
+`dev/kcl.mod` declares the dependency packages of the application, including Kusion application model (`kam`) as well as the `network` and `mysql` module. The configuration file `main.k`, usually written by the **App Developers**, declares customized configurations for `dev` stack, which includes an `AppConfiguration` with the name of `wordpress`. And the `wordpress` application includes a workload of type `workload.Service`, which runs on 1 replica. Besides, it declares a **Kusion Module** with the type of `network.Network` exposing `80` port to be accessed, and a cloud `mysql.MySQL` as the database accessory with the engine version of `8.0` for the application. 
+
 The necessary Terraform resources for deploying and using the cloud rds (relational database service) will be generated, and users can get the `host`, `username` and `password` of the database through the [mysql credentials and connectivity](../../6-reference/2-modules/1-developer-schemas/database/mysql.md#credentials-and-connectivity) of Kusion in application containers. 
 
 :::info
-More details about Catalog models can be found in [Catalog](https://github.com/KusionStack/catalog)
+More details about the `AppConfiguration` model and internal Kusion Module can be found in [kam](https://github.com/KusionStack/kam) and [catalog](https://github.com/KusionStack/catalog). 
 :::
 
 :::info
@@ -248,8 +230,12 @@ The collaboration paradigm between App Developers and Platform Engineers with Ku
 You can complete the delivery of the WordPress application in the folder of `wordpress-cloud-rds/dev` using the following command line: 
 
 ```shell
-kusion apply --watch
+cd wordpress-cloud-rds && kusion apply --watch
 ```
+
+:::info
+During the first apply, the models and modules as well as the Terraform CLI (if not exists) that the application depends on will be downloaded, so it may take some time (usually within two minutes). You can take a break and have a cup of coffee. 
+:::
 
 <Tabs>
 <TabItem value="AWS" >

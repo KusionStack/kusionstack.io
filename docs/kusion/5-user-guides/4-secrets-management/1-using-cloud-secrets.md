@@ -1,3 +1,7 @@
+---
+id: using-cloud-secrets
+---
+
 # Using Cloud Secrets Manager
 
 Applications usually store sensitive data in secrets by using centralized secrets management solutions. For example, you authenticate databases, services, and external systems with passwords, API keys, tokens, and other credentials stored in a secret store, e.g. Hashicorp Vault, AWS Secrets Manager, Azure Key Vault, etc
@@ -45,10 +49,10 @@ At this point we are set up for good! Now you can declare external type of secre
 See the example below for a full, deployable AppConfiguration.
 
 ```
-import models.schema.v1 as ac
-import models.schema.v1.workload as wl
-import models.schema.v1.workload.container as c
-import models.schema.v1.workload.secret as sec
+import kam.v1.app_configuration as ac
+import kam.v1.workload as wl
+import kam.v1.workload.container as c
+import kam.v1.workload.secret as sec
 
 gitsync: ac.AppConfiguration {
     workload: wl.Service {
