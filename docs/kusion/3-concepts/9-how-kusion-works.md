@@ -13,7 +13,7 @@ Kusion is the platform engineering engine of [KusionStack](https://github.com/Ku
 
 The workflow of KusionStack is illustrated in the diagram above, and it consists of three steps. The first step is `Write`, where platform engineers provide Kusion Modules and application developers write AppConfigurations based on the Kusion Modules to describe their operational intent.
 
-The second step is the `Build` process, which results in the creation of the SSoT (Single Source of Truth), also known as the [Intent](intent) of the current operational task. If you need version management of the SSoT, we recommend you manage the Intent with a VCS (Version Control System) tool like git.
+The second step is the `Build` process, which results in the creation of the SSoT (Single Source of Truth), also known as the [Intent](spec) of the current operational task. If you need version management of the SSoT, we recommend you manage the Intent with a VCS (Version Control System) tool like git.
 
 The third step is `Apply` which makes the Intent effective. Kusion parses the operational intent based on the Intent produced in the previous step. Before applying the intent, Kusion will execute the Preview command (you can also execute this command manually) which will use a three-way diff algorithm to preview changes and prompt users to make sure all changes meet expectations; the Apply command will then actualize the operational intent onto various infrastructure platforms. Currently, it supports three runtimes: Terraform, Kubernetes, and on-prem infrastructures.
 
@@ -23,7 +23,7 @@ As a user of Kusion, if you prefer not to be conscious of so many steps, you can
 
 ### Design Kusion Modules
 
-[Kusion Module](kusion-module) is a reusable building block designed by platform engineers and contains two components: an application developer-oriented schema and a Kusion module generator. When platform engineers have developed a Kusion module, they can push it to a [catalog](https://github.com/KusionStack/catalog) repository to make it into a KCL package.
+[Kusion Module](kusion-module/overview) is a reusable building block designed by platform engineers and contains two components: an application developer-oriented schema and a Kusion module generator. When platform engineers have developed a Kusion module, they can push it to a [catalog](https://github.com/KusionStack/catalog) repository to make it into a KCL package.
 
 Given a database Kusion module as an example, the schema definition is shown below and the generator logic can be found [here](https://github.com/KusionStack/kusion/blob/main/pkg/modules/generators/accessories/database_generator.go).
 
