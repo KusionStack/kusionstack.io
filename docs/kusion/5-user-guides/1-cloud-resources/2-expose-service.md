@@ -95,7 +95,7 @@ After creating workspace, you should write application configuration code, which
 We can start by initializing this tutorial project with `kusion init` cmd: 
 
 ```shell
-# Create a new directory and nevigate into it. 
+# Create a new directory and navigate into it. 
 mkdir nginx && cd nginx
 
 # Initialize the demo project with the name of the current directory. 

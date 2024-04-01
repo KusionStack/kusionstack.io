@@ -89,7 +89,7 @@ We will progressively add more workspace configurations throughout this user gui
 Now that workspaces are properly initialized, we can begin by initializing the application configuration:
 
 ```bash
-# Create a new directory and nevigate into it. 
+# Create a new directory and navigate into it. 
 mkdir simple-service && cd simple-service
 
 # Initialize the demo project with the name of the current directory. 

@@ -125,7 +125,7 @@ More details about the configuration of Workspace can be found in [Concepts of W
 We can start by initializing this tutorial project with `kusion init` cmd: 
 
 ```shell
-# Create a new directory and nevigate into it. 
+# Create a new directory and navigate into it. 
 mkdir wordpress-rds-cloud && cd wordpress-rds-cloud
 
 # Initialize the demo project with the name of the current directory. 
