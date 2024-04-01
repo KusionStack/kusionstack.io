@@ -4,11 +4,11 @@ id: deliver-quickstart
 
 # Run Your First App on Kubernetes with Kusion
 
-In this tutorial we will walk through how to deploy a quickstart application on Kubernetes with Kusion. The demo application can interact with a locally deployed MySQL database, which is declared as an accessory in the config codes and will be automatically created and managed by Kusion. 
+In this tutorial, we will walk through how to deploy a quickstart application on Kubernetes with Kusion. The demo application can interact with a locally deployed MySQL database, which is declared as an accessory in the config codes and will be automatically created and managed by Kusion. 
 
 ## Prerequisites
 
-Before we start to play with this example, we need to have the Kusion CLI installed and run an accessible Kubernetes cluster. Here are some helpful documentations: 
+Before we start to play with this example, we need to have the Kusion CLI installed and run an accessible Kubernetes cluster. Here are some helpful documents: 
 
 - Install [Kusion CLI](./1-install-kusion.md)
 - Install [kubectl CLI](https://kubernetes.io/docs/tasks/tools/#kubectl) and run a [Kubernetes](https://kubernetes.io) cluster. Some light and convenient options for Kubernetes local deployment include [k3s](https://docs.k3s.io/quick-start), [k3d](https://k3d.io/v5.4.4/#installation), and [MiniKube](https://minikube.sigs.k8s.io/docs/tutorials/multi_node)
@@ -18,7 +18,7 @@ Before we start to play with this example, we need to have the Kusion CLI instal
 We can start by initializing this tutorial project with `kusion init` cmd. 
 
 ```shell
-# Create a new directory and nevigate into it. 
+# Create a new directory and navigate into it. 
 mkdir quickstart && cd quickstart
 
 # Initialize the demo project with the name of the current directory. 
@@ -82,7 +82,7 @@ The configuration file `main.k`, usually written by the **App Developers**, decl
 
 Besides, it declares a **Kusion Module** with the type of `network.Network`, exposing `8080` port to be accessed for the long-running service. 
 
-The `AppConfiguration` model can hide the major complexity of Kubernetes resources such as `Namespace`, `Deployment` and `Service` which will be created and managed by Kusion, providing the concepts that are **application-centric** and **infrastructure-agnostic** for a more developer-friendly experience. 
+The `AppConfiguration` model can hide the major complexity of Kubernetes resources such as `Namespace`, `Deployment`, and `Service` which will be created and managed by Kusion, providing the concepts that are **application-centric** and **infrastructure-agnostic** for a more developer-friendly experience. 
 
 :::info
 More details about the `AppConfiguration` model and internal Kusion Module can be found in [kam](https://github.com/KusionStack/kam) and [catalog](https://github.com/KusionStack/catalog). 
@@ -113,7 +113,7 @@ More details about the application model and module dependency declaration can b
 
 ## Application Delivery
 
-Use the following command to delivery the quickstart application in `dev` stack on your accessible Kubernetes cluster while watching the resource creation. 
+Use the following command to deliver the quickstart application in `dev` stack on your accessible Kubernetes cluster while watching the resource creation. 
 
 ```shell
 cd dev && kusion apply --watch
@@ -131,7 +131,7 @@ Check the created `Deployment` status:
 kubectl -n quickstart get deployment
 ```
 
-The expected output is shown as following: 
+The expected output is shown as follows: 
 
 ```shell
 ➜  dev kubectl -n quickstart get deployment
@@ -149,7 +149,7 @@ Check the created `Service` status:
 kubectl -n quickstart get service
 ```
 
-The expected output is shown as following: 
+The expected output is shown as follows: 
 
 ```shell
 ➜  dev kubectl -n quickstart get service
@@ -173,9 +173,9 @@ As you can see, the demo application page indicates that the MySQL database is n
 
 ### Update Default Workspace
 
-Besides the configuration codes we have seen above, **Workspace** configurations, usually written by **Platform Engineers** are also part of the complete application configuration. Kusion provides cmd for workspace create, update, delete and switch, and it defaults to using the auto-generated `default` workspace for the targeted stack. 
+Besides the configuration codes we have seen above, **Workspace** configurations, usually written by **Platform Engineers** are also part of the complete application configuration. Kusion provides cmd for workspace create, update, delete, and switch, and it defaults to using the auto-generated `default` workspace for the targeted stack. 
 
-For now we can only see an empty `default` workspace: 
+For now, we can only see an empty `default` workspace: 
 
 ```shell
 ➜  dev kusion workspace list
@@ -210,7 +210,7 @@ More details about the configuration of Workspace can be found in [Concepts of W
 
 ### Update Configuration Codes And Re-Apply
 
-We can add the Kusion provided built-in dependency in the `dev/kcl.mod`, so that we can use the `MySQL` module in the configuration codes. 
+We can add the Kusion-provided built-in dependency in the `dev/kcl.mod`, so that we can use the `MySQL` module in the configuration codes. 
 
 ```shell
 [package]
@@ -229,7 +229,7 @@ entries = ["main.k"]
 We can update the `dev/main.k` with the following configuration codes: 
 
 ```python
-# The configuration codes in perspective of developers. 
+# The configuration codes in the perspective of developers. 
 import kam.v1.app_configuration as ac
 import kam.v1.workload as wl
 import kam.v1.workload.container as c
@@ -280,7 +280,7 @@ kusion apply --watch
 ![](/img/docs/user_docs/getting-started/kusion_re_apply_quickstart.gif)
 
 :::info
-You may wait another minute for downloading the MySQL Module. 
+You may wait another minute to download the MySQL Module. 
 :::
 
 Re-check the `Deployment` and `Service` status: 
@@ -310,7 +310,7 @@ We can port-forward the quickstart demo application again:
 kubectl port-forward -n quickstart service/quickstart-dev-quickstart-private 12345:8080
 ```
 
-And let's visit [http://localhost:12345](http://localhost:12345) in our browser, and we can find that the application has successfully connected to the MySQL database. The connection information is also printed on the page. 
+Let's visit [http://localhost:12345](http://localhost:12345) in our browser, and we can find that the application has successfully connected to the MySQL database. The connection information is also printed on the page. 
 
 ![](/img/docs/user_docs/getting-started/quickstart_page_with_mysql.png)
 
