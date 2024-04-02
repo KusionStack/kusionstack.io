@@ -24,6 +24,7 @@ Additionally, we also need to configure the obtained AccessKey and SecretKey as 
 ```bash
 export AWS_ACCESS_KEY_ID="AKIAQZDxxxx" # replace it with your AccessKey
 export AWS_SECRET_ACCESS_KEY="oE/xxxx" # replace it with your SecretKey
+export AWS_REGION=us-east-1            # replace it with your region
 ```
 
 ![aws iam account](/img/docs/user_docs/getting-started/aws-iam-account.png)
@@ -36,6 +37,7 @@ export AWS_SECRET_ACCESS_KEY="oE/xxxx" # replace it with your SecretKey
 ```bash
 export ALICLOUD_ACCESS_KEY="LTAI5txxx" # replace it with your AccessKey
 export ALICLOUD_SECRET_KEY="nxuowIxxx" # replace it with your SecretKey
+export ALICLOUD_REGION=cn-hangzhou     # replace it with your region
 ```
 
 ![alicloud iam account](/img/docs/user_docs/getting-started/set-rds-access.png)
