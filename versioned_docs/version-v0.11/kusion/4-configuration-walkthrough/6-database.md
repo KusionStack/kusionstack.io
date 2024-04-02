@@ -56,12 +56,14 @@ For AWS, the environment variables needed:
 ```
 export AWS_ACCESS_KEY_ID="xxxxxxxxxxx" # replace it with your AccessKey
 export AWS_SECRET_ACCESS_KEY="xxxxxxx" # replace it with your SecretKey
+export AWS_REGION=us-east-1            # replace it with your region
 ```
 
 For AliCloud, the environment variables needed:
 ```
 export ALICLOUD_ACCESS_KEY="xxxxxxxxx" # replace it with your AccessKey
 export ALICLOUD_SECRET_KEY="xxxxxxxxx" # replace it with your SecretKey
+export ALICLOUD_REGION=cn-hangzhou     # replace it with your region
 ```
 
 The user account that owns these credentials would need to have the proper permission policies attached to create databases and security groups. If you are using the cloud-managed policies, the policies needed to provision a database and configure firewall rules are listed below.
@@ -89,16 +91,6 @@ To provision an AWS RDS instance with MySQL v8.0 or PostgreSQL v14.0, you can ap
 <TabItem value="MySQL" >
 
 ```yaml
-runtimes: 
-  terraform: 
-    random: 
-      version: 3.5.1
-      source: hashicorp/random
-    aws: 
-      version: 5.0.1
-      source: hashicorp/aws
-      region: us-east-1 # Please replace with your own aws provider region
-
 # MySQL configurations for AWS RDS
 modules: 
   kusionstack/mysql@0.1.0:
@@ -116,16 +108,6 @@ modules:
 <TabItem value="PostgreSQL">
 ```
 ```yaml
-runtimes: 
-  terraform: 
-    random: 
-      version: 3.5.1
-      source: hashicorp/random
-    aws: 
-      version: 5.0.1
-      source: hashicorp/aws
-      region: us-east-1 # Please replace with your own aws provider region
-
 # PostgreSQL configurations for AWS RDS
 modules: 
   kusionstack/postgres@0.1.0:
@@ -198,16 +180,6 @@ To provision an Alicloud RDS instance with MySQL or PostgreSQL, you can append t
 <TabItem value="MySQL" >
 
 ```yaml
-runtimes: 
-  terraform: 
-    random: 
-      version: 3.5.1
-      source: hashicorp/random
-    alicloud:
-      version: 1.209.1
-      source: aliyun/alicloud
-      region: cn-beijing # Please replace with your own alicloud provider region
-
 # MySQL configurations for Alicloud RDS
 modules: 
   kusionstack/mysql@0.1.0: 
@@ -228,16 +200,6 @@ modules:
 <TabItem value="PostgreSQL">
 ```
 ```yaml
-runtimes: 
-  terraform: 
-    random: 
-      version: 3.5.1
-      source: hashicorp/random
-    alicloud:
-      version: 1.209.1
-      source: aliyun/alicloud
-      region: cn-beijing # Please replace with your own alicloud provider region
-
 # PostgreSQL configurations for Alicloud RDS
 modules: 
   kusionstack/postgres@0.1.0:
