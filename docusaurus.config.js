@@ -3,21 +3,31 @@
 
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
-const versions = require('./versions.json');
+const fs = require('fs');
 
-function getLastReleasedVersion() {
-  return versions[0];
+function getLastReleasedVersion(current) {
+    if (fs.existsSync(`./${current}_versions.json`)) {
+        const versions = require(`./${current}_versions.json`);
+        return versions[0];
+    } else {
+        return null
+    }
+
 }
 
-function getNextVersionName() {
+function getNextVersionName(current) {
     const expectedPrefix = 'v0.';
-    const lastReleasedVersion = getLastReleasedVersion();
-    if (!lastReleasedVersion.includes(expectedPrefix)) {
+    const lastReleasedVersion = getLastReleasedVersion(current);
+    if (!lastReleasedVersion) {
+        return 'v0.1'
+    }
+    if (!lastReleasedVersion?.includes(expectedPrefix)) {
         throw new Error(
             'this code is only meant to be used during the 1.0 phase.',
         );
     }
-    const version = parseInt(lastReleasedVersion.replace(expectedPrefix, ''), 10);
+
+    const version = parseInt(lastReleasedVersion?.replace(expectedPrefix, ''), 10);
     return `${expectedPrefix}${version + 1}`;
 }
 
@@ -47,13 +57,16 @@ const config = {
             /** @type {import('@docusaurus/preset-classic').Options} */
             ({
                 docs: {
-                    sidebarPath: require.resolve('./sidebars.js'),
+                    id: 'docs',
+                    path: 'docs/kusion',
+                    routeBasePath: 'docs',
+                    sidebarPath: require.resolve('./sidebars/kusion.js'),
 
                     // Versionning related configs
-                    lastVersion: getLastReleasedVersion(),
+                    lastVersion: getLastReleasedVersion('docs'),
                     versions: {
                         current: {
-                            label: `${getNextVersionName()} 🚧`,
+                            label: `${getNextVersionName('docs')} 🚧`,
                         },
                     },
                     // includeCurrentVersion: true,
@@ -85,6 +98,46 @@ const config = {
                     anonymizeIP: false,
                 },
             }),
+        ],
+    ],
+    plugins: [
+        [
+            '@docusaurus/plugin-content-docs',
+            {
+                id: 'operating',
+                path: 'docs/operating',
+                routeBasePath: 'operating',
+                sidebarPath: './sidebars/operating.js',
+                versions: {
+                    current: {
+                        label: `${getNextVersionName('operating')} 🚧`,
+                    },
+                },
+            },
+        ],
+        [
+            '@docusaurus/plugin-content-docs',
+            {
+                id: 'ctrlmesh',
+                path: 'docs/ctrlmesh',
+                routeBasePath: 'ctrlmesh',
+                sidebarPath: './sidebars/ctrlmesh.js',
+                versions: {
+                    current: {
+                        label: `${getNextVersionName('ctrlmesh')} 🚧`,
+                    },
+                },
+            },
+        ],
+        [
+            '@docusaurus/plugin-content-docs',
+            {
+                id: 'community',
+                path: 'docs/community',
+                routeBasePath: 'community',
+                sidebarPath: './sidebars/community.js',
+                // ... other options
+            },
         ],
     ],
     themeConfig:
@@ -120,24 +173,28 @@ const config = {
                         position: 'left',
                         sidebarId: 'kusion',
                         label: 'Kusion',
+                        docsPluginId: 'docs'
                     },
                     {
                         type: 'docSidebar',
                         position: 'left',
                         sidebarId: 'operating',
                         label: 'Operating',
+                        docsPluginId: 'operating'
                     },
                     {
                         type: 'docSidebar',
                         position: 'left',
                         sidebarId: 'ctrlmesh',
                         label: 'Ctrlmesh',
+                        docsPluginId: 'ctrlmesh'
                     },
                     {
                         type: 'docSidebar',
                         position: 'left',
                         sidebarId: 'community',
                         label: 'Community',
+                        docsPluginId: 'community'
                     },
                     {
                         to: 'https://blog.kusionstack.io',
@@ -147,7 +204,18 @@ const config = {
                     },
                     {
                         type: 'docsVersionDropdown',
-                        position: 'right'
+                        position: 'right',
+                        docsPluginId: 'docs',
+                    },
+                    {
+                        type: 'docsVersionDropdown',
+                        position: 'right',
+                        docsPluginId: 'operating',
+                    },
+                    {
+                        type: 'docsVersionDropdown',
+                        position: 'right',
+                        docsPluginId: 'ctrlmesh',
                     },
                     // {
                     //     type: 'localeDropdown',
