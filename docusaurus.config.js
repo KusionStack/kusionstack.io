@@ -1,72 +1,75 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
-const fs = require('fs');
+const lightCodeTheme = require("prism-react-renderer/themes/github");
+const darkCodeTheme = require("prism-react-renderer/themes/dracula");
+const fs = require("fs");
 
 function getLastReleasedVersion(current) {
     if (fs.existsSync(`./${current}_versions.json`)) {
         const versions = require(`./${current}_versions.json`);
         return versions[0];
     } else {
-        return null
+        return null;
     }
-
 }
 
 function getNextVersionName(current) {
-    const expectedPrefix = 'v0.';
+    const expectedPrefix = "v0.";
     const lastReleasedVersion = getLastReleasedVersion(current);
     if (!lastReleasedVersion) {
-        return 'v0.1'
+        return "v0.1";
     }
     if (!lastReleasedVersion?.includes(expectedPrefix)) {
         throw new Error(
-            'this code is only meant to be used during the 1.0 phase.',
+            "this code is only meant to be used during the 1.0 phase.",
         );
     }
 
-    const version = parseInt(lastReleasedVersion?.replace(expectedPrefix, ''), 10);
+    const version = parseInt(
+        lastReleasedVersion?.replace(expectedPrefix, ""),
+        10,
+    );
     return `${expectedPrefix}${version + 1}`;
 }
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-    title: 'Evolve Your Internal Developer Platform with KusionStack',
-    tagline: 'Build a more efficient and secure enterprise-grade Internal Developer Platform in Kubernetes and Clouds',
+    title: "Evolve Your Internal Developer Platform with KusionStack",
+    tagline:
+        "Build a more efficient and secure enterprise-grade Internal Developer Platform in Kubernetes and Clouds",
 
-    url: 'https://kusionstack.io',
-    organizationName: 'KusionStack', // Usually your GitHub org/user name.
-    projectName: 'kusionstack.io', // Usually your repo name.
+    url: "https://kusionstack.io",
+    organizationName: "KusionStack", // Usually your GitHub org/user name.
+    projectName: "kusionstack.io", // Usually your repo name.
 
-    baseUrl: '/',
-    onBrokenLinks: 'throw',
-    onBrokenMarkdownLinks: 'warn',
-    favicon: 'img/kusionstack-icon-square.png',
+    baseUrl: "/",
+    onBrokenLinks: "throw",
+    onBrokenMarkdownLinks: "warn",
+    favicon: "img/kusionstack-icon-square.png",
 
     i18n: {
-        defaultLocale: 'en',
-        locales: ['en'],
+        defaultLocale: "en",
+        locales: ["en"],
     },
     scripts: [],
 
     presets: [
         [
-            '@docusaurus/preset-classic',
+            "@docusaurus/preset-classic",
             /** @type {import('@docusaurus/preset-classic').Options} */
             ({
                 docs: {
-                    id: 'docs',
-                    path: 'docs/kusion',
-                    routeBasePath: 'docs',
-                    sidebarPath: require.resolve('./sidebars/kusion.js'),
+                    id: "docs",
+                    path: "docs/kusion",
+                    routeBasePath: "docs",
+                    sidebarPath: require.resolve("./sidebars/kusion.js"),
 
                     // Versionning related configs
-                    lastVersion: getLastReleasedVersion('docs'),
+                    lastVersion: getLastReleasedVersion("docs"),
                     versions: {
                         current: {
-                            label: `${getNextVersionName('docs')} 🚧`,
+                            label: `${getNextVersionName("docs")} 🚧`,
                         },
                     },
                     // includeCurrentVersion: true,
@@ -75,7 +78,8 @@ const config = {
                     // })(),
 
                     // Please change this to your repo.
-                    editUrl: 'https://github.com/KusionStack/kusionstack.io/blob/main',
+                    editUrl:
+                        "https://github.com/KusionStack/kusionstack.io/blob/main",
                     showLastUpdateAuthor: true,
                     showLastUpdateTime: true,
                 },
@@ -83,18 +87,19 @@ const config = {
                     postsPerPage: 2,
                     showReadingTime: true,
                     // Please change this to your repo.
-                    editUrl: 'https://github.com/KusionStack/kusionstack.io/blob/main',
+                    editUrl:
+                        "https://github.com/KusionStack/kusionstack.io/blob/main",
                 },
                 theme: {
-                    customCss: require.resolve('./src/css/custom.css'),
+                    customCss: require.resolve("./src/css/custom.css"),
                 },
                 // The default Global Site Tag (gtag.js) plugin.
-                // It is a JavaScript tagging framework and API that allows you to send event data to 
+                // It is a JavaScript tagging framework and API that allows you to send event data to
                 // Google Analytics, Google Ads, and Google Marketing Platform.
                 //
                 // More see: https://docusaurus.io/docs/3.0.1/api/plugins/@docusaurus/plugin-google-gtag
                 gtag: {
-                    trackingID: 'G-XC4Z27TLBR',
+                    trackingID: "G-XC4Z27TLBR",
                     anonymizeIP: false,
                 },
             }),
@@ -102,40 +107,40 @@ const config = {
     ],
     plugins: [
         [
-            '@docusaurus/plugin-content-docs',
+            "@docusaurus/plugin-content-docs",
             {
-                id: 'operating',
-                path: 'docs/operating',
-                routeBasePath: 'operating',
-                sidebarPath: './sidebars/operating.js',
+                id: "operating",
+                path: "docs/operating",
+                routeBasePath: "operating",
+                sidebarPath: "./sidebars/operating.js",
                 versions: {
                     current: {
-                        label: `${getNextVersionName('operating')} 🚧`,
+                        label: `${getNextVersionName("operating")} 🚧`,
                     },
                 },
             },
         ],
         [
-            '@docusaurus/plugin-content-docs',
+            "@docusaurus/plugin-content-docs",
             {
-                id: 'ctrlmesh',
-                path: 'docs/ctrlmesh',
-                routeBasePath: 'ctrlmesh',
-                sidebarPath: './sidebars/ctrlmesh.js',
+                id: "ctrlmesh",
+                path: "docs/ctrlmesh",
+                routeBasePath: "ctrlmesh",
+                sidebarPath: "./sidebars/ctrlmesh.js",
                 versions: {
                     current: {
-                        label: `${getNextVersionName('ctrlmesh')} 🚧`,
+                        label: `${getNextVersionName("ctrlmesh")} 🚧`,
                     },
                 },
             },
         ],
         [
-            '@docusaurus/plugin-content-docs',
+            "@docusaurus/plugin-content-docs",
             {
-                id: 'community',
-                path: 'docs/community',
-                routeBasePath: 'community',
-                sidebarPath: './sidebars/community.js',
+                id: "community",
+                path: "docs/community",
+                routeBasePath: "community",
+                sidebarPath: "./sidebars/community.js",
                 // ... other options
             },
         ],
@@ -146,76 +151,76 @@ const config = {
             // hideableSidebar: true,
             docs: {
                 sidebar: {
-                    autoCollapseCategories: true
-                }
+                    autoCollapseCategories: true,
+                },
             },
             announcementBar: {
-                id: 'announcementBar-1', // Increment on change
+                id: "announcementBar-1", // Increment on change
                 content: `⭐️ If you like KusionStack, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/KusionStack/kusion">Github</a>`,
             },
 
             algolia: {
-                appId: 'RE5E6BQUZV',
-                apiKey: 'e9703ec3fe7856ddb5a1321fd17a5425',
-                indexName: 'kusionstack',
+                appId: "RE5E6BQUZV",
+                apiKey: "e9703ec3fe7856ddb5a1321fd17a5425",
+                indexName: "kusionstack",
                 contextualSearch: true,
             },
             navbar: {
-                title: 'KusionStack',
+                title: "KusionStack",
                 logo: {
-                    alt: 'KusionStack Icon',
-                    src: 'img/kusionstack-icon.png',
-                    srcDark: 'img/kusionstack-icon-white.png',
+                    alt: "KusionStack Icon",
+                    src: "img/kusionstack-icon.png",
+                    srcDark: "img/kusionstack-icon-white.png",
                 },
                 items: [
                     {
-                        type: 'docSidebar',
-                        position: 'left',
-                        sidebarId: 'kusion',
-                        label: 'Kusion',
-                        docsPluginId: 'docs'
+                        type: "docSidebar",
+                        position: "left",
+                        sidebarId: "kusion",
+                        label: "Kusion",
+                        docsPluginId: "docs",
                     },
                     {
-                        type: 'docSidebar',
-                        position: 'left',
-                        sidebarId: 'operating',
-                        label: 'Operating',
-                        docsPluginId: 'operating'
+                        type: "docSidebar",
+                        position: "left",
+                        sidebarId: "operating",
+                        label: "Operating",
+                        docsPluginId: "operating",
                     },
                     {
-                        type: 'docSidebar',
-                        position: 'left',
-                        sidebarId: 'ctrlmesh',
-                        label: 'Ctrlmesh',
-                        docsPluginId: 'ctrlmesh'
+                        type: "docSidebar",
+                        position: "left",
+                        sidebarId: "ctrlmesh",
+                        label: "Ctrlmesh",
+                        docsPluginId: "ctrlmesh",
                     },
                     {
-                        type: 'docSidebar',
-                        position: 'left',
-                        sidebarId: 'community',
-                        label: 'Community',
-                        docsPluginId: 'community'
+                        type: "docSidebar",
+                        position: "left",
+                        sidebarId: "community",
+                        label: "Community",
+                        docsPluginId: "community",
                     },
                     {
-                        to: 'https://blog.kusionstack.io',
-                        label: 'Blog',
-                        position: 'left',
-                        target: '_self'
+                        to: "https://blog.kusionstack.io",
+                        label: "Blog",
+                        position: "left",
+                        target: "_self",
                     },
                     {
-                        type: 'docsVersionDropdown',
-                        position: 'right',
-                        docsPluginId: 'docs',
+                        type: "docsVersionDropdown",
+                        position: "right",
+                        docsPluginId: "docs",
                     },
                     {
-                        type: 'docsVersionDropdown',
-                        position: 'right',
-                        docsPluginId: 'operating',
+                        type: "docsVersionDropdown",
+                        position: "right",
+                        docsPluginId: "operating",
                     },
                     {
-                        type: 'docsVersionDropdown',
-                        position: 'right',
-                        docsPluginId: 'ctrlmesh',
+                        type: "docsVersionDropdown",
+                        position: "right",
+                        docsPluginId: "ctrlmesh",
                     },
                     // {
                     //     type: 'localeDropdown',
@@ -228,62 +233,62 @@ const config = {
                     //     ],
                     // },
                     {
-                        href: 'https://github.com/KusionStack',
-                        className: 'header-github-link',
-                        'aria-label': 'GitHub repository',
-                        position: 'right',
+                        href: "https://github.com/KusionStack",
+                        className: "header-github-link",
+                        "aria-label": "GitHub repository",
+                        position: "right",
                     },
-                ].filter(item => true),
+                ].filter((item) => true),
             },
             footer: {
-                style: 'dark',
+                style: "dark",
                 links: [
                     {
-                        title: 'Document',
+                        title: "Document",
                         items: [
                             {
-                                label: 'Kusion',
-                                to: '/docs',
+                                label: "Kusion",
+                                to: "/docs",
                             },
                             {
-                                label: 'ControllerMesh',
-                                to: '/docs/ctrlmesh/intro/',
+                                label: "ControllerMesh",
+                                to: "/ctrlmesh/intro/",
                             },
                         ],
                     },
                     {
-                        title: 'Resource',
+                        title: "Resource",
                         items: [
                             {
-                                label: 'Blog',
+                                label: "Blog",
                                 to: "https://blog.kusionstack.io/",
                             },
                             {
-                                label: 'Github',
-                                href: 'https://github.com/KusionStack',
+                                label: "Github",
+                                href: "https://github.com/KusionStack",
                             },
                             {
-                                label: 'Slack',
-                                href: 'https://join.slack.com/t/kusionstack/shared_invite/zt-19lqcc3a9-_kTNwagaT5qwBE~my5Lnxg',
+                                label: "Slack",
+                                href: "https://join.slack.com/t/kusionstack/shared_invite/zt-19lqcc3a9-_kTNwagaT5qwBE~my5Lnxg",
                             },
                         ],
                     },
                     {
-                        title: 'More',
+                        title: "More",
                         items: [
                             {
-                                label: 'KCL',
-                                to: 'https://kcl-lang.io',
+                                label: "KCL",
+                                to: "https://kcl-lang.io",
                             },
                         ],
                     },
                 ],
                 logo: {
-                    alt: 'AntGroup Open Source Logo',
-                    src: 'img/oss_logo.svg',
+                    alt: "AntGroup Open Source Logo",
+                    src: "img/oss_logo.svg",
                     width: 160,
                     height: 51,
-                    href: 'https://opensource.antgroup.com/',
+                    href: "https://opensource.antgroup.com/",
                 },
                 copyright: `Copyright © ${new Date().getFullYear()} KusionStack Authors`,
             },

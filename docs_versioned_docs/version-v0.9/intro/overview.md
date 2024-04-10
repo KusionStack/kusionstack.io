@@ -7,7 +7,7 @@ slug: /
 
 # Introduction to Kusion
 
-Welcome to Kusion! This introduction section covers what Kusion is, the problem Kusion aims to solve, and how Kusion compares to other software. If you just want to dive into using Kusion, feel free to skip ahead to the [Getting Started](kusion/getting-started/install-kusion) section.
+Welcome to Kusion! This introduction section covers what Kusion is, the problem Kusion aims to solve, and how Kusion compares to other software. If you just want to dive into using Kusion, feel free to skip ahead to the [Getting Started](getting-started/install-kusion) section.
 
 ## What is Kusion?
 
@@ -25,7 +25,7 @@ But the modern day for most software organizations this promise quickly become u
 
 Another challenge we saw is that a series of [antipatterns](https://web.devopstopologies.com/#anti-types) emerge when regular software organizations tries to implement true DevOps. Without well proven reference architecture and supporting tools, it's much more difficult to accomplish the original promise.
 
-On one hand, **Kusion was build to minimize developer's cognitive load**. With application-centric configuration model, you don't need to deal with tedious infrastructure and configuration management tooling, all you need to be familiar with is [AppConfigation](kusion/config-walkthrough/overview). This approach shields developers from the configurational complexity of Kubernetes but still enable standardization by design.
+On one hand, **Kusion was build to minimize developer's cognitive load**. With application-centric configuration model, you don't need to deal with tedious infrastructure and configuration management tooling, all you need to be familiar with is [AppConfigation](config-walkthrough/overview). This approach shields developers from the configurational complexity of Kubernetes but still enable standardization by design.
 
 On the other hand, **Kusion defines a new way of how different engineering teams collaboration**. With the separation of concerns, different roles could focus on their work based on their knowledge and responsibility. Through such a division of labor, the platform team can better manage the differences and complexities of the platform, and app developers could participate in ops work with less cognitive load.
 
