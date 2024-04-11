@@ -1,17 +1,20 @@
 ---
-id: overview
+sidebar_position: 1
+sidebar_label: Overview
 title: Overview
 slug: /
 ---
 
-# Overview
+# Introduction to Kusion
 
 Welcome to Kusion! This introduction section covers what Kusion is, the problem Kusion aims to solve, and how Kusion compares to other software. If you just want to dive into using Kusion, feel free to skip ahead to the [Getting Started](getting-started/install-kusion) section.
 
 ## What is Kusion?
-Kusion is an intent-based Platform Orchestrator that enables developers to specify their desired intent in a declarative way and then using a consistent workflow to drive continuous deployment through application lifecycle. Inspired by the phrase **Fusion on Kubernetes**, Kusion aims to help application and platform developers to develop and deliver in a self-serviceable, fast, reliable, and collaborative way.
 
-![arch](https://raw.githubusercontent.com/KusionStack/kusion/main/docs/workflow.png)
+Kusion is a modern application delivery and management toolchain that enables developers to specify desired intent in a declarative way and then using a consistent workflow to drive continuous deployment through application lifecycle. Inspired by the phrase **Fusion on Kubernetes**, Kusion aims to help application and platform developers to develop and deliver in a self-serviceable, fast, reliable, and collaborative way.
+
+
+![](/img/docs/user_docs/intro/kusion.png)
 
 
 ## Why Kusion?
@@ -22,9 +25,9 @@ But the modern day for most software organizations this promise quickly become u
 
 Another challenge we saw is that a series of [antipatterns](https://web.devopstopologies.com/#anti-types) emerge when regular software organizations tries to implement true DevOps. Without well proven reference architecture and supporting tools, it's much more difficult to accomplish the original promise.
 
-On one hand, **Kusion was build to minimize developer's cognitive load**. With application-centric configuration model, you don't need to deal with tedious infrastructure and configuration management tooling, all you need to be familiar with is [AppConfiguration](configuration-walkthrough/overview). This approach shields developers from the configurational complexity of Kubernetes but still enable standardization by design.
+On one hand, **Kusion was build to minimize developer's cognitive load**. With application-centric configuration model, you don't need to deal with tedious infrastructure and configuration management tooling, all you need to be familiar with is [AppConfigation](config-walkthrough/overview). This approach shields developers from the configurational complexity of Kubernetes but still enable standardization by design.
 
-On the other hand, **Kusion defines a new way for different engineering organizations to collaborate**. With the separation of concerns, different roles could focus on their aspects of the configuration based on their knowledge and responsibility, whereas Kusion will dynamically manage and "glue" the opinionated configurations together. Through such a division of labor, the platform team can better manage the differences and complexities of the platform, and app developers could participate in ops work with much less cognitive load.
+On the other hand, **Kusion defines a new way of how different engineering teams collaboration**. With the separation of concerns, different roles could focus on their work based on their knowledge and responsibility. Through such a division of labor, the platform team can better manage the differences and complexities of the platform, and app developers could participate in ops work with less cognitive load.
 
 ## Kusion Highlights
 
@@ -46,4 +49,4 @@ On the other hand, **Kusion defines a new way for different engineering organiza
 
 :::tip
 
-**Kusion is an early project.** The end goal of Kusion is to boost [Internal Developer Platform](https://internaldeveloperplatform.org/) revolution, and we are iterating on Kusion quickly to strive towards this goal. For any help or feedback, please contact us in [Slack](https://github.com/KusionStack/community/discussions/categories/meeting) or [issues](https://github.com/KusionStack/kusion/issues).
+**Kusion is an early project.** The end goal of Kusion is to boost [Internal Developer Platform](https://internaldeveloperplatform.org/) revolution and we are iterating on Kusion quickly to strive towards this goal. For any help or feedback, please contract us in [Slack](https://github.com/KusionStack/community/discussions/categories/meeting) or [issues](https://github.com/KusionStack/kusion/issues).
