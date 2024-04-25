@@ -278,7 +278,7 @@ const config = {
               },
               {
                 label: "Karpor",
-                to: "/karpor/1-getting-started/",
+                to: "/karpor/",
               },
             ],
           },
