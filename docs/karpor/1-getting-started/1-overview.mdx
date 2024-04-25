@@ -1,0 +1,163 @@
+---
+id: overview
+title: Overview
+slug: /
+---
+
+import { AiOutlineArrowRight } from "react-icons/ai";
+import karporImg from "./assets/1-overview/image-20240321210511142.png";
+import helmImg from "./assets/1-overview/image-20240424205955985.png"
+import searchImg from "../3-user-guide/assets/2-search/image-20240326213930086.png"
+import complianceImg from "../3-user-guide/assets/3-insight/image-20240328173635251.png"
+import cncfImg from "@site/static/img/cncf-color.png";
+import antgroupPng from "@site/static/img/logos/antgroup.jpeg";
+import GithubStars from "@site/src/components/GithubStars";
+import KarporButton from "@site/src/components/KarporButton";
+
+export const FeatureBlock = ({
+  imgSrc = cncfImg,
+  hasFeatureTitle = false,
+  title = "",
+  reverse = false,
+  customStyle = {},
+  desc = "",
+}) => (
+  <div
+    style={{
+      display: "flex",
+      alignItems: "center",
+      padding: "40px 0",
+      ...customStyle,
+      flexDirection: reverse ? "row-reverse" : "row",
+    }}
+  >
+    <div style={{ width: "50%" }}>
+      {hasFeatureTitle && (
+        <div style={{ fontSize: 20, padding: "0px 20px" }}>{title}</div>
+      )}
+      <div style={{ textIndent: "2em", padding: "10px 20px" }}>{desc}</div>
+    </div>
+    <div style={{ width: "50%", padding: "20px 20px" }}>
+      <img src={imgSrc} />
+    </div>
+  </div>
+);
+
+export const Content = () => {
+  return (
+    <>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          padding: 20,
+          borderBottom: "2px solid #f1f1f1",
+        }}
+      >
+        <div style={{ fontSize: 26, fontWeight: "bold" }}>
+          Cross-Cluster Discovery 🔍
+        </div>
+        <div style={{ fontSize: 26, fontWeight: "bold" }}>
+          {" "}
+          Limitless Insights 📊. <span style={{ color: "gray", fontWeight:
+          "normal" }}>with AI.<sup
+          style={{ fontSize: 11 }}>coming soon </sup></span>✨
+        </div>
+        <div style={{ margin: 10, fontSize: 16 }}>
+          <u>Karpor is a <strong>Kubernetes Explorer</strong> focusing on <b>Search</b>, 
+          <b> Insight</b> and <b>Intelligence</b>. </u>
+        </div>
+        <div style={{ padding: 20, display: "flex", alignItems: "center" }}>
+          <div>
+            <KarporButton
+              url="https://karpor-demo.kusionstack.io"
+              btnText="Demo"
+            />
+          </div>
+          <div>
+            <GithubStars repo={"KusionStack/karpor"} />
+          </div>
+        </div>
+        <div style={{ width: "100%", height: "100%" }}>
+          <img style={{ width: "100%", height: "100%" }} src={karporImg} />
+        </div>
+      </div>
+      <div>
+        <FeatureBlock
+          imgSrc={karporImg}
+          hasFeatureTitle={true}
+          title={"What is Karpor?"}
+          customStyle={{ padding: "30px 20px 30px 20px", borderBottom: "2px solid #f1f1f1" }}
+          desc="Karpor is an open-source product that focuses on Kubernetes multi-cluster resource search and insight. Its design goal is to become a fast, intelligent, and non-invasive multi cluster data plane, aimed at helping users more efficiently utilize and understand the resource situation of each cluster."
+        />
+        <div style={{ padding: "20px 0", borderBottom: "2px solid #f1f1f1" }}>
+          <div
+            style={{
+              width: "100%",
+              textAlign: "center",
+              paddingTop: 20,
+              fontSize: 26,
+            }}
+          >
+            Highlights 💡
+          </div>
+          <FeatureBlock
+            reverse={true}
+            imgSrc={helmImg}
+            hasFeatureTitle = {true}
+            title="Lightweight and easy to setup. One helm is done. 🚀"
+            desc="If you already have a kubernetes cluster and helm tool, you can install Karpor with just one click."
+          />
+          <FeatureBlock
+            reverse={false}
+            imgSrc={searchImg}
+            hasFeatureTitle = {true}
+            title="User friendly search way. ⚡️"
+            desc="Karpor offers a nifty SQL query feature that allows you to search and filter all Kubernetes resources within managed clusters using familiar SQL syntax and provides targeted optimizations and enhancements for multi-cluster resource searches."
+          />
+          <FeatureBlock
+            reverse={true}
+            imgSrc={complianceImg}
+            hasFeatureTitle = {true}
+            title="Security compliance. 🔒"
+            desc="Karpor automatically detects and evaluates whether all resources in the current resource or resource group comply with specific compliance standards and security policies, helping you ensure the security and compliance of the cluster and resources."
+          />
+        </div>
+      </div>
+      <div
+        style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            padding: "40px 10px",
+          }}
+        >
+        <p style={{ fontSize: 26 }}>Opensource Contributors 🎖️</p>
+        <div style={{ width: "80%", margin: "10px" }}>
+          <img src="https://contrib.rocks/image?repo=KusionStack/kusion" />
+        </div>
+      </div>
+    </>
+  );
+};
+
+<Content />
+
+<!--
+## Karpor vs. Others
+
+|                                | **Karpor** | **Kubevious** | **Clusterpedia** | **Kubeview** | **Kubernetes Dashboard** |
+| ------------------------------ | ----------- | ------------- | ---------------- | ------------ | ------------------------ |
+| Kubernetes-Native Support      | ✅           | ✅             | ✅                | ✅            | ✅                        |
+| Resource Search                | ✅           | ✅             | ✅                | ✅            | ✅                        |
+| Multi-Cluster Management       | ✅           | ✅             | ✅                | ❌            | ❌                        |
+| Resource Sync                  | ✅           | ❌             | ✅                | ❌            | ❌                        |
+| Cross-Cluster Search           | ✅           | ✅             | ✅                | ❌            | ❌                        |
+| Web UI                         | ✅           | ✅             | ❌                | ✅            | ✅                        |
+| Resource Relationship Topology | ✅           | ✅             | ❌                | ✅            | ❌                        |
+| Security Compliance            | ✅           | ✅             | ❌                | ❌            | ❌                        |
+| Logic View                     | ✅           | ❌             | ❌                | ❌            | ❌                        |
+
+-->
+
