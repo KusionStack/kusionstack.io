@@ -4,10 +4,9 @@ Manage Kusion modules
 
 ### Synopsis
 
+Commands for managing Kusion modules.
 
-		Commands for managing Kusion modules.
-
-		These commands help you manage the lifecycle of Kusion modules.
+ These commands help you manage the lifecycle of Kusion modules.
 
 ```
 kusion mod
