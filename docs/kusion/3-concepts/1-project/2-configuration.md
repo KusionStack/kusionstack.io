@@ -12,18 +12,21 @@ Here is an example of `project.yaml`.
 ```yaml
 # The project basic info
 name: helloworld
-generator:
-  type: AppConfiguration
-prometheus:
-  operatorMode: True
-  monitorType: Service
+extensions:
+- kind: kubernetesNamespace
+  namespace: my-namespace
+- kind: kubernetesMetadata
+  labels:
+    my-label: hello
+  annotations:
+    my-annotation: world
 ```
 
 The config items in `project.yaml` are explained below.
 
-- **name**: The name of the project
-- **generator**:
-    - `type`: The type of the module generator, supports `AppConfiguration` and `KCL`, default is `AppConfiguration`. If using the schema AppConfiguration, set type as AppConfiguration
-- **prometheus**:
-    - **operatorMode**: Decides whether Kusion runs Prometheus in `Operator` mode. Kusion will generate a `Custom Resource` if it is true, while generate some annotations if it is false
-    - **monitorType**: The type of the monitored resource, which can be one of `Service` or `Pod`
+- **name**: The name of the project.
+- **extensions**: The extensions field of the project, including project-level namespace override, labels and annotations.
+  - **kind**: The kind of extension to overlay. Possible values are `kubernetesNamespace` and `kubernetesMetadata`.
+  - **namespace**: Overrides the target Kubernetes workspace at project level.
+  - **labels**: Add additional labels to all Kubernetes resources under this project.
+  - **annotations**: Add additional annotations to all Kubernetes resources under this project.

@@ -5,13 +5,19 @@ sidebar_label: Workspace
 
 # Workspace
 
-Workspace is a logical concept, which represents a target environment to deploy a Stack. A Workspace is composed of a series of platform configuration, which can be reused by multiple stacks. When executing the command `kusion generate`, Kusion will interweave the AppConfiguration and the Workspace configuration to generate the Spec, which contains the whole information to apply the resources required by the Stack. The relationship of the Project, Stack and Workspace is shown as below. Summarizing their relationship in one sentence: a Project in a Workspace is a Stack.
+Workspace is a logical concept that maps to an actual target environment to deploy a stack to. In today's context, this _usually_ represents a Kubernetes cluster for the application workload and an optional cloud account to provision infrastructure resources that the workload depends on (A database, for example). Aside from the deployment destination, workspaces are also designed to be associated with a series of platform configurations that are used by all the stacks deployed to said workspace.
 
-![workspace-project-stack](/img/docs/concept/workspace-project-stack.png)
+When executing the command `kusion generate`, Kusion will "match" the AppConfiguration and the approriate workspace configuration to dynamically generate the `Spec`, which contains the complete manifest to describe the resources in the stack. The relationship of the Project, Stack and Workspace is shown as below. Notice that all three ways to organize stacks are valid.
 
-Workspace is designed for the team collaboration scenario, and to realize the separation of concerns.  We recommend organizing Workspaces by SDLC (Software Development Life Cycle) phases, or cloud vendors, or the combination of the two.
+![project-stack-workspace](/img/docs/concept/project-stack-workspace.png)
 
-The configuration of Workspace is organized by a determinate format, and written in YAML. The subcommands of `kusion workspace` are provided to manage the Workspace. When using `kusion workspace`, the Workspace configuration will be saved as YAML file in local file system. To avoid the possible risks, the environment variables are provided to set the sensitive configuration.
+Workspace is designed to address separation of concerns. As opposed to the development-time concept of a "stack", a workspace is a deploy-time concept that represents a deployment target, a.k.a an actual runtime environment. Workspaces should be entirely managed by Platform Engineers to alleviate the burden on developers to understand environment-specific details.
+
+To dig a little deeper, a workspace represents the need for a distinct set of "platform opinions". That includes things that application developer either don't want to or shouldn't need to worry about, such as which Kubernetes cluster to deploy to, the credentials to deploy to said clusters, and other infrastructure details like what database instance to provision.
+
+Workspace is intended to be flexible so you can map them as your see fit to the boundaries that are relevant to your use case. For example, you can map a workspace to a cloud region (aws-us-east-1), provided that regional isolation is sufficient for you (this is an extreme case). Alternatively, a workspace can be map to the combination of a cloud region and an SDLC phase (aws-dev-us-east-1), provided that it represents the right boundary from a platform perspective.
+
+The workspace configuration is in a deterministic format and currently written in YAML. The subcommands of `kusion workspace` are provided to manage the workspaces. When using `kusion workspace`, the workspace configuration will be saved as YAML file in local file system. To avoid the possible risks, the environment variables are provided to hold the sensitive data such as Access Keys and Secret keys.
 
 ## Workspace Configuration
 
@@ -80,7 +86,7 @@ Different Module and KAM has different name, fields, and corresponding format an
 
 The `runtimes` are the interface that Kusion interacts with the real infrastructure, which are only configured by the platform engineers in Workspace. Kusion supports the runtimes `Kubernetes` and `Terraform` for now.
 
-For `Kubernetes` runtime, the path of the KubeConfig file is provided to configure, which is specified by the filed `kubeConfig`. Besides, the environment variable `KUBECONFIG` is also supported with higher priority. If both not set, the default path `$HOME/.kube/config` will be used. For the example above, the `kubeConfig` is set in the Worksapce configuration.
+For `Kubernetes` runtime, the path of the KubeConfig file is provided to configure, which is specified by the filed `kubeConfig`. Besides, the environment variable `KUBECONFIG` is also supported with higher priority. If both not set, the default path `$HOME/.kube/config` will be used. For the example above, the `kubeConfig` is set in the workspace configuration.
 
 The `Terraform` runtime is composed of multiple Terraform providers' configurations, where the key is the provider name, and the values varies across different providers. For the configuration fields, Kusion keeps the same with Terraform, including the supported environment variables. Please refer to [Terraform Registry](https://registry.terraform.io/) and find more information. For the example above, a sample of aws runtime configuration is given, while the `access_key` and `access_secret` is not set in the Workspace file, and expected setting by the environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
 
@@ -167,10 +173,10 @@ The example is shown as below.
 
 ```shell
 # update a specified workspace
-kusion worksapce update dev -f dev_new.yaml
+kusion workspace update dev -f dev_new.yaml
 
 # update a specified workspace and set it as current
-kusion worksapce update dev -f dev_new.yaml --current
+kusion workspace update dev -f dev_new.yaml --current
 
 # update the current workspace
 kusion workspace update -f dev_new.yaml
@@ -184,7 +190,7 @@ The example is shown as below.
 
 ```shell
 # delete a specified workspace
-kusion worksapce delete dev 
+kusion workspace delete dev 
 
 # delete the current workspace
 kusion workspace delete
@@ -195,6 +201,6 @@ kusion workspace delete
 Workspace is used in the command `kusion generate`, the following steps help smooth the operation process.
 
 1. Write the Workspace configuration file with the format shown above, and fulfill all the necessary fields;
-2. Create the workspace with `kusion worksapce create`, then Kusion perceives the Workspace. The flag `--current` can be used to set it as the current.
+2. Create the workspace with `kusion workspace create`, then Kusion perceives the Workspace. The flag `--current` can be used to set it as the current.
 3. Execute `kusion generate` in a Stack to generate the whole Spec, the AppConfiguration and Workspace configuration get rendered automatically, and can be applied to the real infrastructure. If the appointed Workspace or Backend is asked, the flags `--workspace` and `--backend` will help achieve that. 
 4. If the Workspace needs to update, delete, switch, etc. Use the above commands to achieve that.
