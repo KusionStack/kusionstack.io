@@ -1,32 +1,29 @@
 ---
 id: configuration
-sidebar_label: Stack Configuration
+sidebar_label: Stack file reference
 ---
 
-# Stack Configuration
+# Kusion stack file reference
 
-Users can add config items of the stack in `stack.yaml`, such as the stack name, etc.
+Every Kusion project's stack has a stack file, `stack.yaml`, which specifies metadata about your stack, such as the stack name and stack description. The stack file must begin with lowercase `stack` and have an extension of either `.yaml` or `.yml`.
 
-Here is an example of `stack.yaml`.
+## Attributes
 
-```yaml
-# The stack basic info
-name: dev
-extensions:
-- kind: kubernetesNamespace
-  namespace: my-dev-namespace
-- kind: kubernetesMetadata
-  labels:
-    my-label: hello-dev
-  annotations:
-    my-annotation: world-dev
-```
+| Name          | Required        | Description   | Options       |
+|:------------- |:--------------- |:------------- |:------------- |
+| `name`        | required        | Name of the stack containing alphanumeric characters, hyphens, underscores. | None         |
+| `description` | optional        | A brief description of the stack.  | None           |
+| `extensions`  | optional        | List of extensions on the stack. | [See blow](#extensions)          |
 
-The config items in `stack.yaml` are explained below.
+### Extensions
 
-- **name**: The name of the stack, should be same as the workspace name, such as `dev`, `pre` and `prod`.
-- **extensions**: The extensions field of the stack, including stack-level namespace override, labels and annotations.
-  - **kind**: The kind of extension to overlay. Possible values are `kubernetesNamespace` and `kubernetesMetadata`.
-  - **namespace**: Overrides the target Kubernetes workspace at stack level.
-  - **labels**: Add additional labels to all Kubernetes resources under this stack.
-  - **annotations**: Add additional annotations to all Kubernetes resources under this stack.
+Extensions allow you to customize how resources are generated or customized as part of release.
+
+#### kubernetesNamespace
+
+The Kubernetes namespace extension allows you to customize namespace within your application generate Kubernetes resources. 
+
+| Key  | Required | Description | Example |
+|:------|:--------:|:-------------|:---------|
+| kind | y | The kind of extension being used. Must be 'kubernetesNamespace' | `kubernetesNamespace` |
+| namespace | y | The namespace where all application-scoped resources generate Kubernetes objects. | `default` |
