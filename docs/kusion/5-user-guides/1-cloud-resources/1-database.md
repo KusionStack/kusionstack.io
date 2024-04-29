@@ -11,12 +11,12 @@ This tutorial will demonstrate how to deploy a WordPress application with Kusion
 
 ## Prerequisites
 
-- Install [Kusion](../../2-getting-started/1-install-kusion.md)
-- Install [kubectl CLI](https://kubernetes.io/docs/tasks/tools/#kubectl) and run a [Kubernetes](https://kubernetes.io/) or [Kind](https://kind.sigs.k8s.io/) or [Minikube](https://minikube.sigs.k8s.io/docs/tutorials/multi_node/) cluster
-- Prepare a cloud service account and create a user with at least `VPCFullAccess` and `RDSFullAccess` related permissions to use the Relational Database Service (RDS). This kind of user can be created and managed in the Identity and Access Management (IAM) console of the cloud vendor
-- The environment that executes `kusion` needs to have connectivity to terraform registry to download the terraform providers
+- Install [Kusion](../../2-getting-started/1-install-kusion.md). 
+- Install [kubectl CLI](https://kubernetes.io/docs/tasks/tools/#kubectl) and run a [Kubernetes](https://kubernetes.io/) or [k3s](https://docs.k3s.io/quick-start) or [k3d](https://k3d.io/v5.4.4/#installation) or [MiniKube](https://minikube.sigs.k8s.io/docs/tutorials/multi_node) cluster. 
+- Prepare a cloud service account and create a user with at least **VPCFullAccess** and **RDSFullAccess** related permissions to use the Relational Database Service (RDS). This kind of user can be created and managed in the Identity and Access Management (IAM) console of the cloud vendor. 
+- The environment that executes `kusion` needs to have connectivity to terraform registry to download the terraform providers. 
 
-Additionally, we also need to configure the obtained AccessKey and SecretKey as environment variables for specific cloud provider: 
+Additionally, we also need to configure the obtained AccessKey and SecretKey as well as the cloud resource region as environment variables for specific cloud provider: 
 
 <Tabs>
 <TabItem value="AWS" >
@@ -24,6 +24,7 @@ Additionally, we also need to configure the obtained AccessKey and SecretKey as 
 ```bash
 export AWS_ACCESS_KEY_ID="AKIAQZDxxxx" # replace it with your AccessKey
 export AWS_SECRET_ACCESS_KEY="oE/xxxx" # replace it with your SecretKey
+export AWS_REGION=us-east-1            # replace it with your region
 ```
 
 ![aws iam account](/img/docs/user_docs/getting-started/aws-iam-account.png)
@@ -36,6 +37,7 @@ export AWS_SECRET_ACCESS_KEY="oE/xxxx" # replace it with your SecretKey
 ```bash
 export ALICLOUD_ACCESS_KEY="LTAI5txxx" # replace it with your AccessKey
 export ALICLOUD_SECRET_KEY="nxuowIxxx" # replace it with your SecretKey
+export ALICLOUD_REGION=cn-hangzhou     # replace it with your region
 ```
 
 ![alicloud iam account](/img/docs/user_docs/getting-started/set-rds-access.png)
@@ -90,7 +92,7 @@ modules:
 </Tabs>
 ```
 
-If you would like to try creating the `Alicloud` RDS instance, you should replace the `[your-subnet-id]` of `modules.kusionstack/mysql@0.1.0.default.subnetID` field with the Alicloud `vSwitchID` to which the database will be provisioned in. After that, you can execute the following command line to initiate the workspace configuration for `dev` stack. 
+If you would like to try creating the `Alicloud` RDS instance, you should replace the `[your-subnet-id]` of `modules.kusionstack/mysql@0.1.0.default.subnetID` field with the Alicloud `vSwitchID` to which the database will be provisioned in. After that, you can execute the following command line to initiate the configuration for `dev` workspace. 
 
 ```shell
 kusion workspace create dev -f workspace.yaml
@@ -102,7 +104,7 @@ Since Kusion by default use the `default` workspace, we can switch to the `dev` 
 kusion workspace switch dev
 ```
 
-If you already create and use the configuration of `dev` workspace, you can append the MySQL module configs to your workspace YAML file and use the following command line to update the workspace configuration. 
+If you have already created and used the configuration of `dev` workspace, you can append the MySQL module configs to your workspace YAML file and use the following command line to update the workspace configuration. 
 
 ```shell
 kusion workspace update dev -f workspace.yaml
@@ -120,19 +122,26 @@ The `workspace.yaml` is a sample configuration file for workspace management, in
 More details about the configuration of Workspace can be found in [Concepts of Workspace](../../3-concepts/4-workspace.md). 
 :::
 
-## Init Project
+## Create Project And Stack
 
-We can start by initializing this tutorial project with `kusion init` cmd: 
+We can create a new project named `wordpress-rds-cloud` with the `kusion project create` command. 
 
 ```shell
 # Create a new directory and navigate into it. 
 mkdir wordpress-rds-cloud && cd wordpress-rds-cloud
 
-# Initialize the demo project with the name of the current directory. 
-kusion init
+# Create a new project with the name of the current directory. 
+kusion project create
 ```
 
-The created project structure looks like below: 
+After creating the new project, we can create a new stack named `dev` with the `kusion stack create` command. 
+
+```shell
+# Create a new stack with the specified name under current project directory. 
+kusion stack create dev
+```
+
+The created project and stack structure looks like below: 
 
 ```shell
 tree
@@ -146,31 +155,20 @@ tree
 2 directories, 4 files
 ```
 
-:::info
-More details about the directory structure can be found in [Project](../../3-concepts/1-project/1-overview.md) and [Stack](../../3-concepts/2-stack/1-overview.md). 
-:::
-
 ### Update And Review Configuration Codes
 
-The initiated configuration codes are for the demo quickstart application, we should replace the `dev/kcl.mod` and `dev/main.k` with the below codes: 
+The configuration codes in the created stack are basically empty, thus we should replace the `dev/kcl.mod` and `dev/main.k` with the below codes: 
 
-`dev/kcl.mod`
 ```shell
-[package]
-name = "wordpress-cloud-rds"
-version = "0.1.0"
-
+# dev/kcl.mod
 [dependencies]
 kam = { git = "https://github.com/KusionStack/kam.git", tag = "0.1.0" }
 network = { oci = "oci://ghcr.io/kusionstack/network", tag = "0.1.0" }
 mysql = { oci = "oci://ghcr.io/kusionstack/mysql", tag = "0.1.0" }
-
-[profile]
-entries = ["main.k"]
 ```
 
-`dev/main.k`
 ```python
+# dev/main.k 
 import kam.v1.app_configuration as ac
 import kam.v1.workload as wl
 import kam.v1.workload.container as c
@@ -213,24 +211,12 @@ wordpress: ac.AppConfiguration {
 }
 ```
 
-`dev/kcl.mod` declares the dependency packages of the application, including Kusion application model (`kam`) as well as the `network` and `mysql` module. The configuration file `main.k`, usually written by the **App Developers**, declares customized configurations for `dev` stack, which includes an `AppConfiguration` with the name of `wordpress`. And the `wordpress` application includes a workload of type `workload.Service`, which runs on 1 replica. Besides, it declares a **Kusion Module** with the type of `network.Network` exposing `80` port to be accessed, and a cloud `mysql.MySQL` as the database accessory with the engine version of `8.0` for the application. 
-
-The necessary Terraform resources for deploying and using the cloud rds (relational database service) will be generated, and users can get the `host`, `username` and `password` of the database through the [mysql credentials and connectivity](../../6-reference/2-modules/1-developer-schemas/database/mysql.md#credentials-and-connectivity) of Kusion in application containers. 
-
-:::info
-More details about the `AppConfiguration` model and internal Kusion Module can be found in [kam](https://github.com/KusionStack/kam) and [catalog](https://github.com/KusionStack/catalog). 
-:::
-
-:::info
-The collaboration paradigm between App Developers and Platform Engineers with Kusion can be found in [Collaboration Paradigm](https://github.com/KusionStack/kusion/blob/main/docs/design/collaboration/collaboration_paradigm.md)
-:::
-
 ## Application Delivery
 
-You can complete the delivery of the WordPress application in the folder of `wordpress-cloud-rds/dev` using the following command line: 
+You can complete the delivery of the WordPress application in the folder of `wordpress-cloud-rds/dev` using the following command line. Kusion will enable the watching of the application resource creation and automatic port-forwarding of the specified port (80) from local to the Kubernetes Service. 
 
 ```shell
-cd wordpress-cloud-rds && kusion apply --watch
+cd dev && kusion apply --watch
 ```
 
 :::info
