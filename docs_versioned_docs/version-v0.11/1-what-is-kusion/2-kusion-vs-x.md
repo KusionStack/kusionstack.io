@@ -22,11 +22,9 @@ Kusion allows you to have platform-like features without the constraints of a tr
 
 **vs. KubeVela**
 
-KubeVela is a modern software delivery and management control plane. KubeVela makes it easier to deploy and operate applications on top of Kubernetes.
+KubeVela is a modern software delivery and management control plane which makes it easier to deploy and operate applications on top of Kubernetes.
 
-Kusion is not a control plane. Kusion is a client-side tool for describing application intent in  a declarative way and providing consistent workflow to apply that desired state.
-
-With proper Generator implementation, the target Spec of [AppConfiguration](../concepts/app-configuration) can be [KubeVela Application](https://kubevela.io/docs/getting-started/core-concept/) and Kusion can use KubeVela to satisfy the "apply" step.
+Although some might initially perceive an overlap between Kusion and KubeVela, they are in fact complementary and can be integrated to work together. As a lightweight, purely client-side tool, coupled with corresponding [Generator](https://github.com/KusionStack/kusion-module-framework) implementation, Kusion can render [AppConfiguration](../concepts/app-configuration) schema to generate CRD resources for KubeVela and leverage KubeVela's control plane to implement application delivery.
 
 **vs. Helm**
 
