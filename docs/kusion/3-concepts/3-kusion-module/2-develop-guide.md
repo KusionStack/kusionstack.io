@@ -5,7 +5,7 @@
 To follow this guide, you will need:
 
 - Go 1.22 or higher installed and configured
-- Kusion v0.11.0 or higher installed locally
+- Kusion v0.11.1 or higher installed locally
 
 ## Workflow
 
@@ -56,7 +56,24 @@ $ tree kawesome/
 
 When developing a Kusion module with the scaffold repository, you could follow the steps below:
 
-1. **Define module name.** Rename `go.mod` module and related files to your Kusion module name. We assume the module named is `kawesome` in this guide.
+1. **Define the module name and version** 
+   - For go files. Rename the module name in the `go.mod` and related files to your Kusion module name.
+   ```yaml
+    module kawsome
+    go 1.22
+    require (
+        ...
+    )
+   ```
+   - For KCL files. Rename package name and version in the `kcl.mod`
+   ```toml
+    [package]
+    name = "kawesome"
+    version = 0.1.0
+   ```
+
+    We assume the module named is `kawesome` and the version is `0.1.0` in this guide.
+
 2. **Define the dev-orient schemas**. They would be initialized by app developers. In this scaffold repository, we've defined a schema named Kawesome in `kawesome.k` that consists of two resources `Service` and `RandomPassword` and they will be generated into a Kubernetes Service and a Terraform RandomPassword later.
 
 ```python
@@ -121,16 +138,16 @@ Publish the Kusion module to an OCI registry with the command `kusion mod push`.
 
 Publish a stable version
 ```shell
-kusion mod push /path/to/your-module oci://ghcr.io/kusionstack/kawesome --version=1.0.0 --latest=true --creds <YOUR_TOKEN>
+kusion mod push /path/to/your-module oci://ghcr.io/kusionstack --latest=true --creds <YOUR_TOKEN>
 ```
 
 Publish a pre-release version
 ```shell
-kusion mod push /path/to/your-module oci://ghcr.io/kusionstack/kawesome --version=1.0.0-rc.1 --latest=false --creds <YOUR_TOKEN>
+kusion mod push /path/to/your-module oci://ghcr.io/kusionstack --latest=false --creds <YOUR_TOKEN>
 ```
 
 :::info
-Please ensure that your token has the appropriate permissions to write to the registry.
+The OCI URL format is `oci://<domain>/<org>` and please ensure that your token has the appropriate permissions to write to the registry.
 :::
 
 More details can be found in the `kusion mod push` reference doc.
