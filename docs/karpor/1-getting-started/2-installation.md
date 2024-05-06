@@ -28,16 +28,13 @@ First, you need to create a Kubernetes cluster in your local environment. We wil
 ## Step 2: Install Karpor
 
 After creating the cluster, proceed with the installation of karpor:
-1. Clone the Karpor project using git and navigate to the charts/karpor directory:
+1. Run the following command to install Karpor using Helm:
    ```shell
-   git clone https://github.com/KusionStack/karpor.git
-   cd charts
+   helm repo add kusionstack https://kusionstack.github.io/charts && \
+   helm repo update kusionstack && \
+   helm install karpor kusionstack/karpor
    ```
-2. Run the following command to install Karpor using Helm:
-   ```shell
-   helm install karpor ./karpor
-   ```
-3. Wait for the installation of karpor to complete. You can check the status of karpor installation by running the following command:
+2. Wait for the installation of karpor to complete. You can check the status of karpor installation by running the following command:
    ```shell
    kubectl get pods -n karpor
    ```
