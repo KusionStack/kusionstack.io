@@ -87,7 +87,7 @@ export const Content = () => {
           hasFeatureTitle={true}
           title={"What is Karpor?"}
           customStyle={{ padding: "30px 20px 30px 20px", borderBottom: "2px solid #f1f1f1" }}
-          desc="Karpor is an open-source product that focuses on Kubernetes multi-cluster resource search and insight. Its design goal is to become a fast, intelligent, and non-invasive multi cluster data plane, aimed at helping users more efficiently utilize and understand the resource situation of each cluster."
+          desc="Karpor is a Kubernetes Explorer focusing on 🔍 Search, 💡 Insight and 🤖 Intelligence. It has features such as non-invasive, read-only, secure, and multi-cloud and multi-cluster support, and can serve as a Kubernetes Data Plane to reduce the cost of discovering and understanding kubernetes resources."
         />
         <div style={{ padding: "20px 0", borderBottom: "2px solid #f1f1f1" }}>
           <div
@@ -95,30 +95,65 @@ export const Content = () => {
               width: "100%",
               textAlign: "center",
               paddingTop: 20,
-              fontSize: 26,
+              fontSize: 24,
             }}
           >
-            Highlights 💡
+            Why Karpor? 💡
           </div>
           <FeatureBlock
             reverse={true}
             imgSrc={helmImg}
             hasFeatureTitle = {true}
-            title="Lightweight and easy to setup. One helm is done. 🚀"
+            title="⚡️ Lightweight and easy to setup. One helm is done."
             desc="If you already have a kubernetes cluster and helm tool, you can install Karpor with just one click."
           />
           <FeatureBlock
             reverse={false}
             imgSrc={searchImg}
             hasFeatureTitle = {true}
-            title="User friendly search way. ⚡️"
+            title="📦 Out of the Box."
             desc="Karpor offers a nifty SQL query feature that allows you to search and filter all Kubernetes resources within managed clusters using familiar SQL syntax and provides targeted optimizations and enhancements for multi-cluster resource searches."
           />
           <FeatureBlock
             reverse={true}
+            imgSrc={helmImg}
+            hasFeatureTitle = {true}
+            title="💰 Self-Hosted, Cost-Effective."
+            desc="Bring your own server, scale when you need."
+          />
+          <FeatureBlock
+            reverse={false}
+            imgSrc={searchImg}
+            hasFeatureTitle = {true}
+            title="🔒 Read-Only data plane, Non-Invasive to user cluster."
+            desc="Karpor offers a nifty SQL query feature that allows you to search and filter all Kubernetes resources within managed clusters using familiar SQL syntax and provides targeted optimizations and enhancements for multi-cluster resource searches."
+          />
+          <FeatureBlock
+            reverse={true}
+            imgSrc={helmImg}
+            hasFeatureTitle = {true}
+            title="⚙️ Kubernetes Native API Compatible."
+            desc="Seamless integration of existing kubernetes tool chain."
+          />
+          <FeatureBlock
+            reverse={false}
+            imgSrc={searchImg}
+            hasFeatureTitle = {true}
+            title="☁️ Multi-Cluster and Multi-Cloud."
+            desc="Natural support for Multi-Cluster and Multi-Cloud."
+          />
+          <FeatureBlock
+            reverse={true}
+            imgSrc={searchImg}
+            hasFeatureTitle = {true}
+            title="🔍 User friendly search way."
+            desc="Karpor offers a nifty SQL query feature that allows you to search and filter all Kubernetes resources within managed clusters using familiar SQL syntax and provides targeted optimizations and enhancements for multi-cluster resource searches."
+          />
+          <FeatureBlock
+            reverse={false}
             imgSrc={complianceImg}
             hasFeatureTitle = {true}
-            title="Security compliance. 🔒"
+            title="🔒 Security compliance."
             desc="Karpor automatically detects and evaluates whether all resources in the current resource or resource group comply with specific compliance standards and security policies, helping you ensure the security and compliance of the cluster and resources."
           />
         </div>
