@@ -5,7 +5,10 @@ slug: /
 ---
 
 import { AiOutlineArrowRight } from "react-icons/ai";
-import logoImg from "@site/static/karpor/assets/logo-full.png";
+import logoImg from "@site/static/karpor/assets/logo/logo-full.png";
+import userFriendlyImg from "@site/static/karpor/assets/overview/user-friendly.png";
+import intelligentImg from "@site/static/karpor/assets/overview/intelligent.png";
+import lowBurdenImg from "@site/static/karpor/assets/overview/low-burden.png";
 import karporImg from "./assets/1-overview/image-20240321210511142.png";
 import helmImg from "./assets/1-overview/image-20240424205955985.png"
 import searchImg from "../3-user-guide/assets/2-search/image-20240326213930086.png"
@@ -78,87 +81,85 @@ export const Content = () => {
           Limitless Insight 📊. <span style={{ fontWeight: "normal"}}>With AI.<sup
           style={{ fontSize: 11 }}>coming soon </sup></span>✨
         </div>
-        <div style={{ maxWidth: "100%", marginTop: 20 }}>
-          <ReactPlayer playing controls url='/karpor/assets/demo.mp4' />
-        </div>
       </div>
       <div>
-        <FeatureBlock
-          imgSrc={karporImg}
-          hasFeatureTitle={true}
-          title={"What is Karpor?"}
-          customStyle={{ padding: "30px 20px 30px 20px", borderBottom: "2px solid #f1f1f1" }}
-          desc="Karpor is a Kubernetes Explorer focusing on 🔍 Search, 💡 Insight and 🤖 Intelligence. It has features such as non-invasive, read-only, secure, and multi-cloud and multi-cluster support, and can serve as a Kubernetes Data Plane to reduce the cost of discovering and understanding kubernetes resources."
-        />
-        <div style={{ padding: "20px 0", borderBottom: "2px solid #f1f1f1" }}>
+      <div
+        style={{
+          alignItems: "center",
+          padding: "40px 0",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <div style={{ width: "100%"}}>
+            <h2 style={{ paddingBottom: "14px", borderBottom: "2px solid #f1f1f1"}}>📖 What is Karpor?</h2>
+              <div style={{ padding: "5px 0px" }}>Karpor is a <b>Kubernetes Explorer</b> focusing on <b>🔍 Search, 💡 Insight and 🤖
+              Intelligence</b>.</div>
+              <div style={{ padding: "5px 0px" }}>It has features such as
+              non-invasive, read-only, secure, and multi-cloud and multi-cluster
+              support, and can serve as a <b>Kubernetes Data Plane</b> to reduce the cost of discovering and understanding kubernetes resources.</div>
+        </div>
+        <div style={{ width: "100%", padding: "10px" }}>
+            <div style={{ width:"100%", maxWidth: "100%", marginTop: 20,
+            display: "flex", justifyContent: "center" }}>
+              <ReactPlayer width="100%" height="100%" playing controls url='/karpor/assets/overview/demo.mp4' />
+            </div>
+        </div>
+      </div>
+        <div style={{ padding: "10px 0" }}>
+          <h2 style={{ paddingBottom: "14px", borderBottom: "2px solid #f1f1f1"}}>💡 Why Karpor?</h2>
           <div
             style={{
               width: "100%",
-              textAlign: "center",
               paddingTop: 20,
               fontSize: 24,
             }}
           >
-            Why Karpor? 💡
+            <h3 align="center">🤝 User Friendly</h3>
+            <table style={{fontSize: "16px", border: "none"}}>
+              <tr style={{border: "none"}}>
+                <td style={{verticalAlign: "middle", border: "none"}}>
+                  <b>⚡️ Lightweight and Easy to Setup</b><br />One `helm` is done.<br /><br/>
+                  <b>📦 Out of the Box</b><br />Built-in security and compliance policies, resource sync strategy, resource transform rule, and topology relationship definitions.<br /><br />
+                  <b>🔍 Quickly search and locate resource(s)</b><br />Quickly search and locate resource(s) of interest across a large number of clusters in a user-friendly way.
+                </td>
+                <td style={{width: "60%", verticalAlign: "middle", border: "none"}}>
+                  <img src={userFriendlyImg} alt="User Friendly" />
+                </td>
+              </tr>
+            </table>
+            <br/>
+            <h3 align="center">✨ Intelligent</h3>
+            <table style={{ fontSize: '16px', border: 'none' }}>
+              <tr style={{ border: 'none' }}>
+                <td style={{ width: '60%', verticalAlign: 'middle', border: 'none' }}>
+                  <img src={intelligentImg} alt="Intelligent" />
+                </td>
+                <td style={{ verticalAlign: 'middle', border: 'none' }}>
+                  <b>🔒 Compliance Protection</b><br />Automatically identify potential risks and receive AI suggestions for remediation.<br /><br/>
+                  <b>📊 Logical and topological views</b><br />Logical and topological views of relevant resources within their operational context.
+                </td>
+              </tr>
+            </table>
+            <br/>
+            <h3 align="center">⚡️ Low Burden</h3>
+            <table style={{ fontSize: '16px', border: 'none' }}>
+              <tr style={{ border: 'none' }}>
+                <td style={{ verticalAlign: 'middle', border: 'none' }}>
+                  <b>🔒 Read-Only, Non-Invasive</b><br />Read-Only data plane, Non-Invasive to user cluster.<br /><br/>
+                  <b>⚙️ Kubernetes Native API Compatible</b><br />Seamless integration of existing kubernetes tool chain.<br /><br/>
+                  <b>☁️ Multi-Cluster and Multi-Cloud/Hybrid-Cloud</b><br />Natively supports Multi-Cluster and Multi-Cloud/Hybrid-Cloud.
+                </td>
+                <td style={{ width: '60%', verticalAlign: 'middle', border: 'none' }}>
+                  <img src={lowBurdenImg} alt="Low Burden" />
+                </td>
+              </tr>
+            </table>
+            <br/>
           </div>
-          <FeatureBlock
-            reverse={true}
-            imgSrc={helmImg}
-            hasFeatureTitle = {true}
-            title="⚡️ Lightweight and easy to setup. One helm is done."
-            desc="If you already have a kubernetes cluster and helm tool, you can install Karpor with just one click."
-          />
-          <FeatureBlock
-            reverse={false}
-            imgSrc={searchImg}
-            hasFeatureTitle = {true}
-            title="📦 Out of the Box."
-            desc="Karpor offers a nifty SQL query feature that allows you to search and filter all Kubernetes resources within managed clusters using familiar SQL syntax and provides targeted optimizations and enhancements for multi-cluster resource searches."
-          />
-          <FeatureBlock
-            reverse={true}
-            imgSrc={helmImg}
-            hasFeatureTitle = {true}
-            title="💰 Self-Hosted, Cost-Effective."
-            desc="Bring your own server, scale when you need."
-          />
-          <FeatureBlock
-            reverse={false}
-            imgSrc={searchImg}
-            hasFeatureTitle = {true}
-            title="🔒 Read-Only data plane, Non-Invasive to user cluster."
-            desc="Karpor offers a nifty SQL query feature that allows you to search and filter all Kubernetes resources within managed clusters using familiar SQL syntax and provides targeted optimizations and enhancements for multi-cluster resource searches."
-          />
-          <FeatureBlock
-            reverse={true}
-            imgSrc={helmImg}
-            hasFeatureTitle = {true}
-            title="⚙️ Kubernetes Native API Compatible."
-            desc="Seamless integration of existing kubernetes tool chain."
-          />
-          <FeatureBlock
-            reverse={false}
-            imgSrc={searchImg}
-            hasFeatureTitle = {true}
-            title="☁️ Multi-Cluster and Multi-Cloud."
-            desc="Natural support for Multi-Cluster and Multi-Cloud."
-          />
-          <FeatureBlock
-            reverse={true}
-            imgSrc={searchImg}
-            hasFeatureTitle = {true}
-            title="🔍 User friendly search way."
-            desc="Karpor offers a nifty SQL query feature that allows you to search and filter all Kubernetes resources within managed clusters using familiar SQL syntax and provides targeted optimizations and enhancements for multi-cluster resource searches."
-          />
-          <FeatureBlock
-            reverse={false}
-            imgSrc={complianceImg}
-            hasFeatureTitle = {true}
-            title="🔒 Security compliance."
-            desc="Karpor automatically detects and evaluates whether all resources in the current resource or resource group comply with specific compliance standards and security policies, helping you ensure the security and compliance of the cluster and resources."
-          />
         </div>
       </div>
+      <h2 style={{ paddingBottom: "14px", borderBottom: "2px solid #f1f1f1"}}>🎖️ Opensource Contributors</h2>
       <div
         style={{
             display: "flex",
@@ -167,8 +168,7 @@ export const Content = () => {
             padding: "40px 10px",
           }}
         >
-        <p style={{ fontSize: 26 }}>Opensource Contributors 🎖️</p>
-        <div style={{ width: "80%", margin: "10px" }}>
+        <div style={{ width: "100%", margin: "10px" }}>
           <img src="https://contrib.rocks/image?repo=KusionStack/kusion" />
         </div>
       </div>
