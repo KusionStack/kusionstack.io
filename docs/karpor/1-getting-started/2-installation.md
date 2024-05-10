@@ -4,6 +4,8 @@ title: Installation
 
 This guide will walk you through the installation process of karpor, a cloud-native multi-cluster search and insights software. The installation process consists of three steps: creating a cluster using kind, installing karpor's manifest. Finally, you can access karpor's dashboard.
 
+![Install](./assets/2-installation/install.gif)
+
 ## Prerequisites
 
 * Ensure [kubectl](https://kubernetes.io/docs/tasks/tools/) is installed.
@@ -14,9 +16,9 @@ This guide will walk you through the installation process of karpor, a cloud-nat
 
 First, you need to create a Kubernetes cluster in your local environment. We will use the `kind` tool to create the cluster. Follow these steps:
 
-1. Create a cluster. You can create a cluster named karpor-cluster using the following command:
+1. Create a cluster. You can create a cluster named demo-cluster using the following command:
    ```shell
-   kind create cluster --name karpor-cluster
+   kind create cluster --name demo-cluster
    ```
    This will create a new Kubernetes cluster in your local Docker environment. Wait for a moment until the cluster creation is complete.
 2. Verify that the cluster is running properly by executing the command:
@@ -31,7 +33,7 @@ After creating the cluster, proceed with the installation of karpor:
 1. Run the following command to install Karpor using Helm:
    ```shell
    helm repo add kusionstack https://kusionstack.github.io/charts && \
-   helm repo update kusionstack && \
+   helm repo update && \
    helm install karpor kusionstack/karpor
    ```
 2. Wait for the installation of karpor to complete. You can check the status of karpor installation by running the following command:
@@ -51,9 +53,11 @@ After creating the cluster, proceed with the installation of karpor:
    ```shell
    https://127.0.0.1:7443
    ```
-   This will take you to the karpor dashboard.
+   This will take you to the karpor dashboard. 👇
 
-Congratulations! You have successfully installed karpor. Now you can start using karpor for multi-cluster search and insights.
+![Open in Browser](./assets/2-installation/open-in-browser.gif)
+
+Congratulations! 🎉 You have successfully installed karpor. Now you can start using karpor for multi-cluster search and insights.
 
 Please note that this guide only provides a quick start for karpor, and you may need to refer to additional documentation and resources to configure and use other features of karpor.
 
