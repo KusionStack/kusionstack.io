@@ -5,13 +5,14 @@ slug: /
 ---
 
 import { AiOutlineArrowRight } from "react-icons/ai";
-import logoImg from "../assets/logo-full.png";
+import logoImg from "@site/static/karpor/assets/logo-full.png";
 import karporImg from "./assets/1-overview/image-20240321210511142.png";
 import helmImg from "./assets/1-overview/image-20240424205955985.png"
 import searchImg from "../3-user-guide/assets/2-search/image-20240326213930086.png"
 import complianceImg from "../3-user-guide/assets/3-insight/image-20240328173635251.png"
 import GithubStars from "@site/src/components/GithubStars";
 import KarporButton from "@site/src/components/KarporButton";
+import ReactPlayer from 'react-player'
 
 export const FeatureBlock = ({
   imgSrc = karporImg,
@@ -77,8 +78,8 @@ export const Content = () => {
           Limitless Insight 📊. <span style={{ fontWeight: "normal"}}>With AI.<sup
           style={{ fontSize: 11 }}>coming soon </sup></span>✨
         </div>
-        <div style={{ width: "100%", height: "100%", marginTop: 20 }}>
-          <img style={{ width: "100%", height: "100%" }} src={karporImg} />
+        <div style={{ maxWidth: "100%", marginTop: 20 }}>
+          <ReactPlayer playing controls url='/karpor/assets/demo.mp4' />
         </div>
       </div>
       <div>
