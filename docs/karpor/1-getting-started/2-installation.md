@@ -4,8 +4,6 @@ title: Installation
 
 This guide will walk you through the installation process of karpor, a cloud-native multi-cluster search and insights software. The installation process consists of three steps: creating a cluster using kind, installing karpor's manifest. Finally, you can access karpor's dashboard.
 
-![Install](./assets/2-installation/install.gif)
-
 ## Prerequisites
 
 * Ensure [kubectl](https://kubernetes.io/docs/tasks/tools/) is installed.
@@ -41,6 +39,8 @@ After creating the cluster, proceed with the installation of karpor:
    kubectl get pods -n karpor
    ```
    When all the karpor pods are in the Running state, it means the installation is complete.
+
+![Install](./assets/2-installation/install.gif)
 
 ## Step 3: Access Karpor Dashboard
 
