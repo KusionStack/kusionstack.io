@@ -233,14 +233,18 @@ export const Content = () => {
       <div
         style={{
           ...flexDirectionStyle,
-          padding: "30px 10px",
+          padding: "10px 10px 30px 10px",
           margin: "10px",
+          justifyContent: "center",
+          fontSize: 18
         }}
       >
-        <div>
-          <p>Thanks all! 🍻</p>
-          <p>View <a href="developer-guide/contribution-guide/">Contributing Guide</a>, welcome to join us! 👇</p>
-        </div>
+        <p style={{marginBottom: 10}}>Thanks all! 🍻</p>
+        <p>
+          View{" "}
+          <a href="developer-guide/contribution-guide/">Contributing Guide</a>,
+          welcome to join us! 👇
+        </p>
         <img src="https://contrib.rocks/image?repo=KusionStack/kusion" />
       </div>
       <h2 style={h2Style}>👉 Next Step</h2>
