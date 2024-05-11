@@ -52,3 +52,8 @@ Here are visuals demonstrating the Insight interface:
 ![](../3-user-guide/assets/3-insight/image-20240327205459514.png)
 ![](../3-user-guide/assets/3-insight/image-20240328172844614.png)
 ![](../3-user-guide/assets/3-insight/image-20240328173635251.png)
+
+## Next Step
+- Learn Karpor's [Architecture](../concepts/architecture) and [Glossary](../concepts/glossary).
+- View [User Guide](../user-guide/multi-cluster-management) to look on more of what you can achieve with Karpor.
+

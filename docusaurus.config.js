@@ -161,7 +161,7 @@ const config = {
       // hideableSidebar: true,
       docs: {
         sidebar: {
-          autoCollapseCategories: true,
+          autoCollapseCategories: false,
         },
       },
       announcementBar: {
