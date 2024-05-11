@@ -7,10 +7,14 @@ title: Quick Start
 To install Karpor, execute the following command in your terminal:
 
 ```shell
-git clone https://github.com/KusionStack/karpor.git && cd karpor/charts && helm install karpor ./karpor
+helm repo add kusionstack https://kusionstack.github.io/charts && \
+helm repo update && \
+helm install karpor kusionstack/karpor
 ```
 
-This command will clone the Karpor repository from GitHub and use Helm to install the Karpor chart. For a more comprehensive set of installation instructions, please refer to the [Installation Documentation](2-installation.md).
+This command will clone the Karpor repository from GitHub and use Helm to install the Karpor chart. For more installation details, please refer to the [Installation Documentation](2-installation.md).
+
+![Install](./assets/2-installation/install.gif)
 
 ## Register Cluster
 
