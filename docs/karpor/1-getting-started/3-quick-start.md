@@ -26,7 +26,7 @@ To register a new cluster with Karpor, follow these steps:
 
 An example of the registration button can be seen in the image below:
 
-![](../3-user-guide/assets/1-multi-cluster-management/register-cluster-1.png)
+![](/karpor/assets/cluster-mng/cluster-mng-register-new-cluster.png)
 
 For a more detailed explanation of the registration process, refer to the [Multi-cluster management](../3-user-guide/1-multi-cluster-management.md) Documentation.
 
@@ -39,7 +39,8 @@ Karpor provides a powerful search feature that allows you to quickly find resour
 
 Here is an example of the `Search` interface:
 
-![](../3-user-guide/assets/2-search/image-20240326213930086.png)
+![](/karpor/assets/search/search-auto-complete.png)
+![](/karpor/assets/search/search-result.png)
 
 To learn more about the search capabilities and how to use them effectively, check out the [Search Methodology Documentation](../5-references/3-search-methods.md).
 
@@ -49,9 +50,9 @@ By selecting a result from your search, you can delve into the `Insight` page, w
 
 Here are visuals demonstrating the Insight interface:
 
-![](../3-user-guide/assets/3-insight/image-20240327205459514.png)
-![](../3-user-guide/assets/3-insight/image-20240328172844614.png)
-![](../3-user-guide/assets/3-insight/image-20240328173635251.png)
+![](/karpor/assets/insight/insight-home.png)
+![](/karpor/assets/insight/insight-single-issue.png)
+![](/karpor/assets/insight/insight-topology.png)
 
 ## Next Step
 - Learn Karpor's [Architecture](../concepts/architecture) and [Glossary](../concepts/glossary).

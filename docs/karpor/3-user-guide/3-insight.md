@@ -15,27 +15,25 @@ If you are not familiar with relevant concepts, you can refer to the [Glossary](
 ### Inspecting Specific Resources
 
 1. Search for the resource you are interested in:
-   ![](assets/3-insight/image-20240327205411812.png)
+   ![](/karpor/assets/search/search-home.png)
 
 2. On the search results page, all resources filtered by the criteria will be listed:
-   ![](assets/3-insight/image-20240327205358940.png)
+   ![](/karpor/assets/search/search-result.png)
 
 3. Click on any resource name to jump to that resource's insight page:
-   ![](assets/3-insight/image-20240327205459514.png)
+   ![](/karpor/assets/insight/insight-home.png)
 
 ### Inspecting Specific Resource Groups
 
 You may notice that in each search result entry, tags for `Cluster`, `Kind`, `Namespace`, etc., of the resource are listed. Please note that these tags are **hyperlinks**, which we refer to as "**anchor points**". These represent the links to a particular resource group or a resource. By clicking on these **anchor points**, you can quickly jump to the insight page of that resource group or resource.
 
-![](assets/3-insight/image-20240327205846057.png)
+![](/karpor/assets/search/search-result.png)
 
 ### Flexible Switching Between Resource Groups/Resources
 
 In fact, besides the tags in the mentioned search results, any resource/resource group names you see on any page can be re-directed to as `anchor` points, which serve like space-time wormholes, allowing you to traverse back and forth through any dimension until you find the resources you are searching for. Both search and anchor points are means to expedite the retrieval, which are key features of Karpor as a Kubernetes Explorer.
 
-![](assets/3-insight/image-20240327210019264.png)
-
-![](assets/3-insight/image-20240327210137857.png)
+![](/karpor/assets/insight/insight-breadcrumbs.png)
 
 ## Creating Custom Resource Groups
 
@@ -57,22 +55,22 @@ If you are on:
     3. Namespace Insight Page, the overview card shows the affiliated cluster, namespace, and the most abundant resource types under the current namespace.
 2. Resource Insight Page, the overview card shows the current resource's name, GVK information, affiliated cluster, and namespace.
 
-⚠️ Attention: No matter which resource group insight page you are on, the overview card will display a health score.
+⚠️ **Attention**: No matter which resource group insight page you are on, the overview card will display a health score.
 
 ## Audit Report
 
 This section will introduce the compliance scan feature, primarily used to detect and assess whether all resources in the current resource or resource group comply with specific compliance standards and security policies. Through learning in this section, you will understand how to effectively utilize the compliance scan feature to ensure the security and compliance of the cluster and resources.
 
-If you're not familiar with **audit report** or **risk** related concepts, you can refer to the [Glossary](../2-concepts/3-glossary.md) section.
+If you're not familiar with **Issue Report** or **Risk** related concepts, you can refer to the [Glossary](../2-concepts/3-glossary.md) section.
 
 1. Follow the guidance on [Inspecting Any Resource Group and Resource](#inspecting-any-resource-group-and-resource) and resource to navigate to the insights page of a particular resource group/resource.
-2. In the top right corner of the page, you can see the **Issue Report** card of the resource.
-   ![](assets/3-insight/image-20240328172844614.png)
-3. This card displays the **risks** identified during the scan of the current resource or all the resources under the resource group, categorized by risk level. Under each risk level tag, risks are sorted from highest to lowest occurrence. Each risk entry shows the title, description, number of occurrences, and scanning tool.
+2. You can see the **Issue Report** card of the resource.
+   ![](/karpor/assets/insight/insight-home.png)
+3. This card displays the **Risk** identified during the scan of the current resource or all the resources under the resource group, categorized by risk level. Under each risk level tag, risks are sorted from highest to lowest occurrence. Each risk entry shows the title, description, number of occurrences, and scanning tool.
 4. Clicking on a specific risk will display a popup with details of the risk.
-   ![](assets/3-insight/image-20240328173437463.png)
+   ![](/karpor/assets/insight/insight-single-issue.png)
 5. Click on <kbd>View All Risks</kbd>, and a drawer will pop out listing all the risks. Here, you can search, categorize, paginate, etc
-   ![](assets/3-insight/image-20240328173635251.png)
+   ![](/karpor/assets/insight/insight-all-issues.png)
 6. Once you have resolved a risk following its indications, you can click the [Rescan] button, which will trigger a comprehensive compliance scan of all resources under the resource group. The interface will display the new results once the scan is completed.
 
 ## Resource Topology
@@ -81,15 +79,16 @@ In this section, we will explore the topology feature in Karpor. The topology vi
 
 1. Follow the guidance on [Inspecting Any Resource Group and Resource](#inspecting-any-resource-group-and-resource) to navigate to the insights page of a particular resource group/resource.
 2. At the bottom of the page, you can see the resource topology map.
+   ![](/karpor/assets/insight/insight-topology.png)
 3. Depending on the current page:
     1. Resource Insights Page:
         1. The map will display relevant upstream and downstream resources related to the current resource. For example, if the current resource is a Deployment, the topology map will show the ReplicaSet under the Deployment and the Pods under the ReplicaSet.
-           ![](assets/3-insight/image-20240328165950585.png)
+           ![](/karpor/assets/insight/insight-topology-example.png)
         2. Clicking on a node in the resource topology map is equivalent to clicking on an anchor of a specific resource, which will directly navigate to the insights page of that resource.
     2. Resource Group Insights Page:
         1. The map will intuitively show the quantity and relationship of all types of resources under the current resource group.
         2. Clicking on a node in the resource topology map is equivalent to clicking on a resource type, and the list below will refresh with all the resources under a specific type within the current resource group.
-           ![](assets/3-insight/image-20240327210213409.png)
+           ![](/karpor/assets/insight/insight-linkage.png)
 
 ## Conclusion
 
