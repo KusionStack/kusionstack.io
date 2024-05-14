@@ -35,6 +35,7 @@
     "remark-math": "^3.0.1",
     "throttle-debounce": "3.0.1",
     "trim": "0.0.3",
+    "typed.js": "^2.1.0",
     "url-loader": "^4.1.1"
   },
   "browserslist": {

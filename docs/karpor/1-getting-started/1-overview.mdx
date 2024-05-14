@@ -12,7 +12,7 @@ import lowBurdenImg from "@site/static/karpor/assets/overview/low-burden.png";
 import GithubStars from "@site/src/components/GithubStars";
 import KarporButton from "@site/src/components/KarporButton";
 import ReactPlayer from "react-player";
-
+import Typed from 'typed.js';
 
 export const FeatureBlock = ({
   title,
@@ -65,6 +65,21 @@ export const Content = () => {
     flexDirection: "column",
     alignItems: "center",
   };
+  // Setup typed animation
+  const el = React.useRef(null);
+  React.useEffect(() => {
+    const typed = new Typed(el.current, {
+      strings: ['<b>Search</b> Resources, for <b>SRE</b>.', '<b>Understand</b> Cluster, for <b>Ops</b>.',
+      '<b>Connect</b> Multi-Cluster, for <b>PaaS</b>.'],
+      typeSpeed: 40,
+      backDelay: 1500,
+      loop: true
+    });
+    return () => {
+      // Destroy Typed instance during cleanup to stop animation
+      typed.destroy();
+    };
+  }, []);
   return (
     <>
       <div
@@ -104,6 +119,9 @@ export const Content = () => {
           Limitless Insight 📊. <span style={{ fontWeight: "normal" }}>
             With AI.<sup style={{ fontSize: 11 }}>coming soon </sup>
           </span>✨
+        </div>
+        <div style={{ fontSize: 26, fontWeight: "Normal" }}>
+          <span ref={el} />
         </div>
       </div>
       <div>
