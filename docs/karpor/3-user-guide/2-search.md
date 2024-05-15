@@ -7,6 +7,7 @@ We support two methods of search:
 
 - **Search by SQL**: Perform resource searches using SQL query language.
 - **Search by DSL**: Conduct resource searches through `Karpor`'s Domain Specific Language (DSL).
+- **Search by Natural Language**: Using natural language for resource search.
 
 ## Search by SQL
 
@@ -27,6 +28,10 @@ Below are the steps to use Search by SQL:
 
 4. **Advanced features**: Utilize our built-in advanced SQL syntax, such as sorting, full-text search, etc., to refine your search further. For details, please refer to: [Search Methodology Documentation](../5-references/3-search-methods.md).
 
-## Search by SQL
+## Search by DSL
+
+Coming soon. 🚧
+
+## Search by Natural Language
 
 Coming soon. 🚧
