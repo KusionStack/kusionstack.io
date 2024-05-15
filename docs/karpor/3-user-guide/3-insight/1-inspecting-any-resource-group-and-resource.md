@@ -4,7 +4,7 @@ title: Inspecting Any Resource Group and Resource
 
 In this part, we will explain in detail through clear steps and examples how to use Karpor to inspect any resource group or resource.
 
-If you are not familiar with relevant concepts, you can refer to the [Glossary](../2-concepts/3-glossary.md) section.
+If you are not familiar with relevant concepts, you can refer to the [Glossary](../../2-concepts/3-glossary.md) section.
 
 ## Inspecting Specific Resources
 

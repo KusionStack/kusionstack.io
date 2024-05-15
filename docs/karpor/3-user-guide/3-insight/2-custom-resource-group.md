@@ -6,7 +6,7 @@ title: Custom Resource Group
 
 This section will focus on how to create custom resource group within Karpor. Through custom resource group, you can flexibly manage and organize resources in Karpor according to your own needs and logical concepts. We will guide you step by step to create and define custom resource group and show you how to use these groups for resource insight and management.
 
-If you're not familiar with **Resource Group** and **Resource Group Rule** related concepts, you can refer to the [Glossary](../2-concepts/3-glossary.md) section.
+If you're not familiar with **Resource Group** and **Resource Group Rule** related concepts, you can refer to the [Glossary](../../2-concepts/3-glossary.md) section.
 
 **Let's assume** that within your organization or company, there is a concept of `application unit` that represent **all resources of an application in a certain environment**.
 

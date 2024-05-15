@@ -4,7 +4,7 @@ title: Compliance Report
 
 This section will introduce the compliance scan feature, primarily used to detect and assess whether all resources in the current resource or resource group comply with specific compliance standards and security policies. Through learning in this section, you will understand how to effectively utilize the compliance scan feature to ensure the security and compliance of the cluster and resources.
 
-If you're not familiar with **Compliance Report** or **Risk** related concepts, you can refer to the [Glossary](../2-concepts/3-glossary.md) section.
+If you're not familiar with **Compliance Report** or **Risk** related concepts, you can refer to the [Glossary](../../2-concepts/3-glossary.md) section.
 
 1. Follow the guidance on [Inspecting Any Resource Group and Resource](#inspecting-any-resource-group-and-resource) and resource to navigate to the insights page of a particular resource group/resource.
 2. You can see the **Compliance Report** card of the resource.
