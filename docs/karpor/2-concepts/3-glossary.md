@@ -8,7 +8,7 @@ Equivalent to the concept of a cluster in `Kubernetes`, such as a cluster named 
 
 `Karpor` can manage multiple clusters, including cluster registration, certificate rotation, generating and viewing insights, and other operations through a Dashboard. It also supports accessing any managed cluster using a unified certificate issued by `Karpor` through command-line tools such as `kubectl` and `kubectx`.
 
-For more details, please refer to the best practice: [One Pass with Proxy](../3-user-guide/4-best-production-practices/1-one-pass-with-proxy.md)
+For more details, please refer to the best practice: [One Pass with Proxy](../3-user-guide/4-best-production-practices/1-one-pass-with-proxy.md).
 
 ## Resource
 
@@ -18,13 +18,13 @@ Equivalent to the resource concept in `Kubernetes`, such as a `Deployment` named
 
 ## Resource Group
 
-**A resource group is a logical organizational structure** used to combine related `Kubernetes` resources for a more intuitive view, search, and insight experience. For example, an `Application` named `mockapp` resource group can be created to includes a `Namespace`, a `Deployment`, and multiple `Pods`, all with a specific label such as `application_name: mockapp`.
-
-`Karpor` supports three default resource groups out-of-the-box - `Cluster`, `Kind`, and `Namespace` - as well as user-defined resource group rules.
+**A resource group is a logical organizational structure** used to combine related `Kubernetes` resources for a more intuitive view, search, and insight experience. For example, an `Application` named `mockapp` resource group can be created to includes a `Namespace`, a `Deployment`, and multiple `Pods`, all with a specific label such as `app.kubernetes.io/name: mockapp`.
 
 ## Resource Group Rule
 
-**A resource group rule is a set of conditions** that guide the decision-making process for putting specific resources into appropriate resource groups. These rules aim to organize resources into logical units based on properties such as `annotations`, `labels`, `namespace`, and so on. For example, to define an Application resource group rule, you can specify the `app.kubernetes.io/name` `annotation` as a grouping condition.
+**A resource group rule is a set of conditions** that guide the decision-making process for putting specific resources into appropriate resource groups. These rules aim to organize resources into logical units based on properties such as `annotations`, `labels`, `namespace`, and so on. For example, to define an Application resource group rule, you can specify the `app.kubernetes.io/name` annotation as a grouping condition.
+
+`Karpor` has a preset resource group rule - `Namespace` - as well as custom resource group rules.
 
 ![](assets/3-glossary/image-20240326171327110.png)
 
