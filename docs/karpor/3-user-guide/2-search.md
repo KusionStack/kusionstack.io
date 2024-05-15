@@ -3,7 +3,7 @@ title: How to Search
 ---
 Within this section, we will explore how to perform multi-cluster resource searches using Karpor, with this guide being done entirely through the Web UI.
 
-We support two methods of search:
+We support three methods of search:
 
 - **Search by SQL**: Perform resource searches using SQL query language.
 - **Search by DSL**: Conduct resource searches through `Karpor`'s Domain Specific Language (DSL).
