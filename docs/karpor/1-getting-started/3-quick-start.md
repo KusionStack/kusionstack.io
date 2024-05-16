@@ -2,19 +2,58 @@
 title: Quick Start
 ---
 
-## Install of Karpor
+## Prerequisites
+
+* Ensure [kubectl](https://kubernetes.io/docs/tasks/tools/) is installed.
+* Ensure [helm](https://helm.sh/docs/intro/install/) is installed.
+* If you do not have a ready-made cluster, you still need a [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation/).
+
+## Create Cluster (Optional)
+
+First, if you do not have a ready-made cluster, you need to create a kubernetes cluster in your local environment with the `kind` tool. Follow these steps:
+
+1. Create a cluster. You can create a cluster named demo-cluster using the following command:
+   ```shell
+   kind create cluster --name demo-cluster
+   ```
+   This will create a new Kubernetes cluster in your local Docker environment. Wait for a moment until the cluster creation is complete.
+2. Verify that the cluster is running properly by executing the command:
+   ```shell
+   kubectl cluster-info
+   ```
+   If everything is set up correctly, you'll see information about your Kubernetes cluster.
+
+
+## Installation
 
 To install Karpor, execute the following command in your terminal:
 
 ```shell
-helm repo add kusionstack https://kusionstack.github.io/charts && \
-helm repo update && \
+helm repo add kusionstack https://kusionstack.github.io/charts
+helm repo update
 helm install karpor kusionstack/karpor
 ```
 
-This command will clone the Karpor repository from GitHub and use Helm to install the Karpor chart. For more installation details, please refer to the [Installation Documentation](2-installation.md).
+For more installation details, please refer to the [Installation Documentation](2-installation.md).
 
 ![Install](./assets/2-installation/install.gif)
+
+## Access Web UI of Karpor
+
+1. Run the following command to forward the karpor server port:
+   ```shell
+   kubectl -n karpor port-forward service/karpor-server 7443:7443
+   ```
+   This will create a port forward from your local machine to the karpor server.
+2. Open your browser and enter the following URL:
+   ```shell
+   https://127.0.0.1:7443
+   ```
+   This will take you to the karpor dashboard. 👇
+
+![Open in Browser](./assets/2-installation/open-in-browser.gif)
+
+Congratulations! 🎉 You have successfully installed karpor. Now you can start using karpor for multi-cluster search and insights.
 
 ## Register Cluster
 
@@ -53,6 +92,12 @@ Here are visuals demonstrating the Insight interface:
 ![](/karpor/assets/insight/insight-home.png)
 ![](/karpor/assets/insight/insight-single-issue.png)
 ![](/karpor/assets/insight/insight-topology.png)
+
+## Conclusion
+
+Please note that this guide only provides a quick start for karpor, and you may need to refer to additional documentation and resources to configure and use other features of karpor.
+
+If you have any questions or concerns, feel free to consult the official documentation of karpor or seek relevant support.
 
 ## Next Step
 - Learn Karpor's [Architecture](../concepts/architecture) and [Glossary](../concepts/glossary).
