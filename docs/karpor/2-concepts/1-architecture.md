@@ -2,16 +2,14 @@
 title: Architecture
 ---
 
-## Architecture
-
-![](assets/1-architecture/flowchart.png)
+![](assets/1-architecture/architecture.png)
 
 ## Components
 
--   Dashboard: Web UI for Karpor.
--   Server: Main Backend Server for Karpor.
--   Syncer: Independent Server to synchronize cluster resources in real-time.
--   Storage: Storage Backend to store the synchronized resources and user data.
+-   `Dashboard`: Web UI for Karpor.
+-   `Server`: Main Backend Server for Karpor.
+-   `Syncer`: Independent Server to synchronize cluster resources in real-time.
+-   `Storage`: Storage Backend to store the synchronized resources and user data.
 
 ## How Karpor Works
 
