@@ -1,7 +1,7 @@
 ---
 title: How to Search
 ---
-Within this section, we will explore how to perform multi-cluster resource searches using Karpor, with this guide being done entirely through the Web UI.
+Within this section, we will explore how to perform multi-cluster resource searches using Karpor, with this guide being done entirely through the Dashboard.
 
 We support three methods of search:
 

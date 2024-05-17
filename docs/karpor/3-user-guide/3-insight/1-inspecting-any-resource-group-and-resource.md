@@ -25,7 +25,7 @@ You may notice that in each search result entry, tags for `Cluster`, `Kind`, `Na
 
 ## Flexible Switching Between Resource Groups/Resources
 
-In fact, besides the tags in the mentioned search results, any resource/resource group names you see on any page can be re-directed to as `anchor` points, which serve like space-time wormholes, allowing you to traverse back and forth through any dimension until you find the resources you are searching for. Both search and anchor points are means to expedite the retrieval, which are key features of Karpor as a Kubernetes Explorer.
+In fact, besides the tags in the mentioned search results, any resource/resource group names you see on any page can be re-directed to as **anchor points**, which serve like space-time wormholes, allowing you to traverse back and forth through any dimension until you find the resources you are searching for. Both search and anchor points are means to expedite the retrieval, which are key features of Karpor as a Kubernetes Explorer.
 
 ![](/karpor/assets/insight/insight-breadcrumbs.png)
 

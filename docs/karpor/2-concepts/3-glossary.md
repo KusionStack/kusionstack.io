@@ -14,7 +14,7 @@ For more details, please refer to the best practice: [One Pass with Proxy](../3-
 
 Equivalent to the resource concept in `Kubernetes`, such as a `Deployment` named `mockDeployment`.
 
-`Karpor` performs real-time synchronization, search, and insights on all resources within the managed clusters. A resource is the object with the smallest granularity for searching and insights in `Karpor`.
+`Karpor` performs real-time synchronization, search, and insights on resources within the managed clusters. A resource is the object with the smallest granularity for searching and insights in `Karpor`.
 
 ## Resource Group
 
@@ -22,7 +22,7 @@ Equivalent to the resource concept in `Kubernetes`, such as a `Deployment` named
 
 ## Resource Group Rule
 
-**A resource group rule is a set of conditions** that guide the decision-making process for putting specific resources into appropriate resource groups. These rules aim to organize resources into logical units based on properties such as `annotations`, `labels`, `namespace`, and so on. For example, to define an Application resource group rule, you can specify the `app.kubernetes.io/name` annotation as a grouping condition.
+**A resource group rule is a set of conditions** that groups specific resources into appropriate resource groups. These rules aim to organize resources into logical units based on properties such as `annotations`, `labels`, `namespace`, and so on. For example, to define an Application resource group rule, you can specify the `app.kubernetes.io/name` annotation as a grouping condition.
 
 `Karpor` has a preset resource group rule - `Namespace` - as well as custom resource group rules.
 
@@ -38,11 +38,11 @@ Audit refers to **performing a compliance scan on all resources within a given r
 
 ## Issue
 
-**The output of the audit is referred to as issues**. If there are no problems with the scanned object, the audit results will be empty. Otherwise, all identified risks will be categorized by their risk level and displayed, including descriptions of each risk, associated resources, etc., guiding users to fix the issues and ensure the security and compliance of the cluster resources.
+**The output of the audit is referred to as issues**. If there are no problems with the scanned object, the audit results will be empty. Otherwise, all identified risks will be categorized by their risk level and displayed, including descriptions of each risk, associated resources, etc., guiding users to fix the issues, ensure the security and compliance of the cluster resources.
 
 ## Score
 
-The score is used to reflect the **overall health status of a resource group or a resource**, reminding users to take timely adjustments and measures. The health score is calculated based on the resource group's audit results, and factors impacting the score include: **risk level**, **number of risks**, and **total number of resources**.
+The score is used to reflect the **overall health status of a resource group or a resource**, reminding users to take timely adjustments and measures. The health score is calculated based on the resource group's audit results. The factors that impact the score include: **risk level**, **number of risks**, and **total number of resources**.
 
 ## Next Step
 - Learn Karpor's [Architecture](../concepts/architecture).

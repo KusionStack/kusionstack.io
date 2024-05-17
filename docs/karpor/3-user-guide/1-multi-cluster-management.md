@@ -2,14 +2,14 @@
 title: Multi-Cluster Management
 ---
 
-Multi-cluster management allows for the registration of clusters into Karpor, enabling the search and insight across a large number of clusters.
+Multi-cluster management is the entrance to register clusters into Karpor, enabling search and insight capabilities across a large number of clusters.
 
 ## Register Cluster
 
 1. Click the <kbd>Cluster Management</kbd> Tab.
 2. Click the <kbd>Register Cluster</kbd> button.
    ![](/karpor/assets/cluster-mng/cluster-mng-empty.png)
-3. Input the cluster name. The cluster name must be unique and cannot be altered once created.
+3. Add the cluster name. The cluster name must be unique and CANNOT be altered once created.
 4. Upload the cluster's kubeconfig file. One with read permission is sufficient.
 5. Click the <kbd>Verify and Submit</kbd> button.
    ![](/karpor/assets/cluster-mng/cluster-mng-register-new-cluster.png)
@@ -18,7 +18,7 @@ Multi-cluster management allows for the registration of clusters into Karpor, en
 
 ## Edit Cluster
 
-The <kbd>Edit</kbd> button allows for modifications to the <kbd>Display Name</kbd> and <kbd>Description</kbd>, thus altering how the cluster's name and description appear on the frontend.
+The <kbd>Edit</kbd> button allows for modifications to the <kbd>Display Name</kbd> and <kbd>Description</kbd>, thus altering how the cluster's name and description appear on the Dashboard.
 ![](/karpor/assets/cluster-mng/cluster-mng-edit-cluster.png)
 
 ## Rotate Certificate

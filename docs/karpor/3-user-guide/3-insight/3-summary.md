@@ -2,7 +2,7 @@
 title: Summary
 ---
 
-In this section, we will learn about the `summary card` on the karpor insight page, which are used to quickly view and understand various statistics for the current resource group/resource.
+In this section, we will learn about the `summary card` on the Karpor insight page, which are used to quickly view and understand key metrics for the current resource group or resource.
 
 Under different resource groups, the content displayed by the `summary card` may also vary.
 
@@ -20,5 +20,5 @@ If you are on:
 2. **Resource Insight Page**, the summary card shows the **current resource's name, GVK information, affiliated cluster, and namespace.**
        ![](/karpor/assets/insight/insight-summary-resource.png)
 
-⚠️ **Attention**: No matter which resource group insight page you are on, the summary card will display a health score.
+⚠️ **Attention**: No matter which resource group insight page you are on, the summary card will always display a health score, calculated based on the risk compliance status of the subject.
 

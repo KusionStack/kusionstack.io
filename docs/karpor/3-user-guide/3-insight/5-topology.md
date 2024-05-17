@@ -4,7 +4,7 @@ title: Topology
 
 ## Topology
 
-In this section, we will explore the topology feature in Karpor. The topology view will help you more intuitively understand the relation and dependencies among various resources in your cluster. We will detail how to use the topology view.
+In this section, we will explore the topology feature in Karpor. The topology view will help you more intuitively understand the relationships and dependencies among various resources in your cluster. Here's how to use the topology view.
 
 1. Follow the guidance on [Inspecting Any Resource Group and Resource](#inspecting-any-resource-group-and-resource) to navigate to the insights page of a particular resource group/resource.
 2. At the bottom of the page, you can see the resource topology map.
