@@ -1,12 +1,13 @@
 ---
-title: Search
+title: How to Search
 ---
-Within this section, we will explore how to perform multi-cluster resource searches using Karpor, with this guide being done entirely through the Web UI.
+Within this section, we will explore how to perform multi-cluster resource searches using Karpor, with this guide being done entirely through the Dashboard.
 
-We support two methods of search:
+We support three methods of search:
 
 - **Search by SQL**: Perform resource searches using SQL query language.
 - **Search by DSL**: Conduct resource searches through `Karpor`'s Domain Specific Language (DSL).
+- **Search by Natural Language**: Using natural language for resource search.
 
 ## Search by SQL
 
@@ -17,16 +18,20 @@ SQL is one of the easily accessible skills for practitioners in the software eng
 Below are the steps to use Search by SQL:
 
 1. **Enter the Search page**: We designed the homepage as the entry point for search, so opening `Karpor`'s Web UI immediately presents you with the search page.
-   ![](assets/2-search/image-20240326213720692.png)
+   ![](/karpor/assets/search/search-home.png)
 
 2. **Compose SQL query statements**: Write your query statement using SQL syntax, specifying the cluster name, resource type, conditions, and filters you wish to search for. Additionally, if you enter a keyword and press a space, the search box will pop up with a dropdown with auto-completion, suggesting possible keywords you can type next.
-   ![](assets/2-search/image-20240326213930086.png)
+   ![](/karpor/assets/search/search-auto-complete.png)
 
 3. **Execute the query**: Click the 'search' button to execute the query and be sent to the search results page. Karpor will return a list of resources that match the SQL query.
-   ![](assets/2-search/image-20240326214005117.png)
+   ![](/karpor/assets/search/search-result.png)
 
 4. **Advanced features**: Utilize our built-in advanced SQL syntax, such as sorting, full-text search, etc., to refine your search further. For details, please refer to: [Search Methodology Documentation](../5-references/3-search-methods.md).
 
-## Search by SQL
+## Search by DSL
+
+Coming soon. 🚧
+
+## Search by Natural Language
 
 Coming soon. 🚧

@@ -2,62 +2,48 @@
 title: Installation
 ---
 
-This guide will walk you through the installation process of karpor, a cloud-native multi-cluster search and insights software. The installation process consists of three steps: creating a cluster using kind, installing karpor's manifest. Finally, you can access karpor's dashboard.
-
 ## Prerequisites
 
-* Ensure [kubectl](https://kubernetes.io/docs/tasks/tools/) is installed.
-* Ensure [helm](https://helm.sh/docs/intro/install/) is installed.
-* Ensure [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation/) is installed for local testing.
+* Ensure there is Kubernetes cluster available to install Karpor. For local installations, you can use Minikube or Kind.
 
-## Step 1: Create Cluster
+## Install with helm
 
-First, you need to create a Kubernetes cluster in your local environment. We will use the `kind` tool to create the cluster. Follow these steps:
+Karpor can be installed easily with helm v3.5+, which is a simple command-line tool and you can get it from [here](https://helm.sh/docs/intro/install/).
 
-1. Create a cluster. You can create a cluster named karpor-cluster using the following command:
-   ```shell
-   kind create cluster --name karpor-cluster
-   ```
-   This will create a new Kubernetes cluster in your local Docker environment. Wait for a moment until the cluster creation is complete.
-2. Verify that the cluster is running properly by executing the command:
-   ```shell
-   kubectl cluster-info
-   ```
-   If everything is set up correctly, you'll see information about your Kubernetes cluster.
+```shell
+helm repo add kusionstack https://kusionstack.github.io/charts
+helm repo update
+helm install karpor kusionstack/karpor
+```
 
-## Step 2: Install Karpor
+![Install](./assets/2-installation/install.gif)
 
-After creating the cluster, proceed with the installation of karpor:
-1. Clone the Karpor project using git and navigate to the charts/karpor directory:
-   ```shell
-   git clone https://github.com/KusionStack/karpor.git
-   cd charts
-   ```
-2. Run the following command to install Karpor using Helm:
-   ```shell
-   helm install karpor ./karpor
-   ```
-3. Wait for the installation of karpor to complete. You can check the status of karpor installation by running the following command:
-   ```shell
-   kubectl get pods -n karpor
-   ```
-   When all the karpor pods are in the Running state, it means the installation is complete.
+## Upgrade with helm
 
-## Step 3: Access Karpor Dashboard
+```shell
+helm repo add kusionstack https://kusionstack.github.io/charts
+helm repo update
 
-1. Run the following command to forward the karpor server port:
-   ```shell
-   kubectl -n karpor port-forward service/karpor-server 7443:7443
-   ```
-   This will create a port forward from your local machine to the karpor server.
-2. Open your browser and enter the following URL:
-   ```shell
-   https://127.0.0.1:7443
-   ```
-   This will take you to the karpor dashboard.
+# Upgrade to the latest version.
+helm upgrade karpor kusionstack/karpor
 
-Congratulations! You have successfully installed karpor. Now you can start using karpor for multi-cluster search and insights.
+# Upgrade to the specified version.
+helm upgrade karpor kusionstack/karpor --version 1.2.3
+```
 
-Please note that this guide only provides a quick start for karpor, and you may need to refer to additional documentation and resources to configure and use other features of karpor.
+## Install/Upgrade locally with helm
 
-If you have any questions or concerns, feel free to consult the official documentation of karpor or seek relevant support.
+If you have problem connecting to https://kusionstack.github.io/charts/ in production, you may need to manually download the chart from [here](https://github.com/KusionStack/charts) and use it to install or upgrade locally.
+
+```shell
+git clone https://github.com/KusionStack/charts.git
+helm install/upgrade karpor charts/karpor
+```
+
+## Uninstall
+
+To uninstall karpor:
+
+```shell
+helm uninstall karpor
+```

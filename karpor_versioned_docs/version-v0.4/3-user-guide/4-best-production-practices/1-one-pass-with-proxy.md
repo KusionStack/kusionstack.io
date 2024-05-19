@@ -14,7 +14,6 @@ With the thriving development of multiclusters, various platforms may need to ac
 
 As the number of users and clusters increases, cluster administrators face significant time costs: If there are `M` clusters and `N` users, the time complexity for managing KubeConfig becomes `O(M*N)`. Moreover, users need to switch between different KubeConfigs when accessing different clusters, and the corresponding permissions for KubeConfigs vary across clusters, undoubtedly adding to the complexity of use.
 
-
 ![Direct Connection: Users need to maintain multiple KubeConfigs](assets/1-one-pass-with-proxy/image-20240326163622363.png)
 
 Under these circumstances, is there a method to conveniently access resources in different clusters without maintaining a large number of KubeConfigs and managing various users' permissions across clusters? Moreover, this method should ideally be cloud-native, accessible through kubectl and Kubernetes' official client, to reduce the cost of transitioning to this method. The emergence of `Karpor` is to solve these problems.

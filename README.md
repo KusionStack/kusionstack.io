@@ -54,6 +54,7 @@ Optional sub product names:
 -   `docs` (alias for kusion)
 -   `operating`
 -   `ctrlmesh`
+-   `karpor`
 
 Format of version number: `[vMAJOR.MINOR]`, e.g. `v0.3`, `v0.13`.
 
