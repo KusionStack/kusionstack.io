@@ -1,0 +1,19 @@
+.stars_container {
+    height: 32px;
+    line-height: 32px;
+    padding: 0 20px;
+    border: 1px solid rgba(31, 35, 40, 0.15);
+    border-radius: 4px;
+    color: #24292f;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-weight: bold;
+    text-decoration: none;
+}
+.stars_container:hover {
+    background: #1677ff;
+    color: #fff;
+    text-decoration: none;
+}

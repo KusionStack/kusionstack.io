@@ -1,0 +1,307 @@
+---
+id: overview
+title: Overview
+slug: /
+---
+
+import { AiOutlineArrowRight } from "react-icons/ai";
+import logoImg from "@site/static/karpor/assets/logo/logo-full.png";
+import userFriendlyImg from "@site/static/karpor/assets/overview/user-friendly.png";
+import intelligentImg from "@site/static/karpor/assets/overview/intelligent.png";
+import lowBurdenImg from "@site/static/karpor/assets/overview/low-burden.png";
+import GithubStars from "@site/src/components/GithubStars";
+import KarporButton from "@site/src/components/KarporButton";
+import ReactPlayer from "react-player";
+import Typed from 'typed.js';
+
+export const FeatureBlock = ({
+  title,
+  reverse = false,
+  imgSrc,
+  imgAlt,
+  children,
+}) => {
+  const imgTd = (
+    <td
+      style={{
+        width: "60%",
+        verticalAlign: "middle",
+        border: "none",
+      }}
+    >
+      <img src={imgSrc} alt={imgAlt} />
+    </td>
+  );
+  return (
+    <>
+      <h3 align="center">{title}</h3>
+      <table style={{ fontSize: "16px", border: "none" }}>
+        <tr style={{ border: "none" }}>
+          {reverse ? (
+            <>
+              {imgTd}
+              {children}
+            </>
+          ) : (
+            <>
+              {children}
+              {imgTd}
+            </>
+          )}
+        </tr>
+      </table>
+    </>
+  );
+};
+
+export const Content = () => {
+  const h2Style = {
+    paddingBottom: "14px",
+    borderBottom: "2px solid #f1f1f1",
+    fontSize: 28,
+  };
+  const flexDirectionStyle = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  };
+  // Setup typed animation
+  const el = React.useRef(null);
+  React.useEffect(() => {
+    const typed = new Typed(el.current, {
+      strings: ['<b>Locate</b> resources, for <b>Developers</b>.',
+      '<b>Explore</b> cluster insights, for <b>Admins</b>.',
+      '<b>Connect</b> multi-clusters, for <b>Platforms</b>.'],
+      typeSpeed: 40,
+      backDelay: 1500,
+      loop: true
+    });
+    return () => {
+      // Destroy Typed instance during cleanup to stop animation
+      typed.destroy();
+    };
+  }, []);
+  return (
+    <>
+      <div
+        style={{
+          ...flexDirectionStyle,
+          padding: 20,
+          borderBottom: "2px solid #f1f1f1",
+        }}
+      >
+        <div style={{ width: "40%" }}>
+          <img src={logoImg} />
+        </div>
+        <div
+          style={{
+            paddingTop: "18px",
+            paddingBottom: "20px",
+            marginLeft: "-10px",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <div>
+            <KarporButton
+              url="https://karpor-demo.kusionstack.io"
+              btnText="Demo"
+            />
+          </div>
+          <div>
+            <GithubStars repo={"KusionStack/karpor"} />
+          </div>
+        </div>
+        <div style={{ fontSize: 26, fontWeight: "Bold" }}>
+          Intuitive Discovery 🔍,
+        </div>
+        <div style={{ fontSize: 26, fontWeight: "Bold" }}>
+          {" "}
+          Limitless Insight 📊. <span style={{ fontWeight: "normal" }}>
+            With AI.<sup style={{ fontSize: 11 }}>coming soon </sup>
+          </span>✨
+        </div>
+        <div style={{ fontSize: 22, fontWeight: "Normal" }}>
+          <span ref={el} />
+        </div>
+      </div>
+      <div>
+        <div
+          style={{
+            padding: "40px 0",
+            ...flexDirectionStyle,
+          }}
+        >
+          <div style={{ width: "100%" }}>
+            <h2 style={h2Style}>📖 What is Karpor?</h2>
+            <div style={{ padding: "5px 0px" }}>
+              Karpor is a Modern <b>Kubernetes Explorer</b> focusing on{" "}
+              <b>🔍 Search, 💡 Insight and 🤖 Intelligence</b>.
+            </div>
+            <div style={{ padding: "5px 0px" }}>
+              Karpor features keywords such as <u>self-host, non-invasive, read-only,
+              security & compliance, multi-cloud and multi-cluster support, customizable
+              logical view</u>, and can serve as a <b>Kubernetes Data
+              Plane</b>{" "}
+              to reduce the complexity of discovering and understanding kubernetes
+              resources.
+            </div>
+          </div>
+          <div style={{ width: "100%", padding: "10px" }}>
+            <div
+              style={{
+                width: "100%",
+                maxWidth: "100%",
+                marginTop: 20,
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <ReactPlayer
+                width="100%"
+                height="100%"
+                playing
+                loop
+                controls
+                url="/karpor/assets/overview/demo.mp4"
+              />
+            </div>
+          </div>
+        </div>
+        <div style={{ padding: "10px 0" }}>
+          <h2 style={h2Style}>💡 Why Karpor?</h2>
+          <div
+            style={{
+              width: "100%",
+              paddingTop: 20,
+              fontSize: 24,
+            }}
+          >
+            <FeatureBlock
+              title="🤝 User Friendly"
+              imgSrc={userFriendlyImg}
+              imgAlt="User Friendly"
+            >
+              <td style={{ verticalAlign: "middle", border: "none" }}>
+                <b>⚡️ Lightweight and Easy to Setup</b>
+                <br />
+                Done with one `helm install`.
+                <br />
+                <br />
+                <b>📦 Out of the Box</b>
+                <br />
+                Built-in security and compliance policies, resource syncing strategy,
+                resource transform rules, and topology relationship definitions.
+                <br />
+                <br />
+                <b>🔍 Quickly search and locate resource(s)</b>
+                <br />
+                Quickly search and locate resource(s) of interest across a large
+                number of clusters in a user-friendly way.
+              </td>
+            </FeatureBlock>
+            <br />
+            <FeatureBlock
+              title="✨ Intelligent"
+              imgSrc={intelligentImg}
+              reverse={true}
+              imgAlt="Intelligent"
+            >
+              <td style={{ verticalAlign: "middle", border: "none" }}>
+                <b>🔒 Compliance Reports</b>
+                <br />
+                Automatically identify potential risks and receive AI-driven
+                suggestions (coming soon) for remediation.
+                <br />
+                <br />
+                <b>🔒 Health Scoring </b>
+                <br />
+                Evaluate health scores for individual resources, clusters, 
+                namespaces, or customized logical groupings 
+                <br />
+                <br />
+                <b>📊 Topological views</b>
+                <br />
+                Topological views of relevant resources within their
+                operational context.
+              </td>
+            </FeatureBlock>
+            <br />
+            <FeatureBlock
+              title="⚡️ Low Burden"
+              imgSrc={lowBurdenImg}
+              imgAlt="Low Burden"
+            >
+              <td style={{ verticalAlign: "middle", border: "none" }}>
+                <b>🔒 Read-Only, Non-Invasive</b>
+                <br />
+                Read-Only data plane, Non-Invasive to user clusters.
+                <br />
+                <br />
+                <b>⚙️ Kubernetes Native API Compatible</b>
+                <br />
+                Seamless integration of existing kubernetes tool chain.
+                <br />
+                <br />
+                <b>☁️ Multi-Cluster and Multi-Cloud</b>
+                <br />
+                Natively connects Multi-Cluster and supports Multi-Cloud.
+              </td>
+            </FeatureBlock>
+            <br />
+          </div>
+        </div>
+      </div>
+      <h2 style={h2Style}>🎖️ Open Source Contributors</h2>
+      <div
+        style={{
+          ...flexDirectionStyle,
+          padding: "10px 10px 30px 10px",
+          margin: "10px",
+          justifyContent: "center",
+          fontSize: 18
+        }}
+      >
+        <p style={{marginBottom: 10}}>Thanks all! 🍻</p>
+        <p>
+          Follow{" "}
+          <a href="developer-guide/contribution-guide/">Contributing Guide</a>,
+          come and join us! 👇
+        </p>
+        <img src="https://contrib.rocks/image?repo=KusionStack/kusion" />
+      </div>
+      <h2 style={h2Style}>👉 Next Step</h2>
+      <div
+        style={{
+          padding: "10px",
+          margin: "10px",
+        }}
+      >
+        <ul>
+          <li>Try Karpor's <a href="getting-started/quick-start">Quick Start</a>.</li>
+          <li>Learn Karpor's <a href="concepts/architecture">Architecture</a>.</li>
+          <li>Follow <a href="user-guide/multi-cluster-management">User Guide</a> to learn more on what you can achieve with Karpor.</li>
+        </ul>
+      </div>
+    </>
+  );
+};
+
+<Content />
+
+<!--
+## Karpor vs. Others
+
+|                                | **Karpor** | **Kubevious** | **Clusterpedia** | **Kubeview** | **Kubernetes Dashboard** |
+| ------------------------------ | ----------- | ------------- | ---------------- | ------------ | ------------------------ |
+| Kubernetes-Native Support      | ✅           | ✅             | ✅                | ✅            | ✅                        |
+| Resource Search                | ✅           | ✅             | ✅                | ✅            | ✅                        |
+| Multi-Cluster Management       | ✅           | ✅             | ✅                | ❌            | ❌                        |
+| Resource Sync                  | ✅           | ❌             | ✅                | ❌            | ❌                        |
+| Cross-Cluster Search           | ✅           | ✅             | ✅                | ❌            | ❌                        |
+| Web UI                         | ✅           | ✅             | ❌                | ✅            | ✅                        |
+| Resource Relationship Topology | ✅           | ✅             | ❌                | ✅            | ❌                        |
+| Security Compliance            | ✅           | ✅             | ❌                | ❌            | ❌                        |
+| Logic View                     | ✅           | ❌             | ❌                | ❌            | ❌                        |
+
+-->

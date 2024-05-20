@@ -15,6 +15,10 @@
     "message": "ControllerMesh",
     "description": "Navbar item with label Ctrlmesh"
   },
+  "item.label.Karpor": {
+    "message": "Karpor",
+    "description": "Navbar item with label Karpor"
+  },
   "item.label.DevDoc": {
     "message": "Developing",
     "description": "Navbar item with label DevDoc"

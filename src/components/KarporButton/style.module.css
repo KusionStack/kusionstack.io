@@ -1,0 +1,22 @@
+.karbour_button a{
+  display: inline-block;
+  margin: 0 20px;
+  font-size: 14px;
+  height: 32px;
+  line-height: 32px;
+  padding: 0 20px;
+  border: 1px solid #1677ff;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #1677ff;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  text-decoration:none;
+}
+
+.karbour_button a:hover {
+  background: #1677ff;
+  color: #fff;
+  text-decoration:none;
+}
