@@ -53,7 +53,7 @@ If the `gopath` folder does not exist, create it with `mkdir ~/gopath`. These co
 <details>
   <summary>Manually installing golangci-lint</summary>
 
-You can install it manually following the [guide](https://golangci-lint.run/usage/install/#local-installation), or use the command:
+You can install it manually following the [guide](https://golangci-lint.run/welcome/install), or use the command:
 
 ```
 cd ~/go/ && curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.52.2
