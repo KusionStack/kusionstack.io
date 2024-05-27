@@ -4,7 +4,11 @@ title: Overview
 slug: /
 ---
 
-import { AiOutlineArrowRight } from "react-icons/ai";
+import {
+  AiOutlineArrowRight,
+  AiFillCheckCircle,
+  AiFillCloseCircle,
+} from "react-icons/ai";
 import logoImg from "@site/static/karpor/assets/logo/logo-full.png";
 import userFriendlyImg from "@site/static/karpor/assets/overview/user-friendly.png";
 import intelligentImg from "@site/static/karpor/assets/overview/intelligent.png";
@@ -12,7 +16,7 @@ import lowBurdenImg from "@site/static/karpor/assets/overview/low-burden.png";
 import GithubStars from "@site/src/components/GithubStars";
 import KarporButton from "@site/src/components/KarporButton";
 import ReactPlayer from "react-player";
-import Typed from 'typed.js';
+import Typed from "typed.js";
 
 export const FeatureBlock = ({
   title,
@@ -55,6 +59,38 @@ export const FeatureBlock = ({
 };
 
 export const Content = () => {
+  const karporVsOthers = [
+    {
+      label: "User Interface",
+      karpor: true,
+      kubernetesDashboard: true,
+      labelDesc: "",
+    },
+    {
+      label: "Multi-Cluster",
+      karpor: true,
+      kubernetesDashboard: false,
+      labelDesc: "Ability to connect to multiple clusters simultaneously",
+    },
+    {
+      label: "Aggregated Resource View",
+      karpor: true,
+      kubernetesDashboard: false,
+      labelDesc: "Human-friendly view for resources",
+    },
+    {
+      label: "Security Compliance",
+      karpor: true,
+      kubernetesDashboard: false,
+      labelDesc: "Automatic scanning risk, assessing health score",
+    },
+    {
+      label: "Resource Relationship Topology",
+      karpor: true,
+      kubernetesDashboard: false,
+      labelDesc: "Insight into the context of resources",
+    },
+  ];
   const h2Style = {
     paddingBottom: "14px",
     borderBottom: "2px solid #f1f1f1",
@@ -69,12 +105,14 @@ export const Content = () => {
   const el = React.useRef(null);
   React.useEffect(() => {
     const typed = new Typed(el.current, {
-      strings: ['<b>Locate</b> resources, for <b>Developers</b>.',
-      '<b>Explore</b> cluster insights, for <b>Admins</b>.',
-      '<b>Connect</b> multi-clusters, for <b>Platforms</b>.'],
+      strings: [
+        "<b>Locate</b> resources, for <b>Developers</b>.",
+        "<b>Explore</b> cluster insights, for <b>Admins</b>.",
+        "<b>Connect</b> multi-clusters, for <b>Platforms</b>.",
+      ],
       typeSpeed: 40,
       backDelay: 1500,
-      loop: true
+      loop: true,
     });
     return () => {
       // Destroy Typed instance during cleanup to stop animation
@@ -139,12 +177,13 @@ export const Content = () => {
               <b>🔍 Search, 💡 Insight and 🤖 Intelligence</b>.
             </div>
             <div style={{ padding: "5px 0px" }}>
-              Karpor features keywords such as <u>self-host, non-invasive, read-only,
-              security & compliance, multi-cloud and multi-cluster support, customizable
-              logical view</u>, and can serve as a <b>Kubernetes Data
-              Plane</b>{" "}
-              to reduce the complexity of discovering and understanding kubernetes
-              resources.
+              Karpor features keywords such as{" "}
+              <u>
+                self-host, non-invasive, read-only, security & compliance,
+                multi-cloud and multi-cluster support, customizable logical view
+              </u>
+              , and can serve as a <b>Kubernetes Data Plane</b> to reduce the complexity
+              of discovering and understanding kubernetes resources.
             </div>
           </div>
           <div style={{ width: "100%", padding: "10px" }}>
@@ -216,14 +255,14 @@ export const Content = () => {
                 <br />
                 <b>🔒 Health Scoring </b>
                 <br />
-                Evaluate health scores for individual resources, clusters, 
-                namespaces, or customized logical groupings 
+                Evaluate health scores for individual resources, clusters, namespaces,
+                or customized logical groupings
                 <br />
                 <br />
                 <b>📊 Topological views</b>
                 <br />
-                Topological views of relevant resources within their
-                operational context.
+                Topological views of relevant resources within their operational
+                context.
               </td>
             </FeatureBlock>
             <br />
@@ -252,6 +291,86 @@ export const Content = () => {
           </div>
         </div>
       </div>
+      <h2 style={h2Style}>🙌 Karpor vs. Kubernetes Dashboard</h2>
+      <div style={{
+          width: "100%",
+          padding: "10px 20px"
+      }}>
+        <div
+          style={{
+            height: 60,
+            display: "flex",
+            alignItems: "center",
+            borderBottom: "1px solid #ddd",
+          }}
+        >
+          <div
+            style={{
+              width: "40%",
+              fontSize: 20,
+              fontWeight: "bold",
+              padding: "0 10px",
+            }}
+          >
+          </div>
+          <div style={{ width: "30%", fontSize: 20, textAlign: "center" }}>
+            Karpor
+          </div>
+          <div style={{ width: "30%", fontSize: 20, textAlign: "center" }}>
+            Kubernetes Dashboard
+          </div>
+        </div>
+        {karporVsOthers?.map((item) => {
+          return (
+            <div
+              key={item?.label}
+              style={{
+                height: 60,
+                display: "flex",
+                alignItems: "center",
+                borderBottom: "1px solid #d8d8d8",
+              }}
+            >
+              <div style={{ width: "40%", fontSize: 18, padding: "0 10px" }}>
+                <div>{item?.label}</div>
+                {item?.labelDesc && (
+                  <div style={{ fontSize: 12 }}>{item?.labelDesc}</div>
+                )}
+              </div>
+              <div
+                style={{
+                  width: "30%",
+                  fontSize: 18,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                {item?.karpor ? (
+                  <AiFillCheckCircle style={{ color: "#87d068" }} />
+                ) : (
+                  <AiFillCloseCircle style={{ color: "#f50" }} />
+                )}
+              </div>
+              <div
+                style={{
+                  width: "30%",
+                  fontSize: 20,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                {item?.kubernetesDashboard ? (
+                  <AiFillCheckCircle style={{ color: "#87d068" }} />
+                ) : (
+                  <AiFillCloseCircle style={{ color: "#f50" }} />
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
       <h2 style={h2Style}>🎖️ Open Source Contributors</h2>
       <div
         style={{
@@ -259,10 +378,10 @@ export const Content = () => {
           padding: "10px 10px 30px 10px",
           margin: "10px",
           justifyContent: "center",
-          fontSize: 18
+          fontSize: 18,
         }}
       >
-        <p style={{marginBottom: 10}}>Thanks all! 🍻</p>
+        <p style={{ marginBottom: 10 }}>Thanks all! 🍻</p>
         <p>
           Follow{" "}
           <a href="developer-guide/contribution-guide/">Contributing Guide</a>,
@@ -278,9 +397,16 @@ export const Content = () => {
         }}
       >
         <ul>
-          <li>Try Karpor's <a href="getting-started/quick-start">Quick Start</a>.</li>
-          <li>Learn Karpor's <a href="concepts/architecture">Architecture</a>.</li>
-          <li>Follow <a href="user-guide/multi-cluster-management">User Guide</a> to learn more on what you can achieve with Karpor.</li>
+          <li>
+            Try Karpor's <a href="getting-started/quick-start">Quick Start</a>.
+          </li>
+          <li>
+            Learn Karpor's <a href="concepts/architecture">Architecture</a>.
+          </li>
+          <li>
+            Follow <a href="user-guide/multi-cluster-management">User Guide</a>{" "}
+            to learn more on what you can achieve with Karpor.
+          </li>
         </ul>
       </div>
     </>
@@ -289,16 +415,3 @@ export const Content = () => {
 
 <Content />
 
-<!--
-## Karpor vs. Kubernetes Dashboard 
-
-Here's a quick comparison between [Karpor](https://github.com/KusionStack/karpor) and [Kubernetes Dashboard](https://github.com/kubernetes/dashboard).
-
-|                                | **Karpor**  | **Kubernetes Dashboard** |
-| ------------------------------ | ----------- | ------------------------ |
-| User Interface                 | ✅          | ✅                       |
-| Multi-Cluster                  | ✅          | ❌                       |
-| Aggregated Resource View       | ✅          | ❌                       |
-| Security Compliance            | ✅          | ❌                       |
-| Resource Relationship Topology | ✅          | ❌                       |
--->
