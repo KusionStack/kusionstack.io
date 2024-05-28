@@ -11,7 +11,7 @@ The PodDecoration controller does not control the upgrade of Pods. The actual up
 About [CollaSet](collaset.md).
 # Example
 
-## Create CollaSet
+## 1. Create CollaSet
 
 ```yaml
 # collaset.yaml
@@ -49,7 +49,7 @@ foo-2wnnf      1/1     Running   0             41s
 foo-hqpx7      1/1     Running   0             41s
 foo-mqt48      1/1     Running   0             41s
 ```
-## Create PodDecoration
+## 2. Create PodDecoration
 
 The following `poddecoration.yaml` file describes a PodDecoration, which selects the pod under CollaSet `foo` and injects the content in `template` into the pod with `instance-id=0`.
 
@@ -58,7 +58,7 @@ The following `poddecoration.yaml` file describes a PodDecoration, which selects
 apiVersion: apps.kusionstack.io/v1alpha1
 kind: PodDecoration
 metadata:
-  name: sample-pd
+  name: poddecoration
 spec:
   selector:     # selected pod range in which PodDecoration takes effect
     matchLabels:
@@ -124,9 +124,9 @@ status:
   updatedRevision: sample-pd-9465f4c84
 ```
 
-## Update PodDecoration
+## 3. Update PodDecoration
 
-### Rolling update v1
+### 3.1. Rolling update v1
 
 Edit `sample-pd` to expand the upgrade scope.
 ```shell
@@ -147,8 +147,8 @@ spec:
           operator: In
           values:
           - "0"
-          - "1"  
-          - "2"  
+          - "1"   # add 
+          - "2"   # add 
   template:
     ...
 ```
@@ -187,7 +187,7 @@ status:
   currentRevision: sample-pd-9465f4c84
   updatedRevision: sample-pd-9465f4c84
 ```
-### Rolling update v1 -> v2
+### 3.2. Rolling update v1 -> v2
 
 
 Update `sample-pd`'s sidecar container image and `updateStrategy`.
@@ -198,7 +198,10 @@ $ kubectl edit pd sample-pd
 # poddecoration.yaml
 # Update sidecar-a's image with ubuntu:22.10
 # Edit updateStrategy to select instance-id in [0]
-...
+apiVersion: apps.kusionstack.io/v1alpha1
+kind: PodDecoration
+metadata:
+  name: poddecoration
 spec:
   ...
   updateStrategy:
@@ -262,6 +265,8 @@ status:
 ```yaml
 apiVersion: apps.kusionstack.io/v1alpha1
 kind: PodDecoration
+metadata:
+  name: poddecoration
 spec:
   template:
     metadata:
@@ -301,7 +306,10 @@ metadata:
 ```yaml
 apiVersion: apps.kusionstack.io/v1alpha1
 kind: PodDecoration
+metadata:
+  name: poddecoration
 spec:
+  # ...
   template:
     primaryContainers:
     - targetPolicy: ByName
@@ -328,7 +336,12 @@ Injection into the primary containers only supports limited fields: `image`, `en
 ### Sidecar Container
 
 ```yaml
+apiVersion: apps.kusionstack.io/v1alpha1
+kind: PodDecoration
+metadata:
+  name: poddecoration
 spec:
+  # ...
   template:
     containers:
     - injectPolicy: AfterPrimaryContainer  # Container injected policy, AfterPrimaryContainer or BeforePrimaryContainer
@@ -340,7 +353,12 @@ Inject a new sidecar container. Optional, it can be placed in front or behind th
 ### InitContainer
 
 ```yaml
+apiVersion: apps.kusionstack.io/v1alpha1
+kind: PodDecoration
+metadata:
+  name: poddecoration
 spec:
+  # ...
   template:
     initContainers:
     - name: init
@@ -349,4 +367,35 @@ spec:
 ```
 
 ## Upgrade strategy
-Coming soon...
+
+### selector
+You can use `selector` to select the pod. The `CollaSet` provides a unique `instance-id` for each pod. Of course, custom labels can also be used to label pods for triggering upgrades.
+```yaml
+apiVersion: apps.kusionstack.io/v1alpha1
+kind: PodDecoration
+metadata:
+  name: poddecoration
+spec:
+  # ...
+  updateStrategy:
+    rollingUpdate:
+      selector:
+        - key: collaset.kusionstack.io/instance-id
+          operator: In
+          values:
+          - "0"
+```
+
+### partition
+Partition is the desired number or percent of Pods in **old revisions**, defaults to `0`. 
+```yaml
+apiVersion: apps.kusionstack.io/v1alpha1
+kind: PodDecoration
+metadata:
+  name: poddecoration
+spec:
+  # ...
+  updateStrategy:
+    rollingUpdate:
+      partition: 2   # int number
+```
