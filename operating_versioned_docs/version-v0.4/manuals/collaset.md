@@ -478,7 +478,37 @@ The two Pods will have a pair of labels to identify their relationship. The new 
 
 Additionally, the new Pod and old Pod will each begin their own PodOpsLifecycles, which are independent of each other.
 
-### Recreate And Replace Specified Pod
+
+### Selective Pod Deletion
+When scaling down CollSet, users may want to delete specified pods instead of delete pods randomly.
+ColloSet supports specifying a set of Pod names within the ```spec.scaleStrategy.podToDelete``` for recreating or scaling in specified pods.
+
+```yaml
+apiVersion: apps.kusionstack.io/v1alpha1
+kind: CollaSet
+metadata:
+  name: sample
+spec:
+  replicas: 2
+  scaleStrategy:
+    podToDelete: # replace or scaleIn listed pods
+    - podName1
+    - podName2
+  # ...
+```
+When user specifies a set of pods:
+1. On the one hand, if ```replicas``` is scaled down simultaneously, CollaSet will scale down pods listed in ```podToDelete``` first.
+2. On the other hand, if ```replicas``` is not scale down, pods listed in ```podToDelete``` will be recreated, and new pods will inherit origin pods' ```instance-id```.
+
+Note that, by default, controller will clear the pod name once CollaSet cannot find the pod specified in ```podToDelete```.
+Users can disable clear pod name after pod deletion by disabling the feature ```ReclaimPodToDelete``` to false (the default value is true).
+
+```shell
+# Disable the ReclaimPodToDelete feature when starting the controller with this argument
+$ /manager --feature-gates=ReclaimPodToDelete=false
+```
+
+### Recreate And Replace Pod by Label
 
 In practice, users often need to recreate or replace specified Pods under a CollaSet.
 
@@ -547,7 +577,7 @@ collaset-sample-w6x69   0/1     Terminating         0          5m33s
 ```
 
 
-### Supprting PVCs
+### Supporting PVCs
 CollaSet introduces support for PVCs, allowing user to declare `VolumeClaimTemplates` to create PVCs for each Pod.
 Furthermore, in response to common issues with PVCs management, such as high modification costs and difficult control, CollaSet extends its functionality with the following advantages vs. StatefulSet:
 
