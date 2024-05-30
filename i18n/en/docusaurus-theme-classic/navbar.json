@@ -3,36 +3,32 @@
     "message": "KusionStack",
     "description": "The title in the navbar"
   },
+  "logo.alt": {
+    "message": "KusionStack Icon",
+    "description": "The alt text of navbar logo"
+  },
   "item.label.Kusion": {
     "message": "Kusion",
-    "description": "Navbar item with label UserDoc"
+    "description": "Navbar item with label Kusion"
   },
   "item.label.Operating": {
     "message": "Operating",
     "description": "Navbar item with label Operating"
   },
   "item.label.Ctrlmesh": {
-    "message": "ControllerMesh",
+    "message": "Ctrlmesh",
     "description": "Navbar item with label Ctrlmesh"
   },
   "item.label.Karpor": {
     "message": "Karpor",
     "description": "Navbar item with label Karpor"
   },
-  "item.label.DevDoc": {
-    "message": "Developing",
-    "description": "Navbar item with label DevDoc"
-  },
-  "item.label.Governance": {
-    "message": "Governance",
-    "description": "Navbar item with label Governance"
+  "item.label.Community": {
+    "message": "Community",
+    "description": "Navbar item with label Community"
   },
   "item.label.Blog": {
     "message": "Blog",
     "description": "Navbar item with label Blog"
-  },
-  "item.label.Events": {
-    "message": "Events",
-    "description": "Navbar item with label Events"
   }
 }

@@ -39,14 +39,23 @@ Open http://localhost:8080 in the browser.
 
 ```bash
 npm run docusaurus docs:version:[subProductName] [vMAJOR.MINOR]
+
+# If the sub product has an international document and needs to execute the command again, 
+# it will generate the i18n directory corresponding to that version.
+npm run write-translations -- --locale [localeName] --override
 ```
 
 Example:
 
 ```bash
 npm run docusaurus docs:version:docs v0.12
+npm run docusaurus docs:version:operating v0.2
 npm run docusaurus docs:version:ctrlmesh v0.3
-npm run docusaurus docs:version:ctrlmesh v0.1
+npm run docusaurus docs:version:karpor v0.4
+
+# If the sub product has an international document and needs to execute the command again, 
+# it will generate the i18n directory corresponding to that version.
+npm run write-translations -- --locale zh --override
 ```
 
 Optional sub product names:

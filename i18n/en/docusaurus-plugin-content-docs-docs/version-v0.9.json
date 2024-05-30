@@ -1,0 +1,110 @@
+{
+  "version.label": {
+    "message": "v0.9",
+    "description": "The label for version v0.9"
+  },
+  "sidebar.kusion.category.What is Kusion?": {
+    "message": "What is Kusion?",
+    "description": "The label for category What is Kusion? in sidebar kusion"
+  },
+  "sidebar.kusion.category.Getting Started": {
+    "message": "Getting Started",
+    "description": "The label for category Getting Started in sidebar kusion"
+  },
+  "sidebar.kusion.category.Concepts": {
+    "message": "Concepts",
+    "description": "The label for category Concepts in sidebar kusion"
+  },
+  "sidebar.kusion.category.Configuration Walkthrough": {
+    "message": "Configuration Walkthrough",
+    "description": "The label for category Configuration Walkthrough in sidebar kusion"
+  },
+  "sidebar.kusion.category.User Guide": {
+    "message": "User Guide",
+    "description": "The label for category User Guide in sidebar kusion"
+  },
+  "sidebar.kusion.category.Cloud Resources": {
+    "message": "Cloud Resources",
+    "description": "The label for category Cloud Resources in sidebar kusion"
+  },
+  "sidebar.kusion.category.Kubernetes": {
+    "message": "Kubernetes",
+    "description": "The label for category Kubernetes in sidebar kusion"
+  },
+  "sidebar.kusion.category.Automated Observability": {
+    "message": "Automated Observability",
+    "description": "The label for category Automated Observability in sidebar kusion"
+  },
+  "sidebar.kusion.category.GitHub Actions": {
+    "message": "GitHub Actions",
+    "description": "The label for category GitHub Actions in sidebar kusion"
+  },
+  "sidebar.kusion.category.Reference": {
+    "message": "Reference",
+    "description": "The label for category Reference in sidebar kusion"
+  },
+  "sidebar.kusion.category.Command Line Tools": {
+    "message": "Command Line Tools",
+    "description": "The label for category Command Line Tools in sidebar kusion"
+  },
+  "sidebar.kusion.category.Kusion Commands": {
+    "message": "Kusion Commands",
+    "description": "The label for category Kusion Commands in sidebar kusion"
+  },
+  "sidebar.kusion.category.Backend Configuration": {
+    "message": "Backend Configuration",
+    "description": "The label for category Backend Configuration in sidebar kusion"
+  },
+  "sidebar.kusion.category.Kusion Model Library": {
+    "message": "Kusion Model Library",
+    "description": "The label for category Kusion Model Library in sidebar kusion"
+  },
+  "sidebar.kusion.category.Catalog Models": {
+    "message": "Catalog Models",
+    "description": "The label for category Catalog Models in sidebar kusion"
+  },
+  "sidebar.kusion.category.Workload": {
+    "message": "Workload",
+    "description": "The label for category Workload in sidebar kusion"
+  },
+  "sidebar.kusion.category.Database": {
+    "message": "Database",
+    "description": "The label for category Database in sidebar kusion"
+  },
+  "sidebar.kusion.category.Monitoring": {
+    "message": "Monitoring",
+    "description": "The label for category Monitoring in sidebar kusion"
+  },
+  "sidebar.kusion.category.Trait": {
+    "message": "Trait",
+    "description": "The label for category Trait in sidebar kusion"
+  },
+  "sidebar.kusion.category.Internal": {
+    "message": "Internal",
+    "description": "The label for category Internal in sidebar kusion"
+  },
+  "sidebar.kusion.category.container": {
+    "message": "container",
+    "description": "The label for category container in sidebar kusion"
+  },
+  "sidebar.kusion.category.lifecycle": {
+    "message": "lifecycle",
+    "description": "The label for category lifecycle in sidebar kusion"
+  },
+  "sidebar.kusion.category.probe": {
+    "message": "probe",
+    "description": "The label for category probe in sidebar kusion"
+  },
+  "sidebar.kusion.category.network": {
+    "message": "network",
+    "description": "The label for category network in sidebar kusion"
+  },
+  "sidebar.kusion.category.secret": {
+    "message": "secret",
+    "description": "The label for category secret in sidebar kusion"
+  },
+  "sidebar.kusion.category.FAQ": {
+    "message": "FAQ",
+    "description": "The label for category FAQ in sidebar kusion"
+  }
+}

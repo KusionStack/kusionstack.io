@@ -11,13 +11,21 @@
     "message": "More",
     "description": "The title of the footer links column with title=More in the footer"
   },
-  "link.item.label.Introduction": {
-    "message": "Introduction",
-    "description": "The label of footer link with label=Introduction linking to /docs/kusion/what-is-kusion/overview"
+  "link.item.label.Kusion": {
+    "message": "Kusion",
+    "description": "The label of footer link with label=Kusion linking to /docs"
+  },
+  "link.item.label.ControllerMesh": {
+    "message": "ControllerMesh",
+    "description": "The label of footer link with label=ControllerMesh linking to /ctrlmesh/intro/"
+  },
+  "link.item.label.Karpor": {
+    "message": "Karpor",
+    "description": "The label of footer link with label=Karpor linking to /karpor/"
   },
   "link.item.label.Blog": {
     "message": "Blog",
-    "description": "The label of footer link with label=Blog linking to /blog"
+    "description": "The label of footer link with label=Blog linking to https://blog.kusionstack.io/"
   },
   "link.item.label.Github": {
     "message": "Github",
@@ -27,12 +35,16 @@
     "message": "Slack",
     "description": "The label of footer link with label=Slack linking to https://join.slack.com/t/kusionstack/shared_invite/zt-19lqcc3a9-_kTNwagaT5qwBE~my5Lnxg"
   },
-  "link.item.label.Changelog": {
-    "message": "Changelog",
-    "description": "The label of footer link with label=Changelog linking to /changelog"
+  "link.item.label.KCL": {
+    "message": "KCL",
+    "description": "The label of footer link with label=KCL linking to https://kcl-lang.io"
   },
   "copyright": {
-    "message": "Copyright © 2022 KusionStack Authors",
+    "message": "Copyright © 2024 KusionStack Authors",
     "description": "The footer copyright"
+  },
+  "logo.alt": {
+    "message": "AntGroup Open Source Logo",
+    "description": "The alt text of footer logo"
   }
 }
