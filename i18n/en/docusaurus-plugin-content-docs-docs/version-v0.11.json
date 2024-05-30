@@ -1,0 +1,102 @@
+{
+  "version.label": {
+    "message": "v0.11",
+    "description": "The label for version v0.11"
+  },
+  "sidebar.kusion.category.What is Kusion?": {
+    "message": "What is Kusion?",
+    "description": "The label for category What is Kusion? in sidebar kusion"
+  },
+  "sidebar.kusion.category.Getting Started": {
+    "message": "Getting Started",
+    "description": "The label for category Getting Started in sidebar kusion"
+  },
+  "sidebar.kusion.category.Concepts": {
+    "message": "Concepts",
+    "description": "The label for category Concepts in sidebar kusion"
+  },
+  "sidebar.kusion.category.Project": {
+    "message": "Project",
+    "description": "The label for category Project in sidebar kusion"
+  },
+  "sidebar.kusion.category.Stack": {
+    "message": "Stack",
+    "description": "The label for category Stack in sidebar kusion"
+  },
+  "sidebar.kusion.category.Kusion Module": {
+    "message": "Kusion Module",
+    "description": "The label for category Kusion Module in sidebar kusion"
+  },
+  "sidebar.kusion.category.Configuration Walkthrough": {
+    "message": "Configuration Walkthrough",
+    "description": "The label for category Configuration Walkthrough in sidebar kusion"
+  },
+  "sidebar.kusion.category.User Guides": {
+    "message": "User Guides",
+    "description": "The label for category User Guides in sidebar kusion"
+  },
+  "sidebar.kusion.category.Cloud Resources": {
+    "message": "Cloud Resources",
+    "description": "The label for category Cloud Resources in sidebar kusion"
+  },
+  "sidebar.kusion.category.Kubernetes": {
+    "message": "Kubernetes",
+    "description": "The label for category Kubernetes in sidebar kusion"
+  },
+  "sidebar.kusion.category.Automated Observability": {
+    "message": "Automated Observability",
+    "description": "The label for category Automated Observability in sidebar kusion"
+  },
+  "sidebar.kusion.category.Secrets Management": {
+    "message": "Secrets Management",
+    "description": "The label for category Secrets Management in sidebar kusion"
+  },
+  "sidebar.kusion.category.Reference": {
+    "message": "Reference",
+    "description": "The label for category Reference in sidebar kusion"
+  },
+  "sidebar.kusion.category.Kusion Commands": {
+    "message": "Kusion Commands",
+    "description": "The label for category Kusion Commands in sidebar kusion"
+  },
+  "sidebar.kusion.category.Kusion Modules": {
+    "message": "Kusion Modules",
+    "description": "The label for category Kusion Modules in sidebar kusion"
+  },
+  "sidebar.kusion.category.Developer Schemas": {
+    "message": "Developer Schemas",
+    "description": "The label for category Developer Schemas in sidebar kusion"
+  },
+  "sidebar.kusion.category.database": {
+    "message": "database",
+    "description": "The label for category database in sidebar kusion"
+  },
+  "sidebar.kusion.category.internal": {
+    "message": "internal",
+    "description": "The label for category internal in sidebar kusion"
+  },
+  "sidebar.kusion.category.container": {
+    "message": "container",
+    "description": "The label for category container in sidebar kusion"
+  },
+  "sidebar.kusion.category.monitoring": {
+    "message": "monitoring",
+    "description": "The label for category monitoring in sidebar kusion"
+  },
+  "sidebar.kusion.category.workload": {
+    "message": "workload",
+    "description": "The label for category workload in sidebar kusion"
+  },
+  "sidebar.kusion.category.Workspace Configs": {
+    "message": "Workspace Configs",
+    "description": "The label for category Workspace Configs in sidebar kusion"
+  },
+  "sidebar.kusion.category.networking": {
+    "message": "networking",
+    "description": "The label for category networking in sidebar kusion"
+  },
+  "sidebar.kusion.category.FAQ": {
+    "message": "FAQ",
+    "description": "The label for category FAQ in sidebar kusion"
+  }
+}

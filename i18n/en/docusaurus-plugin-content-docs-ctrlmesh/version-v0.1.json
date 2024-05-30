@@ -1,0 +1,10 @@
+{
+  "version.label": {
+    "message": "v0.1",
+    "description": "The label for version v0.1"
+  },
+  "sidebar.ctrlmesh.category.Getting Started": {
+    "message": "Getting Started",
+    "description": "The label for category Getting Started in sidebar ctrlmesh"
+  }
+}
