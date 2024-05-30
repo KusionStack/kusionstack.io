@@ -142,6 +142,9 @@ const config = {
             label: `${getNextVersionName("karpor")} 🚧`,
           },
         },
+        editUrl: "https://github.com/KusionStack/kusionstack.io/edit/main",
+        showLastUpdateAuthor: true,
+        showLastUpdateTime: true,
       },
     ],
     [
