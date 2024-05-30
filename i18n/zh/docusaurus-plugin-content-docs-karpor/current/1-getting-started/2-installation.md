@@ -1,48 +1,48 @@
 ---
-title: Installation
+title: 安装
 ---
 
-## Prerequisites
+## 前提条件
 
-* Ensure there is Kubernetes cluster available to install Karpor. For local installations, you can use Minikube or Kind.
+* 确保有一个可用的 Kubernetes 集群来安装 Karpor。对于本地安装，您可以使用 Minikube 或 Kind。
 
-## Install with helm
+## 使用 Helm 安装
 
-Karpor can be installed easily with helm v3.5+, which is a simple command-line tool and you can get it from [here](https://helm.sh/docs/intro/install/).
+Karpor 可以通过 Helm v3.5+ 轻松安装，它是一个简单的命令行工具，您可以从 [这里](https://helm.sh/docs/intro/install/) 获取。
 
 ```shell
-helm repo add kusionstack https://kusionstack.github.io/charts
+helm repo add kusionstack https://kusionstack.github.io/charts 
 helm repo update
 helm install karpor kusionstack/karpor
 ```
 
-![Install](./assets/2-installation/install.gif)
+![安装](./assets/2-installation/install.gif)
 
-## Upgrade with helm
+## 使用 Helm 升级
 
 ```shell
-helm repo add kusionstack https://kusionstack.github.io/charts
+helm repo add kusionstack https://kusionstack.github.io/charts 
 helm repo update
 
-# Upgrade to the latest version.
+# 升级到最新版本
 helm upgrade karpor kusionstack/karpor
 
-# Upgrade to the specified version.
+# 升级到指定版本
 helm upgrade karpor kusionstack/karpor --version 1.2.3
 ```
 
-## Install/Upgrade locally with helm
+## 本地使用 Helm 安装/升级
 
-If you have problem connecting to https://kusionstack.github.io/charts/ in production, you may need to manually download the chart from [here](https://github.com/KusionStack/charts) and use it to install or upgrade locally.
+如果您在生产环境中连接到 https://kusionstack.github.io/charts/ 有问题，您可能需要从 [这里](https://github.com/KusionStack/charts) 手动下载 chart，并使用它来本地安装或升级。
 
 ```shell
-git clone https://github.com/KusionStack/charts.git
+git clone https://github.com/KusionStack/charts.git 
 helm install/upgrade karpor charts/karpor
 ```
 
-## Uninstall
+## 卸载
 
-To uninstall karpor:
+执行以下命令卸载 karpor：
 
 ```shell
 helm uninstall karpor
