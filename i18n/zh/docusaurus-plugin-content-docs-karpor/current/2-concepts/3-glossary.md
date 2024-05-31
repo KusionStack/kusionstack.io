@@ -1,49 +1,47 @@
 ---
-title: Glossary
+title: 术语表
 ---
 
-## Cluster
+## 集群
 
-Equivalent to the concept of a cluster in `Kubernetes`, such as a cluster named `democluster`.
+等同于`Kubernetes`中的集群概念，例如名为`democluster`的集群。
 
-`Karpor` can manage multiple clusters, including cluster registration, certificate rotation, generating and viewing insights, and other operations through a Dashboard. It also supports accessing any managed cluster using a unified certificate issued by `Karpor` through command-line tools such as `kubectl` and `kubectx`.
+`Karpor`可以管理多个集群，包括集群注册、证书轮换、生成和查看洞察，以及通过 Dashboard 进行的其他操作。它还支持使用`Karpor`发放的统一证书，通过`kubectl`和`kubectx`等命令行工具访问任何被管理的集群。
 
-For more details, please refer to the best practice: [One Pass with Proxy](../3-user-guide/4-best-production-practices/1-one-pass-with-proxy.md).
+更多细节，请参考最佳实践：[一站式代理通行](../3-user-guide/4-best-production-practices/1-one-pass-with-proxy.md)。
 
-## Resource
+## 资源
+等同于`Kubernetes`中的资源概念，如名为`mockDeployment`的`Deployment`。
 
-Equivalent to the resource concept in `Kubernetes`, such as a `Deployment` named `mockDeployment`.
+`Karpor`对其管理集群中的资源进行实时同步、搜索和洞察。资源是`Karpor`里搜索和洞察的最小粒度对象。
 
-`Karpor` performs real-time synchronization, search, and insights on resources within the managed clusters. A resource is the object with the smallest granularity for searching and insights in `Karpor`.
+## 资源组
 
-## Resource Group
+**资源组是一种逻辑上的组织结构**，用于将相关的`Kubernetes`资源组合起来，以便于更直观的查看、搜索和洞察。例如，可以创建一个名为`mockapp`的`Application`资源组，其中包括一个`Namespace`、一个`Deployment`和多个具有特定标签（如`app.kubernetes.io/name: mockapp`）的`Pods`。
 
-**A resource group is a logical organizational structure** used to combine related `Kubernetes` resources for a more intuitive view, search, and insight experience. For example, an `Application` named `mockapp` resource group can be created to includes a `Namespace`, a `Deployment`, and multiple `Pods`, all with a specific label such as `app.kubernetes.io/name: mockapp`.
+## 资源组规则
 
-## Resource Group Rule
-
-**A resource group rule is a set of conditions** that groups specific resources into appropriate resource groups. These rules aim to organize resources into logical units based on properties such as `annotations`, `labels`, `namespace`, and so on. For example, to define an Application resource group rule, you can specify the `app.kubernetes.io/name` annotation as a grouping condition.
-
-`Karpor` has a preset resource group rule - `Namespace` - as well as custom resource group rules.
+**资源组规则是一套规则**，将特定资源分组到适当的资源组中。这些规则旨在基于`annotations`、`labels`、`namespace`等属性，将资源组织成逻辑单元。例如，要定义一个应用程序资源组规则，可以指定`annotations`为`app.kubernetes.io/name`作为分组条件。
+`Karpor`预设了一个资源组规则`Namespace`以及自定义资源组规则。
 
 ![](assets/3-glossary/image-20240326171327110.png)
 
-## Topology
+## 拓扑
 
-In `Karpor`, the topology refers to the **relations and dependencies between relevant resources within a given resource group**. Viewing and understanding the interior structure of a resource group is made easier with a visual topology diagram, which is helpful for troubleshooting and locating issues.
+在`Karpor`中，拓扑是指**给定资源组内相关资源之间的关系和依赖**。利用可视化的拓扑图可以更容易地查看和理解资源组的内部结构，这对于故障排查和定位问题很有帮助。
 
-## Audit
+## 审计
 
-Audit refers to **performing a compliance scan on all resources within a given resource group**. The goal is to help users discover potential risks. The scanning tools and rules used for the audit are currently built into the system, but we will support customization in the future.
+审计是指**对给定资源组内的所有资源执行合规性扫描**。其目的是帮助用户发现潜在风险。当前系统内置使用的扫描工具和规则，但我们将来会支持自定义方式进行扫描。
 
-## Issue
+## 问题
 
-**The output of the audit is referred to as issues**. If there are no problems with the scanned object, the audit results will be empty. Otherwise, all identified risks will be categorized by their risk level and displayed, including descriptions of each risk, associated resources, etc., guiding users to fix the issues, ensure the security and compliance of the cluster resources.
+**审计的输出被称为问题**。如果被扫描对象没有问题，则审计结果将为空。否则，所有识别到的风险将根据其风险等级进行分类并显示，包括每个风险的描述、相关资源等，用来指导用户解决问题，确保集群资源的安全和合规。
 
-## Score
+## 评分
 
-The score is used to reflect the **overall health status of a resource group or a resource**, reminding users to take timely adjustments and measures. The health score is calculated based on the resource group's audit results. The factors that impact the score include: **risk level**, **number of risks**, and **total number of resources**.
+评分用于反映资源组或资源的**整体健康状况**，提醒用户及时调整和采取措施。健康评分是基于资源组的审计结果计算得出。影响评分的因素包括：**风险等级**、**风险数量**和**资源总数**。
 
-## Next Step
-- Learn Karpor's [Architecture](../concepts/architecture).
-- View [User Guide](../user-guide/multi-cluster-management) to look on more of what you can achieve with Karpor.
+## 下一步
+- 学习 Karpor 的 [架构](../concepts/architecture)。
+- 查看 [用户指南](../user-guide/multi-cluster-management)，了解更多有关您可以通过 Karpor 实现的内容。

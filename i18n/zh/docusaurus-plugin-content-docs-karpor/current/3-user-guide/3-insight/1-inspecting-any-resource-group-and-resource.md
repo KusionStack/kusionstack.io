@@ -1,31 +1,30 @@
 ---
-title: Inspecting Any Resource Group and Resource
+title: 检查任何资源组和资源
 ---
 
-In this part, we will explain in detail through clear steps and examples how to use Karpor to inspect any resource group or resource.
+在这部分内容中，我们将通过清晰的步骤和实例详细解释如何使用 Karpor 来检查任何资源组或资源。
 
-If you are not familiar with relevant concepts, you can refer to the [Glossary](../../2-concepts/3-glossary.md) section.
+如果您不熟悉相关概念，可以参考 [术语表](../../2-concepts/3-glossary.md) 章节。
 
-## Inspecting Specific Resources
+## 检查具体资源
 
-1. Search for the resource you are interested in:
+1. 搜索您感兴趣的资源：
    ![](/karpor/assets/search/search-home.png)
 
-2. On the search results page, all resources filtered by the criteria will be listed:
+2. 在搜索结果页，所有通过条件筛选的资源将会被列出：
    ![](/karpor/assets/search/search-result.png)
 
-3. Click on any resource name to jump to that resource's insight page:
+3. 点击任意资源名称，即可跳转到该资源的洞察页面：
    ![](/karpor/assets/insight/insight-home.png)
 
-## Inspecting Specific Resource Groups
+## 检查具体资源组
 
-You may notice that in each search result entry, tags for `Cluster`, `Kind`, `Namespace`, etc., of the resource are listed. Please note that these tags are **hyperlinks**, which we refer to as "**anchor points**". These represent the links to a particular resource group or a resource. By clicking on these **anchor points**, you can quickly jump to the insight page of that resource group or resource.
+您可能已经注意到，在每一个搜索结果条目中，资源的`Cluster`、`Kind`、`Namespace`等标签都列了出来。请注意，这些标签是**超链接**，我们称之为 "**锚点**"。它们代表了指向特定资源组或资源的链接。通过点击这些**锚点**，您可以快速跳转到该资源组或资源的洞察页面。
 
 ![](/karpor/assets/search/search-result.png)
 
-## Flexible Switching Between Resource Groups/Resources
+## 在资源组 / 资源间灵活切换
 
-In fact, besides the tags in the mentioned search results, any resource/resource group names you see on any page can be re-directed to as **anchor points**, which serve like space-time wormholes, allowing you to traverse back and forth through any dimension until you find the resources you are searching for. Both search and anchor points are means to expedite the retrieval, which are key features of Karpor as a Kubernetes Explorer.
+实际上，除了前述搜索结果中的标签外，在任何页面上看到的任何资源 / 资源组名称，都可以作为**锚点**重定向，就像是时空虫洞，允许您在任何维度之间来回穿梭，直到找到您正在搜索的资源。搜索和锚点都是加速检索的手段，它们是 Karpor 作为 Kubernetes 探索器的关键特性。
 
 ![](/karpor/assets/insight/insight-breadcrumbs.png)
-

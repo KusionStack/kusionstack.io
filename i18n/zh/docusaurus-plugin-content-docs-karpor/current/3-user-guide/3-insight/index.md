@@ -1,8 +1,7 @@
 ---
-title: How to Insight
+title: 如何洞察
 ---
 
-In this section, we will introduce how to gain comprehensive insights into the resources within a cluster using Karpor. You can access the Insight page in various ways and easily toggle between insight pages for different scopes (such as Cluster, Kind, Namespace or individual Resource). If there are domain-specific logical scopes within your current organization, you can even customize resource groups (such as Application, Environment, etc.) by setting resource group rules. We also provide functionality to gain insights into these custom resource groups.
+在本节中，我们将介绍如何使用 Karpor 对集群内的资源进行全面洞察。您可以通过多种方式访问洞察页面，并且可以轻松地在不同范围（如集群、类型、命名空间或单个资源）的洞察页面之间切换。如果您当前组织内有特定领域的逻辑范围，您甚至可以通过设置资源组规则来自定义资源组（如应用程序、环境等）。我们还提供功能以便对这些自定义资源组进行洞察。
 
-This guide will be entirely operated from the Karpor Dashboard.
-
+本指南将完全在 Karpor 仪表板上操作。

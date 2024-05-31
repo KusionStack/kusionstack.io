@@ -1,18 +1,17 @@
 ---
-title: Compliance Report
+title: 合规报告
 ---
 
-This section will introduce the compliance scan feature, primarily used to detect and assess whether all resources in the current resource or resource group comply with specific compliance standards and security policies. In this section, you will understand how to effectively utilize the compliance scan feature to ensure the security and compliance of the cluster and resources.
+本节将介绍合规扫描功能，主要用于检测和评估当前资源或资源组中的所有资源是否符合特定的合规标准和安全政策。在本节中，您将了解如何有效利用合规扫描功能以确保集群和资源的安全与合规。
 
-If you're not familiar with **Compliance Report** or **Risk** related concepts, you can refer to the [Glossary](../../2-concepts/3-glossary.md) section.
+如果您不熟悉**合规报告**或**风险**相关概念，您可以参考 [术语表](../../2-concepts/3-glossary.md) 章节。
 
-1. Follow the guidance on [Inspecting Any Resource Group and Resource](#inspecting-any-resource-group-and-resource) and resource to navigate to the insights page of a particular resource group/resource.
-2. You can see the **Compliance Report** card of the resource.
+1. 按照 [检查任何资源组和资源](#检查任何资源组和资源) 的指引，导航至特定资源组 / 资源的洞察页面。
+2. 您可以看到资源的**合规报告**卡片。
    ![](/karpor/assets/insight/insight-home.png)
-3. This card displays the **Risk** identified during the scan of the current resource or all the resources under the resource group, categorized by risk level. Under each risk level tag, risks are sorted from highest to lowest occurrence. Each risk entry shows the title, description, number of occurrences, and the scanning tool that discovered the issue.
-4. Clicking on a specific risk will display a popup with the details of the risk.
+3. 该卡片显示了对当前资源或资源组下所有资源进行扫描时识别出的**风险**，按风险等级分类。在每个风险等级标签下，风险按发生频率从高到低排序。每个风险条目显示标题、描述、发生次数以及发现问题的扫描工具。
+4. 点击特定风险将显示一个弹出窗口，展示风险的详细信息。
    ![](/karpor/assets/insight/insight-single-issue.png)
-5. Click on <kbd>View All Risks</kbd>, and a drawer will pop out listing all the risks. Here, you can search, categorize, paginate, etc
+5. 点击 <kbd>查看所有风险</kbd> ，将弹出一个抽屉，列出所有风险。这里，您可以搜索、分类、分页等。
    ![](/karpor/assets/insight/insight-all-issues.png)
-6. Once you have resolved a risk following its indications, you can click the [Rescan] button, which will trigger a comprehensive compliance scan of all resources under the resource group. The Dashboard will display the new results once the scan is completed.
-
+6. 一旦您按照其指示解决了一个风险，可以点击 <kbd>重新扫描</kbd> 按钮，这将触发对资源组下所有资源进行全面的合规扫描。一旦扫描完成，仪表板将显示新的结果。
