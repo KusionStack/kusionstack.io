@@ -59,7 +59,7 @@ const Highlight = ({}) => {
                 <div className={styles.action}>
                     <div className={styles.demo}>
                         <a
-                            href="https://karbour-demo.kusionstack.io"
+                            href="https://karpor-demo.kusionstack.io"
                             target="__blank"
                         >
                             Demo
@@ -69,7 +69,7 @@ const Highlight = ({}) => {
                         </a>
                     </div>
                     <div className={styles.github_info}>
-                        <GithubStars repo={"KusionStack/karbour"} />
+                        <GithubStars repo={"KusionStack/karpor"} />
                     </div>
                 </div>
                 <div className={styles.img_box}>
