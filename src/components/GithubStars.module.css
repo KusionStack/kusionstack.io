@@ -33,6 +33,7 @@
   border-radius: 0 4px 4px 0;
   border: 1px solid rgb(208, 215, 222);
   border-left: none;
+  background: #fff;
 }
 
 .karpor_star_button a:hover {
