@@ -1,19 +1,51 @@
-.stars_container {
-    height: 32px;
-    line-height: 32px;
-    padding: 0 20px;
-    border: 1px solid rgba(31, 35, 40, 0.15);
-    border-radius: 4px;
-    color: #24292f;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    font-weight: bold;
-    text-decoration: none;
+.karpor_star_button {
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
+  font-size: 15px;
 }
-.stars_container:hover {
-    background: #1677ff;
-    color: #fff;
-    text-decoration: none;
+.karpor_star_button a {
+  display: inline-block;
+  align-items: center;
+  cursor: pointer;
+  color: rgb(36, 41, 47);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.karpor_star_button a .text {
+  display: flex;
+  align-items: center;
+  padding: 5px 15px;
+  border-radius: 6px 0 0 6px;
+  border: 1px solid rgb(208, 215, 222);
+  background: #ebf0f4;
+}
+
+.karpor_star_button a .icon {
+  margin-right: 5px;
+}
+
+.karpor_star_button a .star {
+  padding: 5px 15px;
+  border-radius: 0 4px 4px 0;
+  border: 1px solid rgb(208, 215, 222);
+  border-left: none;
+  background: #fff;
+}
+
+.karpor_star_button a:hover {
+  text-decoration: none;
+}
+
+.karpor_star_button a .text:hover {
+  text-decoration: none;
+  background-color: #fff;
+  color: rgb(36, 41, 47);
+}
+.karpor_star_button a .star:hover {
+  text-decoration: none;
+  color: #1677ff;
 }

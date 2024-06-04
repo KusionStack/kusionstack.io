@@ -1,19 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { AiOutlineArrowRight } from "react-icons/ai";
+import React from "react";
 
 import styles from "./style.module.css";
 
 function KarporButton({ url, btnText }) {
-    return (
-        <div className={styles.karbour_button}>
-            <a href={url} target="__blank">
-                {btnText}
-                <AiOutlineArrowRight
-                    style={{ fontWeight: "bold", marginLeft: 5 }}
-                />
-            </a>
-        </div>
-    );
+  return (
+    <div className={styles.karpor_button}>
+      <a href={url} target="__blank">
+        <span className={styles.text}>{btnText}</span>
+        <span className={styles.icon}>🕹️</span>
+      </a>
+    </div>
+  );
 }
 
 export default KarporButton;

@@ -13,8 +13,8 @@ import logoImg from "@site/static/karpor/assets/logo/logo-full.png";
 import userFriendlyImg from "@site/static/karpor/assets/overview/user-friendly.png";
 import intelligentImg from "@site/static/karpor/assets/overview/intelligent.png";
 import lowBurdenImg from "@site/static/karpor/assets/overview/low-burden.png";
-import GithubStars from "@site/src/components/GithubStars";
 import KarporButton from "@site/src/components/KarporButton";
+import GithubStar from "@site/src/components/GithubStars";
 import ReactPlayer from "react-player";
 import Typed from "typed.js";
 
@@ -143,11 +143,11 @@ export const Content = () => {
           <div>
             <KarporButton
               url="https://karpor-demo.kusionstack.io"
-              btnText="Demo"
+              btnText="Live Demo"
             />
           </div>
           <div>
-            <GithubStars repo={"KusionStack/karpor"} />
+            <GithubStar repo="KusionStack/karpor"/>
           </div>
         </div>
         <div style={{ fontSize: 26, fontWeight: "Bold" }}>
@@ -292,10 +292,12 @@ export const Content = () => {
         </div>
       </div>
       <h2 style={h2Style}>🙌 Karpor vs. Kubernetes Dashboard</h2>
-      <div style={{
+      <div
+        style={{
           width: "100%",
-          padding: "10px 20px"
-      }}>
+          padding: "10px 20px",
+        }}
+      >
         <div
           style={{
             height: 60,
@@ -414,4 +416,6 @@ export const Content = () => {
 };
 
 <Content />
+
+
 
