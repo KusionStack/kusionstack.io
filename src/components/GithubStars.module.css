@@ -42,7 +42,7 @@
 
 .karpor_star_button a .text:hover {
   text-decoration: none;
-  background-color: rgba(36, 41, 47, 0.1);
+  background-color: #fff;
   color: rgb(36, 41, 47);
 }
 .karpor_star_button a .star:hover {
