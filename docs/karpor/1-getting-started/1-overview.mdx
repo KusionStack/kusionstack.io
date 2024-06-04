@@ -13,8 +13,8 @@ import logoImg from "@site/static/karpor/assets/logo/logo-full.png";
 import userFriendlyImg from "@site/static/karpor/assets/overview/user-friendly.png";
 import intelligentImg from "@site/static/karpor/assets/overview/intelligent.png";
 import lowBurdenImg from "@site/static/karpor/assets/overview/low-burden.png";
-import GitHubButton from "react-github-btn";
 import KarporButton from "@site/src/components/KarporButton";
+import GithubStar from "@site/src/components/GithubStars";
 import ReactPlayer from "react-player";
 import Typed from "typed.js";
 
@@ -140,22 +140,14 @@ export const Content = () => {
             alignItems: "center",
           }}
         >
-          <div style={{marginBottom: 7}}>
+          <div>
             <KarporButton
               url="https://karpor-demo.kusionstack.io"
               btnText="Live Demo"
             />
           </div>
           <div>
-            <GitHubButton
-              href="https://github.com/KusionStack/karpor"
-              data-icon="octicon-star"
-              data-size="large"
-              data-show-count="true"
-              aria-label="Star KusionStack/karpor on GitHub"
-            >
-              Star
-            </GitHubButton>
+            <GithubStar repo="KusionStack/karpor"/>
           </div>
         </div>
         <div style={{ fontSize: 26, fontWeight: "Bold" }}>
@@ -424,4 +416,5 @@ export const Content = () => {
 };
 
 <Content />
+
 
