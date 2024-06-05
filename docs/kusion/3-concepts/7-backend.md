@@ -5,7 +5,7 @@ sidebar_label: Backend
 
 # Backend
 
-Backend is Kusion's storage, which defines the place to store Workspace, Spec and State. By default, Kusion uses the `local` type of backend to store the state on the local disk. While in the scenario of team collaboration, the Workspace, Spec and State can be stored on a remote backend, such as `mysql`, `oss` and `s3`, to allow multiple users' access. 
+Backend is Kusion's storage, which defines the place to store Workspace and Release. By default, Kusion uses the `local` type of backend to store on the local disk. While in the scenario of team collaboration, the Workspace and Release can be stored on a remote backend, such as `oss` and `s3`, to allow multiple users' access. 
 
 The command `kusion config` is used to configure the backend configuration. Configuring a whole backend or an individual config item are both supported. For the sensitive data, the environment variables are supported, and with higher priority.
 
@@ -13,13 +13,13 @@ Furthermore, Kusion provides the operation of setting current backend. Thus, the
 
 ## Available Backend Types
 
-There are four available backend types: `local`, `mysql`, `oss`, `s3`.
+There are three available backend types: `local`, `oss`, `s3`.
 
 ### local
 
 The `local` type backend uses local file system as storage, which is suitable for local operations, but not ideal for multi-user collaboration. The supported config items are as below.
 
-- **path**: `type string`, `optional`, specify the directory to store the Workspace, Spec, and State files. The subdirectories `workspaces`, `specs` and `states` are used to store the corresponding files separately. It's recommended to use an empty or a Kusion exclusive directory as the local backend path. If not set, the default path `${KUSION_HOME}` is in use.
+- **path**: `type string`, `optional`, specify the directory to store the Workspace and Release files. The subdirectories `workspaces` and `releases` are used to store the corresponding files separately. It's recommended to use an empty or a Kusion exclusive directory as the local backend path. If not set, the default path `${KUSION_HOME}` is in use.
 
 The whole local type backend configuration is as below.
 
@@ -32,61 +32,6 @@ The whole local type backend configuration is as below.
 }
 ```
 
-### mysql
-
-The `mysql` type backend uses mysql database as storage. The supported config items are as below.
-
-- **dbName**: `type string`, `required`, the name of the database.
-- **user**: `type string`, `required`, the username of the database. 
-- **password**: `type string`, `optional`, the password of the database, support declaring by environment variable `KUSION_BACKEND_MYSQL_PASSWORD`.
-- **host** - `type string`, `required`, the access address for the database.
-- **port** - `type int`, `optional`, the port of the database. If not set, the default value `3306` will be used.
-
-Please be attention, mysql type are not supported to store Spec for now. For Workspace and State, the table `worksapce` and `state` are used to store the corresponding content separately, whose structures are determinate. The table structures are shown below. 
-
-Noted that there are not fields `id`, `gmt_create(created_at)`, `gmt_modified(updated_at)`, etc., which are usually automatically controlled by the database. Kusion does not use these fields, while the existence of them does not affect the normal operation of Kusion. And the length of the varchar can be changed according to the real scenario.
-
-```sql
--- table workspace
-CREATE TABLE `workspace` (
-    `workspace` varchar(127) NOT NULL COMMENT 'workspace name',
-    `content` longtext NOT NULL COMMENT 'workspace content, in JSON format',
-    `is_current` tinyint(1) DEFAULT NULL COMMENT 'specify is current workspace or not',
-    UNIQUE KEY `uk_workspace` (`name`),
-    KEY `idx_is_current` (`is_current`)
-);
-
--- table state
-CREATE TABLE `state` (
-    `project` varchar(127) NOT NULL COMMENT 'project name',
-    `stack` varchar(127) NOT NULL COMMENT 'stack name',
-    `workspace` varchar(127) NOT NULL COMMENT 'workspace name',
-    `content` longtext NOT NULL COMMENT 'state content, in JSON format',
-    UNIQUE KEY `uk_state` (`project`, `stack`, `worksapce`)
-);
-```
-
-The whole mysql type backend configuration is as below.
-
-```yaml
-{
-  "type": "mysql",
-  "configs": {
-    "dbName": "${mysql_db_name}", # type string, required, the database name.
-    "user": "${mysql_user}", # type string, required, the database user.
-    "password": "${mysql_password}", # type string, optional, the database password.
-    "host": "${mysql_host}", # type string, required, the database host.
-    "port": "${mysql_port}" # type string, optional, the database port. If not set, use the default port 3306.
-  }
-}
-```
-
-The supported environment variable is as below.
-
-```bash
-export KUSION_BACKEND_MYSQL_PASSWORD="${mysql_password}" # configure password
-```
-
 ### oss
 
 The `oss` type backend uses the Alicloud Object Storage Service (OSS) as storage. The supported config items are as below.
@@ -95,7 +40,7 @@ The `oss` type backend uses the Alicloud Object Storage Service (OSS) as storage
 - **accessKeyID**: `type string`, `required`, specify the alicloud account accessKeyID, support declaring by environment variable `OSS_ACCESS_KEY_ID`.
 - **accessKeySecret**: `type string`, `required`, specify the alicloud account accessKeySecret, support declaring by environment variable `OSS_ACCESS_KEY_SECRET`.
 - **bucket**: `type string`, `required`, specify the name of the alicloud oss bucket.
-- **prefix**: `type string`, `optional`, constitute the prefix to store the Workspace, Spec, and State files, whose prefixes are `${prefix}/workspaces`, `${prefix}/specs` and `${prefix}/states` respectively. Using prefix can create a "dedicated space" for the Kusion data, which is beneficial for the management and reuse of the bucket. If not set, there is no prefix, the files are stored in the root path of the bucket if analogy to a file system.
+- **prefix**: `type string`, `optional`, constitute the prefix to store the Workspace and Release files, whose prefixes are `${prefix}/workspaces` and `${prefix}/releases` respectively. Using prefix can create a "dedicated space" for the Kusion data, which is beneficial for the management and reuse of the bucket. If not set, there is no prefix, the files are stored in the root path of the bucket if analogy to a file system.
 
 Noted that `accessKeyID` and `accessKeySecret` are required for the whole configuration combined by the configuration managed by the command `kusion config` and the environment variables. For the `kusion config` alone, they are not obligatory. And for the safety reason, using environment variables is the recommended way.
 
@@ -130,7 +75,7 @@ The `s3` type backend uses the AWS Simple Storage Service (S3) as storage. The s
 - **accessKeyID**: `type string`, `required`, specify the aws account accessKeyID, support declaring by environment variable `AWS_ACCESS_KEY_ID`.
 - **accessKeySecret**: `type string`, `required`, specify the aws account.accessKeySecret, support declaring by environment variable `AWS_SECRET_ACCESS_KEY`.
 - **bucket**: `type string`, `required`, specify the name of the aws s3 bucket.
-- **prefix**: `type string`, `optional`, constitute the prefix to store the Workspace, Spec, and State files, whose prefixes are `${prefix}/workspaces`, `${prefix}/specs` and `${prefix}/states` respectively.
+- **prefix**: `type string`, `optional`, constitute the prefix to store the Workspace and Release files, whose prefixes are `${prefix}/workspaces` and `${prefix}/releases` respectively.
 
 Noted that `region`, `accessKeyID` and `accessKeySecret` are optional for the `kusion config` command.
 
@@ -186,7 +131,7 @@ kusion config set backends.s3_prod '{"type":"s3","configs":{"bucket":"kusion"}}'
 
 ### Setting a Backend Type
 
-The key to set a backend type is `backends.${name}.type`, whose value must be `local`, `mysql`, `oss` or `s3`.
+The key to set a backend type is `backends.${name}.type`, whose value must be `local`, `oss` or `s3`.
 
 ```shell
 # set a backend type
@@ -262,11 +207,10 @@ kusion config list
 
 ## Using Backend
 
-The backend is used to store Workspace, Spec, and State. Thus, the following commands use the backend, shown as below.
+The backend is used to store Workspace and Release. Thus, the following commands use the backend, shown as below.
 
 - subcommands of `kusion workspace`: use to store the Workspace;
-- `kusion generate`: use to store the Spec;
-- `kusion preview`, `kusion apply`, `kusion destroy`: use to store the State;
+- `kusion apply`, `kusion destroy`: use to store the Release;
 
 For all the commands above, the flag `--backend` is provided to specify the backend, or using the current backend. When using backend, you usually need to specify the sensitive data by environment variables. The example is shown below.
 
