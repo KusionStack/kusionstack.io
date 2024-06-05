@@ -10,11 +10,11 @@ import {
   AiFillCloseCircle,
 } from "react-icons/ai";
 import logoImg from "@site/static/karpor/assets/logo/logo-full.png";
-import userFriendlyImg from "@site/static/karpor/assets/overview/user-friendly.png";
-import intelligentImg from "@site/static/karpor/assets/overview/intelligent.png";
-import lowBurdenImg from "@site/static/karpor/assets/overview/low-burden.png";
-import GithubStars from "@site/src/components/GithubStars";
+import searchImg from "@site/static/karpor/assets/overview/search.png";
+import insightImg from "@site/static/karpor/assets/overview/insight.png";
+import comingSoonImg from "@site/static/karpor/assets/misc/coming-soon.jpeg";
 import KarporButton from "@site/src/components/KarporButton";
+import GithubStar from "@site/src/components/GithubStars";
 import ReactPlayer from "react-player";
 import Typed from "typed.js";
 
@@ -143,23 +143,17 @@ export const Content = () => {
           <div>
             <KarporButton
               url="https://karpor-demo.kusionstack.io"
-              btnText="Demo"
+              btnText="Live Demo"
             />
           </div>
           <div>
-            <GithubStars repo={"KusionStack/karpor"} />
+            <GithubStar repo="KusionStack/karpor"/>
           </div>
         </div>
         <div style={{ fontSize: 26, fontWeight: "Bold" }}>
-          Intuitive Discovery 🔍,
+            Intelligence for Kubernetes ✨          
         </div>
-        <div style={{ fontSize: 26, fontWeight: "Bold" }}>
-          {" "}
-          Limitless Insight 📊. <span style={{ fontWeight: "normal" }}>
-            With AI.<sup style={{ fontSize: 11 }}>coming soon </sup>
-          </span>✨
-        </div>
-        <div style={{ fontSize: 22, fontWeight: "Normal" }}>
+        <div style={{ fontSize: 24, fontWeight: "Normal" }}>
           <span ref={el} />
         </div>
       </div>
@@ -173,17 +167,15 @@ export const Content = () => {
           <div style={{ width: "100%" }}>
             <h2 style={h2Style}>📖 What is Karpor?</h2>
             <div style={{ padding: "5px 0px" }}>
-              Karpor is a Modern <b>Kubernetes Explorer</b> focusing on{" "}
-              <b>🔍 Search, 💡 Insight and 🤖 Intelligence</b>.
+                Karpor is <b>Intelligence for Kubernetes</b>. It
+                brings advanced <b>🔍 Search, 💡 Insight and ✨ AI</b> to Kubernetes. It is essentially
+                a <b>Kubernetes Explorer</b>/<b>Kubernetes Dashboard</b>. 
+                With Karpor, you can gain crucial visibility into your Kubernetes clusters 
+                across any clouds and empower developers to ship faster.
             </div>
             <div style={{ padding: "5px 0px" }}>
-              Karpor features keywords such as{" "}
-              <u>
-                self-host, non-invasive, read-only, security & compliance,
-                multi-cloud and multi-cluster support, customizable logical view
-              </u>
-              , and can serve as a <b>Kubernetes Data Plane</b> to reduce the complexity
-              of discovering and understanding kubernetes resources.
+                We hope to become a <b>small and beautiful, vendor-neutral,
+                developer-friendly, community-driven</b> project! 🚀
             </div>
           </div>
           <div style={{ width: "100%", padding: "10px" }}>
@@ -217,74 +209,69 @@ export const Content = () => {
             }}
           >
             <FeatureBlock
-              title="🤝 User Friendly"
-              imgSrc={userFriendlyImg}
-              imgAlt="User Friendly"
+              title="🔍 Search"
+              imgSrc={searchImg}
+              imgAlt="Karpor Search"
             >
               <td style={{ verticalAlign: "middle", border: "none" }}>
-                <b>⚡️ Lightweight and Easy to Setup</b>
+                <b>⚡️ Automatic Syncing</b>
                 <br />
-                Done with one `helm install`.
-                <br />
-                <br />
-                <b>📦 Out of the Box</b>
-                <br />
-                Built-in security and compliance policies, resource syncing strategy,
-                resource transform rules, and topology relationship definitions.
+                Automatically synchronize your resources across any clusters
+                managed by the multi-cloud platform.
                 <br />
                 <br />
-                <b>🔍 Quickly search and locate resource(s)</b>
+                <b>🔍 Powerful, flexible queries</b>
                 <br />
-                Quickly search and locate resource(s) of interest across a large
-                number of clusters in a user-friendly way.
+                Effectively retrieve and locate resources across multi clusters
+                that you are looking for in a quick and easy way.
               </td>
             </FeatureBlock>
             <br />
             <FeatureBlock
-              title="✨ Intelligent"
-              imgSrc={intelligentImg}
+              title="💡 Insight"
+              imgSrc={insightImg}
               reverse={true}
-              imgAlt="Intelligent"
+              imgAlt="Karpor Insight"
             >
               <td style={{ verticalAlign: "middle", border: "none" }}>
-                <b>🔒 Compliance Reports</b>
+                <b>🔒 Compliance Governance</b>
                 <br />
-                Automatically identify potential risks and receive AI-driven
-                suggestions (coming soon) for remediation.
-                <br />
-                <br />
-                <b>🩺 Health Scoring </b>
-                <br />
-                Evaluate health scores for individual resources, clusters, namespaces,
-                or customized logical groupings
+                Understand your compliance status across multiple clusters and
+                compliance standards.
                 <br />
                 <br />
-                <b>📊 Topological views</b>
+                <b>📊 Resource Topology</b>
                 <br />
-                Topological views of relevant resources within their operational
-                context.
+                Logical and topological views of relevant resources within their
+                operational context.
+                <br />
+                <br />
+                <b>📉 Cost Optimization</b>
+                <br />
+                Coming soon.
               </td>
             </FeatureBlock>
             <br />
             <FeatureBlock
-              title="⚡️ Low Burden"
-              imgSrc={lowBurdenImg}
-              imgAlt="Low Burden"
+              title="✨ AI"
+              imgSrc={comingSoonImg}
+              imgAlt="karpor ai"
             >
               <td style={{ verticalAlign: "middle", border: "none" }}>
-                <b>🔒 Read-Only, Non-Invasive</b>
+                <b>💬 Natural Language Operations</b>
                 <br />
-                Read-Only data plane, Non-Invasive to user clusters.
-                <br />
-                <br />
-                <b>⚙️ Kubernetes Native API Compatible</b>
-                <br />
-                Seamless integration of existing kubernetes tool chain.
+                Interact with Kubernetes using plain language for more intuitive
+                operations.
                 <br />
                 <br />
-                <b>☁️ Multi-Cluster and Multi-Cloud</b>
+                <b>📦 Contextual AI Responses</b>
                 <br />
-                Natively connects Multi-Cluster and supports Multi-Cloud.
+                Get smart, contextual assistance that understands your needs.
+                <br />
+                <br />
+                <b>🤖 AIOps for Kubernetes</b>
+                <br />
+                Automate and optimize Kubernetes management with AI-powered insights.
               </td>
             </FeatureBlock>
             <br />
@@ -292,10 +279,12 @@ export const Content = () => {
         </div>
       </div>
       <h2 style={h2Style}>🙌 Karpor vs. Kubernetes Dashboard</h2>
-      <div style={{
+      <div
+        style={{
           width: "100%",
-          padding: "10px 20px"
-      }}>
+          padding: "10px 20px",
+        }}
+      >
         <div
           style={{
             height: 60,
@@ -414,3 +403,4 @@ export const Content = () => {
 };
 
 <Content />
+
