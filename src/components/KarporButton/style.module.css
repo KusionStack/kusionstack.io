@@ -1,22 +1,37 @@
-.karbour_button a{
+.karpor_button a {
   display: inline-block;
-  margin: 0 20px;
-  font-size: 14px;
-  height: 32px;
-  line-height: 32px;
-  padding: 0 20px;
-  border: 1px solid #1677ff;
+  margin: 0 10px;
+  font-size: 15px;
   border-radius: 4px;
   cursor: pointer;
-  color: #1677ff;
+  color: rgb(36, 41, 47);
   font-weight: bold;
   display: flex;
   align-items: center;
-  text-decoration:none;
+  text-decoration: none;
 }
 
-.karbour_button a:hover {
-  background: #1677ff;
-  color: #fff;
-  text-decoration:none;
+.karpor_button a .text {
+  padding: 5px 15px;
+  border-radius: 6px 0 0 6px;
+  border: 1px solid rgb(208, 215, 222);
+  background: #ebf0f4;
+}
+
+.karpor_button a .icon {
+  padding: 5px 15px;
+  border-radius: 0 4px 4px 0;
+  border: 1px solid rgb(208, 215, 222);
+  border-left: none;
+  background: #fff;
+}
+
+.karpor_button a:hover {
+  text-decoration: none;
+}
+
+.karpor_button a .text:hover {
+  text-decoration: none;
+  background-color: #fff;
+  color: rgb(36, 41, 47);
 }

@@ -4,29 +4,32 @@ import { AiOutlineStar } from "react-icons/ai";
 import styles from "./GithubStars.module.css";
 
 function GithubStars({ repo }) {
-    const [stars, setStars] = useState("?");
+  const [stars, setStars] = useState("?");
 
-    useEffect(() => {
-        // 获取 GitHub Star 数
-        fetch(`https://api.github.com/repos/${repo}`)
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.stargazers_count) {
-                    setStars(data.stargazers_count);
-                }
-            });
-    }, [repo]);
+  useEffect(() => {
+    // Fetch the gitHub star number
+    fetch(`https://api.github.com/repos/${repo}`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.stargazers_count) {
+          setStars(data.stargazers_count);
+        }
+      });
+  }, [repo]);
 
-    return (
-        <a
-            href={`https://github.com/${repo}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.stars_container}
-        >
-            Star <AiOutlineStar style={{ marginLeft: 6, fontWeight: "bold" }} />
-        </a>
-    );
+  return (
+    <div className={styles.karpor_star_button}>
+      <a href={`https://github.com/${repo}`} target="_blank">
+        <span className={styles.text}>
+          <AiOutlineStar className={styles.icon} />
+          Star
+        </span>
+      </a>
+      <a href={`https://github.com/${repo}/stargazers`} target="_blank">
+        <span className={styles.star}>{stars}</span>
+      </a>
+    </div>
+  );
 }
 
 export default GithubStars;
