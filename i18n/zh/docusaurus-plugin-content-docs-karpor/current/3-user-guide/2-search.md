@@ -1,37 +1,35 @@
 ---
-title: How to Search
+title: 如何搜索
 ---
-Within this section, we will explore how to perform multi-cluster resource searches using Karpor, with this guide being done entirely through the Dashboard.
 
-We support three methods of search:
+在本节中，我们将探索如何使用 Karpor 执行多集群资源搜索，本指南完全通过 Dashboard 进行。
 
-- **Search by SQL**: Perform resource searches using SQL query language.
-- **Search by DSL**: Conduct resource searches through `Karpor`'s Domain Specific Language (DSL).
-- **Search by Natural Language**: Using natural language for resource search.
+我们支持三种搜索方法：
 
-## Search by SQL
+- **通过 SQL 搜索**：使用 SQL 查询语言执行资源搜索。
+- **通过 DSL 搜索**：通过`Karpor`的特定领域语言（DSL）进行资源搜索。
+- **通过自然语言搜索**：使用自然语言进行资源搜索。
 
-Karpor offers a nifty SQL query feature that allows you to search and filter all Kubernetes resources within managed clusters using familiar SQL syntax and provides targeted optimizations and enhancements for multi-cluster resource searches.
+## 通过 SQL 搜索
 
-SQL is one of the easily accessible skills for practitioners in the software engineering industry, theoretically making the learning curve quite low. As such, this search method is prepared for you! It is particularly well-suited for beginners to Karpor.
+Karpor 提供了一个方便的 SQL 查询功能，允许您使用熟悉的 SQL 语法搜索和过滤所有托管集群中的 Kubernetes 资源，并为多集群资源搜索提供了针对性的优化和增强。
 
-Below are the steps to use Search by SQL:
+SQL 是软件工程行业从业者容易获取的技能之一，理论上使得学习曲线相当低。因此，这种搜索方法是为您准备的！特别适合 Karpor 的初学者。
 
-1. **Enter the Search page**: We designed the homepage as the entry point for search, so opening `Karpor`'s Web UI immediately presents you with the search page.
+以下是使用 SQL 搜索的步骤：
+
+1. **进入搜索页面**：我们将首页设计为搜索的入口点，因此打开`Karpor`的 Web UI 立即呈现给您搜索页面。
    ![](/karpor/assets/search/search-home.png)
-
-2. **Compose SQL query statements**: Write your query statement using SQL syntax, specifying the cluster name, resource type, conditions, and filters you wish to search for. Additionally, if you enter a keyword and press a space, the search box will pop up with a dropdown with auto-completion, suggesting possible keywords you can type next.
+2. **编写 SQL 查询语句**：使用 SQL 语法编写您的查询语句，指定您希望搜索的集群名称、资源类型、条件和过滤器。此外，如果您输入关键词并按空格，搜索框将弹出带有下拉菜单的自动完成提示，建议您可以输入的下一个可能的关键词。
    ![](/karpor/assets/search/search-auto-complete.png)
-
-3. **Execute the query**: Click the 'search' button to execute the query and be sent to the search results page. Karpor will return a list of resources that match the SQL query.
+3. **执行查询**：点击`搜索`按钮执行查询，并被发送到搜索结果页面。Karpor 将返回与 SQL 查询匹配的资源列表。
    ![](/karpor/assets/search/search-result.png)
+4. **高级功能**：利用我们的内置高级 SQL 语法，如排序、全文搜索等，进一步细化您的搜索。详情请参阅：[搜索方法文档](../5-references/3-search-methods.md)。
 
-4. **Advanced features**: Utilize our built-in advanced SQL syntax, such as sorting, full-text search, etc., to refine your search further. For details, please refer to: [Search Methodology Documentation](../5-references/3-search-methods.md).
+## 通过 DSL 搜索
 
-## Search by DSL
+敬请期待。🚧
 
-Coming soon. 🚧
+## 通过自然语言搜索
 
-## Search by Natural Language
-
-Coming soon. 🚧
+敬请期待。🚧

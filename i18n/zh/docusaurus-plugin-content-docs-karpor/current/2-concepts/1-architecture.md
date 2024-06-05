@@ -1,25 +1,25 @@
 ---
-title: Architecture
+title: 架构
 ---
 
 ![](assets/1-architecture/architecture.png)
 
-## Components
+## 组件
 
--   `Dashboard`: Web UI for Karpor.
--   `Server`: Main Backend Server for Karpor.
--   `Syncer`: Independent Server to synchronize cluster resources in real-time.
--   `Storage`: Storage Backend to store the synchronized resources and user data.
+-   `Dashboard`：Karpor 的 Web UI 界面。
+-   `Server`：Karpor 的核心后端服务。
+-   `Syncer`：用于实时同步集群资源的独立服务。
+-   `Storage`：用于存储已同步的资源和用户数据的存储后端
 
-## How Karpor Works
+## Karpor 的工作原理
 
-1. After installation, users can register clusters of interest into Karpor.
-2. The Syncer runs and automatically synchronizes the resources of interest from the cluster to Storage. It also ensures the real-time changes to the resources are automatically sync-ed to Karpor Storage.
-3. When a user wishes to locate specific resource(s), a search query can be typed into the search box in the Dashboard. The Dashboard interacts with the search endpoint of the Server. The search module within the Server parses the search query, searches for relevant resources in Storage, and returns the results to the Dashboard.
-4. Upon clicking a search result, the user is directed to a resource insight page. The Dashboard calls the insight endpoint of the Server, where the Server's insight module performs a static scan of the resource, generates issue reports, and locates its relevant resources to draw a resource topology map with all of its parents and children.
-5. The insight page also applies to groups of resources, such as all resources in a cluster, a Group-Version-Kind combination, a namespace or a custom-defined resource group.
+1. 安装后，用户可以将感兴趣的集群注册到 Karpor 中。
+2. Syncer 组件会自动将已注册集群中的资源实时同步到 Storage 中，同时会确保资源的实时变化也会自动同步到 Storage 中。
+3. 当用户需要查找特定资源时，只需在 Dashboard 的搜索框中输入查询语句。Dashboard 会与 Server 的搜索接口交互，Server 内的搜索模块将解析这些语句，并在 Storage 中查找相应的资源，然后将搜索结果返回给 Dashboard。
+4. 点击搜索结果后，用户将被引导至资源洞察页面。Dashboard 调用 Server 的洞察接口，其中 Server 的洞察模块对资源进行静态扫描，生成问题报告，并定位其相关资源，以绘制包含所有父资源和子资源的资源拓扑图。
+5. 洞察页面同样适用于资源组，比如洞察特定 Group-Version-Kind 的资源组、单个命名空间，或是用户自定义的资源组。
 
-## Next Step
-- Learn Karpor's [Glossary](../concepts/glossary).
-- View [User Guide](../user-guide/multi-cluster-management) to look on more of what you can achieve with Karpor.
+## 下一步
 
+- 学习 Karpor 的 [术语表](../concepts/glossary)。
+- 查看 [用户指南](../user-guide/multi-cluster-management) 以了解更多关于您能够通过 Karpor 实现的内容。
