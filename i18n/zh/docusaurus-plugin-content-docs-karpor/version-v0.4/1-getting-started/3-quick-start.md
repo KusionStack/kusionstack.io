@@ -1,104 +1,103 @@
 ---
-title: Quick Start
+title: 快速开始
 ---
 
-## Prerequisites
+## 前提条件
 
-* Ensure [kubectl](https://kubernetes.io/docs/tasks/tools/) is installed.
-* Ensure [helm](https://helm.sh/docs/intro/install/) is installed.
-* If you do not have a ready-made cluster, you still need a [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation/).
+* 确保已安装 [kubectl](https://kubernetes.io/docs/tasks/tools/)。
+* 确保已安装 [helm](https://helm.sh/docs/intro/install/)。
+* 如果你没有现成的集群，你仍然需要一个 [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation/)。
 
-## Create Cluster (Optional)
+## 创建集群（可选）
 
-First, if you do not have a ready-made cluster, you need to create a kubernetes cluster in your local environment with the `kind` tool. Follow these steps:
+首先，如果你没有现成的集群，可以使用`kind`工具在本地环境中创建一个 Kubernetes 集群。按照以下步骤操作：
 
-1. Create a cluster. You can create a cluster named `demo-cluster` using the following command:
+1. 创建集群。你可以使用以下命令创建名为`demo-cluster`的集群：
    ```shell
    kind create cluster --name demo-cluster
    ```
-   This will create a new Kubernetes cluster in your local Docker environment. Wait for a moment until the cluster creation is complete.
-2. Verify that the cluster is running properly by executing the command:
+   这将在你的本地 Docker 环境中创建一个新的 Kubernetes 集群。稍等片刻，直到集群创建完成。
+2. 通过执行以下命令验证集群是否正常运行：
    ```shell
    kubectl cluster-info
    ```
-   If everything is set up correctly, you'll see information about your Kubernetes cluster.
+   如果一切设置正确，你将看到你的 Kubernetes 集群信息。
 
-## Installation
+## 安装
 
-To install Karpor, execute the following command in your terminal:
+要安装 Karpor，请在终端中执行以下命令：
 
 ```shell
-helm repo add kusionstack https://kusionstack.github.io/charts
+helm repo add kusionstack https://kusionstack.github.io/charts 
 helm repo update
 helm install karpor kusionstack/karpor
 ```
 
-For more installation details, please refer to the [Installation Documentation](2-installation.md).
+更多的安装详情，请参考 [安装文档](2-installation.md)。
 
-![Install](./assets/2-installation/install.gif)
+![安装](./assets/2-installation/install.gif)
 
-## Access Karpor Dashboard
+## 访问 Karpor Web 界面
 
-1. Run the following command to forward the Karpor server port:
+1. 运行以下命令来访问运行在集群中的 Karpor 服务：
    ```shell
    kubectl -n karpor port-forward service/karpor-server 7443:7443
    ```
-   This will create a port forward from your local machine to the Karpor server.
-2. Open your browser and enter the following URL:
+  执行这条命令后，如果你访问本地机器上的 7443 端口，流量会被转发到 Kubernetes 集群中 karpor-server 服务的 7443 端口。 
+2. 打开浏览器并输入以下 URL：
    ```shell
-   https://127.0.0.1:7443
+   https://127.0.0.1:7443 
    ```
-   This will take you to the karpor dashboard. 👇
+   这将打开 Karpor 的 Web 界面。👇
 
-![Open in Browser](./assets/2-installation/open-in-browser.gif)
+![在浏览器中打开](./assets/2-installation/open-in-browser.gif)
 
-Congratulations! 🎉 You have successfully installed Karpor. Now you can start using Karpor for multi-cluster search and insights.
+祝贺你！🎉 你已成功安装 Karpor。现在你可以开始使用 Karpor 探索和洞察多集群中的资源。
 
-## Register Cluster
+## 注册集群
 
-To register a new cluster with Karpor, follow these steps:
+要向 Karpor 注册新集群，请按照以下步骤操作：
 
-1. Navigate to the `Cluster Management` section in the Karpor UI.
-2. Click on the `Register Cluster` button.
-3. Follow the on-screen instructions to complete the registration process.
+1. 打开 Karpor Web 界面中的 <kbd>集群管理</kbd> 部分。
+2. 点击 <kbd>接入集群</kbd> 按钮。
+3. 按照界面上的说明完成集群注册过程。
 
-An example of the registration button can be found in the image below:
+以下是`注册集群`页面的示例：
 
 ![](/karpor/assets/cluster-mng/cluster-mng-register-new-cluster.png)
 
-For a more detailed explanation of the registration process, refer to the [Multi-cluster management](../3-user-guide/1-multi-cluster-management.md) Documentation.
+有关注册过程的更详细解释，请参阅 [多集群管理](../3-user-guide/1-multi-cluster-management.md) 指南。
 
-## Search Resources
+## 搜索资源
 
-Karpor provides a powerful search feature that allows you to quickly find resources across the registered clusters. To use this feature:
+Karpor 提供了一个强大的搜索功能，允许你快速跨集群查找资源。要使用此功能：
 
-1. Go to the `Search` page within the Karpor UI.
-2. Enter the search criteria for the resources you are looking for.
+1. 打开 Karpor Web 界面中的 <kbd>搜索</kbd> 页面。
+2. 输入你要查找的资源的搜索条件。
 
-Here is an example of the `Search` page:
+以下是`搜索`页面的示例：
 
 ![](/karpor/assets/search/search-auto-complete.png)
 ![](/karpor/assets/search/search-result.png)
 
-To learn more about the search capabilities and how to use them effectively, check out the [Search Methods Documentation](../5-references/3-search-methods.md).
+要了解更多关于搜索功能以及如何有效使用它们的说明，请查看 [搜索方法](../5-references/3-search-methods.md) 指南。
 
-## Gain Insight into Resources
+## 资源洞察
 
-By clicking on a result from your search, you can delve into the `Insight` page, where you'll be able to investigate risks related to the resource, see a topological view with its relevant resources, and examine its detailed information.
+通过点击搜索结果，你可以进入到资源的**洞察**页面，在这里你可以查看资源风险报告、健康分、资源关系拓扑图等经过我们提炼的信息。
 
-Here are examples for what you can find on the Insight page:
+以下是`洞察`页面的示例：
 
 ![](/karpor/assets/insight/insight-home.png)
 ![](/karpor/assets/insight/insight-single-issue.png)
 ![](/karpor/assets/insight/insight-topology.png)
 
-## Conclusion
+## 结论
 
-Please note that this guide only provides a quick start for Karpor, and you may need to refer to additional documentations and resources to configure and use other features.
+请注意，本指南仅提供 Karpor 的快速入门，你可能需要参考其他文档和资源来深入地了解每个功能。
 
-If you have any questions or concerns, check out the official documentation of Karpor or seek relevant support.
 
-## Next Step
-- Learn Karpor's [Architecture](../concepts/architecture) and [Glossary](../concepts/glossary).
-- View [User Guide](../user-guide/multi-cluster-management) to look on more of what you can achieve with Karpor.
+## 下一步
+- 了解 Karpor 的 [架构](../concepts/architecture) 和 [术语表](../concepts/glossary)。
+- 查看 [用户指南](../user-guide/multi-cluster-management) 以了解 Karpor 的更多功能。
 
