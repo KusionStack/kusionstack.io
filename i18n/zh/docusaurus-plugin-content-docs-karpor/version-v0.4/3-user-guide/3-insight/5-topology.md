@@ -1,21 +1,20 @@
 ---
-title: Topology
+title: 拓扑结构
 ---
 
-## Topology
+## 拓扑结构
 
-In this section, we will explore the topology feature in Karpor. The topology view will help you more intuitively understand the relationships and dependencies among various resources in your cluster. Here's how to use the topology view.
+在本节中，我们将探索 Karpor 中的拓扑功能。拓扑视图将帮助你更直观地理解集群中各种资源之间的关系和依赖。以下是如何使用拓扑视图。
 
-1. Follow the guidance on [Inspecting Any Resource Group and Resource](#inspecting-any-resource-group-and-resource) to navigate to the insights page of a particular resource group/resource.
-2. At the bottom of the page, you can see the resource topology map.
+1. 按照 [检查任意资源组和资源](#检查任何资源组和资源) 的指引，导航至特定资源组 / 资源的洞察页面。
+2. 在页面底部，你可以看到资源拓扑图。
    ![](/karpor/assets/insight/insight-topology.png)
-3. Depending on the current page:
-    1. Resource Insights Page:
-        1. The map will display relevant upstream and downstream resources related to the current resource. For example, if the current resource is a Deployment, the topology map will show the ReplicaSet under the Deployment and the Pods under the ReplicaSet.
+3. 根据当前页面情况：
+    1. 资源洞察页面：
+        1. 该图将展示与当前资源相关的上游和下游资源。例如，如果当前资源是一个 Deployment（部署），拓扑图将展示 Deployment 下的 ReplicaSet（副本集）以及 ReplicaSet 下的 Pods（容器组）。
            ![](/karpor/assets/insight/insight-topology-example.png)
-        2. Clicking on a node in the resource topology map is equivalent to clicking on an anchor of a specific resource, which will directly navigate to the insights page of that resource.
-    2. Resource Group Insights Page:
-        1. The map will intuitively show the quantity and relationship of all types of resources under the current resource group.
-        2. Clicking on a node in the resource topology map is equivalent to clicking on a resource type, and the list below will refresh with all the resources under a specific type within the current resource group.
+        2. 点击资源拓扑图中的一个节点，等同于点击特定资源的锚点，这将直接导航至该资源的洞察页面。
+    2. 资源组洞察页面：
+        1. 该图将直观显示当前资源组下各种资源类型的数量与关系。
+        2. 点击资源拓扑图中的一个节点，等同于点击资源类型，下方列表将刷新显示当前资源组中特定类型下的所有资源。
            ![](/karpor/assets/insight/insight-linkage.png)
-

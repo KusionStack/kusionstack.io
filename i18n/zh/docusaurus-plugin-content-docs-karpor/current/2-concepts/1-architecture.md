@@ -9,7 +9,7 @@ title: 架构
 -   `Dashboard`：Karpor 的 Web UI 界面。
 -   `Server`：Karpor 的核心后端服务。
 -   `Syncer`：用于实时同步集群资源的独立服务。
--   `Storage`：用于存储已同步的资源和用户数据的存储后端
+-   `Storage`：用于存储已同步的资源和用户数据的存储后端。
 
 ## Karpor 的工作原理
 
@@ -22,4 +22,4 @@ title: 架构
 ## 下一步
 
 - 学习 Karpor 的 [术语表](../concepts/glossary)。
-- 查看 [用户指南](../user-guide/multi-cluster-management) 以了解更多关于您能够通过 Karpor 实现的内容。
+- 查看 [用户指南](../user-guide/multi-cluster-management) 以了解更多关于你能够通过 Karpor 实现的内容。

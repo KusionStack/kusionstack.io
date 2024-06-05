@@ -44,4 +44,4 @@ title: 术语表
 
 ## 下一步
 - 学习 Karpor 的 [架构](../concepts/architecture)。
-- 查看 [用户指南](../user-guide/multi-cluster-management)，了解更多有关您可以通过 Karpor 实现的内容。
+- 查看 [用户指南](../user-guide/multi-cluster-management)，了解更多有关你可以通过 Karpor 实现的内容。

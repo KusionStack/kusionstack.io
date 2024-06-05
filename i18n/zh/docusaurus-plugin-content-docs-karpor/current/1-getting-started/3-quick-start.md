@@ -6,22 +6,22 @@ title: 快速开始
 
 * 确保已安装 [kubectl](https://kubernetes.io/docs/tasks/tools/)。
 * 确保已安装 [helm](https://helm.sh/docs/intro/install/)。
-* 如果您没有现成的集群，您仍然需要一个 [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation/)。
+* 如果你没有现成的集群，你仍然需要一个 [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation/)。
 
 ## 创建集群（可选）
 
-首先，如果您没有现成的集群，可以使用`kind`工具在本地环境中创建一个 Kubernetes 集群。按照以下步骤操作：
+首先，如果你没有现成的集群，可以使用`kind`工具在本地环境中创建一个 Kubernetes 集群。按照以下步骤操作：
 
-1. 创建集群。您可以使用以下命令创建名为`demo-cluster`的集群：
+1. 创建集群。你可以使用以下命令创建名为`demo-cluster`的集群：
    ```shell
    kind create cluster --name demo-cluster
    ```
-   这将在您的本地 Docker 环境中创建一个新的 Kubernetes 集群。稍等片刻，直到集群创建完成。
+   这将在你的本地 Docker 环境中创建一个新的 Kubernetes 集群。稍等片刻，直到集群创建完成。
 2. 通过执行以下命令验证集群是否正常运行：
    ```shell
    kubectl cluster-info
    ```
-   如果一切设置正确，您将看到您的 Kubernetes 集群信息。
+   如果一切设置正确，你将看到你的 Kubernetes 集群信息。
 
 ## 安装
 
@@ -52,7 +52,7 @@ helm install karpor kusionstack/karpor
 
 ![在浏览器中打开](./assets/2-installation/open-in-browser.gif)
 
-祝贺您！🎉 您已成功安装 Karpor。现在您可以开始使用 Karpor 探索和洞察多集群中的资源。
+祝贺你！🎉 你已成功安装 Karpor。现在你可以开始使用 Karpor 探索和洞察多集群中的资源。
 
 ## 注册集群
 
@@ -70,10 +70,10 @@ helm install karpor kusionstack/karpor
 
 ## 搜索资源
 
-Karpor 提供了一个强大的搜索功能，允许您快速跨集群查找资源。要使用此功能：
+Karpor 提供了一个强大的搜索功能，允许你快速跨集群查找资源。要使用此功能：
 
 1. 打开 Karpor Web 界面中的 <kbd>搜索</kbd> 页面。
-2. 输入您要查找的资源的搜索条件。
+2. 输入你要查找的资源的搜索条件。
 
 以下是`搜索`页面的示例：
 
@@ -84,7 +84,7 @@ Karpor 提供了一个强大的搜索功能，允许您快速跨集群查找资�
 
 ## 资源洞察
 
-通过点击搜索结果，您可以进入到资源的**洞察**页面，在这里您可以查看资源风险报告、健康分、资源关系拓扑图等经过我们提炼的信息。
+通过点击搜索结果，你可以进入到资源的**洞察**页面，在这里你可以查看资源风险报告、健康分、资源关系拓扑图等经过我们提炼的信息。
 
 以下是`洞察`页面的示例：
 
@@ -94,7 +94,7 @@ Karpor 提供了一个强大的搜索功能，允许您快速跨集群查找资�
 
 ## 结论
 
-请注意，本指南仅提供 Karpor 的快速入门，您可能需要参考其他文档和资源来深入地了解每个功能。
+请注意，本指南仅提供 Karpor 的快速入门，你可能需要参考其他文档和资源来深入地了解每个功能。
 
 
 ## 下一步
