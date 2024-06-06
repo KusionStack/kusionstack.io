@@ -112,7 +112,7 @@ Please make sure your PR passes these checks.
 
 ## Become a Community Member
 
-If you're interested to become a community member or learn more about the governance, please check the [ROLES](https://github.com/KusionStack/community/blob/main/ROLES.md) for details.
+If you're interested to become a community member or learn more about the governance, please check the [Roles](./3-roles.md) for details.
 
 Enjoy coding and collaboration in Karpor world!
 
