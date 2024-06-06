@@ -1,7 +1,6 @@
 ---
 title: Roles
 ---
-# Contributor Guidelines
 
 Thank you for your interest and support for karpor!
 
