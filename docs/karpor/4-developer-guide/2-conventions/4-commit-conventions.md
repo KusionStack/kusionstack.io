@@ -2,6 +2,8 @@
 title: Commit Conventions
 ---
 
+## Commit Message Structure
+
 Karpor adheres to [conventional-commits](https://www.conventionalcommits.org/en/v1.0.0/).
 
 Commit messages should be organized following this structure:
