@@ -18,6 +18,7 @@ title: 多集群管理
 ## 编辑集群
 
 <kbd>编辑</kbd> 按钮允许修改 <kbd>显示名称</kbd> 和 <kbd>描述</kbd>，从而改变仪表盘中集群名称和描述的显示方式。
+
 ![](/karpor/assets/cluster-mng/cluster-mng-edit-cluster.png)
 
 ## 轮换证书
