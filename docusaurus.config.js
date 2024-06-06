@@ -48,7 +48,15 @@ const config = {
 
   i18n: {
     defaultLocale: "en",
-    locales: ["en"],
+    locales: ["en", "zh"],
+    localeConfigs: {
+      en: {
+        label: "English",
+      },
+      zh: {
+        label: "简体中文",
+      },
+    },
   },
   scripts: [],
 
@@ -247,16 +255,16 @@ const config = {
             position: "right",
             docsPluginId: "karpor",
           },
-          // {
-          //     type: 'localeDropdown',
-          //     position: 'right',
-          //     dropdownItemsAfter: [
-          //         {
-          //             href: 'https://github.com/KusionStack/kusionstack.io/issues/25',
-          //             label: 'Help Us Translate',
-          //         },
-          //     ],
-          // },
+          {
+            type: "localeDropdown",
+            position: "right",
+            dropdownItemsAfter: [
+              {
+                href: "https://github.com/KusionStack/karpor/issues/468",
+                label: "Help Us Translate",
+              },
+            ],
+          },
           {
             href: "https://github.com/KusionStack",
             className: "header-github-link",
