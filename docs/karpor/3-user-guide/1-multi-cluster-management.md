@@ -1,7 +1,6 @@
 ---
 title: Multi-Cluster Management
 ---
-
 Multi-cluster management is the entrance to register clusters into Karpor, enabling search and insight capabilities across a large number of clusters.
 
 ## Register Cluster

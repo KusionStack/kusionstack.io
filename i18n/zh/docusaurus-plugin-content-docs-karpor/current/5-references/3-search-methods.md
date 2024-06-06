@@ -1,7 +1,6 @@
 ---
 title: Search Methods
 ---
-
 Karpor is an open-source project that offers robust capabilities for searching resources across multiple clusters. This document outlines the two main search methods supported by Karpor: DSL (Domain Specific Language) and SQL (Structured Query Language), and explains how to utilize them for resource searches.
 
 ## Keywords

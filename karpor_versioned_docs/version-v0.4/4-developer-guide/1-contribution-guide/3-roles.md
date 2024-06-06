@@ -1,7 +1,6 @@
 ---
 title: Roles
 ---
-
 Thank you for your interest and support for karpor!
 
 This document outlines the roles and responsibilities of contributors in the project, as well as the process for becoming a Contributor and losing Maintainer status. We hope that this document will help every contributor understand the growth path and make a greater contribution to the project's development.

@@ -1,7 +1,6 @@
 ---
 title: Custom Resource Group
 ---
-
 ## Creating Custom Resource Group
 
 This section will focus on how to create custom resource group within Karpor. Through custom resource group, you can flexibly manage and organize resources in Karpor according to your own needs and logical concepts. We will guide you step by step to create and define custom resource group and show you how to use these groups for resource insight and management.
@@ -11,6 +10,7 @@ If you're not familiar with **Resource Group** and **Resource Group Rule** relat
 **Let's assume** that within your organization or company, there is a concept of `application unit` that represent **all resources of an application in a certain environment**.
 
 We mark the **name and environment of the application in the label**. For example, the following is the `application unit` of `mock-apple` in the `production environment`:
+
 ```yaml
 apiVersion: v1
 kind: Namespace
@@ -78,7 +78,6 @@ Now, we will create a custom `resource group rule` called the `application unit`
 7. If necessary, you can also use the same steps to create an `environment resource group`.
    ![](/karpor/assets/insight/insight-create-env-resource-group-rule.png)
    ![](/karpor/assets/insight/insight-list-env-resource-groups.png)
-
 
 ## Edit Custom Resource Group
 

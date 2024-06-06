@@ -1,7 +1,6 @@
 ---
 title: Test Conventions
 ---
-
 ## Testing Principles
 
 In Karpor, we primarily focus on the following three types of tests:
@@ -58,6 +57,7 @@ At the current point in time, the most popular testing frameworks in the Go lang
 In short, Ginkgo/Gomega offers better readability and maintainability, producing clean and clear tests, but with a higher learning curve requiring familiarity with BDD style. Testify is simpler, more practical, with a lower learning curve, but as time progresses, the testing code style may become more varied, lowering maintainability.
 
 Considering the actual situation of Karpor and the pros and cons of both frameworks, we decide to use these two frameworks in combination:
+
 - Use Testify for unit testing, adhering to [Table-Driven Testing](https://go.dev/wiki/TableDrivenTests) to constrain the code style and prevent decay;
 - Utilize Ginkgo's BDD features for writing higher-level integration and end-to-end tests;
 
@@ -171,12 +171,13 @@ It is worth noting that most mainstream IDEs have already integrated [gotests](h
 ### Test Coverage
 
 - **Specification Content**：Attention should be paid to test coverage, use the `go test -cover` command to examine the test coverage of the code.
-
 - **Positive Example**：
+
   ```shell
   $ go test -cover
   ```
 - **Negative Example**：
+
   ```shell
   $ go test # Without checking test coverage
   ```
@@ -258,11 +259,11 @@ It is worth noting that most mainstream IDEs have already integrated [gotests](h
 ### Clear Error Messages
 
 - **Specification Content**: When a test fails, output clear and understandable error messages to help developers locate the problem.
-- **Positive Example**: 
-	- `t.Errorf("Expected value %d, but got %d", expected, real)`
-- **Negative Example**: 
-	- `t.Errorf("Error occurred")`
-	- `fmt.Println("Error occurred")`
-	- `panic("Error occurred")`
+- **Positive Example**:
+  - `t.Errorf("Expected value %d, but got %d", expected, real)`
+- **Negative Example**:
+  - `t.Errorf("Error occurred")`
+  - `fmt.Println("Error occurred")`
+  - `panic("Error occurred")`
 
 When a test fails, output clear and understandable error messages to help developers locate the problem.

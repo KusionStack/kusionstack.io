@@ -1,7 +1,6 @@
 ---
 title: Commit Conventions
 ---
-
 ## Commit Message Structure
 
 Karpor adheres to [conventional-commits](https://www.conventionalcommits.org/en/v1.0.0/).
@@ -42,6 +41,7 @@ refs #133
 ```
 
 ## `<type>`(Required)
+
 The required type helps better capture the area of the commit, based on the [Angular guidelines](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines).
 
 We use lowercase for `<type>` to avoid spending time on case-sensitive issues. `<type>` can be one of the following:
@@ -69,4 +69,3 @@ The subject must come immediately after the type/scope prefix, followed by a col
 ## `<body>`(Required)
 
 A longer commit body can be provided after the brief subject, giving additional context information about the code change. The body must begin one line after the description.
-

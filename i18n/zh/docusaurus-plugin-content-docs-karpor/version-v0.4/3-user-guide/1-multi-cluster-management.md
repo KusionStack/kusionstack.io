@@ -1,7 +1,6 @@
 ---
 title: 多集群管理
 ---
-
 多集群管理是将集群注册进 Karpor 的入口，使能在大量集群间进行搜索和洞察。
 
 ## 注册集群
@@ -22,6 +21,7 @@ title: 多集群管理
 ![](/karpor/assets/cluster-mng/cluster-mng-edit-cluster.png)
 
 ## 轮换证书
+
 当 kubeconfig 过期时，你可以通过点击 <kbd>轮换证书</kbd> 来更新证书。
 ![](/karpor/assets/cluster-mng/cluster-mng-rotate-cluster-1.png)
 ![](/karpor/assets/cluster-mng/cluster-mng-rotate-cluster-2.png)

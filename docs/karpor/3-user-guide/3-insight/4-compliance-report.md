@@ -1,7 +1,6 @@
 ---
 title: Compliance Report
 ---
-
 This section will introduce the compliance scan feature, primarily used to detect and assess whether all resources in the current resource or resource group comply with specific compliance standards and security policies. In this section, you will understand how to effectively utilize the compliance scan feature to ensure the security and compliance of the cluster and resources.
 
 If you're not familiar with **Compliance Report** or **Risk** related concepts, you can refer to the [Glossary](../../2-concepts/3-glossary.md) section.
@@ -15,4 +14,3 @@ If you're not familiar with **Compliance Report** or **Risk** related concepts, 
 5. Click on <kbd>View All Risks</kbd>, and a drawer will pop out listing all the risks. Here, you can search, categorize, paginate, etc
    ![](/karpor/assets/insight/insight-all-issues.png)
 6. Once you have resolved a risk following its indications, you can click the [Rescan] button, which will trigger a comprehensive compliance scan of all resources under the resource group. The Dashboard will display the new results once the scan is completed.
-

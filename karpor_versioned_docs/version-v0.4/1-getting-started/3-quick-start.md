@@ -1,7 +1,6 @@
 ---
 title: Quick Start
 ---
-
 ## Prerequisites
 
 * Ensure [kubectl](https://kubernetes.io/docs/tasks/tools/) is installed.
@@ -16,11 +15,13 @@ First, if you do not have a ready-made cluster, you need to create a kubernetes 
    ```shell
    kind create cluster --name demo-cluster
    ```
+
    This will create a new Kubernetes cluster in your local Docker environment. Wait for a moment until the cluster creation is complete.
 2. Verify that the cluster is running properly by executing the command:
    ```shell
    kubectl cluster-info
    ```
+
    If everything is set up correctly, you'll see information about your Kubernetes cluster.
 
 ## Installation
@@ -43,11 +44,13 @@ For more installation details, please refer to the [Installation Documentation](
    ```shell
    kubectl -n karpor port-forward service/karpor-server 7443:7443
    ```
+
    This will create a port forward from your local machine to the Karpor server.
 2. Open your browser and enter the following URL:
    ```shell
    https://127.0.0.1:7443
    ```
+
    This will take you to the karpor dashboard. 👇
 
 ![Open in Browser](./assets/2-installation/open-in-browser.gif)
@@ -99,6 +102,6 @@ Please note that this guide only provides a quick start for Karpor, and you may 
 If you have any questions or concerns, check out the official documentation of Karpor or seek relevant support.
 
 ## Next Step
+
 - Learn Karpor's [Architecture](../concepts/architecture) and [Glossary](../concepts/glossary).
 - View [User Guide](../user-guide/multi-cluster-management) to look on more of what you can achieve with Karpor.
-

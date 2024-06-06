@@ -1,15 +1,14 @@
 ---
 title: Architecture
 ---
-
 ![](assets/1-architecture/architecture.png)
 
 ## Components
 
--   `Dashboard`: Web UI for Karpor.
--   `Server`: Main Backend Server for Karpor.
--   `Syncer`: Independent Server to synchronize cluster resources in real-time.
--   `Storage`: Storage Backend to store the synchronized resources and user data.
+- `Dashboard`: Web UI for Karpor.
+- `Server`: Main Backend Server for Karpor.
+- `Syncer`: Independent Server to synchronize cluster resources in real-time.
+- `Storage`: Storage Backend to store the synchronized resources and user data.
 
 ## How Karpor Works
 
@@ -20,6 +19,6 @@ title: Architecture
 5. The insight page also applies to groups of resources, such as all resources in a cluster, a Group-Version-Kind combination, a namespace or a custom-defined resource group.
 
 ## Next Step
+
 - Learn Karpor's [Glossary](../concepts/glossary).
 - View [User Guide](../user-guide/multi-cluster-management) to look on more of what you can achieve with Karpor.
-
