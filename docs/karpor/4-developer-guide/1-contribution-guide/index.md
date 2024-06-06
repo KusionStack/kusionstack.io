@@ -77,6 +77,8 @@ test: Adding missing tests or correcting existing tests
 chore: Changes to the build process or auxiliary tools and libraries such as documentation generation
 ```
 
+More see: [Commit Conventions](../2-conventions/4-commit-conventions.md)
+
 ### Open a Pull Request
 
 [Open a pull request](https://github.com/KusionStack/karpor/pulls) from the develop branch of your forked repository to the main branch of karpor. You should clearly describe what you do in the PR, and link it to an issue. Besides, the PR title should also follow the commit conventions described above, and must be 5-256 characters in length, prefix `WIP` and `[WIP]` are not allowed.
