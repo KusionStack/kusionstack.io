@@ -6,6 +6,9 @@ To help us create a safe and positive community experience for all, we require a
 
 ## Before contributing
 
+
+### Find a Contribution Point
+
 You can contribute to Karpor in several ways including code and non-code contributions,
 we appreciate every effort you contribute to the community. 
 
@@ -21,13 +24,13 @@ And:
 - If you don’t know what issues start, we have prepared a [Community tasks | 新手任务清单 🎖︎](https://github.com/KusionStack/karpor/issues/463), or you can filter [help wanted](https://github.com/KusionStack/karpor/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22) or [good first issue](https://github.com/KusionStack/karpor/issues?q=is%3Aopen+is%3Aissue++label%3A%22good+first+issue%22) label in issue tracker. you can choose the issue you like.
 - If you have any questions, please [Submit the Issue](https://github.com/KusionStack/karpor/issues/new/choose) or [Post on the discussions](https://github.com/KusionStack/karpor/discussions/new/choose), we will answer as soon as possible.
 
-### Non-code contribution
+### How to Contribute Non-code
 
 We regard non-coding contribution as equally important with code contribution for the community's very existence and its future growth.
 
 - Refer to [Non-code Contribution Guide](./non-code-contribute) to know how you could help.
 
-### Code contribution
+### How to Contribute Code
 
 Unsure where to begin contributing to Karpor codebase? Start by browsing issues labeled `good first issue` or `help wanted`.
 
@@ -107,7 +110,7 @@ To keep the reliability of the karpor project, the following check will get trig
 
 Please make sure your PR passes these checks.
 
-## Become a community member
+## Become a Community Member
 
 If you're interested to become a community member or learn more about the governance, please check the [ROLES](https://github.com/KusionStack/community/blob/main/ROLES.md) for details.
 
