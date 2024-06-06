@@ -1,15 +1,14 @@
 ---
 title: 架构
 ---
-
 ![](assets/1-architecture/architecture.png)
 
 ## 组件
 
--   `Dashboard`：Karpor 的 Web UI 界面。
--   `Server`：Karpor 的核心后端服务。
--   `Syncer`：用于实时同步集群资源的独立服务。
--   `Storage`：用于存储已同步的资源和用户数据的存储后端。
+- `Dashboard`：Karpor 的 Web UI 界面。
+- `Server`：Karpor 的核心后端服务。
+- `Syncer`：用于实时同步集群资源的独立服务。
+- `Storage`：用于存储已同步的资源和用户数据的存储后端。
 
 ## Karpor 的工作原理
 

@@ -1,7 +1,6 @@
 ---
 title: karpor syncer
 ---
-
 ## karpor syncer
 
 start a resource syncer to sync resource from clusters

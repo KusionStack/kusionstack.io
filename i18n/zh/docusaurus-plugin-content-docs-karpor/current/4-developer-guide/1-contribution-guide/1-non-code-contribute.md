@@ -1,7 +1,6 @@
 ---
 title: Non-code Contribution Guide
 ---
-
 You can contribute in any of the following ways that interest you.
 
 ## Contributing Use Cases and Demos

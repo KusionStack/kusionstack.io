@@ -1,7 +1,6 @@
 ---
 title: One-Pass with Proxy
 ---
-
 ## Challenges and Demands
 
 ### The Scale of Multicluster at a Grand Scale

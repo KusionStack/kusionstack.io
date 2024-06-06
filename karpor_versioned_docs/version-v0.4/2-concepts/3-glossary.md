@@ -1,7 +1,6 @@
 ---
 title: Glossary
 ---
-
 ## Cluster
 
 Equivalent to the concept of a cluster in `Kubernetes`, such as a cluster named `democluster`.
@@ -45,5 +44,6 @@ Audit refers to **performing a compliance scan on all resources within a given r
 The score is used to reflect the **overall health status of a resource group or a resource**, reminding users to take timely adjustments and measures. The health score is calculated based on the resource group's audit results. The factors that impact the score include: **risk level**, **number of risks**, and **total number of resources**.
 
 ## Next Step
+
 - Learn Karpor's [Architecture](../concepts/architecture).
 - View [User Guide](../user-guide/multi-cluster-management) to look on more of what you can achieve with Karpor.

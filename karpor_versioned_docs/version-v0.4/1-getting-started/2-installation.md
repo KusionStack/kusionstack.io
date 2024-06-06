@@ -1,7 +1,6 @@
 ---
 title: Installation
 ---
-
 ## Prerequisites
 
 * Ensure there is Kubernetes cluster available to install Karpor. For local installations, you can use Minikube or Kind.
@@ -33,7 +32,7 @@ helm upgrade karpor kusionstack/karpor --version 1.2.3
 
 ## Install/Upgrade locally with helm
 
-If you have problem connecting to https://kusionstack.github.io/charts/ in production, you may need to manually download the chart from [here](https://github.com/KusionStack/charts) and use it to install or upgrade locally.
+If you have problem connecting to [https://kusionstack.github.io/charts/](https://kusionstack.github.io/charts/) in production, you may need to manually download the chart from [here](https://github.com/KusionStack/charts) and use it to install or upgrade locally.
 
 ```shell
 git clone https://github.com/KusionStack/charts.git

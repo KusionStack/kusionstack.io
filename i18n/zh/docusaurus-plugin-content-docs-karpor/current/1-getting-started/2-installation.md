@@ -1,7 +1,6 @@
 ---
 title: 安装
 ---
-
 ## 前提条件
 
 * 确保有一个可用的 Kubernetes 集群来安装 Karpor。对于本地安装，你可以使用 Minikube 或 Kind。
@@ -33,7 +32,7 @@ helm upgrade karpor kusionstack/karpor --version 1.2.3
 
 ## 本地使用 Helm 安装/升级
 
-如果你在生产环境中连接到 https://kusionstack.github.io/charts/ 有问题，你可能需要从 [这里](https://github.com/KusionStack/charts) 手动下载 chart，并使用它来本地安装或升级。
+如果你在生产环境中连接到 [https://kusionstack.github.io/charts/](https://kusionstack.github.io/charts/) 有问题，你可能需要从 [这里](https://github.com/KusionStack/charts) 手动下载 chart，并使用它来本地安装或升级。
 
 ```shell
 git clone https://github.com/KusionStack/charts.git 

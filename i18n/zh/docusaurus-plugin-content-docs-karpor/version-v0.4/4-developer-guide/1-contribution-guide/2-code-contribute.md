@@ -1,7 +1,6 @@
 ---
 title: Code Contribution Guide
 ---
-
 In this code contribution guide, you will learn about the following:
 
 - [How to run Karpor locally](#running-karpor-locally)
@@ -22,32 +21,33 @@ This guide will help you get started with Karpor development.
   <summary>Installing Golang</summary>
 
 1. Install go1.19 from the [official website](https://go.dev/dl/). Extract the binary files and place them at a location, assuming it is located under the home directory `~/go/`, here is an example command, you should choose the correct binary file for your system.
-  ```
-  wget https://go.dev/dl/go1.20.2.linux-amd64.tar.gz
-  tar xzf go1.20.2.linux-amd64.tar.gz
-  ```
+
+```
+wget https://go.dev/dl/go1.20.2.linux-amd64.tar.gz
+tar xzf go1.20.2.linux-amd64.tar.gz
+```
 
 If you would like to maintain multiple versions of golang in your local development environment, you can download the package and extract it to a location, like `~/go/go1.19.1`, and then alter the path in the command below accordingly.
 
 1. Set environment variables for Golang
 
-  ```
-  export PATH=~/go/bin/:$PATH
-  export GOROOT=~/go/
-  export GOPATH=~/gopath/
-  ```
+```
+export PATH=~/go/bin/:$PATH
+export GOROOT=~/go/
+export GOPATH=~/gopath/
+```
 
 If the `gopath` folder does not exist, create it with `mkdir ~/gopath`. These commands will add the go binary folder to the `PATH` environment variable (making it the primary choice for go) and set the `GOROOT` environment to this go folder. Please add these lines to your `~/.bashrc` or `~/.zshrc` file, so you won't need to set these environment variables every time you open a new terminal.
 
 1. (Optional) Some regions, such as China, may have slow connection to the default go registry; you can configure GOPROXY to speed up the download process.
-  ```
-  go env -w GOPROXY=https://goproxy.cn,direct
-  ```
+
+```
+go env -w GOPROXY=https://goproxy.cn,direct
+```
 
 </details>
 
 * Kubernetes version v1.20+ configured with `~/.kube/config`.
-
 * golangci-lint version v1.52.2+, it will be installed automatically if you run `make lint`, if the installation fails, you can install it manually.
 
 <details>
@@ -76,16 +76,19 @@ Executing `make build-all` will build the executables for all platforms; if you 
 ### Testing
 
 It's essential to write tests to maintain code quality, you can run all unit tests by executing the following command in the project root directory:
+
 ```shell
 make test
 ```
 
 If you need to generate extra coverage report files, execute:
+
 ```shell
 make cover
 ```
 
 Then you can view the content of the coverage report in a browser by running:
+
 ```shell
 make cover-html
 ```
@@ -103,6 +106,7 @@ We know you are excited to create your first pull request. Before we get started
 ### Your First Pull Request
 
 Before submitting your PR, run the following commands to ensure they all succeed:
+
 ```
 make test
 make lint
@@ -124,6 +128,7 @@ If the pull request fixes a bug:
 - To prevent regressions, the pull request should include tests that replicate the bug being fixed.
 
 ## Code Review
+
 Once you have created a pull request, the next step is to have others review your changes. Review is a learning opportunity for both reviewers and the author of the pull request.
 
 If you believe a specific person should review your pull request, you can tag them in the description or a comment.
@@ -152,7 +157,9 @@ We use the pull request titles when generating change logs for releases. Hence, 
 Make sure your pull request title uses the same format as the commit message subject line. If the format is not followed, we will add a `title-needs-formatting` label on the pull request.
 
 ### Passing All CI Checks
+
 Before merging, all testing CIs should pass:
+
 - Coverage should not drop. Currently, the pull request coverage should be at least 70%.
 - Karpor uses a **CLA** for the contributor agreement. It requires you to sign for every commit before merging the pull request.
 

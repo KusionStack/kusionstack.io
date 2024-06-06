@@ -6,11 +6,10 @@ To help us create a safe and positive community experience for all, we require a
 
 ## Before contributing
 
-
 ### Find a Contribution Point
 
 You can contribute to Karpor in several ways including code and non-code contributions,
-we appreciate every effort you contribute to the community. 
+we appreciate every effort you contribute to the community.
 
 Here are some examples:
 
@@ -38,7 +37,7 @@ Unsure where to begin contributing to Karpor codebase? Start by browsing issues 
 - [Help wanted](https://github.com/KusionStack/karpor/labels/help%20wanted) issues are problems we would like the community to help us with regardless of complexity.
 - Refer to [Code Contribution Guide](./code-contribute) for more details.
 
-Learn [Code Conventions](../conventions/code-conventions) and [Test Conventions](../conventions/test-conventions) and understand what to pay attention to when writing code. 
+Learn [Code Conventions](../conventions/code-conventions) and [Test Conventions](../conventions/test-conventions) and understand what to pay attention to when writing code.
 
 And learn the [Release Process And Cadence](../conventions/release-process) to know when your code changes will be released.
 
@@ -61,6 +60,7 @@ After the development is completed, commit and push to your forked repository. S
 Here are some simple explanations:
 
 PR Title should be organized following this structure:
+
 ```
 <type>[optional scope]: <subject>
 
@@ -70,6 +70,7 @@ PR Title should be organized following this structure:
 The required type helps better capture the area of the commit, based on the [Angular guidelines](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines).
 
 We use lowercase for `<type>` to avoid spending time on case-sensitive issues. `<type>` can be one of the following:
+
 ```
 feat: A new feature
 fix: A bug fix
@@ -115,4 +116,3 @@ Please make sure your PR passes these checks.
 If you're interested to become a community member or learn more about the governance, please check the [Roles](./3-roles.md) for details.
 
 Enjoy coding and collaboration in Karpor world!
-
