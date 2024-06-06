@@ -94,7 +94,7 @@ make cover-html
 
 We are thrilled that you are considering contributing to the Karpor project!
 
-This document will guide you through the process of [creating a pull request](./index.md#Contribute-a-Pull-Request).
+This document will guide you through the process of [creating a pull request](./index.md#contribute-a-pull-request).
 
 ### Before you begin
 
