@@ -56,7 +56,9 @@ Thus, to develop karpor, you have to fork one project in [karpor](https://github
 
 Now you can start writing to solve the issue. To maintain the quality of karpor, after submitting the PR, some necessary checks will be triggered.
 
-After the development is completed, commit and push to your forked repository. Since the PR Title will be used as a merging commit message, we ask your PR Title to meet the [conventional-commits](https://www.conventionalcommits.org/en/v1.0.0/).
+After the development is completed, commit and push to your forked repository. Since the PR Title will be used as a merging commit message, we ask your PR Title to meet the [Commit Conventions](../2-conventions/4-commit-conventions.md).
+
+Here are some simple explanations:
 
 PR Title should be organized following this structure:
 ```
@@ -79,8 +81,6 @@ perf: A code change that improves performance
 test: Adding missing tests or correcting existing tests
 chore: Changes to the build process or auxiliary tools and libraries such as documentation generation
 ```
-
-More see: [Commit Conventions](../2-conventions/4-commit-conventions.md)
 
 ### Open a Pull Request
 
