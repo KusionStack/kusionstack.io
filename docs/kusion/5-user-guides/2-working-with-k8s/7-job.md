@@ -41,16 +41,31 @@ For a full reference of what can be configured in the workspace level, please se
 
 ## Example
 
-To schedule a job with cron expression, update `simple-service/dev/main.k` to the following:
+To schedule a job with cron expression, update `simple-service/dev/kcl.mod` and `simple-service/dev/main.k` to the following:
+
+`simple-service/dev/kcl.mod`: 
+```py
+[package]
+name = "simple-service"
+version = "0.1.0"
+
+[dependencies]
+kam = { git = "https://github.com/KusionStack/kam.git", tag = "0.2.0" }
+job = { oci = "oci://ghcr.io/kusionstack/job", tag = "0.1.0" }
+network = { oci = "oci://ghcr.io/kusionstack/network", tag = "0.2.0" }
+
+[profile]
+entries = ["main.k"]
+```
 
 `simple-service/dev/main.k`:
 ```py
 import kam.v1.app_configuration as ac
-import kam.v1.workload as wl
-import kam.v1.workload.container as c
+import job
+import job.container as c
 
 helloworld: ac.AppConfiguration {
-    workload: wl.Job {
+    workload: job.Job {
         containers: {
             "busybox": c.Container {
                 # The target image

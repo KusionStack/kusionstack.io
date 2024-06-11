@@ -131,8 +131,9 @@ name = "nginx"
 version = "0.1.0"
 
 [dependencies]
-kam = { git = "https://github.com/KusionStack/kam.git", tag = "0.1.0" }
-network = { oci = "oci://ghcr.io/kusionstack/network", tag = "0.1.0" }
+kam = { git = "https://github.com/KusionStack/kam.git", tag = "0.2.0" }
+service = { oci = "oci://ghcr.io/kusionstack/service", tag = "0.1.0" }
+network = { oci = "oci://ghcr.io/kusionstack/network", tag = "0.2.0" }
 
 [profile]
 entries = ["main.k"]
@@ -141,13 +142,13 @@ entries = ["main.k"]
 `dev/main.k`
 ```python
 import kam.v1.app_configuration as ac
-import kam.v1.workload as wl
-import kam.v1.workload.container as c
+import service
+import service.container as c
 import network as n
 
 # main.k declares customized configurations for dev stacks.
 nginx: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         containers: {
             nginx: c.Container {
                 image: "nginx:1.25.2"
@@ -217,13 +218,13 @@ If you only need the application to be accessed inside the cluster, just configu
 
 ```python
 import kam.v1.app_configuration as ac
-import kam.v1.workload as wl
-import kam.v1.workload.container as c
+import service
+import service.container as c
 import network as n
 
 # main.k declares customized configurations for dev stacks.
 nginx: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         ...
     }
     accessories: {

@@ -18,12 +18,12 @@ You can consume the data in Secrets as environment variable in your container. F
 
 ```
 import kam.v1.app_configuration as ac
-import kam.v1.workload as wl
-import kam.v1.workload.container as c
-import kam.v1.workload.secret as sec
+import service
+import service.container as c
+import service.secret as sec
 
 sampledb: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         containers: {
             "db": c.Container {
                 image: "mysql"
@@ -51,12 +51,12 @@ Sometimes your secret contains multiple data that need to be consumed as environ
 
 ```
 import kam.v1.app_configuration as ac
-import kam.v1.workload as wl
-import kam.v1.workload.container as c
-import kam.v1.workload.secret as sec
+import service
+import service.container as c
+import service.secret as sec
 
 sampledb: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         containers: {
             "db": c.Container {
                 image: "mysql"
@@ -97,11 +97,12 @@ Basic secrets are defined in the secrets block with the type "basic".
 
 ```
 import kam.v1.app_configuration as ac
-import kam.v1.workload as wl
-import kam.v1.workload.secret as sec
+import service
+import service.container as c
+import service.secret as sec
 
 sampleapp: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         # ...
         secrets: {
             "auth-info": sec.Secret {
@@ -124,11 +125,12 @@ Token secrets are useful for generating a password or secure string used for pas
 
 ```
 import kam.v1.app_configuration as ac
-import kam.v1.workload as wl
-import kam.v1.workload.secret as sec
+import service
+import service.container as c
+import service.secret as sec
 
 sampleapp: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         # ...
         secrets: {
             "api-token": sec.Secret {
@@ -150,11 +152,12 @@ Opaque secrets have no defined structure and can have arbitrary key value pairs.
 
 ```
 import kam.v1.app_configuration as ac
-import kam.v1.workload as wl
-import kam.v1.workload.secret as sec
+import service
+import service.container as c
+import service.secret as sec
 
 sampleapp: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         # ...
         secrets: {
             "my-secret": sec.Secret {
@@ -171,11 +174,12 @@ Certificate secrets are useful for storing a certificate and its associated key.
 
 ```
 import kam.v1.app_configuration as ac
-import kam.v1.workload as wl
-import kam.v1.workload.secret as sec
+import service
+import service.container as c
+import service.secret as sec
 
 sampleapp: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         # ...
         secrets: {
             "server-cert": sec.Secret {
@@ -197,11 +201,12 @@ As a general principle, storing secrets in a plain text configuration file is hi
 
 ```
 import kam.v1.app_configuration as ac
-import kam.v1.workload as wl
-import kam.v1.workload.secret as sec
+import service
+import service.container as c
+import service.secret as sec
 
 sampleapp: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         # ...
         secrets: {
             "api-access-token": sec.Secret {
@@ -226,11 +231,12 @@ To declare a secret as immutable:
 
 ```
 import kam.v1.app_configuration as ac
-import kam.v1.workload as wl
-import kam.v1.workload.secret as sec
+import service
+import service.container as c
+import service.secret as sec
 
 sampleapp: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         # ...
         secrets: {
             "my-secret": sec.Secret {

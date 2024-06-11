@@ -25,10 +25,10 @@ In the examples below, we are using schemas defined in the `catalog` package. Fo
 The `import` statements needed for the following walkthrough:
 ```
 import kam.v1.app_configuration as ac
-import kam.v1.workload as wl
-import kam.v1.workload.container as c
-import kam.v1.workload.container.probe as p
-import kam.v1.workload.container.lifecycle as lc
+import service
+import service.container as c
+import service.container.probe as p
+import service.container.lifecycle as lc
 ```
 
 ## Types of Workloads
@@ -40,15 +40,23 @@ There are currently two types of workloads:
 
 To instantiate a `Service`:
 ```
+import kam.v1.app_configuration as ac
+import service
+import service.container as c
+
 myapp: ac.AppConfiguration {
-    workload: wl.Service {}
+    workload: service.Service {}
 }
 ```
 
 To instantiate a `Job`:
 ```
+import kam.v1.app_configuration as ac
+import job
+import job.container as c
+
 myapp: ac.AppConfiguration {
-    workload: wl.Job {}
+    workload: job.Job {}
 }
 ```
 
@@ -73,8 +81,12 @@ We will walk through the details of configuring a container using an example of 
 
 To add an application container:
 ```
+import kam.v1.app_configuration as ac
+import service
+import service.container as c
+
 myapp: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         containers: {
             "myapp": c.Container {}
         }
@@ -88,8 +100,12 @@ The `image` attribute in the `Container` schema specifies the application image 
 
 To specify an application image:
 ```
+import kam.v1.app_configuration as ac
+import service
+import service.container as c
+
 myapp: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         containers: {
             "myapp": c.Container {
                 image: "gcr.io/google-samples/gb-frontend:v5"
@@ -108,8 +124,12 @@ You can specify an upper limit (which maps to resource limits only) or a range a
 
 To specify an upper bound (only resource limits):
 ```
+import kam.v1.app_configuration as ac
+import service
+import service.container as c
+
 myapp: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         containers: {
             "myapp": c.Container {
                 image: "gcr.io/google-samples/gb-frontend:v5"
@@ -126,8 +146,12 @@ myapp: ac.AppConfiguration {
 
 To specify a range (both resource requests and limits):
 ```
+import kam.v1.app_configuration as ac
+import service
+import service.container as c
+
 myapp: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         containers: {
             "myapp": c.Container {
                 image: "gcr.io/google-samples/gb-frontend:v5"
@@ -156,8 +180,12 @@ The probes are optional. You can only have one Probe of each kind for a given `C
 
 To configure a `Http` type `readinessProbe` that probes the health via HTTP request and a `Exec` type `livenessProbe` which executes a command:
 ```
+import kam.v1.app_configuration as ac
+import service
+import service.container as c
+
 myapp: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         containers: {
             "myapp": c.Container {
                 image: "gcr.io/google-samples/gb-frontend:v5"
@@ -196,8 +224,12 @@ There are two types that is currently supported:
 - `PostStart` - triggers after the container is initialized.
 
 ```
+import kam.v1.app_configuration as ac
+import service
+import service.container as c
+
 myapp: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         containers: {
             "myapp": c.Container {
                 image: "gcr.io/google-samples/gb-frontend:v5"
@@ -225,8 +257,12 @@ You can also create files on-demand during the container initialization.
 
 To create a custom file and mount it to `/home/admin/my-file` when the container starts:
 ```
+import kam.v1.app_configuration as ac
+import service
+import service.container as c
+
 myapp: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         containers: {
             "myapp": c.Container {
                 image: "gcr.io/google-samples/gb-frontend:v5"
@@ -250,8 +286,12 @@ You can also customize the container entrypoint via `command`, `args`, and `work
 
 To customize the container entrypoint:
 ```
+import kam.v1.app_configuration as ac
+import service
+import service.container as c
+
 myapp: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         containers: {
             "myapp": c.Container {
                 image: "gcr.io/google-samples/gb-frontend:v5"
@@ -277,8 +317,12 @@ The `replicas` field in the `workload` instance describes the number of identica
 
 To configure a workload to have a replica count of 3:
 ```
+import kam.v1.app_configuration as ac
+import service
+import service.container as c
+
 myapp: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         containers: {
             # ...
         }
@@ -303,8 +347,12 @@ A `Job` can be configured to run in a recurring manner. In this case, the job wi
 
 To configure a job to run at 21:00 every night:
 ```
+import kam.v1.app_configuration as ac
+import job
+import job.container as c
+
 myjob: ac.AppConfiguration {
-    workload: wl.Job {
+    workload: job.Job {
         containers: {
             "busybox": c.Container {
                 image: "busybox:1.28"

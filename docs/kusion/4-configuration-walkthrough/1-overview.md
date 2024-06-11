@@ -98,15 +98,15 @@ An example of the import looks like the following:
 ```
 ### import from the official kam package
 import kam.v1.app_configuration as ac
-import kam.v1.workload as wl
-import kam.v1.workload.container as c
 
 ### import kusion modules
+import service
+import service.container as c
 import monitoring as m
-import network.network as n
+import network as n
 ```
 
-Take `import kam.v1.workload as wl` as an example, the `.v1.workload` part after `import kam` represents the relative path of a specific schema to import. In this case, the `workload` schema is defined under `v1/workload` directory in the `kam` package.
+Take `import kam.v1.app_configuration as ac` as an example, the `.v1.app_configuration` part after `import kam` represents the relative path of a specific schema to import. In this case, the `AppConfiguration` schema is defined under `v1/app_configuration` directory in the `kam` package.
 
 ### Understanding kcl.mod
 
@@ -145,10 +145,10 @@ entries = ["../base/base.k", "main.k"]
 
 Configuration files consist of building blocks that are made of instances of schemas. An `AppConfiguration` instance consists of several child schemas, most of which are optional. The only mandatory one is the `workload` instance. We will take a closer look in the [workload walkthrough](workload). The order of the building blocks does NOT matter.
 
-The major building blocks as of version `0.11.0`:
+The major building blocks as of version `0.12.0`:
 ```
 myapp: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         containers: {
             "myapp": c.Container {}
             ...
@@ -174,12 +174,12 @@ Here's an example of a configuration that can be consumed by Kusion (assuming it
 
 ```
 import kam.v1.app_configuration as ac
-import kam.v1.workload as wl
-import kam.v1.workload.container as c
-import network.network as n
+import service
+import service.container as c
+import network as n
 
 gocity: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         containers: {
             "gocity": c.Container {
                 image = "howieyuen/gocity:latest"
@@ -208,11 +208,9 @@ Don't worry about what `workload` or `n.Network` stand for at the moment. We wil
 
 ### Using `kusion init`
 
-Kusion offers a `kusion init` sub-command which initializes a new project using some pre-built templates, which saves you from the hassle of manually building the aforementioned directory structure that Kusion expects.
+Kusion offers a `kusion init` sub-command which initializes a new project using a pre-built template, which saves you from the hassle of manually building the aforementioned directory structure that Kusion expects.
 
-There is a built-in template `single-stack-sample` in the Kusion binary that can be used offline. 
-
-We also maintain a [kusion-templates repository](https://github.com/KusionStack/kusion-templates) that hosts a list of more comprehensive project scaffolds. You can access them via `kusion init --online` command which requires connectivity to `github.com`.
+There is a built-in template `quickstart` in the Kusion binary that can be used offline. 
 
 The pre-built templates are meant to help you get off the ground quickly with some simple out-of-the-box examples. You can refer to the [QuickStart documentation](../getting-started/deliver-quickstart) for some step-by-step tutorials.
 

@@ -50,12 +50,12 @@ See the example below for a full, deployable AppConfiguration.
 
 ```
 import kam.v1.app_configuration as ac
-import kam.v1.workload as wl
-import kam.v1.workload.container as c
-import kam.v1.workload.secret as sec
+import service
+import service.container as c
+import service.secret as sec
 
 gitsync: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         containers: {
             "syncer": c.Container {
                 image: "dyrnq/git-sync"

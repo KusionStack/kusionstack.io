@@ -47,12 +47,12 @@ For a full reference of what can be configured in the workspace level, please se
 `simple-service/dev/main.k`:
 ```python
 import kam.v1.app_configuration as ac
-import kam.v1.workload as wl
-import kam.v1.workload.container as c
+import service
+import service.container as c
 import network as n
 
 "helloworld": ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         containers: {
             "helloworld": c.Container {
                 image = "gcr.io/google-samples/gb-frontend:v4"

@@ -47,8 +47,9 @@ name = "simple-service"
 version = "0.1.0"
 
 [dependencies]
-kam = { git = "https://github.com/KusionStack/kam.git", tag = "0.1.0" }
-network = { oci = "oci://ghcr.io/kusionstack/network", tag = "0.1.0" }
+kam = { git = "https://github.com/KusionStack/kam.git", tag = "0.2.0" }
+service = { oci = "oci://ghcr.io/kusionstack/service", tag = "0.1.0" }
+network = { oci = "oci://ghcr.io/kusionstack/network", tag = "0.2.0" }
 opsrule = { oci = "oci://ghcr.io/kusionstack/opsrule", tag = "0.1.0" }
 
 [profile]
@@ -59,12 +60,12 @@ Add the `opsrule` snippet to the `AppConfiguration` in `simple-service/dev/main.
 
 ```py
 import kam.v1.app_configuration as ac
-import kam.v1.workload as wl
-import kam.v1.workload.container as c
+import service
+import service.container as c
 import opsrule
 
 helloworld: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         ...
     }
     # Configure the maxUnavailable rule

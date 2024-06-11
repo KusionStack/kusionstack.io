@@ -18,12 +18,12 @@ The configurations also don't have be placed into a single `.k` file. For comple
 Base configuration defined in `base/base.k`:
 ```
 import kam.v1.app_configuration as ac
-import kam.v1.workload as wl
-import kam.v1.workload.container as c
+import service
+import service.container as c
 import network.network as n
 
 myapp: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         containers: {
             "myapp": c.Container {
                 image: "<no value>"
@@ -51,6 +51,8 @@ myapp: ac.AppConfiguration {
 Environment-specific configuration defined in `dev/main.k`:
 ```
 import kam.v1.app_configuration as ac
+import service
+import service.container as c
 
 # main.k declares customized configurations for dev stack.
 myapp: ac.AppConfiguration {

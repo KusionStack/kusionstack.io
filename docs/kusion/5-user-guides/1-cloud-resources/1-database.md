@@ -162,22 +162,23 @@ The configuration codes in the created stack are basically empty, thus we should
 ```shell
 # dev/kcl.mod
 [dependencies]
-kam = { git = "https://github.com/KusionStack/kam.git", tag = "0.1.0" }
-network = { oci = "oci://ghcr.io/kusionstack/network", tag = "0.1.0" }
-mysql = { oci = "oci://ghcr.io/kusionstack/mysql", tag = "0.1.0" }
+kam = { git = "https://github.com/KusionStack/kam.git", tag = "0.2.0" }
+service = { oci = "oci://ghcr.io/kusionstack/service", tag = "0.1.0" }
+network = { oci = "oci://ghcr.io/kusionstack/network", tag = "0.2.0" }
+mysql = { oci = "oci://ghcr.io/kusionstack/mysql", tag = "0.2.0" }
 ```
 
 ```python
 # dev/main.k 
 import kam.v1.app_configuration as ac
-import kam.v1.workload as wl
-import kam.v1.workload.container as c
+import service
+import service.container as c
 import network as n
 import mysql
 
 # main.k declares customized configurations for dev stacks.
 wordpress: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         containers: {
             wordpress: c.Container {
                 image: "wordpress:6.3"
