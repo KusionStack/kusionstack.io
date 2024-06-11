@@ -53,13 +53,13 @@ cat default/main.k
 
 ```python
 import kam.v1.app_configuration as ac
-import kam.v1.workload as wl
-import kam.v1.workload.container as c
+import service
+import service.container as c
 import network as n
 
 # main.k declares the customized configuration codes for default stack.
 quickstart: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         containers: {
             quickstart: c.Container {
                 image: "kusionstack/kusion-quickstart:latest"
@@ -78,7 +78,7 @@ quickstart: ac.AppConfiguration {
 }
 ```
 
-The configuration file `main.k`, usually written by the **App Developers**, declares the customized configuration codes for `default` stack, including an `AppConfiguration` instance with the name of `quickstart`. The `quickstart` application consists of a `Workload` with the type of `kam.v1.workload.Service`, which runs a container named `quickstart` using the image of `kusionstack/kusion-quickstart:latest`. 
+The configuration file `main.k`, usually written by the **App Developers**, declares the customized configuration codes for `default` stack, including an `AppConfiguration` instance with the name of `quickstart`. The `quickstart` application consists of a `Workload` with the type of `service.Service`, which runs a container named `quickstart` using the image of `kusionstack/kusion-quickstart:latest`. 
 
 Besides, it declares a **Kusion Module** with the type of `network.Network`, exposing `8080` port to be accessed for the long-running service. 
 
@@ -96,12 +96,17 @@ cat default/kcl.mod
 
 ```shell
 [dependencies]
-kam = { git = "https://github.com/KusionStack/kam.git", tag = "0.1.0" }
-network = { oci = "oci://ghcr.io/kusionstack/network", tag = "0.1.0" }
+kam = { git = "https://github.com/KusionStack/kam.git", tag = "0.2.0" }
+service = {oci = "oci://ghcr.io/kusionstack/service", tag = "0.1.0" }
+network = { oci = "oci://ghcr.io/kusionstack/network", tag = "0.2.0" }
 ```
 
 :::info
 More details about the application model and module dependency declaration can be found in [Kusion Module guide for app dev](../3-concepts/3-kusion-module/3-app-dev-guide.md). 
+:::
+
+:::tip
+The specific module versions we used in the above demonstration is only applicable for Kusion CLI after **v0.12.0**. 
 :::
 
 ## Application Delivery
@@ -109,17 +114,17 @@ More details about the application model and module dependency declaration can b
 Use the following command to deliver the quickstart application in `default` stack on your accessible Kubernetes cluster, while watching the resource creation and automatically port-forwarding the specified port (8080) from local to the Kubernetes Service of the application. We can check the details of the resource preview results before we confirm to apply the diffs. 
 
 ```shell
-cd default && kusion apply --watch --port-forward 8080
+cd default && kusion apply --port-forward 8080
 ```
 
-![](/img/docs/user_docs/getting-started/kusion_apply_quickstart.gif)
+![](/img/docs/user_docs/getting-started/kusion_apply_quickstart_0.12.gif)
 
 :::info
 During the first apply, the models and modules that the application depends on will be downloaded, so it may take some time (usually within one minute). You can take a break and have a cup of coffee. 
 :::
 
 :::info
-Kusion by default will create the Kubernetes resources of the application in the namespace the same as the project name. If you want to customize the namespace, please refer to **[T.B.D]**. 
+Kusion by default will create the Kubernetes resources of the application in the namespace the same as the project name. If you want to customize the namespace, please refer to [Project Namespace Extension](../3-concepts/1-project/2-configuration.md#kubernetesnamespace) and [Stack Namespace Extension](../3-concepts/2-stack/2-configuration.md#kubernetesnamespace). 
 :::
 
 Now we can visit [http://localhost:8080](http://localhost:8080) in our browser and play with the demo application! 
@@ -134,31 +139,27 @@ We can add the Kusion-provided built-in dependency in the `default/kcl.mod`, so 
 
 ```shell
 [dependencies]
-kam = { git = "https://github.com/KusionStack/kam.git", tag = "0.1.0" }
-network = { oci = "oci://ghcr.io/kusionstack/network", tag = "0.1.0" }
-mysql = { oci = "oci://ghcr.io/kusionstack/mysql", tag = "0.1.0" }
+kam = { git = "https://github.com/KusionStack/kam.git", tag = "0.2.0" }
+service = {oci = "oci://ghcr.io/kusionstack/service", tag = "0.1.0" }
+network = { oci = "oci://ghcr.io/kusionstack/network", tag = "0.2.0" }
+mysql = { oci = "oci://ghcr.io/kusionstack/mysql", tag = "0.2.0" }
 ```
 
 We can update the `default/main.k` with the following configuration codes: 
 
 ```python
-# The configuration codes in the perspective of developers. 
 import kam.v1.app_configuration as ac
-import kam.v1.workload as wl
-import kam.v1.workload.container as c
+import service
+import service.container as c
 import network as n
 import mysql
 
+# main.k declares the customized configuration codes for default stack. 
 quickstart: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         containers: {
             quickstart: c.Container {
                 image: "kusionstack/kusion-quickstart:latest"
-                env: {
-                    "DB_HOST": "$(KUSION_DB_HOST_QUICKSTART_DEFAULT_QUICKSTART_MYSQL)"
-                    "DB_USERNAME": "$(KUSION_DB_USERNAME_QUICKSTART_DEFAULT_QUICKSTART_MYSQL)"
-                    "DB_PASSWORD": "$(KUSION_DB_PASSWORD_QUICKSTART_DEFAULT_QUICKSTART_MYSQL)"
-                }
             }
         }
     }
@@ -171,7 +172,7 @@ quickstart: ac.AppConfiguration {
             ]
         }
         "mysql": mysql.MySQL {
-            type:   "local"
+            type: "local"
             version: "8.0"
         }
     }
@@ -184,13 +185,13 @@ The configuration codes above declare a local `mysql.MySQL` with the engine vers
 For more information about the naming convention of Kusion built-in MySQL module, you can refer to [Module Naming Convention](../6-reference/2-modules/3-naming-conventions.md). 
 :::
 
-After that, we can re-apply the application: 
+After that, we can re-apply the application, and we can set the `--watch=false` to skip watching the resources to be reconciled: 
 
 ```shell
-kusion apply --watch --port-forward 8080
+kusion apply --port-forward 8080 --watch=false
 ```
 
-![](/img/docs/user_docs/getting-started/kusion_re_apply_quickstart.gif)
+![](/img/docs/user_docs/getting-started/kusion_re_apply_quickstart_0.12.gif)
 
 :::info
 You may wait another minute to download the MySQL Module. 

@@ -15,8 +15,9 @@ In the examples below, we are using schemas defined in the `kam` package and the
 The `import` statements needed for the following walkthrough:
 ```
 import kam.v1.app_configuration as ac
-import kam.v1.workload as wl
-import network.network as n
+import service
+import service.container as c
+import network as n
 ```
 
 The `kcl.mod` must contain reference to the network module:
@@ -24,7 +25,7 @@ The `kcl.mod` must contain reference to the network module:
 #...
 
 [dependencies]
-network = { oci = "oci://ghcr.io/kusionstack/network", tag = "0.1.0" }
+network = { oci = "oci://ghcr.io/kusionstack/network", tag = "0.2.0" }
 
 #...
 ```
@@ -39,8 +40,13 @@ Any ports defined default to private access unless explicitly specified.
 
 To expose port 80 to be accessed privately:
 ```
+import kam.v1.app_configuration as ac
+import service
+import service.container as c
+import network as n
+
 myapp: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         # ...
     }
     accessories: {
@@ -57,8 +63,13 @@ myapp: ac.AppConfiguration {
 
 To expose port 80 to be accessed publicly:
 ```
+import kam.v1.app_configuration as ac
+import service
+import service.container as c
+import network as n
+
 myapp: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         # ...
     }
     accessories: {
@@ -82,8 +93,13 @@ The CSP (Cloud Service Provider) used to provide load balancers is defined by pl
 
 To expose a port `80` that maps to a different port `8088` on the container:
 ```
+import kam.v1.app_configuration as ac
+import service
+import service.container as c
+import network as n
+
 myapp: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         # ...
     }
     accessories: {
@@ -105,8 +121,13 @@ You can also expose multiple ports and configure them separately.
 
 To expose port 80 to be accessed publicly, and port 9099 for private access (to be scraped by Prometheus, for example):
 ```
+import kam.v1.app_configuration as ac
+import service
+import service.container as c
+import network as n
+
 myapp: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         # ...
     }
     accessories: {
@@ -129,8 +150,13 @@ myapp: ac.AppConfiguration {
 
 To expose a port using the `UDP` protocol:
 ```
+import kam.v1.app_configuration as ac
+import service
+import service.container as c
+import network as n
+
 myapp: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         # ...
     }
     accessories: {

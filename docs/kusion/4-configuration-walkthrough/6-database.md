@@ -18,9 +18,10 @@ In the examples below, we are using schemas defined in the `kam` package and the
 The `import` statements needed for the following walkthrough:
 ```
 import kam.v1.app_configuration as ac
-import kam.v1.workload as wl
-import mysql.mysql
-import postgres.postgres
+import service
+import service.container as c
+import mysql
+import postgres
 ```
 
 The `kcl.mod` must contain reference to the `mysql` module or `postgres` module:
@@ -28,8 +29,8 @@ The `kcl.mod` must contain reference to the `mysql` module or `postgres` module:
 #...
 
 [dependencies]
-mysql = { oci = "oci://ghcr.io/kusionstack/mysql", tag = "0.1.0" }
-postgres = { oci = "oci://ghcr.io/kusionstack/postgres", tag = "0.1.0" }
+mysql = { oci = "oci://ghcr.io/kusionstack/mysql", tag = "0.2.0" }
+postgres = { oci = "oci://ghcr.io/kusionstack/postgres", tag = "0.2.0" }
 #...
 ```
 
@@ -54,12 +55,14 @@ Kusion provisions databases on the cloud via [terraform](https://www.terraform.i
 
 For AWS, the environment variables needed:
 ```
+export AWS_REGION=us-east-1            # replace it with your region
 export AWS_ACCESS_KEY_ID="xxxxxxxxxxx" # replace it with your AccessKey
 export AWS_SECRET_ACCESS_KEY="xxxxxxx" # replace it with your SecretKey
 ```
 
 For AliCloud, the environment variables needed:
 ```
+export ALICLOUD_REGION=cn-shanghai     # replace it with your region
 export ALICLOUD_ACCESS_KEY="xxxxxxxxx" # replace it with your AccessKey
 export ALICLOUD_SECRET_KEY="xxxxxxxxx" # replace it with your SecretKey
 ```

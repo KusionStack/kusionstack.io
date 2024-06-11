@@ -57,11 +57,11 @@ You can also use basic control flow statements when writing the configuration fi
 An example that sets the value of `replicas` conditionally based on the value of `containers.myapp.resources.cpu`:
 ```
 import kam.v1.app_configuration as ac
-import kam.v1.workload as wl
-import kam.v1.workload.container as c
+import service
+import service.container as c
 
 myapp: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         containers: {
             "myapp": c.Container {
                 image: "<no value>"

@@ -261,8 +261,9 @@ Please note we are using a new image `quay.io/brancz/prometheus-example-app` sin
 name = "helloworld"
 
 [dependencies]
-monitoring = { oci = "oci://ghcr.io/kusionstack/monitoring", tag = "0.1.0" }
-kam = { git = "https://github.com/KusionStack/kam.git", tag = "0.1.0" }
+monitoring = { oci = "oci://ghcr.io/kusionstack/monitoring", tag = "0.2.0" }
+kam = { git = "https://github.com/KusionStack/kam.git", tag = "0.2.0" }
+service = { oci = "oci://ghcr.io/kusionstack/service", tag = "0.1.0" }
 
 [profile]
 entries = ["main.k"]
@@ -271,13 +272,13 @@ entries = ["main.k"]
 `helloworld/dev/main.k`:
 ```
 import kam.v1.app_configuration as ac
-import kam.v1.workload as wl
-import kam.v1.workload.container as c
+import service
+import service.container as c
 import monitoring as m
 import network.network as n
 
 helloworld: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         containers: {
             "monitoring-sample-app": c.Container {
                 image: "quay.io/brancz/prometheus-example-app:v0.3.0"
