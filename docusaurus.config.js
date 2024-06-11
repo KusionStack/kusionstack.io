@@ -113,6 +113,23 @@ const config = {
     [
       "@docusaurus/plugin-content-docs",
       {
+        id: "karpor",
+        path: "docs/karpor",
+        routeBasePath: "karpor",
+        sidebarPath: "./sidebars/karpor.js",
+        versions: {
+          current: {
+            label: `${getNextVersionName("karpor")} 🚧`,
+          },
+        },
+        editUrl: "https://github.com/KusionStack/kusionstack.io/edit/main",
+        showLastUpdateAuthor: true,
+        showLastUpdateTime: true,
+      },
+    ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
         id: "operating",
         path: "docs/operating",
         routeBasePath: "operating",
@@ -136,23 +153,6 @@ const config = {
             label: `${getNextVersionName("ctrlmesh")} 🚧`,
           },
         },
-      },
-    ],
-    [
-      "@docusaurus/plugin-content-docs",
-      {
-        id: "karpor",
-        path: "docs/karpor",
-        routeBasePath: "karpor",
-        sidebarPath: "./sidebars/karpor.js",
-        versions: {
-          current: {
-            label: `${getNextVersionName("karpor")} 🚧`,
-          },
-        },
-        editUrl: "https://github.com/KusionStack/kusionstack.io/edit/main",
-        showLastUpdateAuthor: true,
-        showLastUpdateTime: true,
       },
     ],
     [
@@ -204,6 +204,13 @@ const config = {
           {
             type: "docSidebar",
             position: "left",
+            sidebarId: "karpor",
+            label: "Karpor",
+            docsPluginId: "karpor",
+          },
+          {
+            type: "docSidebar",
+            position: "left",
             sidebarId: "operating",
             label: "Operating",
             docsPluginId: "operating",
@@ -214,13 +221,6 @@ const config = {
             sidebarId: "ctrlmesh",
             label: "Ctrlmesh",
             docsPluginId: "ctrlmesh",
-          },
-          {
-            type: "docSidebar",
-            position: "left",
-            sidebarId: "karpor",
-            label: "Karpor",
-            docsPluginId: "karpor",
           },
           {
             type: "docSidebar",
@@ -243,17 +243,17 @@ const config = {
           {
             type: "docsVersionDropdown",
             position: "right",
+            docsPluginId: "karpor",
+          },
+          {
+            type: "docsVersionDropdown",
+            position: "right",
             docsPluginId: "operating",
           },
           {
             type: "docsVersionDropdown",
             position: "right",
             docsPluginId: "ctrlmesh",
-          },
-          {
-            type: "docsVersionDropdown",
-            position: "right",
-            docsPluginId: "karpor",
           },
           {
             type: "localeDropdown",
@@ -284,12 +284,16 @@ const config = {
                 to: "/docs",
               },
               {
-                label: "ControllerMesh",
-                to: "/ctrlmesh/intro/",
-              },
-              {
                 label: "Karpor",
                 to: "/karpor/",
+              },
+              {
+                label: "Operating",
+                to: "/operating/",
+              },
+              {
+                label: "CtrlMesh",
+                to: "/ctrlmesh/intro/",
               },
             ],
           },
