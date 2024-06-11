@@ -6,25 +6,38 @@ slug: /
 
 # Overview
 
-Welcome to Kusion! This introduction section covers what Kusion is, the problem Kusion aims to solve, and how Kusion compares to other software. If you just want to dive into using Kusion, feel free to skip ahead to the [Getting Started](getting-started/install-kusion) section.
+Welcome to Kusion! This introduction section covers what Kusion is, the Kusion workflow, and how Kusion compares to other software. If you just want to dive into using Kusion, feel free to skip ahead to the [Getting Started](getting-started/install-kusion) section.
 
 ## What is Kusion?
-Kusion is an intent-based Platform Orchestrator that enables developers to specify their desired intent in a declarative way and then using a consistent workflow to drive continuous deployment through application lifecycle. Inspired by the phrase **Fusion on Kubernetes**, Kusion aims to help application and platform developers to develop and deliver in a self-serviceable, fast, reliable, and collaborative way.
 
-![arch](https://raw.githubusercontent.com/KusionStack/kusion/main/docs/workflow.png)
+Kusion is an intent-driven [Platform Orchestrator](https://internaldeveloperplatform.org/platform-orchestrators/), which sits at the core of an [Internal Developer Platform (IDP)](https://internaldeveloperplatform.org/what-is-an-internal-developer-platform/). With Kusion you can enable app-centric development, your developers only need to write a single application specification - [AppConfiguration](https://www.kusionstack.io/docs/concepts/app-configuration). [AppConfiguration](https://www.kusionstack.io/docs/concepts/app-configuration) defines the workload and all resource dependencies without needing to supply environment-specific values, Kusion ensures it provides everything needed for the application to run.
+
+Kusion helps app developers who are responsible for creating applications and the platform engineers responsible for maintaining the infrastructure the applications run on. These roles may overlap or align differently in your organization, but Kusion is intended to ease the workload for any practitioner responsible for either set of tasks.
+
+![arch](https://raw.githubusercontent.com/KusionStack/kusion/main/docs/overview.jpg)
 
 
-## Why Kusion?
+## How does Kusion work?
 
-Developers should be able to deploy and run their applications and services end to end. **"You build it, you run it", the original promise of DevOps.**
+As a Platform Orchestrator, Kusion enables you to address challenges often associated with Day 0 and Day 1. Both platform engineers and application engineers can benefit from Kusion.
 
-But the modern day for most software organizations this promise quickly become unrelalistic since the increasingly complex cloud-native toolchains, while cloud native technologies made huge improvements in areas such as scalability, availability and operability, it also brings downside - the growing burden on developers, which leads to the rise of [Platform Engineering](https://platformengineering.org/).
+There are two key workflows for Kusion:
 
-Another challenge we saw is that a series of [antipatterns](https://web.devopstopologies.com/#anti-types) emerge when regular software organizations tries to implement true DevOps. Without well proven reference architecture and supporting tools, it's much more difficult to accomplish the original promise.
+1. **Day 0 - Set up the modules and workspaces:** Platform engineers create shared modules for deploying applications and their underlying infrastructure, and workspace definitions for target landing zone. These standardized, shared modules codify the requirements from stakeholders across the organization including security, compliance, and finance.
 
-On one hand, **Kusion was build to minimize developer's cognitive load**. With application-centric configuration model, you don't need to deal with tedious infrastructure and configuration management tooling, all you need to be familiar with is [AppConfiguration](configuration-walkthrough/overview). This approach shields developers from the configurational complexity of Kubernetes but still enable standardization by design.
+	Kusion modules abstract the complexity of underlying infrastructure tooling, enabling app developers to deploy their applications using a self-service model.
+	
+	<div align="center">
 
-On the other hand, **Kusion defines a new way for different engineering organizations to collaborate**. With the separation of concerns, different roles could focus on their aspects of the configuration based on their knowledge and responsibility, whereas Kusion will dynamically manage and "glue" the opinionated configurations together. Through such a division of labor, the platform team can better manage the differences and complexities of the platform, and app developers could participate in ops work with much less cognitive load.
+	![workflow](https://raw.githubusercontent.com/KusionStack/kusion/main/docs/platform_workflow.jpg)
+	</div>
+	
+2. **Day 1 - Set up the application:** Application developers leverage the workspaces and modules created by the platform engineers to deploy applications and their supporting infrastructure. The platform team maintains the workspaces and modules, which allows application developers to focus on building applications using a repeatable process on standardized infrastructure.
+
+	<div align="center">
+
+	![workflow](https://raw.githubusercontent.com/KusionStack/kusion/main/docs/app_workflow.jpg)
+	</div>
 
 ## Kusion Highlights
 
