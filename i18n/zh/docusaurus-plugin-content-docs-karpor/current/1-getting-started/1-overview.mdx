@@ -25,35 +25,23 @@ export const FeatureBlock = ({
   imgAlt,
   children,
 }) => {
-  const imgTd = (
-    <td
-      style={{
-        width: "60%",
-        verticalAlign: "middle",
-        border: "none",
-      }}
-    >
-      <img src={imgSrc} alt={imgAlt} />
-    </td>
-  );
+  const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
   return (
     <>
       <h3 align="center">{title}</h3>
-      <table style={{ fontSize: "16px", border: "none" }}>
-        <tr style={{ border: "none" }}>
-          {reverse ? (
-            <>
-              {imgTd}
-              {children}
-            </>
-          ) : (
-            <>
-              {children}
-              {imgTd}
-            </>
-          )}
-        </tr>
-      </table>
+      <div
+        style={{
+          fontSize: 16,
+          display: "flex",
+          alignItems: isMobile ? "" : "center",
+          flexDirection: isMobile ? "column" : reverse ? "row-reverse" : "row",
+        }}
+      >
+        <div style={{ padding: 12, width: isMobile ? "100%" : "60%" }}>
+          <img src={imgSrc} alt={imgAlt} />
+        </div>
+        <div style={{ padding: 12, flex: 1 }}>{children}</div>
+      </div>
     </>
   );
 };
@@ -147,11 +135,11 @@ export const Content = () => {
             />
           </div>
           <div>
-            <GithubStar repo="KusionStack/karpor"/>
+            <GithubStar repo="KusionStack/karpor" />
           </div>
         </div>
         <div style={{ fontSize: 26, fontWeight: "Bold" }}>
-            Intelligence for Kubernetes ✨          
+          Intelligence for Kubernetes ✨
         </div>
         <div style={{ fontSize: 24, fontWeight: "Normal" }}>
           <span ref={el} />
@@ -167,15 +155,20 @@ export const Content = () => {
           <div style={{ width: "100%" }}>
             <h2 style={h2Style}>📖 What is Karpor?</h2>
             <div style={{ padding: "5px 0px" }}>
-                Karpor is <b>Intelligence for Kubernetes</b>. It
-                brings advanced <b>🔍 Search, 💡 Insight and ✨ AI</b> to Kubernetes. It is essentially
-                a <b>Kubernetes Explorer</b>/<b>Kubernetes Dashboard</b>. 
-                With Karpor, you can gain crucial visibility into your Kubernetes clusters 
-                across any clouds and empower developers to ship faster.
+              Karpor is <b>Intelligence for Kubernetes</b>. It brings advanced{" "}
+              <b>🔍 Search, 💡 Insight and ✨ AI</b> to Kubernetes. It is
+              essentially a <b>Kubernetes Explorer</b>/
+              <b>Kubernetes Dashboard</b>. With Karpor, you can gain crucial
+              visibility into your Kubernetes clusters across any clouds and
+              empower developers to ship faster.
             </div>
             <div style={{ padding: "5px 0px" }}>
-                We hope to become a <b>small and beautiful, vendor-neutral,
-                developer-friendly, community-driven</b> project! 🚀
+              We hope to become a{" "}
+              <b>
+                small and beautiful, vendor-neutral, developer-friendly,
+                community-driven
+              </b>{" "}
+              project! 🚀
             </div>
           </div>
           <div style={{ width: "100%", padding: "10px" }}>
@@ -213,7 +206,7 @@ export const Content = () => {
               imgSrc={searchImg}
               imgAlt="Karpor Search"
             >
-              <td style={{ verticalAlign: "middle", border: "none" }}>
+              <div style={{ verticalAlign: "middle", border: "none" }}>
                 <b>⚡️ Automatic Syncing</b>
                 <br />
                 Automatically synchronize your resources across any clusters
@@ -222,9 +215,9 @@ export const Content = () => {
                 <br />
                 <b>🔍 Powerful, flexible queries</b>
                 <br />
-                Effectively retrieve and locate resources across multi clusters
-                that you are looking for in a quick and easy way.
-              </td>
+                Effectively retrieve and locate resources across multi clusters that
+                you are looking for in a quick and easy way.
+              </div>
             </FeatureBlock>
             <br />
             <FeatureBlock
@@ -233,7 +226,7 @@ export const Content = () => {
               reverse={true}
               imgAlt="Karpor Insight"
             >
-              <td style={{ verticalAlign: "middle", border: "none" }}>
+              <div style={{ verticalAlign: "middle", border: "none" }}>
                 <b>🔒 Compliance Governance</b>
                 <br />
                 Understand your compliance status across multiple clusters and
@@ -249,7 +242,7 @@ export const Content = () => {
                 <b>📉 Cost Optimization</b>
                 <br />
                 Coming soon.
-              </td>
+              </div>
             </FeatureBlock>
             <br />
             <FeatureBlock
@@ -257,7 +250,7 @@ export const Content = () => {
               imgSrc={comingSoonImg}
               imgAlt="karpor ai"
             >
-              <td style={{ verticalAlign: "middle", border: "none" }}>
+              <div style={{ verticalAlign: "middle", border: "none" }}>
                 <b>💬 Natural Language Operations</b>
                 <br />
                 Interact with Kubernetes using plain language for more intuitive
@@ -271,8 +264,9 @@ export const Content = () => {
                 <br />
                 <b>🤖 AIOps for Kubernetes</b>
                 <br />
-                Automate and optimize Kubernetes management with AI-powered insights.
-              </td>
+                Automate and optimize Kubernetes management with AI-powered
+                insights.
+              </div>
             </FeatureBlock>
             <br />
           </div>
@@ -287,7 +281,8 @@ export const Content = () => {
       >
         <div
           style={{
-            height: 60,
+            minHeight: 60,
+            padding: "10px 0",
             display: "flex",
             alignItems: "center",
             borderBottom: "1px solid #ddd",
@@ -300,13 +295,14 @@ export const Content = () => {
               fontWeight: "bold",
               padding: "0 10px",
             }}
-          >
-          </div>
-          <div style={{ width: "30%", fontSize: 20, textAlign: "center" }}>
+          ></div>
+          <div style={{ width: "30%", fontSize: 16, textAlign: "center" }}>
             <a href="https://github.com/KusionStack/karpor">Karpor</a>
           </div>
-          <div style={{ width: "30%", fontSize: 20, textAlign: "center" }}>
-            <a href="https://github.com/kubernetes/dashboard">Kubernetes Dashboard</a>
+          <div style={{ width: "30%", fontSize: 16, textAlign: "center" }}>
+            <a href="https://github.com/kubernetes/dashboard">
+              Kubernetes Dashboard
+            </a>
           </div>
         </div>
         {karporVsOthers?.map((item) => {
@@ -314,7 +310,8 @@ export const Content = () => {
             <div
               key={item?.label}
               style={{
-                height: 60,
+                minHeight: 60,
+                padding: "10px 0",
                 display: "flex",
                 alignItems: "center",
                 borderBottom: "1px solid #d8d8d8",
@@ -403,4 +400,6 @@ export const Content = () => {
 };
 
 <Content />
+
+
 
