@@ -12,6 +12,8 @@
 }
 
 .karpor_button a .text {
+  width: 110px;
+  text-align: center;
   padding: 5px 15px;
   border-radius: 6px 0 0 6px;
   border: 1px solid rgb(208, 215, 222);
