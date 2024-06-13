@@ -7,9 +7,18 @@ To follow this guide, you will need:
 - Go 1.22 or higher installed and configured
 - Kusion v0.12 or higher installed locally
 
-## Choose the modules you need
+## Workflow
 
-For all KusionStack built-in modules, you can find all available versions and documents in the [reference](../../6-reference/2-modules/index.md)
+As a platform engineer, the workflow of developing a Kusion module looks like this:
+
+1. Browse available modules registered by platform engineers in the workspace
+2. Add modules you need to your Stack
+3. Initialize modules
+4. Apply the AppConfiguration
+
+## Browse available modules
+
+For all KusionStack built-in modules, you can find all available modules and documents in the [reference](../../6-reference/2-modules/index.md)
 
 Since the platform engineers have already registered the available modules in the workspace, app developers can execute `kusion mod list` to list the available modules.
 
@@ -20,9 +29,7 @@ Name      Version  URL
 kawesome  0.2.0    oci://ghcr.io/kusionstack/kawesome
 ```
 
-## Add and initialize modules
-
-### Add modules
+## Add modules to your Stack
 
 Taking `kawesome` as an example, the directory structure is shown below:
 
@@ -36,7 +43,7 @@ example
 └── project.yaml
 ```
 
-Select the module you need from the result of `kusion mod list` and execute `kusion mod add kawesome` to add `kawesome` into your project.
+Select the module you need from the result of `kusion mod list` and execute `kusion mod add kawesome` to add `kawesome` into your Stack.
 
 Once you have added the `kawesome` module, the `kcl.mod` file will be updated to look like this.
 
@@ -57,7 +64,7 @@ entries = ["main.k"]
 - The `service` dependency represents the service workload module.
 - The `kawesome` is the Kusion module we are going to use in the AppConfiguration.
 
-### Initialize modules
+## Initialize modules
 
 ```python
 # The configuration codes in perspective of developers. 
