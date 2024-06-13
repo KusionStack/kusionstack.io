@@ -17,30 +17,27 @@ import KarporButton from "@site/src/components/KarporButton";
 import GithubStar from "@site/src/components/GithubStars";
 import ReactPlayer from "react-player";
 import Typed from "typed.js";
+import clsx from "clsx";
 
-export const FeatureBlock = ({
-  title,
-  reverse = false,
-  imgSrc,
-  imgAlt,
-  children,
-}) => {
-  const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
+export const Feature = ({ imgSrc, title, description, reverse }) => {
+  const reverseStyle = reverse ? { flexDirection: "row-reverse" } : {};
   return (
     <>
-      <h3 align="center">{title}</h3>
+      <h3 style={{ textAlign: "center", marginBottom: 30 }}>{title}</h3>
       <div
         style={{
           fontSize: 16,
-          display: "flex",
-          alignItems: isMobile ? "" : "center",
-          flexDirection: isMobile ? "column" : reverse ? "row-reverse" : "row",
+          alignItems: "center",
+          ...reverseStyle,
         }}
+        className={clsx("row")}
       >
-        <div style={{ padding: 12, width: isMobile ? "100%" : "60%" }}>
-          <img src={imgSrc} alt={imgAlt} />
+        <div className="col col--6 text--center">
+          <img src={imgSrc} />
         </div>
-        <div style={{ padding: 12, flex: 1 }}>{children}</div>
+        <div className={clsx("col col--6")} style={{ padding: "16px" }}>
+          {description}
+        </div>
       </div>
     </>
   );
@@ -201,73 +198,73 @@ export const Content = () => {
               fontSize: 24,
             }}
           >
-            <FeatureBlock
+            <Feature
               title="🔍 Search"
               imgSrc={searchImg}
-              imgAlt="Karpor Search"
-            >
-              <div style={{ verticalAlign: "middle", border: "none" }}>
-                <b>⚡️ Automatic Syncing</b>
-                <br />
-                Automatically synchronize your resources across any clusters
-                managed by the multi-cloud platform.
-                <br />
-                <br />
-                <b>🔍 Powerful, flexible queries</b>
-                <br />
-                Effectively retrieve and locate resources across multi clusters that
-                you are looking for in a quick and easy way.
-              </div>
-            </FeatureBlock>
+              description={
+                <>
+                  <b>⚡️ Automatic Syncing</b>
+                  <br />
+                  Automatically synchronize your resources across any clusters
+                  managed by the multi-cloud platform.
+                  <br />
+                  <br />
+                  <b>🔍 Powerful, flexible queries</b>
+                  <br />
+                  Effectively retrieve and locate resources across multi clusters
+                  that you are looking for in a quick and easy way.
+                </>
+              }
+            />
             <br />
-            <FeatureBlock
+            <Feature
               title="💡 Insight"
               imgSrc={insightImg}
               reverse={true}
-              imgAlt="Karpor Insight"
-            >
-              <div style={{ verticalAlign: "middle", border: "none" }}>
-                <b>🔒 Compliance Governance</b>
-                <br />
-                Understand your compliance status across multiple clusters and
-                compliance standards.
-                <br />
-                <br />
-                <b>📊 Resource Topology</b>
-                <br />
-                Logical and topological views of relevant resources within their
-                operational context.
-                <br />
-                <br />
-                <b>📉 Cost Optimization</b>
-                <br />
-                Coming soon.
-              </div>
-            </FeatureBlock>
+              description={
+                <>
+                  <b>🔒 Compliance Governance</b>
+                  <br />
+                  Understand your compliance status across multiple clusters and
+                  compliance standards.
+                  <br />
+                  <br />
+                  <b>📊 Resource Topology</b>
+                  <br />
+                  Logical and topological views of relevant resources within their
+                  operational context.
+                  <br />
+                  <br />
+                  <b>📉 Cost Optimization</b>
+                  <br />
+                  Coming soon.
+                </>
+              }
+            />
             <br />
-            <FeatureBlock
+            <Feature
               title="✨ AI"
               imgSrc={comingSoonImg}
-              imgAlt="karpor ai"
-            >
-              <div style={{ verticalAlign: "middle", border: "none" }}>
-                <b>💬 Natural Language Operations</b>
-                <br />
-                Interact with Kubernetes using plain language for more intuitive
-                operations.
-                <br />
-                <br />
-                <b>📦 Contextual AI Responses</b>
-                <br />
-                Get smart, contextual assistance that understands your needs.
-                <br />
-                <br />
-                <b>🤖 AIOps for Kubernetes</b>
-                <br />
-                Automate and optimize Kubernetes management with AI-powered
-                insights.
-              </div>
-            </FeatureBlock>
+              description={
+                <>
+                  <b>💬 Natural Language Operations</b>
+                  <br />
+                  Interact with Kubernetes using plain language for more
+                  intuitive operations.
+                  <br />
+                  <br />
+                  <b>📦 Contextual AI Responses</b>
+                  <br />
+                  Get smart, contextual assistance that understands your needs.
+                  <br />
+                  <br />
+                  <b>🤖 AIOps for Kubernetes</b>
+                  <br />
+                  Automate and optimize Kubernetes management with AI-powered
+                  insights.
+                </>
+              }
+            />
             <br />
           </div>
         </div>
