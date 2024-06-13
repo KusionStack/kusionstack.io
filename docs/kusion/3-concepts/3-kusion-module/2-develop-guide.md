@@ -69,10 +69,10 @@ When developing a Kusion module with the scaffold repository, you could follow t
    ```toml
     [package]
     name = "kawesome"
-    version = 0.1.0
+    version = 0.2.0
    ```
 
-    We assume the module named is `kawesome` and the version is `0.1.0` in this guide.
+    We assume the module named is `kawesome` and the version is `0.2.0` in this guide.
 
 2. **Define the dev-orient schemas**. They would be initialized by app developers. In this scaffold repository, we've defined a schema named Kawesome in `kawesome.k` that consists of two resources `Service` and `RandomPassword` and they will be generated into a Kubernetes Service and a Terraform RandomPassword later.
 
