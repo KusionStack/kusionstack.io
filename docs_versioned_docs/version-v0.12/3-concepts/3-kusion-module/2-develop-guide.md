@@ -5,7 +5,7 @@
 To follow this guide, you will need:
 
 - Go 1.22 or higher installed and configured
-- Kusion v0.11.1 or higher installed locally
+- Kusion v0.12 or higher installed locally
 
 ## Workflow
 
@@ -92,12 +92,14 @@ Examples
 --------
 import kawesome as ks
 
+... ...
+
 accessories: {
-    "kusionstack/kawesome@v0.1.0": ks.Kawesome {
-        service: ks.Service {
-            port: 8080
+    "kawesome": kawesome.Kawesome {
+        service: kawesome.Service{
+            port: 5678
         }
-        randomPassword: ks.RandomPassword {
+        randomPassword: kawesome.RandomPassword {
             length: 20
         }
     }
@@ -111,26 +113,33 @@ service:                    Service
 randomPassword:             RandomPassword
 ```
 
-3. **Implement the gRPC generate interface.** The `generate` interface consumes the application developer's config described in the [`AppConfiguration`](../app-configuration) and the platform engineer's config described in the [`workspace`](../workspace) to generate all infrastructure resources represented by this module.
+3. **Implement the [gRPC proto](https://github.com/KusionStack/kusion/blob/main/pkg/modules/proto/module.proto) generate interface.** The `generate` interface consumes the application developer's config described in the [`AppConfiguration`](../app-configuration) and the platform engineer's config described in the [`workspace`](../workspace) to generate all infrastructure resources represented by this module.
 
 ```go
-func (k *Kawesome) Generate(_ context.Context, request *module.GeneratorRequest) (*module.GeneratorResponse, error){
+func (k *Kawesome) Generate(_ context.Context, request *module.GeneratorRequest) (*module.GeneratorResponse, error) {
     // generate your infrastructure resoruces
 }
 
-// Patcher contains fields should be patched into the workload corresponding fields
+// Patcher primarily contains patches for fields associated with Workloads, and additionally offers the capability to patch other resources.
 type Patcher struct {
-    // Environments represent the environment variables patched to all containers in the workload.
-    Environments []v1.EnvVar `json:"environments" yaml:"environments"`
-    // Labels represent the labels patched to both the workload and pod.
-    Labels map[string]string `json:"labels" yaml:"labels"`
-    // Annotations represent the annotations patched to both the workload and pod.
-    Annotations map[string]string `json:"annotations" yaml:"annotations"`
+	// Environments represent the environment variables patched to all containers in the workload.
+	Environments []v1.EnvVar `json:"environments,omitempty" yaml:"environments,omitempty"`
+	// Labels represent the labels patched to the workload.
+	Labels map[string]string `json:"labels,omitempty" yaml:"labels,omitempty"`
+	// PodLabels represent the labels patched to the pods.
+	PodLabels map[string]string `json:"podLabels,omitempty" yaml:"podLabels,omitempty"`
+	// Annotations represent the annotations patched to the workload.
+	Annotations map[string]string `json:"annotations,omitempty" yaml:"annotations,omitempty"`
+	// PodAnnotations represent the annotations patched to the pods.
+	PodAnnotations map[string]string `json:"podAnnotations,omitempty" yaml:"podAnnotations,omitempty"`
+	// JSONPatchers represents patchers that can be patched to an arbitrary resource.
+	// The key of this map represents the ResourceId of the resource to be patched.
+	JSONPatchers map[string]JSONPatcher `json:"jsonPatcher,omitempty" yaml:"jsonPatcher,omitempty"`
 }
 ```
 
 The `GeneratorRequest` contains the application developer's config, platform engineer's config, workload config and related metadata a module could need to generate infrastructure resources.
-In the `GeneratorResponse`, there are two fields, `Resources` and `Patchers`. The `Resource` represents resources that should operated by Kusion and they will be appended into the [Spec](../spec). The `Patchers` are used to patch other resources. In this version, Kusion will parse them and patch workload corresponding fields.
+In the `GeneratorResponse`, there are two fields, `Resources` and `Patchers`. The `Resource` represents resources that should operated by Kusion and they will be appended into the [Spec](../spec). The `Patchers` are used to patch the workload and other resources.
 
 ## Publish
 
@@ -138,29 +147,39 @@ Publish the Kusion module to an OCI registry with the command `kusion mod push`.
 
 Publish a stable version
 ```shell
-kusion mod push /path/to/your-module oci://ghcr.io/kusionstack --latest=true --creds <YOUR_TOKEN>
+kusion mod push /path/to/my-module oci://<domain>/<org> --creds <YOUR_TOKEN>
+```
+
+Publish a module of a specific OS arch
+```shell
+kusion mod push /path/to/my-module oci://<domain>/<org> --os-arch==darwin/arm64 --creds <YOUR_TOKEN>
 ```
 
 Publish a pre-release version
 ```shell
-kusion mod push /path/to/your-module oci://ghcr.io/kusionstack --latest=false --creds <YOUR_TOKEN>
+kusion mod push /path/to/my-module oci://<domain>/<org> --latest=false --creds <YOUR_TOKEN>
 ```
 
 :::info
-The OCI URL format is `oci://<domain>/<org>` and please ensure that your token has the appropriate permissions to write to the registry.
+The OCI URL format is `oci://<domain>/<org>` and please ensure that your token has permissions to write to the registry.
 :::
 
 More details can be found in the `kusion mod push` reference doc.
 
-## Initialize the workspace
+## Register to the workspace
 
 ```yaml
 modules: 
-  kusionstack/kawesome@0.1.0: 
-    default: 
-      service: 
-        labels: 
-          kusionstack.io/module-name: kawesome
+  kawesome: 
+    path: oci://ghcr.io/kusionstack/kawesome
+    version: 0.2.0
+    configs: 
+      default: 
+        service: 
+          labels: 
+            kusionstack.io/module-name: kawesome
+          annotations: 
+            kusionstack.io/module-version: 0.2.0
 ```
 
-Initialize module platform configuration in the `workspace.yaml` to standardize the module's behavior. Please notice the key of this module should match this format: `namespace/moduleName@version`
+Register module platform configuration in the `workspace.yaml` to standardize the module's behavior. App developers can list all available modules registered in the workspace.

@@ -1,12 +1,28 @@
 # Application Developer User Guide
 
-## Choose modules you need
+## Prerequisites
+
+To follow this guide, you will need:
+
+- Go 1.22 or higher installed and configured
+- Kusion v0.12 or higher installed locally
+
+## Choose the modules you need
 
 For all KusionStack built-in modules, you can find all available versions and documents in the [reference](../../6-reference/2-modules/index.md)
 
-## Import and initialize modules
+Since the platform engineers have already registered the available modules in the workspace, app developers can execute `kusion mod list` to list the available modules.
 
-### Add dependencies
+```shell
+kusion mod list --workspace dev
+
+Name      Version  URL
+kawesome  0.2.0    oci://ghcr.io/kusionstack/kawesome
+```
+
+## Add and initialize modules
+
+### Add modules
 
 Taking `kawesome` as an example, the directory structure is shown below:
 
@@ -20,44 +36,57 @@ example
 └── project.yaml
 ```
 
-Before importing modules in your AppConfiguration, you should add them to the dependencies part of the `kcl.mod` file.
+Select the module you need from the result of `kusion mod list` and execute `kusion mod add kawesome` to add `kawesome` into your project.
+
+Once you have added the `kawesome` module, the `kcl.mod` file will be updated to look like this.
 
 ``` toml
 [package]
 name = "example"
 
 [dependencies]
-kam = { git = "https://github.com/KusionStack/kam.git", tag = "0.1.0" }
-kawesome = { oci = "oci://ghcr.io/kusionstack/kawesome", tag = "0.1.0" }
+kawesome = { oci = "oci://ghcr.io/kusionstack/kawesome", tag = "0.2.0" }
+service = {oci = "oci://ghcr.io/kusionstack/service", tag = "0.1.0" }
+kam = { git = "https://github.com/KusionStack/kam.git", tag = "0.2.0" }
 
 [profile]
 entries = ["main.k"]
 ```
 
-The kam dependency represents the [Kusion Application Module](https://github.com/KusionStack/kam.git) which contains the AppConfiguration and other basic modules. The `kawesome` is the Kusion module we are going to use in the AppConfiguration.
+- The `kam` dependency represents the [Kusion Application Module](https://github.com/KusionStack/kam.git) which contains the AppConfiguration.
+- The `service` dependency represents the service workload module.
+- The `kawesome` is the Kusion module we are going to use in the AppConfiguration.
 
 ### Initialize modules
 
 ```python
+# The configuration codes in perspective of developers. 
 import kam.v1.app_configuration as ac
-import kam.v1.workload as wl
-import kam.v1.workload.container as c
-import kawesome.kawesome as ks
+import service
+import service.container as c
+import kawesome.v1.kawesome
 
 kawesome: ac.AppConfiguration {
     # Declare the workload configurations. 
-    workload: wl.Service {
+    workload: service.Service {
         containers: {
             kawesome: c.Container {
                 image: "hashicorp/http-echo"
+                env: {
+                    "ECHO_TEXT": "$(KUSION_KAWESOME_RANDOM_PASSWORD)"
+                }
             }
         }
+        replicas: 1
     }
     # Declare the kawesome module configurations. 
     accessories: {
-        "kawesome": ks.Kawesome {
-            service: ks.Service{
+        "kawesome": kawesome.Kawesome {
+            service: kawesome.Service{
                 port: 5678
+            }
+            randomPassword: kawesome.RandomPassword {
+                length: 20
             }
         }
     }
@@ -66,32 +95,27 @@ kawesome: ac.AppConfiguration {
 
 Initialize the `kawesome` module in the `accessories` block of the AppConfiguration. The key of the `accessories` item represents the module name and the value represents the actual module you required.
 
-## Preview the result
+## Apply the result
 
 Execute the preview command to validate the result.
 
 ```shell
-kusion preview
-```
-
-```shell
- ✔︎  Generating Spec in the Stack dev...                                                                                                                                                                                           
-Stack: dev                                                                   
-ID                                                                           Action
-hashicorp:random:random_password:example-dev-kawesome                        Create
-v1:Namespace:example                                                         Create
-v1:Service:example:example-dev-kawesome                                      Create
-apps.kusionstack.io/v1alpha1:PodTransitionRule:example:example-dev-kawesome  Create
-apps.kusionstack.io/v1alpha1:CollaSet:example:example-dev-kawesome           Create
+kusion apply
+ ✔︎  Generating Spec in the Stack dev...
+Stack: dev
+ID                                                     Action
+hashicorp:random:random_password:example-dev-kawesome  Create
+v1:Namespace:example                                   Create
+v1:Service:example:example-dev-kawesome                Create
+apps/v1:Deployment:example:example-dev-kawesome        Create
 
 
-? Which diff detail do you want to see?  [Use arrows to move, type to filter]
+Do you want to apply these diffs?:
+  > details
+Which diff detail do you want to see?:
 > all
   hashicorp:random:random_password:example-dev-kawesome Create
   v1:Namespace:example Create
   v1:Service:example:example-dev-kawesome Create
-  apps.kusionstack.io/v1alpha1:PodTransitionRule:example:example-dev-kawesome Create
-  apps.kusionstack.io/v1alpha1:CollaSet:example:example-dev-kawesome Create
-  cancel
-
+  apps/v1:Deployment:example:example-dev-kawesome Create
 ```
