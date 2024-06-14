@@ -15,11 +15,14 @@
 ```yaml
 modules:
   service:
-    default:
-      replicas: 3
-      labels:
-        label-key: label-value
-      annotations:
-        annotation-key: annotation-value
-      type: CollaSet
+    path: oci://ghcr.io/kusionstack/service
+    version: 0.2.0
+    configs: 
+      default:
+        replicas: 3
+        labels:
+          label-key: label-value
+        annotations:
+          annotation-key: annotation-value
+        type: CollaSet
 ```

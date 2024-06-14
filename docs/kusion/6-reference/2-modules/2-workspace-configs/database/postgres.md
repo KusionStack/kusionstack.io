@@ -22,28 +22,34 @@ PostgreSQL describes the attributes to locally deploy or create a cloud provider
 ```yaml
 # PostgreSQL workspace configs for AWS RDS
 modules: 
-  kusionstack@postgres@0.1.0: 
-    default: 
-      cloud: aws
-      size: 20
-      instanceType: db.t3.micro
-      securityIPs: 
-        - 0.0.0.0/0
-      databaseName: "my-postgres"
+  postgres: 
+    path: oci://ghcr.io/kusionstack/postgres
+    version: 0.2.0
+    configs: 
+      default: 
+        cloud: aws
+        size: 20
+        instanceType: db.t3.micro
+        securityIPs: 
+          - 0.0.0.0/0
+        databaseName: "my-postgres"
 ```
 
 ```yaml
 # PostgreSQL workspace configs for Alicloud RDS
 modules: 
-  kusionstack@postgres@0.1.0:
-    default:
-      cloud: alicloud
-      size: 20
-      instanceType: pg.n2.serverless.1c
-      category: serverless_basic
-      privateRouting: false
-      subnetID: [your-subnet-id]
-      securityIPs: 
-        - 0.0.0.0/0
-      databaseName: "my-postgres"
+  postgres: 
+    path: oci://ghcr.io/kusionstack/postgres
+    version: 0.2.0
+    configs: 
+      default:
+        cloud: alicloud
+        size: 20
+        instanceType: pg.n2.serverless.1c
+        category: serverless_basic
+        privateRouting: false
+        subnetID: [your-subnet-id]
+        securityIPs: 
+          - 0.0.0.0/0
+        databaseName: "my-postgres"
 ```

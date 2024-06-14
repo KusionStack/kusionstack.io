@@ -58,13 +58,16 @@ To deploy the WordPress application with cloud rds, we first need to initiate a 
 ```yaml
 # MySQL configurations for AWS RDS
 modules: 
-  kusionstack/mysql@0.1.0: 
-    default: 
-      cloud: aws
-      size: 20
-      instanceType: db.t3.micro
-      privateRouting: false
-      databaseName: "wordpress-mysql"
+  mysql: 
+    path: oci://ghcr.io/kusionstack/mysql
+    version: 0.2.0
+    configs:
+        default: 
+        cloud: aws
+        size: 20
+        instanceType: db.t3.micro
+        privateRouting: false
+        databaseName: "wordpress-mysql"
 ```
 
 ```mdx-code-block
@@ -76,15 +79,18 @@ modules:
 ```yaml
 # MySQL configurations for Alicloud RDS
 modules: 
-  kusionstack/mysql@0.1.0: 
-    default: 
-      cloud: alicloud
-      size: 20
-      instanceType: mysql.n2.serverless.1c
-      category: serverless_basic
-      privateRouting: false
-      subnetID: [your-subnet-id]
-      databaseName: "wordpress-mysql"
+  mysql: 
+    path: oci://ghcr.io/kusionstack/mysql
+    version: 0.2.0
+    configs:
+        default: 
+        cloud: alicloud
+        size: 20
+        instanceType: mysql.n2.serverless.1c
+        category: serverless_basic
+        privateRouting: false
+        subnetID: [your-subnet-id]
+        databaseName: "wordpress-mysql"
 ```
 
 ```mdx-code-block

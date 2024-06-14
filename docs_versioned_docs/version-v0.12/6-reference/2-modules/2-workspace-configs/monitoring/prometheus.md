@@ -15,26 +15,29 @@
 ### Examples
 ```yaml
 modules:
-  kusionstack/monitoring@0.1.0:
-    default:
-      operatorMode: True
-      monitorType: Pod
-      scheme: http
-      interval: 30s
-      timeout: 15s
-    low_frequency:
-      operatorMode: False
-      interval: 2m
-      timeout: 1m
-      projectSelector:
-      - foo
-      - bar
-    high_frequency:
-      monitorType: Service
-      interval: 10s
-      timeout: 5s
-      projectSelector:
-      - helloworld
-      - wordpress
-      - prometheus-sample-app
+  monitoring: 
+    path: oci://ghcr.io/kusionstack/monitoring
+    version: 0.2.0
+    configs: 
+      default:
+        operatorMode: True
+        monitorType: Pod
+        scheme: http
+        interval: 30s
+        timeout: 15s
+      low_frequency:
+        operatorMode: False
+        interval: 2m
+        timeout: 1m
+        projectSelector:
+        - foo
+        - bar
+      high_frequency:
+        monitorType: Service
+        interval: 10s
+        timeout: 5s
+        projectSelector:
+        - helloworld
+        - wordpress
+        - prometheus-sample-app
 ```
