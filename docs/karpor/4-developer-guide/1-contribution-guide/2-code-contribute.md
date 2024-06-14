@@ -20,7 +20,7 @@ This guide will help you get started with Karpor development.
 <details>
   <summary>Installing Golang</summary>
 
-1. Install go1.19 from the [official website](https://go.dev/dl/). Extract the binary files and place them at a location, assuming it is located under the home directory `~/go/`, here is an example command, you should choose the correct binary file for your system.
+1. Install go1.19+ from the [official website](https://go.dev/dl/). Extract the binary files and place them at a location, assuming it is located under the home directory `~/go/`, here is an example command, you should choose the correct binary file for your system.
 
 ```
 wget https://go.dev/dl/go1.20.2.linux-amd64.tar.gz

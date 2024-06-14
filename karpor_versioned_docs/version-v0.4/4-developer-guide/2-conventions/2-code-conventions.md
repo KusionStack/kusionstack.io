@@ -6,12 +6,12 @@ In this section, you will find the code conventions for all kinds of code Karpor
 - [Go Code Conventions](#go-code-conventions)
 - [Bash or Script Conventions](#bash-or-script-conventions)
 - [Directory and File Conventions](#directory-and-file-conventions)
-- [Logging Conventions](#logging-conventions)
+- [Linting and Formatting](#linting-and-formatting)
 
 ## Go Code Conventions
 
-- [Go Code Review Comments](https://github.com/golang/go/wiki/CodeReviewComments)
-- [Effective Go](https://golang.org/doc/effective_go.html)
+- [Go Code Review Comments](https://go.dev/wiki/CodeReviewComments)
+- [Effective Go](https://go.dev/doc/effective_go)
 - Know and avoid [Go landmines](https://gist.github.com/lavalamp/4bd23295a9f32706a48f)
 - Comment your code.
 
