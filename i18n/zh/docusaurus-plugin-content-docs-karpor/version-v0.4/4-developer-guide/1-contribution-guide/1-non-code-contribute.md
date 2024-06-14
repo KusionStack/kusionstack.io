@@ -3,7 +3,7 @@ title: 非代码贡献指南
 ---
 你可以用以下任何感兴趣的方式贡献。
 
-## 贡献用户实例和 Demo
+## 贡献用户示例和 Demo
 
 * 如果你正在使用 Karpor，最简单的贡献方式就是 [向社区表达感谢](https://github.com/KusionStack/karpor/issues/343)。
 
@@ -27,7 +27,7 @@ title: 非代码贡献指南
 
 ## 回答问题
 
-如果你有疑问并且在 [文档](https://www.kusionstack.io/karpor/) 中找不到答案，下一步是在 [GitHub 讨论](https://github.com/KusionStack/karpor/discussions) 中提问。
+如果你有疑问并且在 [文档](https://www.kusionstack.io/karpor/) 中找不到答案，下一步是在 [GitHub 论坛](https://github.com/KusionStack/karpor/discussions) 中提问。
 
 帮助这些用户对我们很重要，我们很需要你的帮助。你可以通过回答 [他们的问题](https://github.com/KusionStack/karpor/discussions) 来帮助其他的 Karpor 用户。
 

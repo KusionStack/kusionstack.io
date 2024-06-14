@@ -148,20 +148,20 @@ make lint
 
 在接受 pull request 时，Karpor 团队会将所有的 commit 合并为一个。
 
-Pull request 的标题将会成为合并后的 commit 信息的主题。
+Pull request 的标题将会成为合并后的 commit 信息的描述。
 
 我们仍然鼓励贡献者撰写详细的 commit 信息，因为它们将会作为 git commit 正文的一部分。
 
 我们在生成发布更新日志时将会使用 pull request 的标题。因此，我们会努力使标题尽可能具有信息量。
 
-确保你的 pull request 标题使用与 commit 信息主题相同的格式。如果不遵循该格式，我们将会在该 pull request 添加 `title-needs-formatting` 标签。
+确保你的 pull request 标题使用与 commit 信息相同的格式。如果不遵循该格式，我们将会在该 pull request 添加 `title-needs-formatting` 标签。
 
 ### 通过所有 CI 检查
 
 在合并之前，所有的测试 CI 都应该通过：
 
 - 覆盖率不应该下降。当前，pull request 的覆盖率应当至少为 70%。
-- Karpor 使用 **CLA** 作为贡献者协议。它要求你在合并 pull request 之前为每个 commit 签署。
+- Karpor 使用 **CLA** 作为贡献者协议。它要求你在第一次合并 pull request 之前签署。
 
 ## 更新文档和网站
 

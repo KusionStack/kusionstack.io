@@ -3,12 +3,12 @@ title: Commit 规约
 ---
 ## Commit 信息结构
 
-Karpor 遵循 [规范化 commit](https://www.conventionalcommits.org/en/v1.0.0/)。
+Karpor 遵循 [约定式提交](https://www.conventionalcommits.org/zh-hans/v1.0.0/)。
 
 Commit 信息应当组织为以下结构：
 
 ```
-<类型>[可选 范围]: <主题>
+<类型>[可选 范围]: <描述>
 
 [可选 正文]
 ```
@@ -62,10 +62,10 @@ refs #133
 
 当改动影响多个范围时，可以使用 `*`。
 
-## `<主题>`(必须)
+## `<描述>`(必须)
 
-主题必须紧跟在类型/范围前缀后面的冒号和空格。它是代码更改的简明摘要，例如 `fix: array parsing issue when multiple spaces were contained in string`，而不是 `fix: bug`。
+描述必须紧跟在类型/范围前缀后面的冒号和空格。它是代码更改的简明摘要，例如 `fix: array parsing issue when multiple spaces were contained in string`，而不是 `fix: bug`。
 
 ## `<正文>`(可选)
 
-在简短的主题后可以添加较长的正文，提供有关代码更改的更多上下文信息。正文必须位于描述之后一行。
+在简短的描述后可以添加较长的正文，提供有关代码更改的更多上下文信息。正文必须位于描述之后一行。
