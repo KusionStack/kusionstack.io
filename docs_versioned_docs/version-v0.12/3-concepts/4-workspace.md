@@ -21,25 +21,31 @@ The workspace configuration is in a deterministic format and currently written i
 
 ## Workspace Configuration
 
-The configuration of a Workspace is stored in a single YAML file, which consists of `modules` and `runtimes`. An example of Workspace configuration is shown as below.
+The configuration of a Workspace is stored in a single YAML file, which consists of `modules`. An example of Workspace configuration is shown as below.
 
 ```yaml
 # The platform configuration for Modules or KAMs.
 # For each Module or KAM, the configuration format is as below. 
 # # ${module_identifier} or ${KAM_name}:
-# #   default: # default configuration, applied to all projects
-# #     ${field1}: ${value1}
-# #     #{field2}: ${value2}
-# #     ...
-# #   ${patcher_name}: #patcher configuration, applied to the projects assigned in projectSelector
-# #     ${field1}: ${value1_override}
-# #     ...
-# #     projectSelector:
-# #     - ${project1_name}
-# #     - ${project2_name}
-# #     ...
+# #   path: oci://ghcr.io/kusionstack/module-name # url of the module artifact
+# #   version: 0.2.0 # version of the module
+# #   configs: 
+# #     default: # default configuration, applied to all projects
+# #       ${field1}: ${value1}
+# #       #{field2}: ${value2}
+# #       ...
+# #     ${patcher_name}: #patcher configuration, applied to the projects assigned in projectSelector
+# #       ${field1}: ${value1_override}
+# #       ...
+# #       projectSelector:
+# #       - ${project1_name}
+# #       - ${project2_name}
+# #       ...
 modules:
-   kusionstack/mysql@0.1.0:
+   mysql: 
+    path: oci://ghcr.io/kusionstack/mysql
+    version: 0.2.0
+    configs:
       default:
          cloud: alicloud
          size: 20
@@ -53,21 +59,6 @@ modules:
         projectSelector:
         - foo
         - bar
-    
-# The configuration of Runtimes, support Kubernetes and Terraform.
-# For each Runtime, the configuration format is as below.
-# # ${runtime_name}:
-# #   ${field1}: ${value1}
-# #   ${field2}: ${value2}
-# #   ...
-runtimes:
-  kubernetes:
-    kubeConfig: /etc/kubeconfig.yaml
-  terraform:
-    aws:
-      version: 1.0.4
-      source: hashicorp/aws
-      region: us-east-1
 ```
 
 ### modules
@@ -81,14 +72,6 @@ The values of the same fields in `patcher` will override the `default`, and one 
 In the `patcher`, the applied Projects are assigned by the field `ProjectSelector`, which is an array of the Project names. The `ProjectSelector` is provided rather than something may like `StackSelector`, which specifies the applied Stacks. Here are the reasons. Explaining from the perspective of using Workspace, the mapping of Workspace and Stack is specified by the Kusion operation commands' users. While explaining from the perspective of the relationship among Project, Stack and Workspace, Workspace is designed for the reuse of platform-level configuration among multiple Projects. When a Project "encounters" a Workspace, it becomes a "Stack instance", which can be applied to a series of real resources. If using something like `StackSelector`, the reuse would not get realized, and Workspace would also lose its relevance. For more information of the relationship, please refer to [Project](project/overview) and [Stack](stack/overview). 
 
 Different Module and KAM has different name, fields, and corresponding format and restrictions. When writing the configuration, check the corresponding Module's or KAM's description, and make sure all the requisite Modules and KAMs have correctly configured. Please refer to [Kuiosn Module](kusion-module/overview) and find more information. The example above gives a sample of the Module `mysql`.
-
-### runtimes
-
-The `runtimes` are the interface that Kusion interacts with the real infrastructure, which are only configured by the platform engineers in Workspace. Kusion supports the runtimes `Kubernetes` and `Terraform` for now.
-
-For `Kubernetes` runtime, the path of the KubeConfig file is provided to configure, which is specified by the filed `kubeConfig`. Besides, the environment variable `KUBECONFIG` is also supported with higher priority. If both not set, the default path `$HOME/.kube/config` will be used. For the example above, the `kubeConfig` is set in the workspace configuration.
-
-The `Terraform` runtime is composed of multiple Terraform providers' configurations, where the key is the provider name, and the values varies across different providers. For the configuration fields, Kusion keeps the same with Terraform, including the supported environment variables. Please refer to [Terraform Registry](https://registry.terraform.io/) and find more information. For the example above, a sample of aws runtime configuration is given, while the `access_key` and `access_secret` is not set in the Workspace file, and expected setting by the environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
 
 ## Managing Workspace
 

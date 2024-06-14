@@ -31,10 +31,13 @@ Create the workspace as the target where the application will be deployed to. Th
 
 ```yaml
 modules:
-  kusionstack/network@0.1.0: 
-    default: 
-      port: 
-        type: aws
+  network: 
+    path: oci://ghcr.io/kusionstack/network
+    version: 0.2.0
+    configs:
+        default: 
+        port: 
+            type: aws
 ```
 
 ```mdx-code-block
@@ -44,12 +47,15 @@ modules:
 
 ```yaml
 modules:
-  kusionstack/network@0.1.0: 
-    default: 
-      port: 
-        type: alicloud
-        annotations:
-            service.beta.kubernetes.io/alibaba-cloud-loadbalancer-spec: slb.s1.small
+  network: 
+    path: oci://ghcr.io/kusionstack/network
+    version: 0.2.0
+    configs:
+        default: 
+        port: 
+            type: alicloud
+            annotations:
+                service.beta.kubernetes.io/alibaba-cloud-loadbalancer-spec: slb.s1.small
 ```
 
 ```mdx-code-block

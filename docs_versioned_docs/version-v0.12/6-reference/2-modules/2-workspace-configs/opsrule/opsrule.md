@@ -13,7 +13,10 @@
 
 ```yaml
 modules:
-    kusionstack/opsrule@0.1.0:
-        default:
-            maxUnavailable: "40%"
+    opsrule: 
+        path: oci://ghcr.io/kusionstack/opsrule
+        version: 0.2.0
+        configs: 
+            default:
+                maxUnavailable: "40%"
 ```

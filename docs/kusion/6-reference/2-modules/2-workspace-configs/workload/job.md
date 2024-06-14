@@ -14,10 +14,13 @@
 ```yaml
 modules:
   job:
-    default:
-      replicas: 3
-      labels:
-        label-key: label-value
-      annotations:
-        annotation-key: annotation-value
+    path: oci://ghcr.io/kusionstack/job
+    version: 0.1.0
+    configs: 
+      default:
+        replicas: 3
+        labels:
+          label-key: label-value
+        annotations:
+          annotation-key: annotation-value
 ```

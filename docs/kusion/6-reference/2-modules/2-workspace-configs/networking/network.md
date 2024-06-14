@@ -14,7 +14,9 @@
 
 ```yaml
 modules:
-  kusionstack/network@0.1.0:
+  path: oci://ghcr.io/kusionstack/network
+  version: 0.2.0
+  configs:
     default:
       type: alicloud
       labels:
