@@ -49,34 +49,34 @@ export const FeatureBlock = ({
 export const Content = () => {
   const karporVsOthers = [
     {
-      label: "User Interface",
+      label: "用户界面",
       karpor: true,
       kubernetesDashboard: true,
       labelDesc: "",
     },
     {
-      label: "Multi-Cluster",
+      label: "多集群",
       karpor: true,
       kubernetesDashboard: false,
-      labelDesc: "Ability to connect to multiple clusters simultaneously",
+      labelDesc: "能够同时连接到多个集群",
     },
     {
-      label: "Aggregated Resource View",
+      label: "聚合资源视图",
       karpor: true,
       kubernetesDashboard: false,
-      labelDesc: "Human-friendly view for resources",
+      labelDesc: "人类友好的资源视图",
     },
     {
-      label: "Security Compliance",
+      label: "安全合规",
       karpor: true,
       kubernetesDashboard: false,
-      labelDesc: "Automatic scanning risk, assessing health score",
+      labelDesc: "自动扫描风险，评估健康分",
     },
     {
-      label: "Resource Relationship Topology",
+      label: "资源关系拓扑",
       karpor: true,
       kubernetesDashboard: false,
-      labelDesc: "Insight into the context of resources",
+      labelDesc: "洞察资源的上下文关系",
     },
   ];
   const h2Style = {
@@ -94,9 +94,9 @@ export const Content = () => {
   React.useEffect(() => {
     const typed = new Typed(el.current, {
       strings: [
-        "<b>Locate</b> resources, for <b>Developers</b>.",
-        "<b>Explore</b> cluster insights, for <b>Admins</b>.",
-        "<b>Connect</b> multi-clusters, for <b>Platforms</b>.",
+        "帮助<b>开发者</b>快速<b>定位</b>资源",
+        "帮助<b>管理员</b>深入<b>洞察</b>集群",
+        "帮助<b>平台</b>和多集群建立<b>连接</b>",
       ],
       typeSpeed: 40,
       backDelay: 1500,
@@ -153,22 +153,20 @@ export const Content = () => {
           }}
         >
           <div style={{ width: "100%" }}>
-            <h2 style={h2Style}>📖 What is Karpor?</h2>
+            <h2 style={h2Style}>📖 Karpor 是什么？</h2>
             <div style={{ padding: "5px 0px" }}>
-              Karpor is <b>Intelligence for Kubernetes</b>. It brings advanced{" "}
-              <b>🔍 Search, 💡 Insight and ✨ AI</b> to Kubernetes. It is
-              essentially a <b>Kubernetes Explorer</b>/
-              <b>Kubernetes Dashboard</b>. With Karpor, you can gain crucial
-              visibility into your Kubernetes clusters across any clouds and
-              empower developers to ship faster.
+                Karpor 是<b>智能化的 Kubernetes 平台</b>，它为 Kubernetes
+                带来了高级的 <b>🔍 搜索、💡 洞察和 ✨ AI</b> 功能，本质上是一个
+                <b>Kubernetes 资源管理器/Kubernetes 仪表板</b>。通过
+                Karpor，您可以在任何云平台上获得对 Kubernetes
+                集群的关键可见性，并使开发人员能够更快地交付。
             </div>
             <div style={{ padding: "5px 0px" }}>
-              We hope to become a{" "}
-              <b>
-                small and beautiful, vendor-neutral, developer-friendly,
-                community-driven
-              </b>{" "}
-              project! 🚀
+                我们希望成为一个
+                <b>
+                小而美、厂商中立、开发者友好、社区驱动
+                </b>
+                项目! 🚀
             </div>
           </div>
           <div style={{ width: "100%", padding: "10px" }}>
@@ -193,7 +191,7 @@ export const Content = () => {
           </div>
         </div>
         <div style={{ padding: "10px 0" }}>
-          <h2 style={h2Style}>💡 Why Karpor?</h2>
+          <h2 style={h2Style}>💡 为什么选择 Karpor？</h2>
           <div
             style={{
               width: "100%",
@@ -202,46 +200,42 @@ export const Content = () => {
             }}
           >
             <FeatureBlock
-              title="🔍 Search"
+              title="🔍 搜索"
               imgSrc={searchImg}
               imgAlt="Karpor Search"
             >
               <div style={{ verticalAlign: "middle", border: "none" }}>
-                <b>⚡️ Automatic Syncing</b>
+                <b>⚡️ 自动同步</b>
                 <br />
-                Automatically synchronize your resources across any clusters
-                managed by the multi-cloud platform.
+                    自动同步您在多云平台管理的任何集群中的资源
                 <br />
                 <br />
-                <b>🔍 Powerful, flexible queries</b>
+                <b>🔍 强大灵活的查询</b>
                 <br />
-                Effectively retrieve and locate resources across multi clusters that
-                you are looking for in a quick and easy way.
+                    以快速简单的方式有效地检索和定位跨集群的资源
               </div>
             </FeatureBlock>
             <br />
             <FeatureBlock
-              title="💡 Insight"
+              title="💡 洞察"
               imgSrc={insightImg}
               reverse={true}
               imgAlt="Karpor Insight"
             >
               <div style={{ verticalAlign: "middle", border: "none" }}>
-                <b>🔒 Compliance Governance</b>
+                <b>🔒 安全合规</b>
                 <br />
-                Understand your compliance status across multiple clusters and
-                compliance standards.
-                <br />
-                <br />
-                <b>📊 Resource Topology</b>
-                <br />
-                Logical and topological views of relevant resources within their
-                operational context.
+                    了解您在多个集群和合规标准中的合规性状态
                 <br />
                 <br />
-                <b>📉 Cost Optimization</b>
+                <b>📊 资源拓扑</b>
                 <br />
-                Coming soon.
+                    提供包含资源运行上下文信息的关系拓扑和逻辑视图
+                <br />
+                <br />
+                <b>📉 成本优化</b>
+                <br />
+                即将推出
               </div>
             </FeatureBlock>
             <br />
@@ -251,21 +245,19 @@ export const Content = () => {
               imgAlt="karpor ai"
             >
               <div style={{ verticalAlign: "middle", border: "none" }}>
-                <b>💬 Natural Language Operations</b>
+                <b>💬 自然语言操作</b>
                 <br />
-                Interact with Kubernetes using plain language for more intuitive
-                operations.
-                <br />
-                <br />
-                <b>📦 Contextual AI Responses</b>
-                <br />
-                Get smart, contextual assistance that understands your needs.
+                    使用自然语言与 Kubernetes 交互，实现更直观的操作
                 <br />
                 <br />
-                <b>🤖 AIOps for Kubernetes</b>
+                <b>📦 情境化 AI 响应</b>
                 <br />
-                Automate and optimize Kubernetes management with AI-powered
-                insights.
+                    获得智能的、情境化的辅助，满足您的需求
+                <br />
+                <br />
+                <b>🤖 Kubernetes AIOps</b>
+                <br />
+                    利用 AI 驱动的洞察，自动化和优化 Kubernetes 管理
               </div>
             </FeatureBlock>
             <br />
@@ -357,7 +349,7 @@ export const Content = () => {
           );
         })}
       </div>
-      <h2 style={h2Style}>🎖️ Open Source Contributors</h2>
+      <h2 style={h2Style}>🎖️ 项目贡献者</h2>
       <div
         style={{
           ...flexDirectionStyle,
@@ -367,15 +359,15 @@ export const Content = () => {
           fontSize: 18,
         }}
       >
-        <p style={{ marginBottom: 10 }}>Thanks all! 🍻</p>
+        <p style={{ marginBottom: 10 }}>感谢这些了不起的人! 🍻</p>
         <p>
-          Follow{" "}
-          <a href="developer-guide/contribution-guide/">Contributing Guide</a>,
-          come and join us! 👇
+          查看{" "}
+          <a href="developer-guide/contribution-guide/">贡献指南</a>,
+           欢迎加入我们! 👇
         </p>
         <img src="https://contrib.rocks/image?repo=KusionStack/karpor" />
       </div>
-      <h2 style={h2Style}>👉 Next Step</h2>
+      <h2 style={h2Style}>👉 下一步</h2>
       <div
         style={{
           padding: "10px",
@@ -384,14 +376,14 @@ export const Content = () => {
       >
         <ul>
           <li>
-            Try Karpor's <a href="getting-started/quick-start">Quick Start</a>.
+             查看 Karpor 的 <a href="getting-started/quick-start">快速开始</a>.
           </li>
           <li>
-            Learn Karpor's <a href="concepts/architecture">Architecture</a>.
+             学习 Karpor 的 <a href="concepts/architecture">架构</a>.
           </li>
           <li>
-            Follow <a href="user-guide/multi-cluster-management">User Guide</a>{" "}
-            to learn more on what you can achieve with Karpor.
+             查看 <a href="user-guide/multi-cluster-management">用户指南</a>{" "}
+             学习更多 Karpor 可以做的事情.
           </li>
         </ul>
       </div>
@@ -400,6 +392,3 @@ export const Content = () => {
 };
 
 <Content />
-
-
-
