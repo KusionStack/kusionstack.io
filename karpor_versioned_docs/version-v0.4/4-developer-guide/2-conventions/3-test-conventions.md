@@ -265,5 +265,3 @@ It is worth noting that most mainstream IDEs have already integrated [gotests](h
   - `t.Errorf("Error occurred")`
   - `fmt.Println("Error occurred")`
   - `panic("Error occurred")`
-
-When a test fails, output clear and understandable error messages to help developers locate the problem.

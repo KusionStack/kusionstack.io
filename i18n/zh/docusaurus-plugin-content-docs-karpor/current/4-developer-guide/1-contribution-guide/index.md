@@ -1,118 +1,117 @@
-# Contributing Guide
+# 贡献指南
 
-Contributing Guide that introduces how to participate and contribute to the community.
+贡献指南介绍了如何参与社区发展和向社区贡献。
 
-To help us create a safe and positive community experience for all, we require all participants adhere to the CNCF Community [Code of Conduct](https://github.com/cncf/foundation/blob/main/code-of-conduct.md).
+为了帮助我们为所有人建立安全和积极的社区体验，我们要求所有的参与者遵守 CNCF 社区 [行为准则](https://github.com/cncf/foundation/blob/main/code-of-conduct-languages/zh.md)。
 
-## Before contributing
+## 开始贡献之前
 
-### Find a Contribution Point
+### 找到一个贡献点
 
-You can contribute to Karpor in several ways including code and non-code contributions,
-we appreciate every effort you contribute to the community.
+有多种方式对 Karpor 贡献，包括代码和非代码贡献，我们对任何人对社区的任何方式的努力都非常感谢。
 
-Here are some examples:
+这里是一些示例：
 
-* Contribute to the codebase and docs.
-* Report and triage issues.
-* Organize meetups and user groups in your local area.
-* Help others by answering questions about Karpor.
+* 贡献代码仓库和文档。
+* 报告和分类 issue。
+* 在你的地区组织会议和用户群组。
+* 回答 Karpor 相关问题帮助别人。
 
-And:
+并且：
 
-- If you don’t know what issues start, we have prepared a [Community tasks | 新手任务清单 🎖︎](https://github.com/KusionStack/karpor/issues/463), or you can filter [help wanted](https://github.com/KusionStack/karpor/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22) or [good first issue](https://github.com/KusionStack/karpor/issues?q=is%3Aopen+is%3Aissue++label%3A%22good+first+issue%22) label in issue tracker. you can choose the issue you like.
-- If you have any questions, please [Submit the Issue](https://github.com/KusionStack/karpor/issues/new/choose) or [Post on the discussions](https://github.com/KusionStack/karpor/discussions/new/choose), we will answer as soon as possible.
+- 如果你不知道如何开始，我们准备了一份 [新手任务清单 | Community tasks 🎖︎](https://github.com/KusionStack/karpor/issues/463)，或者你可以通过 issue 跟踪器过滤 [help wanted | 需要帮助](https://github.com/KusionStack/karpor/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22) 或 [good first issue | 新手任务](https://github.com/KusionStack/karpor/issues?q=is%3Aopen+is%3Aissue++label%3A%22good+first+issue%22) 标签. 你可以从任何感兴趣的 issue 开始。
+- 如果你有任何问题，欢迎 [提交 Issue](https://github.com/KusionStack/karpor/issues/new/choose) 或者 [发帖讨论](https://github.com/KusionStack/karpor/discussions/new/choose)，我们会尽快回答。
 
-### How to Contribute Non-code
+### 如何进行非代码贡献
 
-We regard non-coding contribution as equally important with code contribution for the community's very existence and its future growth.
+我们认为对社区存续和未来发展而言，非代码贡献和代码贡献同样重要。
 
-- Refer to [Non-code Contribution Guide](./non-code-contribute) to know how you could help.
+- 参考 [非代码贡献指南](./non-code-contribute) 获取更多细节
 
-### How to Contribute Code
+### 如何进行代码贡献
 
-Unsure where to begin contributing to Karpor codebase? Start by browsing issues labeled `good first issue` or `help wanted`.
+不确定从哪里开始向 Karpor 代码库贡献？可以从浏览带有 `good first issue` 或 `help wanted` 标签的 issue 开始。
 
-- [Good first issue](https://github.com/KusionStack/karpor/labels/good%20first%20issue) issues are generally straightforward to complete.
-- [Help wanted](https://github.com/KusionStack/karpor/labels/help%20wanted) issues are problems we would like the community to help us with regardless of complexity.
-- Refer to [Code Contribution Guide](./code-contribute) for more details.
+- [Good first issue | 新手任务](https://github.com/KusionStack/karpor/labels/good%20first%20issue) 通常很容易解决的任务。
+- [Help wantet | 需要帮助](https://github.com/KusionStack/karpor/labels/help%20wanted) 和复杂程度无关， 我们希望能够在社区解决的问题。
+- 参考 [代码贡献指南](./code-contribute) 获取更多细节。
 
-Learn [Code Conventions](../conventions/code-conventions) and [Test Conventions](../conventions/test-conventions) and understand what to pay attention to when writing code.
+学习 [代码规约](../conventions/code-conventions) 和 [测试规约](../conventions/test-conventions)，并了解在写代码时要注意的地方。
 
-And learn the [Release Process And Cadence](../conventions/release-process) to know when your code changes will be released.
+然后阅读 [发布流程与节奏指南](../conventions/release-process)，了解你的代码什么时候会发布。
 
-## Contribute a Pull Request
+## 贡献一个拉取请求（Pull Request）
 
-After opening or claiming an issue, you could contribute codes or non-codes to karpor by a pull request. Here are the steps you should follow:
+在打开或者认领 issue 之后，你可以通过提交一个拉取请求（Pull Request）为 karpor 进行代码或非代码贡献。这里是你应该遵循的一些步骤：
 
-### Fork Repository
+### Fork 仓库
 
-Karpor adopts trunk-based development, i.e., the code used for release is maintained on the main branch.
+Karpor 遵循主干开发模式，也就是说，用于发布的代码维护在 main 分支。
 
-Thus, to develop karpor, you have to fork one project in [karpor](https://github.com/KusionStack/karpor) repository to your workspace, and then check out a new branch to develop coding.
+那么，为了开发 Karpor，你需要从 [karpor](https://github.com/KusionStack/karpor) Fork 一个项目到你自己的工作空间，然后检出一个新的分支用于开发代码。
 
-### Develop Code/Non-Code
+### 开发代码和非代码
 
-Now you can start writing to solve the issue. To maintain the quality of karpor, after submitting the PR, some necessary checks will be triggered.
+现在你可以开始解决 issue 。为了维护 Karpor 的代码质量，提交 PR 之后，一些必要的检查会被触发。
 
-After the development is completed, commit and push to your forked repository. Since the PR Title will be used as a merging commit message, we ask your PR Title to meet the [Commit Conventions](../2-conventions/4-commit-conventions.md).
+开发结束之后，你需要 commit 代码然后将代码 push 到你 fork 出的仓库。由于 PR 的标题将作为 commit message，你的 PR 标题需要符合 [commit 规约](../2-conventions/4-commit-conventions.md)。
 
-Here are some simple explanations:
+以下是一些简单的解释：
 
-PR Title should be organized following this structure:
-
-```
-<type>[optional scope]: <subject>
-
-[optional body]
-```
-
-The required type helps better capture the area of the commit, based on the [Angular guidelines](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines).
-
-We use lowercase for `<type>` to avoid spending time on case-sensitive issues. `<type>` can be one of the following:
+PR 的标题需要按照以下结构组织：
 
 ```
-feat: A new feature
-fix: A bug fix
-docs: Documentation only changes
-build: Changes that affect the build system or external dependencies
-style: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
-refactor: A code change that neither fixes a bug nor adds a feature
-perf: A code change that improves performance
-test: Adding missing tests or correcting existing tests
-chore: Changes to the build process or auxiliary tools and libraries such as documentation generation
+<类型>[可选 范围]: <描述>
+
+[可选 正文]
 ```
 
-### Open a Pull Request
+要求中的类型可以帮助更好地确认这次提交的范围，基于 [Angular 指南](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines)。
 
-[Open a pull request](https://github.com/KusionStack/karpor/pulls) from the develop branch of your forked repository to the main branch of karpor. You should clearly describe what you do in the PR, and link it to an issue. Besides, the PR title should also follow the commit conventions described above, and must be 5-256 characters in length, prefix `WIP` and `[WIP]` are not allowed.
+我们使用小写的 `<类型>`，以避免在大小写敏感的问题上浪费时间。`<类型>` 可以是以下之一：
 
-### Sign CLA
+```
+feat: 新特性
+fix: 漏洞修复
+docs: 仅文档改动
+build: 关于构建系统和外部依赖的改动
+style: 不影响代码含义的改动（如空行、格式、缺少分号等）
+refactor: 不属于漏洞修复或者增加特性的代码改动
+perf: 提升性能的代码改动
+test: 增加缺少的测试用例或者修正现有的测试用例
+chore: 构建过程或辅助工具和库（如文档生成）的修改
+```
 
-If it was your first pull request, you need to sign our [CLA(Contributor License Agreement)](https://github.com/KusionStack/.github/blob/main/CLA.md). The only thing you need to do is to post a pull request comment same as the below format:
+### 打开一个拉取请求（Pull Request）
+
+[打开一个拉取请求（Pull Request）](https://github.com/KusionStack/karpor/pulls)：打开一个从你 fork 的仓库的开发分支到 karpor main 分支的拉取请求（Pull Request）。你需要清楚地描述你的 PR 做了什么，并且链接到一个 issue。除此之外，PR 的标题应该按照前面提到的 commit 规约，并且长度在 5-256 个字符之间，不允许使用 `WIP` 和 `[WIP]` 前缀。
+
+### 签署贡献者许可协议（Contributor License Agreement，CLA）
+
+如果这是你的第一个 PR ，你需要签署我们的 [CLA（贡献者许可协议）](https://github.com/KusionStack/.github/blob/main/CLA.md)。 你唯一需要做的事情的是在当前 PR 按以下格式发表评论：
 
 `I have read the CLA Document and I hereby sign the CLA`
 
-If your CLA signature failed, you may find the solutions below:
+如果你的 CLA 签署失败了，可能有以下原因：
 
-* The comment must be in the same format as above, with no extra spaces, line breaks, etc.
-* The git committer must be the same one who created the Karpor PR
+* 评论的格式必须与上面完全一致，例如不能有额外的空格、空行等。
+* git commit 的作者和 Karpor PR 的作者必须一致。
 
-### PR Checks
+### PR 检查
 
-To keep the reliability of the karpor project, the following check will get triggered automatically:
+为了维持 karpor 项目的可靠性，以下检查将会自动触发：
 
-* Unit Test
-* Golang Lint
-* Commit Lint
-* PR Title Lint
-* License Lint
-* Markdown Link Lint
+* 单元测试
+* Golang 代码风格检查
+* Commit 风格检查
+* PR 标题检查
+* 代码许可证检查
+* Markdown 格式检查
 
-Please make sure your PR passes these checks.
+请确保你的 PR 通过这些检查。
 
-## Become a Community Member
+## 成为社区成员
 
-If you're interested to become a community member or learn more about the governance, please check the [Roles](./3-roles.md) for details.
+如果你对成为社区成员感兴趣或者想了解更多关于治理的内容，请查看 [角色](./3-roles.md) 获取更多细节。
 
-Enjoy coding and collaboration in Karpor world!
+在 Karpor 的世界中享受编码和协作吧！

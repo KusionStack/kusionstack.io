@@ -1,49 +1,49 @@
 ---
-title: Release Process And Cadence
+title: 发布流程和节奏
 ---
-## Release Planning
+## 发布计划
 
-We will establish and continuously follow up on the release plan through [GitHub Milestones](https://github.com/KusionStack/karpor/milestones). Each release milestone will include two types of tasks:
+我们将通过 [GitHub 里程碑](https://github.com/KusionStack/karpor/milestones) 建立并持续根据发布计划。每个发布里程碑将包括两类任务：
 
-- Tasks Maintainers commit to complete. Maintainers will decide on the features they are committed to implementing before the next release based on their available time and effort. Usually, tasks are finalized after offline discussions and then added to the milestone. These tasks will be assigned to the Maintainer who plans to implement or test them.
-- Additional items contributed by community contributors, typically non-urgent features or optimizations. Maintainers do not commit to completing these issues within the release cycle but will commit to reviewing submissions from the community.
+- Maintainer 承诺完成的任务。Maintainer 会在根据他们的时间和精力承诺下次发布要实现的特性。通常，这些任务会经过离线讨论并添加到里程碑。这些任务会被分配给计划实施和测试它们的 Maintainer。
+- Contributor 提出的额外事项，通常是不紧急的特性和优化。Maintainer 不承诺在当前 release 周期内完成，但承诺会对这些社区提交进行代码审查。
 
-The milestones will clearly describe the most important features and their expected completion dates. This will clearly inform end-users about the timing and contents of the next release.
+里程碑会清晰地描述最终要的特性和期望完成日期。这将清楚地告知终端用户下一版本的发布时间和内容。
 
-In addition to the next milestone, we will also maintain drafts of future release milestones.
+除了下一次里程碑之外，我们也会维护未来几个发布里程碑的草稿。
 
-## Release Standards
+## 发布标准
 
-- All **official releases** should be tagged on the `main` branch, with optional pre-release version suffixes such as: `alpha`, `beta`, `rc`, for example, a regular official release version might be `v1.2.3`, `v1.2.3-alpha.0`. For instance, if we want to perform some validations before releasing the official version `v1.2.3`, we could first release a pre-release version like `v1.2.3-alpha.0`, followed by `v1.2.3` after the validation is complete.
-- Maintainers commit to completing certain features and enhancements, tracking progress through [GitHub Milestones](https://github.com/KusionStack/karpor/milestones).
-- We will do our best to avoid release delays; thus, if we cannot complete a feature on time, it will be moved to the next release.
-- A new version will be released every **1 month**.
+- 所有的 **官方发布** 都应该在 `main` 分支添加标签，并且携带类似 `alpha`、 `beta`、 `rc` 的可选先行版本后缀，例如，一个通常的官方发布版本可能是 `v1.2.3`、 `v1.2.3-alpha.0`。例如，如果我们想要在发布正式版本 `v1.2.3` 之前进行一些验证，我们可以先发布类似 `v1.2.3-alpha.0` 的先行版本，在验证完成之后再发布 `v1.2.3` 版本。
+- Maintainer 承诺完成特定的特性和增强，由 [GitHub 里程碑](https://github.com/KusionStack/karpor/milestones) 跟踪。
+- 我们会尽可能防止发布延期；如果一个特性无法按时完成，它将会被挪到下次发布。
+- **每月** 发布一个新版本。
 
-## Release Standard Procedure
+## 发布标准流程
 
-Maintainers are responsible for driving the release process and following standard operating procedures to ensure the quality of the release.
+Maintainer 负责推动发布过程并遵循标准操作程序以确保发布的质量。
 
-1. Tag the git commit designated for release and push it upstream; the tag needs to comply with [Semantic Versioning](#semantic-versioning).
-2. Ensure that the triggered Github Actions pipeline is executed successfully. Once successful, it will automatically generate a new Github Release, which includes the Changelog calculated from commit messages, as well as artifacts such as images and tar.gz files.
-3. Write clear release notes based on the **Github Release**, including:
-   - User-friendly release highlights.
-   - Deprecated and incompatible changes.
-   - Brief instructions on how to install and upgrade.
+1. 为指定发布的 git commit 添加标签并推到上游；该标签需要满足[语义化版本控制](#%E8%AF%AD%E4%B9%89%E5%8C%96%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6)。
+2. 确保触发的 Github Action 流水线执行成功。一旦成功，将会自动触发一次 Github 发布，其中包括根据提交信息计算出的 Changelog，以及镜像和 tar.gz 文件等制品。
+3. 根据 **Github 发布** 编写清晰的发布说明，包括：
+   - 用户友好的发布亮点。
+   - 已弃用和不兼容的更改。
+   - 有关如何安装和升级的简要说明。
 
-## Gate Testing
+## 门控测试
 
-Before creating the release branch, we will have a **1-week** code freeze period. During this period, we will refrain from merging any feature PRs and will only fix bugs.
+在创建发布分支之前：我们会有一个 **一周** 的代码冻结期。在这期间，我们将避免合并任何功能 PR，只会修复错误。
 
-Maintainers will test and fix these last-minute issues before each release.
+Maintainer 会负责测试并修复那些在临近发布时间发现的紧急问题。
 
-## Semantic Versioning
+## 语义化版本控制
 
-`Karpor` adopts [Semantic Versioning](https://semver.org/) for its version numbers.
+`Karpor` 采用 [语义化版本控制](https://semver.org/lang/zh-CN/) 作为版本号。
 
-The version format: `MAJOR.MINOR.PATCH`, for example, `v1.2.3`. The version number **incrementing rules** are as follows:
+版本格式为：主版本号.次版本号.修订号，例如， `v1.2.3`。版本号  **递增规则** 如下：
 
-- MAJOR version when you make incompatible API changes.
-- MINOR version when you add functionality in a backwards-compatible manner.
-- PATCH version when you make backwards-compatible bug fixes.
+- 主版本号：当你做了不兼容的 API 修改。
+- 次版本号：当你做了向下兼容的功能性新增。
+- 修订号：当你做了向下兼容的问题修正。
 
-**Pre-release version numbers and build metadata** can be added to the `MAJOR.MINOR.PATCH` as an extension, like `v1.2.3-alpha.0`, `v1.2.3-beta.1`, `v1.2.3-rc.2`, where `-alpha.0`, `-beta.1`, `-rc.2` are pre-release versions.
+**先行版本号及版本编译信息** 可以作为加到“主版本号.次版本号.修订号”的后面，作为延伸，比如 `v1.2.3-alpha.0`, `v1.2.3-beta.1`, `v1.2.3-rc.2`, 其中 `-alpha.0`, `-beta.1`, `-rc.2` 是先行版本号。
