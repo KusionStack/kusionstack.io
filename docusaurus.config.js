@@ -165,6 +165,12 @@ const config = {
         // ... other options
       },
     ],
+    [
+      require.resolve("@cmfcmf/docusaurus-search-local"),
+      {
+        language: ["en", "zh"],
+      }
+    ],
   ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
