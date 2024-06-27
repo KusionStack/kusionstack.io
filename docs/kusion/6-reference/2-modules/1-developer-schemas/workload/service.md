@@ -32,7 +32,7 @@ Service is a kind of workload profile that describes how to run your application
 import kam.workload as wl
 import kam.workload.container as c
 
-nginxSvc : wl.Service {
+nginxSvc : service.Service {
     containers: {
         "nginx": c.Container {
             image: "nginx:v1"

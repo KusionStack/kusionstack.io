@@ -26,7 +26,7 @@ More rules will be available in future versions of Kusion.
 To set `maxUnavailable` to a percentage of pods:
 ```
 myapp: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         containers: {
             # ...
         }
@@ -42,7 +42,7 @@ myapp: ac.AppConfiguration {
 To set `maxUnavailable` to a fixed number of pods:
 ```
 myapp: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         # ...
     }
     accessories: {

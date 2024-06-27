@@ -56,7 +56,7 @@ import service.container as c
 
 # main.k declares customized configurations for dev stack.
 myapp: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         containers: {
             "myapp": c.Container {
                 # dev stack has different app configuration from the base
