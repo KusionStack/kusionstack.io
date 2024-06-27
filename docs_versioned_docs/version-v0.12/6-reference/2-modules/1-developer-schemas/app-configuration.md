@@ -11,7 +11,7 @@ AppConfiguration is a developer-centric definition that describes how to run an 
 |**accessories**|{str:any}|Accessories defines a collection of accessories that will be attached to the workload.|{}|
 |**annotations**|{str:str}|Annotations are key/value pairs that attach arbitrary non-identifying metadata to resources.|{}|
 |**labels**|{str:str}|Labels can be used to attach arbitrary metadata as key-value pairs to resources.|{}|
-|**workload** `required`|[wl.Service](workload/service#schema-service) \| [wl.Job](workload/job#schema-job) |Workload defines how to run your application code. Currently supported workload profile<br />includes Service and Job.|N/A|
+|**workload** `required`|[service.Service](workload/service#schema-service) \| [wl.Job](workload/job#schema-job) |Workload defines how to run your application code. Currently supported workload profile<br />includes Service and Job.|N/A|
 
 ### Examples
 ```python
@@ -22,7 +22,7 @@ import kam.workload as wl
 import kam.workload.container as c
 
 helloworld : ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         containers: {
             "nginx": c.Container {
                 image: "nginx:v1"

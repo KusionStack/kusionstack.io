@@ -379,7 +379,7 @@ You can use these environment variables out of the box. Or most likely, your app
 This example below will assign the value of `KUSION_DB_HOST_WORDPRESS_MYSQL` into `WORDPRESS_DB_HOST`, `KUSION_DB_USERNAME_WORDPRESS_MYSQL` into `WORDPRESS_DB_USER`, likewise for `KUSION_DB_PASSWORD_WORDPRESS_MYSQL` and `WORDPRESS_DB_PASSWORD`:
 ```
 wordpress: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         containers: {
             wordpress: c.Container {
                 image = "wordpress:6.3-apache"

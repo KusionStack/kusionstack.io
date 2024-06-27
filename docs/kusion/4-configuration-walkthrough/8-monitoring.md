@@ -52,7 +52,7 @@ modules:
 To manage scrape configuration for the application:
 ```
 myapp: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         # ...
     }
     # Add the monitoring configuration backed by Prometheus
@@ -70,7 +70,7 @@ The example above will instruct the Prometheus job to scrape metrics from the `/
 To instruct Prometheus to scrape from `/actuator/metrics` on port `9099` instead:
 ```
 myapp: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         # ...
     }
     # Add the monitoring configuration backed by Prometheus

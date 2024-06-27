@@ -4,7 +4,7 @@ id: job
 
 # Schedule a Job
 
-The guides above provide examples on how to configure workloads of the type `wl.Service`, which is typically used for long-running web applications that should **never** go down. Alternatively, you could also schedule another kind of workload profile, namely `wl.Job` which corresponds to a one-off or recurring execution of tasks that run to completion and then stop.
+The guides above provide examples on how to configure workloads of the type `service.Service`, which is typically used for long-running web applications that should **never** go down. Alternatively, you could also schedule another kind of workload profile, namely `wl.Job` which corresponds to a one-off or recurring execution of tasks that run to completion and then stop.
 
 ## Prerequisites
 

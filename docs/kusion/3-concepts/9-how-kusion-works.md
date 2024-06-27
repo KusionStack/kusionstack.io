@@ -65,29 +65,18 @@ Each [workspace](workspace) includes a corresponding Platform config file mainta
 Platform engineers should instantiate all workspaces and fulfill all fields with platform default values. Kusion will merge the workspace configuration with AppConfiguration in the Stack of the same name. An example is as follows.
 
 ```yaml
-runtimes: 
-   # your kubeconfig file path
-  kubernetes:
-    kubeConfig: /etc/kubeconfig.yaml
-   # metadat of used terraform providers
-  terraform: 
-    random: 
-      version: 3.5.1
-      source: hashicorp/random
-    aws: 
-      version: 5.0.1
-      source: hashicorp/aws
-      region: us-east-1
-
 modules: 
   # platform configuration of AWS RDS MySQL
   mysql: 
-    default: 
-      cloud: aws
-      size: 20
-      instanceType: db.t3.micro
-      privateRouting: false
-      suffix: "-mysql"
+    path: oci://ghcr.io/kusionstack/mysql
+    version: 0.2.0
+    configs:
+        default: 
+            cloud: aws
+            size: 20
+            instanceType: db.t3.micro
+            privateRouting: false
+            databaseName: "wordpress-mysql"
 ```
 
 The `mysql` block represents a Kusion module. The fields inside are parts of the inputs for the Kusion module generator. For more details about the workspace, please refer to the [workspace](workspace) section.
@@ -101,15 +90,15 @@ Application developers choose Kusion modules they need and instantiate them in t
 `main.k` is the **only** configuration maintained by application developers and schemas in this file are defined from the application developer's perspective to reduce their cognitive load. An example is as follows.
 
 ```pthyon
-import catalog.models.schema.v1 as ac
-import catalog.models.schema.v1.workload as wl
-import catalog.models.schema.v1.workload.container as c
-import catalog.models.schema.v1.workload.network as n
-import catalog.models.schema.v1.accessories.mysql
+import kam.v1.app_configuration as ac
+import service
+import service.container as c
+import network as n
+import mysql
 
 # main.k declares customized configurations for dev stacks.
 wordpress: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         containers: {
             wordpress: c.Container {
                 image: "wordpress:6.3"
@@ -124,8 +113,11 @@ wordpress: ac.AppConfiguration {
         }
         ......
     }
-    database: {
-        wordpress: mysql.MySQL {
+    accessories: {
+        "network": n.Network {
+            ......
+        }
+        "mysql": mysql.MySQL {
             type: "cloud"
             version: "8.0"
         }

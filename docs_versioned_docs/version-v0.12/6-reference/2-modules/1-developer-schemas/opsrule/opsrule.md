@@ -17,7 +17,7 @@ import kam.v1.workload as wl
 import kam.v1.workload.container as c
 
 helloworld : ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         containers: {
             "nginx": c.Container {
                 image: "nginx:v1"

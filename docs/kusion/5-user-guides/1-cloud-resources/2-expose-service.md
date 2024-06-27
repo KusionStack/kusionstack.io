@@ -36,8 +36,8 @@ modules:
     version: 0.2.0
     configs:
         default: 
-        port: 
-            type: aws
+            port: 
+                type: aws
 ```
 
 ```mdx-code-block
@@ -52,10 +52,10 @@ modules:
     version: 0.2.0
     configs:
         default: 
-        port: 
-            type: alicloud
-            annotations:
-                service.beta.kubernetes.io/alibaba-cloud-loadbalancer-spec: slb.s1.small
+            port: 
+                type: alicloud
+                annotations:
+                    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-spec: slb.s1.small
 ```
 
 ```mdx-code-block

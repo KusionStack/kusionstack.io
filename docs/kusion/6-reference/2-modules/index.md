@@ -10,7 +10,7 @@ A simple example of using `AppConfiguration` to describe an application is as fo
 
 ```bash
 wordpress: ac.AppConfiguration {
-    workload: wl.Service {
+    workload: service.Service {
         containers: {
             "wordpress": c.Container {
                 image: "wordpress:latest"
