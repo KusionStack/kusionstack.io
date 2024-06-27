@@ -63,11 +63,11 @@ modules:
     version: 0.2.0
     configs:
         default: 
-        cloud: aws
-        size: 20
-        instanceType: db.t3.micro
-        privateRouting: false
-        databaseName: "wordpress-mysql"
+            cloud: aws
+            size: 20
+            instanceType: db.t3.micro
+            privateRouting: false
+            databaseName: "wordpress-mysql"
 ```
 
 ```mdx-code-block
@@ -84,13 +84,13 @@ modules:
     version: 0.2.0
     configs:
         default: 
-        cloud: alicloud
-        size: 20
-        instanceType: mysql.n2.serverless.1c
-        category: serverless_basic
-        privateRouting: false
-        subnetID: [your-subnet-id]
-        databaseName: "wordpress-mysql"
+            cloud: alicloud
+            size: 20
+            instanceType: mysql.n2.serverless.1c
+            category: serverless_basic
+            privateRouting: false
+            subnetID: [your-subnet-id]
+            databaseName: "wordpress-mysql"
 ```
 
 ```mdx-code-block
