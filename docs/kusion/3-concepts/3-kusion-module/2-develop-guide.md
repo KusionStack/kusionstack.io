@@ -143,7 +143,7 @@ In the `GeneratorResponse`, there are two fields, `Resources` and `Patchers`. Th
 
 ## Publish
 
-Publish the Kusion module to an OCI registry with the command `kusion mod push`.
+Publish the Kusion module to an OCI registry with the command `kusion mod push`. If your module is open to the public, we **welcome and highly encourage** you to contribute it to the module registry [catalog](https://github.com/KusionStack/catalog), so that more people can benefit from the module. Submit a pull request to this repository, once it is merged, it will be published to the [KusionStack GitHub container registry](https://github.com/orgs/KusionStack/packages).
 
 Publish a stable version
 ```shell
