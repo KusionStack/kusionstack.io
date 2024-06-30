@@ -102,7 +102,7 @@ network = { oci = "oci://ghcr.io/kusionstack/network", tag = "0.2.0" }
 ```
 
 :::info
-More details about the application model and module dependency declaration can be found in [Kusion Module guide for app dev](../3-concepts/3-kusion-module/3-app-dev-guide.md). 
+More details about the application model and module dependency declaration can be found in [Kusion Module guide for app dev](../3-concepts/3-module/3-app-dev-guide.md). 
 :::
 
 :::tip

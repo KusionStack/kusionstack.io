@@ -1,6 +1,6 @@
 ---
 id: backend
-sidebar_label: Backend
+sidebar_label: Backends
 ---
 
 # Backend
