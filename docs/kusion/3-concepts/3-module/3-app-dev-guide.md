@@ -4,12 +4,11 @@
 
 To follow this guide, you will need:
 
-- Go 1.22 or higher installed and configured
 - Kusion v0.12 or higher installed locally
 
 ## Workflow
 
-As a platform engineer, the workflow of developing a Kusion module looks like this:
+As a developer, the workflow of developing a Kusion module looks like this:
 
 1. Browse available modules registered by platform engineers in the workspace
 2. Add modules you need to your Stack
