@@ -141,6 +141,63 @@ type Patcher struct {
 The `GeneratorRequest` contains the application developer's config, platform engineer's config, workload config and related metadata a module could need to generate infrastructure resources.
 In the `GeneratorResponse`, there are two fields, `Resources` and `Patchers`. The `Resource` represents resources that should operated by Kusion and they will be appended into the [Spec](../spec). The `Patchers` are used to patch the workload and other resources.
 
+### Implicit Resource Dependency
+
+When you need to use an attribute of another resource as the value of a specific resource, Kusion supports declaring the implicit resource dependencies through `$kusion_path`. You can call the `modules.KusionPathDependency` method of the `kusionstack.io/kusion` package, passing in the resource `id` and the `name` of the attribute you want to reference, and this method will return the corresponding implicit resource dependency path. 
+
+In addition, please note that: 
+
+- You can concatenate the implicit resource dependency path with the resource `id`, attribute `name` and the `$kusion_path` prefix yourself. And the attribute name can be any number, for example `$kusion_path.v1:Service:test-ns:test-service.metadata.name`
+
+- The implicit resource dependency path can only be used to replace the value in `Attributes` field of the `Resource`, but not the key. For example, the following `Spec` is invalid: 
+
+```yaml
+# Dependency path not in `attributes`. 
+spec:
+    resources: 
+        - id: v1:Service:test:$kusion_path.apps/v1:Deployment:test-ns:test-deployment.metadata.name
+```
+
+```yaml
+# Dependency path in the key, but not in the value. 
+spec:
+    resources: 
+        - id: apps/v1:Deployment:test-ns:test-deployment
+          type: Kubernetes
+          attributes: 
+            metadata:
+                annotations: 
+                    $kusion_path.v1:Service:test-ns:test-service.metadata.name: test-svc
+```
+
+- The implicit resource dependency path can only be used as a standalone value and cannot be combined with other string. For example, the following `Spec` is invalid: 
+
+```yaml
+# Dependency path combined with other string. 
+spec:
+    resources: 
+        - id: apps/v1:Deployment:test-ns:test-deployment
+          type: Kubernetes
+          attributes: 
+            metadata:
+                annotations: 
+                    test-svc: $kusion_path.v1:Service:test-ns:test-service.metadata.name + "-test"
+```
+
+- The impliciy resource dependency path does not support accessing the value in an array, so the following is currently invalid: 
+
+```yaml
+# Dependency path accessing the value in an array. 
+spec:
+    resources: 
+        - id: apps/v1:Deployment:test-ns:test-deployment
+          type: Kubernetes
+          attributes: 
+            metadata:
+                annotations: 
+                    test-svc: $kusion_path.v1:Service:test-ns:test-service.spec.ports[0].name
+```
+
 ## Publish
 
 Publish the Kusion module to an OCI registry with the command `kusion mod push`. If your module is open to the public, we **welcome and highly encourage** you to contribute it to the module registry [catalog](https://github.com/KusionStack/catalog), so that more people can benefit from the module. Submit a pull request to this repository, once it is merged, it will be published to the [KusionStack GitHub container registry](https://github.com/orgs/KusionStack/packages).
