@@ -8,7 +8,7 @@ To follow this guide, you will need:
 
 ## Workflow
 
-As a developer, the workflow of developing a Kusion module looks like this:
+As an application developer, the workflow of using a Kusion module looks like this:
 
 1. Browse available modules registered by platform engineers in the workspace
 2. Add modules you need to your Stack

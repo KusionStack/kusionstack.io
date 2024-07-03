@@ -143,13 +143,23 @@ In the `GeneratorResponse`, there are two fields, `Resources` and `Patchers`. Th
 
 ### Implicit Resource Dependency
 
-When you need to use an attribute of another resource as the value of a specific resource, Kusion supports declaring the implicit resource dependencies through `$kusion_path`. You can call the `modules.KusionPathDependency` method of the `kusionstack.io/kusion` package, passing in the resource `id` and the `name` of the attribute you want to reference, and this method will return the corresponding implicit resource dependency path. 
+When you need to use an attribute of another resource as the value of a specific resource attribute, Kusion supports declaring the implicit resource dependencies with the `$kusion_path` prefix. You can concatenate the implicit resource dependency path with the resource `id`, attribute `name` and the `$kusion_path` prefix, for example: 
+
+```yaml
+# Dependency path as an attribute value. 
+spec: 
+    resources: 
+        - id: v1:Service:test-ns:test-service
+          type: Kubernetes
+          attributes: 
+            metadata: 
+                annotations: 
+                    deployment-name: $kusion_path.v1:Deployment:test-ns:test-deployment.metadata.name
+```
 
 In addition, please note that: 
 
-- You can concatenate the implicit resource dependency path with the resource `id`, attribute `name` and the `$kusion_path` prefix yourself. And the attribute name can be any number, for example `$kusion_path.v1:Service:test-ns:test-service.metadata.name`
-
-- The implicit resource dependency path can only be used to replace the value in `Attributes` field of the `Resource`, but not the key. For example, the following `Spec` is invalid: 
+- The implicit resource dependency path can only be used to replace the value in `Attributes` field of the `Resource`, but not the key. For example, the following `Spec` is **invalid**: 
 
 ```yaml
 # Dependency path not in `attributes`. 
@@ -170,7 +180,7 @@ spec:
                     $kusion_path.v1:Service:test-ns:test-service.metadata.name: test-svc
 ```
 
-- The implicit resource dependency path can only be used as a standalone value and cannot be combined with other string. For example, the following `Spec` is invalid: 
+- The implicit resource dependency path can only be used as a standalone value and cannot be combined with other string. For example, the following `Spec` is **invalid**: 
 
 ```yaml
 # Dependency path combined with other string. 
@@ -184,7 +194,7 @@ spec:
                     test-svc: $kusion_path.v1:Service:test-ns:test-service.metadata.name + "-test"
 ```
 
-- The impliciy resource dependency path does not support accessing the value in an array, so the following is currently invalid: 
+- The impliciy resource dependency path does not support accessing the value in an array, so the following is currently **invalid**: 
 
 ```yaml
 # Dependency path accessing the value in an array. 
