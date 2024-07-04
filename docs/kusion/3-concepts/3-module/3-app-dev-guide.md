@@ -4,7 +4,6 @@
 
 To follow this guide, you will need:
 
-- Go 1.22 or higher installed and configured
 - Kusion v0.12 or higher installed locally
 
 ## Workflow
