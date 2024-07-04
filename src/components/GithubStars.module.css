@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   margin: 0 10px;
-  font-size: 15px;
+  font-size: 14px;
 }
 .karpor_star_button a {
   display: inline-block;
@@ -18,7 +18,7 @@
 .karpor_star_button a .text {
   display: flex;
   align-items: center;
-  padding: 5px 15px;
+  padding: 5px 10px;
   border-radius: 6px 0 0 6px;
   border: 1px solid rgb(208, 215, 222);
   background: #ebf0f4;
@@ -29,7 +29,7 @@
 }
 
 .karpor_star_button a .star {
-  padding: 5px 15px;
+  padding: 5px 10px;
   border-radius: 0 4px 4px 0;
   border: 1px solid rgb(208, 215, 222);
   border-left: none;

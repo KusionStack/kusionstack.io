@@ -109,7 +109,6 @@ export const Content = () => {
       <div
         style={{
           ...flexDirectionStyle,
-          padding: 20,
           borderBottom: "2px solid #f1f1f1",
         }}
       >
@@ -125,15 +124,11 @@ export const Content = () => {
             alignItems: "center",
           }}
         >
-          <div>
-            <KarporButton
-              url="https://karpor-demo.kusionstack.io"
-              btnText="Live Demo"
-            />
-          </div>
-          <div>
-            <GithubStar repo="KusionStack/karpor" />
-          </div>
+          <KarporButton
+            url="https://karpor-demo.kusionstack.io"
+            btnText="Live Demo"
+          />
+          <GithubStar repo="KusionStack/karpor" />
         </div>
         <div style={{ fontSize: 26, fontWeight: "Bold" }}>
           Intelligence for Kubernetes ✨

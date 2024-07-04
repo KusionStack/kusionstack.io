@@ -1,7 +1,7 @@
 .karpor_button a {
   display: inline-block;
   margin: 0 10px;
-  font-size: 15px;
+  font-size: 14px;
   border-radius: 4px;
   cursor: pointer;
   color: rgb(36, 41, 47);
@@ -12,16 +12,15 @@
 }
 
 .karpor_button a .text {
-  width: 110px;
   text-align: center;
-  padding: 5px 15px;
+  padding: 5px 10px;
   border-radius: 6px 0 0 6px;
   border: 1px solid rgb(208, 215, 222);
   background: #ebf0f4;
 }
 
 .karpor_button a .icon {
-  padding: 5px 15px;
+  padding: 5px 10px;
   border-radius: 0 4px 4px 0;
   border: 1px solid rgb(208, 215, 222);
   border-left: none;
