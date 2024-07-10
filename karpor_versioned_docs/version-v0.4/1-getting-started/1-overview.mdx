@@ -12,40 +12,13 @@ import {
 import logoImg from "@site/static/karpor/assets/logo/logo-full.png";
 import searchImg from "@site/static/karpor/assets/overview/search.png";
 import insightImg from "@site/static/karpor/assets/overview/insight.png";
+import visionImg from "@site/static/karpor/assets/overview/vision.png";
 import comingSoonImg from "@site/static/karpor/assets/misc/coming-soon.jpeg";
 import KarporButton from "@site/src/components/KarporButton";
 import GithubStar from "@site/src/components/GithubStars";
 import ReactPlayer from "react-player";
 import Typed from "typed.js";
 import clsx from "clsx";
-
-export const FeatureBlock = ({
-  title,
-  reverse = false,
-  imgSrc,
-  imgAlt,
-  children,
-}) => {
-  const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
-  return (
-    <>
-      <h3 align="center">{title}</h3>
-      <div
-        style={{
-          fontSize: 16,
-          display: "flex",
-          alignItems: isMobile ? "" : "center",
-          flexDirection: isMobile ? "column" : reverse ? "row-reverse" : "row",
-        }}
-      >
-        <div style={{ padding: 12, width: isMobile ? "100%" : "60%" }}>
-          <img src={imgSrc} alt={imgAlt} />
-        </div>
-        <div style={{ padding: 12, flex: 1 }}>{children}</div>
-      </div>
-    </>
-  );
-};
 
 export const Feature = ({ imgSrc, title, description, reverse }) => {
   const reverseStyle = reverse ? { flexDirection: "row-reverse" } : {};
@@ -152,15 +125,11 @@ export const Content = () => {
             alignItems: "center",
           }}
         >
-          <div>
-            <KarporButton
-              url="https://karpor-demo.kusionstack.io"
-              btnText="Live Demo"
-            />
-          </div>
-          <div>
-            <GithubStar repo="KusionStack/karpor" />
-          </div>
+          <KarporButton
+            url="https://karpor-demo.kusionstack.io"
+            btnText="Live Demo"
+          />
+          <GithubStar repo="KusionStack/karpor" />
         </div>
         <div style={{ fontSize: 26, fontWeight: "Bold" }}>
           Intelligence for Kubernetes ✨
@@ -295,6 +264,32 @@ export const Content = () => {
             <br />
           </div>
         </div>
+        <div
+          style={{
+            padding: "40px 0",
+            ...flexDirectionStyle,
+          }}
+        >
+          <div style={{ width: "100%" }}>
+            <h2 style={h2Style}>🌈 Our vision</h2>
+            <div style={{ padding: "5px 0px" }}>
+                The increasing complexity of the kubernetes ecosystem is an
+                undeniable trend that is becoming more and more difficult to
+                manage. This complexity not only entails a heavier burden on
+                operations and maintenance but also slows down the adoption of
+                new technologies by users, limiting their ability to fully
+                leverage the potential of kubernetes.
+            </div>
+            <div style={{ padding: "5px 0px" }}>
+                We wish Karpor to focus on 🔍 search, 📊 insights,
+                and ✨ AI, to <b>break through the increasingly complex maze of
+                kubernetes</b>, achieving the following <b>value proposition</b>:
+            </div>
+          </div>
+          <div style={{ width: "100%", padding: "10px" }}>
+            <img src={visionImg} />
+          </div>
+        </div>
       </div>
       <h2 style={h2Style}>🙌 Karpor vs. Kubernetes Dashboard</h2>
       <div
@@ -424,3 +419,4 @@ export const Content = () => {
 };
 
 <Content />
+
