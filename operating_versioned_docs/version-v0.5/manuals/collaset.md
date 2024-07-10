@@ -486,7 +486,7 @@ metadata:
   name: collaset-sample
 spec:
   scaleStrategy:
-    OperationDelaySeconds: 60 # duration between traffic off and container shutdown
+    operationDelaySeconds: 60 # duration between traffic off and container shutdown
 ```
 
 In pod operations, including scaling down, updates, and deletions, [PodOpsLifecycle](http://localhost:3000/operating/concepts/podopslifecycle) is responsible for managing the full lifecycle of pods (e.g., `ServiceAvailable`, `Preparing`, `Operating` and `Completing`).
