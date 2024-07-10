@@ -145,7 +145,7 @@ $ kubectl -n default get pod -o yaml | grep "image: nginx"
 The update progress can be controlled using partition.
 
 #### Partition
-Similar to StatefulSet, `partition` is used to control the  progress.
+Similar to StatefulSet, `partition` is used to control the upgrade progress.
 
 By default, if not indicated, all Pods will be updated when spec.template changes. The `partition` can be adjusted from `spec.replicas` to 0 to specify the number of pods in old revisions.
 
@@ -178,7 +178,6 @@ $ kubectl -n default get pod -o yaml | grep "image: nginx"
     - image: nginx:1.25.2   # only 1 Pod updated
     - image: nginx:1.24.0
 ```
-
 #### Update by Label
 By configuring the `byLabel` rolling update policy, users can precisely specify which Pods they want to update by using labels.
 
@@ -195,7 +194,7 @@ spec:
   updateStrategy:
     rollingUpdate:
 -     byPartition:
--       partition: 2
+-       partition: 1
 +     byLabel: {}
 ```
 
@@ -491,20 +490,49 @@ spec:
 ```
 
 In pod operations, including scaling down, updates, and deletions, [PodOpsLifecycle](http://localhost:3000/operating/concepts/podopslifecycle) is responsible for managing the full lifecycle of pods (e.g., `ServiceAvailable`, `Preparing`, `Operating` and `Completing`).
-These operations involve shutting down or restarting containers. 
+These operations involve shutting down or restarting containers.
 
 Directly shutting down containers after traffic off can lead to situations where long connection requests become unresponsive.
-During this period, it is expected to close the containers after waiting for some time after traffic off to handle the remaining long connection requests. 
+During this period, it is expected to close the containers after waiting for some time after traffic off to handle the remaining long connection requests.
 
 #### Comparing to terminationGracePeriodSeconds
-The `operationDelaySeconds` serves a purpose similar to the `terminationGracePeriodSeconds` on a pod. 
-However, the difference is that since operationDelaySeconds is configured in the Spec of CollaSet, modifications to this setting will not trigger pod upgrade. 
+The `operationDelaySeconds` serves a purpose similar to the `terminationGracePeriodSeconds` on a pod.
+However, the difference is that since operationDelaySeconds is configured in the Spec of CollaSet, modifications to this setting will not trigger pod upgrade.
 
 ![operation-delay-seconds](/img/operating/manuals/collaset/operation-delay-seconds.png)
 
 Note that if both operationDelaySeconds and terminationGracePeriodSeconds fields are configured simultaneously, after the traffic off, the user application may wait (operationDelaySeconds + terminationGracePeriodSeconds) before the container being shutdown.
 
-### Recreate And Replace Specified Pod
+### Selective Pod Deletion
+When scaling down CollSet, users may want to delete specified pods instead of delete pods randomly.
+ColloSet supports specifying a set of Pod names within the ```spec.scaleStrategy.podToDelete``` for recreating or scaling in specified pods.
+
+```yaml
+apiVersion: apps.kusionstack.io/v1alpha1
+kind: CollaSet
+metadata:
+  name: sample
+spec:
+  replicas: 2
+  scaleStrategy:
+    podToDelete: # replace or scaleIn listed pods
+    - podName1
+    - podName2
+  # ...
+```
+When user specifies a set of pods:
+1. On the one hand, if ```replicas``` is scaled down simultaneously, CollaSet will scale down pods listed in ```podToDelete``` first.
+2. On the other hand, if ```replicas``` is not scale down, pods listed in ```podToDelete``` will be recreated, and new pods will inherit origin pods' ```instance-id```.
+
+Note that, by default, controller will clear the pod name once CollaSet cannot find the pod specified in ```podToDelete```.
+Users can disable clear pod name after pod deletion by disabling the feature ```ReclaimPodToDelete``` to false (the default value is true).
+
+```shell
+# Disable the ReclaimPodToDelete feature when starting the controller with this argument
+$ /manager --feature-gates=ReclaimPodToDelete=false
+```
+
+### Recreate And Replace Pod by Label
 
 In practice, users often need to recreate or replace specified Pods under a CollaSet.
 
@@ -573,7 +601,7 @@ collaset-sample-w6x69   0/1     Terminating         0          5m33s
 ```
 
 
-### Supprting PVCs
+### Supporting PVCs
 CollaSet introduces support for PVCs, allowing user to declare `VolumeClaimTemplates` to create PVCs for each Pod.
 Furthermore, in response to common issues with PVCs management, such as high modification costs and difficult control, CollaSet extends its functionality with the following advantages vs. StatefulSet:
 
