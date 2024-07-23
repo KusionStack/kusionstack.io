@@ -1,6 +1,6 @@
 # Roadmap
 
-For a finer-grained view of our roadmap and what is being worked on for a release, please refer to the [Roadmap](https://github.com/KusionStack/kusion/issues)
+For a finer-grained view of our roadmap and what is being worked on for a release, please refer to the [Roadmap](https://github.com/orgs/KusionStack/projects/24)
 
 ## Expand Kusion Module Ecosystem to meet more scenarios
 
