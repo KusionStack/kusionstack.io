@@ -1,6 +1,7 @@
 ---
 title: Installation
 ---
+
 ## Install with helm
 
 If you have a kubernetes cluster, helm is the recommended installation method.
@@ -27,6 +28,8 @@ Then you can use the following command to install the latest version of Karpor.
 helm install karpor-release kusionstack/karpor
 ```
 
+![Install](./assets/2-installation/install.gif)
+
 **Note** that installing this chart directly means it will use the [default template values](https://github.com/KusionStack/charts/blob/master/charts/karpor/values.yaml) for Karpor.
 
 You may have to set your specific configurations if it is deployed into a production cluster, or you want to customize the chart configuration, such as `resources`, `replicas`, `port` etc.
@@ -36,9 +39,6 @@ All configurable parameters of the Karpor chart are detailed [here](#chart-confi
 ```shell
 helm install karpor-release kusionstack/karpor --set server.replicas=3 --set syncer.port=7654
 ```
-
-![Install](./assets/2-installation/install.gif)
-
 
 ### Search all available versions
 
