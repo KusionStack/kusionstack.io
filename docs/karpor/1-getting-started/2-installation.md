@@ -73,7 +73,7 @@ helm upgrade karpor-release charts/karpor
 
 ### Uninstall
 
-To uninstall karpor:
+To uninstall/delete the `karpor-release` helm release in namespace `karpor`:
 
 ```shell
 helm uninstall karpor-release
