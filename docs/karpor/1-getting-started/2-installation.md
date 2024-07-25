@@ -79,6 +79,16 @@ To uninstall/delete the `karpor-release` helm release in namespace `karpor`:
 helm uninstall karpor-release
 ```
 
+### Image Registry Proxy for China
+
+If you are in China and have problem to pull image from official DockerHub, you can use the registry proxy:
+
+```shell
+helm install karpor-release kusionstack/karpor --set registryProxy=docker.m.daocloud.io
+```
+
+**NOTE**: The above is just an example, you can replace the value of `registryProxy` as needed.
+
 ### Chart Parameters
 
 The following table lists the configurable parameters of the chart and their default values.

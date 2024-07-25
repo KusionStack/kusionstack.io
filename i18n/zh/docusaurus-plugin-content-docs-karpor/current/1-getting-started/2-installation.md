@@ -79,6 +79,16 @@ helm upgrade karpor-release charts/karpor
 helm uninstall karpor-release
 ```
 
+### 中国镜像代理
+
+如果你在中国、并且从官方 DockerHub 上拉取镜像时遇到困难，那么你可以使用第三方的镜像代理服务：
+
+```shell
+helm install karpor-release kusionstack/karpor --set registryProxy=docker.m.daocloud.io
+```
+
+**注意**: 以上只是一个样例，你可以根据需要替换 `registryProxy` 的值。
+
 ### Chart 参数
 
 以下表格列出了 Chart 的所有可配置参数及其默认值。
