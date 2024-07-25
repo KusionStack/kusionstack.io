@@ -1,48 +1,160 @@
 ---
 title: 安装
 ---
-## 前提条件
-
-* 确保有一个可用的 Kubernetes 集群来安装 Karpor。对于本地安装，你可以使用 Minikube 或 Kind。
 
 ## 使用 Helm 安装
 
-Karpor 可以通过 Helm v3.5+ 轻松安装，它是一个简单的命令行工具，你可以从 [这里](https://helm.sh/docs/intro/install/) 获取。
+如果您拥有 Kubernetes 集群，Helm 是推荐的安装方法。
+
+以下教程将指导您使用 Helm 安装 Karpor，这将在命名空间 `karpor` 中以 `karpor-release` 为 Release 名称安装 Chart。
+
+### 先决条件
+
+* Helm v3+
+* Kubernetes 集群（最简单的方法是使用 `kind` 或 `minikube` 在本地部署 Kubernetes 集群）
+
+### 远程安装
+
+首先，将 karpor chart 仓库添加到您的本地仓库。
 
 ```shell
-helm repo add kusionstack https://kusionstack.github.io/charts 
+helm repo add kusionstack https://kusionstack.github.io/charts
 helm repo update
-helm install karpor kusionstack/karpor
+```
+
+然后，您可以使用以下命令安装 Karpor 的最新版本。
+
+```shell
+helm install karpor-release kusionstack/karpor
 ```
 
 ![安装](./assets/2-installation/install.gif)
 
-## 使用 Helm 升级
+**注意**：直接安装此 Chart 意味着它将使用 Karpor 的[默认模板值](https://github.com/KusionStack/charts/blob/master/charts/karpor/values.yaml)。
+
+如果将其部署到生产集群中，或者您想要自定义 Chart 配置，如 `resources`、`replicas`、`port` 等，您可以通过 `--set` 参数覆盖默认值。
+
+Karpor Chart 的所有可配置参数都详细说明在[这里](#Chart配置)。
 
 ```shell
-helm repo add kusionstack https://kusionstack.github.io/charts 
-helm repo update
+helm install karpor-release kusionstack/karpor --set server.replicas=3 --set syncer.port=7654
+```
 
+### 查看所有可用版本
+
+您可以使用以下命令查看所有可安装的 Karpor Chart 版本。
+
+```shell
+helm repo update
+helm search repo kusionstack/karpor --versions
+```
+
+### 升级到指定版本
+
+您可以通过 `--version` 指定要升级的版本。
+
+```shell
 # 升级到最新版本
-helm upgrade karpor kusionstack/karpor
+helm upgrade karpor-release kusionstack/karpor
 
 # 升级到指定版本
-helm upgrade karpor kusionstack/karpor --version 1.2.3
+helm upgrade karpor-release kusionstack/karpor --version 1.2.3
 ```
 
-## 本地使用 Helm 安装/升级
+### 本地安装
 
-如果你在生产环境中连接到 [https://kusionstack.github.io/charts/](https://kusionstack.github.io/charts/) 有问题，你可能需要从 [这里](https://github.com/KusionStack/charts) 手动下载 chart，并使用它来本地安装或升级。
+如果您在生产中连接 [https://kusionstack.github.io/charts/](https://kusionstack.github.io/charts/) 有问题，您可能需要从 [这里](https://github.com/KusionStack/charts) 手动下载 Chart，并使用它来安装或升级版本。
 
 ```shell
-git clone https://github.com/KusionStack/charts.git 
-helm install/upgrade karpor charts/karpor
+git clone https://github.com/KusionStack/charts.git
+helm install karpor-release charts/karpor
+helm upgrade karpor-release charts/karpor
 ```
 
-## 卸载
+### 卸载
 
-执行以下命令卸载 karpor：
+卸载/删除命名空间 `karpor` 中的 `karpor-release` Helm Release：
 
 ```shell
-helm uninstall karpor
+helm uninstall karpor-release
 ```
+
+### Chart配置
+
+以下表格列出了Chart的可配置参数及其默认值。
+
+#### 通用参数
+
+| 键 | 类型 | 默认值 | 描述 |
+|-----|------|---------|-------------|
+| namespace | string | `"karpor"` | 部署的命名空间。 |
+| namespaceEnabled | bool | `true` | 是否生成命名空间。 |
+| registryProxy | string | `""` | 镜像注册表代理将作为所有组件镜像的前缀。 |
+
+#### 全局参数
+
+| 键 | 类型 | 默认值 | 描述 |
+|-----|------|---------|-------------|
+| global.image.imagePullPolicy | string | `"IfNotPresent"` | 应用于所有 Karpor 组件的镜像拉取策略。 |
+
+#### Karpor 服务器
+
+Karpor 服务器组件是主要的后端服务器。它本身就是一个 `apiserver`，也提供 `/rest-api` 来服务 Web UI。
+
+| 键 | 类型 | 默认值 | 描述 |
+|-----|------|---------|-------------|
+| server.image.repo | string | `"kusionstack/karpor"` | Karpor 服务器镜像的仓库。 |
+| server.image.tag | string | `""` | Karpor 服务器镜像的标签。如果未指定，则默认为 Chart 的 appVersion。 |
+| server.name | string | `"karpor-server"` | karpor 服务器的组件名称。 |
+| server.port | int | `7443` | karpor 服务器的端口。 |
+| server.replicas | int | `1` | 要运行的 karpor 服务器 pod 的数量。 |
+| server.resources | object | `{"limits":{"cpu":"500m","ephemeral-storage":"10Gi","memory":"1Gi"},"requests":{"cpu":"250m","ephemeral-storage":"2Gi","memory":"256Mi"}}` | karpor 服务器 pod 的资源限制和请求。 |
+
+#### Karpor 同步器
+
+Karpor 同步器组件是独立的服务器，用于实时同步集群资源。
+
+| 键 | 类型 | 默认值 | 描述 |
+|-----|------|---------|-------------|
+| syncer.image.repo | string | `"kusionstack/karpor"` | Karpor 同步器镜像的仓库。 |
+| syncer.image.tag | string | `""` | Karpor 同步器镜像的标签。如果未指定，则默认为Chart的 appVersion。 |
+| syncer.name | string | `"karpor-syncer"` | karpor 同步器的组件名称。 |
+| syncer.port | int | `7443` | karpor 同步器的端口。 |
+| syncer.replicas | int | `1` | 要运行的 karpor 同步器 pod 的数量。 |
+| syncer.resources | object | `{"limits":{"cpu":"500m","ephemeral-storage":"10Gi","memory":"1Gi"},"requests":{"cpu":"250m","ephemeral-storage":"2Gi","memory":"256Mi"}}` | karpor 同步器 pod 的资源限制和请求。 |
+
+#### ElasticSearch
+
+ElasticSearch 组件用于存储同步的资源和用户数据。
+
+| 键 | 类型 | 默认值 | 描述 |
+|-----|------|---------|-------------|
+| elasticsearch.image.repo | string | `"docker.elastic.co/elasticsearch/elasticsearch"` | ElasticSearch 镜像的仓库。 |
+| elasticsearch.image.tag | string | `"8.6.2"` | ElasticSearch 镜像的特定标签。 |
+| elasticsearch.name | string | `"elasticsearch"` | ElasticSearch 的组件名称。 |
+| elasticsearch.port | int | `9200` | ElasticSearch 的端口。 |
+| elasticsearch.replicas | int | `1` | 要运行的 ElasticSearch pod 的数量。 |
+| elasticsearch.resources | object | `{"limits":{"cpu":"2","ephemeral-storage":"10Gi","memory":"4Gi"},"requests":{"cpu":"2","ephemeral-storage":"10Gi","memory":"4Gi"}}` | karpor elasticsearch pod 的资源限制和请求。 |
+
+#### ETCD
+
+ETCD 组件是 Karpor 服务器的存储 `apiserver`。
+
+| 键 | 类型 | 默认值 | 描述 |
+|-----|------|---------|-------------|
+| etcd.image.repo | string | `"quay.io/coreos/etcd"` | ETCD 镜像的仓库。 |
+| etcd.image.tag | string | `"v3.5.11"` | ETCD 镜像的特定标签。 |
+| etcd.name | string | `"etcd"` | ETCD 的组件名称。 |
+| etcd.port | int | `2379` | ETCD 的端口。 |
+| etcd.replicas | int | `1` | 要运行的 etcd pod 的数量。 |
+| etcd.resources | object | `{"limits":{"cpu":"500m","ephemeral-storage":"10Gi","memory":"1Gi"},"requests":{"cpu":"250m","ephemeral-storage":"2Gi","memory":"256Mi"}}` | karpor etcd pod 的资源限制和请求。 |
+
+#### 作业
+
+这是一个一次性作业，用于生成根证书和一些初步工作。
+
+| 键 | 类型 | 默认值 | 描述 |
+|-----|------|---------|-------------|
+| job.image.repo | string | `"golang"` | 作业镜像的仓库。 |
+| job.image.tag | string | `"1.19"` | 作业镜像的特定标签。 |
+
