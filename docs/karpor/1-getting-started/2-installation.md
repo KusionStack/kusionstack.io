@@ -34,7 +34,7 @@ helm install karpor-release kusionstack/karpor
 
 You may have to set your specific configurations if it is deployed into a production cluster, or you want to customize the chart configuration, such as `resources`, `replicas`, `port` etc.
 
-All configurable parameters of the Karpor chart are detailed [here](#chart-configuration).
+All configurable parameters of the Karpor chart are detailed [here](#chart-parameters).
 
 ```shell
 helm install karpor-release kusionstack/karpor --set server.replicas=3 --set syncer.port=7654
@@ -79,7 +79,7 @@ To uninstall/delete the `karpor-release` helm release in namespace `karpor`:
 helm uninstall karpor-release
 ```
 
-### Chart Configuration
+### Chart Parameters
 
 The following table lists the configurable parameters of the chart and their default values.
 
