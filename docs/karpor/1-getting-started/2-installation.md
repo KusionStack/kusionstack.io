@@ -34,7 +34,7 @@ helm install karpor-release kusionstack/karpor
 
 You may have to set your specific configurations if it is deployed into a production cluster, or you want to customize the chart configuration, such as `resources`, `replicas`, `port` etc.
 
-All configurable parameters of the Karpor chart are detailed [here](#chart-configuration).
+All configurable parameters of the Karpor chart are detailed [here](#chart-parameters).
 
 ```shell
 helm install karpor-release kusionstack/karpor --set server.replicas=3 --set syncer.port=7654
@@ -79,7 +79,17 @@ To uninstall/delete the `karpor-release` helm release in namespace `karpor`:
 helm uninstall karpor-release
 ```
 
-### Chart Configuration
+### Image Registry Proxy for China
+
+If you are in China and have problem to pull image from official DockerHub, you can use the registry proxy:
+
+```shell
+helm install karpor-release kusionstack/karpor --set registryProxy=docker.m.daocloud.io
+```
+
+**NOTE**: The above is just an example, you can replace the value of `registryProxy` as needed.
+
+### Chart Parameters
 
 The following table lists the configurable parameters of the chart and their default values.
 
