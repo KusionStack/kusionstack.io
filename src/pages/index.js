@@ -113,15 +113,15 @@ function Home() {
                 <>
                   <p>
                     <Translate id="home.easyshipping.1">
-                      Manage all application operations in one place, in a
-                      unified easy way
+                      Effortlessly manage all application operations in a unified, streamlined manner.
                     </Translate>
                   </p>
                   <ul className="left-align-ul">
                     <li>
                       <Translate id="home.easyshipping.2">
-                        Environment-agnostic application configurations
+                        Environment-Agnostic Application Configurations
                       </Translate>
+
                     </li>
                     <li>
                       <Translate id="home.easyshipping.3">
@@ -149,26 +149,23 @@ function Home() {
                 <>
                   <p>
                     <Translate id="home.platformengineering.1">
-                      Fulfill the customized needs with reusable building blocks
+                      Meet customized needs with reusable building blocks.
                     </Translate>
                   </p>
                   <ul className="left-align-ul">
                     <li>
                       <Translate id="home.platformengineering.2">
-                        A growing open module ecosystem integrated with various
-                        cloud-native infrastructures
+                        A growing ecosystem of open modules integrated with various cloud-native infrastructures
                       </Translate>
                     </li>
                     <li>
                       <Translate id="home.platformengineering.3">
-                        An efficient collaboration paradigm between App
-                        Developers and Platform Engineers
+                        An efficient collaboration model for App Developers and Platform Engineers
                       </Translate>
                     </li>
                     <li>
                       <Translate id="home.platformengineering.4">
-                        Building the golden path for end-to-end DevOps lifecycle
-                        management
+                        Paving the golden path for end-to-end DevOps lifecycle management
                       </Translate>
                     </li>
                   </ul>
@@ -187,25 +184,23 @@ function Home() {
                 <>
                   <p>
                     <Translate id="home.enterpriseops.1">
-                      From the first line of codes to production runtime
+                      Ensuring security from the first line of code to production runtime.
                     </Translate>
                   </p>
                   <ul className="left-align-ul">
                     <li>
                       <Translate id="home.enterpriseops.2">
-                        Codified shift-left validation to detect configuration
-                        risks
+                        Codified shift-left validation to detect configuration risks early
                       </Translate>
                     </li>
                     <li>
                       <Translate id="home.enterpriseops.3">
-                        Extended check stages for workload lifecycle
+                        Extended check stages throughout the workload lifecycle
                       </Translate>
                     </li>
                     <li>
                       <Translate id="home.enterpriseops.4">
-                        Enterprise-grade fine-grained cluster control for
-                        Kubernetes
+                        Enterprise-grade fine-grained cluster control for Kubernetes
                       </Translate>
                     </li>
                   </ul>
