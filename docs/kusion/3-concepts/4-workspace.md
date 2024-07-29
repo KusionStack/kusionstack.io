@@ -1,6 +1,6 @@
 ---
 id: workspace
-sidebar_label: Workspaces
+sidebar_label: Workspace
 ---
 
 # Workspace
@@ -21,7 +21,7 @@ The workspace configuration is in a deterministic format and currently written i
 
 ## Workspace Configuration
 
-The configuration of a Workspace is stored in a single YAML file, which consists of `modules`. An example of Workspace configuration is shown as below.
+The configuration of a Workspace is stored in a single YAML file, which consists of `modules`, `secretStore`, and `context`. An example of Workspace configuration is shown as below.
 
 ```yaml
 # The platform configuration for Modules or KAMs.
@@ -59,6 +59,22 @@ modules:
         projectSelector:
         - foo
         - bar
+      importDBInstance: 
+        importedResources: 
+          "aliyun:alicloud:alicloud_db_instance:wordpress-demo": "your-imported-resource-id"
+        projectSelector: 
+        - baz
+
+secretStore:
+  provider:
+    aws:
+      region: us-east-1
+      profile: The optional profile to be used to interact with AWS Secrets Manager.
+
+context: 
+   KUBECONFIG_PATH: $HOME/.kube/config
+   AWS_ACCESS_KEY_ID: ref://secrets-manager-name/key-for-ak
+   AWS_SECRET_ACCESS_KEY: ref://secrets-manager-name/key-for-sk
 ```
 
 ### modules
@@ -72,6 +88,23 @@ The values of the same fields in `patcher` will override the `default`, and one 
 In the `patcher`, the applied Projects are assigned by the field `ProjectSelector`, which is an array of the Project names. The `ProjectSelector` is provided rather than something may like `StackSelector`, which specifies the applied Stacks. Here are the reasons. Explaining from the perspective of using Workspace, the mapping of Workspace and Stack is specified by the Kusion operation commands' users. While explaining from the perspective of the relationship among Project, Stack and Workspace, Workspace is designed for the reuse of platform-level configuration among multiple Projects. When a Project "encounters" a Workspace, it becomes a "Stack instance", which can be applied to a series of real resources. If using something like `StackSelector`, the reuse would not get realized, and Workspace would also lose its relevance. For more information of the relationship, please refer to [Project](project/overview) and [Stack](stack/overview). 
 
 Different Module and KAM has different name, fields, and corresponding format and restrictions. When writing the configuration, check the corresponding Module's or KAM's description, and make sure all the requisite Modules and KAMs have correctly configured. Please refer to [Kuiosn Module](module/overview) and find more information. The example above gives a sample of the Module `mysql`.
+
+The `importedResources` block is designed to declare the import of existing cloud resources. The `importedResources` is a `map` where you can declare the mapping from `id` of the resource in Kusion `Spec` to the Terraform ID of the resource to be imported. Kusion will automatically synchronize the state of the existing cloud resource for the Kusion resource. 
+
+### secretStore
+
+The `secretStore` field can be used to access the sensitive data stored in a cloud-based secrets manager. More details can be found in [here](../5-user-guides/4-secrets-management/1-using-cloud-secrets.md). 
+
+### context
+
+The `context` field can be used to declare the information such as Kubernetes `kubeconfig` path or content, and the AK/SK of the Terraform providers. Below shows the configurable attributes. 
+
+- `KUBECONFIG_PATH`: the local path of the `kubeConfig` file
+- `KUBECONFIG_CONTENT`: the content of the `kubeConfig` file, can be used with cloud-based secrets management (e.g. `ref://secrets-management-name/secrets-key-for-kubeconfig`)
+- `AWS_ACCESS_KEY_ID`: the access key ID of the AWS provider
+- `AWS_SECRET_ACCESS_KEY`: the secret key of the AWS provider
+- `ALICLOUD_ACCESS_KEY`: the access key ID of the Alicloud provider
+- `ALICLOUD_SECRET_KEY`: the secret key of the Alicloud provider
 
 ## Managing Workspace
 
