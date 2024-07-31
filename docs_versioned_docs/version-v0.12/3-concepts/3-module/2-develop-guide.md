@@ -141,6 +141,10 @@ type Patcher struct {
 The `GeneratorRequest` contains the application developer's config, platform engineer's config, workload config and related metadata a module could need to generate infrastructure resources.
 In the `GeneratorResponse`, there are two fields, `Resources` and `Patchers`. The `Resource` represents resources that should operated by Kusion and they will be appended into the [Spec](../spec). The `Patchers` are used to patch the workload and other resources.
 
+### Workload
+
+Workload in the AppConfiguration is also a Kusion module. If the workload module only generates one resource, this resource will be regarded as the workload resource. However, if the workload module generates more than one resource, one and only one of them must contain a key-value pair in the 'extension' field, where the key is 'kusion.io/is-workload' and the value is 'true' and this resource will be regarded as the workload resource.
+
 ### Implicit Resource Dependency
 
 When you need to use an attribute of another resource as the value of a specific resource attribute, Kusion supports declaring the implicit resource dependencies with the `$kusion_path` prefix. You can concatenate the implicit resource dependency path with the resource `id`, attribute `name` and the `$kusion_path` prefix, for example: 
