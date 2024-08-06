@@ -7,7 +7,7 @@ title: 术语表
 
 `Karpor` 可以管理多个集群，包括集群注册、证书轮换、生成和查看洞察，以及通过 Dashboard 进行的其他操作。它还支持使用 `Karpor` 发放的统一证书，通过 `kubectl` 和 `kubectx` 等命令行工具访问任何被管理的集群。
 
-更多细节，请参考最佳实践：[告别集群证书切换，让你“一卡通行”](../3-user-guide/4-best-production-practices/1-one-pass-with-proxy.md)。
+更多细节，请参考最佳实践：[告别集群证书切换，让你“一卡通行”](../3-user-guide/5-best-production-practices/1-one-pass-with-proxy.md)。
 
 ## 资源
 

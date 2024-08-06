@@ -69,7 +69,7 @@ An example of the registration button can be found in the image below:
 
 ![](/karpor/assets/cluster-mng/cluster-mng-register-new-cluster.png)
 
-For a more detailed explanation of the registration process, refer to the [Multi-cluster management](../3-user-guide/1-multi-cluster-management.md) Documentation.
+For a more detailed explanation of the registration process, refer to the [Multi-cluster management](../3-user-guide/2-multi-cluster-management.md) Documentation.
 
 ## Search Resources
 

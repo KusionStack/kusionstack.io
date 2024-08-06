@@ -7,7 +7,7 @@ Equivalent to the concept of a cluster in `Kubernetes`, such as a cluster named 
 
 `Karpor` can manage multiple clusters, including cluster registration, certificate rotation, generating and viewing insights, and other operations through a Dashboard. It also supports accessing any managed cluster using a unified certificate issued by `Karpor` through command-line tools such as `kubectl` and `kubectx`.
 
-For more details, please refer to the best practice: [One Pass with Proxy](../3-user-guide/4-best-production-practices/1-one-pass-with-proxy.md).
+For more details, please refer to the best practice: [One Pass with Proxy](../3-user-guide/5-best-production-practices/1-one-pass-with-proxy.md).
 
 ## Resource
 
