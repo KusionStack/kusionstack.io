@@ -28,3 +28,11 @@ The Kubernetes namespace extension allows you to customize namespace within your
 | kind | y | The kind of extension being used. Must be 'kubernetesNamespace' | `kubernetesNamespace` |
 | namespace | y | The namespace where all application-scoped resources generate Kubernetes objects. | `default` |
 
+```yaml
+# Example `stack.yaml` file with customized namespace of `test`. 
+name: dev
+extensions: 
+    - kind: kubernetesNamespace
+      kubernetesNamespace: 
+        namespace: test
+```
