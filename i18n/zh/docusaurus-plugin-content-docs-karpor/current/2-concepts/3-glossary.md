@@ -9,6 +9,10 @@ title: 术语表
 
 更多细节，请参考最佳实践：[告别集群证书切换，让你“一卡通行”](../3-user-guide/5-best-production-practices/1-one-pass-with-proxy.md)。
 
+## Hub cluster
+
+管理其他集群的集群，在 `Karpor` 中指的是组件 `Server`。
+
 ## 资源
 
 等同于 `Kubernetes` 中的资源概念，如名为 `mockDeployment` 的 `Deployment`。
