@@ -9,9 +9,13 @@ title: 术语表
 
 更多细节，请参考最佳实践：[告别集群证书切换，让你“一卡通行”](../3-user-guide/5-best-production-practices/1-one-pass-with-proxy.md)。
 
-## Hub cluster
+## Hub Cluster
 
-管理其他集群的集群，在 `Karpor` 中指的是组件 `Server`。
+管理其他集群的集群。由于 Karpor 本身也是一个 Kubernetes Apiserver，在这个特殊的集群中我们注册了一些自定义资源用于管理集群元数据、资源回流策略等，这个特殊的集群我们叫它 Hub Cluster，和托管的用户集群区分开。
+
+## Managed Cluster
+
+泛指被 Hub Cluster 管理的集群，一般是托管在 Karpor 中的用户集群。
 
 ## 资源
 

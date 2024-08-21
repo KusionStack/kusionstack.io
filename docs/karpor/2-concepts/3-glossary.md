@@ -9,6 +9,14 @@ Equivalent to the concept of a cluster in `Kubernetes`, such as a cluster named 
 
 For more details, please refer to the best practice: [One Pass with Proxy](../3-user-guide/5-best-production-practices/1-one-pass-with-proxy.md).
 
+## Hub Cluster
+
+Cluster that manages other clusters. Since Karpor itself is also a Kubernetes Apiserver, we have registered some custom resources in this special cluster to manage cluster metadata, resource recycling strategies, and so on. We refer to this special cluster as the Hub Cluster, distinguishing it from the hosted user clusters.
+
+## Managed Cluster
+
+It generally refers to the clusters managed by the Hub Cluster, which are typically the user clusters hosted in Karpor.
+
 ## Resource
 
 Equivalent to the resource concept in `Kubernetes`, such as a `Deployment` named `mockDeployment`.
