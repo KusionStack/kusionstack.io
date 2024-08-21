@@ -25,7 +25,7 @@ title: 多集群管理
 aws eks --region <YOUR REGION> update-kubeconfig  --name <YOUR CLUSTER NAME> --kubeconfig=<OUTPUT FILENAME>
 ```
 
-2. 在导出的 kubeconfig 文件中的 users/exec 中添加 env、interactiveMode 和 provideClusterInfo 字段。可以参考以下的 kubeconfig 结构：
+2. 在导出的 kubeconfig 文件中的 `users/exec` 中添加 `env`、`interactiveMode` 和 `provideClusterInfo` 字段。可以参考以下的 kubeconfig 结构：
 
 ```yaml
 apiVersion: v1
@@ -58,7 +58,7 @@ users:
       - json
       command: aws
       ### 以下字段需要补充到 kubeconfig 中
-      env: 
+      env:
       - name: AWS_ACCESS_KEY_ID
         value: <YOUR AWS_ACCESS_KEY_ID>
       - name: AWS_SECRET_ACCESS_KEY
@@ -66,7 +66,7 @@ users:
       - name: AWS_DEFAULT_REGION
         value: <AWS_DEFAULT_REGION>
       - name: AWS_DEFAULT_OUTPUT
-        value: json  
+        value: json
       interactiveMode: IfAvailable
       provideClusterInfo: false
 ```
