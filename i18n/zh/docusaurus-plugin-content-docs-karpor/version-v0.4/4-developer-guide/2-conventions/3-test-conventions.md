@@ -111,13 +111,13 @@ func TestFlagParser(t *testing.T) {
 ### 文件命名
 
 - **规范内容**：测试函数必须以 `Test` 开头，后面跟着被测试函数的名称，使用驼峰式命名法。
-- **反面示例**：`xxx_test.go`
+- **正面示例**：`xxx_test.go`
 - **反面示例**：`testFile.go`、`test_xxx.go`
 
 ### 测试函数命名
 
 - **规范内容**：测试函数名必须以 `Test` 开头，后面跟着被测试函数的名称，使用驼峰式命名法。
-- **反面示例**：
+- **正面示例**：
   ```go
   func TestAdd(t *testing.T) {
       // 测试逻辑 ...
@@ -133,7 +133,7 @@ func TestFlagParser(t *testing.T) {
 ### 测试函数签名
 
 - **规范内容**：测试函数签名必须是 `func TestXxx(t *testing.T)` 形式，其中 `t` 是类型为 `*testing.T` 的对象，并且不应该有其他的参数和返回值。
-- **反面示例**：
+- **正面示例**：
   ```go
   func TestSubtraction(t *testing.T) {
       // 测试逻辑 ...
@@ -149,7 +149,7 @@ func TestFlagParser(t *testing.T) {
 ### 测试组织
 
 - **规范内容**：测试用例应当相互独立，避免测试之间相互影响；使用子测试 `t.Run` 来组织复杂的测试场景。
-- **反面示例**：
+- **正面示例**：
   ```go
   func TestMathOperations(t *testing.T) {
       t.Run("Addition", func(t *testing.T) {
@@ -170,7 +170,7 @@ func TestFlagParser(t *testing.T) {
 ### Test Coverage
 
 - **规范内容**：需要注意测试覆盖率，使用 `go test -cover` 命令检查代码的测试覆盖率。
-- **反面示例**：
+- **正面示例**：
 
   ```shell
   $ go test -cover
@@ -185,7 +185,7 @@ func TestFlagParser(t *testing.T) {
 ### 性能测试
 
 - **规范内容**：性能测试应当以 `Benchmark` 开头，并且接受 `*testing.B` 类型的参数，专注于性能测试。
-- **反面示例**：
+- **正面示例**：
   ```go
   func BenchmarkAdd(b *testing.B) {
       for i := 0; i < b.N; i++ {
@@ -205,7 +205,7 @@ func TestFlagParser(t *testing.T) {
 ### 并发测试
 
 - **规范内容**：对于并发代码，应该编写适当的测试用例，以确保并发逻辑的正确性。
-- **反面示例**：
+- **正面示例**：
   ```go
   func TestConcurrentAccess(t *testing.T) {
       // 设置并发环境 ... 
@@ -222,7 +222,7 @@ func TestFlagParser(t *testing.T) {
 ### 测试帮助函数
 
 - **规范内容**：可以在测试文件中定义辅助函数来帮助设置测试环境或清理资源。
-- **反面示例**：
+- **正面示例**：
   ```go
   func setupTest(t *testing.T) {
       // 设置测试环境 ...
@@ -252,13 +252,13 @@ func TestFlagParser(t *testing.T) {
 ### 避免使用全局变量
 
 - **规范内容**: 尽量避免在测试中使用全局变量以确保测试独立。
-- **反面示例**: 在测试函数内部声明并使用必要的变量。
+- **正面示例**: 在测试函数内部声明并使用必要的变量。
 - **反面示例**: 在测试文件的顶部声明全局变量。
 
 ### 清晰的错误信息
 
 - **规范内容**: 当测试失败时，输出清晰易懂的错误信息，帮助开发人员定位问题。
-- **反面示例**:
+- **正面示例**:
   - `t.Errorf("Expected value %d, but got %d", expected, real)`
 - **反面示例**:
   - `t.Errorf("Error occurred")`
