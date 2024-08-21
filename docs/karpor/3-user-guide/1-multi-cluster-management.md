@@ -15,6 +15,64 @@ Multi-cluster management is the entrance to register clusters into Karpor, enabl
 6. Once verified, the cluster will be added under the <kbd>Cluster Management</kbd> page
    ![](/karpor/assets/cluster-mng/cluster-mng-register-success.png)
 
+### Register eks Cluster
+
+If you want to register an EKS cluster, you need to perform some additional operations on the kubeconfig:
+
+1. Export the kubeconfig for the EKS cluster. For example, you can obtain the kubeconfig for the specified cluster using the following AWS command:
+
+```shell
+aws eks --region <YOUR REGION> update-kubeconfig  --name <YOUR CLUSTER NAME> --kubeconfig=<OUTPUT FILENAME>
+```
+
+2. Add the fields `env`, `interactiveMode`, and `provideClusterInfo` to the `users/exec` section of the exported kubeconfig file. You can refer to the following kubeconfig structure:
+
+```yaml
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: CA
+    server: SERVER
+  name: CLUSTER
+contexts:
+- context:
+    cluster: CLUSTER
+    user: USER
+  name: CONTEXT
+current-context: CONTEXT
+kind: Config
+preferences: {}
+users:
+- name: USER
+  user:
+    exec:
+      apiVersion: client.authentication.k8s.io/v1beta1
+      args:
+      - --region
+      - ap-southeast-1
+      - eks
+      - get-token
+      - --cluster-name
+      - mycluster3
+      - --output
+      - json
+      command: aws
+      ### The following fields need to be added to the kubeconfig.
+      env:
+      - name: AWS_ACCESS_KEY_ID
+        value: <YOUR AWS_ACCESS_KEY_ID>
+      - name: AWS_SECRET_ACCESS_KEY
+        value: <YOUR AWS_SECRET_ACCESS_KEY>
+      - name: AWS_DEFAULT_REGION
+        value: <AWS_DEFAULT_REGION>
+      - name: AWS_DEFAULT_OUTPUT
+        value: json
+      interactiveMode: IfAvailable
+      provideClusterInfo: false
+```
+
+3. Use the modified kubeconfig in [Register Cluster](#register-cluster).
+
 ## Edit Cluster
 
 The <kbd>Edit</kbd> button allows for modifications to the <kbd>Display Name</kbd> and <kbd>Description</kbd>, thus altering how the cluster's name and description appear on the Dashboard.
