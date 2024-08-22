@@ -70,7 +70,7 @@ https://127.0.0.1:7443
 
 ![](/karpor/assets/cluster-mng/cluster-mng-register-new-cluster.png)
 
-有关注册过程的更详细解释，请参阅 [多集群管理](../3-user-guide/1-multi-cluster-management.md) 指南。
+有关注册过程的更详细解释，请参阅 [多集群管理](../3-user-guide/2-multi-cluster-management.md) 指南。
 
 ## 搜索资源
 

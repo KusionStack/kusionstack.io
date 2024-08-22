@@ -7,7 +7,15 @@ title: 术语表
 
 `Karpor` 可以管理多个集群，包括集群注册、证书轮换、生成和查看洞察，以及通过 Dashboard 进行的其他操作。它还支持使用 `Karpor` 发放的统一证书，通过 `kubectl` 和 `kubectx` 等命令行工具访问任何被管理的集群。
 
-更多细节，请参考最佳实践：[告别集群证书切换，让你“一卡通行”](../3-user-guide/4-best-production-practices/1-one-pass-with-proxy.md)。
+更多细节，请参考最佳实践：[告别集群证书切换，让你“一卡通行”](../3-user-guide/5-best-production-practices/1-one-pass-with-proxy.md)。
+
+## Hub Cluster
+
+管理其他集群的集群。由于 Karpor 本身也是一个 Kubernetes Apiserver，在这个特殊的集群中我们注册了一些自定义资源用于管理集群元数据、资源回流策略等，这个特殊的集群我们叫它 Hub Cluster，和托管的用户集群区分开。
+
+## Managed Cluster
+
+泛指被 Hub Cluster 管理的集群，一般是托管在 Karpor 中的用户集群。
 
 ## 资源
 

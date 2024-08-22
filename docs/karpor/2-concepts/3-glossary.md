@@ -7,7 +7,15 @@ Equivalent to the concept of a cluster in `Kubernetes`, such as a cluster named 
 
 `Karpor` can manage multiple clusters, including cluster registration, certificate rotation, generating and viewing insights, and other operations through a Dashboard. It also supports accessing any managed cluster using a unified certificate issued by `Karpor` through command-line tools such as `kubectl` and `kubectx`.
 
-For more details, please refer to the best practice: [One Pass with Proxy](../3-user-guide/4-best-production-practices/1-one-pass-with-proxy.md).
+For more details, please refer to the best practice: [One Pass with Proxy](../3-user-guide/5-best-production-practices/1-one-pass-with-proxy.md).
+
+## Hub Cluster
+
+Cluster that manages other clusters. Since Karpor itself is also a Kubernetes Apiserver, we have registered some custom resources in this special cluster to manage cluster metadata, resource recycling strategies, and so on. We refer to this special cluster as the Hub Cluster, distinguishing it from the hosted user clusters.
+
+## Managed Cluster
+
+It generally refers to the clusters managed by the Hub Cluster, which are typically the user clusters hosted in Karpor.
 
 ## Resource
 
