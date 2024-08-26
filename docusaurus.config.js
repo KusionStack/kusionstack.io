@@ -218,7 +218,7 @@ const config = {
             type: "docSidebar",
             position: "left",
             sidebarId: "kuperator",
-            label: "kuperator",
+            label: "Kuperator",
             docsPluginId: "kuperator",
           },
           {
@@ -294,7 +294,7 @@ const config = {
                 to: "/karpor/",
               },
               {
-                label: "kuperator",
+                label: "Kuperator",
                 to: "/kuperator/",
               },
               {
