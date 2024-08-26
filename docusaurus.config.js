@@ -130,13 +130,13 @@ const config = {
     [
       "@docusaurus/plugin-content-docs",
       {
-        id: "operating",
-        path: "docs/operating",
-        routeBasePath: "operating",
-        sidebarPath: "./sidebars/operating.js",
+        id: "kuperator",
+        path: "docs/kuperator",
+        routeBasePath: "kuperator",
+        sidebarPath: "./sidebars/kuperator.js",
         versions: {
           current: {
-            label: `${getNextVersionName("operating")} 🚧`,
+            label: `${getNextVersionName("kuperator")} 🚧`,
           },
         },
       },
@@ -217,9 +217,9 @@ const config = {
           {
             type: "docSidebar",
             position: "left",
-            sidebarId: "operating",
-            label: "Operating",
-            docsPluginId: "operating",
+            sidebarId: "kuperator",
+            label: "kuperator",
+            docsPluginId: "kuperator",
           },
           {
             type: "docSidebar",
@@ -254,7 +254,7 @@ const config = {
           {
             type: "docsVersionDropdown",
             position: "right",
-            docsPluginId: "operating",
+            docsPluginId: "kuperator",
           },
           {
             type: "docsVersionDropdown",
@@ -294,8 +294,8 @@ const config = {
                 to: "/karpor/",
               },
               {
-                label: "Operating",
-                to: "/operating/",
+                label: "kuperator",
+                to: "/kuperator/",
               },
               {
                 label: "CtrlMesh",

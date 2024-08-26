@@ -49,7 +49,7 @@ Example:
 
 ```bash
 npm run docusaurus docs:version:docs v0.12
-npm run docusaurus docs:version:operating v0.2
+npm run docusaurus docs:version:kuperator v0.2
 npm run docusaurus docs:version:ctrlmesh v0.3
 npm run docusaurus docs:version:karpor v0.4
 
@@ -61,7 +61,7 @@ npm run write-translations -- --locale zh --override
 Optional sub product names:
 
 -   `docs` (alias for kusion)
--   `operating`
+-   `kuperator`
 -   `ctrlmesh`
 -   `karpor`
 
