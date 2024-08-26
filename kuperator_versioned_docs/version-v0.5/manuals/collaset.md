@@ -499,7 +499,7 @@ During this period, it is expected to close the containers after waiting for som
 The `operationDelaySeconds` serves a purpose similar to the `terminationGracePeriodSeconds` on a pod.
 However, the difference is that since operationDelaySeconds is configured in the Spec of CollaSet, modifications to this setting will not trigger pod upgrade.
 
-![operation-delay-seconds](/img/operating/manuals/collaset/operation-delay-seconds.png)
+![operation-delay-seconds](/img/kuperator/manuals/collaset/operation-delay-seconds.png)
 
 Note that if both operationDelaySeconds and terminationGracePeriodSeconds fields are configured simultaneously, after the traffic off, the user application may wait (operationDelaySeconds + terminationGracePeriodSeconds) before the container being shutdown.
 
