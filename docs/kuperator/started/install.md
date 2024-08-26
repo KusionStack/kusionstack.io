@@ -5,7 +5,7 @@ sidebar_position: 2
 # Installation
 
 ## Install with helm
-KusionStack Operating requires **Kubernetes version >= 1.18**
+KusionStack Kuperator requires **Kubernetes version >= 1.18**
 ```shell
 # Firstly add charts repository if you haven't do this.
 $ helm repo add kusionstack https://kusionstack.github.io/charts
@@ -14,7 +14,7 @@ $ helm repo add kusionstack https://kusionstack.github.io/charts
 $ helm repo update kusionstack
 
 # Install the latest version.
-$ helm install operating kusionstack/operating 
+$ helm install kuperator kusionstack/kuperator 
 ```
 
 
@@ -25,31 +25,31 @@ The following table lists the configurable parameters of the chart and their def
 
 | Parameter   | Description    | Default        |
 |-------------|----------------|----------------|
-| `namespace`  | namespace for Operating installation    | `kusionstack-system`         |
+| `namespace`  | namespace for Kuperator installation    | `kusionstack-system`         |
 | `namespaceEnabled` | Whether to create the installation.namespace   | `true`  |
-| `managerReplicas`| Replicas of Operating deployment | `3`   |
-| `image.repo` | Repository for operating image | `kusionstack/operating`|
-| `image.pullPolicy`| Image pull policy for operating-manager container | `IfNotPresent` |
-| `image.tag`                  | Tag for operating-manager image    | `v0.1.0`  |
-| `resources.limits.cpu`      | CPU resource limit of operating-manager container      | `500m` |
-| `resources.limits.memory` | Memory resource limit of operating-manager container   | `128Mi` |
-| `resources.requests.cpu`    | CPU resource request of operating-manager container    | `10m` |
-| `resources.requests.memory` | Memory resource request of operating-manager container | `64Mi` |
+| `managerReplicas`| Replicas of Kuperator deployment | `3`   |
+| `image.repo` | Repository for kuperator image | `kusionstack/kuperator`|
+| `image.pullPolicy`| Image pull policy for kuperator-manager container | `IfNotPresent` |
+| `image.tag`                  | Tag for kuperator-manager image    | `v0.1.0`  |
+| `resources.limits.cpu`      | CPU resource limit of kuperator-manager container      | `500m` |
+| `resources.limits.memory` | Memory resource limit of kuperator-manager container   | `128Mi` |
+| `resources.requests.cpu`    | CPU resource request of kuperator-manager container    | `10m` |
+| `resources.requests.memory` | Memory resource request of kuperator-manager container | `64Mi` |
 
 ### Upgrade
 
-Run following command to upgrade KusionStack Operating to the latest version.
+Run following command to upgrade KusionStack Kuperator to the latest version.
 
 ```shell
 # Upgrade to the latest version 
-$ helm upgrade operating kusionstack/operating 
+$ helm upgrade kuperator kusionstack/kuperator 
 ```
 
 ### Uninstall
 
-Run following command to uninstall KusionStack Operating.
+Run following command to uninstall KusionStack Kuperator.
 
 ```shell
 # Uninstall
-$ helm uninstall operating
+$ helm uninstall kuperator
 ```

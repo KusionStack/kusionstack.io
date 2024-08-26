@@ -1,4 +1,4 @@
-# Using KusionStack Operating to operate Pods gracefully
+# Using KusionStack Kuperator to operate Pods gracefully
 
 Applications always provide its service along with traffic routing.
 On Kubernetes, they should be a set of Pods and a corresponding Kubernetes Service resource to expose the service.
@@ -6,19 +6,19 @@ On Kubernetes, they should be a set of Pods and a corresponding Kubernetes Servi
 However, during operations such as updating Pod revisions,
 there is a risk that client request traffic may be lost. This can lead to a poor user experience for developers.
 
-This tutorial will demonstrate how to operate Pods gracefully in a KusionStack Operating way on Aliyun ACK
+This tutorial will demonstrate how to operate Pods gracefully in a KusionStack Kuperator way on Aliyun ACK
 with SLB as a Service backend provider.
 
 > You can also get the same point from [this video](https://www.bilibili.com/video/BV1n8411q7sP/?t=15.7),
-> which shows the same case using both KusionStack Kusion and Operating.
+> which shows the same case using both KusionStack Kusion and Kuperator.
 > The sample used in this video can be found from [KusionStack Catalog](https://github.com/KusionStack/catalog/tree/main/models/samples/wordpress).
 
 ## Preparing
 
 First, ensure that you have an Aliyun ACK Kubernetes cluster set up in order to provision an Aliyun SLB.
 
-Next, install KusionStack Operating on this Kubernetes cluster
-following [installation doc](https://kusionstack.io/docs/operating/started/install).
+Next, install KusionStack Kuperator on this Kubernetes cluster
+following [installation doc](https://kusionstack.io/docs/kuperator/started/install).
 
 ## Get started
 
@@ -27,7 +27,7 @@ following [installation doc](https://kusionstack.io/docs/operating/started/insta
 To begin, create a new namespace for this tutorial:
 
 ```shell
-$ kubectl create ns operating-tutorial
+$ kubectl create ns kuperator-tutorial
 ```
 
 ### Provision Pods and Services
@@ -71,13 +71,13 @@ spec:
             port: 8080
           initialDelaySeconds: 5
           periodSeconds: 3
-' | kubectl -n operating-tutorial apply -f -
+' | kubectl -n kuperator-tutorial apply -f -
 ```
 
 There should be 3 Pods created.
 
 ```shell
-$ kubectl -n operating-tutorial get pod
+$ kubectl -n kuperator-tutorial get pod
 NAME           READY   STATUS    RESTARTS   AGE
 server-c5lsr   1/1     Running   0          2m23s
 server-p6wrx   1/1     Running   0          2m23s
@@ -106,13 +106,13 @@ spec:
   selector:
     app: server
   type: LoadBalancer
-' | kubectl -n operating-tutorial apply -f -
+' | kubectl -n kuperator-tutorial apply -f -
 ```
 
 A service with external IP should be provisioned.
 
 ```shell
-$ kubectl -n operating-tutorial get svc server
+$ kubectl -n kuperator-tutorial get svc server
 NAME     TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)        AGE
 server   LoadBalancer   192.168.225.55   47.101.49.182   80:30146/TCP   51s
 ```
@@ -154,7 +154,7 @@ spec:
         - -m
         - POST
         - d
-        - operating-tutorial
+        - kuperator-tutorial
         - -qps
         - "10"
         - -worker
@@ -170,13 +170,13 @@ spec:
             cpu: "0.1"
             ephemeral-storage: 1Gi
             memory: 100Mi
-' | kubectl -n operating-tutorial apply -f -
+' | kubectl -n kuperator-tutorial apply -f -
 ```
 
 A client Pod should be created.
 
 ```shell
-$ kubectl -n operating-tutorial get pod
+$ kubectl -n kuperator-tutorial get pod
 NAME           READY   STATUS    RESTARTS   AGE
 client-nc426   1/1     Running   0          30s
 server-c5lsr   1/1     Running   0          19m
@@ -188,7 +188,7 @@ This client will continuously access the service using the configuration provide
 You can monitor the response codes from its logs:
 
 ```shell
-kubectl -n operating-tutorial logs -f client-nc426
+kubectl -n kuperator-tutorial logs -f client-nc426
 worker-0 another loop, request: 50, failed: 0
 worker-1 another loop, request: 50, failed: 0
 worker-0 another loop, request: 50, failed: 0
@@ -242,7 +242,7 @@ spec:
             port: 8080
           initialDelaySeconds: 5
           periodSeconds: 3
-' | kubectl -n operating-tutorial apply -f -
+' | kubectl -n kuperator-tutorial apply -f -
 ```
 
 It will trigger all Pods updated simultaneously. So the application `server` has no Pod to serve.
@@ -279,14 +279,14 @@ spec:
   selector:
     matchLabels:
       app: server
-' | kubectl -n operating-tutorial apply -f -
+' | kubectl -n kuperator-tutorial apply -f -
 ```
 
 After updating the CollaSet of the server to trigger an update, you will see the Pods rolling update one by one,
 ensuring that at least one Pod is always available to serve.
 
 ```shell
-kubectl -n operating-tutorial get pod
+kubectl -n kuperator-tutorial get pod
 NAME           READY   STATUS    RESTARTS   AGE
 client-rrfbj   1/1     Running   0          25s
 server-457sn   0/1     Running   0          5s
@@ -315,26 +315,26 @@ worker-0 another loop, request: 50, failed: 0
 At the end of this tutorial, you can clean up the resources by deleting the namespace:
 
 ```shell
-$ kubectl delete ns operating-tutorial
+$ kubectl delete ns kuperator-tutorial
 ```
 
 ## Comparison with the Native Approach
 
 Kubernetes provides `preStop` and `postStart` hook in each container, by which users can also interact with service outside
-Kubernetes like Aliyun SLB service. However, KusionStack Operating offers several advantages:
+Kubernetes like Aliyun SLB service. However, KusionStack Kuperator offers several advantages:
 
 * Pod level vs Container level
 
-Operating offers a Pod level hooks which have more complete information than one container,
+Kuperator offers a Pod level hooks which have more complete information than one container,
 especially there are several containers in one Pod.
 
 * Plugin-able
 
-Through KusionStack Operating, you can decouple operations executed before or after Pods actually change.
+Through KusionStack Kuperator, you can decouple operations executed before or after Pods actually change.
 For example, traffic control can be added or removed without modifying the Pod's preStop configuration.
 
 * Rollback option
 
-In case of issues, rollback becomes a viable option when using the Operating approach to update Pods.
-Since Operating does not modify the Pods or their containers during the update,
+In case of issues, rollback becomes a viable option when using the Kuperator approach to update Pods.
+Since Kuperator does not modify the Pods or their containers during the update,
 if the traffic service experiences problems, there is an opportunity to cancel the update.

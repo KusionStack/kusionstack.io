@@ -489,7 +489,7 @@ spec:
     operationDelaySeconds: 60 # duration between traffic off and container shutdown
 ```
 
-In pod operations, including scaling down, updates, and deletions, [PodOpsLifecycle](http://localhost:3000/operating/concepts/podopslifecycle) is responsible for managing the full lifecycle of pods (e.g., `ServiceAvailable`, `Preparing`, `Operating` and `Completing`).
+In pod operations, including scaling down, updates, and deletions, [PodOpsLifecycle](http://localhost:3000/kuperator/concepts/podopslifecycle) is responsible for managing the full lifecycle of pods (e.g., `ServiceAvailable`, `Preparing`, `Operating` and `Completing`).
 These operations involve shutting down or restarting containers.
 
 Directly shutting down containers after traffic off can lead to situations where long connection requests become unresponsive.
@@ -537,7 +537,7 @@ $ /manager --feature-gates=ReclaimPodToDelete=false
 In practice, users often need to recreate or replace specified Pods under a CollaSet.
 
 To delete a Pod, users can simply call the Kubernetes API, like executing `kubectl delete pod <pod-name>`. 
-However, this will bypass the [PodOpsLifecycle](https://www.kusionstack.io/docs/operating/concepts/podopslifecycle) Mechanism. 
+However, this will bypass the [PodOpsLifecycle](https://www.kusionstack.io/docs/kuperator/concepts/podopslifecycle) Mechanism. 
 We provide following two options:
 
 1. Enable the feature `GraceDeleteWebhook` so that it is possible to delete Pods through `PodOpsLifecycle`.

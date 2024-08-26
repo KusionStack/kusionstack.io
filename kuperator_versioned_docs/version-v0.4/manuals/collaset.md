@@ -513,7 +513,7 @@ $ /manager --feature-gates=ReclaimPodToDelete=false
 In practice, users often need to recreate or replace specified Pods under a CollaSet.
 
 To delete a Pod, users can simply call the Kubernetes API, like executing `kubectl delete pod <pod-name>`. 
-However, this will bypass the [PodOpsLifecycle](https://www.kusionstack.io/docs/operating/concepts/podopslifecycle) Mechanism. 
+However, this will bypass the [PodOpsLifecycle](https://www.kusionstack.io/docs/kuperator/concepts/podopslifecycle) Mechanism. 
 We provide following two options:
 
 1. Enable the feature `GraceDeleteWebhook` so that it is possible to delete Pods through `PodOpsLifecycle`.
