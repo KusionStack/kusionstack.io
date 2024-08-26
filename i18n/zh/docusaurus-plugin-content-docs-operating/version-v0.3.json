@@ -3,16 +3,16 @@
     "message": "v0.3",
     "description": "The label for version v0.3"
   },
-  "sidebar.operating.category.Getting Started": {
+  "sidebar.kuperator.category.Getting Started": {
     "message": "Getting Started",
-    "description": "The label for category Getting Started in sidebar operating"
+    "description": "The label for category Getting Started in sidebar kuperator"
   },
-  "sidebar.operating.category.Concepts": {
+  "sidebar.kuperator.category.Concepts": {
     "message": "Concepts",
-    "description": "The label for category Concepts in sidebar operating"
+    "description": "The label for category Concepts in sidebar kuperator"
   },
-  "sidebar.operating.category.Manuals": {
+  "sidebar.kuperator.category.Manuals": {
     "message": "Manuals",
-    "description": "The label for category Manuals in sidebar operating"
+    "description": "The label for category Manuals in sidebar kuperator"
   }
 }
