@@ -295,7 +295,7 @@ const config = {
               },
               {
                 label: "Kuperator",
-                to: "/kuperator/",
+                to: "/kuperator/introduction/",
               },
               {
                 label: "CtrlMesh",
