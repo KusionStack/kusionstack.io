@@ -154,10 +154,6 @@ Action plugin is formulated as golang adapter `ActionHandler`, which consists 4 
 - `GetOpsProgress` gets current operation status of target pod, i.e., "Processing", "Failed" and "Succeeded"
 - `ReleaseTarget` cleans up target pod and operating environment when operation finished or job deleted
 
-```shell
-cat ~/kuperator/pkg/controllers/operationjob/opscore/handler.go
-```
-
 ```go
 ...
 type ActionHandler interface {
@@ -182,10 +178,6 @@ The register function consists 3 parameters:
 - `hander`: ActionHandler, the implemented adapter
 - `enablePodOpsLifecycle`: bool, if true, target pods will be operated in the manner of **[PodOpsLifecycle](../concepts/podopslifecycle.md)**
 
-```shell
-cat ~/kuperator/pkg/controllers/operationjob/opscore/register.go
-```
-
 ```go
 ...
 // RegisterAction will register an operationJob action with handler and lifecycleAdapter
@@ -194,7 +186,5 @@ func RegisterAction(action string, handler ActionHandler, enablePodOpsLifecycle 
 ```
 
 ### Example
-OperationJob natively supports Replace action. And Replace ActionHandler is implemented in this folder:
-```shell
-cd ~/kuperator/pkg/controllers/operationjob/replace
-```
+As an example, OperationJob natively supports Replace action.
+The **[Replace ActionHandler](https://github.com/KusionStack/kuperator/blob/e43c4c0dc3bda50789988b10695e7a314cb44784/pkg/controllers/operationjob/replace/replace.go#L49)** is implemented and registered before OperationJob controller added in **[main function](https://github.com/KusionStack/kuperator/blob/e43c4c0dc3bda50789988b10695e7a314cb44784/main.go#L113)**.
