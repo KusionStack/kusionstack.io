@@ -42,6 +42,10 @@ secretStore:
 ...
 ```
 
+:::note
+The `provider` of the `secretStore` now supports `aws`, `alicloud` and `viettelcloud`. 
+:::
+
 ## Update AppConfiguration
 
 At this point we are set up for good! Now you can declare external type of secrets via the `secrets` field in the `AppConfiguration` model to consume sensitive data stored in AWS Secrets Manager.
