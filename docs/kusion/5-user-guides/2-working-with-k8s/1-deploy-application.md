@@ -156,11 +156,11 @@ import service
 import service.container as c
 import network as n
 
-"helloworld": ac.AppConfiguration {
+helloworld: ac.AppConfiguration {
     workload: service.Service {
         containers: {
             "helloworld": c.Container {
-                image = "gcr.io/google-samples/gb-frontend:v4"
+                image = "kusionstack/kusion-quickstart:latest"
             }
         }
         replicas: 2

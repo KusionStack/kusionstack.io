@@ -106,16 +106,18 @@ secretStore: null
 context: {}
 ```
 
-From the example above, we can see that the `Spec` contains a list of `resources` required by the application. Each resource in the `Spec` needs to have `id`, `type`, `attributes`, `dependsOn`, and `extensions` fields: 
+From the example above, we can see that the `Spec` contains a list of `resources` required by the application.
 
-- `id` is the unique key of this resource. An idiomatic way for Kubernetes resources is `apiVersion:kind:namespace:name`, and for Terraform resources is `providerNamespace:providerName:resourceType:resourceName`. 
-- `type` represents the type of runtime Kusion supports, and currently includes `Kubernetes` and `Terraform`. 
-- `attributes` represents all specified attributes of this resource, basically the manifest and argument attributes for the `Kubernetes` and `Terraform` resources. 
-- `dependsOn` contains all the other resources the resource depends on. 
-- `extensions` specifies the arbitrary metadata of the resource, where you can declare information such as Kubernetes GVK, Terraform provider, and imported resource id, etc. 
+A `resource` is a concept in `Kusion` that abstract infrastructure. It represents an individual unit of infrastructure or application component managed by the `Kusion`, serving as a fundamental building block for defining the desired state of the infrastructure. They provide a unified way to define various types of resources, including `Kubernetes` objects and `Terraform` resources. Each `resource` in the `Spec` needs to have `id`, `type`, `attributes`, `dependsOn`, and `extensions` fields:
 
-Besides the `resources`, Spec also records the `secretStore` and `context` field in the corresponding workspace. The former can be used to access sensitive data stored in an external secrets manager, while the latter can be used to declare the workspace-level configurations such as Kubernetes `kubeconfig` file path or content, and Terraform providers' AK/SK. More information can be found [here](4-workspace.md#secretstore). 
+- `id` is the unique key of this resource. An idiomatic way for `Kubernetes` resources is `apiVersion:kind:namespace:name`, and for `Terraform` resources is `providerNamespace:providerName:resourceType:resourceName`.
+- `type` represents the type of runtime Kusion supports, and currently includes `Kubernetes` and `Terraform`.
+- `attributes` represents all specified attributes of this resource, basically the manifest and argument attributes for the `Kubernetes` and `Terraform` resources.
+- `dependsOn` contains all the other resources the resource depends on.
+- `extensions` specifies the arbitrary metadata of the resource, where you can declare information such as Kubernetes GVK, Terraform provider, and imported resource id, etc.
+
+Besides the `resources`, Spec also records the `secretStore` and `context` field in the corresponding workspace. The former can be used to access sensitive data stored in an external secrets manager, while the latter can be used to declare the workspace-level configurations such as Kubernetes `kubeconfig` file path or content, and Terraform providers' AK/SK. More information can be found [here](4-workspace.md#secretstore).
 
 ## Apply with Spec File
 
-Kusion supports using the Spec file directly as input. Users can place the Spec file in the stack directory and execute `kusion preview --spec-file spec.yaml` and `kusion apply --spec-file spec.yaml` to preview and apply the resources. 
+Kusion supports using the Spec file directly as input. Users can place the Spec file in the stack directory and execute `kusion preview --spec-file spec.yaml` and `kusion apply --spec-file spec.yaml` to preview and apply the resources.
