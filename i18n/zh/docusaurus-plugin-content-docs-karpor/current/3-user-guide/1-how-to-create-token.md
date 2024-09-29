@@ -7,18 +7,19 @@ title: 如何创建 token
 
 ## 导出 Hub Cluster 的 kubeconfig
 
-由于 hub cluster 需要 kubeconfig 进行验证，可以通过以下方法导出将用于访问 hub cluster 的 kubeconfig。
-
+由于 hub cluster 需要 kubeconfig 进行验证，可以通过以下命令一键导出用于访问 hub cluster 的 kubeconfig。
 ```shell
 # 以下操作在安装 Karpor 的 Kubernetes 集群中运行
-kubectl get configmap karpor-kubeconfig -n karpor -o yaml
+kubectl get configmap karpor-kubeconfig -n karpor -o go-template='{{.data.config}}'
 ```
 
-然后把这个 configmap 的 data 字段中的 kubeconfig 导出到你的本地环境。
+**注意**：请确保本地机器可访问 hub cluster 的 kubeconfig 中的 server 地址。如在本地集群部署 karpor，需将 karpor-server 服务转发至本地端口 7443，并将 server 地址改为 `https://127.0.0.1:7443`。
 
 ## 将 hub cluster 的服务转发到本地
 
-接下来，你需要将 karpor-server 的服务转发到本地。如果你使用了其他方法进行了转发，可以跳过这一步。这里使用简单的 port-forward 进行转发，打开另一个终端，运行：
+在本节中，我们假设你将 karpor 部署在了本地集群。
+
+如上节所说，为了在本地访问 hub cluster，你需要将 karpor-server 的服务转发到本地。如果你使用了其他方法进行了转发，可以跳过这一步。这里使用简单的 port-forward 进行转发，打开另一个终端，运行：
 
 ```shell
 # 以下操作在安装 Karpor 的 Kubernetes 集群中运行
@@ -32,7 +33,7 @@ kubectl -n karpor port-forward svc/karpor-server 7443:7443
 ```shell
 # 以下操作在 hub cluster 中运行
 # 创建 karpor-admin 并绑定到 clusterrole
-export KUBECONFIG=<Hub cluster KUBECONFIG>
+export KUBECONFIG=<Hub Cluster KUBECONFIG>
 kubectl create serviceaccount karpor-admin
 kubectl create clusterrolebinding karpor-admin --clusterrole=karpor-admin --serviceaccount=default:karpor-admin
 # 创建 karpor-guest 并绑定到 clusterrole
@@ -57,3 +58,4 @@ kubectl create token karpor-admin --duration=1000h
 复制刚刚生成的 token，粘贴到 Karpor dashboard 的 token 输入框中， 点击登录。
 
 在安全环境下开启你的 Karpor 之旅吧！
+
