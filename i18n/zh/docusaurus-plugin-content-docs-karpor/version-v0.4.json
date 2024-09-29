@@ -1,46 +1,46 @@
 {
-    "version.label": {
-        "message": "v0.4",
-        "description": "The label for version v0.4"
-    },
-    "sidebar.karpor.category.Getting Started": {
-        "message": "入门",
-        "description": "The label for category Getting Started in sidebar karpor"
-    },
-    "sidebar.karpor.category.Concepts": {
-        "message": "概念",
-        "description": "The label for category Concepts in sidebar karpor"
-    },
-    "sidebar.karpor.category.User Guide": {
-        "message": "用户手册",
-        "description": "The label for category User Guide in sidebar karpor"
-    },
-    "sidebar.karpor.category.How to Insight": {
-        "message": "如何洞察",
-        "description": "The label for category How to Insight in sidebar karpor"
-    },
-    "sidebar.karpor.category.Best Production Practices": {
-        "message": "生产最佳实践",
-        "description": "The label for category Best Production Practices in sidebar karpor"
-    },
-    "sidebar.karpor.category.Developer Guide": {
-        "message": "开发者手册",
-        "description": "The label for category Developer Guide in sidebar karpor"
-    },
-    "sidebar.karpor.category.Contribution Guide": {
-        "message": "贡献指南",
-        "description": "The label for category Contribution Guide in sidebar karpor"
-    },
-    "sidebar.karpor.category.Conventions": {
-        "message": "规约",
-        "description": "The label for category Conventions in sidebar karpor"
-    },
-    "sidebar.karpor.category.References": {
-        "message": "参考手册",
-        "description": "The label for category References in sidebar karpor"
-    },
-    "sidebar.karpor.category.CLI Commands": {
-        "message": "CLI Commands",
-        "description": "The label for category CLI Commands in sidebar karpor"
-    }
+  "version.label": {
+    "message": "v0.4",
+    "description": "The label for version v0.4"
+  },
+  "sidebar.karpor.category.Getting Started": {
+    "message": "入门",
+    "description": "The label for category Getting Started in sidebar karpor"
+  },
+  "sidebar.karpor.category.Concepts": {
+    "message": "概念",
+    "description": "The label for category Concepts in sidebar karpor"
+  },
+  "sidebar.karpor.category.User Guide": {
+    "message": "用户手册",
+    "description": "The label for category User Guide in sidebar karpor"
+  },
+  "sidebar.karpor.category.How to Insight": {
+    "message": "如何洞察",
+    "description": "The label for category How to Insight in sidebar karpor"
+  },
+  "sidebar.karpor.category.Best Production Practices": {
+    "message": "生产最佳实践",
+    "description": "The label for category Best Production Practices in sidebar karpor"
+  },
+  "sidebar.karpor.category.Developer Guide": {
+    "message": "开发者手册",
+    "description": "The label for category Developer Guide in sidebar karpor"
+  },
+  "sidebar.karpor.category.Contribution Guide": {
+    "message": "贡献指南",
+    "description": "The label for category Contribution Guide in sidebar karpor"
+  },
+  "sidebar.karpor.category.Conventions": {
+    "message": "规约",
+    "description": "The label for category Conventions in sidebar karpor"
+  },
+  "sidebar.karpor.category.References": {
+    "message": "参考手册",
+    "description": "The label for category References in sidebar karpor"
+  },
+  "sidebar.karpor.category.CLI Commands": {
+    "message": "CLI Commands",
+    "description": "The label for category CLI Commands in sidebar karpor"
+  }
 }
