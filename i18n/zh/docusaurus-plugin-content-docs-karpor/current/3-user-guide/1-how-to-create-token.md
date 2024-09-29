@@ -30,8 +30,9 @@ kubectl -n karpor port-forward svc/karpor-server 7443:7443
 
 你可以用如下命令在 Hub Cluster 中创建 karpor-admin 和 karpor-guest 以及对应 ClusterRoleBinding:
 
+**注意**：以下操作在 Hub Cluster 中进行。
+
 ```shell
-# 以下操作在 Hub Cluster 中运行
 # 创建 ServiceAccount karpor-admin 并绑定到 ClusterRole
 export KUBECONFIG=<Hub Cluster KUBECONFIG>
 kubectl create serviceaccount karpor-admin
@@ -45,13 +46,16 @@ kubectl create clusterrolebinding karpor-guest --clusterrole=karpor-guest --serv
 
 默认情况下，token 的有效期是 1 个小时。如果你需要长期 token，可以指定在生成 token 时指定过期时间。比如：
 
+**注意**：以下操作在 Hub Cluster 中进行。
+
 ```shell
-# 以下操作在 Hub Cluster 中运行
 export KUBECONFIG=<Hub Cluster KUBECONFIG>
 kubectl create token karpor-admin --duration=1000h
 ```
 
-默认参数下， token 的最长有效期为 8760h（1 年）。如果你需要修改这个最长有效期，可以在 karpor-server 的启动参数中添加 `--service-account-max-token-expiration={MAX_EXPIRATION:h/m/s}`
+默认参数下， token 的最长有效期为 8760h（1 年）。如果你需要修改这个最长有效期，可以在 karpor-server 的启动参数中添加 `--service-account-max-token-expiration={MAX_EXPIRATION:h/m/s}`。
+
+**注意**：创建 token 需要 v1.25.0 或更高版本的 kubectl 。
 
 ## 开始安全地使用 Karpor
 
