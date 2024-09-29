@@ -16,6 +16,8 @@ kubectl get configmap karpor-kubeconfig -n karpor -o yaml
 
 然后把这个 configmap 的 data 字段中的 kubeconfig 导出到你的本地环境。
 
+**注意**：大部分情况下，需要手动将该 kubeconfig 的 cluster 字段指向 karpor server。
+
 ## 将 hub cluster 的服务转发到本地
 
 接下来，你需要将 karpor-server 的服务转发到本地。如果你使用了其他方法进行了转发，可以跳过这一步。这里使用简单的 port-forward 进行转发，打开另一个终端，运行：
@@ -29,8 +31,9 @@ kubectl -n karpor port-forward svc/karpor-server 7443:7443
 
 你可以用如下命令在 hub cluster 中创建 karpor-admin 和 karpor-guest 以及对应 clusterrolebinding:
 
+**注意**：以下操作在 hub cluster 中进行。
+
 ```shell
-# 以下操作在 hub cluster 中运行
 # 创建 karpor-admin 并绑定到 clusterrole
 export KUBECONFIG=<Hub cluster KUBECONFIG>
 kubectl create serviceaccount karpor-admin
@@ -44,13 +47,17 @@ kubectl create clusterrolebinding karpor-guest --clusterrole=karpor-guest --serv
 
 默认情况下，token 的有效期是 1 个小时。如果你需要长期 token，可以指定在生成 token 时指定过期时间。比如：
 
+**注意**：以下操作在 hub cluster 中进行。
+
 ```shell
 # 以下操作在 hub 集群中运行
 export KUBECONFIG=<Hub cluster KUBECONFIG>
 kubectl create token karpor-admin --duration=1000h
 ```
 
-默认参数下， token 的最长有效期为 8760h（1 年）。如果你需要修改这个最长有效期，可以在 karpor-server 的启动参数中添加 `--service-account-max-token-expiration={MAX_EXPIRATION:h/m/s}`
+默认参数下， token 的最长有效期为 8760h（1 年）。如果你需要修改这个最长有效期，可以在 karpor-server 的启动参数中添加 `--service-account-max-token-expiration={MAX_EXPIRATION:h/m/s}`。
+
+**注意**：创建 token 需要 v1.25.0 或更高版本的 kubectl 。
 
 ## 开始安全地使用 Karpor
 
