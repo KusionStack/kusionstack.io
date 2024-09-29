@@ -15,7 +15,7 @@ kubectl get configmap karpor-kubeconfig -n karpor -o go-template='{{.data.config
 
 **注意**：请确保本地机器可访问 Hub Cluster 的 kubeconfig 中的 server 地址。如在本地集群部署 Karpor，需将 karpor-server 服务转发至本地端口 7443，并将 server 地址改为 `https://127.0.0.1:7443`。
 
-## 将 hub cluster 的服务转发到本地
+## 将 Hub Cluster 的服务转发到本地
 
 在本节中，我们假设你将 Karpor 部署在了本地集群。
 
@@ -30,10 +30,9 @@ kubectl -n karpor port-forward svc/karpor-server 7443:7443
 
 你可以用如下命令在 Hub Cluster 中创建 karpor-admin 和 karpor-guest 以及对应 ClusterRoleBinding:
 
-**注意**：以下操作在 hub cluster 中进行。
+**注意**：以下操作在 Hub Cluster 中进行。
 
 ```shell
-# 以下操作在 Hub Cluster 中运行
 # 创建 ServiceAccount karpor-admin 并绑定到 ClusterRole
 export KUBECONFIG=<Hub Cluster KUBECONFIG>
 kubectl create serviceaccount karpor-admin
@@ -47,10 +46,9 @@ kubectl create clusterrolebinding karpor-guest --clusterrole=karpor-guest --serv
 
 默认情况下，token 的有效期是 1 个小时。如果你需要长期 token，可以指定在生成 token 时指定过期时间。比如：
 
-**注意**：以下操作在 hub cluster 中进行。
+**注意**：以下操作在 Hub Cluster 中进行。
 
 ```shell
-# 以下操作在 Hub Cluster 中运行
 export KUBECONFIG=<Hub Cluster KUBECONFIG>
 kubectl create token karpor-admin --duration=1000h
 ```

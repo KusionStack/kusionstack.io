@@ -30,10 +30,9 @@ kubectl -n karpor port-forward svc/karpor-server 7443:7443
 
 You can use the following commands to create karpor-admin and karpor-guest along with the corresponding ClusterRoleBinding in the Hub Cluster:
 
-**Note**: The following operations are performed in the hub cluster.
+**Note**: The following operations are performed in the Hub Cluster.
 
 ```shell
-# The following commands run in the Hub Cluster
 # Create ServiceAccount karpor-admin and bind to ClusterRole
 export KUBECONFIG=<Hub Cluster KUBECONFIG>
 kubectl create serviceaccount karpor-admin
@@ -47,10 +46,9 @@ kubectl create clusterrolebinding karpor-guest --clusterrole=karpor-guest --serv
 
 By default, the validity period of a token is 1 hour. If you need a long-term token, you can specify the expiration time when generating the token. For example:
 
-**Note**: The following operations are performed in the hub cluster.
+**Note**: The following operations are performed in the Hub Cluster.
 
 ```shell
-# The following commands run in the Hub Cluster
 export KUBECONFIG=<Hub Cluster KUBECONFIG>
 kubectl create token karpor-admin --duration=1000h
 ```
