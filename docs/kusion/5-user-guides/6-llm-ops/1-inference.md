@@ -6,7 +6,7 @@ id: inference
 
 In the wave of Artificial Intelligence (AI), Large Language Models (LLMs) are gradually becoming a key factor in driving innovation and productivity. As a result, researchers and developers are looking for a more efficient way to deploy and manage complex LLM models and AI applications. 
 
-To simplify the process from model construction, deployment and interaction with applications, the KusionStack community has provided a `inference` module. We will explore in detail how to deploy an AI application using LLM service provided by this module in this article. 
+To simplify the process from model construction, deployment and interaction with applications, the KusionStack community has provided an `inference` module. We will explore in detail how to deploy an AI application using LLM service provided by this module in this article. 
 
 :::info
 The module definition and implementation, as well as the example application we are about to show can be found [here](https://github.com/KusionStack/catalog/tree/main/modules/inference). 
@@ -50,9 +50,9 @@ modules:
 
 ## Example
 
-After creating and switching to the workspace shown above, we can initialize the example project and stack with `kusion project create` and `kusion stack create`. Please refer to [this document](https://www.kusionstack.io/docs/user-guides/working-with-k8s/deploy-application#initializing-application-configuration) for more details. 
+After creating and switching to the workspace shown above, we can initialize the example `Project` and `Stack` with `kusion project create` and `kusion stack create`. Please refer to [this document](https://www.kusionstack.io/docs/user-guides/working-with-k8s/deploy-application#initializing-application-configuration) for more details. 
 
-The directory structure, and configuration file contents of the example project is show below: 
+The directory structure, and configuration file contents of the example project is shown below: 
 
 ```shell
 example/
