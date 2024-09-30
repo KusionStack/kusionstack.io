@@ -1,7 +1,7 @@
 {
   "version.label": {
-    "message": "v0.14 🚧",
-    "description": "The label for version current"
+    "message": "v0.13",
+    "description": "The label for version v0.13"
   },
   "sidebar.kusion.category.What is Kusion?": {
     "message": "What is Kusion?",
@@ -15,17 +15,17 @@
     "message": "Concepts",
     "description": "The label for category Concepts in sidebar kusion"
   },
-  "sidebar.kusion.category.Project": {
-    "message": "Project",
-    "description": "The label for category Project in sidebar kusion"
+  "sidebar.kusion.category.Projects": {
+    "message": "Projects",
+    "description": "The label for category Projects in sidebar kusion"
   },
-  "sidebar.kusion.category.Stack": {
-    "message": "Stack",
-    "description": "The label for category Stack in sidebar kusion"
+  "sidebar.kusion.category.Stacks": {
+    "message": "Stacks",
+    "description": "The label for category Stacks in sidebar kusion"
   },
-  "sidebar.kusion.category.Kusion Module": {
-    "message": "Kusion Module",
-    "description": "The label for category Kusion Module in sidebar kusion"
+  "sidebar.kusion.category.Modules": {
+    "message": "Modules",
+    "description": "The label for category Modules in sidebar kusion"
   },
   "sidebar.kusion.category.Configuration Walkthrough": {
     "message": "Configuration Walkthrough",
@@ -50,6 +50,14 @@
   "sidebar.kusion.category.Secrets Management": {
     "message": "Secrets Management",
     "description": "The label for category Secrets Management in sidebar kusion"
+  },
+  "sidebar.kusion.category.Production Practice Case": {
+    "message": "Production Practice Case",
+    "description": "The label for category Production Practice Case in sidebar kusion"
+  },
+  "sidebar.kusion.category.LLM Ops": {
+    "message": "LLM Ops",
+    "description": "The label for category LLM Ops in sidebar kusion"
   },
   "sidebar.kusion.category.Reference": {
     "message": "Reference",
@@ -98,25 +106,5 @@
   "sidebar.kusion.category.FAQ": {
     "message": "FAQ",
     "description": "The label for category FAQ in sidebar kusion"
-  },
-  "sidebar.kusion.category.Projects": {
-    "message": "Projects",
-    "description": "The label for category Projects in sidebar kusion"
-  },
-  "sidebar.kusion.category.Stacks": {
-    "message": "Stacks",
-    "description": "The label for category Stacks in sidebar kusion"
-  },
-  "sidebar.kusion.category.Modules": {
-    "message": "Modules",
-    "description": "The label for category Modules in sidebar kusion"
-  },
-  "sidebar.kusion.category.Production Practice Case": {
-    "message": "Production Practice Case",
-    "description": "The label for category Production Practice Case in sidebar kusion"
-  },
-  "sidebar.kusion.category.LLM Ops": {
-    "message": "LLM Ops",
-    "description": "The label for category LLM Ops in sidebar kusion"
   }
 }
