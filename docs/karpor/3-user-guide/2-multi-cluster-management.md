@@ -15,7 +15,9 @@ Multi-cluster management is the entrance to register clusters into Karpor, enabl
 6. Once verified, the cluster will be added under the <kbd>Cluster Management</kbd> page
    ![](/karpor/assets/cluster-mng/cluster-mng-register-success.png)
 
-### Register eks Cluster
+**Note**: Please ensure network connectivity between the server address (target cluster address) in the uploaded cluster certificate and Karpor. For example, if you have deployed Karpor in a local cluster and want to register that local cluster, you need to modify the server address in the cluster certificate to the internal cluster address `https://kubernetes.default.svc.cluster.local:443` to ensure that Karpor can directly access the target cluster.
+
+### Register EKS Cluster
 
 If you want to register an EKS cluster, you need to perform some additional operations on the kubeconfig:
 

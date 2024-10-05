@@ -15,11 +15,13 @@ title: 多集群管理
 6. 一旦验证通过，集群将会被添加到 <kbd>集群管理</kbd> 页面。
    ![](/karpor/assets/cluster-mng/cluster-mng-register-success.png)
 
-### 注册 eks 集群
+**注意**：请确保上传的集群证书中的 server 地址（目标集群地址）与 Karpor 之间 的网络连通性。举例来说，如果你在本地集群中部署了 Karpor，并希望注册该本地集群，则需要将集群证书中的 server 地址修改为集群内部地址 `https://kubernetes.default.svc.cluster.local:443`，以确保 Karpor 能够直接访问目标集群。
 
-如果你想注册 eks 集群，那么需要对 kubeconfig 进行一些额外的操作：
+### 注册 EKS 集群
 
-1. 导出 eks 集群的 kubeconfig。例如，通过如下 aws 命令可以获得指定集群的 kubeconfig:
+如果你想注册 EKS 集群，那么需要对 kubeconfig 进行一些额外的操作：
+
+1. 导出 EKS 集群的 kubeconfig。例如，通过如下 aws 命令可以获得指定集群的 kubeconfig:
 
 ```shell
 aws eks --region <YOUR REGION> update-kubeconfig  --name <YOUR CLUSTER NAME> --kubeconfig=<OUTPUT FILENAME>
