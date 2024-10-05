@@ -7,13 +7,13 @@ In this document, you will learn how to use a token to access the Karpor dashboa
 
 ## Exporting the KubeConfig for the Hub Cluster
 
-Since the Hub Cluster requires a kubeconfig for authentication, you can export the kubeconfig to access the Hub Cluster using the following command.
+Since the Hub Cluster requires a KubeConfig for authentication, you can export the KubeConfig to access the Hub Cluster using the following command.
 ```shell
 # The following operation is performed in the Kubernetes cluster where Karpor is installed
 kubectl get configmap karpor-kubeconfig -n karpor -o go-template='{{.data.config}}' > $HOME/.kube/karpor-hub-cluster.kubeconfig
 ```
 
-**Note**: Please ensure that the server address in the Hub Cluster's kubeconfig is accessible from your local machine. The default address is the internal cluster address (https://karpor-server.karpor.svc:7443), which cannot be directly connected from local. If you deployed Karpor in a local cluster, you need to forward the karpor-server service to local port 7443 and change the server address to `https://127.0.0.1:7443`.
+**Note**: Please ensure that the server address in the Hub Cluster's KubeConfig is accessible from your local machine. The default address is the internal cluster address (https://karpor-server.karpor.svc:7443), which cannot be directly connected from local. If you deployed Karpor in a local cluster, you need to forward the karpor-server service to local port 7443 and change the server address to `https://127.0.0.1:7443`.
 
 You can use the following command to change the access address in the Hub Cluster certificate to the local address (Windows users need to replace manually):
 ```shell

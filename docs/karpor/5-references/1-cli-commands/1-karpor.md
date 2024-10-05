@@ -40,7 +40,7 @@ karpor [flags]
       --audit-webhook-batch-throttle-burst int                  Maximum number of requests sent at the same moment if ThrottleQPS was not utilized before. Only used in batch mode. (default 15)
       --audit-webhook-batch-throttle-enable                     Whether batching throttling is enabled. Only used in batch mode. (default true)
       --audit-webhook-batch-throttle-qps float32                Maximum average number of batches per second. Only used in batch mode. (default 10)
-      --audit-webhook-config-file string                        Path to a kubeconfig formatted file that defines the audit webhook configuration.
+      --audit-webhook-config-file string                        Path to a KubeConfig formatted file that defines the audit webhook configuration.
       --audit-webhook-initial-backoff duration                  The amount of time to wait before retrying the first failed request. (default 10s)
       --audit-webhook-mode string                               Strategy for sending audit events. Blocking indicates sending events should block server responses. Batch causes the backend to buffer and write events asynchronously. Known modes are batch,blocking,blocking-strict. (default "batch")
       --audit-webhook-truncate-enabled                          Whether event and batch truncating is enabled.
@@ -51,7 +51,7 @@ karpor [flags]
       --authorization-policy-file string                        File with authorization policy in json line by line format, used with --authorization-mode=ABAC, on the secure port.
       --authorization-webhook-cache-authorized-ttl duration     The duration to cache 'authorized' responses from the webhook authorizer. (default 5m0s)
       --authorization-webhook-cache-unauthorized-ttl duration   The duration to cache 'unauthorized' responses from the webhook authorizer. (default 30s)
-      --authorization-webhook-config-file string                File with webhook configuration in kubeconfig format, used with --authorization-mode=Webhook. The API server will query the remote service to determine access on the API server's secure port.
+      --authorization-webhook-config-file string                File with webhook configuration in KubeConfig format, used with --authorization-mode=Webhook. The API server will query the remote service to determine access on the API server's secure port.
       --authorization-webhook-version string                    The API version of the authorization.k8s.io SubjectAccessReview to send to and expect from the webhook. (default "v1beta1")
       --bind-address ip                                         The IP address on which to listen for the --secure-port port. The associated interface(s) must be reachable by the rest of the cluster, and by CLI/web clients. If blank or an unspecified address (0.0.0.0 or ::), all interfaces will be used. (default 0.0.0.0)
       --cert-dir string                                         The directory where the TLS certs are located. If --tls-cert-file and --tls-private-key-file are provided, this flag will be ignored. (default "apiserver.local.config/certificates")
