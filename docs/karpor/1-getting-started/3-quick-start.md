@@ -47,10 +47,9 @@ For more installation details, please refer to the [Installation Documentation](
 
    After executing this command, if you access port 7443 on your local machine, the traffic will be forwarded to port 7443 of the karpor-server service in the Kubernetes cluster.
 2. Open your browser and enter the following URL:
-
-```shell
-https://127.0.0.1:7443 
-```
+   ```shell
+   https://127.0.0.1:7443 
+   ```
 
 This will open the Karpor Web interface. 👇
 
