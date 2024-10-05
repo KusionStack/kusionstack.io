@@ -40,30 +40,60 @@ For more installation details, please refer to the [Installation Documentation](
 
 ## Access Karpor Dashboard
 
-1. Run the following command to forward the Karpor server port:
+1. Run the following command to access the Karpor service running in the cluster:
    ```shell
    kubectl -n karpor port-forward service/karpor-server 7443:7443
    ```
 
-   This will create a port forward from your local machine to the Karpor server.
+   After executing this command, if you access port 7443 on your local machine, the traffic will be forwarded to port 7443 of the karpor-server service in the Kubernetes cluster.
 2. Open your browser and enter the following URL:
-   ```shell
-   https://127.0.0.1:7443
-   ```
 
-   This will take you to the karpor dashboard. 👇
+```shell
+https://127.0.0.1:7443 
+```
+
+This will open the Karpor Web interface. 👇
 
 ![Open in Browser](./assets/2-installation/open-in-browser.gif)
 
-Congratulations! 🎉 You have successfully installed Karpor. Now you can start using Karpor for multi-cluster search and insights.
+Congratulations! 🎉 You have successfully installed Karpor. Now you can start using Karpor to explore and gain insights into resources across multiple clusters.
+
+## Create Access Token
+
+Before registering clusters, you need to create an access token to log in to the Karpor Web interface. Here are the brief steps to create a token:
+
+1. Export the KubeConfig of the Hub Cluster:
+
+```shell
+kubectl get configmap karpor-kubeconfig -n karpor -o go-template='{{.data.config}}' > $HOME/.kube/karpor-hub-cluster.kubeconfig
+```
+
+2. Create ServiceAccount and ClusterRoleBinding:
+
+```shell
+export KUBECONFIG=$HOME/.kube/karpor-hub-cluster.kubeconfig
+kubectl create serviceaccount karpor-admin
+kubectl create clusterrolebinding karpor-admin --clusterrole=karpor-admin --serviceaccount=default:karpor-admin
+```
+
+3. Create token:
+
+```shell
+kubectl create token karpor-admin --duration=1000h
+```
+
+Copy the generated token, which will be used later to log in to the Karpor Web interface.
+
+For detailed instructions on creating tokens, please refer to the [How to Create Token](../3-user-guide/1-how-to-create-token.md) documentation.
 
 ## Register Cluster
 
 To register a new cluster with Karpor, follow these steps:
 
-1. Navigate to the `Cluster Management` section in the Karpor UI.
-2. Click on the `Register Cluster` button.
-3. Follow the on-screen instructions to complete the registration process.
+1. Log in to the Karpor Web interface using the token created in the previous step.
+2. Navigate to the `Cluster Management` section in the Karpor UI.
+3. Click on the `Register Cluster` button.
+4. Follow the on-screen instructions to complete the registration process.
 
 An example of the registration button can be found in the image below:
 

@@ -58,13 +58,42 @@ https://127.0.0.1:7443
 
 祝贺你！🎉 你已成功安装 Karpor。现在你可以开始使用 Karpor 探索和洞察多集群中的资源。
 
+## 创建访问令牌
+
+在注册集群之前，你需要创建一个访问令牌来登录 Karpor Web 界面。以下是创建令牌的简要步骤：
+
+1. 导出 Hub Cluster 的 KubeConfig:
+
+```shell
+kubectl get configmap karpor-kubeconfig -n karpor -o go-template='{{.data.config}}' > $HOME/.kube/karpor-hub-cluster.kubeconfig
+```
+
+2. 创建 ServiceAccount 和 ClusterRoleBinding:
+
+```shell
+export KUBECONFIG=$HOME/.kube/karpor-hub-cluster.kubeconfig
+kubectl create serviceaccount karpor-admin
+kubectl create clusterrolebinding karpor-admin --clusterrole=karpor-admin --serviceaccount=default:karpor-admin
+```
+
+3. 创建令牌:
+
+```shell
+kubectl create token karpor-admin --duration=1000h
+```
+
+复制生成的令牌,稍后将用于登录 Karpor Web 界面。
+
+有关创建令牌的详细说明,请参阅 [如何创建 Token](../3-user-guide/1-how-to-create-token.md) 文档。
+
 ## 注册集群
 
 要向 Karpor 注册新集群，请按照以下步骤操作：
 
-1. 打开 Karpor Web 界面中的 <kbd>集群管理</kbd> 部分。
-2. 点击 <kbd>接入集群</kbd> 按钮。
-3. 按照界面上的说明完成集群注册过程。
+1. 使用上一步创建的令牌登录 Karpor Web 界面。
+2. 打开 Karpor Web 界面中的 <kbd>集群管理</kbd> 部分。
+3. 点击 <kbd>接入集群</kbd> 按钮。
+4. 按照界面上的说明完成集群注册过程。
 
 以下是 `注册集群` 页面的示例：
 
