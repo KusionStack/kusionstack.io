@@ -9,7 +9,7 @@ Multi-cluster management is the entrance to register clusters into Karpor, enabl
 2. Click the <kbd>Register Cluster</kbd> button.
    ![](/karpor/assets/cluster-mng/cluster-mng-empty.png)
 3. Add the cluster name. The cluster name must be unique and CANNOT be altered once created.
-4. Upload the cluster's kubeconfig file. One with read permission is sufficient.
+4. Upload the cluster's KubeConfig file. One with read permission is sufficient.
 5. Click the <kbd>Verify and Submit</kbd> button.
    ![](/karpor/assets/cluster-mng/cluster-mng-register-new-cluster.png)
 6. Once verified, the cluster will be added under the <kbd>Cluster Management</kbd> page
@@ -22,7 +22,7 @@ The <kbd>Edit</kbd> button allows for modifications to the <kbd>Display Name</kb
 
 ## Rotate Certificate
 
-When the kubeconfig expires, you can update the certificate by clicking <kbd>Rotate Certificate</kbd>.
+When the KubeConfig expires, you can update the certificate by clicking <kbd>Rotate Certificate</kbd>.
 ![](/karpor/assets/cluster-mng/cluster-mng-rotate-cluster-1.png)
 ![](/karpor/assets/cluster-mng/cluster-mng-rotate-cluster-2.png)
 ![](/karpor/assets/cluster-mng/cluster-mng-rotate-cluster-3.png)

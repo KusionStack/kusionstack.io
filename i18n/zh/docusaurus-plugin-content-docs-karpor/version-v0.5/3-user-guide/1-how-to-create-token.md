@@ -7,13 +7,13 @@ title: 如何创建 Token
 
 ## 导出 Hub Cluster 的 KubeConfig
 
-由于 Hub Cluster 需要 kubeconfig 进行验证，可以通过以下命令一键导出用于访问 Hub Cluster 的 kubeconfig。
+由于 Hub Cluster 需要 KubeConfig 进行验证，可以通过以下命令一键导出用于访问 Hub Cluster 的 KubeConfig。
 ```shell
 # 以下操作在安装 Karpor 的 Kubernetes 集群中运行
 kubectl get configmap karpor-kubeconfig -n karpor -o go-template='{{.data.config}}' > $HOME/.kube/karpor-hub-cluster.kubeconfig
 ```
 
-**注意**：确保本地可访问 Hub Cluster kubeconfig 中的 server 地址。默认为集群内部地址（https://karpor-server.karpor.svc:7443），本地无法直接连接。如在本地部署 Karpor，需将 karpor-server 服务转发至本地 7443 端口，并将 server 地址改为 `https://127.0.0.1:7443`。
+**注意**：确保本地可访问 Hub Cluster KubeConfig 中的 server 地址。默认为集群内部地址 (https://karpor-server.karpor.svc:7443)，本地无法直接连接。如在本地部署 Karpor，需将 karpor-server 服务转发至本地 7443 端口，并将 server 地址改为 `https://127.0.0.1:7443`。
 
 执行以下命令可将 Hub Cluster 证书中的访问地址一键改为本地地址（Windows 用户需手动替换）:
 ```shell

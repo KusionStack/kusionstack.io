@@ -9,7 +9,7 @@ Multi-cluster management is the entrance to register clusters into Karpor, enabl
 2. Click the <kbd>Register Cluster</kbd> button.
    ![](/karpor/assets/cluster-mng/cluster-mng-empty.png)
 3. Add the cluster name. The cluster name must be unique and CANNOT be altered once created.
-4. Upload the cluster's kubeconfig file. One with read permission is sufficient.
+4. Upload the cluster's KubeConfig file. One with read permission is sufficient.
 5. Click the <kbd>Verify and Submit</kbd> button.
    ![](/karpor/assets/cluster-mng/cluster-mng-register-new-cluster.png)
 6. Once verified, the cluster will be added under the <kbd>Cluster Management</kbd> page
@@ -19,15 +19,15 @@ Multi-cluster management is the entrance to register clusters into Karpor, enabl
 
 ### Register EKS Cluster
 
-If you want to register an EKS cluster, you need to perform some additional operations on the kubeconfig:
+If you want to register an EKS cluster, you need to perform some additional operations on the KubeConfig:
 
-1. Export the kubeconfig for the EKS cluster. For example, you can obtain the kubeconfig for the specified cluster using the following AWS command:
+1. Export the KubeConfig for the EKS cluster. For example, you can obtain the KubeConfig for the specified cluster using the following AWS command:
 
 ```shell
 aws eks --region <YOUR REGION> update-kubeconfig  --name <YOUR CLUSTER NAME> --kubeconfig=<OUTPUT FILENAME>
 ```
 
-2. Add the fields `env`, `interactiveMode`, and `provideClusterInfo` to the `users/exec` section of the exported kubeconfig file. You can refer to the following kubeconfig structure:
+2. Add the fields `env`, `interactiveMode`, and `provideClusterInfo` to the `users/exec` section of the exported KubeConfig file. You can refer to the following KubeConfig structure:
 
 ```yaml
 apiVersion: v1
@@ -59,7 +59,7 @@ users:
       - --output
       - json
       command: aws
-      ### The following fields need to be added to the kubeconfig.
+      ### The following fields need to be added to the KubeConfig.
       env:
       - name: AWS_ACCESS_KEY_ID
         value: <YOUR AWS_ACCESS_KEY_ID>
