@@ -51,7 +51,7 @@ For more installation details, please refer to the [Installation Documentation](
    https://127.0.0.1:7443
    ```
 
-   This will take you to the karpor dashboard. 👇
+This will take you to the karpor dashboard. 👇
 
 ![Open in Browser](./assets/2-installation/open-in-browser.gif)
 
