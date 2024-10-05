@@ -95,6 +95,15 @@ kubectl create token karpor-admin --duration=1000h
 3. 点击 <kbd>接入集群</kbd> 按钮。
 4. 按照界面上的说明完成集群注册过程。
 
+5. 在注册集群时，请注意以下事项：
+
+   - 集群名称必须唯一且一旦创建不能更改。
+   - 确保上传的集群证书中的 server 地址（目标集群地址）与 Karpor 之间有网络连通性。
+   - 如果你在本地集群中部署了 Karpor，并希望注册该本地集群，则需要将集群证书中的 server 地址修改为集群内部地址 `https://kubernetes.default.svc.cluster.local:443`，以确保 Karpor 能够直接访问目标集群。
+   - 如果要注册 EKS 集群，需要对 kubeconfig 进行额外的配置，包括添加 `env`、`interactiveMode` 和 `provideClusterInfo` 字段。详细步骤请参考 [多集群管理](../3-user-guide/2-multi-cluster-management.md) 文档中的 "注册 EKS 集群" 部分。
+
+6. 完成上述步骤后，点击 <kbd>验证并提交</kbd> 按钮。
+
 以下是 `注册集群` 页面的示例：
 
 ![](/karpor/assets/cluster-mng/cluster-mng-register-new-cluster.png)

@@ -95,7 +95,16 @@ To register a new cluster with Karpor, follow these steps:
 3. Click on the `Register Cluster` button.
 4. Follow the on-screen instructions to complete the registration process.
 
-An example of the registration button can be found in the image below:
+5. When registering a cluster, please note the following:
+
+   - The cluster name must be unique and cannot be changed once created.
+   - Ensure that there is network connectivity between the server address (target cluster address) in the uploaded cluster certificate and Karpor.
+   - If you deployed Karpor in a local cluster and want to register that local cluster, you need to modify the server address in the cluster certificate to the internal cluster address `https://kubernetes.default.svc.cluster.local:443` to ensure that Karpor can directly access the target cluster.
+   - If you want to register an EKS cluster, additional configuration of the kubeconfig is required, including adding the `env`, `interactiveMode`, and `provideClusterInfo` fields. For detailed steps, please refer to the "Registering an EKS Cluster" section in the [Multi-cluster Management](../3-user-guide/2-multi-cluster-management.md) documentation.
+
+6. After completing the above steps, click the `Validate and Submit` button.
+
+An example of the `Register Cluster` page can be found in the image below:
 
 ![](/karpor/assets/cluster-mng/cluster-mng-register-new-cluster.png)
 
