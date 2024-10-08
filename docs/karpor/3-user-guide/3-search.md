@@ -31,4 +31,17 @@ Coming soon. 🚧
 
 ## Search by Natural Language
 
-Coming soon. 🚧
+Although the SQL search function we currently offer does not require additional learning as many engineers already have SQL knowledge, it is clear that the most intuitive and lowest learning threshold search method is to use the user's native language - natural language.
+
+Therefore, we offers search by natural language feature for Kubernetes resources in Karpor.
+
+Below are the steps to use Search by Natural Language:
+
+1. **Enter the Search page**: We designed the homepage as the entry point for search, so opening `Karpor`'s Web UI immediately presents you with the search page. Then we can choose `Search By Natural Language`.
+   ![](/karpor/assets/search/search-home-natural-language.png)
+2. **Compose natural language query statements**：Write your query statement using natural language syntax, specifying the cluster name, resource type, conditions, and filters you wish to search for.
+   ![](/karpor/assets/search/search-by-natural-language.png)
+3. **Execute the query**：Click the 'search' button to execute the query and be sent to the search results page. Karpor will return a list of resources that match the natural language query.
+   ![](/karpor/assets/search/search-by-natural-language-result.png)
+4. **Search tips**：We provide tips for incomplete or haphazard natural language query.
+5. **Second search**：Our natural language query is converted to SQL, which the user can modify to start the search again.
