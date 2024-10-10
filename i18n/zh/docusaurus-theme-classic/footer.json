@@ -40,7 +40,7 @@
     "description": "The label of footer link with label=KCL linking to https://kcl-lang.io"
   },
   "copyright": {
-    "message": "Copyright © 2024 KusionStack Authors",
+    "message": "Copyright © 2024 KusionStack Authors. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our <a href=\"https://www.linuxfoundation.org/trademark-usage/\"> Trademark Usage</a> page.",
     "description": "The footer copyright"
   },
   "logo.alt": {
