@@ -256,13 +256,12 @@ function Home() {
         <div className="container">
           <div className="container text--center">
             <h2 className={clsx("hero__subtitle", styles.poppinsFont)}>
-              KusionStack is in{" "}
+              KusionStack is a {" "}
               <Link to="https://cncf.io/">
                 Cloud Native Computing Foundation
               </Link>{" "}
-              landscape
+              Sandbox Project
             </h2>
-            <br />
             <div>
               <ThemedImage
                 className={styles.cncfLogo}
@@ -274,6 +273,27 @@ function Home() {
               />
             </div>
           </div>
+        </div>
+        <br></br>
+        <div className="container">
+            <div className="container text--center">
+                <div className="container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', height: '15vh' }}>
+                    <h2 className={clsx("hero__subtitle", styles.poppinsFont)} style={{ marginRight: '0px', fontSize: "16px" }}>
+                        Originally created by
+                    </h2>
+                    <a href="https://external-link.com" target="_blank" rel="noopener noreferrer">
+                        <ThemedImage
+                            className={styles.cncfLogo}
+                            alt="Ant Open Source"
+                            sources={{
+                                light: useBaseUrl("/img/oss_logo_black.svg"),
+                                dark: useBaseUrl("/img/oss_logo_black.svg"),
+                            }}
+                            style={{ width: '200px', height: 'auto' }} // Adjust the width as needed
+                        />
+                    </a>
+                </div>
+            </div>
         </div>
         <br></br>
         <br></br>

@@ -330,14 +330,14 @@ const config = {
             ],
           },
         ],
-        logo: {
-          alt: "AntGroup Open Source Logo",
-          src: "img/oss_logo.svg",
-          width: 160,
-          height: 51,
-          href: "https://opensource.antgroup.com/",
-        },
-        copyright: `Copyright © ${new Date().getFullYear()} KusionStack Authors`,
+        // logo: {
+        //   alt: "AntGroup Open Source Logo",
+        //   src: "img/oss_logo.svg",
+        //   width: 160,
+        //   height: 51,
+        //   href: "https://opensource.antgroup.com/",
+        // },
+        copyright: `Copyright © ${new Date().getFullYear()} KusionStack Authors. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our <a href="https://www.linuxfoundation.org/trademark-usage/"> Trademark Usage</a> page.`,
       },
       prism: {
         theme: lightCodeTheme,
