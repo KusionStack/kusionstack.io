@@ -121,6 +121,8 @@ In the above example, we configure the `model` and `framework` item of the `infe
 
 As for how the AI application use the LLM service provided by the `inference` module, an environment variable named `INFERENCE_URL` will be injected by the module and the application can call the LLM service with the address. 
 
+Which model used in the application is transparent, and you only need to provide the `prompt` parameter to the request address. Of course, you can directly modify the model and other configuration items in the `main.k` file and update the deployment resources by `kusion apply`.
+
 There are also some optional configuration items in the `inference` module for adjusting the LLM service, whose details can be found [here](../../6-reference/2-modules/1-developer-schemas/inference/inference.md). 
 
 ## Deployment
@@ -368,14 +370,40 @@ replicaset.apps/ollama-infer-deployment-7c56845496   1         1         1      
 
 The AI application in the example provides a simple service that returns the LLM responses when sending a GET request with the `prompt` parameter. 
 
-We can run a new pod (such as `nginx`) in the same cluster and send requests to the AI application's service to perform a simple test. The relevant commands and test results are as follows:
+We can test the application service locally by `port-forward`, allowing us to directly send requests to the application via our browser.
 
 ```sh
-kubectl run mynginx --image=nginx -n example
-kubectl exec -it pod/mynginx -n example -- /bin/bash
-
-# mynginx
-curl 'http://example-dev-inference-public?prompt=Who%20are%20you'
+kubectl port-forward service/example-dev-inference-public 8080:80 -n example
 ```
 
-![](/img/docs/user_docs/guides/llm-ops/inference-test.png)
+The test results are shown in the figure below.
+
+![](/img/docs/user_docs/guides/llm-ops/inference-test-1.png)
+
+By modifying the `model` parameter in the `main.k` file, you can switch to a different model without having to change the application itself. 
+
+For example, we change the value of `model` from `llama3` to `qwen`. Then we execute the `kusion apply` command to update the K8S resources.
+
+```sh
+❯ kusion apply                                                         
+ ✔︎  Generating Spec in the Stack dev...                                                                     
+Stack: dev                                          
+ID                                                  Action
+v1:Namespace:example                                UnChanged
+v1:Service:example:ollama-infer-service             UnChanged
+v1:Service:example:proxy-infer-service              UnChanged
+v1:Service:example:example-dev-inference-public     UnChanged
+apps/v1:Deployment:example:example-dev-inference    UnChanged
+apps/v1:Deployment:example:proxy-infer-deployment   Update
+apps/v1:Deployment:example:ollama-infer-deployment  Update
+
+
+Do you want to apply these diffs?:
+  yes
+> details
+  no
+```
+
+We repeat to send the request to the application via the browser, and the new results are as follows.
+
+![](/img/docs/user_docs/guides/llm-ops/inference-test-2.png)
