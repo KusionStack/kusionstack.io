@@ -15,7 +15,7 @@ Inference is a module schema consisting of model, framework and so on
 
 | name | type | description | default value |
 | --- | --- | --- | --- |
-|**framework** `required`|"Ollama" | "KubeRay"|The framework or environment in which the model operates.||
+|**framework** `required`|"Ollama" \| "KubeRay"|The framework or environment in which the model operates.||
 |**model** `required`|str|The model name to be used for inference.||
 |**num_ctx**|int|The size of the context window used to generate the next token.|2048|
 |**num_predict**|int|Maximum number of tokens to predict when generating text.|128|
