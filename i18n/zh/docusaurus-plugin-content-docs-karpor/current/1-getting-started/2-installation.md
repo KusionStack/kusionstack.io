@@ -119,6 +119,7 @@ Karpor Server 组件是主要的后端服务。它本身就是一个 `apiserver`
 | server.port | int | `7443` | Karpor Server 的端口 |
 | server.replicas | int | `1` | 要运行的 Karpor Server pod 的数量 |
 | server.resources | object | `{"limits":{"cpu":"500m","ephemeral-storage":"10Gi","memory":"1Gi"},"requests":{"cpu":"250m","ephemeral-storage":"2Gi","memory":"256Mi"}}` | Karpor Server pod 的资源规格 |
+| server.serviceType | string | `"ClusterIP"`                                                                                                                                | Karpor Server 的服务类型，可用的值为 ["ClusterIP"、"NodePort"、"LoadBalancer"] |
 
 #### Karpor Syncer
 
@@ -155,6 +156,8 @@ ETCD 组件是 Karpor Server 作为 `apiserver` 背后的存储。
 | etcd.image.repo | string | `"quay.io/coreos/etcd"` | ETCD 镜像的仓库 |
 | etcd.image.tag | string | `"v3.5.11"` | ETCD 镜像的标签 |
 | etcd.name | string | `"etcd"` | ETCD 的组件名称 |
+| etcd.persistence.accessModes[0] | string | `"ReadWriteOnce"` |  |
+| etcd.persistence.size | string | `"10Gi"` |  |
 | etcd.port | int | `2379` | ETCD 的端口 |
 | etcd.replicas | int | `1` | 要运行的 etcd pod 的数量 |
 | etcd.resources | object | `{"limits":{"cpu":"500m","ephemeral-storage":"10Gi","memory":"1Gi"},"requests":{"cpu":"250m","ephemeral-storage":"2Gi","memory":"256Mi"}}` | karpor etcd pod 的资源规格 |

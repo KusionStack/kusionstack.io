@@ -119,6 +119,7 @@ The Karpor Server Component is main backend server. It itself is an `apiserver`,
 | server.port | int | `7443` | Port for karpor server. |
 | server.replicas | int | `1` | The number of karpor server pods to run. |
 | server.resources | object | `{"limits":{"cpu":"500m","ephemeral-storage":"10Gi","memory":"1Gi"},"requests":{"cpu":"250m","ephemeral-storage":"2Gi","memory":"256Mi"}}` | Resource limits and requests for the karpor server pods. |
+| server.serviceType | string | `"ClusterIP"`                                                                                                                                | Service type for the karpor server. The available type values list as ["ClusterIP"、"NodePort"、"LoadBalancer"]. |
 
 #### Karpor Syncer
 
@@ -155,6 +156,8 @@ The ETCD Component is the storage of Karpor Server as `apiserver`.
 | etcd.image.repo | string | `"quay.io/coreos/etcd"` | Repository for ETCD image. |
 | etcd.image.tag | string | `"v3.5.11"` | Specific tag for ETCD image. |
 | etcd.name | string | `"etcd"` | Component name for ETCD. |
+| etcd.persistence.accessModes[0] | string | `"ReadWriteOnce"` |  |
+| etcd.persistence.size | string | `"10Gi"` |  |
 | etcd.port | int | `2379` | Port for ETCD. |
 | etcd.replicas | int | `1` | The number of etcd pods to run. |
 | etcd.resources | object | `{"limits":{"cpu":"500m","ephemeral-storage":"10Gi","memory":"1Gi"},"requests":{"cpu":"250m","ephemeral-storage":"2Gi","memory":"256Mi"}}` | Resource limits and requests for the karpor etcd pods. |
