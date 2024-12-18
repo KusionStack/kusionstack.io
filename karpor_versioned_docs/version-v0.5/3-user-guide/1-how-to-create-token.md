@@ -22,13 +22,13 @@ For MacOS/BSD systems (need an extra `''` after `-i`):
 sed -i '' 's/karpor-server.karpor.svc/127.0.0.1/g' $HOME/.kube/karpor-hub-cluster.kubeconfig
 ```
 
-For Linux systems (only `-i`):  
+For Linux/GNU systems (only `-i`):  
 ```shell
 sed -i 's/karpor-server.karpor.svc/127.0.0.1/g' $HOME/.kube/karpor-hub-cluster.kubeconfig
 ```
 
-For Windows:  
-need to proceed manually
+For Windows systems:  
+Please modify the server address manually in the kubeconfig file.
 
 ## Forward the Services of the Hub Cluster to the Local Machine
 
@@ -81,4 +81,3 @@ By default, the maximum validity period of the token is 8760 hours (1 year). If 
 Copy the token you just generated and paste it into the token input box on the Karpor dashboard, then click login.
 
 Start your Karpor journey in a secure environment!
-

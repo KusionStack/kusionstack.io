@@ -15,10 +15,20 @@ kubectl get configmap karpor-kubeconfig -n karpor -o go-template='{{.data.config
 
 **Note**: Please ensure that the server address in the Hub Cluster's KubeConfig is accessible from your local machine. The default address is the internal cluster address (https://karpor-server.karpor.svc:7443), which cannot be directly connected from local. If you deployed Karpor in a local cluster, you need to forward the karpor-server service to local port 7443 and change the server address to `https://127.0.0.1:7443`.
 
-You can use the following command to change the access address in the Hub Cluster certificate to the local address (Windows users need to replace manually):
+You can use the following sed command to change the access address in the Hub Cluster certificate to the local address:
+
+For MacOS/BSD systems (need an extra `''` after `-i`):  
 ```shell
 sed -i '' 's/karpor-server.karpor.svc/127.0.0.1/g' $HOME/.kube/karpor-hub-cluster.kubeconfig
 ```
+
+For Linux/GNU systems (only `-i`):  
+```shell
+sed -i 's/karpor-server.karpor.svc/127.0.0.1/g' $HOME/.kube/karpor-hub-cluster.kubeconfig
+```
+
+For Windows systems:  
+Please modify the server address manually in the kubeconfig file.
 
 ## Forward the Services of the Hub Cluster to the Local Machine
 
@@ -71,4 +81,3 @@ By default, the maximum validity period of the token is 8760 hours (1 year). If 
 Copy the token you just generated and paste it into the token input box on the Karpor dashboard, then click login.
 
 Start your Karpor journey in a secure environment!
-
