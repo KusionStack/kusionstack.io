@@ -170,4 +170,3 @@ ETCD 组件是 Karpor Server 作为 `apiserver` 背后的存储。
 |-----|------|---------|-------------|
 | job.image.repo | string | `"kusionstack/karpor"` | Job 镜像的仓库 |
 | job.image.tag | string | `""` | Karpor 镜像的标签。如果未指定，则默认为 Chart 的 appVersion |
-

@@ -15,10 +15,20 @@ kubectl get configmap karpor-kubeconfig -n karpor -o go-template='{{.data.config
 
 **注意**：确保本地可访问 Hub Cluster kubeconfig 中的 server 地址。默认为集群内部地址 (https://karpor-server.karpor.svc:7443)，本地无法直接连接。如在本地部署 Karpor，需将 karpor-server 服务转发至本地 7443 端口，并将 server 地址改为 `https://127.0.0.1:7443`。
 
-执行以下命令可将 Hub Cluster 证书中的访问地址一键改为本地地址（Windows 用户需手动替换）:
+你可以使用以下 sed 命令将 Hub 集群证书中的访问地址更改为本地地址：
+
+对于 MacOS/BSD 系统（需要在 `-i` 后添加 `''`）：
 ```shell
 sed -i '' 's/karpor-server.karpor.svc/127.0.0.1/g' $HOME/.kube/karpor-hub-cluster.kubeconfig
 ```
+
+对于 Linux/GNU 系统（仅需要 `-i`）：
+```shell
+sed -i 's/karpor-server.karpor.svc/127.0.0.1/g' $HOME/.kube/karpor-hub-cluster.kubeconfig
+```
+
+对于 Windows 系统：
+请手动修改 kubeconfig 文件中的服务器地址。
 
 ## 将 Hub Cluster 的服务转发到本地
 
@@ -70,4 +80,3 @@ kubectl create token karpor-admin --duration=1000h
 复制刚刚生成的 token，粘贴到 Karpor dashboard 的 token 输入框中， 点击登录。
 
 在安全环境下开启你的 Karpor 之旅吧！
-

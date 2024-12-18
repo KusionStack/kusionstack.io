@@ -170,4 +170,3 @@ This one-time job is used to generate root certificates and some preliminary wor
 |-----|------|---------|-------------|
 | job.image.repo | string | `"kusionstack/karpor"` | Repository for the Job image. |
 | job.image.tag | string | `""` | Tag for Karpor image. Defaults to the chart's appVersion if not specified. |
-
