@@ -15,19 +15,19 @@ title: 代码贡献指南
 
 ### 前提条件
 
-* Golang 版本 1.19+
+* Golang 版本 1.22+
 
 <details>
   <summary>安装 Golang</summary>
 
-1. 从 [官方网站](https://go.dev/dl/) 安装 golang 1.19+。解压二进制文件并放置到某个位置，假设该位置是 home 目录下的 `~/go/`，下面是一个示例命令，你应当选择适合你系统的正确二进制文件。
+1. 从 [官方网站](https://go.dev/dl/) 安装 golang 1.22+。解压二进制文件并放置到某个位置，假设该位置是 home 目录下的 `~/go/`，下面是一个示例命令，你应当选择适合你系统的正确二进制文件。
 
 ```
-wget https://go.dev/dl/go1.20.2.linux-amd64.tar.gz
-tar xzf go1.20.2.linux-amd64.tar.gz
+wget https://go.dev/dl/go1.22.5.linux-amd64.tar.gz
+tar xzf go1.22.5.linux-amd64.tar.gz
 ```
 
-如果你想在本地开发环境维护多个 golang 版本，你可以下载包并解压到某个位置，比如 `~/go/go1.19.1`，然后根据下面的命令相应地改变路径。
+如果你想在本地开发环境维护多个 golang 版本，你可以下载包并解压到某个位置，比如 `~/go/go1.22.1`，然后根据下面的命令相应地改变路径。
 
 1. 为 Golang 设置环境变量
 
@@ -160,7 +160,7 @@ Pull request 的标题将会成为合并后的 commit 信息的描述。
 
 在合并之前，所有的测试 CI 都应该通过：
 
-- 覆盖率不应该下降。当前，pull request 的覆盖率应当至少为 70%。
+- 覆盖率不应该下降。当前，pull request 的覆盖率应当至少为 60%。
 - Karpor 使用 **CLA** 作为贡献者协议。它要求你在第一次合并 pull request 之前签署。
 
 ## 更新文档和网站

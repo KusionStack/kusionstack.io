@@ -15,19 +15,19 @@ This guide will help you get started with Karpor development.
 
 ### Prerequisites
 
-* Golang version 1.19+
+* Golang version 1.22+
 
 <details>
   <summary>Installing Golang</summary>
 
-1. Install go1.19+ from the [official website](https://go.dev/dl/). Extract the binary files and place them at a location, assuming it is located under the home directory `~/go/`, here is an example command, you should choose the correct binary file for your system.
+1. Install go1.22+ from the [official website](https://go.dev/dl/). Extract the binary files and place them at a location, assuming it is located under the home directory `~/go/`, here is an example command, you should choose the correct binary file for your system.
 
 ```
-wget https://go.dev/dl/go1.20.2.linux-amd64.tar.gz
-tar xzf go1.20.2.linux-amd64.tar.gz
+wget https://go.dev/dl/go1.22.5.linux-amd64.tar.gz
+tar xzf go1.22.5.linux-amd64.tar.gz
 ```
 
-If you would like to maintain multiple versions of golang in your local development environment, you can download the package and extract it to a location, like `~/go/go1.19.1`, and then alter the path in the command below accordingly.
+If you would like to maintain multiple versions of golang in your local development environment, you can download the package and extract it to a location, like `~/go/go1.22.1`, and then alter the path in the command below accordingly.
 
 1. Set environment variables for Golang
 
@@ -160,7 +160,7 @@ Make sure your pull request title uses the same format as the commit message sub
 
 Before merging, all testing CIs should pass:
 
-- Coverage should not drop. Currently, the pull request coverage should be at least 70%.
+- Coverage should not drop. Currently, the pull request coverage should be at least 60%.
 - Karpor uses a **CLA** for the contributor agreement. It requires you to sign for every commit before merging the pull request.
 
 ## Updating Documentation and Website
