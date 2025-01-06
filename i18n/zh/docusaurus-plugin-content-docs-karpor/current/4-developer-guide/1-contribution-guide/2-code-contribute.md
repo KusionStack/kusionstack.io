@@ -23,8 +23,8 @@ title: 代码贡献指南
 1. 从 [官方网站](https://go.dev/dl/) 安装 golang 1.22+。解压二进制文件并放置到某个位置，假设该位置是 home 目录下的 `~/go/`，下面是一个示例命令，你应当选择适合你系统的正确二进制文件。
 
 ```
-wget https://go.dev/dl/go1.20.2.linux-amd64.tar.gz
-tar xzf go1.20.2.linux-amd64.tar.gz
+wget https://go.dev/dl/go1.22.5.linux-amd64.tar.gz
+tar xzf go1.22.5.linux-amd64.tar.gz
 ```
 
 如果你想在本地开发环境维护多个 golang 版本，你可以下载包并解压到某个位置，比如 `~/go/go1.22.1`，然后根据下面的命令相应地改变路径。

@@ -23,8 +23,8 @@ This guide will help you get started with Karpor development.
 1. Install go1.22+ from the [official website](https://go.dev/dl/). Extract the binary files and place them at a location, assuming it is located under the home directory `~/go/`, here is an example command, you should choose the correct binary file for your system.
 
 ```
-wget https://go.dev/dl/go1.20.2.linux-amd64.tar.gz
-tar xzf go1.20.2.linux-amd64.tar.gz
+wget https://go.dev/dl/go1.22.5.linux-amd64.tar.gz
+tar xzf go1.22.5.linux-amd64.tar.gz
 ```
 
 If you would like to maintain multiple versions of golang in your local development environment, you can download the package and extract it to a location, like `~/go/go1.22.1`, and then alter the path in the command below accordingly.
