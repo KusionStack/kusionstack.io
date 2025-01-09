@@ -57,33 +57,11 @@ helm install karpor kusionstack/karpor
 
 祝贺你！🎉 你已成功安装 Karpor。现在你可以开始使用 Karpor 探索和洞察多集群中的资源。
 
-## 创建访问令牌
+## 在安装 Karpor 时启用 RBAC 功能（可选）
 
-在注册集群之前，你需要创建一个访问令牌来登录 Karpor Web 界面。以下是创建令牌的简要步骤：
+为了方便用户快速上手 Karpor，`karpor-server` 的 RBAC（基于角色的访问控制）认证功能默认是关闭的。这意味着 `karpor-server` 会接受所有请求。然而，这种做法在生产环境中可能会带来显著的风险。我们强烈建议在生产环境中部署 Karpor 时启用 RBAC 认证功能，以保护数据安全。
 
-1. 导出 Hub Cluster 的 KubeConfig:
-
-```shell
-kubectl get configmap karpor-kubeconfig -n karpor -o go-template='{{.data.config}}' > $HOME/.kube/karpor-hub-cluster.kubeconfig
-```
-
-2. 创建 ServiceAccount 和 ClusterRoleBinding:
-
-```shell
-export KUBECONFIG=$HOME/.kube/karpor-hub-cluster.kubeconfig
-kubectl create serviceaccount karpor-admin
-kubectl create clusterrolebinding karpor-admin --clusterrole=karpor-admin --serviceaccount=default:karpor-admin
-```
-
-3. 创建令牌:
-
-```shell
-kubectl create token karpor-admin --duration=1000h
-```
-
-复制生成的令牌,稍后将用于登录 Karpor Web 界面。
-
-有关创建令牌的详细说明,请参阅 [如何创建 Token](../3-user-guide/1-how-to-create-token.md) 文档。
+有关 RBAC 鉴权和创建令牌的详细说明,请参阅 [如何创建 Token](../3-user-guide/1-how-to-create-token.md) 文档。
 
 ## 注册集群
 

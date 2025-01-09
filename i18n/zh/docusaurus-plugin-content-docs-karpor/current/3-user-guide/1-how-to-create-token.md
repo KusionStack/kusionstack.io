@@ -5,9 +5,20 @@ title: 如何创建 Token
 
 [Hub Cluster](../2-concepts/3-glossary.md#hub-cluster) 采用了与 Kubernetes 相同的基于角色的访问控制（RBAC）机制。这意味着，要访问 Hub Cluster，用户需要在 Hub Cluster 上创建 ClusterRole、ServiceAccount，以及相应的 ClusterRoleBinding 来将两者绑定。为了提升用户体验，我们预设了两种 ClusterRole：karpor-admin 和 karpor-guest。karpor-admin 角色拥有在面板上执行所有操作的权限，包括但不限于添加或删除集群、创建资源组等；而 karpor-guest 角色则仅限于在面板上进行查看操作。随着对 Karpor 的深入了解，用户可以根据自身需求，创建额外的 ClusterRole，实现更细致的权限管理。
 
+## 在安装 Karpor 时启用 RBAC 功能
+
+为了方便用户快速上手 Karpor，`karpor-server` 的 RBAC（基于角色的访问控制）认证功能默认是关闭的。这意味着 `karpor-server` 会接受所有请求。然而，这种做法在生产环境中可能会带来显著的风险。我们强烈建议在生产环境中部署 Karpor 时启用 RBAC 认证功能，以保护数据安全。请按照以下说明在安装 Karpor 时启用 RBAC 功能。
+
+```shell
+helm repo add kusionstack https://kusionstack.github.io/charts
+helm repo update
+helm install karpor kusionstack/karpor --set server.enableRbac=true
+```
+
 ## 导出 Hub Cluster 的 KubeConfig
 
 由于 Hub Cluster 需要 KubeConfig 进行验证，可以通过以下命令一键导出用于访问 Hub Cluster 的 KubeConfig。
+
 ```shell
 # 以下操作在安装 Karpor 的 Kubernetes 集群中运行
 kubectl get configmap karpor-kubeconfig -n karpor -o go-template='{{.data.config}}' > $HOME/.kube/karpor-hub-cluster.kubeconfig
@@ -18,11 +29,13 @@ kubectl get configmap karpor-kubeconfig -n karpor -o go-template='{{.data.config
 你可以使用以下 sed 命令将 Hub 集群证书中的访问地址更改为本地地址：
 
 对于 MacOS/BSD 系统（需要在 `-i` 后添加 `''`）：
+
 ```shell
 sed -i '' 's/karpor-server.karpor.svc/127.0.0.1/g' $HOME/.kube/karpor-hub-cluster.kubeconfig
 ```
 
 对于 Linux/GNU 系统（仅需要 `-i`）：
+
 ```shell
 sed -i 's/karpor-server.karpor.svc/127.0.0.1/g' $HOME/.kube/karpor-hub-cluster.kubeconfig
 ```
@@ -46,6 +59,7 @@ kubectl -n karpor port-forward svc/karpor-server 7443:7443
 本节将指导你如何在 Hub Cluster 中创建 karpor-admin 和 karpor-guest 用户，并为它们分配相应的 ClusterRoleBinding。以下是具体的操作步骤：
 
 首先，指定 kubectl 连接的目标集群为 Hub Cluster：
+
 ```shell
 export KUBECONFIG=$HOME/.kube/karpor-hub-cluster.kubeconfig
 ```
@@ -62,11 +76,13 @@ kubectl create clusterrolebinding karpor-guest --clusterrole=karpor-guest --serv
 ## 为你的用户创建 Token
 
 以下操作需在 Hub Cluster 中执行，请确保已正确设置 kubectl 连接到 Hub Cluster：
+
 ```shell
 export KUBECONFIG=$HOME/.kube/karpor-hub-cluster.kubeconfig
 ```
 
 默认情况下，token 的有效期为 1 小时。如果你需要长期使用的 token，可以在生成时指定更长的过期时间。例如：
+
 ```shell
 kubectl create token karpor-admin --duration=1000h
 ```
