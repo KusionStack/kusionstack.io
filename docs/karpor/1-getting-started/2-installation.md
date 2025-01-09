@@ -49,7 +49,7 @@ helm repo update
 helm search repo kusionstack/karpor --versions
 ```
 
-### Upgrade specified version 
+### Upgrade specified version
 
 You can specify the version to be upgraded through the `--version`.
 

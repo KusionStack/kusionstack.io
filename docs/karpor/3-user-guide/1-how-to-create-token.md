@@ -5,9 +5,20 @@ In this document, you will learn how to use a token to access the Karpor dashboa
 
 [Hub Cluster](../2-concepts/3-glossary.md#hub-cluster) adopts the same Role-Based Access Control (RBAC) mechanism as Kubernetes. This means that in order to access the Hub Cluster, users need to create a ClusterRole, ServiceAccount, and the corresponding ClusterRoleBinding in the Hub Cluster to bind the two. To enhance user experience, we have preset two ClusterRoles: karpor-admin and karpor-guest. The karpor-admin role has permissions to perform all actions on the dashboard, including but not limited to adding or deleting clusters, creating resource groups, etc., while the karpor-guest role is limited to view-only actions on the dashboard. As users gain a deeper understanding of Karpor, they can create additional ClusterRoles based on their needs to achieve more granular permission management.
 
+## Enable RBAC when installing karpor
+
+To facilitate users in quickly getting started with Karpor, the RBAC (Role-Based Access Control) authentication feature of `karpor-server` is disabled by default. This means that `karpor-server` will accept all requests. However, this approach can introduce significant risks in a production environment. We strongly recommend using RBAC authentication to protect data security when deploying Karpor in a production setting. Follow the instructions below to enable the RBAC feature during Karpor installation.
+
+```shell
+helm repo add kusionstack https://kusionstack.github.io/charts
+helm repo update
+helm install karpor kusionstack/karpor --set server.enableRbac=true
+```
+
 ## Exporting the KubeConfig for the Hub Cluster
 
 Since the Hub Cluster requires a KubeConfig for authentication, you can export the KubeConfig to access the Hub Cluster using the following command.
+
 ```shell
 # The following operation is performed in the Kubernetes cluster where Karpor is installed
 kubectl get configmap karpor-kubeconfig -n karpor -o go-template='{{.data.config}}' > $HOME/.kube/karpor-hub-cluster.kubeconfig
@@ -18,11 +29,13 @@ kubectl get configmap karpor-kubeconfig -n karpor -o go-template='{{.data.config
 You can use the following sed command to change the access address in the Hub Cluster certificate to the local address:
 
 For MacOS/BSD systems (need an extra `''` after `-i`):  
+
 ```shell
 sed -i '' 's/karpor-server.karpor.svc/127.0.0.1/g' $HOME/.kube/karpor-hub-cluster.kubeconfig
 ```
 
 For Linux/GNU systems (only `-i`):  
+
 ```shell
 sed -i 's/karpor-server.karpor.svc/127.0.0.1/g' $HOME/.kube/karpor-hub-cluster.kubeconfig
 ```
@@ -46,6 +59,7 @@ kubectl -n karpor port-forward svc/karpor-server 7443:7443
 This section will guide you on how to create karpor-admin and karpor-guest users in the Hub Cluster and assign the corresponding ClusterRoleBinding to them. Here are the specific steps:
 
 First, specify the target cluster for kubectl to connect to as the Hub Cluster:
+
 ```shell
 export KUBECONFIG=$HOME/.kube/karpor-hub-cluster.kubeconfig
 ```
@@ -62,6 +76,7 @@ kubectl create clusterrolebinding karpor-guest --clusterrole=karpor-guest --serv
 ## Create Tokens for Your Users
 
 The following operations need to be performed in the Hub Cluster. Please ensure that kubectl is correctly set to connect to the Hub Cluster:
+
 ```shell
 export KUBECONFIG=$HOME/.kube/karpor-hub-cluster.kubeconfig
 ```

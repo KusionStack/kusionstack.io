@@ -57,33 +57,11 @@ This will open the Karpor Web interface. 👇
 
 Congratulations! 🎉 You have successfully installed Karpor. Now you can start using Karpor to explore and gain insights into resources across multiple clusters.
 
-## Create Access Token
+## Enable RBAC when installing karpor (optional)
 
-Before registering clusters, you need to create an access token to log in to the Karpor Web interface. Here are the brief steps to create a token:
+To facilitate users in quickly getting started with Karpor, the RBAC (Role-Based Access Control) authentication feature of `karpor-server` is disabled by default. This means that `karpor-server` will accept all requests. However, this approach can introduce significant risks in a production environment. We strongly recommend using RBAC authentication to protect data security when deploying Karpor in a production setting.
 
-1. Export the KubeConfig of the Hub Cluster:
-
-```shell
-kubectl get configmap karpor-kubeconfig -n karpor -o go-template='{{.data.config}}' > $HOME/.kube/karpor-hub-cluster.kubeconfig
-```
-
-2. Create ServiceAccount and ClusterRoleBinding:
-
-```shell
-export KUBECONFIG=$HOME/.kube/karpor-hub-cluster.kubeconfig
-kubectl create serviceaccount karpor-admin
-kubectl create clusterrolebinding karpor-admin --clusterrole=karpor-admin --serviceaccount=default:karpor-admin
-```
-
-3. Create token:
-
-```shell
-kubectl create token karpor-admin --duration=1000h
-```
-
-Copy the generated token, which will be used later to log in to the Karpor Web interface.
-
-For detailed instructions on creating tokens, please refer to the [How to Create Token](../3-user-guide/1-how-to-create-token.md) documentation.
+For detailed instructions on RBAC authorization and tokens, please refer to the [How to Create Token](../3-user-guide/1-how-to-create-token.md) documentation.
 
 ## Register Cluster
 
