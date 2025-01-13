@@ -5,7 +5,7 @@ In this document, you will learn how to use a token to access the Karpor dashboa
 
 [Hub Cluster](../2-concepts/3-glossary.md#hub-cluster) adopts the same Role-Based Access Control (RBAC) mechanism as Kubernetes. This means that in order to access the Hub Cluster, users need to create a ClusterRole, ServiceAccount, and the corresponding ClusterRoleBinding in the Hub Cluster to bind the two. To enhance user experience, we have preset two ClusterRoles: karpor-admin and karpor-guest. The karpor-admin role has permissions to perform all actions on the dashboard, including but not limited to adding or deleting clusters, creating resource groups, etc., while the karpor-guest role is limited to view-only actions on the dashboard. As users gain a deeper understanding of Karpor, they can create additional ClusterRoles based on their needs to achieve more granular permission management.
 
-## Enable RBAC when installing karpor
+## Enable RBAC when installing Karpor
 
 To facilitate users in quickly getting started with Karpor, the RBAC (Role-Based Access Control) authentication feature of `karpor-server` is disabled by default. This means that `karpor-server` will accept all requests. However, this approach can introduce significant risks in a production environment. We strongly recommend using RBAC authentication to protect data security when deploying Karpor in a production setting. Follow the instructions below to enable the RBAC feature during Karpor installation.
 

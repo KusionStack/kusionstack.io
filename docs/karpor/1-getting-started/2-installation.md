@@ -2,16 +2,16 @@
 title: Installation
 ---
 
-## Install with helm
+## Install with Helm
 
-If you have a kubernetes cluster, helm is the recommended installation method.
+If you have a Kubernetes cluster, Helm is the recommended installation method.
 
 The following tutorial will guide you to install Karpor using Helm, which will install the chart with the release name `karpor-release` in namespace `karpor`.
 
 ### Prerequisites
 
 * Helm v3+
-* A Kubernetes Cluster (The simplest way is to deploy a kubernetes cluster locally using `kind` or `minikube`)
+* A Kubernetes Cluster (The simplest way is to deploy a Kubernetes cluster locally using `kind` or `minikube`)
 
 ### Remote Installation
 
@@ -73,7 +73,7 @@ helm upgrade karpor-release charts/karpor
 
 ### Uninstall
 
-To uninstall/delete the `karpor-release` helm release in namespace `karpor`:
+To uninstall/delete the `karpor-release` Helm release in namespace `karpor`:
 
 ```shell
 helm uninstall karpor-release

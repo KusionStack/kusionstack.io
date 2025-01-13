@@ -15,7 +15,7 @@ title: 安装
 
 ### 远程安装
 
-首先，将 karpor chart 仓库添加到您的本地仓库。
+首先，将 Karpor chart 仓库添加到您的本地仓库。
 
 ```shell
 helm repo add kusionstack https://kusionstack.github.io/charts
