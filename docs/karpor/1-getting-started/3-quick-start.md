@@ -9,7 +9,7 @@ title: Quick Start
 
 ## Create Cluster (Optional)
 
-First, if you do not have a ready-made cluster, you need to create a kubernetes cluster in your local environment with the `kind` tool. Follow these steps:
+First, if you do not have a ready-made cluster, you need to create a Kubernetes cluster in your local environment with the `kind` tool. Follow these steps:
 
 1. Create a cluster. You can create a cluster named `demo-cluster` using the following command:
    ```shell
@@ -57,7 +57,7 @@ This will open the Karpor Web interface. 👇
 
 Congratulations! 🎉 You have successfully installed Karpor. Now you can start using Karpor to explore and gain insights into resources across multiple clusters.
 
-## Enable RBAC when installing karpor (optional)
+## Enable RBAC when installing Karpor (optional)
 
 To facilitate users in quickly getting started with Karpor, the RBAC (Role-Based Access Control) authentication feature of `karpor-server` is disabled by default. This means that `karpor-server` will accept all requests. However, this approach can introduce significant risks in a production environment. We strongly recommend using RBAC authentication to protect data security when deploying Karpor in a production setting.
 
