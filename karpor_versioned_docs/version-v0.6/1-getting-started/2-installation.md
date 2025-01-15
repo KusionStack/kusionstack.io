@@ -99,7 +99,9 @@ helm install karpor-release kusionstack/karpor \
 --set server.ai.authToken=YOUR_AI_TOKEN \
 --set server.ai.baseUrl=https://api.openai.com/v1
 
-# server.ai.backend has default values `openai`, which can be overridden when necessary. If the backend you are using is compatible with OpenAI, then there is no need to make any changes here.
+# server.ai.backend has default values `openai`, which can be overridden when necessary.
+# If the backend you are using is compatible with OpenAI, then there is no need to make 
+# any changes here.
 helm install karpor-release kusionstack/karpor \
 --set server.ai.authToken=YOUR_AI_TOKEN \
 --set server.ai.baseUrl=https://api.openai.com/v1 \
