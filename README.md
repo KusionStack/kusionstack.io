@@ -58,6 +58,15 @@ npm run docusaurus docs:version:karpor v0.4
 npm run write-translations -- --locale zh --override
 ```
 
+Use karpor as an example, when preparing to officially release version v0.6.0, execute the following commands in sequence:
+```bash
+npm run docusaurus docs:version:karpor v0.6
+npm run write-translations -- --locale zh --override && npm run write-translations -- --locale en --override
+# Note: After execution, version declaration files will be automatically updated.
+# For example, the next version in current.json will be changed to v0.7.0.
+# And, you need to remove any file changes unrelated to Karpor here.
+```
+
 Optional sub product names:
 
 -   `docs` (alias for kusion)
