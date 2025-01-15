@@ -1,42 +1,42 @@
 {
   "version.label": {
-    "message": "v0.7 🚧",
-    "description": "The label for version current"
+    "message": "v0.6",
+    "description": "The label for version v0.6"
   },
   "sidebar.karpor.category.Getting Started": {
-    "message": "入门",
+    "message": "Getting Started",
     "description": "The label for category Getting Started in sidebar karpor"
   },
   "sidebar.karpor.category.Concepts": {
-    "message": "概念",
+    "message": "Concepts",
     "description": "The label for category Concepts in sidebar karpor"
   },
   "sidebar.karpor.category.User Guide": {
-    "message": "用户手册",
+    "message": "User Guide",
     "description": "The label for category User Guide in sidebar karpor"
   },
   "sidebar.karpor.category.How to Insight": {
-    "message": "如何洞察",
+    "message": "How to Insight",
     "description": "The label for category How to Insight in sidebar karpor"
   },
   "sidebar.karpor.category.Best Production Practices": {
-    "message": "生产最佳实践",
+    "message": "Best Production Practices",
     "description": "The label for category Best Production Practices in sidebar karpor"
   },
   "sidebar.karpor.category.Developer Guide": {
-    "message": "开发者手册",
+    "message": "Developer Guide",
     "description": "The label for category Developer Guide in sidebar karpor"
   },
   "sidebar.karpor.category.Contribution Guide": {
-    "message": "贡献指南",
+    "message": "Contribution Guide",
     "description": "The label for category Contribution Guide in sidebar karpor"
   },
   "sidebar.karpor.category.Conventions": {
-    "message": "规约",
+    "message": "Conventions",
     "description": "The label for category Conventions in sidebar karpor"
   },
   "sidebar.karpor.category.References": {
-    "message": "参考手册",
+    "message": "References",
     "description": "The label for category References in sidebar karpor"
   },
   "sidebar.karpor.category.CLI Commands": {
