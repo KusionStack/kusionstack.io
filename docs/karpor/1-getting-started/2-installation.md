@@ -98,16 +98,19 @@ If you are trying to install Karpor with AI features, including natural language
 helm install karpor-release kusionstack/karpor \
 --set server.ai.authToken=YOUR_AI_TOKEN \
 --set server.ai.baseUrl=https://api.openai.com/v1
+
 # server.ai.backend has default values `openai`, which can be overridden when necessary. If the backend you are using is compatible with OpenAI, then there is no need to make any changes here.
 helm install karpor-release kusionstack/karpor \
 --set server.ai.authToken=YOUR_AI_TOKEN \
 --set server.ai.baseUrl=https://api.openai.com/v1 \
 --set server.ai.backend=huggingface
+
 # server.ai.model has default values `gpt-3.5-turbo`, which can be overridden when necessary.
 helm install karpor-release kusionstack/karpor \
 --set server.ai.authToken=YOUR_AI_TOKEN \
 --set server.ai.baseUrl=https://api.openai.com/v1 \
 --set server.ai.model=gpt-4o
+
 # server.ai.topP and server.ai.temperature can also be manually modified.
 helm install karpor-release kusionstack/karpor \
 --set server.ai.authToken=YOUR_AI_TOKEN \
