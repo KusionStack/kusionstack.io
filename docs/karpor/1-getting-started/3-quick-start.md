@@ -119,5 +119,6 @@ If you have any questions or concerns, check out the official documentation of K
 
 ## Next Step
 
-- Learn Karpor's [Architecture](../concepts/architecture) and [Glossary](../concepts/glossary).
-- View [User Guide](../user-guide/multi-cluster-management) to look on more of what you can achieve with Karpor.
+* Learn Karpor's [Architecture](../concepts/architecture) and [Glossary](../concepts/glossary).
+* View [User Guide](../user-guide/multi-cluster-management) to look on more of what you can achieve with Karpor.
+* [Enable AI features](installation#enable-ai-features), including natural language search and AI analyze.

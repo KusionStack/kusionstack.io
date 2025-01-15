@@ -89,6 +89,33 @@ helm install karpor-release kusionstack/karpor --set registryProxy=docker.m.daoc
 
 **NOTE**: The above is just an example, you can replace the value of `registryProxy` as needed.
 
+### Enable AI features
+
+If you are trying to install Karpor with AI features, including natural language search and AI analyze, `ai-auth-token` and `ai-base-url` should be configured, e.g.:
+
+```shell
+# At a minimum, server.ai.authToken and server.ai.baseUrl must be configured.
+helm install karpor-release kusionstack/karpor \
+--set server.ai.authToken=YOUR_AI_TOKEN \
+--set server.ai.baseUrl=https://api.openai.com/v1
+# server.ai.backend has default values `openai`, which can be overridden when necessary. If the backend you are using is compatible with OpenAI, then there is no need to make any changes here.
+helm install karpor-release kusionstack/karpor \
+--set server.ai.authToken=YOUR_AI_TOKEN \
+--set server.ai.baseUrl=https://api.openai.com/v1 \
+--set server.ai.backend=huggingface
+# server.ai.model has default values `gpt-3.5-turbo`, which can be overridden when necessary.
+helm install karpor-release kusionstack/karpor \
+--set server.ai.authToken=YOUR_AI_TOKEN \
+--set server.ai.baseUrl=https://api.openai.com/v1 \
+--set server.ai.model=gpt-4o
+# server.ai.topP and server.ai.temperature can also be manually modified.
+helm install karpor-release kusionstack/karpor \
+--set server.ai.authToken=YOUR_AI_TOKEN \
+--set server.ai.baseUrl=https://api.openai.com/v1 \
+--set server.ai.topP=0.5 \
+--set server.ai.temperature=0.2
+```
+
 ### Chart Parameters
 
 The following table lists the configurable parameters of the chart and their default values.
@@ -113,13 +140,21 @@ The Karpor Server Component is main backend server. It itself is an `apiserver`,
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| server.ai | object | `{"authToken":"","backend":"openai","baseUrl":"","model":"gpt-3.5-turbo","temperature":1,"topP":1}` | AI configuration section. The AI analysis feature requires that [authToken, baseUrl] be assigned values. |
+| server.ai.authToken | string | `""` | Authentication token for accessing the AI service.  |
+| server.ai.backend | string | `"openai"` | Backend service or platform that the AI model is hosted on. e.g., "openai". If the backend you are using is compatible with OpenAI, then there is no need to make any changes here. |
+| server.ai.baseUrl | string | `""` | Base URL of the AI service. e.g., "https://api.openai.com/v1". |
+| server.ai.model | string | `"gpt-3.5-turbo"` | Name or identifier of the AI model to be used. e.g., "gpt-3.5-turbo". |
+| server.ai.temperature | float | `1` | Temperature parameter for the AI model. This controls the randomness of the output, where a higher value (e.g., 1.0) makes the output more random, and a lower value (e.g., 0.0) makes it more deterministic. |
+| server.ai.topP | float | `1` | Top-p (nucleus sampling) parameter for the AI model. This controls Controls the probability mass to consider for sampling, where a higher value leads to greater diversity in the generated content (typically ranging from 0 to 1) |
+| server.enableRbac | bool | `false` | Enable RBAC authorization if set to true. |
 | server.image.repo | string | `"kusionstack/karpor"` | Repository for Karpor server image. |
 | server.image.tag | string | `""` | Tag for Karpor server image. Defaults to the chart's appVersion if not specified. |
 | server.name | string | `"karpor-server"` | Component name for karpor server. |
 | server.port | int | `7443` | Port for karpor server. |
 | server.replicas | int | `1` | The number of karpor server pods to run. |
 | server.resources | object | `{"limits":{"cpu":"500m","ephemeral-storage":"10Gi","memory":"1Gi"},"requests":{"cpu":"250m","ephemeral-storage":"2Gi","memory":"256Mi"}}` | Resource limits and requests for the karpor server pods. |
-| server.serviceType | string | `"ClusterIP"`                                                                                                                                | Service type for the karpor server. The available type values list as ["ClusterIP"、"NodePort"、"LoadBalancer"]. |
+| server.serviceType | string | `"ClusterIP"` | Service type for the karpor server. The available type values list as ["ClusterIP"、"NodePort"、"LoadBalancer"]. |
 
 #### Karpor Syncer
 
@@ -156,8 +191,8 @@ The ETCD Component is the storage of Karpor Server as `apiserver`.
 | etcd.image.repo | string | `"quay.io/coreos/etcd"` | Repository for ETCD image. |
 | etcd.image.tag | string | `"v3.5.11"` | Specific tag for ETCD image. |
 | etcd.name | string | `"etcd"` | Component name for ETCD. |
-| etcd.persistence.accessModes[0] | string | `"ReadWriteOnce"` |  |
-| etcd.persistence.size | string | `"10Gi"` |  |
+| etcd.persistence.accessModes | list | `["ReadWriteOnce"]` | Volume access mode, ReadWriteOnce means single node read-write access |
+| etcd.persistence.size | string | `"10Gi"` | Size of etcd persistent volume |
 | etcd.port | int | `2379` | Port for ETCD. |
 | etcd.replicas | int | `1` | The number of etcd pods to run. |
 | etcd.resources | object | `{"limits":{"cpu":"500m","ephemeral-storage":"10Gi","memory":"1Gi"},"requests":{"cpu":"250m","ephemeral-storage":"2Gi","memory":"256Mi"}}` | Resource limits and requests for the karpor etcd pods. |

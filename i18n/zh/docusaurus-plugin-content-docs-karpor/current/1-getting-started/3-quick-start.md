@@ -117,5 +117,6 @@ Karpor 提供了一个强大的搜索功能，允许你快速跨集群查找资�
 
 ## 下一步
 
-- 了解 Karpor 的 [架构](../concepts/architecture) 和 [术语表](../concepts/glossary)。
-- 查看 [用户指南](../user-guide/multi-cluster-management) 以了解 Karpor 的更多功能。
+* 了解 Karpor 的 [架构](../concepts/architecture) 和 [术语表](../concepts/glossary)。
+* 查看 [用户指南](../user-guide/multi-cluster-management) 以了解 Karpor 的更多功能。
+* [启用 AI 功能](installation#启用-ai-功能)，包括自然语言搜索和 AI 智能分析。

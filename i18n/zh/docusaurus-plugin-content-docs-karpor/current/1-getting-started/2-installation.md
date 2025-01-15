@@ -89,6 +89,33 @@ helm install karpor-release kusionstack/karpor --set registryProxy=docker.m.daoc
 
 **注意**: 以上只是一个样例，你可以根据需要替换 `registryProxy` 的值。
 
+### 启用 AI 功能
+
+如果您要安装带有AI功能的Karpor，包括自然语言搜索和AI分析，则应配置 `ai-auth-token` 和 `ai-base-url`，例如：
+
+```shell
+# 至少需要配置 server.ai.authToken 和 server.ai.baseUrl。
+helm install karpor-release kusionstack/karpor \
+--set server.ai.authToken=YOUR_AI_TOKEN \
+--set server.ai.baseUrl=https://api.openai.com/v1
+# server.ai.backend 的默认值是 `openai`，可以根据需要进行覆盖。如果你使用的后端与 OpenAI 兼容，则无需在此处进行任何更改。
+helm install karpor-release kusionstack/karpor \
+--set server.ai.authToken=YOUR_AI_TOKEN \
+--set server.ai.baseUrl=https://api.openai.com/v1 \
+--set server.ai.backend=huggingface
+# server.ai.model 的默认值是 `gpt-3.5-turbo`，可以根据需要进行覆盖。
+helm install karpor-release kusionstack/karpor \
+--set server.ai.authToken=YOUR_AI_TOKEN \
+--set server.ai.baseUrl=https://api.openai.com/v1 \
+--set server.ai.model=gpt-4o
+# server.ai.topP 和 server.ai.temperature 也可以手动修改。
+helm install karpor-release kusionstack/karpor \
+--set server.ai.authToken=YOUR_AI_TOKEN \
+--set server.ai.baseUrl=https://api.openai.com/v1 \
+--set server.ai.topP=0.5 \
+--set server.ai.temperature=0.2
+```
+
 ### Chart 参数
 
 以下表格列出了 Chart 的所有可配置参数及其默认值。
