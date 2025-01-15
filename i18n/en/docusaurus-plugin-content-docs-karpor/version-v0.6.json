@@ -1,7 +1,7 @@
 {
   "version.label": {
-    "message": "v0.7 🚧",
-    "description": "The label for version current"
+    "message": "v0.6",
+    "description": "The label for version v0.6"
   },
   "sidebar.karpor.category.Getting Started": {
     "message": "Getting Started",
