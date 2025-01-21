@@ -23,7 +23,7 @@ The ability to roll back is crucial in reducing incident duration. Rolling back 
 
 ## Example
 
-The API definition of the `Spec` structure in Kusion can be found [here](https://github.com/KusionStack/kusion/blob/main/pkg/apis/api.kusion.io/v1/types.go#L862). Below is an example `Spec` file generated from the `quickstart` demo application (more details can be found [here](../2-getting-started/2-deliver-quickstart.md)). 
+The API definition of the `Spec` structure in Kusion can be found [here](https://github.com/KusionStack/kusion/blob/main/pkg/apis/api.kusion.io/v1/types.go#L862). Below is an example `Spec` file generated from the `quickstart` demo application (more details can be found [here](../2-getting-started/2-getting-started-with-kusion-cli/1-deliver-quickstart.md)). 
 
 ```yaml
 resources:

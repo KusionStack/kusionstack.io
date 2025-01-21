@@ -212,7 +212,7 @@ Kusion offers a `kusion init` sub-command which initializes a new project using 
 
 There is a built-in template `quickstart` in the Kusion binary that can be used offline. 
 
-The pre-built templates are meant to help you get off the ground quickly with some simple out-of-the-box examples. You can refer to the [QuickStart documentation](../getting-started/deliver-quickstart) for some step-by-step tutorials.
+The pre-built templates are meant to help you get off the ground quickly with some simple out-of-the-box examples. You can refer to the [QuickStart documentation](../2-getting-started/2-getting-started-with-kusion-cli/1-deliver-quickstart.md) for some step-by-step tutorials.
 
 ### Using references
 
