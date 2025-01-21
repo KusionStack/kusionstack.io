@@ -12,7 +12,7 @@ To follow this guide, you will need:
 As a platform engineer, the workflow of developing a Kusion module looks like this:
 
 1. Communicate with app developers and identify the fields that should exposed to them in the dev-orient schema
-2. Identify module input parameters that should be configured by platform engineers in the [workspace](../workspace)
+2. Identify module input parameters that should be configured by platform engineers in the [workspace](../4-workspace/1-overview.md)
 3. Define the app dev-orient schema
 4. Develop the module by implementing gRPC interfaces
 
@@ -113,7 +113,7 @@ service:                    Service
 randomPassword:             RandomPassword
 ```
 
-3. **Implement the [gRPC proto](https://github.com/KusionStack/kusion/blob/main/pkg/modules/proto/module.proto) generate interface.** The `generate` interface consumes the application developer's config described in the [`AppConfiguration`](../app-configuration) and the platform engineer's config described in the [`workspace`](../workspace) to generate all infrastructure resources represented by this module.
+3. **Implement the [gRPC proto](https://github.com/KusionStack/kusion/blob/main/pkg/modules/proto/module.proto) generate interface.** The `generate` interface consumes the application developer's config described in the [`AppConfiguration`](../app-configuration) and the platform engineer's config described in the [`workspace`](../4-workspace/1-overview.md) to generate all infrastructure resources represented by this module.
 
 ```go
 func (k *Kawesome) Generate(_ context.Context, request *module.GeneratorRequest) (*module.GeneratorResponse, error) {

@@ -44,7 +44,7 @@ This guide is to deploy an app using Kusion, relying on the Kusion CLI and an ex
 
 ### Initializing workspace configuration
 
-In version 0.10.0, we have introduced the new concept of [workspaces](../../../3-concepts/4-workspace.md), which is a logical layer whose configurations represent an opinionated set of defaults, often appointed by the platform team. In most cases workspaces are represented with an "environment" in traditional SDLC terms. These workspaces provide a means to separate the concerns between the **application developers** who wish to focus on business logic, and a group of **platform engineers** who wish to standardize the applications on the platform.
+In version 0.10.0, we have introduced the new concept of [workspaces](../../3-concepts/4-workspace/1-overview.md), which is a logical layer whose configurations represent an opinionated set of defaults, often appointed by the platform team. In most cases workspaces are represented with an "environment" in traditional SDLC terms. These workspaces provide a means to separate the concerns between the **application developers** who wish to focus on business logic, and a group of **platform engineers** who wish to standardize the applications on the platform.
 
 Driven by the discipline of Platform Engineering, management of the workspaces, including create/updating/deleting workspaces and their configurations should be done by dedicated platform engineers in a large software organizations to facilitate a more mature and scalable collaboration pattern.
 
