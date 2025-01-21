@@ -11,7 +11,7 @@ This tutorial will demonstrate how to deploy a WordPress application with Kusion
 
 ## Prerequisites
 
-- Install [Kusion](../../2-getting-started/1-install-kusion.md). 
+- Install [Kusion](../../../2-getting-started/1-install-kusion.md). 
 - Install [kubectl CLI](https://kubernetes.io/docs/tasks/tools/#kubectl) and run a [Kubernetes](https://kubernetes.io/) or [k3s](https://docs.k3s.io/quick-start) or [k3d](https://k3d.io/v5.4.4/#installation) or [MiniKube](https://minikube.sigs.k8s.io/docs/tutorials/multi_node) cluster. 
 - Prepare a cloud service account and create a user with at least **VPCFullAccess** and **RDSFullAccess** related permissions to use the Relational Database Service (RDS). This kind of user can be created and managed in the Identity and Access Management (IAM) console of the cloud vendor. 
 - The environment that executes `kusion` needs to have connectivity to terraform registry to download the terraform providers. 
@@ -125,7 +125,7 @@ kusion workspace show
 The `workspace.yaml` is a sample configuration file for workspace management, including `MySQL` module configs. Workspace configurations are usually declared by **Platform Engineers** and will take effect through the corresponding stack. 
 
 :::info
-More details about the configuration of Workspace can be found in [Concepts of Workspace](../../3-concepts/4-workspace.md). 
+More details about the configuration of Workspace can be found in [Concepts of Workspace](../../../3-concepts/4-workspace.md). 
 :::
 
 ## Create Project And Stack

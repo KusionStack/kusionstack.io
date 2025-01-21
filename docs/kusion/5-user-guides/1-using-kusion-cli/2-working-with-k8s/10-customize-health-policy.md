@@ -8,9 +8,9 @@ Kusion now offers advanced customized health checks leveraging the power of `KCL
 
 ## Prerequisites
 
-Please refer to the [prerequisites](deploy-application#prerequisites) in the guide for deploying an application.
+Please refer to the [prerequisites](1-deploy-application#prerequisites) in the guide for deploying an application.
 
-The example below also requires you to have [initialized the project](deploy-application#initializing) using the `kusion workspace create` and `kusion init` command, which will create a workspace and also generate a [`kcl.mod` file](deploy-application#kclmod) under the stack directory.
+The example below also requires you to have [initialized the project](1-deploy-application#initializing) using the `kusion workspace create` and `kusion init` command, which will create a workspace and also generate a [`kcl.mod` file](1-deploy-application#kclmod) under the stack directory.
 
 ## Defining a Health Policy
 
@@ -191,4 +191,4 @@ Ensure that the resource meets the conditions defined in your health policy.
 
 Customized health checks provides a powerful way to ensure your Kubernetes resources are in the desired state before considering an `apply` operation complete. By defining health policies, you can automate the validation of your resources and ensure they meet specific criteria before being considered healthy. By leveraging KCL, you can create sophisticated health check logic tailored to your specific `project` needs.
 
-For more details on KCL and its syntax, refer to the [KCL documentation](../../4-configuration-walkthrough/2-kcl-basics.md).
+For more details on KCL and its syntax, refer to the [KCL documentation](../../../4-configuration-walkthrough/2-kcl-basics.md).

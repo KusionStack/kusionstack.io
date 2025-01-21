@@ -8,13 +8,13 @@ You can set up operational rules in the `AppConfiguration` model with the `opsru
 
 ## Prerequisites
 
-Please refer to the [prerequisites](deploy-application#prerequisites) in the guide for deploying an application.
+Please refer to the [prerequisites](1-deploy-application#prerequisites) in the guide for deploying an application.
 
-The example below also requires you to have [initialized the project](deploy-application#initializing) using the `kusion workspace create` and `kusion init` command, which will create a workspace and also generate a [`kcl.mod` file](deploy-application#kclmod) under the stack directory.
+The example below also requires you to have [initialized the project](1-deploy-application#initializing) using the `kusion workspace create` and `kusion init` command, which will create a workspace and also generate a [`kcl.mod` file](1-deploy-application#kclmod) under the stack directory.
 
 ## Managing Workspace Configuration
 
-In the first guide in this series, we introduced a step to [initialize a workspace](deploy-application#initializing-workspace-configuration) with an empty configuration. The same empty configuration will still work in this guide, no changes are required there.
+In the first guide in this series, we introduced a step to [initialize a workspace](1-deploy-application#initializing-workspace-configuration) with an empty configuration. The same empty configuration will still work in this guide, no changes are required there.
 
 However, if you (or the platform team) would like to set default values for the opsrule to standardize the behavior of applications, you can do so by updating the `~/dev.yaml`. 
 Note that the platform engineers should set the default workload to [Kusion Operation CollaSet](https://github.com/KusionStack/operating) and installed the Kusion Operation controllers properly, the `opsrules` module will generate a [PodTransitionRule](https://www.kusionstack.io/docs/operating/manuals/podtransitionrule) instead of updating the `maxUnavailable` value in the deployment:
@@ -79,7 +79,7 @@ helloworld: ac.AppConfiguration {
 
 ## Applying
 
-Re-run steps in [Applying](deploy-application#applying), resource scaling is completed.
+Re-run steps in [Applying](1-deploy-application#applying), resource scaling is completed.
 
 ## Validation
 

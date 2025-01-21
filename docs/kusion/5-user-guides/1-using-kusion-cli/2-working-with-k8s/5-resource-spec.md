@@ -6,17 +6,17 @@ id: resource-spec
 
 You can manage container-level resource specification in the `AppConfiguration` model via the `resources` field (under the `Container` schema).
 
-For the full `Container` schema reference, please see [here](../../reference/modules/developer-schemas/workload/service#schema-container) for more details.
+For the full `Container` schema reference, please see [here](../../../6-reference/2-modules/1-developer-schemas/workload/service#schema-container) for more details.
 
 ## Prerequisites
 
-Please refer to the [prerequisites](deploy-application#prerequisites) in the guide for deploying an application.
+Please refer to the [prerequisites](1-deploy-application#prerequisites) in the guide for deploying an application.
 
-The example below also requires you to have [initialized the project](deploy-application#initializing) using the `kusion workspace create` and `kusion init` command, which will create a workspace and also generate a [`kcl.mod` file](deploy-application#kclmod) under the stack directory.
+The example below also requires you to have [initialized the project](1-deploy-application#initializing) using the `kusion workspace create` and `kusion init` command, which will create a workspace and also generate a [`kcl.mod` file](1-deploy-application#kclmod) under the stack directory.
 
 ## Managing Workspace Configuration
 
-In the first guide in this series, we introduced a step to [initialize a workspace](deploy-application#initializing-workspace-configuration) with an empty configuration. The same empty configuration will still work in this guide, no changes are required there.
+In the first guide in this series, we introduced a step to [initialize a workspace](1-deploy-application#initializing-workspace-configuration) with an empty configuration. The same empty configuration will still work in this guide, no changes are required there.
 
 ## Example
 
@@ -47,7 +47,7 @@ Everything else in `main.k` stay the same.
 
 ## Applying
 
-Re-run steps in [Applying](deploy-application#applying), resource scaling is completed.
+Re-run steps in [Applying](1-deploy-application#applying), resource scaling is completed.
 
 ```
 $ kusion apply

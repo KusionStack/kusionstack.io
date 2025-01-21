@@ -6,17 +6,17 @@ id: container
 
 You can manage container-level configurations in the `AppConfiguration` model via the `containers` field (under the `workload` schema). By default, everything defined in the `containers` field will be treated as application containers. Sidecar containers will be supported in a future version of kusion.
 
-For the full `Container` schema reference, please see [here](../../reference/modules/developer-schemas/workload/service#schema-container) for more details.
+For the full `Container` schema reference, please see [here](../../../6-reference/2-modules/1-developer-schemas/workload/service#schema-container) for more details.
 
 ## Pre-requisite
 
-Please refer to the [prerequisites](deploy-application#prerequisites) in the guide for deploying an application.
+Please refer to the [prerequisites](1-deploy-application#prerequisites) in the guide for deploying an application.
 
-The example below also requires you to have [initialized the project](deploy-application#initializing) using the `kusion workspace create` and `kusion init` command, which will create a workspace and also generate a [`kcl.mod` file](deploy-application#kclmod) under the stack directory.
+The example below also requires you to have [initialized the project](1-deploy-application#initializing) using the `kusion workspace create` and `kusion init` command, which will create a workspace and also generate a [`kcl.mod` file](1-deploy-application#kclmod) under the stack directory.
 
 ## Managing Workspace Configuration
 
-In the last guide, we introduced a step to [initialize a workspace](deploy-application#initializing-workspace-configuration) with an empty configuration. The same empty configuration will still work in this guide, no changes are required there.
+In the last guide, we introduced a step to [initialize a workspace](1-deploy-application#initializing-workspace-configuration) with an empty configuration. The same empty configuration will still work in this guide, no changes are required there.
 
 However, if you (or the platform team) would like to set default values for the workloads to standardize the behavior of applications in the `dev` workspace, you can do so by updating the `~/dev.yaml`:
 
@@ -40,7 +40,7 @@ The workspace configuration need to be updated with the command:
 kusion workspace update dev -f ~/dev.yaml
 ```
 
-For a full reference of what can be configured in the workspace level, please see the [workspace reference](../../reference/modules/workspace-configs/workload/service).
+For a full reference of what can be configured in the workspace level, please see the [workspace reference](../../../6-reference/2-modules/2-workspace-configs/workload/service).
 
 ## Example
 
@@ -89,7 +89,7 @@ import network as n
 
 ## Apply
 
-Re-run steps in [Applying](deploy-application#applying), new container configuration can be applied.
+Re-run steps in [Applying](1-deploy-application#applying), new container configuration can be applied.
 
 ```
 $ kusion apply
