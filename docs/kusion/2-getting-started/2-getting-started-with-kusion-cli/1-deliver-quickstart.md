@@ -2,7 +2,7 @@
 id: deliver-quickstart
 ---
 
-# Run Your First App on Kubernetes with Kusion
+# Run Your First App on Kubernetes with Kusion CLI
 
 In this tutorial, we will walk through how to deploy a quickstart application on Kubernetes with Kusion. The demo application can interact with a locally deployed MySQL database, which is declared as an accessory in the config codes and will be automatically created and managed by Kusion. 
 
@@ -10,7 +10,7 @@ In this tutorial, we will walk through how to deploy a quickstart application on
 
 Before we start to play with this example, we need to have the Kusion CLI installed and run an accessible Kubernetes cluster. Here are some helpful documents: 
 
-- Install [Kusion CLI](./1-install-kusion.md). 
+- Install [Kusion CLI](../1-install-kusion.md). 
 - Run a [Kubernetes](https://kubernetes.io) cluster. Some light and convenient options for Kubernetes local deployment include [k3s](https://docs.k3s.io/quick-start), [k3d](https://k3d.io/v5.4.4/#installation), and [MiniKube](https://minikube.sigs.k8s.io/docs/tutorials/multi_node). 
 
 ## Initialize Project
@@ -40,7 +40,7 @@ tree
 ```
 
 :::info
-More details about the project and stack structure can be found in [Project](../3-concepts/1-project/1-overview.md) and [Stack](../3-concepts/2-stack/1-overview.md). 
+More details about the project and stack structure can be found in [Project](../../3-concepts/1-project/1-overview.md) and [Stack](../../3-concepts/2-stack/1-overview.md). 
 :::
 
 ### Review Configuration Files
@@ -102,7 +102,7 @@ network = { oci = "oci://ghcr.io/kusionstack/network", tag = "0.2.0" }
 ```
 
 :::info
-More details about the application model and module dependency declaration can be found in [Kusion Module guide for app dev](../3-concepts/3-module/3-app-dev-guide.md). 
+More details about the application model and module dependency declaration can be found in [Kusion Module guide for app dev](../../3-concepts/3-module/3-app-dev-guide.md). 
 :::
 
 :::tip
@@ -124,7 +124,7 @@ During the first apply, the models and modules that the application depends on w
 :::
 
 :::info
-Kusion by default will create the Kubernetes resources of the application in the namespace the same as the project name. If you want to customize the namespace, please refer to [Project Namespace Extension](../3-concepts/1-project/2-configuration.md#kubernetesnamespace) and [Stack Namespace Extension](../3-concepts/2-stack/2-configuration.md#kubernetesnamespace). 
+Kusion by default will create the Kubernetes resources of the application in the namespace the same as the project name. If you want to customize the namespace, please refer to [Project Namespace Extension](../../3-concepts/1-project/2-configuration.md#kubernetesnamespace) and [Stack Namespace Extension](../../3-concepts/2-stack/2-configuration.md#kubernetesnamespace). 
 :::
 
 Now we can visit [http://localhost:8080](http://localhost:8080) in our browser and play with the demo application! 
@@ -184,10 +184,10 @@ quickstart: ac.AppConfiguration {
 }
 ```
 
-The configuration codes above declare a local `mysql.MySQL` with the engine version of `8.0` as an accessory for the application workload. The necessary Kubernetes resources for deploying and using the local MySQL database will be generated and users can get the `host`, `username` and `password` of the database through the [MySQL Credentials And Connectivity](../6-reference/2-modules/1-developer-schemas/database/mysql.md#credentials-and-connectivity) of Kusion in application containers. 
+The configuration codes above declare a local `mysql.MySQL` with the engine version of `8.0` as an accessory for the application workload. The necessary Kubernetes resources for deploying and using the local MySQL database will be generated and users can get the `host`, `username` and `password` of the database through the [MySQL Credentials And Connectivity](../../6-reference/2-modules/1-developer-schemas/database/mysql.md#credentials-and-connectivity) of Kusion in application containers. 
 
 :::info
-For more information about the naming convention of Kusion built-in MySQL module, you can refer to [Module Naming Convention](../6-reference/2-modules/3-naming-conventions.md). 
+For more information about the naming convention of Kusion built-in MySQL module, you can refer to [Module Naming Convention](../../6-reference/2-modules/3-naming-conventions.md). 
 :::
 
 After that, we can re-apply the application, and we can set the `--watch=false` to skip watching the resources to be reconciled: 
