@@ -68,7 +68,7 @@ function Home() {
                     "button button--primary button--lg",
                     styles.button,
                   )}
-                  to="/docs/getting-started/install-kusion"
+                  to="/docs/getting-started/getting-started-with-kusion-cli/install-kusion"
                 >
                   <Translate description="homepage install button">
                     Install
