@@ -8,9 +8,9 @@ Kusion now offers advanced customized health checks leveraging the power of `KCL
 
 ## Prerequisites
 
-Please refer to the [prerequisites](1-deploy-application#prerequisites) in the guide for deploying an application.
+Please refer to the [prerequisites](1-deploy-application.md#prerequisites) in the guide for deploying an application.
 
-The example below also requires you to have [initialized the project](1-deploy-application#initializing) using the `kusion workspace create` and `kusion init` command, which will create a workspace and also generate a [`kcl.mod` file](1-deploy-application#kclmod) under the stack directory.
+The example below also requires you to have [initialized the project](1-deploy-application.md#initializing) using the `kusion workspace create` and `kusion init` command, which will create a workspace and also generate a [`kcl.mod` file](1-deploy-application.md#kclmod) under the stack directory.
 
 ## Defining a Health Policy
 

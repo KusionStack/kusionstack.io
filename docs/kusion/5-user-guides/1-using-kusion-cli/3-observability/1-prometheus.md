@@ -25,9 +25,9 @@ If you are not familiar with the relevant concepts, please refer to the links be
 :::
 
 ## Pre-requisite
-Please refer to the [prerequisites](../2-working-with-k8s/1-deploy-application#prerequisites) in the guide for deploying an application.
+Please refer to the [prerequisites](../2-working-with-k8s/1-deploy-application.md#prerequisites) in the guide for deploying an application.
 
-The example below also requires you to have [initialized the project](../2-working-with-k8s/1-deploy-application#initializing) using the `kusion init` command, which will generate a [`kcl.mod` file](../2-working-with-k8s/1-deploy-application#kclmod) under the project directory.
+The example below also requires you to have [initialized the project](../2-working-with-k8s/1-deploy-application.md#initializing) using the `kusion init` command, which will generate a [`kcl.mod` file](../2-working-with-k8s/1-deploy-application.md#kclmod) under the project directory.
 
 ## Setting up your own Prometheus
 
@@ -221,7 +221,7 @@ In the example above, a project with the name `helloworld` will have the monitor
 
 You cannot have the same project appear in two projectSelectors.
 
-For a full reference of what can be configured in the workspace level, please see the [workspace reference](../../../6-reference/2-modules/2-workspace-configs/monitoring/prometheus).
+For a full reference of what can be configured in the workspace level, please see the [workspace reference](../../../6-reference/2-modules/2-workspace-configs/monitoring/prometheus.md).
 
 ## Updating the workspace config
 

@@ -10,9 +10,9 @@ Kusion provides out-of-the-box support to reference existing external secrets ma
 
 ## Prerequisites
 
-Please refer to the [prerequisites](../2-working-with-k8s/1-deploy-application#prerequisites) in the guide for deploying an application.
+Please refer to the [prerequisites](../2-working-with-k8s/1-deploy-application.md#prerequisites) in the guide for deploying an application.
 
-The example below also requires you to have [initialized the project](../2-working-with-k8s/1-deploy-application#initializing) using the `kusion init` command, which will generate a [`kcl.mod` file](../2-working-with-k8s/1-deploy-application#kclmod) under the project directory.
+The example below also requires you to have [initialized the project](../2-working-with-k8s/1-deploy-application.md#initializing) using the `kusion init` command, which will generate a [`kcl.mod` file](../2-working-with-k8s/1-deploy-application.md#kclmod) under the project directory.
 
 Additionally, you also need to configure the obtained AccessKey and SecretKey as environment variables: 
 
