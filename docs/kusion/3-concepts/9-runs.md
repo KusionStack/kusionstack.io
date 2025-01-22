@@ -18,7 +18,7 @@ Please note that in the case of APIs the runs APIs are asynchronous. An external
 
 There are 4 types of runs:
 
-- Generate: Generate the resource-facing desired state, or [Spec](./6-spec.md) for the given stack and workspace
+- Generate: Generate the resource-facing desired state, or [Spec](./6-specs.md) for the given stack and workspace
 - Preview: Preview the resource changes for the given stack and workspace based on the difference between desired state and current state
 - Apply: Apply the desired state to the target workspace
 - Destroy: Destroy the resources for the given stack in the target workspace

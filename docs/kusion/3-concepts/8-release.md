@@ -13,7 +13,7 @@ Every time an `apply` or `destroy` operation is executed, it will trigger the ge
 For kusion server, the default release path is `releases/server/$SOURCE_NAME/$PROJECT_NAME/$WORKSPACE_NAME`
 :::
 
-The release file contains the [Spec](./6-spec.md) and [State](./8-release.md#state) of an application, both of which are composed of `Resources`, representing the expected description from the configuration code and the actual state of the resources respectively. In addition, the release file also contains the information of creation and modification time, operation phase, and application metadata, etc.
+The release file contains the [Spec](./6-specs.md) and [State](./8-release.md#state) of an application, both of which are composed of `Resources`, representing the expected description from the configuration code and the actual state of the resources respectively. In addition, the release file also contains the information of creation and modification time, operation phase, and application metadata, etc.
 
 ## State
 

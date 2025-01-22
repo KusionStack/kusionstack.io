@@ -68,7 +68,7 @@ The schema for `AppConfiguration` is defined in the [KusionStack/kam](https://gi
 
 `AppConfiguration` consists of multiple sub-components that each represent either the application workload itself, its dependencies (in the form of [Kusion Modules](../concepts/module/overview)), relevant workflows or operational expectations. We will deep dive into the details on how to author each of these elements in this upcoming documentation series.
 
-For more details on the `AppConfiguration`, please refer to the [design documentation](../concepts/app-configuration).
+For more details on the `AppConfiguration`, please refer to the [design documentation](../concepts/appconfigurations).
 
 ## Authoring Configuration Files
 

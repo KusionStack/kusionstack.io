@@ -70,7 +70,7 @@ So far, PE has almost completed the fundamental work for setting up the IDP.
 
 ### Setup Kusion Storage Backend
 
-In order to get the available modules of the workspace and validate the generated [spec](../../../3-concepts/6-spec.md), developers need to communicate with PEs to obtain the AK/SK (usually with **Read-Only** permission), bucket name, and the endpoint to access the remote storage backend. And similar to the PEs, developers can set up the backend configs with the following commands. 
+In order to get the available modules of the workspace and validate the generated [spec](../../../3-concepts/6-specs.md), developers need to communicate with PEs to obtain the AK/SK (usually with **Read-Only** permission), bucket name, and the endpoint to access the remote storage backend. And similar to the PEs, developers can set up the backend configs with the following commands. 
 
 ```shell
 # please replace the env with actual AK/SK

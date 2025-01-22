@@ -1,6 +1,6 @@
 # Resources
 
-Kusion uses [Spec](./6-spec.md) to manage resource specifications. A Kusion resource is a logical concept that encapsulates physical resources on different resource planes, including but not limited to Kubernetes, AWS, AliCloud, Azure and Google Cloud.
+Kusion uses [Spec](./6-specs.md) to manage resource specifications. A Kusion resource is a logical concept that encapsulates physical resources on different resource planes, including but not limited to Kubernetes, AWS, AliCloud, Azure and Google Cloud.
 
 Kusion Resources are produced by [Kusion Module Generators](./3-module/1-overview.md) and usually map to a physical resource that can be applied via a Kusion Runtime.
 

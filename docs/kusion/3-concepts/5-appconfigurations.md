@@ -1,9 +1,4 @@
----
-id: app-configuration
-sidebar_label: AppConfiguration
----
-
-# AppConfiguration
+# AppConfigurations
 
 As a modern cloud-native application delivery toolchain, declarative intent-based actuation is the central idea of Kusion, and `AppConfiguration` model plays the role of describing the intent, which provides a simpler path for on-boarding developers to the platform without leaking low-level details in runtime infrastructure and allows developers to fully focus on the application logic itself.
 

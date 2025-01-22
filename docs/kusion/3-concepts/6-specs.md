@@ -1,9 +1,4 @@
----
-id: spec
-sidebar_label: Spec
----
-
-# Spec
+# Specs
 
 The spec is a system-generated, immutable, declarative representation of the resources involved in a particular deployment. As opposed to the static configurations that are stored in a stack folder in a git repository, which may or may not be scoped to a given deploy target, a spec is dynamically rendered from the aggregated intents from multiple sources, including those that are target-specific, and those aren't (e.g. global configs, constraints posed by security, compliance and so on, for example what kind of application may have Internet access). Specs are resource-facing desired states and are always rendered on the spot based on all the relevant inputs.
 
