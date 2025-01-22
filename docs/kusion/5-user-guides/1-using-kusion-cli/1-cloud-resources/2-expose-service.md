@@ -123,7 +123,7 @@ tree
 ```
 
 :::info
-More details about the directory structure can be found in [Project](../../3-concepts/1-project/1-overview.md) and [Stack](../../3-concepts/2-stack/1-overview.md). 
+More details about the directory structure can be found in [Project](../../../3-concepts/1-project/1-overview.md) and [Stack](../../../3-concepts/2-stack/1-overview.md). 
 :::
 
 ### Update And Review Configuration Codes

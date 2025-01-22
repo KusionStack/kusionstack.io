@@ -1,43 +1,36 @@
 ---
-id: resource-spec
+id: image-upgrade
 ---
 
-# Configure Resource Specification
+# Upgrade Image
 
-You can manage container-level resource specification in the `AppConfiguration` model via the `resources` field (under the `Container` schema).
+You can declare the application's container image via `image` field of the `Container` schema.
 
-For the full `Container` schema reference, please see [here](../../reference/modules/developer-schemas/workload/service#schema-container) for more details.
+For the full `Container` schema reference, please see [here](../../../6-reference/2-modules/1-developer-schemas/workload/service.md#schema-container) for more details.
 
-## Prerequisites
+## Pre-requisite
 
-Please refer to the [prerequisites](deploy-application#prerequisites) in the guide for deploying an application.
+Please refer to the [prerequisites](1-deploy-application.md#prerequisites) in the guide for deploying an application.
 
-The example below also requires you to have [initialized the project](deploy-application#initializing) using the `kusion workspace create` and `kusion init` command, which will create a workspace and also generate a [`kcl.mod` file](deploy-application#kclmod) under the stack directory.
+The example below also requires you to have [initialized the project](1-deploy-application.md#initializing) using the `kusion workspace create` and `kusion init` command, which will create a workspace and also generate a [`kcl.mod` file](1-deploy-application.md#kclmod) under the stack directory.
 
 ## Managing Workspace Configuration
 
-In the first guide in this series, we introduced a step to [initialize a workspace](deploy-application#initializing-workspace-configuration) with an empty configuration. The same empty configuration will still work in this guide, no changes are required there.
+In the first guide in this series, we introduced a step to [initialize a workspace](1-deploy-application.md#initializing-workspace-configuration) with an empty configuration. The same empty configuration will still work in this guide, no changes are required there.
 
 ## Example
 
-Update the resources value in `simple-service/dev/main.k`:
-
-```py
+Update the image value in `simple-service/dev/main.k`:
+```python
 import kam.v1.app_configuration as ac
 
 helloworld: ac.AppConfiguration {
-    workload.containers.helloworld: {
+    workload.containers.nginx: {
         ...
-        # before:
-        # resources: {
-        #     "cpu": "500m"
-        #     "memory": "512M"
-        # }
+        # before: 
+        # image = "gcr.io/google-samples/gb-frontend:v4"
         # after: 
-        resources: {
-            "cpu": "250m"
-            "memory": "256Mi"
-        }
+        image = "gcr.io/google-samples/gb-frontend:v5"
         ...
     }
 }
@@ -47,7 +40,7 @@ Everything else in `main.k` stay the same.
 
 ## Applying
 
-Re-run steps in [Applying](deploy-application#applying), resource scaling is completed.
+Re-run steps in [Applying](1-deploy-application.md#applying), update image is completed.
 
 ```
 $ kusion apply
@@ -69,8 +62,7 @@ Apply complete! Resources: 0 created, 1 updated, 0 deleted.
 
 ## Validation
 
-We can verify the application container (in the deployment template) now has the updated resources attributes (cpu:250m, memory:256Mi) as defined in the container configuration:
-
+We can verify the application container (in the deployment template) now has the updated image (v5) as defined in the container configuration:
 ```
 kubectl get deployment -n simple-service -o yaml
 ...
@@ -82,9 +74,5 @@ kubectl get deployment -n simple-service -o yaml
           ...
           image: gcr.io/google-samples/gb-frontend:v5
           ...
-          resources:
-            limits:
-              cpu: 250m
-              memory: 256Mi
 ...
 ```

@@ -8,7 +8,7 @@ The guides above provide examples on how to configure workloads and accessories 
 
 However, in some specific scenario, users may also have the need to directly use Kusion to apply and manage the raw Kubernetes manifest YAML files, such as taking over some existing resources and deploying CRD (CustomResourceDefinition), or other special resources. 
 
-To help users directly apply raw K8s manifests, the KusionStack community has provided the [k8s_manifest](../../6-reference/2-modules/1-developer-schemas/k8s_manifest/k8s_manifest.md) Kusion Module. 
+To help users directly apply raw K8s manifests, the KusionStack community has provided the [k8s_manifest](../../../6-reference/2-modules/1-developer-schemas/k8s_manifest/k8s_manifest.md) Kusion Module. 
 
 :::info
 The module definition and implementation, as well as the example can be found at [here](https://github.com/KusionStack/catalog/tree/main/modules/k8s_manifest). 
@@ -16,13 +16,13 @@ The module definition and implementation, as well as the example can be found at
 
 ## Prerequisites
 
-Please refer to the [prerequisites](deploy-application#prerequisites) in the guide for deploying an application. 
+Please refer to the [prerequisites](1-deploy-application.md#prerequisites) in the guide for deploying an application. 
 
-The example below also requires you to have [initialized the project](deploy-application#initializing) using the `kusion workspace create`, `kusion project create`, `kusion stack create` command, which will create a workspace and project, and also generate a [kcl.mod](deploy-application#kclmod) file under the stack directory. 
+The example below also requires you to have [initialized the project](1-deploy-application.md#initializing) using the `kusion workspace create`, `kusion project create`, `kusion stack create` command, which will create a workspace and project, and also generate a [kcl.mod](1-deploy-application.md#kclmod) file under the stack directory. 
 
 ## Managing Workspace Configuration
 
-In the first guide in this series, we introduced a step to [initialize a workspace](deploy-application#initializing-workspace-configuration) with an empty configuration. The same empty configuration will still work in this guide, no changes are required there. Alternatively, if you have updated your workspace config in the previous guides, no changes need to be made either.
+In the first guide in this series, we introduced a step to [initialize a workspace](1-deploy-application.md#initializing-workspace-configuration) with an empty configuration. The same empty configuration will still work in this guide, no changes are required there. Alternatively, if you have updated your workspace config in the previous guides, no changes need to be made either.
 
 However, if you (or the platform team) would like to set some default paths for the raw K8s manifest YAML files to standardize the behavior of applications in the `dev` workspace, you can do so by updating the `dev.yaml` with the following config block: 
 

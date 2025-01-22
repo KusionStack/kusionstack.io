@@ -6,7 +6,7 @@ id: deploy-application
 
 This guide shows you how to use Kusion CLIs to complete the deployment of an application running in Kubernetes.
 We call the abstraction of application operation and maintenance configuration as `AppConfiguration`, and its instance as `Application`.
-It is essentially a configuration model that describes an application. The complete definition can be seen [here](../../reference/modules/developer-schemas/app-configuration).
+It is essentially a configuration model that describes an application. The complete definition can be seen [here](../../../6-reference/2-modules/1-developer-schemas/app-configuration.md).
 
 In production, the application generally includes minimally several k8s resources:
 
@@ -31,7 +31,7 @@ Before we start, we need to complete the following steps:
 1、Install Kusion
 
 We recommend using HomeBrew(Mac), Scoop(Windows), or an installation shell script to download and install Kusion.
-See [Download and Install](../../getting-started/install-kusion) for more details.
+See [Download and Install](../../../2-getting-started/1-install-kusion.md) for more details.
 
 2、Running Kubernetes cluster
 
@@ -44,7 +44,7 @@ This guide is to deploy an app using Kusion, relying on the Kusion CLI and an ex
 
 ### Initializing workspace configuration
 
-In version 0.10.0, we have introduced the new concept of [workspaces](../../concepts/workspace), which is a logical layer whose configurations represent an opinionated set of defaults, often appointed by the platform team. In most cases workspaces are represented with an "environment" in traditional SDLC terms. These workspaces provide a means to separate the concerns between the **application developers** who wish to focus on business logic, and a group of **platform engineers** who wish to standardize the applications on the platform.
+In version 0.10.0, we have introduced the new concept of [workspaces](../../../3-concepts/4-workspace.md), which is a logical layer whose configurations represent an opinionated set of defaults, often appointed by the platform team. In most cases workspaces are represented with an "environment" in traditional SDLC terms. These workspaces provide a means to separate the concerns between the **application developers** who wish to focus on business logic, and a group of **platform engineers** who wish to standardize the applications on the platform.
 
 Driven by the discipline of Platform Engineering, management of the workspaces, including create/updating/deleting workspaces and their configurations should be done by dedicated platform engineers in a large software organizations to facilitate a more mature and scalable collaboration pattern.
 
@@ -120,7 +120,7 @@ The project directory has the following files that are automatically generated:
 In general, the `.k` files are the KCL source code that represents the application configuration, and the `.yaml` is the static configuration file that describes behavior at the project or stack level.
 
 :::info
-See [Project](../../concepts/project/overview) and [Stack](../../concepts/stack/overview) for more details about Project and Stack.
+See [Project](../../../3-concepts/1-project/1-overview.md) and [Stack](../../../3-concepts/2-stack/1-overview.md) for more details about Project and Stack.
 :::
 
 The `kusion init` command will create a demo quickstart application, we may update the `dev/kcl.mod` and `dev/main.k` later. 
@@ -189,7 +189,7 @@ cd simple-service/dev && kusion preview
 ```
 
 :::tip
-For instructions on the kusion command line tool, execute `kusion -h`, or refer to the tool's online [documentation](../../reference/commands).
+For instructions on the kusion command line tool, execute `kusion -h`, or refer to the tool's online [documentation](../../../6-reference/1-commands/index.md).
 :::
 
 ## Applying

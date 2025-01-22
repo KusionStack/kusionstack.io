@@ -123,7 +123,7 @@ As for how the AI application use the LLM service provided by the `inference` mo
 
 Which model used in the application is transparent, and you only need to provide the `prompt` parameter to the request address. Of course, you can directly modify the model and other configuration items in the `main.k` file and update the deployment resources by `kusion apply`.
 
-There are also some optional configuration items in the `inference` module for adjusting the LLM service, whose details can be found [here](../../6-reference/2-modules/1-developer-schemas/inference/inference.md). 
+There are also some optional configuration items in the `inference` module for adjusting the LLM service, whose details can be found [here](../../../6-reference/2-modules/1-developer-schemas/inference/inference.md). 
 
 ## Deployment
 

@@ -6,7 +6,7 @@ id: collaborate-with-github-actions
 
 In this article, we will introduce how to use Kusion CLI in combination with GitHub Actions to achieve team collaboration in production practice. 
 
-Adopting the concept of separation of concerns, we divide the staff involved in application delivery and operation into two groups: **Platform Engineers (PEs)** and **Developers (Devs)**. As the builders of the Internal Developer Platform (IDP), platform engineers are primarily responsible for creating the [storage backend](../../3-concepts/7-backend.md) for the Kusion CLI in team collaborative scenarios (e.g. AWS S3 or Alicloud OSS), developing custom reusable [Kusion modules](../../3-concepts/3-module/1-overview.md), and creating and maintaining standardized platform configurations in [workspace](../../3-concepts/4-workspace.md). While application developers can focus on writing the application business logic and the configuration codes, self-serving the application delivery and operation by triggering the automated CI/CD pipelines. [GitHub Actions](https://github.com/features/actions) is such a CI/CD platform, and by customizing [GitHub Actions workflow](https://docs.github.com/en/actions/using-workflows), the pipeline such as building, testing, and deploying will be executed automatically. 
+Adopting the concept of separation of concerns, we divide the staff involved in application delivery and operation into two groups: **Platform Engineers (PEs)** and **Developers (Devs)**. As the builders of the Internal Developer Platform (IDP), platform engineers are primarily responsible for creating the [storage backend](../../../3-concepts/7-backend.md) for the Kusion CLI in team collaborative scenarios (e.g. AWS S3 or Alicloud OSS), developing custom reusable [Kusion modules](../../../3-concepts/3-module/1-overview.md), and creating and maintaining standardized platform configurations in [workspace](../../../3-concepts/4-workspace.md). While application developers can focus on writing the application business logic and the configuration codes, self-serving the application delivery and operation by triggering the automated CI/CD pipelines. [GitHub Actions](https://github.com/features/actions) is such a CI/CD platform, and by customizing [GitHub Actions workflow](https://docs.github.com/en/actions/using-workflows), the pipeline such as building, testing, and deploying will be executed automatically. 
 
 In the following sections, we will demonstrate the specific workflow from the perspectives of both PEs and Devs with the sample workflows from our [konfg](https://github.com/KusionStack/konfig) and [catalog](https://github.com/KusionStack/catalog) repository. 
 
@@ -70,7 +70,7 @@ So far, PE has almost completed the fundamental work for setting up the IDP.
 
 ### Setup Kusion Storage Backend
 
-In order to get the available modules of the workspace and validate the generated [spec](../../3-concepts/6-spec.md), developers need to communicate with PEs to obtain the AK/SK (usually with **Read-Only** permission), bucket name, and the endpoint to access the remote storage backend. And similar to the PEs, developers can set up the backend configs with the following commands. 
+In order to get the available modules of the workspace and validate the generated [spec](../../../3-concepts/6-spec.md), developers need to communicate with PEs to obtain the AK/SK (usually with **Read-Only** permission), bucket name, and the endpoint to access the remote storage backend. And similar to the PEs, developers can set up the backend configs with the following commands. 
 
 ```shell
 # please replace the env with actual AK/SK
@@ -84,7 +84,7 @@ kusion config set backends.current oss_test
 
 ### Create and Update Project and Stack
 
-Next, developers can create and update the [Project](../../3-concepts/1-project/1-overview.md) and [Stack](../../3-concepts/2-stack/1-overview.md) configurations with `kusion project` and `kusion stack` command. 
+Next, developers can create and update the [Project](../../../3-concepts/1-project/1-overview.md) and [Stack](../../../3-concepts/2-stack/1-overview.md) configurations with `kusion project` and `kusion stack` command. 
 
 ```shell
 # create a new project named quickstart

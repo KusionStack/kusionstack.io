@@ -8,13 +8,13 @@ The guides above provide examples on how to configure workloads of the type `ser
 
 ## Prerequisites
 
-Please refer to the [prerequisites](deploy-application#prerequisites) in the guide for scheduling a job.
+Please refer to the [prerequisites](1-deploy-application.md#prerequisites) in the guide for scheduling a job.
 
-The example below also requires you to have [initialized the project](deploy-application#initializing) using the `kusion workspace create` and `kusion init` command, which will create a workspace and also generate a [`kcl.mod` file](deploy-application#kclmod) under the stack directory.
+The example below also requires you to have [initialized the project](1-deploy-application.md#initializing) using the `kusion workspace create` and `kusion init` command, which will create a workspace and also generate a [`kcl.mod` file](1-deploy-application.md#kclmod) under the stack directory.
 
 ## Managing Workspace Configuration
 
-In the first guide in this series, we introduced a step to [initialize a workspace](deploy-application#initializing-workspace-configuration) with an empty configuration. The same empty configuration will still work in this guide, no changes are required there. Alternatively, if you have updated your workspace config in the previous guides, no changes need to be made either.
+In the first guide in this series, we introduced a step to [initialize a workspace](1-deploy-application.md#initializing-workspace-configuration) with an empty configuration. The same empty configuration will still work in this guide, no changes are required there. Alternatively, if you have updated your workspace config in the previous guides, no changes need to be made either.
 
 However, if you (or the platform team) would like to set default values for the workloads to standardize the behavior of applications in the `dev` workspace, you can do so by updating the `~/dev.yaml`:
 
@@ -37,7 +37,7 @@ The workspace configuration need to be updated with the command:
 kusion workspace update dev -f ~/dev.yaml
 ```
 
-For a full reference of what can be configured in the workspace level, please see the [workspace reference](../../reference/modules/workspace-configs/workload/job).
+For a full reference of what can be configured in the workspace level, please see the [workspace reference](../../../6-reference/2-modules/2-workspace-configs/workload/job.md).
 
 ## Example
 
@@ -86,7 +86,7 @@ You can find the full example in here in the [konfig repo](https://github.com/Ku
 
 ## Applying
 
-Re-run steps in [Applying](deploy-application#applying) and schedule the job. Your output might look like one of the following:
+Re-run steps in [Applying](1-deploy-application.md#applying) and schedule the job. Your output might look like one of the following:
 
 If you are starting from scratch, all resources are created on the spot:
 

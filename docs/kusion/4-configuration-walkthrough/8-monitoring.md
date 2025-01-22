@@ -8,7 +8,7 @@ As of version 0.11.0, Kusion supports integration with Prometheus by managing sc
 
 For the monitoring configuration to work (more specifically, consumed by Prometheus), this requires the target cluster to have installed Prometheus correctly, either as a Kubernetes operator or a server/agent.
 
-More about how to set up Prometheus can be found in the [Prometheus User Guide for Kusion](../user-guides/observability/prometheus)
+More about how to set up Prometheus can be found in the [Prometheus User Guide for Kusion](../5-user-guides/1-using-kusion-cli/3-observability/1-prometheus.md)
 :::
 
 ## Import
@@ -26,7 +26,7 @@ import monitoring as m
 
 In addition to the KCL configuration file, there are also workspace-level configurations that should be set first. In an ideal scenario, this step is done by the platform engineers. 
 
-In the event that they do not exist for you or your organization, e.g. if you are an individual developer, you can either do it yourself or use the [default values](#default-values) provided by the KusionStack team. The steps to do this yourself can be found in the [Prometheus User Guide for Kusion](../user-guides/observability/prometheus#setting-up-workspace-configs).
+In the event that they do not exist for you or your organization, e.g. if you are an individual developer, you can either do it yourself or use the [default values](#default-values) provided by the KusionStack team. The steps to do this yourself can be found in the [Prometheus User Guide for Kusion](../5-user-guides/1-using-kusion-cli/3-observability/1-prometheus.md#setting-up-workspace-configs).
 
 :::info
 
@@ -87,7 +87,7 @@ Note that numbered ports only work when your Prometheus is not running as an ope
 
 Neither `path` and `port` are required fields if Prometheus runs as an operator. If omitted, `path` defaults to `/metrics`, and `port` defaults to the container port or service port, depending on which resource is being monitored. If Prometheus does not run as an operator, both fields are required.
 
-Scraping scheme, interval and timeout are considered platform-managed configurations and are therefore managed as part of the [workspace configurations](../user-guides/observability/prometheus#setting-up-workspace-configs).
+Scraping scheme, interval and timeout are considered platform-managed configurations and are therefore managed as part of the [workspace configurations](../5-user-guides/1-using-kusion-cli/3-observability/1-prometheus.md#setting-up-workspace-configs).
 
 More details about how the Prometheus integration works can be found in the [design documentation](https://github.com/KusionStack/kusion/blob/main/docs/prometheus.md).
 
@@ -99,4 +99,4 @@ If no workspace configurations are found, the default values provided by the Kus
 - Scraping scheme defaults to http
 - Defaults to NOT running as an operator
 
-If any of the default values does not meet your need, you can change them by [setting up the workspace configuration](../user-guides/observability/prometheus#setting-up-workspace-configs).
+If any of the default values does not meet your need, you can change them by [setting up the workspace configuration](../5-user-guides/1-using-kusion-cli/3-observability/1-prometheus.md#setting-up-workspace-configs).
