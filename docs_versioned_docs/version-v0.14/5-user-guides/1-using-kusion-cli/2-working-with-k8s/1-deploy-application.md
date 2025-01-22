@@ -31,7 +31,7 @@ Before we start, we need to complete the following steps:
 1、Install Kusion
 
 We recommend using HomeBrew(Mac), Scoop(Windows), or an installation shell script to download and install Kusion.
-See [Download and Install](../../../2-getting-started/1-install-kusion.md) for more details.
+See [Download and Install](../../../2-getting-started/2-getting-started-with-kusion-cli/0-install-kusion.md) for more details.
 
 2、Running Kubernetes cluster
 

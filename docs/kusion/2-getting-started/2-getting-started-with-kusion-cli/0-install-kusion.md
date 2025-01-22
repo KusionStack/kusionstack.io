@@ -1,7 +1,7 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Install Kusion
+# Install Kusion CLI
 
 You can install the latest Kusion CLI on MacOS, Linux and Windows.
 

@@ -6,7 +6,7 @@ slug: /
 
 # Overview
 
-Welcome to Kusion! This introduction section covers what Kusion is, the Kusion workflow, and how Kusion compares to other software. If you just want to dive into using Kusion, feel free to skip ahead to the [Getting Started](getting-started/install-kusion) section.
+Welcome to Kusion! This introduction section covers what Kusion is, the Kusion workflow, and how Kusion compares to other software. If you just want to dive into using Kusion, feel free to skip ahead to the [Getting Started](../2-getting-started/2-getting-started-with-kusion-cli/0-install-kusion.md) section.
 
 ## What is Kusion?
 

@@ -10,7 +10,7 @@ In this tutorial, we will learn how to create and manage our own application wit
 
 Before we start to play with this example, we need to have the Kusion Server installed and run an accessible Kubernetes cluster. Besides, we need to have a GitHub account to initiate our own config code repository as `Source` in Kusion. 
 
-- Install [Kusion Server](../1-install-kusion.md). 
+- Install [Kusion Server](../2-getting-started-with-kusion-cli/0-install-kusion.md). 
 - Run a [Kubernetes](https://kubernetes.io) cluster. Some light and convenient options for Kubernetes local deployment include [k3s](https://docs.k3s.io/quick-start), [k3d](https://k3d.io/v5.4.4/#installation), and [MiniKube](https://minikube.sigs.k8s.io/docs/tutorials/multi_node). 
 
 
