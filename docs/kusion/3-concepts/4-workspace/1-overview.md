@@ -92,7 +92,7 @@ The `importedResources` block is designed to declare the import of existing clou
 
 ### secretStore
 
-The `secretStore` field can be used to access the sensitive data stored in a cloud-based secrets manager. More details can be found in [here](../5-user-guides/1-using-kusion-cli/4-secrets-management/1-using-cloud-secrets.md). 
+The `secretStore` field can be used to access the sensitive data stored in a cloud-based secrets manager. More details can be found in [here](../../5-user-guides/1-using-kusion-cli/4-secrets-management/1-using-cloud-secrets.md). 
 
 ### context
 

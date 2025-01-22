@@ -25,7 +25,7 @@ export AWS_SECRET_ACCESS_KEY="oE/xxxx" # replace it with your SecretKey
 
 ## Setting up workspace
 
-Since v0.10.0, we have introduced the concept of [workspaces](../../3-concepts/4-workspace/1-overview.md), whose configurations represent the part of the application behaviors that platform teams are interested in standardizing, or the ones to eliminate from developer's mind to make their lives easier.
+Since v0.10.0, we have introduced the concept of [workspaces](../../../3-concepts/4-workspace/1-overview.md), whose configurations represent the part of the application behaviors that platform teams are interested in standardizing, or the ones to eliminate from developer's mind to make their lives easier.
 
 In the case of setting up cloud secrets manager, platform teams need to specify which secrets management solution to use and necessary information to access on the workspace level.
 
