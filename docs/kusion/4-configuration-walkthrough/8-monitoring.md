@@ -30,7 +30,7 @@ In the event that they do not exist for you or your organization, e.g. if you ar
 
 :::info
 
-For more details on how workspaces work, please refer to the [workspace concept](../3-concepts/4-workspace.md)
+For more details on how workspaces work, please refer to the [workspace concept](../3-concepts/4-workspace/1-overview.md)
 :::
 
 By separating configurations that the developers are interested in and those that platform owners are interested in, we can reduce the cognitive complexity of the application configuration and achieve separation of concern.

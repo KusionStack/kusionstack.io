@@ -1,13 +1,20 @@
----
-id: spec
-sidebar_label: Spec
----
+# Specs
 
-# Spec
+The spec is a system-generated, immutable, declarative representation of the resources involved in a particular deployment. As opposed to the static configurations that are stored in a stack folder in a git repository, which may or may not be scoped to a given deploy target, a spec is dynamically rendered from the aggregated intents from multiple sources, including those that are target-specific, and those aren't (e.g. global configs, constraints posed by security, compliance and so on, for example what kind of application may have Internet access). Specs are resource-facing desired states and are always rendered on the spot based on all the relevant inputs.
 
-The Spec represents the operational intentions that you aim to deliver using Kusion. These intentions are expected to contain all components throughout the DevOps lifecycle, including resources (workload, database, load balancer, etc.), dependencies, and policies. The Kusion module generators are responsible for converting all AppConfigurations and environment configurations into the Spec. Once the Spec is generated, the Kusion Engine takes charge of updating the actual infrastructures to match the Spec.
+The Specs are designed to be **THE** intermediate data layer between configuration code and actual resources. It is designed to be a structured data format that is both machine-friendly (so that we can use the proper libraries to process and actualize them) and human-friendly (so that it provides a readable reference to the resource perspective of an application). 
 
-## Purpose
+## Generators
+
+The rendering logic that transforms the static configuration to the **Spec** are produced by "Generators", which are pieces of code written and distributed in Go. Generators are in charge of converting configuration code written in KCL into resource specifications in the Spec. They are packaged and wrapped inside a GRPC server whose lifecycle are dynamically managed as individual go-plugins.
+
+## Runtimes
+
+In this workflow, the component that processes the resources in the Spec is called a Runtime. Runtimes are in charge of bridging the resource specification to the actual infrastructure API. For Kubernetes resources, its runtime uses client-go to connect to the clusters. For the cloud resources, we are using IAC tools like Terraform/Crossplane and their providers to connect to the cloud control APIs. Runtimes are also extensible.
+
+![intent-flow](/img/docs/concept/intent-flow.png)
+
+## Purpose of Spec
 
 ### Single Source of Truth
 
@@ -116,8 +123,8 @@ A `resource` is a concept in `Kusion` that abstract infrastructure. It represent
 - `dependsOn` contains all the other resources the resource depends on.
 - `extensions` specifies the arbitrary metadata of the resource, where you can declare information such as Kubernetes GVK, Terraform provider, and imported resource id, etc.
 
-Besides the `resources`, Spec also records the `secretStore` and `context` field in the corresponding workspace. The former can be used to access sensitive data stored in an external secrets manager, while the latter can be used to declare the workspace-level configurations such as Kubernetes `kubeconfig` file path or content, and Terraform providers' AK/SK. More information can be found [here](4-workspace.md#secretstore).
+Besides the `resources`, Spec also records the `secretStore` and `context` field in the corresponding workspace. The former can be used to access sensitive data stored in an external secrets manager, while the latter can be used to declare the workspace-level configurations such as Kubernetes `kubeconfig` file path or content, and Terraform providers' AK/SK. More information can be found [here](./4-workspace/1-overview.md#secretstore).
 
 ## Apply with Spec File
 
-Kusion supports using the Spec file directly as input. Users can place the Spec file in the stack directory and execute `kusion preview --spec-file spec.yaml` and `kusion apply --spec-file spec.yaml` to preview and apply the resources.
+When using the CLI, Kusion supports using the Spec file directly as input. Users can place the Spec file in the stack directory and execute `kusion preview --spec-file spec.yaml` and `kusion apply --spec-file spec.yaml` to preview and apply the resources.

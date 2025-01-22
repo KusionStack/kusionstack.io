@@ -1,11 +1,15 @@
 ---
 id: configuration
-sidebar_label: Configuration
+sidebar_label: CLI Configurations
 ---
 
-# Configuration
+# CLI Configurations
 
-Kusion can be configured with some global settings, which are separate from the AppConfiguration written by the application developers and the workspace configurations written by the platform engineers. 
+:::tip
+If you are using Kusion server, this article does NOT apply.
+:::
+
+Kusion CLI can be configured with some global settings, which are separate from the AppConfiguration written by the application developers and the workspace configurations written by the platform engineers. 
 
 The configurations are only relevant to the Kusion itself, and can be managed by command `kusion config`. The configuration items are specified, which are in the hierarchical format with full stop for segmentation, such as `backends.current`. For now, only the backend configurations are included.
 

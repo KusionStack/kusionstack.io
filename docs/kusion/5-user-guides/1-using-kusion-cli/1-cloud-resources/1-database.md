@@ -125,7 +125,7 @@ kusion workspace show
 The `workspace.yaml` is a sample configuration file for workspace management, including `MySQL` module configs. Workspace configurations are usually declared by **Platform Engineers** and will take effect through the corresponding stack. 
 
 :::info
-More details about the configuration of Workspace can be found in [Concepts of Workspace](../../../3-concepts/4-workspace.md). 
+More details about the configuration of Workspace can be found in [Concepts of Workspace](../../../3-concepts/4-workspace/1-overview.md). 
 :::
 
 ## Create Project And Stack

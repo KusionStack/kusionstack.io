@@ -10,7 +10,7 @@ It can be difficult to understand how different software compare to each other. 
  
 According to the [open GitOps principles](https://opengitops.dev/), GitOps systems typically have its desired state expressed declaratively, continuously observe actual system state and attempt to apply the desired state. In the design of Kusion toolchain, we refer to those principles but have no intention to reinvent any GitOps systems wheel. 
 
-Kusion adopts your GitOps process and improves it with richness of features. The declarative [AppConfiguration](../concepts/app-configuration) model can be used to express desired intent, once intent is declared [Kusion CLI](../reference/commands) takes the role to make production match intent as safely as possible. 
+Kusion adopts your GitOps process and improves it with richness of features. The declarative [AppConfiguration](../concepts/appconfigurations) model can be used to express desired intent, once intent is declared [Kusion CLI](../reference/commands) takes the role to make production match intent as safely as possible. 
 
 **vs. PaaS (Heroku, Vercel, etc.)**
 
@@ -24,7 +24,7 @@ Kusion allows you to have platform-like features without the constraints of a tr
 
 KubeVela is a modern software delivery and management control plane which makes it easier to deploy and operate applications on top of Kubernetes.
 
-Although some might initially perceive an overlap between Kusion and KubeVela, they are in fact complementary and can be integrated to work together. As a lightweight, purely client-side tool, coupled with corresponding [Generator](https://github.com/KusionStack/kusion-module-framework) implementation, Kusion can render [AppConfiguration](../concepts/app-configuration) schema to generate CRD resources for KubeVela and leverage KubeVela's control plane to implement application delivery.
+Although some might initially perceive an overlap between Kusion and KubeVela, they are in fact complementary and can be integrated to work together. As a lightweight, purely client-side tool, coupled with corresponding [Generator](https://github.com/KusionStack/kusion-module-framework) implementation, Kusion can render [AppConfiguration](../concepts/appconfigurations) schema to generate CRD resources for KubeVela and leverage KubeVela's control plane to implement application delivery.
 
 **vs. Helm**
 

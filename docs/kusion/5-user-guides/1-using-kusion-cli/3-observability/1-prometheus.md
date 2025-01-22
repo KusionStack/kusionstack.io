@@ -137,7 +137,7 @@ If you are running a non-local cluster, you can try to expose it via another way
 
 ## Setting up workspace configs
 
-Since v0.10.0, we have introduced the concept of [workspaces](../../../3-concepts/4-workspace.md), whose configurations represent the part of the application behaviors that platform teams are interested in standardizing, or the ones to eliminate from developer's mind to make their lives easier.
+Since v0.10.0, we have introduced the concept of [workspaces](../../../3-concepts/4-workspace/1-overview.md), whose configurations represent the part of the application behaviors that platform teams are interested in standardizing, or the ones to eliminate from developer's mind to make their lives easier.
 
 In the case of setting up Prometheus, there are a few things to set up on the workspace level:
 
