@@ -1,5 +1,5 @@
 ---
-title: Installation
+title: Install Kusion Server
 ---
 
 ## Install with Helm
