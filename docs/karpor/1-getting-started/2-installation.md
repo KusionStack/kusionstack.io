@@ -113,9 +113,9 @@ helm install karpor-release kusionstack/karpor \
 # Custom configuration
 helm install karpor-release kusionstack/karpor \
    --set server.ai.authToken={YOUR_AI_TOKEN} \
-   --set server.ai.baseUrl=https://api.openai.com/v1 \
+   --set server.ai.baseUrl=https://api.deepseek.com \
    --set server.ai.backend=openai \
-   --set server.ai.model=gpt-3.5-turbo \
+   --set server.ai.model=deepseek-chat \
    --set server.ai.topP=0.5 \
    --set server.ai.temperature=0.2
 ```
