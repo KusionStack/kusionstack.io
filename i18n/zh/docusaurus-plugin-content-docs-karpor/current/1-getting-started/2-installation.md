@@ -120,91 +120,88 @@ helm install karpor-release kusionstack/karpor \
 
 以下表格列出了 Chart 的所有可配置参数及其默认值。
 
-### General Parameters
+### 通用参数
 
-| Key | Type | Default | Description |
+| 键 | 类型 | 默认值 | 描述 |
 |-----|------|---------|-------------|
-| namespace | string | `"karpor"` | Which namespace to be deployed. |
-| namespaceEnabled | bool | `true` | Whether to generate namespace. |
-| registryProxy | string | `""` | Image registry proxy will be the prefix as all component image. |
+| namespace | string | `"karpor"` | 部署的目标命名空间。 |
+| namespaceEnabled | bool | `true` | 是否生成命名空间。 |
+| registryProxy | string | `""` | 镜像仓库代理，将作为所有组件镜像的前缀。 |
 
-### Global Parameters
+### 全局参数
 
-| Key | Type | Default | Description |
+| 键 | 类型 | 默认值 | 描述 |
 |-----|------|---------|-------------|
-| global.image.imagePullPolicy | string | `"IfNotPresent"` | Image pull policy to be applied to all Karpor components. |
+| global.image.imagePullPolicy | string | `"IfNotPresent"` | 应用于所有 Karpor 组件的镜像拉取策略。 |
 
-### Karpor Server
+### Karpor 服务端
 
-The Karpor Server Component is main backend server. It itself is an `apiserver`, which also provides `/rest-api` to serve Dashboard.
+Karpor 服务器组件是主要的后端服务器。它本身是一个 `apiserver`，同时也提供 `/rest-api` 来服务仪表板。
 
-| Key | Type | Default | Description |
+| 键 | 类型 | 默认值 | 描述 |
 |-----|------|---------|-------------|
-| server.ai | object | `{"authToken":"","backend":"openai","baseUrl":"","model":"gpt-3.5-turbo","temperature":1,"topP":1}` | AI configuration section. The AI analysis feature requires that [authToken, baseUrl] be assigned values. |
-| server.ai.authToken | string | `""` | Authentication token for accessing the AI service. |
-| server.ai.backend | string | `"openai"` | Backend service or platform that the AI model is hosted on. Available options: <br/>- `"openai"`: OpenAI API (default)<br/>- `"azureopenai"`: Azure OpenAI Service<br/>- `"huggingface"`: Hugging Face API<br/> If the backend you are using is compatible with OpenAI, then there is no need to make any changes here. |
-| server.ai.baseUrl | string | `""` | Base URL of the AI service. e.g., "https://api.openai.com/v1". |
-| server.ai.model | string | `"gpt-3.5-turbo"` | Name or identifier of the AI model to be used. e.g., "gpt-3.5-turbo". |
-| server.ai.temperature | float | `1` | Temperature parameter for the AI model. This controls the randomness of the output, where a higher value (e.g., 1.0) makes the output more random, and a lower value (e.g., 0.0) makes it more deterministic. |
-| server.ai.topP | float | `1` | Top-p (nucleus sampling) parameter for the AI model. This controls Controls the probability mass to consider for sampling, where a higher value leads to greater diversity in the generated content (typically ranging from 0 to 1) |
-| server.enableRbac | bool | `false` | Enable RBAC authorization if set to true. |
-| server.image.repo | string | `"kusionstack/karpor"` | Repository for Karpor server image. |
-| server.image.tag | string | `""` | Tag for Karpor server image. Defaults to the chart's appVersion if not specified. |
-| server.name | string | `"karpor-server"` | Component name for karpor server. |
-| server.port | int | `7443` | Port for karpor server. |
-| server.replicas | int | `1` | The number of karpor server pods to run. |
-| server.resources | object | `{"limits":{"cpu":"500m","ephemeral-storage":"10Gi","memory":"1Gi"},"requests":{"cpu":"250m","ephemeral-storage":"2Gi","memory":"256Mi"}}` | Resource limits and requests for the karpor server pods. |
-| server.serviceType | string | `"ClusterIP"` | Service type for the karpor server. The available type values list as ["ClusterIP"、"NodePort"、"LoadBalancer"]. |
+| server.ai | object | `{"authToken":"","backend":"openai","baseUrl":"","model":"gpt-3.5-turbo","temperature":1,"topP":1}` | AI 配置部分。AI 分析功能需要为 [authToken, baseUrl] 赋值。 |
+| server.ai.authToken | string | `""` | 访问 AI 服务的认证令牌。 |
+| server.ai.backend | string | `"openai"` | 托管 AI 模型的后端服务或平台。可用选项：<br/>- `"openai"`: OpenAI API（默认）<br/>- `"azureopenai"`: Azure OpenAI 服务<br/>- `"huggingface"`: Hugging Face API<br/>如果您使用的后端与 OpenAI 兼容，则无需在此处进行任何更改。 |
+| server.ai.baseUrl | string | `""` | AI 服务的基础 URL。例如："https://api.openai.com/v1"。 |
+| server.ai.model | string | `"gpt-3.5-turbo"` | 要使用的 AI 模型的名称或标识符。例如："gpt-3.5-turbo"。 |
+| server.ai.temperature | float | `1` | AI 模型的温度参数。控制输出的随机性，较高的值（例如 1.0）使输出更随机，较低的值（例如 0.0）使输出更确定性。 |
+| server.ai.topP | float | `1` | AI 模型的 Top-p（核采样）参数。控制采样的概率质量，较高的值导致生成内容的多样性更大（通常范围为 0 到 1）。 |
+| server.enableRbac | bool | `false` | 如果设置为 true，则启用 RBAC 授权。 |
+| server.image.repo | string | `"kusionstack/karpor"` | Karpor 服务器镜像的仓库。 |
+| server.image.tag | string | `""` | Karpor 服务器镜像的标签。如果未指定，则默认为 Chart 的 appVersion。 |
+| server.name | string | `"karpor-server"` | Karpor 服务器的组件名称。 |
+| server.port | int | `7443` | Karpor 服务器的端口。 |
+| server.replicas | int | `1` | 要运行的 Karpor 服务器 Pod 数量。 |
+| server.resources | object | `{"limits":{"cpu":"500m","ephemeral-storage":"10Gi","memory":"1Gi"},"requests":{"cpu":"250m","ephemeral-storage":"2Gi","memory":"256Mi"}}` | Karpor 服务器 Pod 的资源限制和请求。 |
+| server.serviceType | string | `"ClusterIP"` | Karpor 服务器的服务类型。可用类型值为 ["ClusterIP"、"NodePort"、"LoadBalancer"]。 |
 
-### Karpor Syncer
+### Karpor 同步器
 
-The Karpor Syncer Component is independent server to synchronize cluster resources in real-time.
+Karpor 同步器组件是一个独立的服务器，用于实时同步集群资源。
 
-| Key | Type | Default | Description |
+| 键 | 类型 | 默认值 | 描述 |
 |-----|------|---------|-------------|
-| syncer.image.repo | string | `"kusionstack/karpor"` | Repository for Karpor syncer image. |
-| syncer.image.tag | string | `""` | Tag for Karpor syncer image. Defaults to the chart's appVersion if not specified. |
-| syncer.name | string | `"karpor-syncer"` | Component name for Karpor syncer. |
-| syncer.port | int | `7443` | Port for Karpor syncer. |
-| syncer.replicas | int | `1` | The number of karpor syncer pods to run. |
-| syncer.resources | object | `{"limits":{"cpu":"500m","ephemeral-storage":"10Gi","memory":"1Gi"},"requests":{"cpu":"250m","ephemeral-storage":"2Gi","memory":"256Mi"}}` | Resource limits and requests for the karpor syncer pods. |
+| syncer.image.repo | string | `"kusionstack/karpor"` | Karpor 同步器镜像的仓库。 |
+| syncer.image.tag | string | `""` | Karpor 同步器镜像的标签。如果未指定，则默认为 Chart 的 appVersion。 |
+| syncer.name | string | `"karpor-syncer"` | Karpor 同步器的组件名称。 |
+| syncer.port | int | `7443` | Karpor 同步器的端口。 |
+| syncer.replicas | int | `1` | 要运行的 Karpor 同步器 Pod 数量。 |
+| syncer.resources | object | `{"limits":{"cpu":"500m","ephemeral-storage":"10Gi","memory":"1Gi"},"requests":{"cpu":"250m","ephemeral-storage":"2Gi","memory":"256Mi"}}` | Karpor 同步器 Pod 的资源限制和请求。 |
 
 ### ElasticSearch
 
-The ElasticSearch Component to store the synchronized resources and user data.
+ElasticSearch 组件用于存储同步的资源数据和用户数据。
 
-| Key | Type | Default | Description |
+| 键 | 类型 | 默认值 | 描述 |
 |-----|------|---------|-------------|
-| elasticsearch.image.repo | string | `"docker.elastic.co/elasticsearch/elasticsearch"` | Repository for ElasticSearch image. |
-| elasticsearch.image.tag | string | `"8.6.2"` | Specific tag for ElasticSearch image. |
-| elasticsearch.name | string | `"elasticsearch"` | Component name for ElasticSearch. |
-| elasticsearch.port | int | `9200` | Port for ElasticSearch. |
-| elasticsearch.replicas | int | `1` | The number of ElasticSearch pods to run. |
-| elasticsearch.resources | object | `{"limits":{"cpu":"2","ephemeral-storage":"10Gi","memory":"4Gi"},"requests":{"cpu":"2","ephemeral-storage":"10Gi","memory":"4Gi"}}` | Resource limits and requests for the karpor elasticsearch pods. |
+| elasticsearch.image.repo | string | `"docker.elastic.co/elasticsearch/elasticsearch"` | ElasticSearch 镜像的仓库。 |
+| elasticsearch.image.tag | string | `"8.6.2"` | ElasticSearch 镜像的特定标签。 |
+| elasticsearch.name | string | `"elasticsearch"` | ElasticSearch 的组件名称。 |
+| elasticsearch.port | int | `9200` | ElasticSearch 的端口。 |
+| elasticsearch.replicas | int | `1` | 要运行的 ElasticSearch Pod 数量。 |
+| elasticsearch.resources | object | `{"limits":{"cpu":"2","ephemeral-storage":"10Gi","memory":"4Gi"},"requests":{"cpu":"2","ephemeral-storage":"10Gi","memory":"4Gi"}}` | Karpor ElasticSearch Pod 的资源限制和请求。 |
 
 ### ETCD
 
-The ETCD Component is the storage of Karpor Server as `apiserver`.
+ETCD 组件是 Karpor 服务器作为 `apiserver` 的存储。
 
-| Key | Type | Default | Description |
+| 键 | 类型 | 默认值 | 描述 |
 |-----|------|---------|-------------|
-| etcd.image.repo | string | `"quay.io/coreos/etcd"` | Repository for ETCD image. |
-| etcd.image.tag | string | `"v3.5.11"` | Specific tag for ETCD image. |
-| etcd.name | string | `"etcd"` | Component name for ETCD. |
-| etcd.persistence.accessModes | list | `["ReadWriteOnce"]` | Volume access mode, ReadWriteOnce means single node read-write access |
-| etcd.persistence.size | string | `"10Gi"` | Size of etcd persistent volume |
-| etcd.port | int | `2379` | Port for ETCD. |
-| etcd.replicas | int | `1` | The number of etcd pods to run. |
-| etcd.resources | object | `{"limits":{"cpu":"500m","ephemeral-storage":"10Gi","memory":"1Gi"},"requests":{"cpu":"250m","ephemeral-storage":"2Gi","memory":"256Mi"}}` | Resource limits and requests for the karpor etcd pods. |
+| etcd.image.repo | string | `"quay.io/coreos/etcd"` | ETCD 镜像的仓库。 |
+| etcd.image.tag | string | `"v3.5.11"` | ETCD 镜像的特定标签。 |
+| etcd.name | string | `"etcd"` | ETCD 的组件名称。 |
+| etcd.persistence.accessModes | list | `["ReadWriteOnce"]` | 卷访问模式，ReadWriteOnce 表示单节点读写访问。 |
+| etcd.persistence.size | string | `"10Gi"` | ETCD 持久卷的大小。 |
+| etcd.port | int | `2379` | ETCD 的端口。 |
+| etcd.replicas | int | `1` | 要运行的 ETCD Pod 数量。 |
+| etcd.resources | object | `{"limits":{"cpu":"500m","ephemeral-storage":"10Gi","memory":"1Gi"},"requests":{"cpu":"250m","ephemeral-storage":"2Gi","memory":"256Mi"}}` | Karpor ETCD Pod 的资源限制和请求。 |
 
-### Job
+### 任务
 
-This one-time job is used to generate root certificates and some preliminary work.
+此一次性任务用于生成根证书和一些准备工作。
 
-| Key | Type | Default | Description |
+| 键 | 类型 | 默认值 | 描述 |
 |-----|------|---------|-------------|
-| job.image.repo | string | `"kusionstack/karpor"` | Repository for the Job image. |
-| job.image.tag | string | `""` | Tag for Karpor image. Defaults to the chart's appVersion if not specified. |
-
-
-
+| job.image.repo | string | `"kusionstack/karpor"` | 任务镜像的仓库。 |
+| job.image.tag | string | `""` | Karpor 镜像的标签。如果未指定，则默认为 Chart 的 appVersion。 |
