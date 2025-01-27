@@ -91,41 +91,40 @@ helm install karpor-release kusionstack/karpor --set registryProxy=docker.m.daoc
 
 ### Enable AI features
 
-If you are trying to install Karpor with AI features, including natural language search and AI analyze, `ai-auth-token` and `ai-base-url` should be configured, e.g.:
+If you want to install Karpor with AI features, including natural language search and AI analysis, you should configure parameters such as `ai-auth-token`, `ai-base-url`, etc., for example:
 
 ```shell
-# At a minimum, server.ai.authToken and server.ai.baseUrl must be configured.
+# Minimal configuration, using OpenAI as the default AI backend
 helm install karpor-release kusionstack/karpor \
---set server.ai.authToken=YOUR_AI_TOKEN \
---set server.ai.baseUrl=https://api.openai.com/v1
+   --set server.ai.authToken={YOUR_AI_TOKEN}
 
-# server.ai.backend has default values `openai`, which can be overridden when necessary.
-# If the backend you are using is compatible with OpenAI, then there is no need to make 
-# any changes here.
+# Example using Azure OpenAI
 helm install karpor-release kusionstack/karpor \
---set server.ai.authToken=YOUR_AI_TOKEN \
---set server.ai.baseUrl=https://api.openai.com/v1 \
---set server.ai.backend=huggingface
+   --set server.ai.authToken={YOUR_AI_TOKEN} \
+   --set server.ai.baseUrl=https://{YOUR_RESOURCE_NAME}.openai.azure.com \
+   --set server.ai.backend=azureopenai
 
-# server.ai.model has default values `gpt-3.5-turbo`, which can be overridden when necessary.
+# Example using Hugging Face
 helm install karpor-release kusionstack/karpor \
---set server.ai.authToken=YOUR_AI_TOKEN \
---set server.ai.baseUrl=https://api.openai.com/v1 \
---set server.ai.model=gpt-4o
+   --set server.ai.authToken={YOUR_AI_TOKEN} \
+   --set server.ai.model={YOUR_HUGGINGFACE_MODEL} \
+   --set server.ai.backend=huggingface
 
-# server.ai.topP and server.ai.temperature can also be manually modified.
+# Custom configuration
 helm install karpor-release kusionstack/karpor \
---set server.ai.authToken=YOUR_AI_TOKEN \
---set server.ai.baseUrl=https://api.openai.com/v1 \
---set server.ai.topP=0.5 \
---set server.ai.temperature=0.2
+   --set server.ai.authToken={YOUR_AI_TOKEN} \
+   --set server.ai.baseUrl=https://api.deepseek.com \
+   --set server.ai.backend=openai \
+   --set server.ai.model=deepseek-chat \
+   --set server.ai.topP=0.5 \
+   --set server.ai.temperature=0.2
 ```
 
-### Chart Parameters
+## Chart Parameters
 
 The following table lists the configurable parameters of the chart and their default values.
 
-#### General Parameters
+### General Parameters
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
@@ -133,21 +132,21 @@ The following table lists the configurable parameters of the chart and their def
 | namespaceEnabled | bool | `true` | Whether to generate namespace. |
 | registryProxy | string | `""` | Image registry proxy will be the prefix as all component image. |
 
-#### Global Parameters
+### Global Parameters
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | global.image.imagePullPolicy | string | `"IfNotPresent"` | Image pull policy to be applied to all Karpor components. |
 
-#### Karpor Server
+### Karpor Server
 
 The Karpor Server Component is main backend server. It itself is an `apiserver`, which also provides `/rest-api` to serve Dashboard.
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | server.ai | object | `{"authToken":"","backend":"openai","baseUrl":"","model":"gpt-3.5-turbo","temperature":1,"topP":1}` | AI configuration section. The AI analysis feature requires that [authToken, baseUrl] be assigned values. |
-| server.ai.authToken | string | `""` | Authentication token for accessing the AI service.  |
-| server.ai.backend | string | `"openai"` | Backend service or platform that the AI model is hosted on. e.g., "openai". If the backend you are using is compatible with OpenAI, then there is no need to make any changes here. |
+| server.ai.authToken | string | `""` | Authentication token for accessing the AI service. |
+| server.ai.backend | string | `"openai"` | Backend service or platform that the AI model is hosted on. Available options: <br/>- `"openai"`: OpenAI API (default)<br/>- `"azureopenai"`: Azure OpenAI Service<br/>- `"huggingface"`: Hugging Face API<br/> If the backend you are using is compatible with OpenAI, then there is no need to make any changes here. |
 | server.ai.baseUrl | string | `""` | Base URL of the AI service. e.g., "https://api.openai.com/v1". |
 | server.ai.model | string | `"gpt-3.5-turbo"` | Name or identifier of the AI model to be used. e.g., "gpt-3.5-turbo". |
 | server.ai.temperature | float | `1` | Temperature parameter for the AI model. This controls the randomness of the output, where a higher value (e.g., 1.0) makes the output more random, and a lower value (e.g., 0.0) makes it more deterministic. |
@@ -161,7 +160,7 @@ The Karpor Server Component is main backend server. It itself is an `apiserver`,
 | server.resources | object | `{"limits":{"cpu":"500m","ephemeral-storage":"10Gi","memory":"1Gi"},"requests":{"cpu":"250m","ephemeral-storage":"2Gi","memory":"256Mi"}}` | Resource limits and requests for the karpor server pods. |
 | server.serviceType | string | `"ClusterIP"` | Service type for the karpor server. The available type values list as ["ClusterIP"、"NodePort"、"LoadBalancer"]. |
 
-#### Karpor Syncer
+### Karpor Syncer
 
 The Karpor Syncer Component is independent server to synchronize cluster resources in real-time.
 
@@ -174,7 +173,7 @@ The Karpor Syncer Component is independent server to synchronize cluster resourc
 | syncer.replicas | int | `1` | The number of karpor syncer pods to run. |
 | syncer.resources | object | `{"limits":{"cpu":"500m","ephemeral-storage":"10Gi","memory":"1Gi"},"requests":{"cpu":"250m","ephemeral-storage":"2Gi","memory":"256Mi"}}` | Resource limits and requests for the karpor syncer pods. |
 
-#### ElasticSearch
+### ElasticSearch
 
 The ElasticSearch Component to store the synchronized resources and user data.
 
@@ -187,7 +186,7 @@ The ElasticSearch Component to store the synchronized resources and user data.
 | elasticsearch.replicas | int | `1` | The number of ElasticSearch pods to run. |
 | elasticsearch.resources | object | `{"limits":{"cpu":"2","ephemeral-storage":"10Gi","memory":"4Gi"},"requests":{"cpu":"2","ephemeral-storage":"10Gi","memory":"4Gi"}}` | Resource limits and requests for the karpor elasticsearch pods. |
 
-#### ETCD
+### ETCD
 
 The ETCD Component is the storage of Karpor Server as `apiserver`.
 
@@ -202,7 +201,7 @@ The ETCD Component is the storage of Karpor Server as `apiserver`.
 | etcd.replicas | int | `1` | The number of etcd pods to run. |
 | etcd.resources | object | `{"limits":{"cpu":"500m","ephemeral-storage":"10Gi","memory":"1Gi"},"requests":{"cpu":"250m","ephemeral-storage":"2Gi","memory":"256Mi"}}` | Resource limits and requests for the karpor etcd pods. |
 
-#### Job
+### Job
 
 This one-time job is used to generate root certificates and some preliminary work.
 
@@ -210,3 +209,5 @@ This one-time job is used to generate root certificates and some preliminary wor
 |-----|------|---------|-------------|
 | job.image.repo | string | `"kusionstack/karpor"` | Repository for the Job image. |
 | job.image.tag | string | `""` | Tag for Karpor image. Defaults to the chart's appVersion if not specified. |
+
+
