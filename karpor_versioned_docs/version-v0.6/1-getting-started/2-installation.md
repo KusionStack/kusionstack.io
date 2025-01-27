@@ -147,11 +147,11 @@ The Karpor Server Component is main backend server. It itself is an `apiserver`,
 |-----|------|---------|-------------|
 | server.ai | object | `{"authToken":"","backend":"openai","baseUrl":"","model":"gpt-3.5-turbo","temperature":1,"topP":1}` | AI configuration section. The AI analysis feature requires that [authToken, baseUrl] be assigned values. |
 | server.ai.authToken | string | `""` | Authentication token for accessing the AI service.  |
-| server.ai.backend | string | `"openai"` | Backend service or platform that the AI model is hosted on. e.g., "openai". If the backend you are using is compatible with OpenAI, then there is no need to make any changes here. |
+| server.ai.backend | string | `"openai"` | Backend service or platform that the AI model is hosted on. Available options:<br/>- `"openai"`: OpenAI API (default)<br/>- `"azureopenai"`: Azure OpenAI Service<br/>- `"huggingface"`: Hugging Face API<br/>If the backend you are using is compatible with OpenAI, then there is no need to make any changes here. |
 | server.ai.baseUrl | string | `""` | Base URL of the AI service. e.g., "https://api.openai.com/v1". |
 | server.ai.model | string | `"gpt-3.5-turbo"` | Name or identifier of the AI model to be used. e.g., "gpt-3.5-turbo". |
 | server.ai.temperature | float | `1` | Temperature parameter for the AI model. This controls the randomness of the output, where a higher value (e.g., 1.0) makes the output more random, and a lower value (e.g., 0.0) makes it more deterministic. |
-| server.ai.topP | float | `1` | Top-p (nucleus sampling) parameter for the AI model. This controls Controls the probability mass to consider for sampling, where a higher value leads to greater diversity in the generated content (typically ranging from 0 to 1) |
+| server.ai.topP | float | `1` | Top-p (nucleus sampling) parameter for the AI model. This controls the probability mass to consider for sampling, where a higher value leads to greater diversity in the generated content (typically ranging from 0 to 1) |
 | server.enableRbac | bool | `false` | Enable RBAC authorization if set to true. |
 | server.image.repo | string | `"kusionstack/karpor"` | Repository for Karpor server image. |
 | server.image.tag | string | `""` | Tag for Karpor server image. Defaults to the chart's appVersion if not specified. |
