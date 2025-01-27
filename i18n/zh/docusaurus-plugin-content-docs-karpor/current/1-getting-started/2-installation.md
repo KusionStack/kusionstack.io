@@ -91,29 +91,33 @@ helm install karpor-release kusionstack/karpor --set registryProxy=docker.m.daoc
 
 ### 启用 AI 功能
 
-如果您要安装带有AI功能的Karpor，包括自然语言搜索和AI分析，则应配置 `ai-auth-token` 和 `ai-base-url`，例如：
+如果您要安装带有 AI 功能的 Karpor，包括自然语言搜索和 AI 分析，则应配置 `ai-auth-token`、`ai-base-url` 等参数，例如：
 
 ```shell
-# 至少需要配置 server.ai.authToken 和 server.ai.baseUrl。
+# 最少配置，默认使用 OpenAI 作为 AI Backend
 helm install karpor-release kusionstack/karpor \
---set server.ai.authToken=YOUR_AI_TOKEN \
---set server.ai.baseUrl=https://api.openai.com/v1
-# server.ai.backend 的默认值是 `openai`，可以根据需要进行覆盖。如果你使用的后端与 OpenAI 兼容，则无需在此处进行任何更改。
+   --set server.ai.authToken={YOUR_AI_TOKEN}
+
+# 使用 Azure OpenAI 的样例
 helm install karpor-release kusionstack/karpor \
---set server.ai.authToken=YOUR_AI_TOKEN \
---set server.ai.baseUrl=https://api.openai.com/v1 \
---set server.ai.backend=huggingface
-# server.ai.model 的默认值是 `gpt-3.5-turbo`，可以根据需要进行覆盖。
+   --set server.ai.authToken={YOUR_AI_TOKEN} \
+   --set server.ai.baseUrl=https://{YOUR_RESOURCE_NAME}.openai.azure.com \
+   --set server.ai.backend=azureopenai
+
+# 使用 Hugging Face 的样例
 helm install karpor-release kusionstack/karpor \
---set server.ai.authToken=YOUR_AI_TOKEN \
---set server.ai.baseUrl=https://api.openai.com/v1 \
---set server.ai.model=gpt-4o
-# server.ai.topP 和 server.ai.temperature 也可以手动修改。
+   --set server.ai.authToken={YOUR_AI_TOKEN} \
+   --set server.ai.model={YOUR_HUGGINGFACE_MODEL} \
+   --set server.ai.backend=huggingface
+
+# 自定义配置
 helm install karpor-release kusionstack/karpor \
---set server.ai.authToken=YOUR_AI_TOKEN \
---set server.ai.baseUrl=https://api.openai.com/v1 \
---set server.ai.topP=0.5 \
---set server.ai.temperature=0.2
+   --set server.ai.authToken={YOUR_AI_TOKEN} \
+   --set server.ai.baseUrl=https://api.openai.com/v1 \
+   --set server.ai.backend=openai \
+   --set server.ai.model=gpt-3.5-turbo \
+   --set server.ai.topP=0.5 \
+   --set server.ai.temperature=0.2
 ```
 
 ## Chart 参数

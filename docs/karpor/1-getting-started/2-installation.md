@@ -91,34 +91,33 @@ helm install karpor-release kusionstack/karpor --set registryProxy=docker.m.daoc
 
 ### Enable AI features
 
-If you are trying to install Karpor with AI features, including natural language search and AI analyze, `ai-auth-token` and `ai-base-url` should be configured, e.g.:
+If you want to install Karpor with AI features, including natural language search and AI analysis, you should configure parameters such as `ai-auth-token`, `ai-base-url`, etc., for example:
 
 ```shell
-# At a minimum, server.ai.authToken and server.ai.baseUrl must be configured.
+# Minimal configuration, using OpenAI as the default AI backend
 helm install karpor-release kusionstack/karpor \
---set server.ai.authToken=YOUR_AI_TOKEN \
---set server.ai.baseUrl=https://api.openai.com/v1
+   --set server.ai.authToken={YOUR_AI_TOKEN}
 
-# server.ai.backend has default values `openai`, which can be overridden when necessary.
-# If the backend you are using is compatible with OpenAI, then there is no need to make 
-# any changes here.
+# Example using Azure OpenAI
 helm install karpor-release kusionstack/karpor \
---set server.ai.authToken=YOUR_AI_TOKEN \
---set server.ai.baseUrl=https://api.openai.com/v1 \
---set server.ai.backend=huggingface
+   --set server.ai.authToken={YOUR_AI_TOKEN} \
+   --set server.ai.baseUrl=https://{YOUR_RESOURCE_NAME}.openai.azure.com \
+   --set server.ai.backend=azureopenai
 
-# server.ai.model has default values `gpt-3.5-turbo`, which can be overridden when necessary.
+# Example using Hugging Face
 helm install karpor-release kusionstack/karpor \
---set server.ai.authToken=YOUR_AI_TOKEN \
---set server.ai.baseUrl=https://api.openai.com/v1 \
---set server.ai.model=gpt-4o
+   --set server.ai.authToken={YOUR_AI_TOKEN} \
+   --set server.ai.model={YOUR_HUGGINGFACE_MODEL} \
+   --set server.ai.backend=huggingface
 
-# server.ai.topP and server.ai.temperature can also be manually modified.
+# Custom configuration
 helm install karpor-release kusionstack/karpor \
---set server.ai.authToken=YOUR_AI_TOKEN \
---set server.ai.baseUrl=https://api.openai.com/v1 \
---set server.ai.topP=0.5 \
---set server.ai.temperature=0.2
+   --set server.ai.authToken={YOUR_AI_TOKEN} \
+   --set server.ai.baseUrl=https://api.openai.com/v1 \
+   --set server.ai.backend=openai \
+   --set server.ai.model=gpt-3.5-turbo \
+   --set server.ai.topP=0.5 \
+   --set server.ai.temperature=0.2
 ```
 
 ## Chart Parameters
