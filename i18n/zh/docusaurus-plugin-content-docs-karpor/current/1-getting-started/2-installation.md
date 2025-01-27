@@ -116,84 +116,95 @@ helm install karpor-release kusionstack/karpor \
 --set server.ai.temperature=0.2
 ```
 
-### Chart 参数
+## Chart 参数
 
 以下表格列出了 Chart 的所有可配置参数及其默认值。
 
-#### 通用参数
+### General Parameters
 
-| 键 | 类型 | 默认值 | 描述 |
+| Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| namespace | string | `"karpor"` | 部署的目标命名空间 |
-| namespaceEnabled | bool | `true` | 是否生成命名空间 |
-| registryProxy | string | `""` | 镜像代理地址，配置后将作为所有组件镜像的前缀。 比如，`golang:latest` 将替换为 `<registryProxy>/golang:latest` |
+| namespace | string | `"karpor"` | Which namespace to be deployed. |
+| namespaceEnabled | bool | `true` | Whether to generate namespace. |
+| registryProxy | string | `""` | Image registry proxy will be the prefix as all component image. |
 
-#### 全局参数
+### Global Parameters
 
-| 键 | 类型 | 默认值 | 描述 |
+| Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| global.image.imagePullPolicy | string | `"IfNotPresent"` | 应用于所有 Karpor 组件的镜像拉取策略 |
+| global.image.imagePullPolicy | string | `"IfNotPresent"` | Image pull policy to be applied to all Karpor components. |
 
-#### Karpor Server
+### Karpor Server
 
-Karpor Server 组件是主要的后端服务。它本身就是一个 `apiserver`，也提供 `/rest-api` 来服务 Web UI
+The Karpor Server Component is main backend server. It itself is an `apiserver`, which also provides `/rest-api` to serve Dashboard.
 
-| 键 | 类型 | 默认值 | 描述 |
+| Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| server.image.repo | string | `"kusionstack/karpor"` | Karpor Server 镜像的仓库 |
-| server.image.tag | string | `""` | Karpor Server 镜像的标签。如果未指定，则默认为 Chart 的 appVersion |
-| server.name | string | `"karpor-server"` | Karpor Server 的组件名称 |
-| server.port | int | `7443` | Karpor Server 的端口 |
-| server.replicas | int | `1` | 要运行的 Karpor Server pod 的数量 |
-| server.resources | object | `{"limits":{"cpu":"500m","ephemeral-storage":"10Gi","memory":"1Gi"},"requests":{"cpu":"250m","ephemeral-storage":"2Gi","memory":"256Mi"}}` | Karpor Server pod 的资源规格 |
-| server.serviceType | string | `"ClusterIP"`                                                                                                                                | Karpor Server 的服务类型，可用的值为 ["ClusterIP"、"NodePort"、"LoadBalancer"] |
+| server.ai | object | `{"authToken":"","backend":"openai","baseUrl":"","model":"gpt-3.5-turbo","temperature":1,"topP":1}` | AI configuration section. The AI analysis feature requires that [authToken, baseUrl] be assigned values. |
+| server.ai.authToken | string | `""` | Authentication token for accessing the AI service. |
+| server.ai.backend | string | `"openai"` | Backend service or platform that the AI model is hosted on. Available options: <br/>- `"openai"`: OpenAI API (default)<br/>- `"azureopenai"`: Azure OpenAI Service<br/>- `"huggingface"`: Hugging Face API<br/> If the backend you are using is compatible with OpenAI, then there is no need to make any changes here. |
+| server.ai.baseUrl | string | `""` | Base URL of the AI service. e.g., "https://api.openai.com/v1". |
+| server.ai.model | string | `"gpt-3.5-turbo"` | Name or identifier of the AI model to be used. e.g., "gpt-3.5-turbo". |
+| server.ai.temperature | float | `1` | Temperature parameter for the AI model. This controls the randomness of the output, where a higher value (e.g., 1.0) makes the output more random, and a lower value (e.g., 0.0) makes it more deterministic. |
+| server.ai.topP | float | `1` | Top-p (nucleus sampling) parameter for the AI model. This controls Controls the probability mass to consider for sampling, where a higher value leads to greater diversity in the generated content (typically ranging from 0 to 1) |
+| server.enableRbac | bool | `false` | Enable RBAC authorization if set to true. |
+| server.image.repo | string | `"kusionstack/karpor"` | Repository for Karpor server image. |
+| server.image.tag | string | `""` | Tag for Karpor server image. Defaults to the chart's appVersion if not specified. |
+| server.name | string | `"karpor-server"` | Component name for karpor server. |
+| server.port | int | `7443` | Port for karpor server. |
+| server.replicas | int | `1` | The number of karpor server pods to run. |
+| server.resources | object | `{"limits":{"cpu":"500m","ephemeral-storage":"10Gi","memory":"1Gi"},"requests":{"cpu":"250m","ephemeral-storage":"2Gi","memory":"256Mi"}}` | Resource limits and requests for the karpor server pods. |
+| server.serviceType | string | `"ClusterIP"` | Service type for the karpor server. The available type values list as ["ClusterIP"、"NodePort"、"LoadBalancer"]. |
 
-#### Karpor Syncer
+### Karpor Syncer
 
-Karpor Syncer 组件是独立的服务，用于实时同步集群资源。
+The Karpor Syncer Component is independent server to synchronize cluster resources in real-time.
 
-| 键 | 类型 | 默认值 | 描述 |
+| Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| syncer.image.repo | string | `"kusionstack/karpor"` | Karpor Syncer 镜像的仓库 |
-| syncer.image.tag | string | `""` | Karpor Syncer 镜像的标签。如果未指定，则默认为 Chart 的 appVersion |
-| syncer.name | string | `"karpor-syncer"` | karpor Syncer 的组件名称 |
-| syncer.port | int | `7443` | karpor Syncer 的端口 |
-| syncer.replicas | int | `1` | 要运行的 karpor Syncer pod 的数量 |
-| syncer.resources | object | `{"limits":{"cpu":"500m","ephemeral-storage":"10Gi","memory":"1Gi"},"requests":{"cpu":"250m","ephemeral-storage":"2Gi","memory":"256Mi"}}` | karpor Syncer pod 的资源规格 |
+| syncer.image.repo | string | `"kusionstack/karpor"` | Repository for Karpor syncer image. |
+| syncer.image.tag | string | `""` | Tag for Karpor syncer image. Defaults to the chart's appVersion if not specified. |
+| syncer.name | string | `"karpor-syncer"` | Component name for Karpor syncer. |
+| syncer.port | int | `7443` | Port for Karpor syncer. |
+| syncer.replicas | int | `1` | The number of karpor syncer pods to run. |
+| syncer.resources | object | `{"limits":{"cpu":"500m","ephemeral-storage":"10Gi","memory":"1Gi"},"requests":{"cpu":"250m","ephemeral-storage":"2Gi","memory":"256Mi"}}` | Resource limits and requests for the karpor syncer pods. |
 
-#### ElasticSearch
+### ElasticSearch
 
-ElasticSearch 组件用于存储同步的资源和用户数据。
+The ElasticSearch Component to store the synchronized resources and user data.
 
-| 键 | 类型 | 默认值 | 描述 |
+| Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| elasticsearch.image.repo | string | `"docker.elastic.co/elasticsearch/elasticsearch"` | ElasticSearch 镜像的仓库 |
-| elasticsearch.image.tag | string | `"8.6.2"` | ElasticSearch 镜像的特定标签 |
-| elasticsearch.name | string | `"elasticsearch"` | ElasticSearch 的组件名称 |
-| elasticsearch.port | int | `9200` | ElasticSearch 的端口 |
-| elasticsearch.replicas | int | `1` | 要运行的 ElasticSearch pod 的数量 |
-| elasticsearch.resources | object | `{"limits":{"cpu":"2","ephemeral-storage":"10Gi","memory":"4Gi"},"requests":{"cpu":"2","ephemeral-storage":"10Gi","memory":"4Gi"}}` | karpor elasticsearch pod 的资源规格 |
+| elasticsearch.image.repo | string | `"docker.elastic.co/elasticsearch/elasticsearch"` | Repository for ElasticSearch image. |
+| elasticsearch.image.tag | string | `"8.6.2"` | Specific tag for ElasticSearch image. |
+| elasticsearch.name | string | `"elasticsearch"` | Component name for ElasticSearch. |
+| elasticsearch.port | int | `9200` | Port for ElasticSearch. |
+| elasticsearch.replicas | int | `1` | The number of ElasticSearch pods to run. |
+| elasticsearch.resources | object | `{"limits":{"cpu":"2","ephemeral-storage":"10Gi","memory":"4Gi"},"requests":{"cpu":"2","ephemeral-storage":"10Gi","memory":"4Gi"}}` | Resource limits and requests for the karpor elasticsearch pods. |
 
-#### ETCD
+### ETCD
 
-ETCD 组件是 Karpor Server 作为 `apiserver` 背后的存储。
+The ETCD Component is the storage of Karpor Server as `apiserver`.
 
-| 键 | 类型 | 默认值 | 描述 |
+| Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| etcd.image.repo | string | `"quay.io/coreos/etcd"` | ETCD 镜像的仓库 |
-| etcd.image.tag | string | `"v3.5.11"` | ETCD 镜像的标签 |
-| etcd.name | string | `"etcd"` | ETCD 的组件名称 |
-| etcd.persistence.accessModes[0] | string | `"ReadWriteOnce"` |  |
-| etcd.persistence.size | string | `"10Gi"` |  |
-| etcd.port | int | `2379` | ETCD 的端口 |
-| etcd.replicas | int | `1` | 要运行的 etcd pod 的数量 |
-| etcd.resources | object | `{"limits":{"cpu":"500m","ephemeral-storage":"10Gi","memory":"1Gi"},"requests":{"cpu":"250m","ephemeral-storage":"2Gi","memory":"256Mi"}}` | karpor etcd pod 的资源规格 |
+| etcd.image.repo | string | `"quay.io/coreos/etcd"` | Repository for ETCD image. |
+| etcd.image.tag | string | `"v3.5.11"` | Specific tag for ETCD image. |
+| etcd.name | string | `"etcd"` | Component name for ETCD. |
+| etcd.persistence.accessModes | list | `["ReadWriteOnce"]` | Volume access mode, ReadWriteOnce means single node read-write access |
+| etcd.persistence.size | string | `"10Gi"` | Size of etcd persistent volume |
+| etcd.port | int | `2379` | Port for ETCD. |
+| etcd.replicas | int | `1` | The number of etcd pods to run. |
+| etcd.resources | object | `{"limits":{"cpu":"500m","ephemeral-storage":"10Gi","memory":"1Gi"},"requests":{"cpu":"250m","ephemeral-storage":"2Gi","memory":"256Mi"}}` | Resource limits and requests for the karpor etcd pods. |
 
-#### Job
+### Job
 
-这是一个一次性 Kubernetes Job，用于生成根证书和一些前置工作。Karpor Server 和 Karpor Syncer 都需要依赖它完成才能正常启动。
+This one-time job is used to generate root certificates and some preliminary work.
 
-| 键 | 类型 | 默认值 | 描述 |
+| Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| job.image.repo | string | `"kusionstack/karpor"` | Job 镜像的仓库 |
-| job.image.tag | string | `""` | Karpor 镜像的标签。如果未指定，则默认为 Chart 的 appVersion |
+| job.image.repo | string | `"kusionstack/karpor"` | Repository for the Job image. |
+| job.image.tag | string | `""` | Tag for Karpor image. Defaults to the chart's appVersion if not specified. |
+
+
+
