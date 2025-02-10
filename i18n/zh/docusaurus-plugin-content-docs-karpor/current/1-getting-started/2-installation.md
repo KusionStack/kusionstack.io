@@ -118,6 +118,14 @@ helm install karpor-release kusionstack/karpor \
    --set server.ai.model=deepseek-chat \
    --set server.ai.topP=0.5 \
    --set server.ai.temperature=0.2
+
+# 使用 AI Proxy 的样例
+helm install karpor kusionstack/karpor \
+   --set server.ai.authToken={YOUR_AI_TOKEN} \
+   --set server.ai.proxy.enabled=true \
+   --set server.ai.proxy.httpProxy={YOUR_HTTP_PROXY} \
+   --set server.ai.proxy.httpsProxy={YOUR_HTTPS_PROXY} \
+   --set server.ai.proxy.noProxy={YOUR_NO_PROXY}
 ```
 
 ## Chart 参数
@@ -144,11 +152,16 @@ Karpor 服务器组件是主要的后端服务器。它本身是一个 `apiserve
 
 | 键 | 类型 | 默认值 | 描述 |
 |-----|------|---------|-------------|
-| server.ai | object | `{"authToken":"","backend":"openai","baseUrl":"","model":"gpt-3.5-turbo","temperature":1,"topP":1}` | AI 配置部分。AI 分析功能需要为 [authToken, baseUrl] 赋值。 |
+| server.ai | object | `{"authToken":"","backend":"openai","baseUrl":"","model":"gpt-3.5-turbo","proxy":{"enabled":false,"httpProxy":"","httpsProxy":"","noProxy":""},"temperature":1,"topP":1}` | AI 配置部分。AI 分析功能需要为 [authToken, baseUrl] 赋值。 |
 | server.ai.authToken | string | `""` | 访问 AI 服务的认证令牌。 |
 | server.ai.backend | string | `"openai"` | 托管 AI 模型的后端服务或平台。可用选项：<br/>- `"openai"`: OpenAI API（默认）<br/>- `"azureopenai"`: Azure OpenAI 服务<br/>- `"huggingface"`: Hugging Face API<br/>如果您使用的后端与 OpenAI 兼容，则无需在此处进行任何更改。 |
 | server.ai.baseUrl | string | `""` | AI 服务的基础 URL。例如："https://api.openai.com/v1"。 |
 | server.ai.model | string | `"gpt-3.5-turbo"` | 要使用的 AI 模型的名称或标识符。例如："gpt-3.5-turbo"。 |
+| server.ai.proxy | object | `{"enabled":false,"httpProxy":"","httpsProxy":"","noProxy":""}` | AI 服务连接的代理配置。 |
+| server.ai.proxy.enabled | bool | `false` | 启用 AI 服务连接的代理设置。如果为 false，则将忽略代理设置。 |
+| server.ai.proxy.httpProxy | string | `""` | AI 服务连接的 HTTP 代理 URL（例如“http://proxy.example.com:8080”）。 |
+| server.ai.proxy.httpsProxy | string | `""` | AI 服务连接的 HTTPS 代理 URL（例如“https://proxy.example.com:8080”）。 |
+| server.ai.proxy.noProxy | string | `""` | 不需要通过代理服务器进行访问的域名（例如“localhost,127.0.0.1,example.com”）。|
 | server.ai.temperature | float | `1` | AI 模型的温度参数。控制输出的随机性，较高的值（例如 1.0）使输出更随机，较低的值（例如 0.0）使输出更确定性。 |
 | server.ai.topP | float | `1` | AI 模型的 Top-p（核采样）参数。控制采样的概率质量，较高的值导致生成内容的多样性更大（通常范围为 0 到 1）。 |
 | server.enableRbac | bool | `false` | 如果设置为 true，则启用 RBAC 授权。 |

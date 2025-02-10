@@ -118,6 +118,14 @@ helm install karpor-release kusionstack/karpor \
    --set server.ai.model=deepseek-chat \
    --set server.ai.topP=0.5 \
    --set server.ai.temperature=0.2
+
+# Example using AI Proxy
+helm install karpor kusionstack/karpor \
+   --set server.ai.authToken={YOUR_AI_TOKEN} \
+   --set server.ai.proxy.enabled=true \
+   --set server.ai.proxy.httpProxy={YOUR_HTTP_PROXY} \
+   --set server.ai.proxy.httpsProxy={YOUR_HTTPS_PROXY} \
+   --set server.ai.proxy.noProxy={YOUR_NO_PROXY}
 ```
 
 ## Chart Parameters
@@ -144,11 +152,16 @@ The Karpor Server Component is main backend server. It itself is an `apiserver`,
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| server.ai | object | `{"authToken":"","backend":"openai","baseUrl":"","model":"gpt-3.5-turbo","temperature":1,"topP":1}` | AI configuration section. The AI analysis feature requires that [authToken, baseUrl] be assigned values. |
+| server.ai | object | `{"authToken":"","backend":"openai","baseUrl":"","model":"gpt-3.5-turbo","proxy":{"enabled":false,"httpProxy":"","httpsProxy":"","noProxy":""},"temperature":1,"topP":1}` | AI configuration section. The AI analysis feature requires that [authToken, baseUrl] be assigned values. |
 | server.ai.authToken | string | `""` | Authentication token for accessing the AI service. |
 | server.ai.backend | string | `"openai"` | Backend service or platform that the AI model is hosted on. Available options: <br/>- `"openai"`: OpenAI API (default)<br/>- `"azureopenai"`: Azure OpenAI Service<br/>- `"huggingface"`: Hugging Face API<br/> If the backend you are using is compatible with OpenAI, then there is no need to make any changes here. |
 | server.ai.baseUrl | string | `""` | Base URL of the AI service. e.g., "https://api.openai.com/v1". |
 | server.ai.model | string | `"gpt-3.5-turbo"` | Name or identifier of the AI model to be used. e.g., "gpt-3.5-turbo". |
+| server.ai.proxy | object | `{"enabled":false,"httpProxy":"","httpsProxy":"","noProxy":""}` | Proxy configuration for AI service connections. |
+| server.ai.proxy.enabled | bool | `false` | Enable proxy settings for AI service connections. When false, proxy settings will be ignored. |
+| server.ai.proxy.httpProxy | string | `""` | HTTP proxy URL for AI service connections (e.g., "http://proxy.example.com:8080"). |
+| server.ai.proxy.httpsProxy | string | `""` | HTTPS proxy URL for AI service connections (e.g., "https://proxy.example.com:8080"). |
+| server.ai.proxy.noProxy | string | `""` | No proxy configuration for AI service connections (e.g., "localhost,127.0.0.1,example.com"). |
 | server.ai.temperature | float | `1` | Temperature parameter for the AI model. This controls the randomness of the output, where a higher value (e.g., 1.0) makes the output more random, and a lower value (e.g., 0.0) makes it more deterministic. |
 | server.ai.topP | float | `1` | Top-p (nucleus sampling) parameter for the AI model. This controls Controls the probability mass to consider for sampling, where a higher value leads to greater diversity in the generated content (typically ranging from 0 to 1) |
 | server.enableRbac | bool | `false` | Enable RBAC authorization if set to true. |
