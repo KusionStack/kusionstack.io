@@ -161,7 +161,7 @@ Karpor 服务器组件是主要的后端服务器。它本身是一个 `apiserve
 | server.ai.proxy.enabled | bool | `false` | 启用 AI 服务连接的代理设置。如果为 false，则将忽略代理设置。 |
 | server.ai.proxy.httpProxy | string | `""` | AI 服务连接的 HTTP 代理 URL（例如“http://proxy.example.com:8080”）。 |
 | server.ai.proxy.httpsProxy | string | `""` | AI 服务连接的 HTTPS 代理 URL（例如“https://proxy.example.com:8080”）。 |
-| server.ai.proxy.noProxy | string | `""` | AI 服务连接无需代理配置（例如“localhost,127.0.0.1,example.com”）。 |
+| server.ai.proxy.noProxy | string | `""` | 不需要通过代理服务器进行访问的域名（例如“localhost,127.0.0.1,example.com”）。|
 | server.ai.temperature | float | `1` | AI 模型的温度参数。控制输出的随机性，较高的值（例如 1.0）使输出更随机，较低的值（例如 0.0）使输出更确定性。 |
 | server.ai.topP | float | `1` | AI 模型的 Top-p（核采样）参数。控制采样的概率质量，较高的值导致生成内容的多样性更大（通常范围为 0 到 1）。 |
 | server.enableRbac | bool | `false` | 如果设置为 true，则启用 RBAC 授权。 |
