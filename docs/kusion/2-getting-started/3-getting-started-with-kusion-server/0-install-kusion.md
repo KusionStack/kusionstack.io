@@ -37,7 +37,7 @@ chmod +x install-kusion.sh
 Run the installation script with your kubeconfig files:
 
 ```shell
-./install-kusion-server.sh <kubeconfig_key1=kubeconfig_path1> <kubeconfig_key2=kubeconfig_path2> ...
+./install-kusion.sh <kubeconfig_key1=kubeconfig_path1> <kubeconfig_key2=kubeconfig_path2> ...
 ```
 
 **Parameters:**
