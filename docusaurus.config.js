@@ -337,7 +337,7 @@ const config = {
         //   height: 51,
         //   href: "https://opensource.antgroup.com/",
         // },
-        copyright: `Copyright © ${new Date().getFullYear()} KusionStack Authors. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our <a href="https://www.linuxfoundation.org/trademark-usage/"> Trademark Usage</a> page.`,
+        copyright: `Copyright © ${new Date().getFullYear()} KusionStack a Series of LF Projects, LLC. For website terms of use, trademark policy and other project policies please see <a href="https://lfprojects.org/policies/"> LF Projects, LLC Policies</a> page.`,
       },
       prism: {
         theme: lightCodeTheme,
