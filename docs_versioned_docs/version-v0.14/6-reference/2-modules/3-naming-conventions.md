@@ -31,4 +31,6 @@ Similarly, Kusion also adheres to specific naming conventions when generating th
 | alicloud_db_connection | `<DATABASE_NAME>` | aliyun:alicloud:alicloud_db_connection:wordpress |
 | alicloud_rds_account | `<DATABASE_NAME>` | aliyun:alicloud:alicloud_rds_account:wordpress |
 
-The `<DATABASE_NAME>` is composed of two parts, one of which is the `key` of database declared in `AppConfiguration` and the other is the `suffix` declared in `workspace` configuration. Kusion will concatenate the database key and suffix, convert them to uppercase, and replace `-` with `_`. And the `<DATABASE_TYPE>` supported now includes `mysql` and `postgres`. 
+The `<DATABASE_NAME>` is composed of two parts, one of which is the `key` of database declared in `AppConfiguration` and the other is the `suffix` declared in `workspace` configuration. Kusion will concatenate the database key and suffix, convert them to uppercase, and replace `-` with `_`. However, as for the local database, concerning the limitation of resource name length, Kusion will truncate and only take the first 31 characters. And for the name of the Pod, Kusion will truncate and take the first 15 characters. 
+
+The `<DATABASE_TYPE>` supported now includes `mysql` and `postgres`. 
