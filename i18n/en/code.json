@@ -8,52 +8,52 @@
     "description": "homepage install button"
   },
   "home.quickstart": {
-    "message": "All About Your Modern Apps by Platform Engineering"
+    "message": "Everything You Need to Know About Modern Apps with Platform Engineering."
   },
   "home.easyshipping": {
     "message": "Dynamic Configuration Management"
   },
   "home.easyshipping.1": {
-    "message": "Manage all application operations in one place, in a unified easy way"
+    "message": "Easily manage all application operations from a unified platform."
   },
   "home.easyshipping.2": {
-    "message": "Environment-agnostic application configurations"
+    "message": "Environment-agnostic application configuration for seamless deployment."
   },
   "home.easyshipping.3": {
-    "message": "Standardized and flexible platform configurations"
+    "message": "Standardized yet flexible platform configurations tailored to your needs."
   },
   "home.easyshipping.4": {
-    "message": "Kubernetes-first, lightweight and user-friendly"
+    "message": "Kubernetes-first, lightweight, and user-friendly for modern workflows."
   },
   "home.platformengineering": {
-    "message": "Enable Developer Self-Service"
+    "message": "Empower Developer Self-Service"
   },
   "home.platformengineering.1": {
-    "message": "Fulfill the customized needs with reusable building blocks"
+    "message": "Meet customized needs with reusable building blocks."
   },
   "home.platformengineering.2": {
-    "message": "A growing open module ecosystem integrated with various cloud-native infrastructures"
+    "message": "A growing ecosystem of open modules integrated with various cloud-native infrastructures."
   },
   "home.platformengineering.3": {
-    "message": "An efficient collaboration paradigm between App Developers and Platform Engineers"
+    "message": "An efficient collaboration model between app developers and platform engineers."
   },
   "home.platformengineering.4": {
-    "message": "Building the golden path for end-to-end DevOps lifecycle management"
+    "message": "Building the golden path for end-to-end DevOps lifecycle management."
   },
   "home.enterpriseops": {
     "message": "Built-in Security and Compliance"
   },
   "home.enterpriseops.1": {
-    "message": "From the first line of codes to production runtime"
+    "message": "From the first line of code to production runtime."
   },
   "home.enterpriseops.2": {
-    "message": "Codified shift-left validation to detect configuration risks"
+    "message": "Shift-left validation to detect configuration risks early."
   },
   "home.enterpriseops.3": {
-    "message": "Extended check stages for workload lifecycle"
+    "message": "Extended validation stages throughout the workload lifecycle."
   },
   "home.enterpriseops.4": {
-    "message": "Enterprise-grade fine-grained cluster control for Kubernetes"
+    "message": "Enterprise-grade, fine-grained cluster control for Kubernetes."
   },
   "home.whoisusing": {
     "message": "Adopted by"
