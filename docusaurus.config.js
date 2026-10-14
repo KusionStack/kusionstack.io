@@ -33,9 +33,9 @@ function getNextVersionName(current) {
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "Transform Your Internal Developer Platform with KusionStack",
+  title: "Revolutionize Your Internal Developer Platform with KusionStack",
   tagline:
-    "Create a robust, secure, and enterprise-ready Internal Developer Platform on Kubernetes and cloud infrastructures.",
+    "Build a robust, secure, and enterprise-ready Internal Developer Platform on Kubernetes and cloud infrastructure.",
 
   url: "https://kusionstack.io",
   organizationName: "KusionStack", // Usually your GitHub org/user name.
